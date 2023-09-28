@@ -15,23 +15,24 @@ class Program
         Color WOJ = new Color(151, 40, 44, 255);
         Color ZLO = new Color(0, 78, 125, 255);
 
-        const int NAME_FONT_SPACING = 1;
+        const int NAME_FONT_SPACING = 0;
         const int TITLE_FONT_SPACING = 1;
-        const int DESC_FONT_SPACING = 1;
+        const int DESC_FONT_SPACING = 0;
 
-        Color DESC = new Color(78, 78, 78, 255);
+        Color descColor = new Color(78, 78, 78, 255);
 
         const int CARD_WIDTH = 827;
         const int CARD_HEIGHT = 1417;
 
-        const int NAME_SIZE = 64; // 69
-        const int TITLE_SIZE = 38; // 41
-        const int DESC_SIZE = 35; // 35
+        const int NAME_SIZE = 67; // 67
+        const int TITLE_SIZE = 40; // 40
+        const int DESC_SIZE = 28; // 35
 
         Font nameFont = Raylib.LoadFontEx("name_font.ttf", NAME_SIZE, null, 1415);
         Font titleFont = Raylib.LoadFontEx("desc_font.ttf", TITLE_SIZE, null, 1415);
         Font descFont = Raylib.LoadFontEx("desc_font.ttf", DESC_SIZE, null, 1415);
 
+        bool gradientSetting = true;
         Image frame = Raylib.LoadImage("template/frame.png");
         Image bottom = Raylib.LoadImage("template/bottom.png");
         Image gradient = Raylib.LoadImage("template/gradient.png");
@@ -41,10 +42,10 @@ class Program
 
         Color desiredColor;
         int desiredClass = 5;
-        string leaderTitle;
 
         string leaderName = "Pięść Roztropności";
-        string leaderDescription = "To jest test C#.";
+        string leaderTitle;
+        string leaderDescription = "Za każdym razem, gdy rzucasz kośćmi, aby rzucić\nWYZWANIE, dodaj 2 do swojego wyniku.";
 
         switch (desiredClass)
         {
@@ -85,32 +86,34 @@ class Program
                 break;
         }
 
-
         Vector2 leaderNameSize = Raylib.MeasureTextEx(nameFont, leaderName, NAME_SIZE, NAME_FONT_SPACING);
         Vector2 leaderTitleSize = Raylib.MeasureTextEx(titleFont, leaderTitle, TITLE_SIZE, TITLE_FONT_SPACING);
         Vector2 leaderDescriptionSize = Raylib.MeasureTextEx(descFont, leaderDescription, DESC_SIZE, DESC_FONT_SPACING);
 
         Rectangle imageRec = new(0, 0, 827, 1417);
 
-        Raylib.ImageColorTint(ref frame, desiredColor);
-
         Raylib.ImageResize(ref leader, 827, 1417);
-
         Raylib.ImageDraw(ref card, leader, imageRec, imageRec, Color.WHITE);
-        Raylib.ImageDraw(ref card, gradient, imageRec, imageRec, Color.WHITE);
+
+        if (gradientSetting) { Raylib.ImageDraw(ref card, gradient, imageRec, imageRec, Color.WHITE); }
+        Raylib.ImageColorTint(ref frame, desiredColor);
         Raylib.ImageDraw(ref card, frame, imageRec, imageRec, Color.WHITE);
         Raylib.ImageDraw(ref card, bottom, imageRec, imageRec, Color.WHITE);
         Raylib.ImageDraw(ref card, classSymbol, imageRec, imageRec, Color.WHITE);
 
-        Raylib.ImageDrawTextEx(ref card, nameFont, leaderName, new Vector2((CARD_WIDTH / 2) - ((leaderNameSize.X * 0.96f) / 2) + 4, 84.0f), NAME_SIZE, NAME_FONT_SPACING, new Color(255, 255, 255, 127));
-        Raylib.ImageDrawTextEx(ref card, nameFont, leaderName, new Vector2((CARD_WIDTH / 2) - ((leaderNameSize.X * 0.96f) / 2), 80.0f), NAME_SIZE, NAME_FONT_SPACING, Color.BLACK);
+        // Leader Name
+        Raylib.ImageDrawTextEx(ref card, nameFont, leaderName, new Vector2((CARD_WIDTH / 2) - (leaderNameSize.X / 2) + 3, 70.0f + 3), NAME_SIZE, NAME_FONT_SPACING, new Color(255, 255, 255, 127));
+        Raylib.ImageDrawTextEx(ref card, nameFont, leaderName, new Vector2((CARD_WIDTH / 2) - (leaderNameSize.X / 2), 70.0f), NAME_SIZE, NAME_FONT_SPACING, Color.BLACK);
 
-        Raylib.ImageDrawTextEx(ref card, titleFont, leaderTitle, new Vector2((CARD_WIDTH / 2) - (leaderTitleSize.X / 2), 154.0f), TITLE_SIZE, TITLE_FONT_SPACING, DESC);
+        // Class
+        Raylib.ImageDrawTextEx(ref card, titleFont, leaderTitle, new Vector2((CARD_WIDTH / 2) - (leaderTitleSize.X / 2) + 2, 141.0f + 2), TITLE_SIZE, TITLE_FONT_SPACING, new Color(255, 255, 255, 127));
+        Raylib.ImageDrawTextEx(ref card, titleFont, leaderTitle, new Vector2((CARD_WIDTH / 2) - (leaderTitleSize.X / 2), 141.0f), TITLE_SIZE, TITLE_FONT_SPACING, Color.BLACK);
 
-        Raylib.ImageDrawTextEx(ref card, descFont, leaderDescription, new Vector2(94.0f, (CARD_HEIGHT - (199 / 2) - (leaderDescriptionSize.Y / 2))), DESC_SIZE, DESC_FONT_SPACING, DESC);
+        // Description
+        Raylib.ImageDrawTextEx(ref card, descFont, leaderDescription, new Vector2(94.0f, (CARD_HEIGHT - (199 / 2) - (leaderDescriptionSize.Y / 2))), DESC_SIZE, DESC_FONT_SPACING, descColor);
+        //to do - fix line spacing
 
         Raylib.ExportImage(card, "test.png");
-
         Raylib.CloseWindow();
     }
 }
