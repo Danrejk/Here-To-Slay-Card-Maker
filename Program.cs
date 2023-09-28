@@ -15,71 +15,82 @@ class Program
         Color WOJ = new Color(151, 40, 44, 255);
         Color ZLO = new Color(0, 78, 125, 255);
 
+        const int NAME_FONT_SPACING = 1;
+        const int TITLE_FONT_SPACING = 1;
+        const int DESC_FONT_SPACING = 1;
+
         Color DESC = new Color(78, 78, 78, 255);
 
         const int CARD_WIDTH = 827;
         const int CARD_HEIGHT = 1417;
 
-        const int NAME_SIZE = 69; // 69 test
-        const int TITLE_SIZE = 41; // 41
+        const int NAME_SIZE = 64; // 69
+        const int TITLE_SIZE = 38; // 41
         const int DESC_SIZE = 35; // 35
 
-        Font nameFont = Raylib.LoadFontEx("name_font.ttf", 1000, null, 1382);
-        Font descFont = Raylib.LoadFontEx("desc_font.ttf", 1000, null, 1382);
-
-        Color desiredColor = WOJ;
-        int desiredClass = 5;
-
-        string leaderName = "Pięść Roztropności";
-        string leaderTitle;
-        string leaderDescription = "To jest test C#.";
-
-        switch (desiredClass)
-        {
-            case 1:
-                leaderTitle = "Przywódca drużyny: łowca";
-                break;
-            case 2:
-                leaderTitle = "Przywódca drużyny: mag";
-                break;
-            case 3:
-                leaderTitle = "Przywódca drużyny: bard";
-                break;
-            case 4:
-                leaderTitle = "Przywódca drużyny: strażnik";
-                break;
-            case 5:
-                leaderTitle = "Przywódca drużyny: wojownik";
-                break;
-            case 6:
-                leaderTitle = "Przywódca drużyny: złodziej";
-                break;
-            default:
-                leaderTitle = "";
-                break;
-        }
-
-        Vector2 leaderNameSize = Raylib.MeasureTextEx(nameFont, leaderName, NAME_SIZE, 1);
-        Vector2 leaderTitleSize = Raylib.MeasureTextEx(descFont, leaderTitle, TITLE_SIZE, 1);
-        Vector2 leaderDescriptionSize = Raylib.MeasureTextEx(descFont, leaderDescription, DESC_SIZE, 1);
+        Font nameFont = Raylib.LoadFontEx("name_font.ttf", NAME_SIZE, null, 1415);
+        Font titleFont = Raylib.LoadFontEx("desc_font.ttf", TITLE_SIZE, null, 1415);
+        Font descFont = Raylib.LoadFontEx("desc_font.ttf", DESC_SIZE, null, 1415);
 
         Image frame = Raylib.LoadImage("template/frame.png");
         Image bottom = Raylib.LoadImage("template/bottom.png");
         Image gradient = Raylib.LoadImage("template/gradient.png");
         Image card = Raylib.LoadImage("template/background.png");
         Image leader = Raylib.LoadImage("leader_pic.png");
+        Image classSymbol;
 
-        Rectangle imageRec = new Rectangle(0, 0, 827, 1417);
+        Color desiredColor;
+        int desiredClass = 5;
+        string leaderTitle;
 
-        Image[] classesSymbol =
+        string leaderName = "Pięść Roztropności";
+        string leaderDescription = "To jest test C#.";
+
+        switch (desiredClass)
         {
-            Raylib.LoadImage("classes/lowca.png"),
-            Raylib.LoadImage("classes/mag.png"),
-            Raylib.LoadImage("classes/najebus.png"),
-            Raylib.LoadImage("classes/straznik.png"),
-            Raylib.LoadImage("classes/wojownik.png"),
-            Raylib.LoadImage("classes/zlodziej.png")
-        };
+            case 1:
+                leaderTitle = "Przywódca drużyny: łowca";
+                desiredColor = LOW;
+                classSymbol = Raylib.LoadImage("classes/lowca.png");
+                break;
+            case 2:
+                leaderTitle = "Przywódca drużyny: mag";
+                desiredColor = MAG;
+                classSymbol = Raylib.LoadImage("classes/mag.png");
+                break;
+            case 3:
+                leaderTitle = "Przywódca drużyny: bard";
+                classSymbol = Raylib.LoadImage("classes/najebus.png");
+                desiredColor = NAJ;
+                break;
+            case 4:
+                leaderTitle = "Przywódca drużyny: strażnik";
+                classSymbol = Raylib.LoadImage("classes/straznik.png");
+                desiredColor = STR;
+                break;
+            case 5:
+                leaderTitle = "Przywódca drużyny: wojownik";
+                classSymbol = Raylib.LoadImage("classes/wojownik.png");
+                desiredColor = WOJ;
+                break;
+            case 6:
+                leaderTitle = "Przywódca drużyny: złodziej";
+                classSymbol = Raylib.LoadImage("classes/zlodziej.png");
+                desiredColor = ZLO;
+                break;
+            default: // when no desired class is given it deafults to thief
+                leaderTitle = "Przywódca drużyny: złodziej";
+                classSymbol = Raylib.LoadImage("classes/zlodziej.png");
+                desiredColor = ZLO;
+                break;
+        }
+
+
+        Vector2 leaderNameSize = Raylib.MeasureTextEx(nameFont, leaderName, NAME_SIZE, NAME_FONT_SPACING);
+        Vector2 leaderTitleSize = Raylib.MeasureTextEx(titleFont, leaderTitle, TITLE_SIZE, TITLE_FONT_SPACING);
+        Vector2 leaderDescriptionSize = Raylib.MeasureTextEx(descFont, leaderDescription, DESC_SIZE, DESC_FONT_SPACING);
+
+        Rectangle imageRec = new(0, 0, 827, 1417);
 
         Raylib.ImageColorTint(ref frame, desiredColor);
 
@@ -89,14 +100,14 @@ class Program
         Raylib.ImageDraw(ref card, gradient, imageRec, imageRec, Color.WHITE);
         Raylib.ImageDraw(ref card, frame, imageRec, imageRec, Color.WHITE);
         Raylib.ImageDraw(ref card, bottom, imageRec, imageRec, Color.WHITE);
-        Raylib.ImageDraw(ref card, classesSymbol[desiredClass - 1], imageRec, imageRec, Color.WHITE);
+        Raylib.ImageDraw(ref card, classSymbol, imageRec, imageRec, Color.WHITE);
 
-        Raylib.ImageDrawTextEx(ref card, nameFont, leaderName, new Vector2((CARD_WIDTH / 2) - ((leaderNameSize.X * 0.96f) / 2) + 4, 84.0f), NAME_SIZE, 1, new Color(255, 255, 255, 127));
-        Raylib.ImageDrawTextEx(ref card, nameFont, leaderName, new Vector2((CARD_WIDTH / 2) - ((leaderNameSize.X * 0.96f) / 2), 80.0f), NAME_SIZE, 1, Color.BLACK);
+        Raylib.ImageDrawTextEx(ref card, nameFont, leaderName, new Vector2((CARD_WIDTH / 2) - ((leaderNameSize.X * 0.96f) / 2) + 4, 84.0f), NAME_SIZE, NAME_FONT_SPACING, new Color(255, 255, 255, 127));
+        Raylib.ImageDrawTextEx(ref card, nameFont, leaderName, new Vector2((CARD_WIDTH / 2) - ((leaderNameSize.X * 0.96f) / 2), 80.0f), NAME_SIZE, NAME_FONT_SPACING, Color.BLACK);
 
-        Raylib.ImageDrawTextEx(ref card, descFont, leaderTitle, new Vector2((CARD_WIDTH / 2) - ((leaderTitleSize.X * 0.96f) / 2), 154.0f), TITLE_SIZE, 1, DESC);
+        Raylib.ImageDrawTextEx(ref card, titleFont, leaderTitle, new Vector2((CARD_WIDTH / 2) - (leaderTitleSize.X / 2), 154.0f), TITLE_SIZE, TITLE_FONT_SPACING, DESC);
 
-        Raylib.ImageDrawTextEx(ref card, descFont, leaderDescription, new Vector2(94.0f, (CARD_HEIGHT - (199 / 2) - (leaderDescriptionSize.Y / 2))), DESC_SIZE, 1, DESC);
+        Raylib.ImageDrawTextEx(ref card, descFont, leaderDescription, new Vector2(94.0f, (CARD_HEIGHT - (199 / 2) - (leaderDescriptionSize.Y / 2))), DESC_SIZE, DESC_FONT_SPACING, DESC);
 
         Raylib.ExportImage(card, "test.png");
 
