@@ -20,7 +20,7 @@ class Program
         const int CARD_WIDTH = 827;
         const int CARD_HEIGHT = 1417;
 
-        const int NAME_SIZE = 69; // 69
+        const int NAME_SIZE = 69; // 69 test
         const int TITLE_SIZE = 41; // 41
         const int DESC_SIZE = 35; // 35
 
