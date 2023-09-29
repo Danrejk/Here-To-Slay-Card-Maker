@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Numerics;
 using Raylib_cs;
+using System.Resources;
 
 namespace HereToSlayGen
 {
@@ -8,14 +9,16 @@ namespace HereToSlayGen
     {
         public static void Main()
         {
+            ResourceManager resourceManager = new ResourceManager("HereToSlay.Resources", typeof(Program).Assembly);
+
             Raylib.InitWindow(400, 400, "generator");
 
-        Color LOW = new Color(35, 94, 57, 255);
-        Color MAG = new Color(116, 46, 137, 255); //testt
-        Color NAJ = new Color(194, 81, 47, 255);
-        Color STR = new Color(235, 171, 33, 255);
-        Color WOJ = new Color(151, 40, 44, 255);
-        Color ZLO = new Color(0, 78, 125, 255);
+            Color LOW = new Color(35, 94, 57, 255);
+            Color MAG = new Color(116, 46, 137, 255);
+            Color NAJ = new Color(194, 81, 47, 255);
+            Color STR = new Color(235, 171, 33, 255);
+            Color WOJ = new Color(151, 40, 44, 255);
+            Color ZLO = new Color(0, 78, 125, 255);
 
             const int NAME_FONT_SPACING = 0;
             const int TITLE_FONT_SPACING = 1;
@@ -30,9 +33,9 @@ namespace HereToSlayGen
             const int TITLE_SIZE = 35; // 40
             const int DESC_SIZE = 28; // 28
 
-            Font nameFont = Raylib.LoadFontEx("name_font.ttf", NAME_SIZE, null, 1415);
-            Font titleFont = Raylib.LoadFontEx("desc_font.ttf", TITLE_SIZE, null, 1415);
-            Font descFont = Raylib.LoadFontEx("desc_font.ttf", DESC_SIZE, null, 1415);
+            Font nameFont = Raylib.LoadFontEx("fonts/PatuaOne-polish.ttf", NAME_SIZE, null, 1415);
+            Font titleFont = Raylib.LoadFontEx("fonts/Helvetica.ttf", TITLE_SIZE, null, 1415); 
+            Font descFont = Raylib.LoadFontEx("fonts/Helvetica.ttf", DESC_SIZE, null, 1415);
 
             bool gradientSetting = false;
             Image frame = Raylib.LoadImage("template/frame.png");
