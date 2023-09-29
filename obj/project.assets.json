@@ -134,9 +134,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\SDanr\\.Moje Dokumenty\\Projekty\\ToJaGoTne\\ToJaGoTne\\ToJaGoTne.csproj",
-      "projectName": "ToJaGoTne",
-      "projectPath": "C:\\Users\\SDanr\\.Moje Dokumenty\\Projekty\\ToJaGoTne\\ToJaGoTne\\ToJaGoTne.csproj",
+      "projectUniqueName": "C:\\Users\\SDanr\\.Moje Dokumenty\\Projekty\\ToJaGoTne\\ToJaGoTne\\HereToSlayGenerator.csproj",
+      "projectName": "HereToSlayGenerator",
+      "projectPath": "C:\\Users\\SDanr\\.Moje Dokumenty\\Projekty\\ToJaGoTne\\ToJaGoTne\\HereToSlayGenerator.csproj",
       "packagesPath": "C:\\Users\\SDanr\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\SDanr\\.Moje Dokumenty\\Projekty\\ToJaGoTne\\ToJaGoTne\\obj\\",
       "projectStyle": "PackageReference",
