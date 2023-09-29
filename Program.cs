@@ -10,12 +10,12 @@ namespace HereToSlayGen
         {
             Raylib.InitWindow(400, 400, "generator");
 
-            Color LOW = new Color(35, 94, 57, 255);
-            Color MAG = new Color(116, 46, 137, 255);
-            Color NAJ = new Color(194, 81, 47, 255);
-            Color STR = new Color(235, 171, 33, 255);
-            Color WOJ = new Color(151, 40, 44, 255);
-            Color ZLO = new Color(0, 78, 125, 255);
+        Color LOW = new Color(35, 94, 57, 255);
+        Color MAG = new Color(116, 46, 137, 255); //testt
+        Color NAJ = new Color(194, 81, 47, 255);
+        Color STR = new Color(235, 171, 33, 255);
+        Color WOJ = new Color(151, 40, 44, 255);
+        Color ZLO = new Color(0, 78, 125, 255);
 
             const int NAME_FONT_SPACING = 0;
             const int TITLE_FONT_SPACING = 1;
