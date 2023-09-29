@@ -9,9 +9,9 @@ namespace HereToSlayGen
     {
         static void Main(string[] args)
         {
-            generate(0,"Test Leader", "Test description",5);
+            generate(0,"Test Leader", 5, "leader_pic.png", "Test description");
         }
-        public static void generate(int language, string leaderName, string leaderDescription, int desiredClass)
+        public static void generate(int language, string leaderName, int desiredClass, string leaderImg, string leaderDescription)
         {
             ResourceManager resourceManager = new ResourceManager("HereToSlay.Resources", typeof(Program).Assembly);
 
@@ -46,7 +46,7 @@ namespace HereToSlayGen
             Image bottom = Raylib.LoadImage("template/bottom.png");
             Image gradient = Raylib.LoadImage("template/gradient.png");
             Image card = Raylib.LoadImage("template/background.png");
-            Image leader = Raylib.LoadImage("leader_pic.png");
+            Image leader = Raylib.LoadImage(leaderImg);
             Image classSymbol;
 
             Color desiredColor;
