@@ -4,6 +4,7 @@ using Raylib_cs;
 
 class Program
 {
+
     static void Main()
     {
         Raylib.InitWindow(400, 400, "generator");
@@ -24,15 +25,15 @@ class Program
         const int CARD_WIDTH = 827;
         const int CARD_HEIGHT = 1417;
 
-        const int NAME_SIZE = 67; // 67
-        const int TITLE_SIZE = 40; // 40
-        const int DESC_SIZE = 28; // 35
+        const int NAME_SIZE = 60; // 67
+        const int TITLE_SIZE = 35; // 40
+        const int DESC_SIZE = 28; // 28
 
         Font nameFont = Raylib.LoadFontEx("name_font.ttf", NAME_SIZE, null, 1415);
         Font titleFont = Raylib.LoadFontEx("desc_font.ttf", TITLE_SIZE, null, 1415);
         Font descFont = Raylib.LoadFontEx("desc_font.ttf", DESC_SIZE, null, 1415);
 
-        bool gradientSetting = true;
+        bool gradientSetting = false;
         Image frame = Raylib.LoadImage("template/frame.png");
         Image bottom = Raylib.LoadImage("template/bottom.png");
         Image gradient = Raylib.LoadImage("template/gradient.png");
@@ -92,8 +93,9 @@ class Program
 
         Rectangle imageRec = new(0, 0, 827, 1417);
 
-        Raylib.ImageResize(ref leader, 827, 1417);
-        Raylib.ImageDraw(ref card, leader, imageRec, imageRec, Color.WHITE);
+        Raylib.ImageResize(ref leader, 745, 1176);
+        //Raylib.ImageResize(ref leader, 827, 1417);
+        Raylib.ImageDraw(ref card, leader, imageRec, new(41, 41, 745, 1176), Color.WHITE);
 
         if (gradientSetting) { Raylib.ImageDraw(ref card, gradient, imageRec, imageRec, Color.WHITE); }
         Raylib.ImageColorTint(ref frame, desiredColor);
@@ -102,15 +104,15 @@ class Program
         Raylib.ImageDraw(ref card, classSymbol, imageRec, imageRec, Color.WHITE);
 
         // Leader Name
-        Raylib.ImageDrawTextEx(ref card, nameFont, leaderName, new Vector2((CARD_WIDTH / 2) - (leaderNameSize.X / 2) + 3, 70.0f + 3), NAME_SIZE, NAME_FONT_SPACING, new Color(255, 255, 255, 127));
-        Raylib.ImageDrawTextEx(ref card, nameFont, leaderName, new Vector2((CARD_WIDTH / 2) - (leaderNameSize.X / 2), 70.0f), NAME_SIZE, NAME_FONT_SPACING, Color.BLACK);
+        Raylib.ImageDrawTextEx(ref card, nameFont, leaderName, new Vector2((CARD_WIDTH / 2) - (leaderNameSize.X / 2) + 3, 70 + 3), NAME_SIZE, NAME_FONT_SPACING, new Color(255, 255, 255, 127));
+        Raylib.ImageDrawTextEx(ref card, nameFont, leaderName, new Vector2((CARD_WIDTH / 2) - (leaderNameSize.X / 2), 70), NAME_SIZE, NAME_FONT_SPACING, Color.BLACK);
 
         // Class
-        Raylib.ImageDrawTextEx(ref card, titleFont, leaderTitle, new Vector2((CARD_WIDTH / 2) - (leaderTitleSize.X / 2) + 2, 141.0f + 2), TITLE_SIZE, TITLE_FONT_SPACING, new Color(255, 255, 255, 127));
-        Raylib.ImageDrawTextEx(ref card, titleFont, leaderTitle, new Vector2((CARD_WIDTH / 2) - (leaderTitleSize.X / 2), 141.0f), TITLE_SIZE, TITLE_FONT_SPACING, Color.BLACK);
+        Raylib.ImageDrawTextEx(ref card, titleFont, leaderTitle, new Vector2((CARD_WIDTH / 2) - (leaderTitleSize.X / 2) + 2, 133 + 2), TITLE_SIZE, TITLE_FONT_SPACING, new Color(255, 255, 255, 127));
+        Raylib.ImageDrawTextEx(ref card, titleFont, leaderTitle, new Vector2((CARD_WIDTH / 2) - (leaderTitleSize.X / 2), 133), TITLE_SIZE, TITLE_FONT_SPACING, Color.BLACK);
 
         // Description
-        Raylib.ImageDrawTextEx(ref card, descFont, leaderDescription, new Vector2(94.0f, (CARD_HEIGHT - (199 / 2) - (leaderDescriptionSize.Y / 2))), DESC_SIZE, DESC_FONT_SPACING, descColor);
+        Raylib.ImageDrawTextEx(ref card, descFont, leaderDescription, new Vector2(100, (CARD_HEIGHT - (200 / 2) - (leaderDescriptionSize.Y / 2) + 5)), DESC_SIZE, DESC_FONT_SPACING, descColor);
         //to do - fix line spacing
 
         Raylib.ExportImage(card, "test.png");
