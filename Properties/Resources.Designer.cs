@@ -183,6 +183,16 @@ namespace HereToSlayGenerator.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] wojownik1 {
+            get {
+                object obj = ResourceManager.GetObject("wojownik1", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] zlodziej {
             get {
                 object obj = ResourceManager.GetObject("zlodziej", resourceCulture);
