@@ -1,0 +1,30 @@
+ 
+# Visual Studio files
+.vscode/
+*.suo
+*.user
+*.userprefs
+*.sln.docstates
+
+# User-specific files
+*.suo
+*.user
+*.suo
+*.user
+*.userprefs
+*.sln.docstates
+*.suo
+*.user
+*.suo
+*.user
+*.userprefs
+*.sln.docstates
+*.suo
+*.user
+*.suo
+*.user
+*.userprefs
+*.sln.docstates
+
+# Compiled binary files
+obj/
