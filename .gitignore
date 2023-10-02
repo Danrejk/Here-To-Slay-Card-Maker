@@ -23,4 +23,4 @@
 
 # Compiled binary files
 obj/
-bin/Debug/
+Debug/
