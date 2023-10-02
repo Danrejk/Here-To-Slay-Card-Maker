@@ -103,6 +103,7 @@
             // 
             // chosenClass
             // 
+            chosenClass.DropDownStyle = ComboBoxStyle.DropDownList;
             chosenClass.FormattingEnabled = true;
             chosenClass.Location = new Point(338, 190);
             chosenClass.Name = "chosenClass";

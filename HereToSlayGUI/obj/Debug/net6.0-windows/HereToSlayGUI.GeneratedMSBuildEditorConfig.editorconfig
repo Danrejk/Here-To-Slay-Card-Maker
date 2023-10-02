@@ -14,4 +14,4 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = HereToSlayGUI
-build_property.ProjectDir = C:\Users\SDanr\Source\Repos\HereToSlay-Generator\HereToSlayGUI\
+build_property.ProjectDir = C:\Users\SDanr\source\repos\HereToSlay-Generator\HereToSlayGUI\
