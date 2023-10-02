@@ -17,13 +17,14 @@ namespace HereToSlayGen
         const int TITLE_FONT_SPACING = 0;
         const int DESC_FONT_SPACING = 0;
         const int DESC_LINE_SPACING = 0;
+        const int DESC_MARGIN = 100;
 
         const int CARD_WIDTH = 827;
         const int CARD_HEIGHT = 1417;
 
         const int NAME_SIZE = 60; // 60
-        const int TITLE_SIZE = 49; // 35
-        const int DESC_SIZE = 38; // 28
+        const int TITLE_SIZE = 49; // 49
+        const int DESC_SIZE = 38; // 38
 
         public static void generate(int language, string leaderName, int desiredClass, string leaderImg, string leaderDescription, bool addGradient, bool leaderWhite)
         {
@@ -140,7 +141,7 @@ namespace HereToSlayGen
             Raylib.ImageDrawTextEx(ref card, titleFont, leaderTitle, new Vector2((CARD_WIDTH / 2) - (leaderTitleSize.X / 2), 123), TITLE_SIZE, TITLE_FONT_SPACING, leaderColor);
 
             // Description
-            //Raylib.ImageDrawTextEx(ref card, descFont, leaderDescription, new Vector2(100, (CARD_HEIGHT - (200 / 2) - (leaderDescriptionSize.Y / 2) + 5)), DESC_SIZE, DESC_FONT_SPACING, descColor);
+            //Raylib.ImageDrawTextEx(ref card, descFont, leaderDescription, new Vector2(DESC_MARGIN, (CARD_HEIGHT - (200 / 2) - (leaderDescriptionSize.Y / 2) + 5)), DESC_SIZE, DESC_FONT_SPACING, descColor);
             DescriptionDraw(descFont, leaderDescription, card, descColor);
 
             Raylib.ExportImage(card, "test.png");
@@ -152,7 +153,7 @@ namespace HereToSlayGen
             Vector2 textSize = Raylib.MeasureTextEx(font, text, DESC_SIZE, DESC_FONT_SPACING);
 
             int len = text.Length;
-            int targetLen = CARD_WIDTH-(100*2);
+            int targetLen = CARD_WIDTH-(DESC_MARGIN*2);
             int targetLines = (int)(textSize.X / targetLen);
             int currentLine = 0;
             int outputPointer = 0;
@@ -177,7 +178,7 @@ namespace HereToSlayGen
                 if (currentLen.X + dashLen.X >= targetLen)
                 {
                     output.Append(dash);
-                    Raylib.ImageDrawTextEx(ref card, font, output.ToString(), new Vector2(94.0f, (CARD_HEIGHT - 195) + textBlockCenter + ((textSize.Y - 5 + DESC_LINE_SPACING) * currentLine)), DESC_SIZE, DESC_FONT_SPACING, descColor);
+                    Raylib.ImageDrawTextEx(ref card, font, output.ToString(), new Vector2(DESC_MARGIN, (CARD_HEIGHT - 195) + textBlockCenter + ((textSize.Y - 5 + DESC_LINE_SPACING) * currentLine)), DESC_SIZE, DESC_FONT_SPACING, descColor);
 
                     output.Clear();
                     currentLine++;
@@ -185,7 +186,7 @@ namespace HereToSlayGen
                 }
             }
 
-            Raylib.ImageDrawTextEx(ref card, font, output.ToString(), new Vector2(94.0f, (CARD_HEIGHT - 195) + textBlockCenter + ((textSize.Y - 5 + DESC_LINE_SPACING) * currentLine)), DESC_SIZE, DESC_FONT_SPACING, descColor);
+            Raylib.ImageDrawTextEx(ref card, font, output.ToString(), new Vector2(DESC_MARGIN, (CARD_HEIGHT - 195) + textBlockCenter + ((textSize.Y - 5 + DESC_LINE_SPACING) * currentLine)), DESC_SIZE, DESC_FONT_SPACING, descColor);
         }
     }
 }
