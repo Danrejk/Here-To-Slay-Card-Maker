@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "4w7zYTCWybdxS3f/hQpYHJFOa4RTiej9XiAXS/QaqOHsL5VRRynTElcurbzkSOEL/R+Q0M3RGFz+SBm99RH2yg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\SDanr\\source\\repos\\HereToSlay-Generator\\ToJaGoTne\\HereToSlayGenerator.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\SDanr\\.nuget\\packages\\raylib-cs\\4.5.0.4\\raylib-cs.4.5.0.4.nupkg.sha512",
+    "C:\\Users\\SDanr\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}
