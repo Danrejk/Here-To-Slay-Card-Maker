@@ -41,6 +41,8 @@
             selectImg = new Button();
             selectImgText = new TextBox();
             labelImg = new Label();
+            gradient = new CheckBox();
+            LeaderWhite = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)logo).BeginInit();
             SuspendLayout();
             // 
@@ -106,6 +108,7 @@
             chosenClass.Name = "chosenClass";
             chosenClass.Size = new Size(100, 23);
             chosenClass.TabIndex = 7;
+            chosenClass.SelectedIndexChanged += chosenClass_SelectedIndexChanged;
             // 
             // descriptionText
             // 
@@ -154,11 +157,33 @@
             labelImg.TabIndex = 12;
             labelImg.Text = "Leader Image";
             // 
+            // gradient
+            // 
+            gradient.AutoSize = true;
+            gradient.Location = new Point(525, 114);
+            gradient.Name = "gradient";
+            gradient.Size = new Size(124, 19);
+            gradient.TabIndex = 13;
+            gradient.Text = "Add back Gradient";
+            gradient.UseVisualStyleBackColor = true;
+            // 
+            // LeaderWhite
+            // 
+            LeaderWhite.AutoSize = true;
+            LeaderWhite.Location = new Point(525, 131);
+            LeaderWhite.Name = "LeaderWhite";
+            LeaderWhite.Size = new Size(150, 19);
+            LeaderWhite.TabIndex = 14;
+            LeaderWhite.Text = "Make Leader text White";
+            LeaderWhite.UseVisualStyleBackColor = true;
+            // 
             // Menu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(LeaderWhite);
+            Controls.Add(gradient);
             Controls.Add(labelImg);
             Controls.Add(selectImgText);
             Controls.Add(selectImg);
@@ -193,5 +218,7 @@
         private Button selectImg;
         private TextBox selectImgText;
         private Label labelImg;
+        private CheckBox gradient;
+        private CheckBox LeaderWhite;
     }
 }

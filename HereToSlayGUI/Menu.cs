@@ -18,7 +18,7 @@ namespace HereToSlayGUI
 
         private void Button_Press(object sender, EventArgs e)
         {
-            HereToSlayGen.Program.generate(language.SelectedIndex, leaderNameText.Text, chosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text);
+            HereToSlayGen.Program.generate(language.SelectedIndex, leaderNameText.Text, chosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text, gradient.Checked, LeaderWhite.Checked);
         }
 
         int currentIndex;
@@ -67,6 +67,11 @@ namespace HereToSlayGUI
                     selectImgText.Text = selectedFilePath;
                 }
             }
+        }
+
+        private void chosenClass_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -10,7 +10,7 @@ namespace HereToSlayGen
     {
         static void Main(string[] args)
         {
-            generate(0,"Test Leader", 5, "leader_pic.png", "Test description");
+            generate(0,"Test Leader", 5, "leader_pic.png", "Test description", false, false);
         }
 
         const int NAME_FONT_SPACING = 0;
@@ -25,7 +25,7 @@ namespace HereToSlayGen
         const int TITLE_SIZE = 49; // 35
         const int DESC_SIZE = 38; // 28
 
-        public static void generate(int language, string leaderName, int desiredClass, string leaderImg, string leaderDescription)
+        public static void generate(int language, string leaderName, int desiredClass, string leaderImg, string leaderDescription, bool addGradient, bool leaderWhite)
         {
             ResourceManager resourceManager = new ResourceManager("HereToSlay.Resources", typeof(Program).Assembly);
 
@@ -44,16 +44,12 @@ namespace HereToSlayGen
             Font titleFont = Raylib.LoadFontEx("fonts/SourceSansPro.ttf", TITLE_SIZE, null, 1415); 
             Font descFont = Raylib.LoadFontEx("fonts/SourceSansPro.ttf", DESC_SIZE, null, 1415);
 
-            bool gradientSetting = false;
             Image frame = Raylib.LoadImage("template/frame.png");
             Image bottom = Raylib.LoadImage("template/bottom.png");
-            Image gradient = Raylib.LoadImage("template/gradient.png");
+            Image? gradient = null;
+            if (addGradient) { gradient = Raylib.LoadImage("template/gradient.png"); }
             Image card = Raylib.LoadImage("template/background.png");
-            //Image leader = Raylib.LoadImage(leaderImg);
-            Image leader = Raylib.LoadImage("C:/Users/SDanr/Desktop/leader_pic.png");
-            leaderDescription = "Za każdym razem, gdy rzucasz kośćmi, aby rzucić    WYZWANIE, dodaj 2 do swojego wyniku.";
-            desiredClass = 4;
-            leaderName = "Pięśc Roztropności";
+            Image leader = Raylib.LoadImage(leaderImg);
 
             Image classSymbol;
 
@@ -116,19 +112,32 @@ namespace HereToSlayGen
             //Raylib.ImageResize(ref leader, 827, 1417);
             Raylib.ImageDraw(ref card, leader, imageRec, new(41, 41, 745, 1176), Color.WHITE);
 
-            if (gradientSetting) { Raylib.ImageDraw(ref card, gradient, imageRec, imageRec, Color.WHITE); }
+            if (gradient != null) { Raylib.ImageDraw(ref card, (Image)gradient, imageRec, imageRec, Color.WHITE); }
             Raylib.ImageColorTint(ref frame, desiredColor);
             Raylib.ImageDraw(ref card, frame, imageRec, imageRec, Color.WHITE);
             Raylib.ImageDraw(ref card, bottom, imageRec, imageRec, Color.WHITE);
             Raylib.ImageDraw(ref card, classSymbol, imageRec, imageRec, Color.WHITE);
 
+            Color leaderColor;
+            Color leaderShadow;
+            if (leaderWhite)
+            {
+                leaderColor = Color.WHITE;
+                leaderShadow = new(0, 0, 0, 127);
+            }
+            else
+            {
+                leaderColor = Color.BLACK;
+                leaderShadow = new(255, 255, 255, 127);
+            }
+
             // Leader Name
-            Raylib.ImageDrawTextEx(ref card, nameFont, leaderName, new Vector2((CARD_WIDTH / 2) - (leaderNameSize.X / 2) + 3, 70 + 3), NAME_SIZE, NAME_FONT_SPACING, new Color(255, 255, 255, 127));
-            Raylib.ImageDrawTextEx(ref card, nameFont, leaderName, new Vector2((CARD_WIDTH / 2) - (leaderNameSize.X / 2), 70), NAME_SIZE, NAME_FONT_SPACING, Color.BLACK);
+            Raylib.ImageDrawTextEx(ref card, nameFont, leaderName, new Vector2((CARD_WIDTH / 2) - (leaderNameSize.X / 2) + 3, 70 + 3), NAME_SIZE, NAME_FONT_SPACING, leaderShadow);
+            Raylib.ImageDrawTextEx(ref card, nameFont, leaderName, new Vector2((CARD_WIDTH / 2) - (leaderNameSize.X / 2), 70), NAME_SIZE, NAME_FONT_SPACING, leaderColor);
 
             // Class
-            Raylib.ImageDrawTextEx(ref card, titleFont, leaderTitle, new Vector2((CARD_WIDTH / 2) - (leaderTitleSize.X / 2) + 2, 120 + 2), TITLE_SIZE, TITLE_FONT_SPACING, new Color(255, 255, 255, 127));
-            Raylib.ImageDrawTextEx(ref card, titleFont, leaderTitle, new Vector2((CARD_WIDTH / 2) - (leaderTitleSize.X / 2), 123), TITLE_SIZE, TITLE_FONT_SPACING, Color.BLACK);
+            Raylib.ImageDrawTextEx(ref card, titleFont, leaderTitle, new Vector2((CARD_WIDTH / 2) - (leaderTitleSize.X / 2) + 2, 123 + 2), TITLE_SIZE, TITLE_FONT_SPACING, leaderShadow);
+            Raylib.ImageDrawTextEx(ref card, titleFont, leaderTitle, new Vector2((CARD_WIDTH / 2) - (leaderTitleSize.X / 2), 123), TITLE_SIZE, TITLE_FONT_SPACING, leaderColor);
 
             // Description
             //Raylib.ImageDrawTextEx(ref card, descFont, leaderDescription, new Vector2(100, (CARD_HEIGHT - (200 / 2) - (leaderDescriptionSize.Y / 2) + 5)), DESC_SIZE, DESC_FONT_SPACING, descColor);
