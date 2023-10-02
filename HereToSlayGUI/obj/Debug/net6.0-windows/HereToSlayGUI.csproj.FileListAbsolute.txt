@@ -55,7 +55,6 @@ C:\Users\SDanr\source\repos\HereToSlay-Generator\HereToSlayGUI\bin\Debug\net6.0-
 C:\Users\SDanr\source\repos\HereToSlay-Generator\HereToSlayGUI\bin\Debug\net6.0-windows\classes\straznik.png
 C:\Users\SDanr\source\repos\HereToSlay-Generator\HereToSlayGUI\bin\Debug\net6.0-windows\classes\wojownik.png
 C:\Users\SDanr\source\repos\HereToSlay-Generator\HereToSlayGUI\bin\Debug\net6.0-windows\classes\zlodziej.png
-C:\Users\SDanr\source\repos\HereToSlay-Generator\HereToSlayGUI\bin\Debug\net6.0-windows\fonts\Helvetica.ttf
 C:\Users\SDanr\source\repos\HereToSlay-Generator\HereToSlayGUI\bin\Debug\net6.0-windows\fonts\PatuaOne-polish.ttf
 C:\Users\SDanr\source\repos\HereToSlay-Generator\HereToSlayGUI\bin\Debug\net6.0-windows\template\background.png
 C:\Users\SDanr\source\repos\HereToSlay-Generator\HereToSlayGUI\bin\Debug\net6.0-windows\template\bottom.png
@@ -90,3 +89,4 @@ C:\Users\SDanr\source\repos\HereToSlay-Generator\HereToSlayGUI\obj\Debug\net6.0-
 C:\Users\SDanr\source\repos\HereToSlay-Generator\HereToSlayGUI\obj\Debug\net6.0-windows\HereToSlayGUI.pdb
 C:\Users\SDanr\source\repos\HereToSlay-Generator\HereToSlayGUI\obj\Debug\net6.0-windows\HereToSlayGUI.genruntimeconfig.cache
 C:\Users\SDanr\source\repos\HereToSlay-Generator\HereToSlayGUI\obj\Debug\net6.0-windows\ref\HereToSlayGUI.dll
+C:\Users\SDanr\source\repos\HereToSlay-Generator\HereToSlayGUI\bin\Debug\net6.0-windows\fonts\SourceSansPro.ttf
