@@ -1,10 +1,5 @@
- 
-# Visual Studio files
-.vscode/
-*.suo
-*.user
-*.userprefs
-*.sln.docstates
+# Visual Studio
+.vs/
 
 # User-specific files
 *.suo
