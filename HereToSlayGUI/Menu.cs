@@ -1,5 +1,9 @@
 using HereToSlayGen;
 using HereToSlayGUI.Properties;
+using System.Drawing.Text;
+using System.Reflection;
+using System.Resources;
+using System.Runtime.InteropServices;
 
 namespace HereToSlayGUI
 {
@@ -14,11 +18,18 @@ namespace HereToSlayGUI
             language.SelectedIndex = Properties.Settings.Default.Language;
 
             logo.SizeMode = PictureBoxSizeMode.Zoom;
+
+            Font fontUI = GetFont(Properties.Resources.SourceSansPro, 10);
+            ChangeFontForAllControls(this, fontUI);
+            Font fontLeader = GetFont(Properties.Resources.PatuaOne_polish, 11);
+            leaderNameText.Font = fontLeader;
+            labelLeader.Font = fontLeader;
+            //descriptionText.Font = fontUi;
         }
 
         private void Button_Press(object sender, EventArgs e)
         {
-            HereToSlayGen.Program.generate(language.SelectedIndex, leaderNameText.Text, chosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text, gradient.Checked, LeaderWhite.Checked);
+            HereToSlayGen.Program.generate(language.SelectedIndex, leaderNameText.Text, chosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text, gradient.Checked, leaderWhite.Checked);
         }
 
         int currentIndex;
@@ -36,7 +47,7 @@ namespace HereToSlayGUI
                 case 1:
                     logo.Image = Properties.Resources.Logo1;
                     classes = new string[] { "£owca", "Mag", "Bard", "Stra¿nik", "Wojownik", "Z³odziej" };
-                    labelName.Text = "Nazwa lidera";
+                    labelLeader.Text = "Nazwa lidera";
                     labelClass.Text = "Klasa lidera";
                     labelImg.Text = "Obrazek lidera";
                     labelDescription.Text = "Opis mocy";
@@ -44,7 +55,7 @@ namespace HereToSlayGUI
                 default:
                     logo.Image = Properties.Resources.Logo0;
                     classes = new string[] { "Ranger", "Wizard", "Bard", "Guardian", "Fighter", "Thief" };
-                    labelName.Text = "Leader name";
+                    labelLeader.Text = "Leader name";
                     labelClass.Text = "Leader class";
                     labelImg.Text = "Leader image";
                     labelDescription.Text = "Description";
@@ -54,24 +65,35 @@ namespace HereToSlayGUI
             chosenClass.SelectedIndex = currentIndex;
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void ChangeFontForAllControls(Control control, Font fontUI)
         {
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            foreach (Control c in control.Controls)
             {
-                openFileDialog.Title = "Select a File";
-                openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp|All Files (*.*)|*.*";
-
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                c.Font = fontUI;
+                if (c.Controls.Count > 0)
                 {
-                    string selectedFilePath = openFileDialog.FileName;
-                    selectImgText.Text = selectedFilePath;
+                    ChangeFontForAllControls(c, fontUI);
                 }
             }
         }
 
-        private void chosenClass_SelectedIndexChanged(object sender, EventArgs e)
+        private Font GetFont(byte[] fontData, float size)
         {
+            IntPtr data = Marshal.AllocCoTaskMem(fontData.Length);
+            Marshal.Copy(fontData, 0, data, fontData.Length);
 
+            PrivateFontCollection fontCollection = new PrivateFontCollection();
+            fontCollection.AddMemoryFont(data, fontData.Length);
+
+            if (fontCollection.Families.Length > 0)
+            {
+                FontFamily fontFamily = fontCollection.Families[0];
+                Marshal.FreeCoTaskMem(data); // Release the allocated memory
+                return new Font(fontFamily, size);
+            }
+
+            // Return a fallback font if the resource cannot be loaded
+            return SystemFonts.DefaultFont;
         }
     }
 }

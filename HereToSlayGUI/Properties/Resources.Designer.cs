@@ -79,5 +79,25 @@ namespace HereToSlayGUI.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] PatuaOne_polish {
+            get {
+                object obj = ResourceManager.GetObject("PatuaOne_polish", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] SourceSansPro {
+            get {
+                object obj = ResourceManager.GetObject("SourceSansPro", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

@@ -28,8 +28,6 @@ namespace HereToSlayGen
 
         public static void generate(int language, string leaderName, int desiredClass, string leaderImg, string leaderDescription, bool addGradient, bool leaderWhite)
         {
-            ResourceManager resourceManager = new ResourceManager("HereToSlay.Resources", typeof(Program).Assembly);
-
             Raylib.InitWindow(1, 1, "generator");
 
             Color LOW = new Color(35, 94, 57, 255);

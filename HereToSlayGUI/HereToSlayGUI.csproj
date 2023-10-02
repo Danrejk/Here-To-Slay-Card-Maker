@@ -33,6 +33,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="fonts\PatuaOne-polish.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="fonts\SourceSansPro.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="MenuAssets\Logo0.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
