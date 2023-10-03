@@ -1,4 +1,5 @@
 # HereToSlay-Generator
 work in progress<br><br>
-Code - <a href="https://github.com/Beukot">@Beukot</a><br>
-Design help and a <a href="https://github.com/Danrejk/PatuaOne-Polish">Custom Patua One font</a> - <a href="https://github.com/Danrejk">@Danrejk</a>
+Code for Generation (huge) - <a href="https://github.com/Beukot">@Beukot</a><br>
+Code for GUI and the GUI itself - <a href="https://github.com/Danrejk">@Danrejk</a>
+Visual accuracy - <a href="https://github.com/Danrejk">@Danrejk</a>
