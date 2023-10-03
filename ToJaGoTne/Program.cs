@@ -10,7 +10,7 @@ namespace HereToSlayGen
     {
         static void Main(string[] args)
         {
-            generate(0,"Test Leader", 5, "leader_pic.png", "Test description", false, false);
+            generate(false, 0,"Test Leader", 5, "leader_pic.png", "Test description", false, false);
         }
 
         const int NAME_FONT_SPACING = 0;
@@ -26,10 +26,8 @@ namespace HereToSlayGen
         const int TITLE_SIZE = 49; // 49
         const int DESC_SIZE = 38; // 38
 
-        public static void generate(int language, string leaderName, int desiredClass, string leaderImg, string leaderDescription, bool addGradient, bool leaderWhite)
+        public static void generate(bool preview, int language, string leaderName, int desiredClass, string leaderImg, string leaderDescription, bool addGradient, bool leaderWhite)
         {
-            Raylib.InitWindow(1, 1, "generator");
-
             Color LOW = new Color(35, 94, 57, 255);
             Color MAG = new Color(116, 46, 137, 255);
             Color NAJ = new Color(194, 81, 47, 255);
@@ -39,9 +37,15 @@ namespace HereToSlayGen
 
             Color descColor = new Color(78, 78, 78, 255);
 
+
+            Raylib.InitWindow(1, 1, "generator");
+            Raylib.SetWindowPosition(-1000, -1000);
+
             Font nameFont = Raylib.LoadFontEx("fonts/PatuaOne-polish.ttf", NAME_SIZE, null, 1415); // this font has limited language support
             Font titleFont = Raylib.LoadFontEx("fonts/SourceSansPro.ttf", TITLE_SIZE, null, 1415); 
             Font descFont = Raylib.LoadFontEx("fonts/SourceSansPro.ttf", DESC_SIZE, null, 1415);
+
+            Raylib.CloseWindow();
 
             Image frame = Raylib.LoadImage("template/frame.png");
             Image bottom = Raylib.LoadImage("template/bottom.png");
@@ -103,7 +107,7 @@ namespace HereToSlayGen
 
             Vector2 leaderNameSize = Raylib.MeasureTextEx(nameFont, leaderName, NAME_SIZE, NAME_FONT_SPACING);
             Vector2 leaderTitleSize = Raylib.MeasureTextEx(titleFont, leaderTitle, TITLE_SIZE, TITLE_FONT_SPACING);
-            Vector2 leaderDescriptionSize = Raylib.MeasureTextEx(descFont, leaderDescription, DESC_SIZE, DESC_FONT_SPACING);
+            //Vector2 leaderDescriptionSize = Raylib.MeasureTextEx(descFont, leaderDescription, DESC_SIZE, DESC_FONT_SPACING);
 
             Rectangle imageRec = new(0, 0, 827, 1417);
 
@@ -142,8 +146,14 @@ namespace HereToSlayGen
             //Raylib.ImageDrawTextEx(ref card, descFont, leaderDescription, new Vector2(DESC_MARGIN, (CARD_HEIGHT - (200 / 2) - (leaderDescriptionSize.Y / 2) + 5)), DESC_SIZE, DESC_FONT_SPACING, descColor);
             DescriptionDraw(descFont, leaderDescription, card, descColor);
 
-            Raylib.ExportImage(card, "test.png");
-            Raylib.CloseWindow();
+            if (preview)
+            {
+                Raylib.ExportImage(card, "preview.png");
+            }
+            else
+            {
+                Raylib.ExportImage(card, "export.png");
+            }
         }
 
         static void DescriptionDraw(Font font, string text, Image card, Color descColor)
