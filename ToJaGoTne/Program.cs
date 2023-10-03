@@ -3,6 +3,7 @@ using System.Numerics;
 using Raylib_cs;
 using System.Resources;
 using System.Text;
+using System.Runtime.InteropServices;
 
 namespace HereToSlayGen
 {
@@ -37,9 +38,10 @@ namespace HereToSlayGen
 
             Color descColor = new Color(78, 78, 78, 255);
 
-
+            IntPtr hInstance = Marshal.GetHINSTANCE(typeof(Program).Module);
             Raylib.InitWindow(1, 1, "generator");
             Raylib.SetWindowPosition(-1000, -1000);
+            Raylib.MinimizeWindow();
 
             Font nameFont = Raylib.LoadFontEx("fonts/PatuaOne-polish.ttf", NAME_SIZE, null, 1415); // this font has limited language support
             Font titleFont = Raylib.LoadFontEx("fonts/SourceSansPro.ttf", TITLE_SIZE, null, 1415); 

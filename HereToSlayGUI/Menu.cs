@@ -17,7 +17,9 @@ namespace HereToSlayGUI
 
             language.Items.Add("English");
             language.Items.Add("Polish");
+            
             language.SelectedIndex = Properties.Settings.Default.Language;
+            initialLang = true;
 
             logo.SizeMode = PictureBoxSizeMode.Zoom;
 
@@ -141,30 +143,32 @@ namespace HereToSlayGUI
         }
 
         private CancellationTokenSource? cancellationTokenSource;
+        bool initialLang = false; //it's so that when the program opens and sets the remembered language, it doesn't render the preview automatically.
         private async void renderPreview(object sender, EventArgs e)
         {
             cancellationTokenSource?.Cancel();
             cancellationTokenSource = new CancellationTokenSource();
-
-            try
-            {
-                int timer = 3;
-                while (timer > 0)
+            if (initialLang){
+                try
                 {
-                    cancellationTokenSource.Token.ThrowIfCancellationRequested();
+                    int timer = 1;
+                    while (timer > 0)
+                    {
+                        cancellationTokenSource.Token.ThrowIfCancellationRequested();
 
-                    await Task.Delay(500, cancellationTokenSource.Token);
-                    timer--;
+                        await Task.Delay(500, cancellationTokenSource.Token);
+                        timer--;
+                    }
+                    if (timer >= 0)
+                    {
+                        if (previewImg.Image != null) { previewImg.Image.Dispose(); }
+                        previewImg.Image = null;
+                        HereToSlayGen.Program.generate(true, language.SelectedIndex, leaderNameText.Text, chosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text, gradient.Checked, leaderWhite.Checked);
+                        previewImg.Image = Image.FromFile("preview.png");
+                    }
                 }
-                if (timer >= 0)
-                {
-                    if (previewImg.Image != null) { previewImg.Image.Dispose(); }
-                    previewImg.Image = null;
-                    HereToSlayGen.Program.generate(true, language.SelectedIndex, leaderNameText.Text, chosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text, gradient.Checked, leaderWhite.Checked);
-                    previewImg.Image = Image.FromFile("preview.png");
-                }
+                catch (OperationCanceledException) { }
             }
-            catch (OperationCanceledException) { }
         }
     }
 }
