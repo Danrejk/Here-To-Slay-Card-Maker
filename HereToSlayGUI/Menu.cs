@@ -1,5 +1,6 @@
 using HereToSlayGen;
 using HereToSlayGUI.Properties;
+using System.Diagnostics;
 using System.Drawing.Text;
 using System.Reflection;
 using System.Resources;
@@ -18,14 +19,15 @@ namespace HereToSlayGUI
             language.Items.Add("English");
             language.Items.Add("Polish");
 
+
             language.SelectedIndex = Properties.Settings.Default.Language;
             initialLang = true;
 
             logo.SizeMode = PictureBoxSizeMode.Zoom;
 
-            Font fontUI = GetFont(Properties.Resources.SourceSansPro, 9);
+            Font fontUI = GetFont(Properties.Resources.SourceSansPro, 10);
             ChangeFontForAllControls(this, fontUI);
-            Font fontLeader = GetFont(Properties.Resources.PatuaOne_polish, 10);
+            Font fontLeader = GetFont(Properties.Resources.PatuaOne_polish, 12);
             leaderNameText.Font = fontLeader;
             //labelLeader.Font = fontLeader;
             RENDER.Font = fontLeader;
@@ -36,6 +38,7 @@ namespace HereToSlayGUI
 
         private void Button_Press(object sender, EventArgs e)
         {
+            renderPreview(sender,e);
             HereToSlayGen.Program.Generate(false, language.SelectedIndex, leaderNameText.Text, chosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text, gradient.Checked, leaderWhite.Checked);
         }
 
@@ -177,5 +180,10 @@ namespace HereToSlayGUI
                 catch (OperationCanceledException) { }
             }
         }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        { System.Diagnostics.Process.Start(new ProcessStartInfo { FileName = "https://github.com/Danrejk", UseShellExecute = true }); }
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        { System.Diagnostics.Process.Start(new ProcessStartInfo { FileName = "https://github.com/Beukot", UseShellExecute = true }); }
     }
 }

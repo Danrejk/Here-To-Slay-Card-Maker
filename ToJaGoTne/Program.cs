@@ -11,7 +11,7 @@ namespace HereToSlayGen
     {
         static void Main()
         {
-            Generate(false, 0,"Test Leader", 5, "leader_pic.png", "Test description", false, false);
+            Generate(false, 0,"Test Leader", 5, "C:\\Users\\SDanr\\Memy\\4kxq0po7rlx41smol.jpg", "Test description", false, false);
         }
 
         const int NAME_FONT_SPACING = 0;
@@ -109,14 +109,31 @@ namespace HereToSlayGen
 
             Vector2 leaderNameSize = Raylib.MeasureTextEx(nameFont, leaderName, NAME_SIZE, NAME_FONT_SPACING);
             Vector2 leaderTitleSize = Raylib.MeasureTextEx(titleFont, leaderTitle, TITLE_SIZE, TITLE_FONT_SPACING);
-            //Vector2 leaderDescriptionSize = Raylib.MeasureTextEx(descFont, leaderDescription, DESC_SIZE, DESC_FONT_SPACING);
 
             Rectangle imageRec = new(0, 0, 827, 1417);
 
-            Raylib.ImageResize(ref leader, 745, 1176);
-            //Raylib.ImageResize(ref leader, 827, 1417);
-            Raylib.ImageDraw(ref card, leader, imageRec, new(41, 41, 745, 1176), Color.WHITE);
+            #region Image Crop
+            float targetAspectRatio = 745.0f / 1176.0f;
+            int targetWidth, targetHeight;
+            if (leader.width / (float)leader.height > targetAspectRatio)
+            {
+                targetWidth = (int)(leader.height * targetAspectRatio);
+                targetHeight = leader.height;
+            }
+            else
+            {
+                targetWidth = leader.width;
+                targetHeight = (int)(leader.width / targetAspectRatio);
+            }
 
+            int cropX = (leader.width - targetWidth) / 2;
+            int cropY = (leader.height - targetHeight) / 2;
+
+            Raylib.ImageCrop(ref leader, new Rectangle(cropX, cropY, targetWidth, targetHeight));
+            Raylib.ImageResize(ref leader, 745, 1176);
+            #endregion
+
+            Raylib.ImageDraw(ref card, leader, imageRec, new(41, 41, 745, 1176), Color.WHITE);
             if (gradient != null) { Raylib.ImageDraw(ref card, (Image)gradient, imageRec, imageRec, Color.WHITE); }
             Raylib.ImageColorTint(ref frame, desiredColor);
             Raylib.ImageDraw(ref card, frame, imageRec, imageRec, Color.WHITE);
