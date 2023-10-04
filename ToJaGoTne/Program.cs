@@ -9,9 +9,9 @@ namespace HereToSlayGen
 {
     public class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            generate(false, 0,"Test Leader", 5, "leader_pic.png", "Test description", false, false);
+            Generate(false, 0,"Test Leader", 5, "leader_pic.png", "Test description", false, false);
         }
 
         const int NAME_FONT_SPACING = 0;
@@ -27,18 +27,18 @@ namespace HereToSlayGen
         const int TITLE_SIZE = 49; // 49
         const int DESC_SIZE = 38; // 38
 
-        public static void generate(bool preview, int language, string leaderName, int desiredClass, string leaderImg, string leaderDescription, bool addGradient, bool leaderWhite)
+        public static void Generate(bool preview, int language, string leaderName, int desiredClass, string leaderImg, string leaderDescription, bool addGradient, bool leaderWhite)
         {
-            Color LOW = new Color(35, 94, 57, 255);
-            Color MAG = new Color(116, 46, 137, 255);
-            Color NAJ = new Color(194, 81, 47, 255);
-            Color STR = new Color(235, 171, 33, 255);
-            Color WOJ = new Color(151, 40, 44, 255);
-            Color ZLO = new Color(0, 78, 125, 255);
+            Color LOW = new(35, 94, 57, 255);
+            Color MAG = new(116, 46, 137, 255);
+            Color NAJ = new(194, 81, 47, 255);
+            Color STR = new(235, 171, 33, 255);
+            Color WOJ = new(151, 40, 44, 255);
+            Color ZLO = new(0, 78, 125, 255);
 
-            Color descColor = new Color(78, 78, 78, 255);
+            Color descColor = new(78, 78, 78, 255);
 
-            IntPtr hInstance = Marshal.GetHINSTANCE(typeof(Program).Module);
+            Marshal.GetHINSTANCE(typeof(Program).Module);
             Raylib.InitWindow(1, 1, "generator");
             Raylib.SetWindowPosition(-1000, -1000);
             Raylib.MinimizeWindow();
@@ -64,44 +64,44 @@ namespace HereToSlayGen
             switch (desiredClass)
             {
                 case 0:
-                    switch (language){
-                        case 1: leaderTitle = "Przywódca drużyny: łowca"; break;
-                        default: leaderTitle = "Party Leader: Ranger"; break;}
+                    leaderTitle = language switch{
+                        1 => "Przywódca drużyny: łowca",
+                        _ => "Party Leader: Ranger"};
                     desiredColor = LOW;
                     classSymbol = Raylib.LoadImage("classes/lowca.png");
                     break;
                 case 1:
-                    switch (language){
-                        case 1: leaderTitle = "Przywódca drużyny: mag"; ; break;
-                        default: leaderTitle = "Party Leader: Wizard"; break;}
+                    leaderTitle = language switch{
+                        1 => "Przywódca drużyny: mag",
+                        _ => "Party Leader: Wizard"};
                     desiredColor = MAG;
                     classSymbol = Raylib.LoadImage("classes/mag.png");
                     break;
                 case 2:
-                    switch (language){
-                        case 1: leaderTitle = "Przywódca drużyny: bard"; break;
-                        default: leaderTitle = "Party Leader: Bard"; break;}
+                    leaderTitle = language switch{
+                        1 => "Przywódca drużyny: bard",
+                        _ => "Party Leader: Bard"};
                     classSymbol = Raylib.LoadImage("classes/najebus.png");
                     desiredColor = NAJ;
                     break;
                 case 3:
-                    switch (language){
-                        case 1: leaderTitle = "Przywódca drużyny: strażnik"; break;
-                        default: leaderTitle = "Party Leader: Guardian"; break;}
+                    leaderTitle = language switch{
+                        1 => "Przywódca drużyny: strażnik",
+                        _ => "Party Leader: Guardian"};
                     classSymbol = Raylib.LoadImage("classes/straznik.png");
                     desiredColor = STR;
                     break;
                 case 4:
-                    switch (language){
-                        case 1: leaderTitle = "Przywódca drużyny: wojownik"; break;
-                        default: leaderTitle = "Party Leader: Fighter"; break;}
+                    leaderTitle = language switch{
+                        1 => "Przywódca drużyny: wojownik",
+                        _ => "Party Leader: Fighter"};
                     classSymbol = Raylib.LoadImage("classes/wojownik.png");
                     desiredColor = WOJ;
                     break;
                 default: // when no desired class is given it deafults to thief
-                    switch (language){
-                        case 1: leaderTitle = "Przywódca drużyny: złodziej"; break;
-                        default: leaderTitle = "Party Leader: Thief"; break;}
+                    leaderTitle = language switch{
+                        1 => "Przywódca drużyny: złodziej",
+                        _ => "Party Leader: Thief"};
                     classSymbol = Raylib.LoadImage("classes/zlodziej.png");
                     desiredColor = ZLO;
                     break;

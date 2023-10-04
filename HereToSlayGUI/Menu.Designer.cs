@@ -44,13 +44,16 @@
             leaderWhite = new CheckBox();
             descriptionText = new TextBox();
             previewImg = new PictureBox();
+            linkLabel1 = new LinkLabel();
+            label1 = new Label();
+            linkLabel2 = new LinkLabel();
             ((System.ComponentModel.ISupportInitialize)logo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)previewImg).BeginInit();
             SuspendLayout();
             // 
             // RENDER
             // 
-            RENDER.Location = new Point(92, 625);
+            RENDER.Location = new Point(109, 464);
             RENDER.Name = "RENDER";
             RENDER.Size = new Size(185, 74);
             RENDER.TabIndex = 0;
@@ -62,12 +65,11 @@
             // 
             language.DropDownStyle = ComboBoxStyle.DropDownList;
             language.FormattingEnabled = true;
-            language.Location = new Point(342, 675);
+            language.Location = new Point(342, 12);
             language.Name = "language";
             language.Size = new Size(66, 23);
             language.TabIndex = 1;
             language.SelectedIndexChanged += language_SelectedIndexChanged;
-            language.SelectedIndexChanged += renderPreview;
             // 
             // leaderNameText
             // 
@@ -114,7 +116,8 @@
             chosenClass.Name = "chosenClass";
             chosenClass.Size = new Size(100, 23);
             chosenClass.TabIndex = 7;
-            chosenClass.SelectedIndexChanged += renderPreview;
+            chosenClass.SelectedIndexChanged += chosenClass_SelectedIndexChanged;
+            chosenClass.Click += chosenClass_Click;
             // 
             // labelClass
             // 
@@ -161,7 +164,7 @@
             // gradient
             // 
             gradient.AutoSize = true;
-            gradient.Location = new Point(137, 439);
+            gradient.Location = new Point(137, 544);
             gradient.Name = "gradient";
             gradient.Size = new Size(124, 19);
             gradient.TabIndex = 13;
@@ -172,7 +175,7 @@
             // leaderWhite
             // 
             leaderWhite.AutoSize = true;
-            leaderWhite.Location = new Point(137, 414);
+            leaderWhite.Location = new Point(137, 569);
             leaderWhite.Name = "leaderWhite";
             leaderWhite.Size = new Size(150, 19);
             leaderWhite.TabIndex = 14;
@@ -200,10 +203,42 @@
             previewImg.TabIndex = 16;
             previewImg.TabStop = false;
             // 
+            // linkLabel1
+            // 
+            linkLabel1.AutoSize = true;
+            linkLabel1.Location = new Point(12, 687);
+            linkLabel1.Name = "linkLabel1";
+            linkLabel1.Size = new Size(58, 15);
+            linkLabel1.TabIndex = 17;
+            linkLabel1.TabStop = true;
+            linkLabel1.Text = "@Danrejk";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(12, 657);
+            label1.Name = "label1";
+            label1.Size = new Size(52, 15);
+            label1.TabIndex = 18;
+            label1.Text = "Authors:";
+            // 
+            // linkLabel2
+            // 
+            linkLabel2.AutoSize = true;
+            linkLabel2.Location = new Point(12, 672);
+            linkLabel2.Name = "linkLabel2";
+            linkLabel2.Size = new Size(55, 15);
+            linkLabel2.TabIndex = 19;
+            linkLabel2.TabStop = true;
+            linkLabel2.Text = "@Beukot";
+            // 
             // Menu
             // 
             AutoScaleMode = AutoScaleMode.None;
             ClientSize = new Size(828, 711);
+            Controls.Add(linkLabel2);
+            Controls.Add(label1);
+            Controls.Add(linkLabel1);
             Controls.Add(descriptionText);
             Controls.Add(leaderWhite);
             Controls.Add(gradient);
@@ -212,12 +247,12 @@
             Controls.Add(selectImg);
             Controls.Add(labelClass);
             Controls.Add(chosenClass);
-            Controls.Add(logo);
             Controls.Add(labelDescription);
             Controls.Add(labelLeader);
             Controls.Add(leaderNameText);
             Controls.Add(language);
             Controls.Add(RENDER);
+            Controls.Add(logo);
             Controls.Add(previewImg);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
@@ -249,5 +284,8 @@
         private CheckBox gradient;
         private CheckBox leaderWhite;
         private PictureBox previewImg;
+        private LinkLabel linkLabel1;
+        private Label label1;
+        private LinkLabel linkLabel2;
     }
 }

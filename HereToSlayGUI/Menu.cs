@@ -17,15 +17,15 @@ namespace HereToSlayGUI
 
             language.Items.Add("English");
             language.Items.Add("Polish");
-            
+
             language.SelectedIndex = Properties.Settings.Default.Language;
             initialLang = true;
 
             logo.SizeMode = PictureBoxSizeMode.Zoom;
 
-            Font fontUI = GetFont(Properties.Resources.SourceSansPro, 10);
+            Font fontUI = GetFont(Properties.Resources.SourceSansPro, 9);
             ChangeFontForAllControls(this, fontUI);
-            Font fontLeader = GetFont(Properties.Resources.PatuaOne_polish, 11);
+            Font fontLeader = GetFont(Properties.Resources.PatuaOne_polish, 10);
             leaderNameText.Font = fontLeader;
             //labelLeader.Font = fontLeader;
             RENDER.Font = fontLeader;
@@ -36,7 +36,7 @@ namespace HereToSlayGUI
 
         private void Button_Press(object sender, EventArgs e)
         {
-            HereToSlayGen.Program.generate(false, language.SelectedIndex, leaderNameText.Text, chosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text, gradient.Checked, leaderWhite.Checked);
+            HereToSlayGen.Program.Generate(false, language.SelectedIndex, leaderNameText.Text, chosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text, gradient.Checked, leaderWhite.Checked);
         }
 
         int currentIndex;
@@ -70,6 +70,7 @@ namespace HereToSlayGUI
             }
             chosenClass.Items.AddRange(classes);
             chosenClass.SelectedIndex = currentIndex;
+            renderPreview(sender, e);
         }
 
         // Font changes
@@ -84,12 +85,12 @@ namespace HereToSlayGUI
                 }
             }
         }
-        private Font GetFont(byte[] fontData, float size)
+        private static Font GetFont(byte[] fontData, float size)
         {
             IntPtr data = Marshal.AllocCoTaskMem(fontData.Length);
             Marshal.Copy(fontData, 0, data, fontData.Length);
 
-            PrivateFontCollection fontCollection = new PrivateFontCollection();
+            PrivateFontCollection fontCollection = new();
             fontCollection.AddMemoryFont(data, fontData.Length);
 
             if (fontCollection.Families.Length > 0)
@@ -126,21 +127,26 @@ namespace HereToSlayGUI
                     this.Icon = Properties.Resources.zlodziej;
                     break;
             }
+            renderPreview(sender, e);
         }
+        private void chosenClass_Click(object sender, EventArgs e)
+        {
+            cancellationTokenSource?.Cancel();
+        }
+
         private void selectImg_Click(object sender, EventArgs e)
         {
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
-            {
-                openFileDialog.Title = "Select a File";
-                openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp|All Files (*.*)|*.*";
+            using OpenFileDialog openFileDialog = new();
+            openFileDialog.Title = "Select a File";
+            openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp|All Files (*.*)|*.*";
 
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    string selectedFilePath = openFileDialog.FileName;
-                    selectImgText.Text = selectedFilePath;
-                }
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string selectedFilePath = openFileDialog.FileName;
+                selectImgText.Text = selectedFilePath;
             }
         }
+
 
         private CancellationTokenSource? cancellationTokenSource;
         bool initialLang = false; //it's so that when the program opens and sets the remembered language, it doesn't render the preview automatically.
@@ -148,7 +154,8 @@ namespace HereToSlayGUI
         {
             cancellationTokenSource?.Cancel();
             cancellationTokenSource = new CancellationTokenSource();
-            if (initialLang){
+            if (initialLang)
+            {
                 try
                 {
                     int timer = 1;
@@ -161,9 +168,9 @@ namespace HereToSlayGUI
                     }
                     if (timer >= 0)
                     {
-                        if (previewImg.Image != null) { previewImg.Image.Dispose(); }
+                        previewImg.Image?.Dispose();
                         previewImg.Image = null;
-                        HereToSlayGen.Program.generate(true, language.SelectedIndex, leaderNameText.Text, chosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text, gradient.Checked, leaderWhite.Checked);
+                        HereToSlayGen.Program.Generate(true, language.SelectedIndex, leaderNameText.Text, chosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text, gradient.Checked, leaderWhite.Checked);
                         previewImg.Image = Image.FromFile("preview.png");
                     }
                 }
