@@ -11,7 +11,7 @@ namespace HereToSlayGen
     {
         static void Main()
         {
-            Generate(false, 0,"Test Leader", 5, "C:\\Users\\SDanr\\Memy\\4kxq0po7rlx41smol.jpg", "Test description", false, false);
+            Generate(false, 0,"Test Leader", 5, "leader_pic.png", "Test description", false, false);
         }
 
         const int NAME_FONT_SPACING = 0;
