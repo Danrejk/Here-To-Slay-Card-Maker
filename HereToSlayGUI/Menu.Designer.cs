@@ -53,6 +53,7 @@
             sourceExport = new Button();
             label1 = new Label();
             classIcons = new ImageList(components);
+            langIcons = new ImageList(components);
             ((System.ComponentModel.ISupportInitialize)logo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)previewImg).BeginInit();
             SuspendLayout();
@@ -79,9 +80,9 @@
             language.FlatStyle = FlatStyle.Flat;
             language.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             language.FormattingEnabled = true;
-            language.Location = new Point(342, 12);
+            language.Location = new Point(323, 12);
             language.Name = "language";
-            language.Size = new Size(66, 25);
+            language.Size = new Size(85, 25);
             language.TabIndex = 1;
             language.SelectedIndexChanged += language_SelectedIndexChanged;
             // 
@@ -359,6 +360,12 @@
             classIcons.TransparentColor = Color.Transparent;
             classIcons.Images.SetKeyName(0, "Warrior.png");
             // 
+            // langIcons
+            // 
+            langIcons.ColorDepth = ColorDepth.Depth8Bit;
+            langIcons.ImageSize = new Size(16, 16);
+            langIcons.TransparentColor = Color.Transparent;
+            // 
             // Menu
             // 
             AutoScaleMode = AutoScaleMode.None;
@@ -423,5 +430,6 @@
         private Button sourceExport;
         private Label label1;
         private ImageList classIcons;
+        private ImageList langIcons;
     }
 }

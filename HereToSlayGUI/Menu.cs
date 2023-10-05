@@ -18,11 +18,25 @@ namespace HereToSlayGUI
         {
             InitializeComponent();
 
-            language.Items.Add("English");
-            language.Items.Add("Polish");
+            //language.Items.Add("English");
+            //language.Items.Add("Polski");
+            language.DrawMode = DrawMode.OwnerDrawFixed;
+            language.DrawItem += LangIcons_DrawItem;
 
+            Image[] langIconsList = new Image[]{
+                Properties.Resources.uk,
+                Properties.Resources.pl
+            };
+            language.DataSource = null;
+            language.Items.Clear();
+            langIcons.Images.AddRange(langIconsList);
+            List<Tuple<string, int>> langList = new(){
+                    new Tuple<string, int>("English", 0),
+                    new Tuple<string, int>("Polski", 1),
+            };
+            language.DataSource = langList;
 
-            language.SelectedIndex = Properties.Settings.Default.Language;
+            //language.SelectedIndex = Properties.Settings.Default.Language;
             initialLang = true;
 
             logo.SizeMode = PictureBoxSizeMode.Zoom;
@@ -38,7 +52,7 @@ namespace HereToSlayGUI
             this.Icon = Properties.Resources.LEADER;
 
             chosenClass.DrawMode = DrawMode.OwnerDrawFixed;
-            chosenClass.DrawItem += chosenClass_DrawItem;
+            chosenClass.DrawItem += ClassIcons_DrawItem;
             chosenClass.ItemHeight = 18;
         }
 
@@ -74,7 +88,7 @@ namespace HereToSlayGUI
 
             List<Tuple<string, int>> classList = lang switch
             {
-                1 => new List<Tuple<string, int>>
+                1 => new()
                     {
                     new Tuple<string, int>("£owca", 1),
                     new Tuple<string, int>("Mag", 2),
@@ -89,7 +103,7 @@ namespace HereToSlayGUI
                     new Tuple<string, int>("Czarownik", 11),
                     new Tuple<string, int>("brak", 12)
                     },
-                _ => new List<Tuple<string, int>>
+                _ => new()
                     {
                     new Tuple<string, int>("Ranger", 1),
                     new Tuple<string, int>("Wizard", 2),
@@ -105,14 +119,12 @@ namespace HereToSlayGUI
                     new Tuple<string, int>("none", 12)
                     }
             };
-
             chosenClass.DataSource = classList;
-
             chosenClass.SelectedIndex = currentIndex;
         }
 
         // no idea what's going on here, this one I stole, but it works and looks nice so...
-        private void chosenClass_DrawItem(object? sender, DrawItemEventArgs e)
+        private void ClassIcons_DrawItem(object? sender, DrawItemEventArgs e)
         {
             if (e.Index >= 0)
             {
@@ -146,6 +158,40 @@ namespace HereToSlayGUI
                 e.Graphics.DrawString(className, chosenClass.Font, textBrush, e.Bounds.Left + chosenClass.ItemHeight, e.Bounds.Top);
             }
         }
+        private void LangIcons_DrawItem(object? sender, DrawItemEventArgs e)
+        {
+            if (e.Index >= 0)
+            {
+                Tuple<string, int> item = (Tuple<string, int>)language.Items[e.Index];
+                string langName = item.Item1;
+                int iconIndex = item.Item2;
+                Brush textBrush = SystemBrushes.WindowText;
+                if (e.Index == -1)
+                {
+                    e.Graphics.FillRectangle(SystemBrushes.HotTrack, e.Bounds);
+                    textBrush = SystemBrushes.HighlightText;
+                }
+                else
+                {
+                    if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+                    {
+                        e.Graphics.FillRectangle(SystemBrushes.Highlight, e.Bounds);
+                        textBrush = SystemBrushes.HighlightText;
+                    }
+                    else
+                    {
+                        e.Graphics.FillRectangle(SystemBrushes.Window, e.Bounds);
+                    }
+                }
+                if (iconIndex >= 0 && iconIndex < langIcons.Images.Count)
+                {
+                    Image icon = langIcons.Images[iconIndex];
+                    e.Graphics.DrawImage(icon, e.Bounds.Left, e.Bounds.Top);
+                }
+
+                e.Graphics.DrawString(langName, language.Font, textBrush, e.Bounds.Left + language.ItemHeight, e.Bounds.Top);
+            }
+        } //make this into one function. for now it's a lazy fix
 
         private void language_SelectedIndexChanged(object sender, EventArgs e)
         {
