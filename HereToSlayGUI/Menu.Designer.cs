@@ -147,7 +147,7 @@
             chosenClass.Location = new Point(111, 226);
             chosenClass.Margin = new Padding(0);
             chosenClass.Name = "chosenClass";
-            chosenClass.Size = new Size(100, 25);
+            chosenClass.Size = new Size(116, 25);
             chosenClass.TabIndex = 7;
             chosenClass.SelectedIndexChanged += chosenClass_SelectedIndexChanged;
             chosenClass.Click += chosenClass_Click;

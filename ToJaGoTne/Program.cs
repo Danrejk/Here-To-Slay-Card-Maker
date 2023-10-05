@@ -39,6 +39,7 @@ namespace HereToSlayGen
             Color AWA = new(94, 109, 180, 255);
             Color BER = new(225, 131, 51, 255);
             Color NEK = new(213, 28, 106, 255);
+            Color CZA = new(29, 31, 29, 255);
             Color EMPTY = new(91, 93, 92, 255);
 
             Color descColor = new(78, 78, 78, 255);
@@ -137,6 +138,13 @@ namespace HereToSlayGen
                         _ => "Party Leader: Necromancer"};
                     classSymbol = Raylib.LoadImage("classes/nekromanta.png");
                     desiredColor = NEK;
+                    break;
+                case 10:
+                    leaderTitle = language switch{
+                        1 => "Przywódca drużyny: czarownik",
+                        _ => "Party Leader: Sorcerer"};
+                    classSymbol = Raylib.LoadImage("classes/czarownik.png");
+                    desiredColor = CZA;
                     break;
                 default: // when no desired class is given it deafults to an empty class
                     leaderTitle = language switch{

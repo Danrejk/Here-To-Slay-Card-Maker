@@ -79,8 +79,4 @@
     </None>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="classTextIcons\" />
-  </ItemGroup>
-
 </Project>

@@ -59,9 +59,11 @@ namespace HereToSlayGUI
                 Properties.Resources.druid.ToBitmap(),
                 Properties.Resources.awanturnik.ToBitmap(),
                 Properties.Resources.berserk.ToBitmap(),
-                Properties.Resources.nekromanta.ToBitmap()
+                Properties.Resources.nekromanta.ToBitmap(),
+                Properties.Resources.czarownik.ToBitmap(),
+                Properties.Resources.empty.ToBitmap()
             };
-        
+
         private void AddClassOptions(int lang)
         {
             classIcons.Images.AddRange(classIconsList);
@@ -83,7 +85,8 @@ namespace HereToSlayGUI
                     new Tuple<string, int>("Awanturnik", 8),
                     new Tuple<string, int>("Berserk", 9),
                     new Tuple<string, int>("Nekromanta", 10),
-                    new Tuple<string, int>("brak", 11)
+                    new Tuple<string, int>("Czarownik", 11),
+                    new Tuple<string, int>("brak", 12)
                     },
                 _ => new List<Tuple<string, int>>
                     {
@@ -97,7 +100,8 @@ namespace HereToSlayGUI
                     new Tuple<string, int>("Warrior", 8),
                     new Tuple<string, int>("Berserker", 9),
                     new Tuple<string, int>("Necromancer", 10),
-                    new Tuple<string, int>("none", 11)
+                    new Tuple<string, int>("Sorcerer", 11),
+                    new Tuple<string, int>("none", 12)
                     }
             };
 
@@ -142,7 +146,6 @@ namespace HereToSlayGUI
             }
         }
 
-        
         private void language_SelectedIndexChanged(object sender, EventArgs e)
         {
             Properties.Settings.Default.Language = language.SelectedIndex;
@@ -215,6 +218,8 @@ namespace HereToSlayGUI
                 7 => Properties.Resources.awanturnik,
                 8 => Properties.Resources.berserk,
                 9 => Properties.Resources.nekromanta,
+                10 => Properties.Resources.czarownik,
+                11 => Properties.Resources.empty,
                 _ => Properties.Resources.LEADER
             };
             renderPreview(sender, e);
@@ -228,7 +233,7 @@ namespace HereToSlayGUI
         {
             using OpenFileDialog openFileDialog = new();
             openFileDialog.Title = "Select a File";
-            openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp|All Files (*.*)|*.*";
+            openFileDialog.Filter = "Image Files|*.png;*.gif;*.bmp|All Files (*.*)|*.*";
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
