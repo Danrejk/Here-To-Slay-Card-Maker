@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Menu));
             RENDER = new Button();
             language = new ComboBox();
             leaderNameText = new TextBox();
@@ -46,6 +48,11 @@
             previewImg = new PictureBox();
             gitLabel2 = new LinkLabel();
             gitLabel1 = new LinkLabel();
+            wordSplitting = new CheckBox();
+            sourceExportText = new TextBox();
+            sourceExport = new Button();
+            label1 = new Label();
+            classIcons = new ImageList(components);
             ((System.ComponentModel.ISupportInitialize)logo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)previewImg).BeginInit();
             SuspendLayout();
@@ -57,7 +64,7 @@
             RENDER.FlatAppearance.BorderColor = Color.FromArgb(118, 110, 109);
             RENDER.FlatStyle = FlatStyle.Flat;
             RENDER.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            RENDER.Location = new Point(109, 464);
+            RENDER.Location = new Point(111, 464);
             RENDER.Name = "RENDER";
             RENDER.Size = new Size(185, 74);
             RENDER.TabIndex = 0;
@@ -83,7 +90,7 @@
             leaderNameText.BackColor = Color.FromArgb(245, 240, 232);
             leaderNameText.BorderStyle = BorderStyle.None;
             leaderNameText.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            leaderNameText.Location = new Point(109, 176);
+            leaderNameText.Location = new Point(111, 176);
             leaderNameText.Margin = new Padding(0);
             leaderNameText.Name = "leaderNameText";
             leaderNameText.Size = new Size(185, 22);
@@ -97,7 +104,7 @@
             labelLeader.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             labelLeader.ForeColor = Color.FromArgb(245, 240, 232);
             labelLeader.ImageAlign = ContentAlignment.BottomLeft;
-            labelLeader.Location = new Point(105, 156);
+            labelLeader.Location = new Point(107, 156);
             labelLeader.Margin = new Padding(0);
             labelLeader.Name = "labelLeader";
             labelLeader.Size = new Size(150, 20);
@@ -110,7 +117,7 @@
             labelDescription.BackColor = Color.Transparent;
             labelDescription.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             labelDescription.ForeColor = Color.FromArgb(245, 240, 232);
-            labelDescription.Location = new Point(106, 345);
+            labelDescription.Location = new Point(108, 345);
             labelDescription.Margin = new Padding(0);
             labelDescription.Name = "labelDescription";
             labelDescription.Size = new Size(100, 20);
@@ -137,7 +144,7 @@
             chosenClass.FlatStyle = FlatStyle.Flat;
             chosenClass.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             chosenClass.FormattingEnabled = true;
-            chosenClass.Location = new Point(109, 226);
+            chosenClass.Location = new Point(111, 226);
             chosenClass.Margin = new Padding(0);
             chosenClass.Name = "chosenClass";
             chosenClass.Size = new Size(100, 25);
@@ -150,7 +157,7 @@
             labelClass.BackColor = Color.Transparent;
             labelClass.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             labelClass.ForeColor = Color.FromArgb(245, 240, 232);
-            labelClass.Location = new Point(105, 206);
+            labelClass.Location = new Point(107, 206);
             labelClass.Margin = new Padding(0);
             labelClass.Name = "labelClass";
             labelClass.Size = new Size(100, 20);
@@ -169,7 +176,7 @@
             selectImg.FlatAppearance.BorderColor = Color.White;
             selectImg.FlatStyle = FlatStyle.Flat;
             selectImg.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            selectImg.Location = new Point(270, 280);
+            selectImg.Location = new Point(269, 280);
             selectImg.Margin = new Padding(0);
             selectImg.Name = "selectImg";
             selectImg.Size = new Size(24, 22);
@@ -184,7 +191,7 @@
             selectImgText.BackColor = Color.FromArgb(245, 240, 232);
             selectImgText.BorderStyle = BorderStyle.None;
             selectImgText.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            selectImgText.Location = new Point(109, 280);
+            selectImgText.Location = new Point(111, 280);
             selectImgText.Margin = new Padding(0);
             selectImgText.Multiline = true;
             selectImgText.Name = "selectImgText";
@@ -199,7 +206,7 @@
             labelImg.BackColor = Color.Transparent;
             labelImg.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             labelImg.ForeColor = Color.FromArgb(245, 240, 232);
-            labelImg.Location = new Point(105, 260);
+            labelImg.Location = new Point(107, 260);
             labelImg.Margin = new Padding(0);
             labelImg.Name = "labelImg";
             labelImg.RightToLeft = RightToLeft.No;
@@ -214,7 +221,7 @@
             gradient.BackColor = Color.Transparent;
             gradient.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             gradient.ForeColor = Color.FromArgb(245, 240, 232);
-            gradient.Location = new Point(137, 544);
+            gradient.Location = new Point(136, 544);
             gradient.Name = "gradient";
             gradient.Size = new Size(142, 23);
             gradient.TabIndex = 13;
@@ -228,7 +235,7 @@
             leaderWhite.BackColor = Color.Transparent;
             leaderWhite.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             leaderWhite.ForeColor = Color.FromArgb(245, 240, 232);
-            leaderWhite.Location = new Point(137, 569);
+            leaderWhite.Location = new Point(136, 569);
             leaderWhite.Name = "leaderWhite";
             leaderWhite.Size = new Size(174, 23);
             leaderWhite.TabIndex = 14;
@@ -240,7 +247,7 @@
             // 
             descriptionText.BackColor = Color.FromArgb(245, 240, 232);
             descriptionText.BorderStyle = BorderStyle.None;
-            descriptionText.Location = new Point(109, 365);
+            descriptionText.Location = new Point(111, 365);
             descriptionText.Margin = new Padding(0);
             descriptionText.Multiline = true;
             descriptionText.Name = "descriptionText";
@@ -286,12 +293,79 @@
             gitLabel1.Text = "@Beukot";
             gitLabel1.LinkClicked += linkLabel2_LinkClicked;
             // 
+            // wordSplitting
+            // 
+            wordSplitting.AutoSize = true;
+            wordSplitting.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            wordSplitting.ForeColor = Color.FromArgb(245, 240, 232);
+            wordSplitting.Location = new Point(136, 598);
+            wordSplitting.Name = "wordSplitting";
+            wordSplitting.Size = new Size(115, 23);
+            wordSplitting.TabIndex = 20;
+            wordSplitting.Text = "Word Splitting";
+            wordSplitting.UseVisualStyleBackColor = true;
+            // 
+            // sourceExportText
+            // 
+            sourceExportText.BackColor = Color.FromArgb(245, 240, 232);
+            sourceExportText.BorderStyle = BorderStyle.None;
+            sourceExportText.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            sourceExportText.Location = new Point(136, 651);
+            sourceExportText.Margin = new Padding(0);
+            sourceExportText.Multiline = true;
+            sourceExportText.Name = "sourceExportText";
+            sourceExportText.Size = new Size(161, 22);
+            sourceExportText.TabIndex = 21;
+            sourceExportText.WordWrap = false;
+            // 
+            // sourceExport
+            // 
+            sourceExport.BackColor = SystemColors.Control;
+            sourceExport.Cursor = Cursors.Hand;
+            sourceExport.FlatAppearance.BorderColor = Color.White;
+            sourceExport.FlatStyle = FlatStyle.Flat;
+            sourceExport.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            sourceExport.Location = new Point(297, 651);
+            sourceExport.Margin = new Padding(0);
+            sourceExport.Name = "sourceExport";
+            sourceExport.Size = new Size(24, 22);
+            sourceExport.TabIndex = 22;
+            sourceExport.Text = "⋯";
+            sourceExport.TextAlign = ContentAlignment.TopCenter;
+            sourceExport.UseVisualStyleBackColor = false;
+            // 
+            // label1
+            // 
+            label1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label1.BackColor = Color.Transparent;
+            label1.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.ForeColor = Color.FromArgb(245, 240, 232);
+            label1.Location = new Point(133, 631);
+            label1.Margin = new Padding(0);
+            label1.Name = "label1";
+            label1.RightToLeft = RightToLeft.No;
+            label1.Size = new Size(145, 20);
+            label1.TabIndex = 23;
+            label1.Text = "Export Location";
+            label1.TextAlign = ContentAlignment.BottomLeft;
+            // 
+            // classIcons
+            // 
+            classIcons.ColorDepth = ColorDepth.Depth8Bit;
+            classIcons.ImageStream = (ImageListStreamer)resources.GetObject("classIcons.ImageStream");
+            classIcons.TransparentColor = Color.Transparent;
+            classIcons.Images.SetKeyName(0, "Warrior.png");
+            // 
             // Menu
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackColor = Color.FromArgb(39, 43, 52);
             BackgroundImage = Properties.Resources.gradient;
             ClientSize = new Size(828, 711);
+            Controls.Add(label1);
+            Controls.Add(sourceExport);
+            Controls.Add(sourceExportText);
+            Controls.Add(wordSplitting);
             Controls.Add(gitLabel1);
             Controls.Add(gitLabel2);
             Controls.Add(descriptionText);
@@ -341,5 +415,10 @@
         private PictureBox previewImg;
         private LinkLabel gitLabel2;
         private LinkLabel gitLabel1;
+        private CheckBox wordSplitting;
+        private TextBox sourceExportText;
+        private Button sourceExport;
+        private Label label1;
+        private ImageList classIcons;
     }
 }

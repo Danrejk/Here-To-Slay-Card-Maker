@@ -7,6 +7,7 @@ using System.Resources;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace HereToSlayGUI
 {
@@ -34,29 +35,123 @@ namespace HereToSlayGUI
             gitLabel2.Font = GetFont(Properties.Resources.SourceSansPro, 9);
             selectImg.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             this.Icon = Properties.Resources.LEADER;
+
+            chosenClass.DrawMode = DrawMode.OwnerDrawFixed;
+            chosenClass.DrawItem += chosenClass_DrawItem;
+            chosenClass.ItemHeight = 18;
         }
 
         private void Button_Press(object sender, EventArgs e)
         {
             renderPreview(sender, e);
             HereToSlayGen.Program.Generate(false, language.SelectedIndex, leaderNameText.Text, chosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text, gradient.Checked, leaderWhite.Checked);
+            new Popup().ShowDialog();
         }
 
         int currentIndex;
+        Image[] classIconsList = new Image[]{
+                Properties.Resources.lowca.ToBitmap(),
+                Properties.Resources.mag.ToBitmap(),
+                Properties.Resources.najebus.ToBitmap(),
+                Properties.Resources.straznik.ToBitmap(),
+                Properties.Resources.wojownik.ToBitmap(),
+                Properties.Resources.zlodziej.ToBitmap(),
+                Properties.Resources.druid.ToBitmap(),
+                Properties.Resources.awanturnik.ToBitmap(),
+                Properties.Resources.berserk.ToBitmap(),
+                Properties.Resources.nekromanta.ToBitmap()
+            };
+        
+        private void AddClassOptions(int lang)
+        {
+            classIcons.Images.AddRange(classIconsList);
+            currentIndex = chosenClass.SelectedIndex;
+            chosenClass.DataSource = null;
+            chosenClass.Items.Clear();
+
+            List<Tuple<string, int>> classList = lang switch
+            {
+                1 => new List<Tuple<string, int>>
+                    {
+                    new Tuple<string, int>("£owca", 1),
+                    new Tuple<string, int>("Mag", 2),
+                    new Tuple<string, int>("Bard", 3),
+                    new Tuple<string, int>("Stra¿nik", 4),
+                    new Tuple<string, int>("Wojownik", 5),
+                    new Tuple<string, int>("Z³odziej", 6),
+                    new Tuple<string, int>("Druid", 7),
+                    new Tuple<string, int>("Awanturnik", 8),
+                    new Tuple<string, int>("Berserk", 9),
+                    new Tuple<string, int>("Nekromanta", 10),
+                    new Tuple<string, int>("brak", 11)
+                    },
+                _ => new List<Tuple<string, int>>
+                    {
+                    new Tuple<string, int>("Ranger", 1),
+                    new Tuple<string, int>("Wizard", 2),
+                    new Tuple<string, int>("Bard", 3),
+                    new Tuple<string, int>("Guardian", 4),
+                    new Tuple<string, int>("Fighter", 5),
+                    new Tuple<string, int>("Thief", 6),
+                    new Tuple<string, int>("Druid", 7),
+                    new Tuple<string, int>("Warrior", 8),
+                    new Tuple<string, int>("Berserker", 9),
+                    new Tuple<string, int>("Necromancer", 10),
+                    new Tuple<string, int>("none", 11)
+                    }
+            };
+
+            chosenClass.DataSource = classList;
+
+            chosenClass.SelectedIndex = currentIndex;
+        }
+
+        // no idea what's going on here, this one I stole, but it works and looks nice so...
+        private void chosenClass_DrawItem(object? sender, DrawItemEventArgs e)
+        {
+            if (e.Index >= 0)
+            {
+                Tuple<string, int> item = (Tuple<string, int>)chosenClass.Items[e.Index];
+                string className = item.Item1;
+                int iconIndex = item.Item2;
+                Brush textBrush = SystemBrushes.WindowText;
+                if (e.Index == -1)
+                {
+                    e.Graphics.FillRectangle(SystemBrushes.HotTrack, e.Bounds);
+                    textBrush = SystemBrushes.HighlightText;
+                }
+                else
+                {
+                    if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+                    {
+                        e.Graphics.FillRectangle(SystemBrushes.Highlight, e.Bounds);
+                        textBrush = SystemBrushes.HighlightText;
+                    }
+                    else
+                    {
+                        e.Graphics.FillRectangle(SystemBrushes.Window, e.Bounds);
+                    }
+                }
+                if (iconIndex >= 0 && iconIndex < classIcons.Images.Count)
+                {
+                    Image icon = classIcons.Images[iconIndex];
+                    e.Graphics.DrawImage(icon, e.Bounds.Left, e.Bounds.Top);
+                }
+
+                e.Graphics.DrawString(className, chosenClass.Font, textBrush, e.Bounds.Left + chosenClass.ItemHeight, e.Bounds.Top);
+            }
+        }
+
+        
         private void language_SelectedIndexChanged(object sender, EventArgs e)
         {
             Properties.Settings.Default.Language = language.SelectedIndex;
             Properties.Settings.Default.Save();
 
-            string[] classes;
-
-            currentIndex = chosenClass.SelectedIndex;
-            chosenClass.Items.Clear();
             switch (language.SelectedIndex)
             {
                 case 1:
                     logo.Image = Properties.Resources.Logo1;
-                    classes = new string[] { "£owca", "Mag", "Bard", "Stra¿nik", "Wojownik", "Z³odziej" };
                     labelLeader.Text = "Nazwa lidera";
                     labelClass.Text = "Klasa lidera";
                     labelImg.Text = "Obrazek lidera";
@@ -64,16 +159,15 @@ namespace HereToSlayGUI
                     break;
                 default:
                     logo.Image = Properties.Resources.Logo0;
-                    classes = new string[] { "Ranger", "Wizard", "Bard", "Guardian", "Fighter", "Thief" };
                     labelLeader.Text = "Leader name";
                     labelClass.Text = "Leader class";
                     labelImg.Text = "Leader image";
                     labelDescription.Text = "Description";
                     break;
             }
-            chosenClass.Items.AddRange(classes);
-            chosenClass.SelectedIndex = currentIndex;
+            AddClassOptions(language.SelectedIndex);
             renderPreview(sender, e);
+
         }
 
         // Font changes
@@ -109,27 +203,20 @@ namespace HereToSlayGUI
 
         private void chosenClass_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (chosenClass.SelectedIndex)
+            this.Icon = chosenClass.SelectedIndex switch
             {
-                case 0:
-                    this.Icon = Properties.Resources.lowca;
-                    break;
-                case 1:
-                    this.Icon = Properties.Resources.mag;
-                    break;
-                case 2:
-                    this.Icon = Properties.Resources.najebus;
-                    break;
-                case 3:
-                    this.Icon = Properties.Resources.straznik;
-                    break;
-                case 4:
-                    this.Icon = Properties.Resources.wojownik;
-                    break;
-                case 5:
-                    this.Icon = Properties.Resources.zlodziej;
-                    break;
-            }
+                0 => Properties.Resources.lowca,
+                1 => Properties.Resources.mag,
+                2 => Properties.Resources.najebus,
+                3 => Properties.Resources.straznik,
+                4 => Properties.Resources.wojownik,
+                5 => Properties.Resources.zlodziej,
+                6 => Properties.Resources.druid,
+                7 => Properties.Resources.awanturnik,
+                8 => Properties.Resources.berserk,
+                9 => Properties.Resources.nekromanta,
+                _ => Properties.Resources.LEADER
+            };
             renderPreview(sender, e);
         }
         private void chosenClass_Click(object sender, EventArgs e)
@@ -161,7 +248,7 @@ namespace HereToSlayGUI
             {
                 try
                 {
-                    int timer = 1;
+                    int timer = 2;
                     while (timer > 0)
                     {
                         cancellationTokenSource.Token.ThrowIfCancellationRequested();

@@ -11,7 +11,7 @@ namespace HereToSlayGen
     {
         static void Main()
         {
-            Generate(false, 0,"Test Leader", 5, "leader_pic.png", "Test description", false, false);
+            Generate(false, 0,"Test Leader", 11, "leader_pic.png", "Test description", false, false);
         }
 
         const int NAME_FONT_SPACING = 0;
@@ -35,6 +35,11 @@ namespace HereToSlayGen
             Color STR = new(235, 171, 33, 255);
             Color WOJ = new(151, 40, 44, 255);
             Color ZLO = new(0, 78, 125, 255);
+            Color DRU = new(0, 171, 143, 255);
+            Color AWA = new(94, 109, 180, 255);
+            Color BER = new(225, 131, 51, 255);
+            Color NEK = new(213, 28, 106, 255);
+            Color EMPTY = new(91, 93, 92, 255);
 
             Color descColor = new(78, 78, 78, 255);
 
@@ -98,12 +103,47 @@ namespace HereToSlayGen
                     classSymbol = Raylib.LoadImage("classes/wojownik.png");
                     desiredColor = WOJ;
                     break;
-                default: // when no desired class is given it deafults to thief
+                case 5:
                     leaderTitle = language switch{
-                        1 => "Przywódca drużyny: złodziej",
+                        1 => "Przywódca drużyny: zlodziej",
                         _ => "Party Leader: Thief"};
                     classSymbol = Raylib.LoadImage("classes/zlodziej.png");
                     desiredColor = ZLO;
+                    break;
+                case 6:
+                    leaderTitle = language switch{
+                        1 => "Przywódca drużyny: druid",
+                        _ => "Party Leader: Druid"};
+                    classSymbol = Raylib.LoadImage("classes/druid.png");
+                    desiredColor = DRU;
+                    break;
+                case 7:
+                    leaderTitle = language switch{
+                        1 => "Przywódca drużyny: awanturnik",
+                        _ => "Party Leader: Warrior"};
+                    classSymbol = Raylib.LoadImage("classes/awanturnik.png");
+                    desiredColor = AWA;
+                    break;
+                case 8:
+                    leaderTitle = language switch{
+                        1 => "Przywódca drużyny: berserk",
+                        _ => "Party Leader: Berserker"};
+                    classSymbol = Raylib.LoadImage("classes/berserk.png");
+                    desiredColor = BER;
+                    break;
+                case 9:
+                    leaderTitle = language switch{
+                        1 => "Przywódca drużyny: nekromanta",
+                        _ => "Party Leader: Necromancer"};
+                    classSymbol = Raylib.LoadImage("classes/nekromanta.png");
+                    desiredColor = NEK;
+                    break;
+                default: // when no desired class is given it deafults to an empty class
+                    leaderTitle = language switch{
+                        1 => "Przywódca drużyny",
+                        _ => "Party Leader"};
+                    classSymbol = Raylib.LoadImage("classes/empty.png");
+                    desiredColor = EMPTY;
                     break;
             }
 

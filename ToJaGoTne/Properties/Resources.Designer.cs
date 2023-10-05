@@ -63,6 +63,16 @@ namespace HereToSlayGenerator.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] awanturnik {
+            get {
+                object obj = ResourceManager.GetObject("awanturnik", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] background {
             get {
                 object obj = ResourceManager.GetObject("background", resourceCulture);
@@ -73,9 +83,39 @@ namespace HereToSlayGenerator.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] berserk {
+            get {
+                object obj = ResourceManager.GetObject("berserk", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] bottom {
             get {
                 object obj = ResourceManager.GetObject("bottom", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] druid {
+            get {
+                object obj = ResourceManager.GetObject("druid", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] empty {
+            get {
+                object obj = ResourceManager.GetObject("empty", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -143,6 +183,16 @@ namespace HereToSlayGenerator.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] nekromanta {
+            get {
+                object obj = ResourceManager.GetObject("nekromanta", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] PatuaOne_polish {
             get {
                 object obj = ResourceManager.GetObject("PatuaOne-polish", resourceCulture);
@@ -176,16 +226,6 @@ namespace HereToSlayGenerator.Properties {
         internal static byte[] wojownik {
             get {
                 object obj = ResourceManager.GetObject("wojownik", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] wojownik1 {
-            get {
-                object obj = ResourceManager.GetObject("wojownik1", resourceCulture);
                 return ((byte[])(obj));
             }
         }
