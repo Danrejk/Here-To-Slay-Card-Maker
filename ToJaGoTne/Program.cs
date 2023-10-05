@@ -185,10 +185,11 @@ namespace HereToSlayGen
             int currentLine = 0;
             int outputPointer = 0;
 
-            if (targetLines < 1) { targetLines = 2; }
+            if (targetLines < 1) { targetLines = 1; }
             else { targetLines += 1; }
 
-            float textBlockCenter = ((205 - (targetLines * (DESC_SIZE + DESC_LINE_SPACING))) / 2) + DESC_LINE_SPACING;
+            int offset = 210 - (targetLines*15); // I'm not sure why it's like this, but this does match the apperance on the real cards. maybe some other code is goofy, but if it works it works.
+            float textBlockCenter = ((offset - (targetLines * (DESC_SIZE + DESC_LINE_SPACING))) / 2) + DESC_LINE_SPACING;
 
             StringBuilder output = new(len);
             string dash = "-";
@@ -205,7 +206,7 @@ namespace HereToSlayGen
                 if (currentLen.X + dashLen.X >= targetLen)
                 {
                     output.Append(dash);
-                    Raylib.ImageDrawTextEx(ref card, font, output.ToString(), new Vector2(DESC_MARGIN, (CARD_HEIGHT - 195) + textBlockCenter + ((textSize.Y - 5 + DESC_LINE_SPACING) * currentLine)), DESC_SIZE, DESC_FONT_SPACING, descColor);
+                    Raylib.ImageDrawTextEx(ref card, font, output.ToString(), new Vector2(DESC_MARGIN, (CARD_HEIGHT - offset) + textBlockCenter + ((textSize.Y - 5 + DESC_LINE_SPACING) * currentLine)), DESC_SIZE, DESC_FONT_SPACING, descColor);
 
                     output.Clear();
                     currentLine++;
@@ -213,7 +214,7 @@ namespace HereToSlayGen
                 }
             }
 
-            Raylib.ImageDrawTextEx(ref card, font, output.ToString(), new Vector2(DESC_MARGIN, (CARD_HEIGHT - 195) + textBlockCenter + ((textSize.Y - 5 + DESC_LINE_SPACING) * currentLine)), DESC_SIZE, DESC_FONT_SPACING, descColor);
+            Raylib.ImageDrawTextEx(ref card, font, output.ToString(), new Vector2(DESC_MARGIN, (CARD_HEIGHT - offset) + textBlockCenter + ((textSize.Y - 5 + DESC_LINE_SPACING) * currentLine)), DESC_SIZE, DESC_FONT_SPACING, descColor);
         }
     }
 }

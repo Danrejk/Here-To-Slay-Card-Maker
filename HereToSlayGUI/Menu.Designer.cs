@@ -44,8 +44,8 @@
             leaderWhite = new CheckBox();
             descriptionText = new TextBox();
             previewImg = new PictureBox();
-            linkLabel1 = new LinkLabel();
-            linkLabel2 = new LinkLabel();
+            gitLabel2 = new LinkLabel();
+            gitLabel1 = new LinkLabel();
             ((System.ComponentModel.ISupportInitialize)logo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)previewImg).BeginInit();
             SuspendLayout();
@@ -53,6 +53,8 @@
             // RENDER
             // 
             RENDER.BackColor = Color.FromArgb(245, 240, 232);
+            RENDER.Cursor = Cursors.Hand;
+            RENDER.FlatAppearance.BorderColor = Color.FromArgb(118, 110, 109);
             RENDER.FlatStyle = FlatStyle.Flat;
             RENDER.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             RENDER.Location = new Point(109, 464);
@@ -80,20 +82,23 @@
             // 
             leaderNameText.BackColor = Color.FromArgb(245, 240, 232);
             leaderNameText.BorderStyle = BorderStyle.None;
-            leaderNameText.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            leaderNameText.Location = new Point(137, 176);
+            leaderNameText.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            leaderNameText.Location = new Point(109, 176);
             leaderNameText.Margin = new Padding(0);
             leaderNameText.Name = "leaderNameText";
-            leaderNameText.Size = new Size(150, 18);
+            leaderNameText.Size = new Size(185, 22);
             leaderNameText.TabIndex = 2;
             leaderNameText.TextChanged += renderPreview;
             // 
             // labelLeader
             // 
             labelLeader.BackColor = Color.Transparent;
+            labelLeader.FlatStyle = FlatStyle.Flat;
             labelLeader.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             labelLeader.ForeColor = Color.FromArgb(245, 240, 232);
-            labelLeader.Location = new Point(136, 156);
+            labelLeader.ImageAlign = ContentAlignment.BottomLeft;
+            labelLeader.Location = new Point(105, 156);
+            labelLeader.Margin = new Padding(0);
             labelLeader.Name = "labelLeader";
             labelLeader.Size = new Size(150, 20);
             labelLeader.TabIndex = 4;
@@ -105,7 +110,7 @@
             labelDescription.BackColor = Color.Transparent;
             labelDescription.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             labelDescription.ForeColor = Color.FromArgb(245, 240, 232);
-            labelDescription.Location = new Point(109, 345);
+            labelDescription.Location = new Point(106, 345);
             labelDescription.Margin = new Padding(0);
             labelDescription.Name = "labelDescription";
             labelDescription.Size = new Size(100, 20);
@@ -132,7 +137,7 @@
             chosenClass.FlatStyle = FlatStyle.Flat;
             chosenClass.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             chosenClass.FormattingEnabled = true;
-            chosenClass.Location = new Point(137, 226);
+            chosenClass.Location = new Point(109, 226);
             chosenClass.Margin = new Padding(0);
             chosenClass.Name = "chosenClass";
             chosenClass.Size = new Size(100, 25);
@@ -145,7 +150,7 @@
             labelClass.BackColor = Color.Transparent;
             labelClass.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             labelClass.ForeColor = Color.FromArgb(245, 240, 232);
-            labelClass.Location = new Point(136, 206);
+            labelClass.Location = new Point(105, 206);
             labelClass.Margin = new Padding(0);
             labelClass.Name = "labelClass";
             labelClass.Size = new Size(100, 20);
@@ -160,14 +165,17 @@
             // selectImg
             // 
             selectImg.BackColor = SystemColors.Control;
+            selectImg.Cursor = Cursors.Hand;
+            selectImg.FlatAppearance.BorderColor = Color.White;
             selectImg.FlatStyle = FlatStyle.Flat;
             selectImg.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            selectImg.Location = new Point(237, 280);
+            selectImg.Location = new Point(270, 280);
             selectImg.Margin = new Padding(0);
             selectImg.Name = "selectImg";
-            selectImg.Size = new Size(24, 18);
+            selectImg.Size = new Size(24, 22);
             selectImg.TabIndex = 10;
-            selectImg.Text = "...";
+            selectImg.Text = "⋯";
+            selectImg.TextAlign = ContentAlignment.TopCenter;
             selectImg.UseVisualStyleBackColor = false;
             selectImg.Click += selectImg_Click;
             // 
@@ -176,11 +184,13 @@
             selectImgText.BackColor = Color.FromArgb(245, 240, 232);
             selectImgText.BorderStyle = BorderStyle.None;
             selectImgText.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            selectImgText.Location = new Point(137, 280);
+            selectImgText.Location = new Point(109, 280);
             selectImgText.Margin = new Padding(0);
+            selectImgText.Multiline = true;
             selectImgText.Name = "selectImgText";
-            selectImgText.Size = new Size(100, 18);
+            selectImgText.Size = new Size(161, 22);
             selectImgText.TabIndex = 11;
+            selectImgText.WordWrap = false;
             selectImgText.TextChanged += renderPreview;
             // 
             // labelImg
@@ -189,7 +199,7 @@
             labelImg.BackColor = Color.Transparent;
             labelImg.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             labelImg.ForeColor = Color.FromArgb(245, 240, 232);
-            labelImg.Location = new Point(136, 260);
+            labelImg.Location = new Point(105, 260);
             labelImg.Margin = new Padding(0);
             labelImg.Name = "labelImg";
             labelImg.RightToLeft = RightToLeft.No;
@@ -234,6 +244,7 @@
             descriptionText.Margin = new Padding(0);
             descriptionText.Multiline = true;
             descriptionText.Name = "descriptionText";
+            descriptionText.RightToLeft = RightToLeft.No;
             descriptionText.Size = new Size(185, 78);
             descriptionText.TabIndex = 15;
             descriptionText.TextChanged += renderPreview;
@@ -249,31 +260,31 @@
             previewImg.TabIndex = 16;
             previewImg.TabStop = false;
             // 
-            // linkLabel1
+            // gitLabel2
             // 
-            linkLabel1.AutoSize = true;
-            linkLabel1.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            linkLabel1.LinkColor = Color.FromArgb(220, 101, 11);
-            linkLabel1.Location = new Point(0, 683);
-            linkLabel1.Name = "linkLabel1";
-            linkLabel1.Size = new Size(69, 19);
-            linkLabel1.TabIndex = 17;
-            linkLabel1.TabStop = true;
-            linkLabel1.Text = "@Danrejk";
-            linkLabel1.LinkClicked += linkLabel1_LinkClicked;
+            gitLabel2.AutoSize = true;
+            gitLabel2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            gitLabel2.LinkColor = Color.FromArgb(220, 101, 11);
+            gitLabel2.Location = new Point(0, 687);
+            gitLabel2.Name = "gitLabel2";
+            gitLabel2.Size = new Size(58, 15);
+            gitLabel2.TabIndex = 17;
+            gitLabel2.TabStop = true;
+            gitLabel2.Text = "@Danrejk";
+            gitLabel2.LinkClicked += linkLabel1_LinkClicked;
             // 
-            // linkLabel2
+            // gitLabel1
             // 
-            linkLabel2.AutoSize = true;
-            linkLabel2.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            linkLabel2.LinkColor = Color.FromArgb(220, 101, 11);
-            linkLabel2.Location = new Point(0, 664);
-            linkLabel2.Name = "linkLabel2";
-            linkLabel2.Size = new Size(65, 19);
-            linkLabel2.TabIndex = 19;
-            linkLabel2.TabStop = true;
-            linkLabel2.Text = "@Beukot";
-            linkLabel2.LinkClicked += linkLabel2_LinkClicked;
+            gitLabel1.AutoSize = true;
+            gitLabel1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            gitLabel1.LinkColor = Color.FromArgb(220, 101, 11);
+            gitLabel1.Location = new Point(0, 672);
+            gitLabel1.Name = "gitLabel1";
+            gitLabel1.Size = new Size(55, 15);
+            gitLabel1.TabIndex = 19;
+            gitLabel1.TabStop = true;
+            gitLabel1.Text = "@Beukot";
+            gitLabel1.LinkClicked += linkLabel2_LinkClicked;
             // 
             // Menu
             // 
@@ -281,8 +292,8 @@
             BackColor = Color.FromArgb(39, 43, 52);
             BackgroundImage = Properties.Resources.gradient;
             ClientSize = new Size(828, 711);
-            Controls.Add(linkLabel2);
-            Controls.Add(linkLabel1);
+            Controls.Add(gitLabel1);
+            Controls.Add(gitLabel2);
             Controls.Add(descriptionText);
             Controls.Add(leaderWhite);
             Controls.Add(gradient);
@@ -292,12 +303,12 @@
             Controls.Add(labelClass);
             Controls.Add(chosenClass);
             Controls.Add(labelDescription);
-            Controls.Add(labelLeader);
             Controls.Add(leaderNameText);
             Controls.Add(language);
             Controls.Add(RENDER);
             Controls.Add(logo);
             Controls.Add(previewImg);
+            Controls.Add(labelLeader);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "Menu";
@@ -328,7 +339,7 @@
         private CheckBox gradient;
         private CheckBox leaderWhite;
         private PictureBox previewImg;
-        private LinkLabel linkLabel1;
-        private LinkLabel linkLabel2;
+        private LinkLabel gitLabel2;
+        private LinkLabel gitLabel1;
     }
 }

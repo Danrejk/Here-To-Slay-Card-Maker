@@ -29,16 +29,16 @@ namespace HereToSlayGUI
             ChangeFontForAllControls(this, fontUI);
             Font fontLeader = GetFont(Properties.Resources.PatuaOne_polish, 12);
             leaderNameText.Font = fontLeader;
-            //labelLeader.Font = fontLeader;
             RENDER.Font = fontLeader;
+            gitLabel1.Font = GetFont(Properties.Resources.SourceSansPro, 9);
+            gitLabel2.Font = GetFont(Properties.Resources.SourceSansPro, 9);
+            selectImg.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             this.Icon = Properties.Resources.LEADER;
-            //this.ClientSize = new Size(828, 709);
-            //previewImg.Image = Image.FromFile("test.png");
         }
 
         private void Button_Press(object sender, EventArgs e)
         {
-            renderPreview(sender,e);
+            renderPreview(sender, e);
             HereToSlayGen.Program.Generate(false, language.SelectedIndex, leaderNameText.Text, chosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text, gradient.Checked, leaderWhite.Checked);
         }
 
