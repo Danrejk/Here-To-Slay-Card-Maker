@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace HereToSlayGUI
 {
@@ -277,5 +278,16 @@ namespace HereToSlayGUI
         { System.Diagnostics.Process.Start(new ProcessStartInfo { FileName = "https://github.com/Danrejk", UseShellExecute = true }); }
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         { System.Diagnostics.Process.Start(new ProcessStartInfo { FileName = "https://github.com/Beukot", UseShellExecute = true }); }
+
+        private void previewImg_Click(object sender, EventArgs e)
+        {
+            string? previewImgPath = Path.Combine(Directory.GetCurrentDirectory(), "preview.png");
+            if (File.Exists(previewImgPath))
+            {
+                string? folderPath = Path.GetDirectoryName(previewImgPath);
+                folderPath ??= string.Empty;
+                Process.Start("explorer.exe", folderPath);
+            }
+        }
     }
 }
