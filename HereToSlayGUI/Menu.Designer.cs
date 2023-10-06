@@ -72,7 +72,7 @@
             RENDER.FlatAppearance.BorderColor = Color.FromArgb(118, 110, 109);
             RENDER.FlatStyle = FlatStyle.Flat;
             RENDER.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            RENDER.Location = new Point(119, 557);
+            RENDER.Location = new Point(119, 532);
             RENDER.Name = "RENDER";
             RENDER.Size = new Size(175, 75);
             RENDER.TabIndex = 0;
@@ -125,7 +125,7 @@
             labelDescription.BackColor = Color.Transparent;
             labelDescription.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             labelDescription.ForeColor = Color.White;
-            labelDescription.Location = new Point(53, 395);
+            labelDescription.Location = new Point(53, 415);
             labelDescription.Margin = new Padding(0);
             labelDescription.Name = "labelDescription";
             labelDescription.Size = new Size(100, 20);
@@ -152,7 +152,7 @@
             chosenClass.FlatStyle = FlatStyle.Flat;
             chosenClass.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             chosenClass.FormattingEnabled = true;
-            chosenClass.Location = new Point(145, 262);
+            chosenClass.Location = new Point(145, 239);
             chosenClass.Margin = new Padding(0);
             chosenClass.Name = "chosenClass";
             chosenClass.Size = new Size(120, 25);
@@ -165,7 +165,7 @@
             labelClass.BackColor = Color.Transparent;
             labelClass.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             labelClass.ForeColor = Color.FromArgb(245, 240, 232);
-            labelClass.Location = new Point(142, 242);
+            labelClass.Location = new Point(142, 219);
             labelClass.Margin = new Padding(0);
             labelClass.Name = "labelClass";
             labelClass.Size = new Size(100, 20);
@@ -184,7 +184,7 @@
             selectImg.FlatAppearance.BorderColor = Color.White;
             selectImg.FlatStyle = FlatStyle.Flat;
             selectImg.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            selectImg.Location = new Point(270, 340);
+            selectImg.Location = new Point(270, 339);
             selectImg.Margin = new Padding(0);
             selectImg.Name = "selectImg";
             selectImg.Size = new Size(24, 22);
@@ -199,7 +199,7 @@
             selectImgText.BackColor = Color.White;
             selectImgText.BorderStyle = BorderStyle.None;
             selectImgText.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            selectImgText.Location = new Point(119, 340);
+            selectImgText.Location = new Point(119, 339);
             selectImgText.Margin = new Padding(0);
             selectImgText.Multiline = true;
             selectImgText.Name = "selectImgText";
@@ -214,7 +214,7 @@
             labelImg.BackColor = Color.Transparent;
             labelImg.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             labelImg.ForeColor = Color.White;
-            labelImg.Location = new Point(115, 320);
+            labelImg.Location = new Point(115, 319);
             labelImg.Margin = new Padding(0);
             labelImg.Name = "labelImg";
             labelImg.RightToLeft = RightToLeft.No;
@@ -257,7 +257,7 @@
             // 
             descriptionText.BackColor = Color.White;
             descriptionText.BorderStyle = BorderStyle.None;
-            descriptionText.Location = new Point(57, 415);
+            descriptionText.Location = new Point(57, 435);
             descriptionText.Margin = new Padding(0);
             descriptionText.Multiline = true;
             descriptionText.Name = "descriptionText";
@@ -349,7 +349,7 @@
             advancedNameBox.Location = new Point(134, 207);
             advancedNameBox.Margin = new Padding(0);
             advancedNameBox.Name = "advancedNameBox";
-            advancedNameBox.Size = new Size(197, 40);
+            advancedNameBox.Size = new Size(197, 18);
             advancedNameBox.TabIndex = 21;
             advancedNameBox.Visible = false;
             // 
@@ -368,10 +368,10 @@
             // advancedDescBox
             // 
             advancedDescBox.Controls.Add(wordSplitting);
-            advancedDescBox.Location = new Point(72, 481);
+            advancedDescBox.Location = new Point(72, 501);
             advancedDescBox.Margin = new Padding(0);
             advancedDescBox.Name = "advancedDescBox";
-            advancedDescBox.Size = new Size(285, 63);
+            advancedDescBox.Size = new Size(285, 28);
             advancedDescBox.TabIndex = 23;
             advancedDescBox.Visible = false;
             // 
@@ -379,7 +379,7 @@
             // 
             advancedDesc.BackColor = Color.Transparent;
             advancedDesc.Image = Properties.Resources.closed;
-            advancedDesc.Location = new Point(57, 483);
+            advancedDesc.Location = new Point(57, 503);
             advancedDesc.Name = "advancedDesc";
             advancedDesc.Size = new Size(12, 12);
             advancedDesc.SizeMode = PictureBoxSizeMode.Zoom;
