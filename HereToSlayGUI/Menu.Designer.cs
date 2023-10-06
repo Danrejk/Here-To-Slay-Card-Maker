@@ -80,7 +80,7 @@
             language.FlatStyle = FlatStyle.Flat;
             language.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             language.FormattingEnabled = true;
-            language.Location = new Point(323, 12);
+            language.Location = new Point(329, 12);
             language.Name = "language";
             language.Size = new Size(85, 25);
             language.TabIndex = 1;
