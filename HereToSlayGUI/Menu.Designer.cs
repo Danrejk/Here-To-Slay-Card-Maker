@@ -52,6 +52,7 @@
             classIcons = new ImageList(components);
             langIcons = new ImageList(components);
             SaveRenderDialog = new SaveFileDialog();
+            leaderImgToolTip = new ToolTip(components);
             ((System.ComponentModel.ISupportInitialize)logo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)previewImg).BeginInit();
             SuspendLayout();
@@ -320,6 +321,13 @@
             langIcons.ImageSize = new Size(16, 16);
             langIcons.TransparentColor = Color.Transparent;
             // 
+            // leaderImgToolTip
+            // 
+            leaderImgToolTip.AutoPopDelay = 5000;
+            leaderImgToolTip.InitialDelay = 250;
+            leaderImgToolTip.ReshowDelay = 100;
+            leaderImgToolTip.ToolTipIcon = ToolTipIcon.Info;
+            // 
             // Menu
             // 
             AutoScaleMode = AutoScaleMode.None;
@@ -380,5 +388,6 @@
         private ImageList classIcons;
         private ImageList langIcons;
         private SaveFileDialog SaveRenderDialog;
+        private ToolTip leaderImgToolTip;
     }
 }

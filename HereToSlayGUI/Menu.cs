@@ -143,6 +143,8 @@ namespace HereToSlayGUI
                     labelClass.Text = "Klasa lidera";
                     labelImg.Text = "Obrazek lidera";
                     labelDescription.Text = "Opis mocy";
+                    leaderImgToolTip.ToolTipTitle = "Wymiary obazka";
+                    leaderImgToolTip.SetToolTip(selectImg, "Obrazek lidera (nie ca³a karta) ma wymiary 745x1176. \nProgram automatycznie przytnie i przybli¿y obraz, je¿eli bêdzie to potrzebne.\n\nWspierane rozszerzenia plików: .png, .gif");
                     break;
                 default:
                     logo.Image = Properties.Resources.Logo0;
@@ -150,6 +152,8 @@ namespace HereToSlayGUI
                     labelClass.Text = "Leader class";
                     labelImg.Text = "Leader image";
                     labelDescription.Text = "Description";
+                    leaderImgToolTip.ToolTipTitle = "Image dimentions";
+                    leaderImgToolTip.SetToolTip(selectImg, "The leader image (not the whole card) dimentions are 745x1176. \nThe program will automatically crop and zoom the image, if needed.\n\nSupported file extensions: .png, .gif");
                     break;
             }
             LocaliseClassOptions(language.SelectedIndex); // change class options based on selected language
@@ -295,7 +299,7 @@ namespace HereToSlayGUI
         {
             using OpenFileDialog openFileDialog = new();
             openFileDialog.Title = "Select a File";
-            openFileDialog.Filter = "Image Files|*.png;*.gif;*.bmp|All Files (*.*)|*.*";
+            openFileDialog.Filter = "Image Files|*.png;*.gif;|All Files (*.*)|*.*";
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
