@@ -42,9 +42,14 @@ namespace HereToSlayGUI
             ChangeFontForAllControls(this, fontUI);
             selectImg.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
 
-            Font fontLeader = GetFont(Properties.Resources.PatuaOne_polish, 12);
+            Font fontLeader = GetFont(Properties.Resources.PatuaOne_polish, 13);
             leaderNameText.Font = fontLeader;
             RENDER.Font = fontLeader;
+
+            Font fontUIsmall = GetFont(Properties.Resources.SourceSansPro, 9);
+            gradient.Font = fontUIsmall;
+            leaderWhite.Font = fontUIsmall;
+            wordSplitting.Font = fontUIsmall;
 
             gitLabel1.Font = GetFont(Properties.Resources.SourceSansPro, 9);
             gitLabel2.Font = GetFont(Properties.Resources.SourceSansPro, 9);
@@ -144,7 +149,10 @@ namespace HereToSlayGUI
                     labelImg.Text = "Obrazek lidera";
                     labelDescription.Text = "Opis mocy";
                     leaderImgToolTip.ToolTipTitle = "Wymiary obazka";
-                    leaderImgToolTip.SetToolTip(selectImg, "Obrazek lidera (nie ca³a karta) ma wymiary 745x1176. \nProgram automatycznie przytnie i przybli¿y obraz, je¿eli bêdzie to potrzebne.\n\nWspierane rozszerzenia plików: .png, .gif");
+                    leaderImgToolTip.SetToolTip(selectImg, "Obrazek lidera (nie ca³a karta) ma wymiary 745x1176. \nProgram automatycznie przytnie i przybli¿y obraz, je¿eli bêdzie to potrzebne.\n\nWspierane rozszerzenia plików: .png, .gif (pierwsza klatka)");
+                    gradient.Text = "Tylni gradient";
+                    leaderWhite.Text = "Bia³a nazwa";
+                    wordSplitting.Text = "Dzielenie wyrazów";
                     break;
                 default:
                     logo.Image = Properties.Resources.Logo0;
@@ -153,7 +161,10 @@ namespace HereToSlayGUI
                     labelImg.Text = "Leader image";
                     labelDescription.Text = "Description";
                     leaderImgToolTip.ToolTipTitle = "Image dimentions";
-                    leaderImgToolTip.SetToolTip(selectImg, "The leader image (not the whole card) dimentions are 745x1176. \nThe program will automatically crop and zoom the image, if needed.\n\nSupported file extensions: .png, .gif");
+                    leaderImgToolTip.SetToolTip(selectImg, "The leader image (not the whole card) dimentions are 745x1176. \nThe program will automatically crop and zoom the image, if needed.\n\nSupported file extensions: .png, .gif (first frame)");
+                    gradient.Text = "Back gradient";
+                    leaderWhite.Text = "White name";
+                    wordSplitting.Text = "Word Splitting";
                     break;
             }
             LocaliseClassOptions(language.SelectedIndex); // change class options based on selected language
@@ -322,6 +333,23 @@ namespace HereToSlayGUI
                 folderPath ??= string.Empty;
                 Process.Start("explorer.exe", folderPath);
             }
+        }
+
+        private void advanced_Click(object sender, EventArgs e)
+        {
+            PictureBox? pictureBox = sender as PictureBox ?? throw new NotImplementedException();
+            FlowLayoutPanel list = pictureBox.Name switch
+            {
+                "advancedName" => advancedNameBox,
+                "advancedDesc" => advancedDescBox,
+                _ => throw new NotImplementedException(),
+            };
+            list.Visible = !list.Visible;
+            pictureBox.Image = list.Visible switch
+            {
+                true => Properties.Resources.open,
+                false => Properties.Resources.closed
+            };
         }
     }
 }

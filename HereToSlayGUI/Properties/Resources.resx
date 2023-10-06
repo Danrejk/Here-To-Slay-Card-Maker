@@ -124,6 +124,9 @@
   <data name="berserk" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\icons\berserk.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="closed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\MenuAssets\closed.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="czarownik" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\icons\czarownik.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -156,6 +159,9 @@
   </data>
   <data name="nekromanta" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\icons\nekromanta.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="open" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\MenuAssets\open.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="PatuaOne_polish" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\fonts\PatuaOne-polish.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

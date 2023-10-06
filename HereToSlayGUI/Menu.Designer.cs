@@ -53,8 +53,16 @@
             langIcons = new ImageList(components);
             SaveRenderDialog = new SaveFileDialog();
             leaderImgToolTip = new ToolTip(components);
+            advancedNameBox = new FlowLayoutPanel();
+            advancedName = new PictureBox();
+            advancedDescBox = new FlowLayoutPanel();
+            advancedDesc = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)logo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)previewImg).BeginInit();
+            advancedNameBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)advancedName).BeginInit();
+            advancedDescBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)advancedDesc).BeginInit();
             SuspendLayout();
             // 
             // RENDER
@@ -64,9 +72,9 @@
             RENDER.FlatAppearance.BorderColor = Color.FromArgb(118, 110, 109);
             RENDER.FlatStyle = FlatStyle.Flat;
             RENDER.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            RENDER.Location = new Point(111, 464);
+            RENDER.Location = new Point(119, 557);
             RENDER.Name = "RENDER";
-            RENDER.Size = new Size(185, 74);
+            RENDER.Size = new Size(175, 75);
             RENDER.TabIndex = 0;
             RENDER.Text = "RENDER";
             RENDER.UseVisualStyleBackColor = false;
@@ -90,10 +98,10 @@
             leaderNameText.BackColor = Color.White;
             leaderNameText.BorderStyle = BorderStyle.None;
             leaderNameText.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            leaderNameText.Location = new Point(111, 176);
+            leaderNameText.Location = new Point(119, 185);
             leaderNameText.Margin = new Padding(0);
             leaderNameText.Name = "leaderNameText";
-            leaderNameText.Size = new Size(185, 22);
+            leaderNameText.Size = new Size(175, 22);
             leaderNameText.TabIndex = 2;
             leaderNameText.TextChanged += renderPreview;
             // 
@@ -104,7 +112,7 @@
             labelLeader.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             labelLeader.ForeColor = Color.White;
             labelLeader.ImageAlign = ContentAlignment.BottomLeft;
-            labelLeader.Location = new Point(107, 156);
+            labelLeader.Location = new Point(115, 165);
             labelLeader.Margin = new Padding(0);
             labelLeader.Name = "labelLeader";
             labelLeader.Size = new Size(150, 20);
@@ -117,7 +125,7 @@
             labelDescription.BackColor = Color.Transparent;
             labelDescription.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             labelDescription.ForeColor = Color.White;
-            labelDescription.Location = new Point(108, 345);
+            labelDescription.Location = new Point(53, 395);
             labelDescription.Margin = new Padding(0);
             labelDescription.Name = "labelDescription";
             labelDescription.Size = new Size(100, 20);
@@ -144,10 +152,10 @@
             chosenClass.FlatStyle = FlatStyle.Flat;
             chosenClass.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             chosenClass.FormattingEnabled = true;
-            chosenClass.Location = new Point(111, 226);
+            chosenClass.Location = new Point(145, 262);
             chosenClass.Margin = new Padding(0);
             chosenClass.Name = "chosenClass";
-            chosenClass.Size = new Size(116, 25);
+            chosenClass.Size = new Size(120, 25);
             chosenClass.TabIndex = 7;
             chosenClass.SelectedIndexChanged += chosenClass_SelectedIndexChanged;
             chosenClass.Click += chosenClass_Click;
@@ -157,7 +165,7 @@
             labelClass.BackColor = Color.Transparent;
             labelClass.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             labelClass.ForeColor = Color.FromArgb(245, 240, 232);
-            labelClass.Location = new Point(107, 206);
+            labelClass.Location = new Point(142, 242);
             labelClass.Margin = new Padding(0);
             labelClass.Name = "labelClass";
             labelClass.Size = new Size(100, 20);
@@ -176,7 +184,7 @@
             selectImg.FlatAppearance.BorderColor = Color.White;
             selectImg.FlatStyle = FlatStyle.Flat;
             selectImg.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            selectImg.Location = new Point(269, 280);
+            selectImg.Location = new Point(270, 340);
             selectImg.Margin = new Padding(0);
             selectImg.Name = "selectImg";
             selectImg.Size = new Size(24, 22);
@@ -191,11 +199,11 @@
             selectImgText.BackColor = Color.White;
             selectImgText.BorderStyle = BorderStyle.None;
             selectImgText.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            selectImgText.Location = new Point(111, 280);
+            selectImgText.Location = new Point(119, 340);
             selectImgText.Margin = new Padding(0);
             selectImgText.Multiline = true;
             selectImgText.Name = "selectImgText";
-            selectImgText.Size = new Size(161, 22);
+            selectImgText.Size = new Size(151, 22);
             selectImgText.TabIndex = 11;
             selectImgText.WordWrap = false;
             selectImgText.TextChanged += renderPreview;
@@ -206,7 +214,7 @@
             labelImg.BackColor = Color.Transparent;
             labelImg.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             labelImg.ForeColor = Color.White;
-            labelImg.Location = new Point(107, 260);
+            labelImg.Location = new Point(115, 320);
             labelImg.Margin = new Padding(0);
             labelImg.Name = "labelImg";
             labelImg.RightToLeft = RightToLeft.No;
@@ -219,13 +227,14 @@
             // 
             gradient.AutoSize = true;
             gradient.BackColor = Color.Transparent;
-            gradient.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            gradient.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             gradient.ForeColor = Color.White;
-            gradient.Location = new Point(136, 544);
+            gradient.Location = new Point(92, 0);
+            gradient.Margin = new Padding(0);
             gradient.Name = "gradient";
-            gradient.Size = new Size(142, 23);
+            gradient.Size = new Size(99, 19);
             gradient.TabIndex = 13;
-            gradient.Text = "Add back Gradient";
+            gradient.Text = "Back Gradient";
             gradient.UseVisualStyleBackColor = false;
             gradient.CheckedChanged += renderPreview;
             // 
@@ -233,13 +242,14 @@
             // 
             leaderWhite.AutoSize = true;
             leaderWhite.BackColor = Color.Transparent;
-            leaderWhite.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            leaderWhite.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             leaderWhite.ForeColor = Color.White;
-            leaderWhite.Location = new Point(136, 569);
+            leaderWhite.Location = new Point(0, 0);
+            leaderWhite.Margin = new Padding(0);
             leaderWhite.Name = "leaderWhite";
-            leaderWhite.Size = new Size(174, 23);
+            leaderWhite.Size = new Size(92, 19);
             leaderWhite.TabIndex = 14;
-            leaderWhite.Text = "Make Leader text White";
+            leaderWhite.Text = "White Name";
             leaderWhite.UseVisualStyleBackColor = false;
             leaderWhite.CheckedChanged += renderPreview;
             // 
@@ -247,18 +257,19 @@
             // 
             descriptionText.BackColor = Color.White;
             descriptionText.BorderStyle = BorderStyle.None;
-            descriptionText.Location = new Point(111, 365);
+            descriptionText.Location = new Point(57, 415);
             descriptionText.Margin = new Padding(0);
             descriptionText.Multiline = true;
             descriptionText.Name = "descriptionText";
             descriptionText.RightToLeft = RightToLeft.No;
-            descriptionText.Size = new Size(185, 78);
+            descriptionText.Size = new Size(300, 65);
             descriptionText.TabIndex = 15;
             descriptionText.TextChanged += renderPreview;
             // 
             // previewImg
             // 
             previewImg.BackColor = SystemColors.ControlLight;
+            previewImg.Cursor = Cursors.Hand;
             previewImg.Dock = DockStyle.Right;
             previewImg.Location = new Point(414, 0);
             previewImg.Name = "previewImg";
@@ -299,14 +310,16 @@
             // wordSplitting
             // 
             wordSplitting.AutoSize = true;
-            wordSplitting.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            wordSplitting.BackColor = Color.Transparent;
+            wordSplitting.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             wordSplitting.ForeColor = Color.White;
-            wordSplitting.Location = new Point(136, 598);
+            wordSplitting.Location = new Point(0, 0);
+            wordSplitting.Margin = new Padding(0);
             wordSplitting.Name = "wordSplitting";
-            wordSplitting.Size = new Size(115, 23);
+            wordSplitting.Size = new Size(102, 19);
             wordSplitting.TabIndex = 20;
             wordSplitting.Text = "Word Splitting";
-            wordSplitting.UseVisualStyleBackColor = true;
+            wordSplitting.UseVisualStyleBackColor = false;
             // 
             // classIcons
             // 
@@ -328,18 +341,65 @@
             leaderImgToolTip.ReshowDelay = 100;
             leaderImgToolTip.ToolTipIcon = ToolTipIcon.Info;
             // 
+            // advancedNameBox
+            // 
+            advancedNameBox.BackColor = Color.Transparent;
+            advancedNameBox.Controls.Add(leaderWhite);
+            advancedNameBox.Controls.Add(gradient);
+            advancedNameBox.Location = new Point(134, 207);
+            advancedNameBox.Margin = new Padding(0);
+            advancedNameBox.Name = "advancedNameBox";
+            advancedNameBox.Size = new Size(223, 40);
+            advancedNameBox.TabIndex = 21;
+            advancedNameBox.Visible = false;
+            // 
+            // advancedName
+            // 
+            advancedName.BackColor = Color.Transparent;
+            advancedName.Image = Properties.Resources.closed;
+            advancedName.Location = new Point(119, 209);
+            advancedName.Name = "advancedName";
+            advancedName.Size = new Size(12, 12);
+            advancedName.SizeMode = PictureBoxSizeMode.Zoom;
+            advancedName.TabIndex = 22;
+            advancedName.TabStop = false;
+            advancedName.Click += advanced_Click;
+            // 
+            // advancedDescBox
+            // 
+            advancedDescBox.Controls.Add(wordSplitting);
+            advancedDescBox.Location = new Point(72, 481);
+            advancedDescBox.Margin = new Padding(0);
+            advancedDescBox.Name = "advancedDescBox";
+            advancedDescBox.Size = new Size(115, 26);
+            advancedDescBox.TabIndex = 23;
+            advancedDescBox.Visible = false;
+            // 
+            // advancedDesc
+            // 
+            advancedDesc.BackColor = Color.Transparent;
+            advancedDesc.Image = Properties.Resources.closed;
+            advancedDesc.Location = new Point(57, 483);
+            advancedDesc.Name = "advancedDesc";
+            advancedDesc.Size = new Size(12, 12);
+            advancedDesc.SizeMode = PictureBoxSizeMode.Zoom;
+            advancedDesc.TabIndex = 24;
+            advancedDesc.TabStop = false;
+            advancedDesc.Click += advanced_Click;
+            // 
             // Menu
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackColor = Color.FromArgb(39, 43, 52);
             BackgroundImage = Properties.Resources.gradient;
             ClientSize = new Size(828, 711);
-            Controls.Add(wordSplitting);
+            Controls.Add(advancedDesc);
+            Controls.Add(advancedDescBox);
+            Controls.Add(advancedName);
+            Controls.Add(advancedNameBox);
             Controls.Add(gitLabel1);
             Controls.Add(gitLabel2);
             Controls.Add(descriptionText);
-            Controls.Add(leaderWhite);
-            Controls.Add(gradient);
             Controls.Add(labelImg);
             Controls.Add(selectImgText);
             Controls.Add(selectImg);
@@ -360,6 +420,12 @@
             Text = "Here To Slay - Custom leader card Generator";
             ((System.ComponentModel.ISupportInitialize)logo).EndInit();
             ((System.ComponentModel.ISupportInitialize)previewImg).EndInit();
+            advancedNameBox.ResumeLayout(false);
+            advancedNameBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)advancedName).EndInit();
+            advancedDescBox.ResumeLayout(false);
+            advancedDescBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)advancedDesc).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -389,5 +455,9 @@
         private ImageList langIcons;
         private SaveFileDialog SaveRenderDialog;
         private ToolTip leaderImgToolTip;
+        private FlowLayoutPanel advancedNameBox;
+        private PictureBox advancedName;
+        private FlowLayoutPanel advancedDescBox;
+        private PictureBox advancedDesc;
     }
 }
