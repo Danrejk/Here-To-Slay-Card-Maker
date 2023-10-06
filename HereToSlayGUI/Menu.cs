@@ -83,9 +83,16 @@ namespace HereToSlayGUI
         #region The Rendering ones
         private void RenderButton_Press(object sender, EventArgs e)
         {
-            renderPreview(sender, e);
-            HereToSlayGen.Program.Generate(false, language.SelectedIndex, leaderNameText.Text, chosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text, gradient.Checked, leaderWhite.Checked);
-            new Popup().ShowDialog();
+            using SaveFileDialog SaveRenderDialog = new();
+            SaveRenderDialog.Filter = "Image Files (*.png;*.jpeg;*.jpg;*.gif;*.bmp)|*.png;*.jpeg;*.jpg;*.gif;*.bmp|All Files (*.*)|*.*";
+            SaveRenderDialog.FilterIndex = 1;
+
+            if (SaveRenderDialog.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = SaveRenderDialog.FileName;
+                renderPreview(sender, e);
+                HereToSlayGen.Program.Generate(false, filePath, language.SelectedIndex, leaderNameText.Text, chosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text, gradient.Checked, leaderWhite.Checked);
+            }
         }
 
         private CancellationTokenSource? cancellationTokenSource;
@@ -110,7 +117,7 @@ namespace HereToSlayGUI
                     {
                         previewImg.Image?.Dispose();
                         previewImg.Image = null;
-                        HereToSlayGen.Program.Generate(true, language.SelectedIndex, leaderNameText.Text, chosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text, gradient.Checked, leaderWhite.Checked);
+                        HereToSlayGen.Program.Generate(true, "", language.SelectedIndex, leaderNameText.Text, chosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text, gradient.Checked, leaderWhite.Checked);
                         previewImg.Image = Image.FromFile("preview.png");
                     }
                 }

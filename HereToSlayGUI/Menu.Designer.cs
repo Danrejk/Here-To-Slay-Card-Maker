@@ -38,7 +38,7 @@
             logo = new PictureBox();
             chosenClass = new ComboBox();
             labelClass = new Label();
-            openFileDialog1 = new OpenFileDialog();
+            LeaderImgDialog = new OpenFileDialog();
             selectImg = new Button();
             selectImgText = new TextBox();
             labelImg = new Label();
@@ -49,11 +49,9 @@
             gitLabel2 = new LinkLabel();
             gitLabel1 = new LinkLabel();
             wordSplitting = new CheckBox();
-            sourceExportText = new TextBox();
-            sourceExport = new Button();
-            label1 = new Label();
             classIcons = new ImageList(components);
             langIcons = new ImageList(components);
+            SaveRenderDialog = new SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)logo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)previewImg).BeginInit();
             SuspendLayout();
@@ -166,9 +164,9 @@
             labelClass.Text = "Class";
             labelClass.TextAlign = ContentAlignment.BottomLeft;
             // 
-            // openFileDialog1
+            // LeaderImgDialog
             // 
-            openFileDialog1.FileName = "openFileDialog1";
+            LeaderImgDialog.FileName = "openFileDialog1";
             // 
             // selectImg
             // 
@@ -302,56 +300,12 @@
             wordSplitting.AutoSize = true;
             wordSplitting.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             wordSplitting.ForeColor = Color.White;
-            wordSplitting.Location = new Point(136, 605);
+            wordSplitting.Location = new Point(136, 598);
             wordSplitting.Name = "wordSplitting";
             wordSplitting.Size = new Size(115, 23);
             wordSplitting.TabIndex = 20;
             wordSplitting.Text = "Word Splitting";
             wordSplitting.UseVisualStyleBackColor = true;
-            // 
-            // sourceExportText
-            // 
-            sourceExportText.BackColor = Color.White;
-            sourceExportText.BorderStyle = BorderStyle.None;
-            sourceExportText.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            sourceExportText.Location = new Point(136, 640);
-            sourceExportText.Margin = new Padding(0);
-            sourceExportText.Multiline = true;
-            sourceExportText.Name = "sourceExportText";
-            sourceExportText.Size = new Size(161, 22);
-            sourceExportText.TabIndex = 21;
-            sourceExportText.WordWrap = false;
-            // 
-            // sourceExport
-            // 
-            sourceExport.BackColor = SystemColors.Control;
-            sourceExport.Cursor = Cursors.Hand;
-            sourceExport.FlatAppearance.BorderColor = Color.White;
-            sourceExport.FlatStyle = FlatStyle.Flat;
-            sourceExport.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            sourceExport.Location = new Point(297, 640);
-            sourceExport.Margin = new Padding(0);
-            sourceExport.Name = "sourceExport";
-            sourceExport.Size = new Size(24, 22);
-            sourceExport.TabIndex = 22;
-            sourceExport.Text = "⋯";
-            sourceExport.TextAlign = ContentAlignment.TopCenter;
-            sourceExport.UseVisualStyleBackColor = false;
-            // 
-            // label1
-            // 
-            label1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.ForeColor = Color.White;
-            label1.Location = new Point(133, 620);
-            label1.Margin = new Padding(0);
-            label1.Name = "label1";
-            label1.RightToLeft = RightToLeft.No;
-            label1.Size = new Size(145, 20);
-            label1.TabIndex = 23;
-            label1.Text = "Export Location";
-            label1.TextAlign = ContentAlignment.BottomLeft;
             // 
             // classIcons
             // 
@@ -372,9 +326,6 @@
             BackColor = Color.FromArgb(39, 43, 52);
             BackgroundImage = Properties.Resources.gradient;
             ClientSize = new Size(828, 711);
-            Controls.Add(label1);
-            Controls.Add(sourceExport);
-            Controls.Add(sourceExportText);
             Controls.Add(wordSplitting);
             Controls.Add(gitLabel1);
             Controls.Add(gitLabel2);
@@ -416,7 +367,7 @@
         private ComboBox chosenClass;
         private TextBox descriptionText;
         private Label labelClass;
-        private OpenFileDialog openFileDialog1;
+        private OpenFileDialog LeaderImgDialog;
         private Button selectImg;
         private TextBox selectImgText;
         private Label labelImg;
@@ -426,10 +377,8 @@
         private LinkLabel gitLabel2;
         private LinkLabel gitLabel1;
         private CheckBox wordSplitting;
-        private TextBox sourceExportText;
-        private Button sourceExport;
-        private Label label1;
         private ImageList classIcons;
         private ImageList langIcons;
+        private SaveFileDialog SaveRenderDialog;
     }
 }

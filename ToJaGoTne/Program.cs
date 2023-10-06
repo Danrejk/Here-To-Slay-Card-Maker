@@ -11,7 +11,7 @@ namespace HereToSlayGen
     {
         static void Main()
         {
-            Generate(false, 0,"Test Leader", 11, "leader_pic.png", "Test description", false, false);
+            Generate(false, "render.png", 0,"Test Leader", 11, "leader_pic.png", "Test description", false, false);
         }
 
         const int NAME_FONT_SPACING = 0;
@@ -27,7 +27,7 @@ namespace HereToSlayGen
         const int TITLE_SIZE = 49; // 49
         const int DESC_SIZE = 38; // 38
 
-        public static void Generate(bool preview, int language, string leaderName, int desiredClass, string leaderImg, string leaderDescription, bool addGradient, bool leaderWhite)
+        public static void Generate(bool preview, string renderLocation, int language, string leaderName, int desiredClass, string leaderImg, string leaderDescription, bool addGradient, bool leaderWhite)
         {
             Color LOW = new(35, 94, 57, 255);
             Color MAG = new(116, 46, 137, 255);
@@ -219,7 +219,7 @@ namespace HereToSlayGen
             }
             else
             {
-                Raylib.ExportImage(card, "export.png");
+                Raylib.ExportImage(card, renderLocation);
             }
         }
 
