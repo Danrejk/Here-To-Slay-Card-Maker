@@ -50,33 +50,108 @@ namespace HereToSlayGUI
             gitLabel2.Font = GetFont(Properties.Resources.SourceSansPro, 9);
         }
 
-        private void Button_Press(object sender, EventArgs e)
+        #region Font Changes
+        private static Font GetFont(byte[] fontData, float size)
+        {
+            IntPtr data = Marshal.AllocCoTaskMem(fontData.Length);
+            Marshal.Copy(fontData, 0, data, fontData.Length);
+
+            PrivateFontCollection fontCollection = new();
+            fontCollection.AddMemoryFont(data, fontData.Length);
+
+            if (fontCollection.Families.Length > 0)
+            {
+                FontFamily fontFamily = fontCollection.Families[0];
+                Marshal.FreeCoTaskMem(data);
+                return new Font(fontFamily, size);
+            }
+            return SystemFonts.DefaultFont;
+        }
+        private void ChangeFontForAllControls(Control control, Font fontUI)
+        {
+            foreach (Control c in control.Controls)
+            {
+                c.Font = fontUI;
+                if (c.Controls.Count > 0)
+                {
+                    ChangeFontForAllControls(c, fontUI);
+                }
+            }
+        }
+        #endregion
+
+        #region The Rendering ones
+        private void RenderButton_Press(object sender, EventArgs e)
         {
             renderPreview(sender, e);
             HereToSlayGen.Program.Generate(false, language.SelectedIndex, leaderNameText.Text, chosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text, gradient.Checked, leaderWhite.Checked);
             new Popup().ShowDialog();
         }
 
-        int currentIndex;
-        Image[] classIconsList = new Image[]{
-                Properties.Resources.lowca.ToBitmap(),
-                Properties.Resources.mag.ToBitmap(),
-                Properties.Resources.najebus.ToBitmap(),
-                Properties.Resources.straznik.ToBitmap(),
-                Properties.Resources.wojownik.ToBitmap(),
-                Properties.Resources.zlodziej.ToBitmap(),
-                Properties.Resources.druid.ToBitmap(),
-                Properties.Resources.awanturnik.ToBitmap(),
-                Properties.Resources.berserk.ToBitmap(),
-                Properties.Resources.nekromanta.ToBitmap(),
-                Properties.Resources.czarownik.ToBitmap(),
-                Properties.Resources.empty.ToBitmap()
-            };
+        private CancellationTokenSource? cancellationTokenSource;
+        bool initialLang = false; //it's so that when the program opens and sets the remembered language, it doesn't render the preview automatically.
+        private async void renderPreview(object sender, EventArgs e)
+        {
+            cancellationTokenSource?.Cancel();
+            cancellationTokenSource = new CancellationTokenSource();
+            if (initialLang)
+            {
+                try
+                {
+                    int timer = 2;
+                    while (timer > 0)
+                    {
+                        cancellationTokenSource.Token.ThrowIfCancellationRequested();
 
-        private void AddClassOptions(int lang)
+                        await Task.Delay(500, cancellationTokenSource.Token);
+                        timer--;
+                    }
+                    if (timer >= 0)
+                    {
+                        previewImg.Image?.Dispose();
+                        previewImg.Image = null;
+                        HereToSlayGen.Program.Generate(true, language.SelectedIndex, leaderNameText.Text, chosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text, gradient.Checked, leaderWhite.Checked);
+                        previewImg.Image = Image.FromFile("preview.png");
+                    }
+                }
+                catch (OperationCanceledException) { }
+            }
+        }
+        #endregion
+
+        #region Comboboxes
+        private void language_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (initialLang == true) // so that it doesn't overwrite the setting, before it can be read
+            {
+                Properties.Settings.Default.Language = language.SelectedIndex;
+                Properties.Settings.Default.Save();
+            }
+
+            switch (language.SelectedIndex)
+            {
+                case 1:
+                    logo.Image = Properties.Resources.Logo1;
+                    labelLeader.Text = "Nazwa lidera";
+                    labelClass.Text = "Klasa lidera";
+                    labelImg.Text = "Obrazek lidera";
+                    labelDescription.Text = "Opis mocy";
+                    break;
+                default:
+                    logo.Image = Properties.Resources.Logo0;
+                    labelLeader.Text = "Leader name";
+                    labelClass.Text = "Leader class";
+                    labelImg.Text = "Leader image";
+                    labelDescription.Text = "Description";
+                    break;
+            }
+            LocaliseClassOptions(language.SelectedIndex); // change class options based on selected language
+            renderPreview(sender, e);
+        }
+        private void LocaliseClassOptions(int lang)
         {
             classIcons.Images.AddRange(classIconsList);
-            currentIndex = chosenClass.SelectedIndex;
+            currentClassIndex = chosenClass.SelectedIndex;
             chosenClass.DataSource = null;
             chosenClass.Items.Clear();
 
@@ -114,11 +189,50 @@ namespace HereToSlayGUI
                     }
             };
             chosenClass.DataSource = classList;
-            chosenClass.SelectedIndex = currentIndex;
+            chosenClass.SelectedIndex = currentClassIndex;
         }
 
-        // no idea what's going on here, this one I stole, but it works and looks nice so...
-        private void ComboBox_Icons_DrawItem(object? sender, DrawItemEventArgs e)
+        int currentClassIndex;
+        Image[] classIconsList = new Image[]{
+                Properties.Resources.lowca.ToBitmap(),
+                Properties.Resources.mag.ToBitmap(),
+                Properties.Resources.najebus.ToBitmap(),
+                Properties.Resources.straznik.ToBitmap(),
+                Properties.Resources.wojownik.ToBitmap(),
+                Properties.Resources.zlodziej.ToBitmap(),
+                Properties.Resources.druid.ToBitmap(),
+                Properties.Resources.awanturnik.ToBitmap(),
+                Properties.Resources.berserk.ToBitmap(),
+                Properties.Resources.nekromanta.ToBitmap(),
+                Properties.Resources.czarownik.ToBitmap(),
+                Properties.Resources.empty.ToBitmap()
+            };
+        private void chosenClass_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.Icon = chosenClass.SelectedIndex switch
+            {
+                0 => Properties.Resources.lowca,
+                1 => Properties.Resources.mag,
+                2 => Properties.Resources.najebus,
+                3 => Properties.Resources.straznik,
+                4 => Properties.Resources.wojownik,
+                5 => Properties.Resources.zlodziej,
+                6 => Properties.Resources.druid,
+                7 => Properties.Resources.awanturnik,
+                8 => Properties.Resources.berserk,
+                9 => Properties.Resources.nekromanta,
+                10 => Properties.Resources.czarownik,
+                11 => Properties.Resources.empty,
+                _ => Properties.Resources.LEADER
+            };
+            renderPreview(sender, e);
+        }
+        private void chosenClass_Click(object sender, EventArgs e)
+        {
+            cancellationTokenSource?.Cancel();
+        }
+
+        private void ComboBox_Icons_DrawItem(object? sender, DrawItemEventArgs e) // no sure how it works, this one I stole, but it works and looks nice so...
         {
             ComboBox? comboBox = sender as ComboBox;
 
@@ -168,91 +282,7 @@ namespace HereToSlayGUI
                 }
             }
         }
-        
-        private void language_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (initialLang == true) // so that it doesn't overwrite the setting, before it can be read
-            {
-                Properties.Settings.Default.Language = language.SelectedIndex;
-                Properties.Settings.Default.Save();
-            }
-            
-            switch (language.SelectedIndex)
-            {
-                case 1:
-                    logo.Image = Properties.Resources.Logo1;
-                    labelLeader.Text = "Nazwa lidera";
-                    labelClass.Text = "Klasa lidera";
-                    labelImg.Text = "Obrazek lidera";
-                    labelDescription.Text = "Opis mocy";
-                    break;
-                default:
-                    logo.Image = Properties.Resources.Logo0;
-                    labelLeader.Text = "Leader name";
-                    labelClass.Text = "Leader class";
-                    labelImg.Text = "Leader image";
-                    labelDescription.Text = "Description";
-                    break;
-            }
-            AddClassOptions(language.SelectedIndex);
-            renderPreview(sender, e);
-        }
-
-        // Font changes
-        private void ChangeFontForAllControls(Control control, Font fontUI)
-        {
-            foreach (Control c in control.Controls)
-            {
-                c.Font = fontUI;
-                if (c.Controls.Count > 0)
-                {
-                    ChangeFontForAllControls(c, fontUI);
-                }
-            }
-        }
-        private static Font GetFont(byte[] fontData, float size)
-        {
-            IntPtr data = Marshal.AllocCoTaskMem(fontData.Length);
-            Marshal.Copy(fontData, 0, data, fontData.Length);
-
-            PrivateFontCollection fontCollection = new();
-            fontCollection.AddMemoryFont(data, fontData.Length);
-
-            if (fontCollection.Families.Length > 0)
-            {
-                FontFamily fontFamily = fontCollection.Families[0];
-                Marshal.FreeCoTaskMem(data); // Release the allocated memory
-                return new Font(fontFamily, size);
-            }
-
-            // Return a fallback font if the resource cannot be loaded
-            return SystemFonts.DefaultFont;
-        }
-
-        private void chosenClass_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            this.Icon = chosenClass.SelectedIndex switch
-            {
-                0 => Properties.Resources.lowca,
-                1 => Properties.Resources.mag,
-                2 => Properties.Resources.najebus,
-                3 => Properties.Resources.straznik,
-                4 => Properties.Resources.wojownik,
-                5 => Properties.Resources.zlodziej,
-                6 => Properties.Resources.druid,
-                7 => Properties.Resources.awanturnik,
-                8 => Properties.Resources.berserk,
-                9 => Properties.Resources.nekromanta,
-                10 => Properties.Resources.czarownik,
-                11 => Properties.Resources.empty,
-                _ => Properties.Resources.LEADER
-            };
-            renderPreview(sender, e);
-        }
-        private void chosenClass_Click(object sender, EventArgs e)
-        {
-            cancellationTokenSource?.Cancel();
-        }
+        #endregion
 
         private void selectImg_Click(object sender, EventArgs e)
         {
@@ -264,37 +294,6 @@ namespace HereToSlayGUI
             {
                 string selectedFilePath = openFileDialog.FileName;
                 selectImgText.Text = selectedFilePath;
-            }
-        }
-
-
-        private CancellationTokenSource? cancellationTokenSource;
-        bool initialLang = false; //it's so that when the program opens and sets the remembered language, it doesn't render the preview automatically.
-        private async void renderPreview(object sender, EventArgs e)
-        {
-            cancellationTokenSource?.Cancel();
-            cancellationTokenSource = new CancellationTokenSource();
-            if (initialLang)
-            {
-                try
-                {
-                    int timer = 2;
-                    while (timer > 0)
-                    {
-                        cancellationTokenSource.Token.ThrowIfCancellationRequested();
-
-                        await Task.Delay(500, cancellationTokenSource.Token);
-                        timer--;
-                    }
-                    if (timer >= 0)
-                    {
-                        previewImg.Image?.Dispose();
-                        previewImg.Image = null;
-                        HereToSlayGen.Program.Generate(true, language.SelectedIndex, leaderNameText.Text, chosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text, gradient.Checked, leaderWhite.Checked);
-                        previewImg.Image = Image.FromFile("preview.png");
-                    }
-                }
-                catch (OperationCanceledException) { }
             }
         }
 

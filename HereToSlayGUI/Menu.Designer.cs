@@ -71,7 +71,7 @@
             RENDER.TabIndex = 0;
             RENDER.Text = "RENDER";
             RENDER.UseVisualStyleBackColor = false;
-            RENDER.Click += Button_Press;
+            RENDER.Click += RenderButton_Press;
             // 
             // language
             // 
