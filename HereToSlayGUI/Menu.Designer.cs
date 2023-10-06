@@ -349,7 +349,7 @@
             advancedNameBox.Location = new Point(134, 207);
             advancedNameBox.Margin = new Padding(0);
             advancedNameBox.Name = "advancedNameBox";
-            advancedNameBox.Size = new Size(223, 40);
+            advancedNameBox.Size = new Size(197, 40);
             advancedNameBox.TabIndex = 21;
             advancedNameBox.Visible = false;
             // 
@@ -371,7 +371,7 @@
             advancedDescBox.Location = new Point(72, 481);
             advancedDescBox.Margin = new Padding(0);
             advancedDescBox.Name = "advancedDescBox";
-            advancedDescBox.Size = new Size(115, 26);
+            advancedDescBox.Size = new Size(285, 63);
             advancedDescBox.TabIndex = 23;
             advancedDescBox.Visible = false;
             // 

@@ -95,8 +95,8 @@ namespace HereToSlayGUI
             if (SaveRenderDialog.ShowDialog() == DialogResult.OK)
             {
                 string filePath = SaveRenderDialog.FileName;
-                renderPreview(sender, e);
                 HereToSlayGen.Program.Generate(false, filePath, language.SelectedIndex, leaderNameText.Text, chosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text, gradient.Checked, leaderWhite.Checked);
+                previewImg.ImageLocation = filePath;
             }
         }
 
@@ -123,7 +123,7 @@ namespace HereToSlayGUI
                         previewImg.Image?.Dispose();
                         previewImg.Image = null;
                         HereToSlayGen.Program.Generate(true, "", language.SelectedIndex, leaderNameText.Text, chosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text, gradient.Checked, leaderWhite.Checked);
-                        previewImg.Image = Image.FromFile("preview.png");
+                        previewImg.ImageLocation = Path.Combine(Directory.GetCurrentDirectory(), "preview.png"); ;
                     }
                 }
                 catch (OperationCanceledException) { }
@@ -326,12 +326,16 @@ namespace HereToSlayGUI
 
         private void previewImg_Click(object sender, EventArgs e)
         {
-            string? previewImgPath = Path.Combine(Directory.GetCurrentDirectory(), "preview.png");
-            if (File.Exists(previewImgPath))
+            PictureBox? pictureBox = sender as PictureBox;
+
+            if (pictureBox != null)
             {
+                string previewImgPath = pictureBox.ImageLocation;
                 string? folderPath = Path.GetDirectoryName(previewImgPath);
-                folderPath ??= string.Empty;
-                Process.Start("explorer.exe", folderPath);
+                if (folderPath != null)
+                {
+                    Process.Start("explorer.exe", folderPath);
+                }
             }
         }
 
