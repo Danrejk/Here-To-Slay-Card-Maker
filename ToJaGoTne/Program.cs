@@ -7,6 +7,46 @@ using System.Runtime.InteropServices;
 
 namespace HereToSlayGen
 {
+    public class AssetManager
+    {
+        private static AssetManager instance;
+        public Image frame { get; private set; }
+        public Image bottom { get; private set; }
+        public Font nameFont { get; private set; }
+        public Font titleFont { get; private set; }
+        public Font descFont { get; private set; }
+
+        private AssetManager()
+        {
+            const int NAME_SIZE = 60; // 60
+            const int TITLE_SIZE = 49; // 49
+            const int DESC_SIZE = 38; // 38
+
+            Marshal.GetHINSTANCE(typeof(Program).Module);
+            Raylib.InitWindow(1, 1, "generator");
+            Raylib.SetWindowPosition(-2000, -2000);
+            Raylib.MinimizeWindow();
+            nameFont = Raylib.LoadFontEx("fonts/PatuaOne-polish.ttf", NAME_SIZE, null, 382); // this font has limited language support
+            titleFont = Raylib.LoadFontEx("fonts/SourceSansPro.ttf", TITLE_SIZE, null, 1415);
+            descFont = Raylib.LoadFontEx("fonts/SourceSansPro.ttf", DESC_SIZE, null, 1415);
+
+            frame = Raylib.LoadImage("template/frame.png");
+            bottom = Raylib.LoadImage("template/bottom.png");
+        }
+
+        public static AssetManager Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new AssetManager();
+                }
+                return instance;
+            }
+        }
+    }
+
     public class Program
     {
         static void Main()
@@ -15,7 +55,7 @@ namespace HereToSlayGen
             Raylib.InitWindow(1, 1, "generator");
             Raylib.SetWindowPosition(-2000, -2000);
             Raylib.MinimizeWindow();
-            Program dit = new();
+            AssetManager dit = AssetManager.Instance;
             Generate(dit,"render.png", 0,"Test Leader", 11, "", "Test description", false, false);
         }
 
@@ -32,16 +72,16 @@ namespace HereToSlayGen
         const int TITLE_SIZE = 49; // 49
         const int DESC_SIZE = 38; // 38
 
+
         Font nameFont = Raylib.LoadFontEx("fonts/PatuaOne-polish.ttf", NAME_SIZE, null, 382); // this font has limited language support
         Font titleFont = Raylib.LoadFontEx("fonts/SourceSansPro.ttf", TITLE_SIZE, null, 1415);
         Font descFont = Raylib.LoadFontEx("fonts/SourceSansPro.ttf", DESC_SIZE, null, 1415);
 
         Image frame = Raylib.LoadImage("template/frame.png");
         Image bottom = Raylib.LoadImage("template/bottom.png");
-        static Image leader = Raylib.LoadImage("");
         public static void ChangeLeaderImage(string path)
         {
-            leader = Raylib.LoadImage(path);
+            //leader = Raylib.LoadImage(path);
         }
 
         public static Program Initialize()
@@ -58,11 +98,14 @@ namespace HereToSlayGen
             return instance;
         }
 
-        public static void Generate(Program to, string? renderLocation, int language, string leaderName, int desiredClass, string leaderImg, string leaderDescription, bool addGradient, bool leaderWhite)
+        public static void Generate(AssetManager tos, string? renderLocation, int language, string leaderName, int desiredClass, string leaderImg, string leaderDescription, bool addGradient, bool leaderWhite)
         {
+            Image leader = Raylib.LoadImage(leaderImg);
             Image card = Raylib.LoadImage("template/background.png");
             Image? gradient = null;
             if (addGradient) { gradient = Raylib.LoadImage("template/gradient.png"); }
+
+            AssetManager to = AssetManager.Instance;
 
             Image classSymbol;
             Color desiredColor;
@@ -182,8 +225,9 @@ namespace HereToSlayGen
             Raylib.ImageCrop(ref leader, new Rectangle(cropX, cropY, targetWidth, targetHeight));
             Raylib.ImageResize(ref leader, 745, 1176);
             #endregion
-
             Raylib.ImageDraw(ref card, leader, imageRec, new(41, 41, 745, 1176), Color.WHITE);
+            Raylib.UnloadImage(leader);
+
             if (gradient != null) { Raylib.ImageDraw(ref card, (Image)gradient, imageRec, imageRec, Color.WHITE); }
             Image frameTinted = Raylib.ImageCopy(to.frame);
             Raylib.ImageColorTint(ref frameTinted, desiredColor);

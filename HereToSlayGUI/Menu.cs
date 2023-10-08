@@ -14,7 +14,7 @@ namespace HereToSlayGUI
 {
     public partial class Menu : Form
     {
-        readonly HereToSlayGen.Program to = HereToSlayGen.Program.Initialize();
+        readonly HereToSlayGen.AssetManager to = AssetManager.Instance;
 
         public Menu()
         {
@@ -319,7 +319,6 @@ namespace HereToSlayGUI
             {
                 string selectedFilePath = openFileDialog.FileName;
                 selectImgText.Text = selectedFilePath;
-                HereToSlayGen.Program.ChangeLeaderImage(selectedFilePath);
             }
         }
 
