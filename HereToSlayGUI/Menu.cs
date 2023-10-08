@@ -125,8 +125,6 @@ namespace HereToSlayGUI
                     }
                     if (timer >= 0)
                     {
-                        previewImg.Image?.Dispose();
-                        previewImg.Image = null;
                         HereToSlayGen.Program.Generate(to, null, language.SelectedIndex, leaderNameText.Text, chosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text, gradient.Checked, leaderWhite.Checked);
                         previewImg.ImageLocation = Path.Combine(Directory.GetCurrentDirectory(), "preview.png"); ;
                     }
