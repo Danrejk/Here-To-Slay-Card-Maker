@@ -14,6 +14,8 @@ namespace HereToSlayGUI
 {
     public partial class Menu : Form
     {
+        readonly HereToSlayGen.Program to = HereToSlayGen.Program.Initialize();
+
         public Menu()
         {
             InitializeComponent();
@@ -53,7 +55,10 @@ namespace HereToSlayGUI
 
             gitLabel1.Font = GetFont(Properties.Resources.SourceSansPro, 9);
             gitLabel2.Font = GetFont(Properties.Resources.SourceSansPro, 9);
+
         }
+
+        
 
         #region Font Changes
         private static Font GetFont(byte[] fontData, float size)
@@ -95,7 +100,7 @@ namespace HereToSlayGUI
             if (SaveRenderDialog.ShowDialog() == DialogResult.OK)
             {
                 string filePath = SaveRenderDialog.FileName;
-                HereToSlayGen.Program.Generate(false, filePath, language.SelectedIndex, leaderNameText.Text, chosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text, gradient.Checked, leaderWhite.Checked);
+                HereToSlayGen.Program.Generate(to, filePath, language.SelectedIndex, leaderNameText.Text, chosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text, gradient.Checked, leaderWhite.Checked);
                 previewImg.ImageLocation = filePath;
             }
         }
@@ -110,7 +115,7 @@ namespace HereToSlayGUI
             {
                 try
                 {
-                    int timer = 2;
+                    int timer = 1;
                     while (timer > 0)
                     {
                         cancellationTokenSource.Token.ThrowIfCancellationRequested();
@@ -122,7 +127,7 @@ namespace HereToSlayGUI
                     {
                         previewImg.Image?.Dispose();
                         previewImg.Image = null;
-                        HereToSlayGen.Program.Generate(true, "", language.SelectedIndex, leaderNameText.Text, chosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text, gradient.Checked, leaderWhite.Checked);
+                        HereToSlayGen.Program.Generate(to, null, language.SelectedIndex, leaderNameText.Text, chosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text, gradient.Checked, leaderWhite.Checked);
                         previewImg.ImageLocation = Path.Combine(Directory.GetCurrentDirectory(), "preview.png"); ;
                     }
                 }
@@ -316,6 +321,7 @@ namespace HereToSlayGUI
             {
                 string selectedFilePath = openFileDialog.FileName;
                 selectImgText.Text = selectedFilePath;
+                HereToSlayGen.Program.ChangeLeaderImage(selectedFilePath);
             }
         }
 

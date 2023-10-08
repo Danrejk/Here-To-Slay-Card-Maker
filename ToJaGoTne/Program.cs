@@ -11,7 +11,12 @@ namespace HereToSlayGen
     {
         static void Main()
         {
-            Generate(false, "render.png", 0,"Test Leader", 11, "leader_pic.png", "Test description", false, false);
+            Marshal.GetHINSTANCE(typeof(Program).Module);
+            Raylib.InitWindow(1, 1, "generator");
+            Raylib.SetWindowPosition(-2000, -2000);
+            Raylib.MinimizeWindow();
+            Program dit = new();
+            Generate(dit,"render.png", 0,"Test Leader", 11, "", "Test description", false, false);
         }
 
         const int NAME_FONT_SPACING = 0;
@@ -27,43 +32,39 @@ namespace HereToSlayGen
         const int TITLE_SIZE = 49; // 49
         const int DESC_SIZE = 38; // 38
 
-        public static void Generate(bool preview, string renderLocation, int language, string leaderName, int desiredClass, string leaderImg, string leaderDescription, bool addGradient, bool leaderWhite)
+        Font nameFont = Raylib.LoadFontEx("fonts/PatuaOne-polish.ttf", NAME_SIZE, null, 382); // this font has limited language support
+        Font titleFont = Raylib.LoadFontEx("fonts/SourceSansPro.ttf", TITLE_SIZE, null, 1415);
+        Font descFont = Raylib.LoadFontEx("fonts/SourceSansPro.ttf", DESC_SIZE, null, 1415);
+
+        Image frame = Raylib.LoadImage("template/frame.png");
+        Image bottom = Raylib.LoadImage("template/bottom.png");
+        static Image leader = Raylib.LoadImage("");
+        public static void ChangeLeaderImage(string path)
         {
-            Color LOW = new(35, 94, 57, 255);
-            Color MAG = new(116, 46, 137, 255);
-            Color NAJ = new(194, 81, 47, 255);
-            Color STR = new(235, 171, 33, 255);
-            Color WOJ = new(151, 40, 44, 255);
-            Color ZLO = new(0, 78, 125, 255);
-            Color DRU = new(0, 171, 143, 255);
-            Color AWA = new(94, 109, 180, 255);
-            Color BER = new(225, 131, 51, 255);
-            Color NEK = new(213, 28, 106, 255);
-            Color CZA = new(29, 31, 29, 255);
-            Color EMPTY = new(91, 93, 92, 255);
+            leader = Raylib.LoadImage(path);
+        }
 
-            Color descColor = new(78, 78, 78, 255);
-
+        public static Program Initialize()
+        {
             Marshal.GetHINSTANCE(typeof(Program).Module);
             Raylib.InitWindow(1, 1, "generator");
-            Raylib.SetWindowPosition(-1000, -1000);
+            Raylib.SetWindowPosition(-2000, -2000);
             Raylib.MinimizeWindow();
 
-            Font nameFont = Raylib.LoadFontEx("fonts/PatuaOne-polish.ttf", NAME_SIZE, null, 1415); // this font has limited language support
-            Font titleFont = Raylib.LoadFontEx("fonts/SourceSansPro.ttf", TITLE_SIZE, null, 1415); 
-            Font descFont = Raylib.LoadFontEx("fonts/SourceSansPro.ttf", DESC_SIZE, null, 1415);
+            Program instance = new();
 
             Raylib.CloseWindow();
 
-            Image frame = Raylib.LoadImage("template/frame.png");
-            Image bottom = Raylib.LoadImage("template/bottom.png");
+            return instance;
+        }
+
+        public static void Generate(Program to, string? renderLocation, int language, string leaderName, int desiredClass, string leaderImg, string leaderDescription, bool addGradient, bool leaderWhite)
+        {
+            Image card = Raylib.LoadImage("template/background.png");
             Image? gradient = null;
             if (addGradient) { gradient = Raylib.LoadImage("template/gradient.png"); }
-            Image card = Raylib.LoadImage("template/background.png");
-            Image leader = Raylib.LoadImage(leaderImg);
 
             Image classSymbol;
-
             Color desiredColor;
             string leaderTitle;
 
@@ -73,14 +74,14 @@ namespace HereToSlayGen
                     leaderTitle = language switch{
                         1 => "Przywódca drużyny: łowca",
                         _ => "Party Leader: Ranger"};
-                    desiredColor = LOW;
+                    desiredColor = new(35, 94, 57, 255);
                     classSymbol = Raylib.LoadImage("classes/lowca.png");
                     break;
                 case 1:
                     leaderTitle = language switch{
                         1 => "Przywódca drużyny: mag",
                         _ => "Party Leader: Wizard"};
-                    desiredColor = MAG;
+                    desiredColor = new(116, 46, 137, 255);
                     classSymbol = Raylib.LoadImage("classes/mag.png");
                     break;
                 case 2:
@@ -88,75 +89,76 @@ namespace HereToSlayGen
                         1 => "Przywódca drużyny: bard",
                         _ => "Party Leader: Bard"};
                     classSymbol = Raylib.LoadImage("classes/najebus.png");
-                    desiredColor = NAJ;
+                    desiredColor = new(194, 81, 47, 255);
                     break;
                 case 3:
                     leaderTitle = language switch{
                         1 => "Przywódca drużyny: strażnik",
                         _ => "Party Leader: Guardian"};
                     classSymbol = Raylib.LoadImage("classes/straznik.png");
-                    desiredColor = STR;
+                    desiredColor = new(235, 171, 33, 255);
                     break;
                 case 4:
                     leaderTitle = language switch{
                         1 => "Przywódca drużyny: wojownik",
                         _ => "Party Leader: Fighter"};
                     classSymbol = Raylib.LoadImage("classes/wojownik.png");
-                    desiredColor = WOJ;
+                    desiredColor = new(0, 78, 125, 255);
                     break;
                 case 5:
                     leaderTitle = language switch{
                         1 => "Przywódca drużyny: zlodziej",
                         _ => "Party Leader: Thief"};
                     classSymbol = Raylib.LoadImage("classes/zlodziej.png");
-                    desiredColor = ZLO;
+                    desiredColor = new(0, 78, 125, 255);
                     break;
                 case 6:
                     leaderTitle = language switch{
                         1 => "Przywódca drużyny: druid",
                         _ => "Party Leader: Druid"};
                     classSymbol = Raylib.LoadImage("classes/druid.png");
-                    desiredColor = DRU;
+                    desiredColor = new(0, 171, 143, 255);
                     break;
                 case 7:
                     leaderTitle = language switch{
                         1 => "Przywódca drużyny: awanturnik",
                         _ => "Party Leader: Warrior"};
                     classSymbol = Raylib.LoadImage("classes/awanturnik.png");
-                    desiredColor = AWA;
+                    desiredColor = new(94, 109, 180, 255);
                     break;
                 case 8:
                     leaderTitle = language switch{
                         1 => "Przywódca drużyny: berserk",
                         _ => "Party Leader: Berserker"};
                     classSymbol = Raylib.LoadImage("classes/berserk.png");
-                    desiredColor = BER;
+                    desiredColor = new(225, 131, 51, 255);
                     break;
                 case 9:
                     leaderTitle = language switch{
                         1 => "Przywódca drużyny: nekromanta",
                         _ => "Party Leader: Necromancer"};
                     classSymbol = Raylib.LoadImage("classes/nekromanta.png");
-                    desiredColor = NEK;
+                    desiredColor = new(213, 28, 106, 255);
                     break;
                 case 10:
                     leaderTitle = language switch{
                         1 => "Przywódca drużyny: czarownik",
                         _ => "Party Leader: Sorcerer"};
                     classSymbol = Raylib.LoadImage("classes/czarownik.png");
-                    desiredColor = CZA;
+                    desiredColor = new(29, 31, 29, 255);
                     break;
                 default: // when no desired class is given it deafults to an empty class
                     leaderTitle = language switch{
                         1 => "Przywódca drużyny",
                         _ => "Party Leader"};
                     classSymbol = Raylib.LoadImage("classes/empty.png");
-                    desiredColor = EMPTY;
+                    desiredColor = new(91, 93, 92, 255);
                     break;
             }
 
-            Vector2 leaderNameSize = Raylib.MeasureTextEx(nameFont, leaderName, NAME_SIZE, NAME_FONT_SPACING);
-            Vector2 leaderTitleSize = Raylib.MeasureTextEx(titleFont, leaderTitle, TITLE_SIZE, TITLE_FONT_SPACING);
+            
+            Vector2 leaderNameSize = Raylib.MeasureTextEx(to.nameFont, leaderName, NAME_SIZE, NAME_FONT_SPACING);
+            Vector2 leaderTitleSize = Raylib.MeasureTextEx(to.titleFont, leaderTitle, TITLE_SIZE, TITLE_FONT_SPACING);
 
             Rectangle imageRec = new(0, 0, 827, 1417);
 
@@ -183,9 +185,10 @@ namespace HereToSlayGen
 
             Raylib.ImageDraw(ref card, leader, imageRec, new(41, 41, 745, 1176), Color.WHITE);
             if (gradient != null) { Raylib.ImageDraw(ref card, (Image)gradient, imageRec, imageRec, Color.WHITE); }
-            Raylib.ImageColorTint(ref frame, desiredColor);
-            Raylib.ImageDraw(ref card, frame, imageRec, imageRec, Color.WHITE);
-            Raylib.ImageDraw(ref card, bottom, imageRec, imageRec, Color.WHITE);
+            Image frameTinted = Raylib.ImageCopy(to.frame);
+            Raylib.ImageColorTint(ref frameTinted, desiredColor);
+            Raylib.ImageDraw(ref card, frameTinted, imageRec, imageRec, Color.WHITE);
+            Raylib.ImageDraw(ref card, to.bottom, imageRec, imageRec, Color.WHITE);
             Raylib.ImageDraw(ref card, classSymbol, imageRec, imageRec, Color.WHITE);
 
             Color leaderColor;
@@ -202,18 +205,18 @@ namespace HereToSlayGen
             }
 
             // Leader Name
-            Raylib.ImageDrawTextEx(ref card, nameFont, leaderName, new Vector2((CARD_WIDTH / 2) - (leaderNameSize.X / 2) + 3, 70 + 3), NAME_SIZE, NAME_FONT_SPACING, leaderShadow);
-            Raylib.ImageDrawTextEx(ref card, nameFont, leaderName, new Vector2((CARD_WIDTH / 2) - (leaderNameSize.X / 2), 70), NAME_SIZE, NAME_FONT_SPACING, leaderColor);
+            Raylib.ImageDrawTextEx(ref card, to.nameFont, leaderName, new Vector2((CARD_WIDTH / 2) - (leaderNameSize.X / 2) + 3, 70 + 3), NAME_SIZE, NAME_FONT_SPACING, leaderShadow);
+            Raylib.ImageDrawTextEx(ref card, to.nameFont, leaderName, new Vector2((CARD_WIDTH / 2) - (leaderNameSize.X / 2), 70), NAME_SIZE, NAME_FONT_SPACING, leaderColor);
 
             // Class
-            Raylib.ImageDrawTextEx(ref card, titleFont, leaderTitle, new Vector2((CARD_WIDTH / 2) - (leaderTitleSize.X / 2) + 2, 123 + 2), TITLE_SIZE, TITLE_FONT_SPACING, leaderShadow);
-            Raylib.ImageDrawTextEx(ref card, titleFont, leaderTitle, new Vector2((CARD_WIDTH / 2) - (leaderTitleSize.X / 2), 123), TITLE_SIZE, TITLE_FONT_SPACING, leaderColor);
+            Raylib.ImageDrawTextEx(ref card, to.titleFont, leaderTitle, new Vector2((CARD_WIDTH / 2) - (leaderTitleSize.X / 2) + 2, 123 + 2), TITLE_SIZE, TITLE_FONT_SPACING, leaderShadow);
+            Raylib.ImageDrawTextEx(ref card, to.titleFont, leaderTitle, new Vector2((CARD_WIDTH / 2) - (leaderTitleSize.X / 2), 123), TITLE_SIZE, TITLE_FONT_SPACING, leaderColor);
 
             // Description
             //Raylib.ImageDrawTextEx(ref card, descFont, leaderDescription, new Vector2(DESC_MARGIN, (CARD_HEIGHT - (200 / 2) - (leaderDescriptionSize.Y / 2) + 5)), DESC_SIZE, DESC_FONT_SPACING, descColor);
-            DescriptionDraw(descFont, leaderDescription, card, descColor);
+            DescriptionDraw(to.descFont, leaderDescription, card, new(78, 78, 78, 255)); // 78 78 78 is the color of the background of the card description
 
-            if (preview)
+            if (renderLocation == null)
             {
                 Raylib.ExportImage(card, "preview.png");
             }
@@ -228,15 +231,15 @@ namespace HereToSlayGen
             Vector2 textSize = Raylib.MeasureTextEx(font, text, DESC_SIZE, DESC_FONT_SPACING);
 
             int len = text.Length;
-            int targetLen = CARD_WIDTH-(DESC_MARGIN*2);
+            int targetLen = CARD_WIDTH - (DESC_MARGIN * 2);
             int targetLines = (int)(textSize.X / targetLen);
             int currentLine = 0;
             int outputPointer = 0;
 
             if (targetLines < 1) { targetLines = 1; }
-            else { targetLines += 1; }
+            else { targetLines++; }
 
-            int offset = 210 - (targetLines*15); // I'm not sure why it's like this, but this does match the apperance on the real cards. maybe some other code is goofy, but if it works it works.
+            int offset = 210 - (targetLines * 15); // I'm not sure why it's like this, but this does match the apperance on the real cards. maybe some other code is goofy, but if it works it works.
             float textBlockCenter = ((offset - (targetLines * (DESC_SIZE + DESC_LINE_SPACING))) / 2) + DESC_LINE_SPACING;
 
             StringBuilder output = new(len);
