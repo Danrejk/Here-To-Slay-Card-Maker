@@ -158,7 +158,6 @@
             chosenClass.Size = new Size(120, 25);
             chosenClass.TabIndex = 7;
             chosenClass.SelectedIndexChanged += chosenClass_SelectedIndexChanged;
-            chosenClass.Click += chosenClass_Click;
             // 
             // labelClass
             // 
@@ -418,6 +417,7 @@
             SizeGripStyle = SizeGripStyle.Hide;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Here To Slay - Custom leader card Generator";
+            TopMost = true;
             ((System.ComponentModel.ISupportInitialize)logo).EndInit();
             ((System.ComponentModel.ISupportInitialize)previewImg).EndInit();
             advancedNameBox.ResumeLayout(false);

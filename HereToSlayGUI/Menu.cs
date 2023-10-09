@@ -14,15 +14,12 @@ namespace HereToSlayGUI
 {
     public partial class Menu : Form
     {
-        readonly HereToSlayGen.AssetManager to = AssetManager.Instance;
-
+        readonly HereToSlayGen.AssetManager instance = AssetManager.Instance;
         public Menu()
         {
             InitializeComponent();
             this.Icon = Properties.Resources.LEADER;
 
-            language.DrawMode = DrawMode.OwnerDrawFixed;
-            language.DrawItem += ComboBox_Icons_DrawItem;
             Image[] langIconsList = new Image[]{
                 Properties.Resources.uk,
                 Properties.Resources.pl
@@ -32,12 +29,11 @@ namespace HereToSlayGUI
                     new Tuple<string, int>("English", 0),
                     new Tuple<string, int>("Polski", 1),
             };
+
             language.DataSource = langList;
             language.SelectedIndex = Properties.Settings.Default.Language;
             initialLang = true;
 
-            chosenClass.DrawMode = DrawMode.OwnerDrawFixed;
-            chosenClass.DrawItem += ComboBox_Icons_DrawItem;
             chosenClass.ItemHeight = 18;
 
             Font fontUI = GetFont(Properties.Resources.SourceSansPro, 10);
@@ -56,9 +52,10 @@ namespace HereToSlayGUI
             gitLabel1.Font = GetFont(Properties.Resources.SourceSansPro, 9);
             gitLabel2.Font = GetFont(Properties.Resources.SourceSansPro, 9);
 
+            this.TopMost = false;
         }
 
-        
+
 
         #region Font Changes
         private static Font GetFont(byte[] fontData, float size)
@@ -100,7 +97,7 @@ namespace HereToSlayGUI
             if (SaveRenderDialog.ShowDialog() == DialogResult.OK)
             {
                 string filePath = SaveRenderDialog.FileName;
-                HereToSlayGen.Program.Generate(to, filePath, language.SelectedIndex, leaderNameText.Text, chosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text, gradient.Checked, leaderWhite.Checked);
+                HereToSlayGen.Program.Generate(instance, filePath, language.SelectedIndex, leaderNameText.Text, chosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text, gradient.Checked, leaderWhite.Checked);
                 previewImg.ImageLocation = filePath;
             }
         }
@@ -125,7 +122,7 @@ namespace HereToSlayGUI
                     }
                     if (timer >= 0)
                     {
-                        HereToSlayGen.Program.Generate(to, null, language.SelectedIndex, leaderNameText.Text, chosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text, gradient.Checked, leaderWhite.Checked);
+                        HereToSlayGen.Program.Generate(instance, null, language.SelectedIndex, leaderNameText.Text, chosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text, gradient.Checked, leaderWhite.Checked);
                         previewImg.ImageLocation = Path.Combine(Directory.GetCurrentDirectory(), "preview.png"); ;
                     }
                 }
@@ -251,61 +248,6 @@ namespace HereToSlayGUI
                 _ => Properties.Resources.LEADER
             };
             renderPreview(sender, e);
-        }
-        private void chosenClass_Click(object sender, EventArgs e)
-        {
-            cancellationTokenSource?.Cancel();
-        }
-
-        private void ComboBox_Icons_DrawItem(object? sender, DrawItemEventArgs e) // no sure how it works, this one I stole, but it works and looks nice so...
-        {
-            ComboBox? comboBox = sender as ComboBox;
-
-            if (comboBox != null)
-            {
-                if (e.Index >= 0)
-                {
-                    Tuple<string, int> item = (Tuple<string, int>)comboBox.Items[e.Index];
-                    string className = item.Item1;
-                    int iconIndex = item.Item2;
-                    Brush textBrush = SystemBrushes.WindowText;
-                    if (e.Index == -1)
-                    {
-                        e.Graphics.FillRectangle(SystemBrushes.HotTrack, e.Bounds);
-                        textBrush = SystemBrushes.HighlightText;
-                    }
-                    else
-                    {
-                        if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
-                        {
-                            e.Graphics.FillRectangle(SystemBrushes.Highlight, e.Bounds);
-                            textBrush = SystemBrushes.HighlightText;
-                        }
-                        else
-                        {
-                            e.Graphics.FillRectangle(SystemBrushes.Window, e.Bounds);
-                        }
-                    }
-                    switch (comboBox.Name)
-                    {
-                        case "chosenClass":
-                            if (iconIndex >= 0 && iconIndex < classIcons.Images.Count)
-                            {
-                                Image icon = classIcons.Images[iconIndex];
-                                e.Graphics.DrawImage(icon, e.Bounds.Left, e.Bounds.Top);
-                            }
-                            break;
-                        case "language":
-                            if (iconIndex >= 0 && iconIndex < langIcons.Images.Count)
-                            {
-                                Image icon = langIcons.Images[iconIndex];
-                                e.Graphics.DrawImage(icon, e.Bounds.Left, e.Bounds.Top);
-                            }
-                            break;
-                    }
-                    e.Graphics.DrawString(className, comboBox.Font, textBrush, e.Bounds.Left + comboBox.ItemHeight, e.Bounds.Top); // this has some major issues
-                }
-            }
         }
         #endregion
 

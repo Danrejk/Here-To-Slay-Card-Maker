@@ -106,7 +106,7 @@ namespace HereToSlayGen
             Image? gradient = null;
             if (addGradient) { gradient = Raylib.LoadImage("template/gradient.png"); }
 
-            AssetManager to = AssetManager.Instance;
+            AssetManager inst = AssetManager.Instance;
 
             Image classSymbol;
             Color desiredColor;
@@ -201,8 +201,8 @@ namespace HereToSlayGen
             }
 
             
-            Vector2 leaderNameSize = Raylib.MeasureTextEx(to.nameFont, leaderName, NAME_SIZE, NAME_FONT_SPACING);
-            Vector2 leaderTitleSize = Raylib.MeasureTextEx(to.titleFont, leaderTitle, TITLE_SIZE, TITLE_FONT_SPACING);
+            Vector2 leaderNameSize = Raylib.MeasureTextEx(inst.nameFont, leaderName, NAME_SIZE, NAME_FONT_SPACING);
+            Vector2 leaderTitleSize = Raylib.MeasureTextEx(inst.titleFont, leaderTitle, TITLE_SIZE, TITLE_FONT_SPACING);
 
             Rectangle imageRec = new(0, 0, 827, 1417);
 
@@ -230,10 +230,10 @@ namespace HereToSlayGen
             Raylib.UnloadImage(leader);
 
             if (gradient != null) { Raylib.ImageDraw(ref card, (Image)gradient, imageRec, imageRec, Color.WHITE); }
-            Image frameTinted = Raylib.ImageCopy(to.frame);
+            Image frameTinted = Raylib.ImageCopy(inst.frame);
             Raylib.ImageColorTint(ref frameTinted, desiredColor);
             Raylib.ImageDraw(ref card, frameTinted, imageRec, imageRec, Color.WHITE);
-            Raylib.ImageDraw(ref card, to.bottom, imageRec, imageRec, Color.WHITE);
+            Raylib.ImageDraw(ref card, inst.bottom, imageRec, imageRec, Color.WHITE);
             Raylib.ImageDraw(ref card, classSymbol, imageRec, imageRec, Color.WHITE);
 
             Color leaderColor;
@@ -250,16 +250,16 @@ namespace HereToSlayGen
             }
 
             // Leader Name
-            Raylib.ImageDrawTextEx(ref card, to.nameFont, leaderName, new Vector2((CARD_WIDTH / 2) - (leaderNameSize.X / 2) + 3, 70 + 3), NAME_SIZE, NAME_FONT_SPACING, leaderShadow);
-            Raylib.ImageDrawTextEx(ref card, to.nameFont, leaderName, new Vector2((CARD_WIDTH / 2) - (leaderNameSize.X / 2), 70), NAME_SIZE, NAME_FONT_SPACING, leaderColor);
+            Raylib.ImageDrawTextEx(ref card, inst.nameFont, leaderName, new Vector2((CARD_WIDTH / 2) - (leaderNameSize.X / 2) + 3, 70 + 3), NAME_SIZE, NAME_FONT_SPACING, leaderShadow);
+            Raylib.ImageDrawTextEx(ref card, inst.nameFont, leaderName, new Vector2((CARD_WIDTH / 2) - (leaderNameSize.X / 2), 70), NAME_SIZE, NAME_FONT_SPACING, leaderColor);
 
             // Class
-            Raylib.ImageDrawTextEx(ref card, to.titleFont, leaderTitle, new Vector2((CARD_WIDTH / 2) - (leaderTitleSize.X / 2) + 2, 123 + 2), TITLE_SIZE, TITLE_FONT_SPACING, leaderShadow);
-            Raylib.ImageDrawTextEx(ref card, to.titleFont, leaderTitle, new Vector2((CARD_WIDTH / 2) - (leaderTitleSize.X / 2), 123), TITLE_SIZE, TITLE_FONT_SPACING, leaderColor);
+            Raylib.ImageDrawTextEx(ref card, inst.titleFont, leaderTitle, new Vector2((CARD_WIDTH / 2) - (leaderTitleSize.X / 2) + 2, 123 + 2), TITLE_SIZE, TITLE_FONT_SPACING, leaderShadow);
+            Raylib.ImageDrawTextEx(ref card, inst.titleFont, leaderTitle, new Vector2((CARD_WIDTH / 2) - (leaderTitleSize.X / 2), 123), TITLE_SIZE, TITLE_FONT_SPACING, leaderColor);
 
             // Description
             //Raylib.ImageDrawTextEx(ref card, descFont, leaderDescription, new Vector2(DESC_MARGIN, (CARD_HEIGHT - (200 / 2) - (leaderDescriptionSize.Y / 2) + 5)), DESC_SIZE, DESC_FONT_SPACING, descColor);
-            DescriptionDraw(to.descFont, leaderDescription, card, new(78, 78, 78, 255)); // 78 78 78 is the color of the background of the card description
+            DescriptionDraw(inst.descFont, leaderDescription, card, new(78, 78, 78, 255)); // 78 78 78 is the color of the background of the card description
 
             if (renderLocation == null)
             {
