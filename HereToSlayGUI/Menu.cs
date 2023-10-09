@@ -303,7 +303,7 @@ namespace HereToSlayGUI
                             }
                             break;
                     }
-                    e.Graphics.DrawString(className, comboBox.Font, textBrush, e.Bounds.Left + comboBox.ItemHeight, e.Bounds.Top);
+                    e.Graphics.DrawString(className, comboBox.Font, textBrush, e.Bounds.Left + comboBox.ItemHeight, e.Bounds.Top); // this has some major issues
                 }
             }
         }

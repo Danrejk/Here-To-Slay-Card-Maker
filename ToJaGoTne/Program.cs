@@ -29,6 +29,7 @@ namespace HereToSlayGen
             nameFont = Raylib.LoadFontEx("fonts/PatuaOne-polish.ttf", NAME_SIZE, null, 382); // this font has limited language support
             titleFont = Raylib.LoadFontEx("fonts/SourceSansPro.ttf", TITLE_SIZE, null, 1415);
             descFont = Raylib.LoadFontEx("fonts/SourceSansPro.ttf", DESC_SIZE, null, 1415);
+            Raylib.CloseWindow();
 
             frame = Raylib.LoadImage("template/frame.png");
             bottom = Raylib.LoadImage("template/bottom.png");
@@ -51,7 +52,7 @@ namespace HereToSlayGen
     {
         static void Main()
         {
-            Marshal.GetHINSTANCE(typeof(Program).Module);
+            //Marshal.GetHINSTANCE(typeof(Program).Module);
             Raylib.InitWindow(1, 1, "generator");
             Raylib.SetWindowPosition(-2000, -2000);
             Raylib.MinimizeWindow();
@@ -73,12 +74,12 @@ namespace HereToSlayGen
         const int DESC_SIZE = 38; // 38
 
 
-        Font nameFont = Raylib.LoadFontEx("fonts/PatuaOne-polish.ttf", NAME_SIZE, null, 382); // this font has limited language support
-        Font titleFont = Raylib.LoadFontEx("fonts/SourceSansPro.ttf", TITLE_SIZE, null, 1415);
-        Font descFont = Raylib.LoadFontEx("fonts/SourceSansPro.ttf", DESC_SIZE, null, 1415);
+        //Font nameFont = Raylib.LoadFontEx("fonts/PatuaOne-polish.ttf", NAME_SIZE, null, 382); // this font has limited language support
+        //Font titleFont = Raylib.LoadFontEx("fonts/SourceSansPro.ttf", TITLE_SIZE, null, 1415);
+        //Font descFont = Raylib.LoadFontEx("fonts/SourceSansPro.ttf", DESC_SIZE, null, 1415);
 
-        Image frame = Raylib.LoadImage("template/frame.png");
-        Image bottom = Raylib.LoadImage("template/bottom.png");
+        //Image frame = Raylib.LoadImage("template/frame.png");
+        //Image bottom = Raylib.LoadImage("template/bottom.png");
         public static void ChangeLeaderImage(string path)
         {
             //leader = Raylib.LoadImage(path);
