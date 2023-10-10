@@ -417,7 +417,6 @@
             SizeGripStyle = SizeGripStyle.Hide;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Here To Slay - Custom leader card Generator";
-            TopMost = true;
             ((System.ComponentModel.ISupportInitialize)logo).EndInit();
             ((System.ComponentModel.ISupportInitialize)previewImg).EndInit();
             advancedNameBox.ResumeLayout(false);

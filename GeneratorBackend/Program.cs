@@ -22,10 +22,10 @@ namespace GeneratorBackend
             const int TITLE_SIZE = 49; // 49
             const int DESC_SIZE = 38; // 38
 
-            Marshal.GetHINSTANCE(typeof(Program).Module);
-            Raylib.InitWindow(1, 1, "generator");
+            //Marshal.GetHINSTANCE(typeof(Program).Module);
+            Raylib.InitWindow(1, 1, "Font Loader");
             Raylib.SetWindowPosition(-2000, -2000);
-            Raylib.MinimizeWindow();
+            //Raylib.MinimizeWindow();
             nameFont = Raylib.LoadFontEx("fonts/PatuaOne-polish.ttf", NAME_SIZE, null, 382); // this font has limited language support
             titleFont = Raylib.LoadFontEx("fonts/SourceSansPro.ttf", TITLE_SIZE, null, 1415);
             descFont = Raylib.LoadFontEx("fonts/SourceSansPro.ttf", DESC_SIZE, null, 1415);

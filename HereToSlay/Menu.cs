@@ -14,7 +14,8 @@ namespace HereToSlay
 {
     public partial class Menu : Form
     {
-        readonly GeneratorBackend.AssetManager instance = AssetManager.Instance;
+        readonly GeneratorBackend.AssetManager instance;
+
         public Menu()
         {
             InitializeComponent();
@@ -52,10 +53,9 @@ namespace HereToSlay
             gitLabel1.Font = GetFont(Properties.Resources.SourceSansPro, 9);
             gitLabel2.Font = GetFont(Properties.Resources.SourceSansPro, 9);
 
-            this.TopMost = false;
+            this.Activate();
+            instance = AssetManager.Instance;
         }
-
-
 
         #region Font Changes
         private static Font GetFont(byte[] fontData, float size)
@@ -88,6 +88,7 @@ namespace HereToSlay
         #endregion
 
         #region The Rendering ones
+
         private void RenderButton_Press(object sender, EventArgs e)
         {
             using SaveFileDialog SaveRenderDialog = new();
@@ -131,7 +132,7 @@ namespace HereToSlay
         }
         #endregion
 
-        #region Comboboxes
+        #region Language
         private void language_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (initialLang == true) // so that it doesn't overwrite the setting, before it can be read
@@ -213,7 +214,7 @@ namespace HereToSlay
             chosenClass.DataSource = classList;
             chosenClass.SelectedIndex = currentClassIndex;
         }
-
+        #endregion
         int currentClassIndex;
         Image[] classIconsList = new Image[]{
                 Properties.Resources.lowca.ToBitmap(),
@@ -249,7 +250,6 @@ namespace HereToSlay
             };
             renderPreview(sender, e);
         }
-        #endregion
 
         private void selectImg_Click(object sender, EventArgs e)
         {
