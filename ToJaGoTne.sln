@@ -3,9 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HereToSlayGenerator", "ToJaGoTne\HereToSlayGenerator.csproj", "{F361E0ED-5193-4769-853C-798394B2ECBF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeneratorBackend", "GeneratorBackend\GeneratorBackend.csproj", "{F361E0ED-5193-4769-853C-798394B2ECBF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HereToSlayGUI", "HereToSlayGUI\HereToSlayGUI.csproj", "{1BB2DF6C-3DC7-43D7-964F-6F2353AD5A0E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HereToSlay", "HereToSlay\HereToSlay.csproj", "{1BB2DF6C-3DC7-43D7-964F-6F2353AD5A0E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F361E0ED-5193-4769-853C-798394B2ECBF} = {F361E0ED-5193-4769-853C-798394B2ECBF}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

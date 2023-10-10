@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ToJaGoTne\HereToSlayGenerator.csproj" />
+    <ProjectReference Include="..\GeneratorBackend\GeneratorBackend.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,4 +1,4 @@
-﻿namespace HereToSlayGUI
+﻿namespace HereToSlay
 {
     partial class Menu
     {

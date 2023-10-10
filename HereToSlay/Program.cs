@@ -1,4 +1,4 @@
-namespace HereToSlayGUI
+namespace HereToSlay
 {
     internal static class Program
     {

@@ -5,7 +5,7 @@ using System.Resources;
 using System.Text;
 using System.Runtime.InteropServices;
 
-namespace HereToSlayGen
+namespace GeneratorBackend
 {
     public class AssetManager
     {

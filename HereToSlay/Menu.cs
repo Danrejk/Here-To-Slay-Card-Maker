@@ -1,5 +1,5 @@
-using HereToSlayGen;
-using HereToSlayGUI.Properties;
+using GeneratorBackend;
+using HereToSlay.Properties;
 using System.Diagnostics;
 using System.Drawing.Text;
 using System.Reflection;
@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace HereToSlayGUI
+namespace HereToSlay
 {
     public partial class Menu : Form
     {
-        readonly HereToSlayGen.AssetManager instance = AssetManager.Instance;
+        readonly GeneratorBackend.AssetManager instance = AssetManager.Instance;
         public Menu()
         {
             InitializeComponent();
@@ -97,7 +97,7 @@ namespace HereToSlayGUI
             if (SaveRenderDialog.ShowDialog() == DialogResult.OK)
             {
                 string filePath = SaveRenderDialog.FileName;
-                HereToSlayGen.Program.Generate(instance, filePath, language.SelectedIndex, leaderNameText.Text, chosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text, gradient.Checked, leaderWhite.Checked);
+                GeneratorBackend.Program.Generate(instance, filePath, language.SelectedIndex, leaderNameText.Text, chosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text, gradient.Checked, leaderWhite.Checked);
                 previewImg.ImageLocation = filePath;
             }
         }
@@ -122,7 +122,7 @@ namespace HereToSlayGUI
                     }
                     if (timer >= 0)
                     {
-                        HereToSlayGen.Program.Generate(instance, null, language.SelectedIndex, leaderNameText.Text, chosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text, gradient.Checked, leaderWhite.Checked);
+                        GeneratorBackend.Program.Generate(instance, null, language.SelectedIndex, leaderNameText.Text, chosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text, gradient.Checked, leaderWhite.Checked);
                         previewImg.ImageLocation = Path.Combine(Directory.GetCurrentDirectory(), "preview.png"); ;
                     }
                 }
