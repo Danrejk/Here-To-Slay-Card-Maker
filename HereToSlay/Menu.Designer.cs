@@ -442,6 +442,7 @@
             chosenSecondClass.Size = new Size(120, 25);
             chosenSecondClass.TabIndex = 27;
             chosenSecondClass.Visible = false;
+            chosenSecondClass.SelectedIndexChanged += chosenSecondClass_SelectedIndexChanged;
             // 
             // labelSecondClass
             // 

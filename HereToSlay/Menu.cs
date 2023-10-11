@@ -209,6 +209,10 @@ namespace HereToSlay
             };
             renderPreview(sender, e);
         }
+        private void chosenSecondClass_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            renderPreview(sender, e);
+        }
 
         private void selectImg_Click(object sender, EventArgs e)
         {
@@ -279,8 +283,6 @@ namespace HereToSlay
                     labelSecondClass.Visible = true;
                     break;
             }
-        }
-
-
+        }        
     }
 }

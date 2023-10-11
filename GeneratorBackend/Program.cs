@@ -91,15 +91,15 @@ namespace GeneratorBackend
                     leaderTitle = language switch{
                         1 => "Przywódca drużyny: łowca",
                         _ => "Party Leader: Ranger"};
-                    desiredColor = new(35, 94, 57, 255);
                     classSymbol = Raylib.LoadImage("classes/lowca.png");
+                    desiredColor = new(35, 94, 57, 255);
                     break;
                 case 1:
                     leaderTitle = language switch{
                         1 => "Przywódca drużyny: mag",
                         _ => "Party Leader: Wizard"};
-                    desiredColor = new(116, 46, 137, 255);
                     classSymbol = Raylib.LoadImage("classes/mag.png");
+                    desiredColor = new(116, 46, 137, 255);
                     break;
                 case 2:
                     leaderTitle = language switch{
@@ -173,6 +173,123 @@ namespace GeneratorBackend
                     break;
             }
 
+            Image secondClassSymbol = new();
+            Color desiredSecondColor = new();
+            if (desiredSecondClass != -1)
+            {
+                switch (desiredSecondClass)
+                {
+                    case 0:
+                        leaderTitle += language switch
+                        {
+                            1 => "/łowca",
+                            _ => "/Ranger"
+                        };
+                        secondClassSymbol = Raylib.LoadImage("classes/lowca.png");
+                        desiredSecondColor = new(35, 94, 57, 255);
+                        break;
+                    case 1:
+                        leaderTitle += language switch
+                        {
+                            1 => "/mag",
+                            _ => "/Wizard"
+                        };
+                        secondClassSymbol = Raylib.LoadImage("classes/mag.png");
+                        desiredSecondColor = new(116, 46, 137, 255);
+                        break;
+                    case 2:
+                        leaderTitle += language switch
+                        {
+                            1 => "/bard",
+                            _ => "/Bard"
+                        };
+                        secondClassSymbol = Raylib.LoadImage("classes/najebus.png");
+                        desiredSecondColor = new(194, 81, 47, 255);
+                        break;
+                    case 3:
+                        leaderTitle += language switch
+                        {
+                            1 => "/strażnik",
+                            _ => "/Guardian"
+                        };
+                        secondClassSymbol = Raylib.LoadImage("classes/straznik.png");
+                        desiredSecondColor = new(235, 171, 33, 255);
+                        break;
+                    case 4:
+                        leaderTitle += language switch
+                        {
+                            1 => "/wojownik",
+                            _ => "/Fighter"
+                        };
+                        secondClassSymbol = Raylib.LoadImage("classes/wojownik.png");
+                        desiredSecondColor = new(0, 78, 125, 255);
+                        break;
+                    case 5:
+                        leaderTitle += language switch
+                        {
+                            1 => "/zlodziej",
+                            _ => "/Thief"
+                        };
+                        secondClassSymbol = Raylib.LoadImage("classes/zlodziej.png");
+                        desiredSecondColor = new(0, 78, 125, 255);
+                        break;
+                    case 6:
+                        leaderTitle += language switch
+                        {
+                            1 => "/druid",
+                            _ => "/Druid"
+                        };
+                        secondClassSymbol = Raylib.LoadImage("classes/druid.png");
+                        desiredSecondColor = new(0, 171, 143, 255);
+                        break;
+                    case 7:
+                        leaderTitle += language switch
+                        {
+                            1 => "/awanturnik",
+                            _ => "/Warrior"
+                        };
+                        secondClassSymbol = Raylib.LoadImage("classes/awanturnik.png");
+                        desiredSecondColor = new(94, 109, 180, 255);
+                        break;
+                    case 8:
+                        leaderTitle += language switch
+                        {
+                            1 => "/berserk",
+                            _ => "/Berserker"
+                        };
+                        secondClassSymbol = Raylib.LoadImage("classes/berserk.png");
+                        desiredSecondColor = new(225, 131, 51, 255);
+                        break;
+                    case 9:
+                        leaderTitle += language switch
+                        {
+                            1 => "/nekromanta",
+                            _ => "/Necromancer"
+                        };
+                        secondClassSymbol = Raylib.LoadImage("classes/nekromanta.png");
+                        desiredSecondColor = new(213, 28, 106, 255);
+                        break;
+                    case 10:
+                        leaderTitle += language switch
+                        {
+                            1 => "/czarownik",
+                            _ => "/Sorcerer"
+                        };
+                        secondClassSymbol = Raylib.LoadImage("classes/czarownik.png");
+                        desiredSecondColor = new(29, 31, 29, 255);
+                        break;
+                    default:
+                        leaderTitle += language switch
+                        {
+                            1 => "/przywódca",
+                            _ => "/Leader"
+                        };
+                        secondClassSymbol = Raylib.LoadImage("classes/empty.png");
+                        desiredSecondColor = new(91, 93, 92, 255);
+                        break;
+                }
+                Raylib.ImageCrop(ref secondClassSymbol, new Rectangle(0, 0, 413, 1417));
+            }
             
             Vector2 leaderNameSize = Raylib.MeasureTextEx(inst.nameFont, leaderName, NAME_SIZE, NAME_FONT_SPACING);
             Vector2 leaderTitleSize = Raylib.MeasureTextEx(inst.titleFont, leaderTitle, TITLE_SIZE, TITLE_FONT_SPACING);
@@ -202,12 +319,27 @@ namespace GeneratorBackend
             Raylib.ImageDraw(ref card, leader, imageRec, new(41, 41, 745, 1176), Color.WHITE);
             Raylib.UnloadImage(leader);
 
-            if (gradient != null) { Raylib.ImageDraw(ref card, (Image)gradient, imageRec, imageRec, Color.WHITE); }
             Image frameTinted = Raylib.ImageCopy(inst.frame);
-            Raylib.ImageColorTint(ref frameTinted, desiredColor);
-            Raylib.ImageDraw(ref card, frameTinted, imageRec, imageRec, Color.WHITE);
+            if (desiredSecondClass != -1) {
+                Raylib.ImageCrop(ref frameTinted, new Rectangle(0, 0, 414, 1417));
+                Raylib.ImageColorTint(ref frameTinted, desiredColor);
+                Raylib.ImageDraw(ref card, frameTinted, imageRec, new(0, 0, 414, 1417), Color.WHITE);
+
+                frameTinted = Raylib.ImageCopy(inst.frame);
+                Raylib.ImageCrop(ref frameTinted, new Rectangle(413, 0, 414, 1417)); // while the sizes might look irregular. It's all because the image is 827px wide, so I have to compensate the 0,5px offset
+                Raylib.ImageColorTint(ref frameTinted, desiredSecondColor);
+                Raylib.ImageDraw(ref card, frameTinted, imageRec, new(414, 0, 413, 1417), Color.WHITE);
+            }
+            else {
+                Raylib.ImageColorTint(ref frameTinted, desiredColor);
+                Raylib.ImageDraw(ref card, frameTinted, imageRec, imageRec, Color.WHITE);
+            }
+
+            if (gradient != null) { Raylib.ImageDraw(ref card, (Image)gradient, imageRec, imageRec, Color.WHITE); }
             Raylib.ImageDraw(ref card, inst.bottom, imageRec, imageRec, Color.WHITE);
+
             Raylib.ImageDraw(ref card, classSymbol, imageRec, imageRec, Color.WHITE);
+            if (desiredSecondClass != -1){ Raylib.ImageDraw(ref card, secondClassSymbol, imageRec, new(0, 0, 413, 1417), Color.WHITE); }
 
             Color leaderColor;
             Color leaderShadow;
