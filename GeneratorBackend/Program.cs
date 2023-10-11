@@ -21,11 +21,9 @@ namespace GeneratorBackend
             const int NAME_SIZE = 60; // 60
             const int TITLE_SIZE = 49; // 49
             const int DESC_SIZE = 38; // 38
-
-            //Marshal.GetHINSTANCE(typeof(Program).Module);
+            
             Raylib.InitWindow(1, 1, "Font Loader");
             Raylib.SetWindowPosition(-2000, -2000);
-            //Raylib.MinimizeWindow();
             nameFont = Raylib.LoadFontEx("fonts/PatuaOne-polish.ttf", NAME_SIZE, null, 382); // this font has limited language support
             titleFont = Raylib.LoadFontEx("fonts/SourceSansPro.ttf", TITLE_SIZE, null, 1415);
             descFont = Raylib.LoadFontEx("fonts/SourceSansPro.ttf", DESC_SIZE, null, 1415);
@@ -52,12 +50,8 @@ namespace GeneratorBackend
     {
         static void Main()
         {
-            //Marshal.GetHINSTANCE(typeof(Program).Module);
-            Raylib.InitWindow(1, 1, "generator");
-            Raylib.SetWindowPosition(-2000, -2000);
-            Raylib.MinimizeWindow();
-            AssetManager dit = AssetManager.Instance;
-            Generate(dit,"render.png", 0,"Test Leader", 11, "", "Test description", false, false);
+            Generate("render.png", 0,"Test Leader", 11, -1, "", "Test description", false, false); // if you want to test the generator, change the parameters here
+            //"-1" here means that there is only one class.
         }
 
         const int NAME_FONT_SPACING = 0;
@@ -73,33 +67,12 @@ namespace GeneratorBackend
         const int TITLE_SIZE = 49; // 49
         const int DESC_SIZE = 38; // 38
 
-
-        //Font nameFont = Raylib.LoadFontEx("fonts/PatuaOne-polish.ttf", NAME_SIZE, null, 382); // this font has limited language support
-        //Font titleFont = Raylib.LoadFontEx("fonts/SourceSansPro.ttf", TITLE_SIZE, null, 1415);
-        //Font descFont = Raylib.LoadFontEx("fonts/SourceSansPro.ttf", DESC_SIZE, null, 1415);
-
-        //Image frame = Raylib.LoadImage("template/frame.png");
-        //Image bottom = Raylib.LoadImage("template/bottom.png");
         public static void ChangeLeaderImage(string path)
         {
-            //leader = Raylib.LoadImage(path);
+            //leader = Raylib.LoadImage(path); #TODO
         }
 
-        public static Program Initialize()
-        {
-            Marshal.GetHINSTANCE(typeof(Program).Module);
-            Raylib.InitWindow(1, 1, "generator");
-            Raylib.SetWindowPosition(-2000, -2000);
-            Raylib.MinimizeWindow();
-
-            Program instance = new();
-
-            Raylib.CloseWindow();
-
-            return instance;
-        }
-
-        public static void Generate(AssetManager tos, string? renderLocation, int language, string leaderName, int desiredClass, string leaderImg, string leaderDescription, bool addGradient, bool leaderWhite)
+        public static void Generate(string? renderLocation, int language, string leaderName, int desiredClass, int desiredSecondClass, string leaderImg, string leaderDescription, bool addGradient, bool leaderWhite)
         {
             Image leader = Raylib.LoadImage(leaderImg);
             Image card = Raylib.LoadImage("template/background.png");

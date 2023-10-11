@@ -57,12 +57,19 @@
             advancedName = new PictureBox();
             advancedDescBox = new FlowLayoutPanel();
             advancedDesc = new PictureBox();
+            advancedClass = new PictureBox();
+            advancedClassBox = new FlowLayoutPanel();
+            splitClass = new CheckBox();
+            chosenSecondClass = new ComboBox();
+            labelSecondClass = new Label();
             ((System.ComponentModel.ISupportInitialize)logo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)previewImg).BeginInit();
             advancedNameBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)advancedName).BeginInit();
             advancedDescBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)advancedDesc).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)advancedClass).BeginInit();
+            advancedClassBox.SuspendLayout();
             SuspendLayout();
             // 
             // RENDER
@@ -386,12 +393,79 @@
             advancedDesc.TabStop = false;
             advancedDesc.Click += advanced_Click;
             // 
+            // advancedClass
+            // 
+            advancedClass.BackColor = Color.Transparent;
+            advancedClass.Image = Properties.Resources.closed;
+            advancedClass.Location = new Point(145, 267);
+            advancedClass.Name = "advancedClass";
+            advancedClass.Size = new Size(12, 12);
+            advancedClass.SizeMode = PictureBoxSizeMode.Zoom;
+            advancedClass.TabIndex = 25;
+            advancedClass.TabStop = false;
+            advancedClass.Click += advanced_Click;
+            // 
+            // advancedClassBox
+            // 
+            advancedClassBox.Controls.Add(splitClass);
+            advancedClassBox.Location = new Point(160, 264);
+            advancedClassBox.Margin = new Padding(0);
+            advancedClassBox.Name = "advancedClassBox";
+            advancedClassBox.Size = new Size(190, 24);
+            advancedClassBox.TabIndex = 26;
+            advancedClassBox.Visible = false;
+            // 
+            // splitClass
+            // 
+            splitClass.AutoSize = true;
+            splitClass.ForeColor = Color.White;
+            splitClass.Location = new Point(0, 0);
+            splitClass.Margin = new Padding(0);
+            splitClass.Name = "splitClass";
+            splitClass.Padding = new Padding(0, 1, 0, 0);
+            splitClass.Size = new Size(79, 20);
+            splitClass.TabIndex = 0;
+            splitClass.Text = "Split Class";
+            splitClass.UseVisualStyleBackColor = true;
+            splitClass.CheckStateChanged += splitClass_CheckStateChanged;
+            // 
+            // chosenSecondClass
+            // 
+            chosenSecondClass.BackColor = Color.White;
+            chosenSecondClass.DropDownStyle = ComboBoxStyle.DropDownList;
+            chosenSecondClass.FlatStyle = FlatStyle.Flat;
+            chosenSecondClass.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            chosenSecondClass.FormattingEnabled = true;
+            chosenSecondClass.Location = new Point(210, 239);
+            chosenSecondClass.Margin = new Padding(0);
+            chosenSecondClass.Name = "chosenSecondClass";
+            chosenSecondClass.Size = new Size(120, 25);
+            chosenSecondClass.TabIndex = 27;
+            chosenSecondClass.Visible = false;
+            // 
+            // labelSecondClass
+            // 
+            labelSecondClass.BackColor = Color.Transparent;
+            labelSecondClass.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            labelSecondClass.ForeColor = Color.FromArgb(245, 240, 232);
+            labelSecondClass.Location = new Point(207, 219);
+            labelSecondClass.Margin = new Padding(0);
+            labelSecondClass.Name = "labelSecondClass";
+            labelSecondClass.Size = new Size(100, 20);
+            labelSecondClass.TabIndex = 28;
+            labelSecondClass.Text = "Second Class";
+            labelSecondClass.TextAlign = ContentAlignment.BottomLeft;
+            labelSecondClass.Visible = false;
+            // 
             // Menu
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackColor = Color.FromArgb(39, 43, 52);
             BackgroundImage = Properties.Resources.gradient;
             ClientSize = new Size(828, 711);
+            Controls.Add(chosenSecondClass);
+            Controls.Add(advancedClassBox);
+            Controls.Add(advancedClass);
             Controls.Add(advancedDesc);
             Controls.Add(advancedDescBox);
             Controls.Add(advancedName);
@@ -402,7 +476,6 @@
             Controls.Add(labelImg);
             Controls.Add(selectImgText);
             Controls.Add(selectImg);
-            Controls.Add(labelClass);
             Controls.Add(chosenClass);
             Controls.Add(labelDescription);
             Controls.Add(leaderNameText);
@@ -411,6 +484,8 @@
             Controls.Add(logo);
             Controls.Add(previewImg);
             Controls.Add(labelLeader);
+            Controls.Add(labelSecondClass);
+            Controls.Add(labelClass);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "Menu";
@@ -425,6 +500,9 @@
             advancedDescBox.ResumeLayout(false);
             advancedDescBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)advancedDesc).EndInit();
+            ((System.ComponentModel.ISupportInitialize)advancedClass).EndInit();
+            advancedClassBox.ResumeLayout(false);
+            advancedClassBox.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -458,5 +536,10 @@
         private PictureBox advancedName;
         private FlowLayoutPanel advancedDescBox;
         private PictureBox advancedDesc;
+        private PictureBox advancedClass;
+        private FlowLayoutPanel advancedClassBox;
+        private CheckBox splitClass;
+        private ComboBox chosenSecondClass;
+        private Label labelSecondClass;
     }
 }

@@ -21,17 +21,8 @@ namespace HereToSlay
             InitializeComponent();
             this.Icon = Properties.Resources.LEADER;
 
-            Image[] langIconsList = new Image[]{
-                Properties.Resources.uk,
-                Properties.Resources.pl
-            };
-            langIcons.Images.AddRange(langIconsList);
-            List<Tuple<string, int>> langList = new(){
-                    new Tuple<string, int>("English", 0),
-                    new Tuple<string, int>("Polski", 1),
-            };
-
-            language.DataSource = langList;
+            string[] langList = { "English", "Polski" };
+            language.Items.AddRange(langList);
             language.SelectedIndex = Properties.Settings.Default.Language;
             initialLang = true;
 
@@ -49,12 +40,12 @@ namespace HereToSlay
             gradient.Font = fontUIsmall;
             leaderWhite.Font = fontUIsmall;
             wordSplitting.Font = fontUIsmall;
+            splitClass.Font = fontUIsmall;
 
             gitLabel1.Font = GetFont(Properties.Resources.SourceSansPro, 9);
             gitLabel2.Font = GetFont(Properties.Resources.SourceSansPro, 9);
 
             this.Activate();
-            instance = AssetManager.Instance;
         }
 
         #region Font Changes
@@ -98,7 +89,7 @@ namespace HereToSlay
             if (SaveRenderDialog.ShowDialog() == DialogResult.OK)
             {
                 string filePath = SaveRenderDialog.FileName;
-                GeneratorBackend.Program.Generate(instance, filePath, language.SelectedIndex, leaderNameText.Text, chosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text, gradient.Checked, leaderWhite.Checked);
+                GeneratorBackend.Program.Generate(filePath, language.SelectedIndex, leaderNameText.Text, chosenClass.SelectedIndex, chosenSecondClass.SelectedIndex, selectImgText.Text, descriptionText.Text, gradient.Checked, leaderWhite.Checked);
                 previewImg.ImageLocation = filePath;
             }
         }
@@ -123,7 +114,7 @@ namespace HereToSlay
                     }
                     if (timer >= 0)
                     {
-                        GeneratorBackend.Program.Generate(instance, null, language.SelectedIndex, leaderNameText.Text, chosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text, gradient.Checked, leaderWhite.Checked);
+                        GeneratorBackend.Program.Generate(null, language.SelectedIndex, leaderNameText.Text, chosenClass.SelectedIndex, chosenSecondClass.SelectedIndex, selectImgText.Text, descriptionText.Text, gradient.Checked, leaderWhite.Checked);
                         previewImg.ImageLocation = Path.Combine(Directory.GetCurrentDirectory(), "preview.png"); ;
                     }
                 }
@@ -147,6 +138,7 @@ namespace HereToSlay
                     logo.Image = Properties.Resources.Logo1;
                     labelLeader.Text = "Nazwa lidera";
                     labelClass.Text = "Klasa lidera";
+                    labelSecondClass.Text = "Druga klasa";
                     labelImg.Text = "Obrazek lidera";
                     labelDescription.Text = "Opis mocy";
                     leaderImgToolTip.ToolTipTitle = "Wymiary obazka";
@@ -154,11 +146,13 @@ namespace HereToSlay
                     gradient.Text = "Tylni gradient";
                     leaderWhite.Text = "Bia³a nazwa";
                     wordSplitting.Text = "Dzielenie wyrazów";
+                    splitClass.Text = "Podwójna Klasa";
                     break;
                 default:
                     logo.Image = Properties.Resources.Logo0;
                     labelLeader.Text = "Leader name";
                     labelClass.Text = "Leader class";
+                    labelSecondClass.Text = "Second class";
                     labelImg.Text = "Leader image";
                     labelDescription.Text = "Description";
                     leaderImgToolTip.ToolTipTitle = "Image dimentions";
@@ -166,70 +160,35 @@ namespace HereToSlay
                     gradient.Text = "Back gradient";
                     leaderWhite.Text = "White name";
                     wordSplitting.Text = "Word Splitting";
+                    splitClass.Text = "Split Class";
                     break;
             }
             LocaliseClassOptions(language.SelectedIndex); // change class options based on selected language
             renderPreview(sender, e);
         }
+        int currentClassIndex;
+        int currentSecondClassIndex;
         private void LocaliseClassOptions(int lang)
         {
-            classIcons.Images.AddRange(classIconsList);
             currentClassIndex = chosenClass.SelectedIndex;
-            chosenClass.DataSource = null;
             chosenClass.Items.Clear();
 
-            List<Tuple<string, int>> classList = lang switch
+            currentSecondClassIndex = chosenSecondClass.SelectedIndex;
+            chosenSecondClass.Items.Clear();
+
+
+            string[] classList = lang switch
             {
-                1 => new()
-                    {
-                    new Tuple<string, int>("£owca", 1),
-                    new Tuple<string, int>("Mag", 2),
-                    new Tuple<string, int>("Bard", 3),
-                    new Tuple<string, int>("Stra¿nik", 4),
-                    new Tuple<string, int>("Wojownik", 5),
-                    new Tuple<string, int>("Z³odziej", 6),
-                    new Tuple<string, int>("Druid", 7),
-                    new Tuple<string, int>("Awanturnik", 8),
-                    new Tuple<string, int>("Berserk", 9),
-                    new Tuple<string, int>("Nekromanta", 10),
-                    new Tuple<string, int>("Czarownik", 11),
-                    new Tuple<string, int>("brak", 12)
-                    },
-                _ => new()
-                    {
-                    new Tuple<string, int>("Ranger", 1),
-                    new Tuple<string, int>("Wizard", 2),
-                    new Tuple<string, int>("Bard", 3),
-                    new Tuple<string, int>("Guardian", 4),
-                    new Tuple<string, int>("Fighter", 5),
-                    new Tuple<string, int>("Thief", 6),
-                    new Tuple<string, int>("Druid", 7),
-                    new Tuple<string, int>("Warrior", 8),
-                    new Tuple<string, int>("Berserker", 9),
-                    new Tuple<string, int>("Necromancer", 10),
-                    new Tuple<string, int>("Sorcerer", 11),
-                    new Tuple<string, int>("none", 12)
-                    }
+                1 => new string[] { "£owca", "Mag", "Bard", "Stra¿nik", "Wojownik", "Z³odziej", "Druid", "Awanturnik", "Berserk", "Nekromanta", "Czarownik", "BRAK" },
+                _ => new string[] { "Ranger", "Wizard", "Bard", "Guardian", "Fighter", "Thief", "Druid", "Warrior", "Berserker", "Necromancer", "Sorcerer", "NONE" }
             };
-            chosenClass.DataSource = classList;
+            chosenClass.Items.AddRange(classList);
             chosenClass.SelectedIndex = currentClassIndex;
+
+            chosenSecondClass.Items.AddRange(classList);
+            chosenSecondClass.SelectedIndex = currentSecondClassIndex;
         }
         #endregion
-        int currentClassIndex;
-        Image[] classIconsList = new Image[]{
-                Properties.Resources.lowca.ToBitmap(),
-                Properties.Resources.mag.ToBitmap(),
-                Properties.Resources.najebus.ToBitmap(),
-                Properties.Resources.straznik.ToBitmap(),
-                Properties.Resources.wojownik.ToBitmap(),
-                Properties.Resources.zlodziej.ToBitmap(),
-                Properties.Resources.druid.ToBitmap(),
-                Properties.Resources.awanturnik.ToBitmap(),
-                Properties.Resources.berserk.ToBitmap(),
-                Properties.Resources.nekromanta.ToBitmap(),
-                Properties.Resources.czarownik.ToBitmap(),
-                Properties.Resources.empty.ToBitmap()
-            };
         private void chosenClass_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.Icon = chosenClass.SelectedIndex switch
@@ -291,6 +250,7 @@ namespace HereToSlay
             {
                 "advancedName" => advancedNameBox,
                 "advancedDesc" => advancedDescBox,
+                "advancedClass" => advancedClassBox,
                 _ => throw new NotImplementedException(),
             };
             list.Visible = !list.Visible;
@@ -300,5 +260,27 @@ namespace HereToSlay
                 false => Properties.Resources.closed
             };
         }
+
+        private void splitClass_CheckStateChanged(object sender, EventArgs e)
+        {
+            switch (splitClass.Checked)
+            {
+                case false:
+                    chosenSecondClass.Visible = false;
+                    labelSecondClass.Visible = false;
+                    chosenClass.Location = new Point(145, 239);
+                    labelClass.Location = new Point(142, 219);
+                    chosenSecondClass.SelectedIndex = -1;
+                    break;
+                case true:
+                    chosenClass.Location = new Point(82, 239);
+                    labelClass.Location = new Point(79, 219);
+                    chosenSecondClass.Visible = true;
+                    labelSecondClass.Visible = true;
+                    break;
+            }
+        }
+
+
     }
 }
