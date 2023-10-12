@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Numerics;
-using Raylib_cs;
 using System.Resources;
 using System.Text;
 using System.Runtime.InteropServices;
+using Raylib_cs;
 
 namespace GeneratorBackend
 {
     public class AssetManager
     {
-        private static AssetManager instance;
+        private static AssetManager? instance;
         public Image frame { get; private set; }
         public Image bottom { get; private set; }
         public Font nameFont { get; private set; }
@@ -50,7 +50,7 @@ namespace GeneratorBackend
     {
         static void Main()
         {
-            Generate("render.png", 0,"Test Leader", 11, -1, "", "Test description", false, false); // if you want to test the generator, change the parameters here
+            Generate("render.png", 0,"Test Leader", 11, -1, "C:\\Users\\SDanr\\Downloads\\uy0c1e63jusb1.jpg", "Test description", false, false); // if you want to test the generator, change the parameters here
             //"-1" here means that there is only one class.
         }
 
@@ -74,12 +74,12 @@ namespace GeneratorBackend
 
         public static void Generate(string? renderLocation, int language, string leaderName, int desiredClass, int desiredSecondClass, string leaderImg, string leaderDescription, bool addGradient, bool leaderWhite)
         {
+            AssetManager inst = AssetManager.Instance;
+
             Image leader = Raylib.LoadImage(leaderImg);
             Image card = Raylib.LoadImage("template/background.png");
             Image? gradient = null;
             if (addGradient) { gradient = Raylib.LoadImage("template/gradient.png"); }
-
-            AssetManager inst = AssetManager.Instance;
 
             Image classSymbol;
             Color desiredColor;
@@ -416,7 +416,7 @@ namespace GeneratorBackend
                 else if (text[i] == ' ' && currentLen.X + wordLen.X <= targetLen) 
                 { 
                     output.Append(word);
-                    output.Append(" ");
+                    output.Append(' ');
                     word.Clear();
                 }
                 

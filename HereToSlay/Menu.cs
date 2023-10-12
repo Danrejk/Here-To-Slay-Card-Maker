@@ -10,12 +10,11 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
+
 namespace HereToSlay
 {
     public partial class Menu : Form
     {
-        readonly GeneratorBackend.AssetManager instance;
-
         public Menu()
         {
             InitializeComponent();
@@ -218,7 +217,7 @@ namespace HereToSlay
         {
             using OpenFileDialog openFileDialog = new();
             openFileDialog.Title = "Select a File";
-            openFileDialog.Filter = "Image Files|*.png;*.gif;|All Files (*.*)|*.*";
+            openFileDialog.Filter = "Image Files|*.png;*.gif;*.jpg;*bmp;|All Files (*.*)|*.*";
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -283,6 +282,6 @@ namespace HereToSlay
                     labelSecondClass.Visible = true;
                     break;
             }
-        }        
+        }
     }
 }
