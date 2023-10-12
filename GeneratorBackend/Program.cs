@@ -120,11 +120,11 @@ namespace GeneratorBackend
                         1 => "Przywódca drużyny: wojownik",
                         _ => "Party Leader: Fighter"};
                     classSymbol = Raylib.LoadImage("classes/wojownik.png");
-                    desiredColor = new(0, 78, 125, 255);
+                    desiredColor = new(151, 40, 44, 255);
                     break;
                 case 5:
                     leaderTitle = language switch{
-                        1 => "Przywódca drużyny: zlodziej",
+                        1 => "Przywódca drużyny: złodziej",
                         _ => "Party Leader: Thief"};
                     classSymbol = Raylib.LoadImage("classes/zlodziej.png");
                     desiredColor = new(0, 78, 125, 255);
@@ -222,12 +222,12 @@ namespace GeneratorBackend
                             _ => "/Fighter"
                         };
                         secondClassSymbol = Raylib.LoadImage("classes/wojownik.png");
-                        desiredSecondColor = new(0, 78, 125, 255);
+                        desiredSecondColor = new(151, 40, 44, 255);
                         break;
                     case 5:
                         leaderTitle += language switch
                         {
-                            1 => "/zlodziej",
+                            1 => "/złodziej",
                             _ => "/Thief"
                         };
                         secondClassSymbol = Raylib.LoadImage("classes/zlodziej.png");
