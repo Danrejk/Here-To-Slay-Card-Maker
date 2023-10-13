@@ -34,5 +34,17 @@ namespace HereToSlay.Properties {
                 this["Language"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int CardType {
+            get {
+                return ((int)(this["CardType"]));
+            }
+            set {
+                this["CardType"] = value;
+            }
+        }
     }
 }

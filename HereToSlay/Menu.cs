@@ -20,8 +20,6 @@ namespace HereToSlay
             InitializeComponent();
             this.Icon = Properties.Resources.LEADER;
 
-            chosenClass.ItemHeight = 18;
-
             #region Fonts
             Font fontUI = FontLoader.GetFont(Properties.Resources.SourceSansPro, 10);
             FontLoader.ChangeFontForAllControls(this, fontUI);
@@ -30,7 +28,6 @@ namespace HereToSlay
             Font fontUIsmall = FontLoader.GetFont(Properties.Resources.SourceSansPro, 9);
             gradient.Font = fontUIsmall;
             leaderWhite.Font = fontUIsmall;
-            wordSplitting.Font = fontUIsmall;
             splitClass.Font = fontUIsmall;
             gitLabel1.Font = fontUIsmall;
             gitLabel2.Font = fontUIsmall;
@@ -47,7 +44,6 @@ namespace HereToSlay
 
             #region ComboBoxes
 #pragma warning disable CS8622 // the warnings were annoying me, so I disabled them
-            language.Alignment = ToolStripItemAlignment.Right;
             language.ComboBox.DrawMode = DrawMode.OwnerDrawFixed;
             language.ComboBox.DrawItem += ImageCBox.ComboBox_DrawItem;
             language.Items.Add(new ImageCBox("English", Properties.Resources.en));
@@ -62,6 +58,16 @@ namespace HereToSlay
             chosenSecondClass.DrawItem += ImageCBox.ComboBox_DrawItem;
 #pragma warning restore CS8622
             #endregion
+
+            switch (Properties.Settings.Default.CardType)
+            {
+                case 0:
+                    LeaderCard_Click(null, null);
+                    break;
+                case 1:
+                    MonsterCard_Click(null, null);
+                    break;
+            }
         }
 
         #region The Rendering ones
@@ -130,7 +136,6 @@ namespace HereToSlay
                     leaderImgToolTip.SetToolTip(selectImg, "Obrazek lidera (nie ca³a karta) ma wymiary 745x1176. \nProgram automatycznie przytnie i przybli¿y obraz, je¿eli bêdzie to potrzebne.\n\nWspierane rozszerzenia plików:\n.png, .jpeg, .jpg, .gif (pierwsza klatka), .bmp, .webp, .pbm, .tiff, .tga");
                     gradient.Text = "Tylni gradient";
                     leaderWhite.Text = "Bia³a nazwa";
-                    wordSplitting.Text = "Dzielenie wyrazów";
                     splitClass.Text = "Podwójna Klasa";
                     break;
                 default:
@@ -144,7 +149,6 @@ namespace HereToSlay
                     leaderImgToolTip.SetToolTip(selectImg, "The leader image (not the whole card) dimentions are 745x1176. \nThe program will automatically crop and zoom the image, if needed.\n\nSupported file extensions:\n.png, .jpeg, .jpg, .gif (first frame), .bmp, .webp, .pbm, .tiff, .tga");
                     gradient.Text = "Back gradient";
                     leaderWhite.Text = "White name";
-                    wordSplitting.Text = "Word Splitting";
                     splitClass.Text = "Split Class";
                     break;
             }
@@ -176,7 +180,7 @@ namespace HereToSlay
                     chosenClass.Items.Add(new ImageCBox("Berserk", Properties.Resources.berserk.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("Nekromanta", Properties.Resources.nekromanta.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("Czarownik", Properties.Resources.czarownik.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("BRAK", Properties.Resources.empty.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("WSZYSTKIE", Properties.Resources.empty.ToBitmap()));
                     break;
                 default:
                     chosenClass.Items.Add(new ImageCBox("Ranger", Properties.Resources.lowca.ToBitmap()));
@@ -190,7 +194,7 @@ namespace HereToSlay
                     chosenClass.Items.Add(new ImageCBox("Berserker", Properties.Resources.berserk.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("Necromancer", Properties.Resources.nekromanta.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("Sorcerer", Properties.Resources.czarownik.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("NONE", Properties.Resources.empty.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("ALL", Properties.Resources.empty.ToBitmap()));
                     break;
             }
             chosenClass.SelectedIndex = currentClassIndex;
@@ -294,6 +298,86 @@ namespace HereToSlay
                     break;
             }
         }
+
+        private void LeaderCard_Click(object? sender, EventArgs? e) // TODO: make it one method
+        {
+            if (LeaderCard.Checked == false)
+            {
+                Properties.Settings.Default.CardType = 0;
+                Properties.Settings.Default.Save();
+                MonsterCard.Checked = false;
+                MonsterCard.BackColor = SystemColors.Control;
+                LeaderCard.Checked = true;
+                LeaderCard.BackColor = SystemColors.ControlDark;
+
+                chosenClass.Visible = true;
+                labelClass.Visible = true;
+                advancedClass.Visible = true;
+                advancedClass.Image = Properties.Resources.closed;
+                splitClass.Checked = false;
+                splitClass_CheckStateChanged(null, null);
+
+                labelImg.Location = new Point(115, 344);
+                selectImgText.Location = new Point(119, 364);
+                selectImg.Location = new Point(270, 364);
+
+                heroReq1.Visible = false;
+                heroReq2.Visible = false;
+                heroReq3.Visible = false;
+                heroReq4.Visible = false;
+                heroReq5.Visible = false;
+
+                labelBad.Visible = false;
+                badOutputText.Visible = false;
+                badOutputNum.Visible = false;
+                badOutputSym.Visible = false;
+
+                labelGood.Visible = false;
+                goodOutputText.Visible = false;
+                goodOutputNum.Visible = false;
+                goodOutputSym.Visible = false;
+            }
+        }
+        private void MonsterCard_Click(object? sender, EventArgs? e)
+        {
+            if (MonsterCard.Checked == false)
+            {
+                Properties.Settings.Default.CardType = 1;
+                Properties.Settings.Default.Save();
+                LeaderCard.Checked = false;
+                LeaderCard.BackColor = SystemColors.Control;
+                MonsterCard.Checked = true;
+                MonsterCard.BackColor = SystemColors.ControlDark;
+
+                chosenClass.Visible = false;
+                labelClass.Visible = false;
+                chosenSecondClass.Visible = false;
+                labelSecondClass.Visible = false;
+                advancedClass.Visible = false;
+                advancedClassBox.Visible = false;
+
+                labelImg.Location = new Point(115, 244);
+                selectImgText.Location = new Point(119, 264);
+                selectImg.Location = new Point(270, 264);
+
+                heroReq1.Visible = true;
+                heroReq2.Visible = true;
+                heroReq3.Visible = true;
+                heroReq4.Visible = true;
+                heroReq5.Visible = true;
+
+                labelBad.Visible = true;
+                badOutputText.Visible = true;
+                badOutputNum.Visible = true;
+                badOutputSym.Visible = true;
+
+                labelGood.Visible = true;
+                goodOutputText.Visible = true;
+                goodOutputNum.Visible = true;
+                goodOutputSym.Visible = true;
+
+            }
+        }
     }
     class FontLoader
     {
@@ -337,7 +421,7 @@ namespace HereToSlay
             }
         }
     }
-    public class ImageCBox
+    class ImageCBox
     {
         public string Text { get; set; }
         public Image Image { get; set; }

@@ -46,13 +46,10 @@
             previewImg = new PictureBox();
             gitLabel2 = new LinkLabel();
             gitLabel1 = new LinkLabel();
-            wordSplitting = new CheckBox();
             SaveRenderDialog = new SaveFileDialog();
             leaderImgToolTip = new ToolTip(components);
             advancedNameBox = new FlowLayoutPanel();
             advancedName = new PictureBox();
-            advancedDescBox = new FlowLayoutPanel();
-            advancedDesc = new PictureBox();
             advancedClass = new PictureBox();
             advancedClassBox = new FlowLayoutPanel();
             splitClass = new CheckBox();
@@ -62,15 +59,29 @@
             LeaderCard = new ToolStripMenuItem();
             MonsterCard = new ToolStripMenuItem();
             language = new ToolStripComboBox();
+            heroReq3 = new ComboBox();
+            heroReq2 = new ComboBox();
+            heroReq1 = new ComboBox();
+            heroReq4 = new ComboBox();
+            labelReq = new Label();
+            heroReq5 = new ComboBox();
+            badOutputNum = new NumericUpDown();
+            badOutputSym = new ComboBox();
+            badOutputText = new TextBox();
+            labelBad = new Label();
+            labelGood = new Label();
+            goodOutputText = new TextBox();
+            goodOutputSym = new ComboBox();
+            goodOutputNum = new NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)logo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)previewImg).BeginInit();
             advancedNameBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)advancedName).BeginInit();
-            advancedDescBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)advancedDesc).BeginInit();
             ((System.ComponentModel.ISupportInitialize)advancedClass).BeginInit();
             advancedClassBox.SuspendLayout();
             menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)badOutputNum).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)goodOutputNum).BeginInit();
             SuspendLayout();
             // 
             // RENDER
@@ -120,7 +131,7 @@
             labelDescription.BackColor = Color.Transparent;
             labelDescription.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             labelDescription.ForeColor = Color.White;
-            labelDescription.Location = new Point(53, 440);
+            labelDescription.Location = new Point(53, 458);
             labelDescription.Margin = new Padding(0);
             labelDescription.Name = "labelDescription";
             labelDescription.Size = new Size(100, 20);
@@ -251,7 +262,7 @@
             // 
             descriptionText.BackColor = Color.White;
             descriptionText.BorderStyle = BorderStyle.None;
-            descriptionText.Location = new Point(57, 460);
+            descriptionText.Location = new Point(57, 478);
             descriptionText.Margin = new Padding(0);
             descriptionText.Multiline = true;
             descriptionText.Name = "descriptionText";
@@ -301,20 +312,6 @@
             gitLabel1.Text = "@Beukot";
             gitLabel1.LinkClicked += linkLabel2_LinkClicked;
             // 
-            // wordSplitting
-            // 
-            wordSplitting.AutoSize = true;
-            wordSplitting.BackColor = Color.Transparent;
-            wordSplitting.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            wordSplitting.ForeColor = Color.White;
-            wordSplitting.Location = new Point(0, 0);
-            wordSplitting.Margin = new Padding(0);
-            wordSplitting.Name = "wordSplitting";
-            wordSplitting.Size = new Size(102, 19);
-            wordSplitting.TabIndex = 20;
-            wordSplitting.Text = "Word Splitting";
-            wordSplitting.UseVisualStyleBackColor = false;
-            // 
             // leaderImgToolTip
             // 
             leaderImgToolTip.AutoPopDelay = 5000;
@@ -345,29 +342,6 @@
             advancedName.TabIndex = 22;
             advancedName.TabStop = false;
             advancedName.Click += advanced_Click;
-            // 
-            // advancedDescBox
-            // 
-            advancedDescBox.Controls.Add(wordSplitting);
-            advancedDescBox.Location = new Point(72, 526);
-            advancedDescBox.Margin = new Padding(0);
-            advancedDescBox.Name = "advancedDescBox";
-            advancedDescBox.Size = new Size(285, 28);
-            advancedDescBox.TabIndex = 23;
-            advancedDescBox.Visible = false;
-            // 
-            // advancedDesc
-            // 
-            advancedDesc.BackColor = Color.Transparent;
-            advancedDesc.Image = Properties.Resources.closed;
-            advancedDesc.Location = new Point(57, 528);
-            advancedDesc.Name = "advancedDesc";
-            advancedDesc.Size = new Size(12, 12);
-            advancedDesc.SizeMode = PictureBoxSizeMode.Zoom;
-            advancedDesc.TabIndex = 24;
-            advancedDesc.TabStop = false;
-            advancedDesc.Visible = false;
-            advancedDesc.Click += advanced_Click;
             // 
             // advancedClass
             // 
@@ -448,27 +422,202 @@
             // 
             // LeaderCard
             // 
-            LeaderCard.BackColor = SystemColors.ButtonFace;
+            LeaderCard.BackColor = SystemColors.Control;
             LeaderCard.Name = "LeaderCard";
             LeaderCard.Size = new Size(82, 23);
             LeaderCard.Text = "Leader Card";
+            LeaderCard.Click += LeaderCard_Click;
             // 
             // MonsterCard
             // 
-            MonsterCard.BackColor = SystemColors.ButtonFace;
+            MonsterCard.BackColor = SystemColors.Control;
             MonsterCard.Margin = new Padding(6, 0, 0, 0);
             MonsterCard.Name = "MonsterCard";
             MonsterCard.RightToLeft = RightToLeft.No;
             MonsterCard.Size = new Size(91, 23);
             MonsterCard.Text = "Monster Card";
+            MonsterCard.Visible = false;
+            MonsterCard.Click += MonsterCard_Click;
             // 
             // language
             // 
+            language.Alignment = ToolStripItemAlignment.Right;
             language.DropDownStyle = ComboBoxStyle.DropDownList;
             language.Margin = new Padding(0);
             language.Name = "language";
             language.Size = new Size(85, 23);
             language.SelectedIndexChanged += language_SelectedIndexChanged;
+            // 
+            // heroReq3
+            // 
+            heroReq3.BackColor = Color.White;
+            heroReq3.DropDownStyle = ComboBoxStyle.DropDownList;
+            heroReq3.FlatStyle = FlatStyle.Flat;
+            heroReq3.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            heroReq3.FormattingEnabled = true;
+            heroReq3.Location = new Point(268, 316);
+            heroReq3.Name = "heroReq3";
+            heroReq3.Size = new Size(120, 25);
+            heroReq3.TabIndex = 30;
+            heroReq3.Visible = false;
+            // 
+            // heroReq2
+            // 
+            heroReq2.BackColor = Color.White;
+            heroReq2.DropDownStyle = ComboBoxStyle.DropDownList;
+            heroReq2.FlatStyle = FlatStyle.Flat;
+            heroReq2.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            heroReq2.FormattingEnabled = true;
+            heroReq2.Location = new Point(142, 316);
+            heroReq2.Name = "heroReq2";
+            heroReq2.Size = new Size(120, 25);
+            heroReq2.TabIndex = 31;
+            heroReq2.Visible = false;
+            // 
+            // heroReq1
+            // 
+            heroReq1.BackColor = Color.White;
+            heroReq1.DropDownStyle = ComboBoxStyle.DropDownList;
+            heroReq1.FlatStyle = FlatStyle.Flat;
+            heroReq1.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            heroReq1.FormattingEnabled = true;
+            heroReq1.Location = new Point(16, 316);
+            heroReq1.Name = "heroReq1";
+            heroReq1.Size = new Size(120, 25);
+            heroReq1.TabIndex = 32;
+            heroReq1.Visible = false;
+            // 
+            // heroReq4
+            // 
+            heroReq4.BackColor = Color.White;
+            heroReq4.DropDownStyle = ComboBoxStyle.DropDownList;
+            heroReq4.FlatStyle = FlatStyle.Flat;
+            heroReq4.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            heroReq4.FormattingEnabled = true;
+            heroReq4.Location = new Point(79, 347);
+            heroReq4.Name = "heroReq4";
+            heroReq4.Size = new Size(120, 25);
+            heroReq4.TabIndex = 33;
+            heroReq4.Visible = false;
+            // 
+            // labelReq
+            // 
+            labelReq.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            labelReq.BackColor = Color.Transparent;
+            labelReq.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            labelReq.ForeColor = Color.White;
+            labelReq.Location = new Point(13, 296);
+            labelReq.Margin = new Padding(0);
+            labelReq.Name = "labelReq";
+            labelReq.RightToLeft = RightToLeft.No;
+            labelReq.Size = new Size(100, 20);
+            labelReq.TabIndex = 34;
+            labelReq.Text = "Requirements";
+            labelReq.TextAlign = ContentAlignment.BottomLeft;
+            labelReq.Visible = false;
+            // 
+            // heroReq5
+            // 
+            heroReq5.BackColor = Color.White;
+            heroReq5.DropDownStyle = ComboBoxStyle.DropDownList;
+            heroReq5.FlatStyle = FlatStyle.Flat;
+            heroReq5.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            heroReq5.FormattingEnabled = true;
+            heroReq5.Location = new Point(205, 347);
+            heroReq5.Name = "heroReq5";
+            heroReq5.Size = new Size(120, 25);
+            heroReq5.TabIndex = 35;
+            heroReq5.Visible = false;
+            // 
+            // badOutputNum
+            // 
+            badOutputNum.BorderStyle = BorderStyle.FixedSingle;
+            badOutputNum.Location = new Point(328, 397);
+            badOutputNum.Name = "badOutputNum";
+            badOutputNum.Size = new Size(33, 23);
+            badOutputNum.TabIndex = 36;
+            badOutputNum.TextAlign = HorizontalAlignment.Center;
+            badOutputNum.Visible = false;
+            // 
+            // badOutputSym
+            // 
+            badOutputSym.DropDownStyle = ComboBoxStyle.DropDownList;
+            badOutputSym.FormattingEnabled = true;
+            badOutputSym.Items.AddRange(new object[] { "+", "-" });
+            badOutputSym.Location = new Point(360, 397);
+            badOutputSym.Name = "badOutputSym";
+            badOutputSym.Size = new Size(30, 23);
+            badOutputSym.TabIndex = 37;
+            badOutputSym.Visible = false;
+            // 
+            // badOutputText
+            // 
+            badOutputText.Location = new Point(396, 397);
+            badOutputText.Name = "badOutputText";
+            badOutputText.Size = new Size(146, 23);
+            badOutputText.TabIndex = 38;
+            badOutputText.Visible = false;
+            // 
+            // labelBad
+            // 
+            labelBad.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            labelBad.BackColor = Color.Transparent;
+            labelBad.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            labelBad.ForeColor = Color.White;
+            labelBad.Location = new Point(328, 374);
+            labelBad.Margin = new Padding(0);
+            labelBad.Name = "labelBad";
+            labelBad.RightToLeft = RightToLeft.No;
+            labelBad.Size = new Size(100, 20);
+            labelBad.TabIndex = 39;
+            labelBad.Text = "Fail Condition";
+            labelBad.TextAlign = ContentAlignment.BottomLeft;
+            labelBad.Visible = false;
+            // 
+            // labelGood
+            // 
+            labelGood.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            labelGood.BackColor = Color.Transparent;
+            labelGood.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            labelGood.ForeColor = Color.White;
+            labelGood.Location = new Point(328, 421);
+            labelGood.Margin = new Padding(0);
+            labelGood.Name = "labelGood";
+            labelGood.RightToLeft = RightToLeft.No;
+            labelGood.Size = new Size(135, 20);
+            labelGood.TabIndex = 43;
+            labelGood.Text = "Success Condition";
+            labelGood.TextAlign = ContentAlignment.BottomLeft;
+            labelGood.Visible = false;
+            // 
+            // goodOutputText
+            // 
+            goodOutputText.Location = new Point(396, 444);
+            goodOutputText.Name = "goodOutputText";
+            goodOutputText.Size = new Size(146, 23);
+            goodOutputText.TabIndex = 42;
+            goodOutputText.Visible = false;
+            // 
+            // goodOutputSym
+            // 
+            goodOutputSym.DropDownStyle = ComboBoxStyle.DropDownList;
+            goodOutputSym.FormattingEnabled = true;
+            goodOutputSym.Items.AddRange(new object[] { "+", "-" });
+            goodOutputSym.Location = new Point(360, 444);
+            goodOutputSym.Name = "goodOutputSym";
+            goodOutputSym.Size = new Size(30, 23);
+            goodOutputSym.TabIndex = 41;
+            goodOutputSym.Visible = false;
+            // 
+            // goodOutputNum
+            // 
+            goodOutputNum.BorderStyle = BorderStyle.FixedSingle;
+            goodOutputNum.Location = new Point(328, 444);
+            goodOutputNum.Name = "goodOutputNum";
+            goodOutputNum.Size = new Size(33, 23);
+            goodOutputNum.TabIndex = 40;
+            goodOutputNum.TextAlign = HorizontalAlignment.Center;
+            goodOutputNum.Visible = false;
             // 
             // Menu
             // 
@@ -477,11 +626,17 @@
             BackColor = Color.FromArgb(39, 43, 52);
             BackgroundImage = Properties.Resources.gradient;
             ClientSize = new Size(828, 711);
+            Controls.Add(labelGood);
+            Controls.Add(goodOutputText);
+            Controls.Add(goodOutputSym);
+            Controls.Add(goodOutputNum);
+            Controls.Add(labelBad);
+            Controls.Add(badOutputText);
+            Controls.Add(badOutputSym);
+            Controls.Add(badOutputNum);
             Controls.Add(chosenSecondClass);
             Controls.Add(advancedClassBox);
             Controls.Add(advancedClass);
-            Controls.Add(advancedDesc);
-            Controls.Add(advancedDescBox);
             Controls.Add(advancedName);
             Controls.Add(advancedNameBox);
             Controls.Add(gitLabel1);
@@ -500,6 +655,12 @@
             Controls.Add(labelClass);
             Controls.Add(menuStrip1);
             Controls.Add(previewImg);
+            Controls.Add(heroReq5);
+            Controls.Add(labelReq);
+            Controls.Add(heroReq4);
+            Controls.Add(heroReq1);
+            Controls.Add(heroReq2);
+            Controls.Add(heroReq3);
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MainMenuStrip = menuStrip1;
@@ -514,14 +675,13 @@
             advancedNameBox.ResumeLayout(false);
             advancedNameBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)advancedName).EndInit();
-            advancedDescBox.ResumeLayout(false);
-            advancedDescBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)advancedDesc).EndInit();
             ((System.ComponentModel.ISupportInitialize)advancedClass).EndInit();
             advancedClassBox.ResumeLayout(false);
             advancedClassBox.PerformLayout();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)badOutputNum).EndInit();
+            ((System.ComponentModel.ISupportInitialize)goodOutputNum).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -545,7 +705,6 @@
         private PictureBox previewImg;
         private LinkLabel gitLabel2;
         private LinkLabel gitLabel1;
-        private CheckBox wordSplitting;
         private SaveFileDialog SaveRenderDialog;
         private ToolTip leaderImgToolTip;
         private FlowLayoutPanel advancedNameBox;
@@ -561,5 +720,20 @@
         private ToolStripMenuItem LeaderCard;
         private ToolStripMenuItem MonsterCard;
         private ToolStripComboBox language;
+        private ComboBox heroReq3;
+        private ComboBox heroReq2;
+        private ComboBox heroReq1;
+        private ComboBox heroReq4;
+        private Label labelReq;
+        private ComboBox heroReq5;
+        private NumericUpDown badOutputNum;
+        private NumericUpDown badOutput;
+        private ComboBox badOutputSym;
+        private TextBox badOutputText;
+        private Label labelBad;
+        private Label labelGood;
+        private TextBox goodOutputText;
+        private ComboBox goodOutputSym;
+        private NumericUpDown goodOutputNum;
     }
 }
