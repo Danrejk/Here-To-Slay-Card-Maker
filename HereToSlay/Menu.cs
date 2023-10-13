@@ -38,6 +38,11 @@ namespace HereToSlay
             Font fontLeader = FontLoader.GetFont(Properties.Resources.PatuaOne_polish, 13);
             leaderNameText.Font = fontLeader;
             RENDER.Font = fontLeader;
+
+            Font fontLeaderSmall = FontLoader.GetFont(Properties.Resources.PatuaOne_polish, 10);
+            FontLoader.ChangeFontForAllLabels(this, fontLeaderSmall);
+            LeaderCard.Font = fontLeaderSmall;
+            MonsterCard.Font = fontLeaderSmall;
             #endregion
 
             #region ComboBoxes
@@ -277,13 +282,13 @@ namespace HereToSlay
                 case false:
                     chosenSecondClass.Visible = false;
                     labelSecondClass.Visible = false;
-                    chosenClass.Location = new Point(145, 239);
-                    labelClass.Location = new Point(142, 219);
+                    chosenClass.Location = new Point(145, 264);
+                    labelClass.Location = new Point(142, 244);
                     chosenSecondClass.SelectedIndex = -1;
                     break;
                 case true:
-                    chosenClass.Location = new Point(82, 239);
-                    labelClass.Location = new Point(79, 219);
+                    chosenClass.Location = new Point(82, 264);
+                    labelClass.Location = new Point(79, 244);
                     chosenSecondClass.Visible = true;
                     labelSecondClass.Visible = true;
                     break;
@@ -296,6 +301,8 @@ namespace HereToSlay
 
         public static Font GetFont(byte[] fontData, float size)
         {
+            new PrivateFontCollection();
+
             IntPtr fontBuffer = Marshal.AllocCoTaskMem(fontData.Length);
             Marshal.Copy(fontData, 0, fontBuffer, fontData.Length);
             FontCollection.AddMemoryFont(fontBuffer, fontData.Length);
@@ -311,6 +318,21 @@ namespace HereToSlay
                 if (c.Controls.Count > 0)
                 {
                     ChangeFontForAllControls(c, fontUI);
+                }
+            }
+        }
+
+        public static void ChangeFontForAllLabels(Control control, Font fontUI)
+        {
+            foreach (Control c in control.Controls)
+            {
+                if (c is Label label)
+                {
+                    label.Font = fontUI;
+                }
+                if (c.Controls.Count > 0)
+                {
+                    ChangeFontForAllLabels(c, fontUI);
                 }
             }
         }

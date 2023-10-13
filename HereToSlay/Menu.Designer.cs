@@ -265,7 +265,7 @@
             previewImg.BackColor = SystemColors.ControlLight;
             previewImg.Cursor = Cursors.Hand;
             previewImg.Dock = DockStyle.Right;
-            previewImg.Location = new Point(414, 25);
+            previewImg.Location = new Point(414, 0);
             previewImg.Name = "previewImg";
             previewImg.Size = new Size(414, 711);
             previewImg.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -279,7 +279,7 @@
             gitLabel2.AutoSize = true;
             gitLabel2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             gitLabel2.LinkColor = Color.FromArgb(205, 208, 215);
-            gitLabel2.Location = new Point(0, 712);
+            gitLabel2.Location = new Point(0, 687);
             gitLabel2.Name = "gitLabel2";
             gitLabel2.Size = new Size(58, 15);
             gitLabel2.TabIndex = 17;
@@ -293,7 +293,7 @@
             gitLabel1.AutoSize = true;
             gitLabel1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             gitLabel1.LinkColor = Color.FromArgb(205, 208, 215);
-            gitLabel1.Location = new Point(0, 697);
+            gitLabel1.Location = new Point(0, 672);
             gitLabel1.Name = "gitLabel1";
             gitLabel1.Size = new Size(55, 15);
             gitLabel1.TabIndex = 19;
@@ -442,7 +442,7 @@
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(6, 0, 0, 2);
-            menuStrip1.Size = new Size(828, 25);
+            menuStrip1.Size = new Size(414, 25);
             menuStrip1.TabIndex = 29;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -465,8 +465,9 @@
             // language
             // 
             language.DropDownStyle = ComboBoxStyle.DropDownList;
+            language.Margin = new Padding(0);
             language.Name = "language";
-            language.Size = new Size(121, 23);
+            language.Size = new Size(85, 23);
             language.SelectedIndexChanged += language_SelectedIndexChanged;
             // 
             // Menu
@@ -475,7 +476,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(39, 43, 52);
             BackgroundImage = Properties.Resources.gradient;
-            ClientSize = new Size(828, 736);
+            ClientSize = new Size(828, 711);
             Controls.Add(chosenSecondClass);
             Controls.Add(advancedClassBox);
             Controls.Add(advancedClass);
@@ -494,11 +495,11 @@
             Controls.Add(leaderNameText);
             Controls.Add(RENDER);
             Controls.Add(logo);
-            Controls.Add(previewImg);
             Controls.Add(labelLeader);
             Controls.Add(labelSecondClass);
             Controls.Add(labelClass);
             Controls.Add(menuStrip1);
+            Controls.Add(previewImg);
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MainMenuStrip = menuStrip1;
@@ -507,6 +508,7 @@
             SizeGripStyle = SizeGripStyle.Hide;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Here To Slay - Custom leader card Generator";
+            Load += renderPreview;
             ((System.ComponentModel.ISupportInitialize)logo).EndInit();
             ((System.ComponentModel.ISupportInitialize)previewImg).EndInit();
             advancedNameBox.ResumeLayout(false);
