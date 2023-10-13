@@ -27,58 +27,24 @@ namespace HereToSlay
 
             chosenClass.ItemHeight = 18;
 
-            Font fontUI = GetFont(Properties.Resources.SourceSansPro, 10);
-            ChangeFontForAllControls(this, fontUI);
+            Font fontUI = FontLoader.GetFont(Properties.Resources.SourceSansPro, 10);
+            FontLoader.ChangeFontForAllControls(this, fontUI);
             selectImg.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
 
-            Font fontLeader = GetFont(Properties.Resources.PatuaOne_polish, 13);
-            leaderNameText.Font = fontLeader;
-            RENDER.Font = fontLeader;
-
-            Font fontUIsmall = GetFont(Properties.Resources.SourceSansPro, 9);
+            Font fontUIsmall = FontLoader.GetFont(Properties.Resources.SourceSansPro, 9);
             gradient.Font = fontUIsmall;
             leaderWhite.Font = fontUIsmall;
             wordSplitting.Font = fontUIsmall;
             splitClass.Font = fontUIsmall;
+            gitLabel1.Font = fontUIsmall;
+            gitLabel2.Font = fontUIsmall;
 
-            gitLabel1.Font = GetFont(Properties.Resources.SourceSansPro, 9);
-            gitLabel2.Font = GetFont(Properties.Resources.SourceSansPro, 9);
-
-            this.Activate();
+            Font fontLeader = FontLoader.GetFont(Properties.Resources.PatuaOne_polish, 13);
+            leaderNameText.Font = fontLeader;
+            RENDER.Font = fontLeader;
         }
-
-        #region Font Changes
-        private static Font GetFont(byte[] fontData, float size)
-        {
-            IntPtr data = Marshal.AllocCoTaskMem(fontData.Length);
-            Marshal.Copy(fontData, 0, data, fontData.Length);
-
-            PrivateFontCollection fontCollection = new();
-            fontCollection.AddMemoryFont(data, fontData.Length);
-
-            if (fontCollection.Families.Length > 0)
-            {
-                FontFamily fontFamily = fontCollection.Families[0];
-                Marshal.FreeCoTaskMem(data);
-                return new Font(fontFamily, size);
-            }
-            return SystemFonts.DefaultFont;
-        }
-        private void ChangeFontForAllControls(Control control, Font fontUI)
-        {
-            foreach (Control c in control.Controls)
-            {
-                c.Font = fontUI;
-                if (c.Controls.Count > 0)
-                {
-                    ChangeFontForAllControls(c, fontUI);
-                }
-            }
-        }
-        #endregion
 
         #region The Rendering ones
-
         private void RenderButton_Press(object sender, EventArgs e)
         {
             using SaveFileDialog SaveRenderDialog = new();
@@ -281,6 +247,31 @@ namespace HereToSlay
                     chosenSecondClass.Visible = true;
                     labelSecondClass.Visible = true;
                     break;
+            }
+        }
+    }
+    class FontLoader
+    {
+        private static readonly PrivateFontCollection FontCollection = new();
+
+        public static Font GetFont(byte[] fontData, float size)
+        {
+            IntPtr fontBuffer = Marshal.AllocCoTaskMem(fontData.Length);
+            Marshal.Copy(fontData, 0, fontBuffer, fontData.Length);
+            FontCollection.AddMemoryFont(fontBuffer, fontData.Length);
+
+            return new Font(FontCollection.Families[0], size);
+        }
+
+        public static void ChangeFontForAllControls(Control control, Font fontUI)
+        {
+            foreach (Control c in control.Controls)
+            {
+                c.Font = fontUI;
+                if (c.Controls.Count > 0)
+                {
+                    ChangeFontForAllControls(c, fontUI);
+                }
             }
         }
     }

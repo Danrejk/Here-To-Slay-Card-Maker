@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Menu));
             RENDER = new Button();
             language = new ComboBox();
             leaderNameText = new TextBox();
@@ -49,8 +48,6 @@
             gitLabel2 = new LinkLabel();
             gitLabel1 = new LinkLabel();
             wordSplitting = new CheckBox();
-            classIcons = new ImageList(components);
-            langIcons = new ImageList(components);
             SaveRenderDialog = new SaveFileDialog();
             leaderImgToolTip = new ToolTip(components);
             advancedNameBox = new FlowLayoutPanel();
@@ -327,19 +324,6 @@
             wordSplitting.Text = "Word Splitting";
             wordSplitting.UseVisualStyleBackColor = false;
             // 
-            // classIcons
-            // 
-            classIcons.ColorDepth = ColorDepth.Depth8Bit;
-            classIcons.ImageStream = (ImageListStreamer)resources.GetObject("classIcons.ImageStream");
-            classIcons.TransparentColor = Color.Transparent;
-            classIcons.Images.SetKeyName(0, "Warrior.png");
-            // 
-            // langIcons
-            // 
-            langIcons.ColorDepth = ColorDepth.Depth8Bit;
-            langIcons.ImageSize = new Size(16, 16);
-            langIcons.TransparentColor = Color.Transparent;
-            // 
             // leaderImgToolTip
             // 
             leaderImgToolTip.AutoPopDelay = 5000;
@@ -531,8 +515,6 @@
         private LinkLabel gitLabel2;
         private LinkLabel gitLabel1;
         private CheckBox wordSplitting;
-        private ImageList classIcons;
-        private ImageList langIcons;
         private SaveFileDialog SaveRenderDialog;
         private ToolTip leaderImgToolTip;
         private FlowLayoutPanel advancedNameBox;

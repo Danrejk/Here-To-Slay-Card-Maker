@@ -221,16 +221,6 @@ namespace HereToSlay.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap pl {
-            get {
-                object obj = ResourceManager.GetObject("pl", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         internal static byte[] SourceSansPro {
@@ -247,16 +237,6 @@ namespace HereToSlay.Properties {
             get {
                 object obj = ResourceManager.GetObject("straznik", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap uk {
-            get {
-                object obj = ResourceManager.GetObject("uk", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
