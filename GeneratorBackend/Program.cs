@@ -79,18 +79,20 @@ namespace GeneratorBackend
         {
             AssetManager inst = AssetManager.Instance;
 
-            Raylib_cs.Image leader;
-
+            Raylib_cs.Image leader = new();
             Image<Rgba32> image;
-            using (var fs = System.IO.File.OpenRead(leaderImg))
+            if (File.Exists(leaderImg))
             {
-                image = SixLabors.ImageSharp.Image.Load<Rgba32>(fs);
-            }
-            using (var memoryStream = new System.IO.MemoryStream())
-            {
-                image.SaveAsPng(memoryStream);
-                memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
-                leader = Raylib.LoadImageFromMemory(".png", memoryStream.ToArray());
+                using (var file = File.OpenRead(leaderImg))
+                {
+                    image = SixLabors.ImageSharp.Image.Load<Rgba32>(file);
+                }
+                using (var memoryStream = new MemoryStream())
+                {
+                    image.SaveAsPng(memoryStream);
+                    memoryStream.Seek(0, SeekOrigin.Begin);
+                    leader = Raylib.LoadImageFromMemory(".png", memoryStream.ToArray());
+                }
             }
 
             //Raylib_cs.Image leader = Raylib.LoadImage(leaderImg);
