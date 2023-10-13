@@ -217,7 +217,7 @@ namespace HereToSlay
         {
             using OpenFileDialog openFileDialog = new();
             openFileDialog.Title = "Select a File";
-            openFileDialog.Filter = "Image Files|*.png;*.gif;*.jpg;*bmp;|All Files (*.*)|*.*";
+            openFileDialog.Filter = "Image Files|*.png;*.gif;*.jpg;*.bmp;*.webp;|All Files (*.*)|*.*";
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {

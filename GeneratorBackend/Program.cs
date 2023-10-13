@@ -4,6 +4,9 @@ using System.Resources;
 using System.Text;
 using System.Runtime.InteropServices;
 using Raylib_cs;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
+using SixLabors.ImageSharp.Processing;
 
 namespace GeneratorBackend
 {
@@ -76,7 +79,21 @@ namespace GeneratorBackend
         {
             AssetManager inst = AssetManager.Instance;
 
-            Raylib_cs.Image leader = Raylib.LoadImage(leaderImg);
+            Raylib_cs.Image leader;
+
+            Image<Rgba32> image;
+            using (var fs = System.IO.File.OpenRead(leaderImg))
+            {
+                image = SixLabors.ImageSharp.Image.Load<Rgba32>(fs);
+            }
+            using (var memoryStream = new System.IO.MemoryStream())
+            {
+                image.SaveAsPng(memoryStream);
+                memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
+                leader = Raylib.LoadImageFromMemory(".png", memoryStream.ToArray());
+            }
+
+            //Raylib_cs.Image leader = Raylib.LoadImage(leaderImg);
             Raylib_cs.Image card = Raylib.LoadImage("template/background.png");
             Raylib_cs.Image? gradient = null;
             if (addGradient) { gradient = Raylib.LoadImage("template/gradient.png"); }
