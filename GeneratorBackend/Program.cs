@@ -10,8 +10,8 @@ namespace GeneratorBackend
     public class AssetManager
     {
         private static AssetManager? instance;
-        public Image frame { get; private set; }
-        public Image bottom { get; private set; }
+        public Raylib_cs.Image frame { get; private set; }
+        public Raylib_cs.Image bottom { get; private set; }
         public Font nameFont { get; private set; }
         public Font titleFont { get; private set; }
         public Font descFont { get; private set; }
@@ -76,13 +76,13 @@ namespace GeneratorBackend
         {
             AssetManager inst = AssetManager.Instance;
 
-            Image leader = Raylib.LoadImage(leaderImg);
-            Image card = Raylib.LoadImage("template/background.png");
-            Image? gradient = null;
+            Raylib_cs.Image leader = Raylib.LoadImage(leaderImg);
+            Raylib_cs.Image card = Raylib.LoadImage("template/background.png");
+            Raylib_cs.Image? gradient = null;
             if (addGradient) { gradient = Raylib.LoadImage("template/gradient.png"); }
 
-            Image classSymbol;
-            Color desiredColor;
+            Raylib_cs.Image classSymbol;
+            Raylib_cs.Color desiredColor;
             string leaderTitle;
 
             switch (desiredClass)
@@ -173,8 +173,8 @@ namespace GeneratorBackend
                     break;
             }
 
-            Image secondClassSymbol = new();
-            Color desiredSecondColor = new();
+            Raylib_cs.Image secondClassSymbol = new();
+            Raylib_cs.Color desiredSecondColor = new();
             if (desiredSecondClass != -1)
             {
                 switch (desiredSecondClass)
@@ -288,15 +288,15 @@ namespace GeneratorBackend
                         desiredSecondColor = new(91, 93, 92, 255);
                         break;
                 }
-                Raylib.ImageCrop(ref secondClassSymbol, new Rectangle(0, 0, 413, 1417));
+                Raylib.ImageCrop(ref secondClassSymbol, new Raylib_cs.Rectangle(0, 0, 413, 1417));
             }
             
             Vector2 leaderNameSize = Raylib.MeasureTextEx(inst.nameFont, leaderName, NAME_SIZE, NAME_FONT_SPACING);
             Vector2 leaderTitleSize = Raylib.MeasureTextEx(inst.titleFont, leaderTitle, TITLE_SIZE, TITLE_FONT_SPACING);
 
-            Rectangle imageRec = new(0, 0, 827, 1417);
+            Raylib_cs.Rectangle imageRec = new(0, 0, 827, 1417);
 
-            #region Image Crop
+            #region Raylib_cs.Image Crop
             float targetAspectRatio = 745.0f / 1176.0f;
             int targetWidth, targetHeight;
             if (leader.width / (float)leader.height > targetAspectRatio)
@@ -313,44 +313,44 @@ namespace GeneratorBackend
             int cropX = (leader.width - targetWidth) / 2;
             int cropY = (leader.height - targetHeight) / 2;
 
-            Raylib.ImageCrop(ref leader, new Rectangle(cropX, cropY, targetWidth, targetHeight));
+            Raylib.ImageCrop(ref leader, new Raylib_cs.Rectangle(cropX, cropY, targetWidth, targetHeight));
             Raylib.ImageResize(ref leader, 745, 1176);
             #endregion
-            Raylib.ImageDraw(ref card, leader, imageRec, new(41, 41, 745, 1176), Color.WHITE);
+            Raylib.ImageDraw(ref card, leader, imageRec, new(41, 41, 745, 1176), Raylib_cs.Color.WHITE);
             Raylib.UnloadImage(leader);
 
-            Image frameTinted = Raylib.ImageCopy(inst.frame);
+            Raylib_cs.Image frameTinted = Raylib.ImageCopy(inst.frame);
             if (desiredSecondClass != -1) {
-                Raylib.ImageCrop(ref frameTinted, new Rectangle(0, 0, 414, 1417));
+                Raylib.ImageCrop(ref frameTinted, new Raylib_cs.Rectangle(0, 0, 414, 1417));
                 Raylib.ImageColorTint(ref frameTinted, desiredColor);
-                Raylib.ImageDraw(ref card, frameTinted, imageRec, new(0, 0, 414, 1417), Color.WHITE);
+                Raylib.ImageDraw(ref card, frameTinted, imageRec, new(0, 0, 414, 1417), Raylib_cs.Color.WHITE);
 
                 frameTinted = Raylib.ImageCopy(inst.frame);
-                Raylib.ImageCrop(ref frameTinted, new Rectangle(413, 0, 414, 1417)); // while the sizes might look irregular. It's all because the image is 827px wide, so I have to compensate the 0,5px offset
+                Raylib.ImageCrop(ref frameTinted, new Raylib_cs.Rectangle(413, 0, 414, 1417)); // while the sizes might look irregular. It's all because the image is 827px wide, so I have to compensate the 0,5px offset
                 Raylib.ImageColorTint(ref frameTinted, desiredSecondColor);
-                Raylib.ImageDraw(ref card, frameTinted, imageRec, new(414, 0, 413, 1417), Color.WHITE);
+                Raylib.ImageDraw(ref card, frameTinted, imageRec, new(414, 0, 413, 1417), Raylib_cs.Color.WHITE);
             }
             else {
                 Raylib.ImageColorTint(ref frameTinted, desiredColor);
-                Raylib.ImageDraw(ref card, frameTinted, imageRec, imageRec, Color.WHITE);
+                Raylib.ImageDraw(ref card, frameTinted, imageRec, imageRec, Raylib_cs.Color.WHITE);
             }
 
-            if (gradient != null) { Raylib.ImageDraw(ref card, (Image)gradient, imageRec, imageRec, Color.WHITE); }
-            Raylib.ImageDraw(ref card, inst.bottom, imageRec, imageRec, Color.WHITE);
+            if (gradient != null) { Raylib.ImageDraw(ref card, (Raylib_cs.Image)gradient, imageRec, imageRec, Raylib_cs.Color.WHITE); }
+            Raylib.ImageDraw(ref card, inst.bottom, imageRec, imageRec, Raylib_cs.Color.WHITE);
 
-            Raylib.ImageDraw(ref card, classSymbol, imageRec, imageRec, Color.WHITE);
-            if (desiredSecondClass != -1){ Raylib.ImageDraw(ref card, secondClassSymbol, imageRec, new(0, 0, 413, 1417), Color.WHITE); }
+            Raylib.ImageDraw(ref card, classSymbol, imageRec, imageRec, Raylib_cs.Color.WHITE);
+            if (desiredSecondClass != -1){ Raylib.ImageDraw(ref card, secondClassSymbol, imageRec, new(0, 0, 413, 1417), Raylib_cs.Color.WHITE); }
 
-            Color leaderColor;
-            Color leaderShadow;
+            Raylib_cs.Color leaderColor;
+            Raylib_cs.Color leaderShadow;
             if (leaderWhite)
             {
-                leaderColor = Color.WHITE;
+                leaderColor = Raylib_cs.Color.WHITE;
                 leaderShadow = new(0, 0, 0, 127);
             }
             else
             {
-                leaderColor = Color.BLACK;
+                leaderColor = Raylib_cs.Color.BLACK;
                 leaderShadow = new(255, 255, 255, 127);
             }
 
@@ -376,7 +376,7 @@ namespace GeneratorBackend
             }
         }
 
-        static void DescriptionDraw(Font font, string text, Image card, Color descColor)
+        static void DescriptionDraw(Font font, string text, Raylib_cs.Image card, Raylib_cs.Color descColor)
         {
             Vector2 textSize = Raylib.MeasureTextEx(font, text, DESC_SIZE, DESC_FONT_SPACING);
 
