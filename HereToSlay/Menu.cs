@@ -48,7 +48,7 @@ namespace HereToSlay
         private void RenderButton_Press(object sender, EventArgs e)
         {
             using SaveFileDialog SaveRenderDialog = new();
-            SaveRenderDialog.Filter = "Image Files (*.png;*.jpeg;*.jpg;*.gif;*.bmp)|*.png;*.jpeg;*.jpg;*.gif;*.bmp|All Files (*.*)|*.*";
+            SaveRenderDialog.Filter = "Supported Image Files (*.png;*.jpeg;*.jpg;*.gif;*.bmp;*.webp;*.pbm;*.tiff;*.tga;)|*.png;*.jpeg;*.jpg;*.gif;*.bmp;*.webp;*.pbm;*.tiff;*.tga;|All Files (*.*)|*.*";
             SaveRenderDialog.FilterIndex = 1;
 
             if (SaveRenderDialog.ShowDialog() == DialogResult.OK)
@@ -107,7 +107,7 @@ namespace HereToSlay
                     labelImg.Text = "Obrazek lidera";
                     labelDescription.Text = "Opis mocy";
                     leaderImgToolTip.ToolTipTitle = "Wymiary obazka";
-                    leaderImgToolTip.SetToolTip(selectImg, "Obrazek lidera (nie ca³a karta) ma wymiary 745x1176. \nProgram automatycznie przytnie i przybli¿y obraz, je¿eli bêdzie to potrzebne.\n\nWspierane rozszerzenia plików: .png, .gif (pierwsza klatka)");
+                    leaderImgToolTip.SetToolTip(selectImg, "Obrazek lidera (nie ca³a karta) ma wymiary 745x1176. \nProgram automatycznie przytnie i przybli¿y obraz, je¿eli bêdzie to potrzebne.\n\nWspierane rozszerzenia plików:\n.png, .jpeg, .jpg, .gif (pierwsza klatka), .bmp, .webp, .pbm, .tiff, .tga");
                     gradient.Text = "Tylni gradient";
                     leaderWhite.Text = "Bia³a nazwa";
                     wordSplitting.Text = "Dzielenie wyrazów";
@@ -121,7 +121,7 @@ namespace HereToSlay
                     labelImg.Text = "Leader image";
                     labelDescription.Text = "Description";
                     leaderImgToolTip.ToolTipTitle = "Image dimentions";
-                    leaderImgToolTip.SetToolTip(selectImg, "The leader image (not the whole card) dimentions are 745x1176. \nThe program will automatically crop and zoom the image, if needed.\n\nSupported file extensions: .png, .gif (first frame)");
+                    leaderImgToolTip.SetToolTip(selectImg, "The leader image (not the whole card) dimentions are 745x1176. \nThe program will automatically crop and zoom the image, if needed.\n\nSupported file extensions:\n.png, .jpeg, .jpg, .gif (first frame), .bmp, .webp, .pbm, .tiff, .tga");
                     gradient.Text = "Back gradient";
                     leaderWhite.Text = "White name";
                     wordSplitting.Text = "Word Splitting";
@@ -183,7 +183,7 @@ namespace HereToSlay
         {
             using OpenFileDialog openFileDialog = new();
             openFileDialog.Title = "Select a File";
-            openFileDialog.Filter = "Image Files|*.png;*.gif;*.jpg;*bmp;|All Files (*.*)|*.*";
+            openFileDialog.Filter = "Supported Image Files (*.png;*.jpeg;*.jpg;*.gif;*.bmp;*.webp;*.pbm;*.tiff;*.tga;)|*.png;*.jpeg;*.jpg;*.gif;*.bmp;*.webp;*.pbm;*.tiff;*.tga;|All Files (*.*)|*.*"; ;
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
