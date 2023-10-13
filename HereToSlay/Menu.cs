@@ -20,13 +20,9 @@ namespace HereToSlay
             InitializeComponent();
             this.Icon = Properties.Resources.LEADER;
 
-            string[] langList = { "English", "Polski" };
-            language.Items.AddRange(langList);
-            language.SelectedIndex = Properties.Settings.Default.Language;
-            initialLang = true;
-
             chosenClass.ItemHeight = 18;
 
+            #region Fonts
             Font fontUI = FontLoader.GetFont(Properties.Resources.SourceSansPro, 10);
             FontLoader.ChangeFontForAllControls(this, fontUI);
             selectImg.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
@@ -42,6 +38,25 @@ namespace HereToSlay
             Font fontLeader = FontLoader.GetFont(Properties.Resources.PatuaOne_polish, 13);
             leaderNameText.Font = fontLeader;
             RENDER.Font = fontLeader;
+            #endregion
+
+            #region ComboBoxes
+#pragma warning disable CS8622 // the warnings were annoying me, so I disabled them
+            language.Alignment = ToolStripItemAlignment.Right;
+            language.ComboBox.DrawMode = DrawMode.OwnerDrawFixed;
+            language.ComboBox.DrawItem += ImageCBox.ComboBox_DrawItem;
+            language.Items.Add(new ImageCBox("English", Properties.Resources.en));
+            language.Items.Add(new ImageCBox("Polski", Properties.Resources.pl));
+            language.SelectedIndex = Properties.Settings.Default.Language;
+            initialLang = true;
+
+            chosenClass.DrawMode = DrawMode.OwnerDrawFixed;
+            chosenClass.DrawItem += ImageCBox.ComboBox_DrawItem;
+
+            chosenSecondClass.DrawMode = DrawMode.OwnerDrawFixed;
+            chosenSecondClass.DrawItem += ImageCBox.ComboBox_DrawItem;
+#pragma warning restore CS8622
+            #endregion
         }
 
         #region The Rendering ones
@@ -142,15 +157,40 @@ namespace HereToSlay
             chosenSecondClass.Items.Clear();
 
 
-            string[] classList = lang switch
+            switch (lang)
             {
-                1 => new string[] { "£owca", "Mag", "Bard", "Stra¿nik", "Wojownik", "Z³odziej", "Druid", "Awanturnik", "Berserk", "Nekromanta", "Czarownik", "BRAK" },
-                _ => new string[] { "Ranger", "Wizard", "Bard", "Guardian", "Fighter", "Thief", "Druid", "Warrior", "Berserker", "Necromancer", "Sorcerer", "NONE" }
-            };
-            chosenClass.Items.AddRange(classList);
+                case 1:
+                    chosenClass.Items.Add(new ImageCBox("£owca", Properties.Resources.lowca.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Mag", Properties.Resources.mag.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Bard", Properties.Resources.najebus.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Stra¿nik", Properties.Resources.straznik.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Wojownik", Properties.Resources.wojownik.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Z³odziej", Properties.Resources.zlodziej.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Druid", Properties.Resources.druid.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Awanturnik", Properties.Resources.awanturnik.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Berserk", Properties.Resources.berserk.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Nekromanta", Properties.Resources.nekromanta.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Czarownik", Properties.Resources.czarownik.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("BRAK", Properties.Resources.empty.ToBitmap()));
+                    break;
+                default:
+                    chosenClass.Items.Add(new ImageCBox("Ranger", Properties.Resources.lowca.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Wizard", Properties.Resources.mag.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Bard", Properties.Resources.najebus.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Guardian", Properties.Resources.straznik.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Fighter", Properties.Resources.wojownik.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Thief", Properties.Resources.zlodziej.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Druid", Properties.Resources.druid.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Warrior", Properties.Resources.awanturnik.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Berserker", Properties.Resources.berserk.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Necromancer", Properties.Resources.nekromanta.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Sorcerer", Properties.Resources.czarownik.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("NONE", Properties.Resources.empty.ToBitmap()));
+                    break;
+            }
             chosenClass.SelectedIndex = currentClassIndex;
 
-            chosenSecondClass.Items.AddRange(classList);
+            foreach (var item in chosenClass.Items) { chosenSecondClass.Items.Add(item); }
             chosenSecondClass.SelectedIndex = currentSecondClassIndex;
         }
         #endregion
@@ -273,6 +313,40 @@ namespace HereToSlay
                     ChangeFontForAllControls(c, fontUI);
                 }
             }
+        }
+    }
+    public class ImageCBox
+    {
+        public string Text { get; set; }
+        public Image Image { get; set; }
+
+        public ImageCBox(string text, Image image)
+        {
+            Text = text;
+            Image = image;
+        }
+
+        public static void ComboBox_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index < 0 || sender == null) return;
+
+            e.DrawBackground();
+
+            if (sender is ComboBox comboBox && comboBox.Items.Count > 0 && comboBox.Items[e.Index] is ImageCBox item)
+            {
+                if (e.Font != null)
+                {
+                    e.Graphics.DrawImage(item.Image, e.Bounds.Left, e.Bounds.Top, e.Bounds.Height, e.Bounds.Height);
+                    e.Graphics.DrawString(item.Text, e.Font, Brushes.Black, e.Bounds.Left + e.Bounds.Height, e.Bounds.Top);
+                }
+            }
+
+            e.DrawFocusRectangle();
+        }
+
+        public override string ToString()
+        {
+            return Text;
         }
     }
 }

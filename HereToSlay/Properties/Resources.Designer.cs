@@ -123,6 +123,16 @@ namespace HereToSlay.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap en {
+            get {
+                object obj = ResourceManager.GetObject("en", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap gradient {
             get {
                 object obj = ResourceManager.GetObject("gradient", resourceCulture);
@@ -217,6 +227,16 @@ namespace HereToSlay.Properties {
             get {
                 object obj = ResourceManager.GetObject("PatuaOne_polish", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pl {
+            get {
+                object obj = ResourceManager.GetObject("pl", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

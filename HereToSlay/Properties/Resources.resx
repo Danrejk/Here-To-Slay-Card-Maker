@@ -136,6 +136,9 @@
   <data name="empty" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\icons\empty.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="en" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\MenuAssets\en.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="gradient" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\MenuAssets\gradient.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -165,6 +168,9 @@
   </data>
   <data name="PatuaOne_polish" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\fonts\PatuaOne-polish.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="pl" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\MenuAssets\pl.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SourceSansPro" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\fonts\SourceSansPro.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
