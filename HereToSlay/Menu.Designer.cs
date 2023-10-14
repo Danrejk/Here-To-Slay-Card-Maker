@@ -73,6 +73,12 @@
             goodOutputText = new TextBox();
             goodOutputSym = new ComboBox();
             goodOutputNum = new NumericUpDown();
+            clearSecondClass = new Button();
+            button1 = new Button();
+            button2 = new Button();
+            button4 = new Button();
+            button5 = new Button();
+            button3 = new Button();
             ((System.ComponentModel.ISupportInitialize)logo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)previewImg).BeginInit();
             advancedNameBox.SuspendLayout();
@@ -91,7 +97,7 @@
             RENDER.FlatAppearance.BorderColor = Color.FromArgb(118, 110, 109);
             RENDER.FlatStyle = FlatStyle.Flat;
             RENDER.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            RENDER.Location = new Point(119, 557);
+            RENDER.Location = new Point(119, 542);
             RENDER.Name = "RENDER";
             RENDER.Size = new Size(175, 75);
             RENDER.TabIndex = 0;
@@ -104,7 +110,7 @@
             leaderNameText.BackColor = Color.White;
             leaderNameText.BorderStyle = BorderStyle.None;
             leaderNameText.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            leaderNameText.Location = new Point(119, 210);
+            leaderNameText.Location = new Point(119, 195);
             leaderNameText.Margin = new Padding(0);
             leaderNameText.Name = "leaderNameText";
             leaderNameText.Size = new Size(175, 22);
@@ -118,7 +124,7 @@
             labelLeader.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             labelLeader.ForeColor = Color.White;
             labelLeader.ImageAlign = ContentAlignment.BottomLeft;
-            labelLeader.Location = new Point(115, 190);
+            labelLeader.Location = new Point(115, 175);
             labelLeader.Margin = new Padding(0);
             labelLeader.Name = "labelLeader";
             labelLeader.Size = new Size(150, 20);
@@ -131,7 +137,7 @@
             labelDescription.BackColor = Color.Transparent;
             labelDescription.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             labelDescription.ForeColor = Color.White;
-            labelDescription.Location = new Point(53, 458);
+            labelDescription.Location = new Point(53, 443);
             labelDescription.Margin = new Padding(0);
             labelDescription.Name = "labelDescription";
             labelDescription.Size = new Size(100, 20);
@@ -158,7 +164,7 @@
             chosenClass.FlatStyle = FlatStyle.Flat;
             chosenClass.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             chosenClass.FormattingEnabled = true;
-            chosenClass.Location = new Point(145, 264);
+            chosenClass.Location = new Point(145, 249);
             chosenClass.Margin = new Padding(0);
             chosenClass.Name = "chosenClass";
             chosenClass.Size = new Size(120, 25);
@@ -170,7 +176,7 @@
             labelClass.BackColor = Color.Transparent;
             labelClass.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             labelClass.ForeColor = Color.FromArgb(245, 240, 232);
-            labelClass.Location = new Point(142, 244);
+            labelClass.Location = new Point(142, 229);
             labelClass.Margin = new Padding(0);
             labelClass.Name = "labelClass";
             labelClass.Size = new Size(100, 20);
@@ -189,7 +195,7 @@
             selectImg.FlatAppearance.BorderColor = Color.White;
             selectImg.FlatStyle = FlatStyle.Flat;
             selectImg.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            selectImg.Location = new Point(270, 364);
+            selectImg.Location = new Point(270, 349);
             selectImg.Margin = new Padding(0);
             selectImg.Name = "selectImg";
             selectImg.Size = new Size(24, 22);
@@ -204,11 +210,11 @@
             selectImgText.BackColor = Color.White;
             selectImgText.BorderStyle = BorderStyle.None;
             selectImgText.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            selectImgText.Location = new Point(119, 364);
+            selectImgText.Location = new Point(119, 349);
             selectImgText.Margin = new Padding(0);
-            selectImgText.Multiline = true;
             selectImgText.Name = "selectImgText";
-            selectImgText.Size = new Size(151, 22);
+            selectImgText.PlaceholderText = "e.g. C:\\Users\\Me\\Downloads\\franki.png";
+            selectImgText.Size = new Size(151, 18);
             selectImgText.TabIndex = 11;
             selectImgText.WordWrap = false;
             selectImgText.TextChanged += renderPreview;
@@ -219,7 +225,7 @@
             labelImg.BackColor = Color.Transparent;
             labelImg.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             labelImg.ForeColor = Color.White;
-            labelImg.Location = new Point(115, 344);
+            labelImg.Location = new Point(115, 329);
             labelImg.Margin = new Padding(0);
             labelImg.Name = "labelImg";
             labelImg.RightToLeft = RightToLeft.No;
@@ -262,7 +268,7 @@
             // 
             descriptionText.BackColor = Color.White;
             descriptionText.BorderStyle = BorderStyle.None;
-            descriptionText.Location = new Point(57, 478);
+            descriptionText.Location = new Point(57, 463);
             descriptionText.Margin = new Padding(0);
             descriptionText.Multiline = true;
             descriptionText.Name = "descriptionText";
@@ -324,7 +330,7 @@
             advancedNameBox.BackColor = Color.Transparent;
             advancedNameBox.Controls.Add(leaderWhite);
             advancedNameBox.Controls.Add(gradient);
-            advancedNameBox.Location = new Point(134, 232);
+            advancedNameBox.Location = new Point(134, 217);
             advancedNameBox.Margin = new Padding(0);
             advancedNameBox.Name = "advancedNameBox";
             advancedNameBox.Size = new Size(197, 18);
@@ -335,7 +341,7 @@
             // 
             advancedName.BackColor = Color.Transparent;
             advancedName.Image = Properties.Resources.closed;
-            advancedName.Location = new Point(119, 234);
+            advancedName.Location = new Point(119, 219);
             advancedName.Name = "advancedName";
             advancedName.Size = new Size(12, 12);
             advancedName.SizeMode = PictureBoxSizeMode.Zoom;
@@ -347,7 +353,7 @@
             // 
             advancedClass.BackColor = Color.Transparent;
             advancedClass.Image = Properties.Resources.closed;
-            advancedClass.Location = new Point(145, 292);
+            advancedClass.Location = new Point(145, 277);
             advancedClass.Name = "advancedClass";
             advancedClass.Size = new Size(12, 12);
             advancedClass.SizeMode = PictureBoxSizeMode.Zoom;
@@ -358,7 +364,7 @@
             // advancedClassBox
             // 
             advancedClassBox.Controls.Add(splitClass);
-            advancedClassBox.Location = new Point(160, 289);
+            advancedClassBox.Location = new Point(160, 274);
             advancedClassBox.Margin = new Padding(0);
             advancedClassBox.Name = "advancedClassBox";
             advancedClassBox.Size = new Size(190, 24);
@@ -386,7 +392,7 @@
             chosenSecondClass.FlatStyle = FlatStyle.Flat;
             chosenSecondClass.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             chosenSecondClass.FormattingEnabled = true;
-            chosenSecondClass.Location = new Point(210, 264);
+            chosenSecondClass.Location = new Point(210, 249);
             chosenSecondClass.Margin = new Padding(0);
             chosenSecondClass.Name = "chosenSecondClass";
             chosenSecondClass.Size = new Size(120, 25);
@@ -399,7 +405,7 @@
             labelSecondClass.BackColor = Color.Transparent;
             labelSecondClass.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             labelSecondClass.ForeColor = Color.FromArgb(245, 240, 232);
-            labelSecondClass.Location = new Point(207, 244);
+            labelSecondClass.Location = new Point(207, 229);
             labelSecondClass.Margin = new Padding(0);
             labelSecondClass.Name = "labelSecondClass";
             labelSecondClass.Size = new Size(100, 20);
@@ -436,7 +442,6 @@
             MonsterCard.RightToLeft = RightToLeft.No;
             MonsterCard.Size = new Size(91, 23);
             MonsterCard.Text = "Monster Card";
-            MonsterCard.Visible = false;
             MonsterCard.Click += MonsterCard_Click;
             // 
             // language
@@ -455,7 +460,8 @@
             heroReq3.FlatStyle = FlatStyle.Flat;
             heroReq3.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             heroReq3.FormattingEnabled = true;
-            heroReq3.Location = new Point(268, 316);
+            heroReq3.Location = new Point(564, 320);
+            heroReq3.Margin = new Padding(3, 3, 0, 3);
             heroReq3.Name = "heroReq3";
             heroReq3.Size = new Size(120, 25);
             heroReq3.TabIndex = 30;
@@ -468,7 +474,8 @@
             heroReq2.FlatStyle = FlatStyle.Flat;
             heroReq2.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             heroReq2.FormattingEnabled = true;
-            heroReq2.Location = new Point(142, 316);
+            heroReq2.Location = new Point(632, 264);
+            heroReq2.Margin = new Padding(3, 3, 0, 3);
             heroReq2.Name = "heroReq2";
             heroReq2.Size = new Size(120, 25);
             heroReq2.TabIndex = 31;
@@ -481,7 +488,8 @@
             heroReq1.FlatStyle = FlatStyle.Flat;
             heroReq1.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             heroReq1.FormattingEnabled = true;
-            heroReq1.Location = new Point(16, 316);
+            heroReq1.Location = new Point(495, 264);
+            heroReq1.Margin = new Padding(3, 3, 0, 3);
             heroReq1.Name = "heroReq1";
             heroReq1.Size = new Size(120, 25);
             heroReq1.TabIndex = 32;
@@ -494,7 +502,8 @@
             heroReq4.FlatStyle = FlatStyle.Flat;
             heroReq4.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             heroReq4.FormattingEnabled = true;
-            heroReq4.Location = new Point(79, 347);
+            heroReq4.Location = new Point(495, 292);
+            heroReq4.Margin = new Padding(3, 3, 0, 3);
             heroReq4.Name = "heroReq4";
             heroReq4.Size = new Size(120, 25);
             heroReq4.TabIndex = 33;
@@ -506,7 +515,7 @@
             labelReq.BackColor = Color.Transparent;
             labelReq.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             labelReq.ForeColor = Color.White;
-            labelReq.Location = new Point(13, 296);
+            labelReq.Location = new Point(492, 244);
             labelReq.Margin = new Padding(0);
             labelReq.Name = "labelReq";
             labelReq.RightToLeft = RightToLeft.No;
@@ -523,7 +532,8 @@
             heroReq5.FlatStyle = FlatStyle.Flat;
             heroReq5.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             heroReq5.FormattingEnabled = true;
-            heroReq5.Location = new Point(205, 347);
+            heroReq5.Location = new Point(632, 292);
+            heroReq5.Margin = new Padding(3, 3, 0, 3);
             heroReq5.Name = "heroReq5";
             heroReq5.Size = new Size(120, 25);
             heroReq5.TabIndex = 35;
@@ -532,9 +542,9 @@
             // badOutputNum
             // 
             badOutputNum.BorderStyle = BorderStyle.FixedSingle;
-            badOutputNum.Location = new Point(328, 397);
+            badOutputNum.Location = new Point(326, 397);
             badOutputNum.Name = "badOutputNum";
-            badOutputNum.Size = new Size(33, 23);
+            badOutputNum.Size = new Size(35, 23);
             badOutputNum.TabIndex = 36;
             badOutputNum.TextAlign = HorizontalAlignment.Center;
             badOutputNum.Visible = false;
@@ -542,17 +552,23 @@
             // badOutputSym
             // 
             badOutputSym.DropDownStyle = ComboBoxStyle.DropDownList;
+            badOutputSym.FlatStyle = FlatStyle.Flat;
+            badOutputSym.ForeColor = Color.White;
             badOutputSym.FormattingEnabled = true;
-            badOutputSym.Items.AddRange(new object[] { "+", "-" });
             badOutputSym.Location = new Point(360, 397);
+            badOutputSym.Margin = new Padding(0);
             badOutputSym.Name = "badOutputSym";
-            badOutputSym.Size = new Size(30, 23);
+            badOutputSym.Size = new Size(35, 23);
             badOutputSym.TabIndex = 37;
             badOutputSym.Visible = false;
+            badOutputSym.SelectedIndexChanged += OutputSym_SelectedIndexChanged;
             // 
             // badOutputText
             // 
-            badOutputText.Location = new Point(396, 397);
+            badOutputText.BorderStyle = BorderStyle.None;
+            badOutputText.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            badOutputText.Location = new Point(414, 398);
+            badOutputText.Multiline = true;
             badOutputText.Name = "badOutputText";
             badOutputText.Size = new Size(146, 23);
             badOutputText.TabIndex = 38;
@@ -584,40 +600,150 @@
             labelGood.Margin = new Padding(0);
             labelGood.Name = "labelGood";
             labelGood.RightToLeft = RightToLeft.No;
-            labelGood.Size = new Size(135, 20);
+            labelGood.Size = new Size(181, 20);
             labelGood.TabIndex = 43;
-            labelGood.Text = "Success Condition";
+            labelGood.Text = "Kill Monster Condition";
             labelGood.TextAlign = ContentAlignment.BottomLeft;
             labelGood.Visible = false;
             // 
             // goodOutputText
             // 
-            goodOutputText.Location = new Point(396, 444);
+            goodOutputText.BorderStyle = BorderStyle.None;
+            goodOutputText.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            goodOutputText.Location = new Point(414, 445);
+            goodOutputText.Multiline = true;
             goodOutputText.Name = "goodOutputText";
             goodOutputText.Size = new Size(146, 23);
             goodOutputText.TabIndex = 42;
+            goodOutputText.Text = "UBIJ tego potwora.";
             goodOutputText.Visible = false;
             // 
             // goodOutputSym
             // 
             goodOutputSym.DropDownStyle = ComboBoxStyle.DropDownList;
+            goodOutputSym.FlatStyle = FlatStyle.Flat;
+            goodOutputSym.ForeColor = Color.White;
             goodOutputSym.FormattingEnabled = true;
-            goodOutputSym.Items.AddRange(new object[] { "+", "-" });
             goodOutputSym.Location = new Point(360, 444);
+            goodOutputSym.Margin = new Padding(0);
             goodOutputSym.Name = "goodOutputSym";
-            goodOutputSym.Size = new Size(30, 23);
+            goodOutputSym.Size = new Size(35, 23);
             goodOutputSym.TabIndex = 41;
             goodOutputSym.Visible = false;
+            goodOutputSym.SelectedIndexChanged += OutputSym_SelectedIndexChanged;
             // 
             // goodOutputNum
             // 
             goodOutputNum.BorderStyle = BorderStyle.FixedSingle;
-            goodOutputNum.Location = new Point(328, 444);
+            goodOutputNum.Location = new Point(326, 444);
             goodOutputNum.Name = "goodOutputNum";
-            goodOutputNum.Size = new Size(33, 23);
+            goodOutputNum.Size = new Size(35, 23);
             goodOutputNum.TabIndex = 40;
             goodOutputNum.TextAlign = HorizontalAlignment.Center;
             goodOutputNum.Visible = false;
+            // 
+            // clearSecondClass
+            // 
+            clearSecondClass.Anchor = AnchorStyles.None;
+            clearSecondClass.BackColor = SystemColors.ControlLight;
+            clearSecondClass.FlatAppearance.BorderSize = 0;
+            clearSecondClass.FlatStyle = FlatStyle.Flat;
+            clearSecondClass.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            clearSecondClass.ForeColor = Color.FromArgb(230, 44, 47);
+            clearSecondClass.Location = new Point(330, 249);
+            clearSecondClass.Margin = new Padding(0);
+            clearSecondClass.Name = "clearSecondClass";
+            clearSecondClass.Size = new Size(15, 25);
+            clearSecondClass.TabIndex = 44;
+            clearSecondClass.Text = "X";
+            clearSecondClass.UseVisualStyleBackColor = false;
+            clearSecondClass.Visible = false;
+            clearSecondClass.Click += button1_Click;
+            // 
+            // button1
+            // 
+            button1.Anchor = AnchorStyles.None;
+            button1.BackColor = SystemColors.ControlLight;
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            button1.ForeColor = Color.FromArgb(230, 44, 47);
+            button1.Location = new Point(614, 264);
+            button1.Margin = new Padding(0);
+            button1.Name = "button1";
+            button1.Size = new Size(15, 25);
+            button1.TabIndex = 45;
+            button1.Text = "X";
+            button1.UseVisualStyleBackColor = false;
+            button1.Visible = false;
+            // 
+            // button2
+            // 
+            button2.Anchor = AnchorStyles.None;
+            button2.BackColor = SystemColors.ControlLight;
+            button2.FlatAppearance.BorderSize = 0;
+            button2.FlatStyle = FlatStyle.Flat;
+            button2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            button2.ForeColor = Color.FromArgb(230, 44, 47);
+            button2.Location = new Point(751, 264);
+            button2.Margin = new Padding(0);
+            button2.Name = "button2";
+            button2.Size = new Size(15, 25);
+            button2.TabIndex = 46;
+            button2.Text = "X";
+            button2.UseVisualStyleBackColor = false;
+            button2.Visible = false;
+            // 
+            // button4
+            // 
+            button4.Anchor = AnchorStyles.None;
+            button4.BackColor = SystemColors.ControlLight;
+            button4.FlatAppearance.BorderSize = 0;
+            button4.FlatStyle = FlatStyle.Flat;
+            button4.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            button4.ForeColor = Color.FromArgb(230, 44, 47);
+            button4.Location = new Point(751, 292);
+            button4.Margin = new Padding(0);
+            button4.Name = "button4";
+            button4.Size = new Size(15, 25);
+            button4.TabIndex = 48;
+            button4.Text = "X";
+            button4.UseVisualStyleBackColor = false;
+            button4.Visible = false;
+            // 
+            // button5
+            // 
+            button5.Anchor = AnchorStyles.None;
+            button5.BackColor = SystemColors.ControlLight;
+            button5.FlatAppearance.BorderSize = 0;
+            button5.FlatStyle = FlatStyle.Flat;
+            button5.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            button5.ForeColor = Color.FromArgb(230, 44, 47);
+            button5.Location = new Point(684, 320);
+            button5.Margin = new Padding(0);
+            button5.Name = "button5";
+            button5.Size = new Size(15, 25);
+            button5.TabIndex = 49;
+            button5.Text = "X";
+            button5.UseVisualStyleBackColor = false;
+            button5.Visible = false;
+            // 
+            // button3
+            // 
+            button3.Anchor = AnchorStyles.None;
+            button3.BackColor = SystemColors.ControlLight;
+            button3.FlatAppearance.BorderSize = 0;
+            button3.FlatStyle = FlatStyle.Flat;
+            button3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            button3.ForeColor = Color.FromArgb(230, 44, 47);
+            button3.Location = new Point(614, 292);
+            button3.Margin = new Padding(0);
+            button3.Name = "button3";
+            button3.Size = new Size(15, 25);
+            button3.TabIndex = 47;
+            button3.Text = "X";
+            button3.UseVisualStyleBackColor = false;
+            button3.Visible = false;
             // 
             // Menu
             // 
@@ -626,6 +752,18 @@
             BackColor = Color.FromArgb(39, 43, 52);
             BackgroundImage = Properties.Resources.gradient;
             ClientSize = new Size(828, 711);
+            Controls.Add(button5);
+            Controls.Add(button4);
+            Controls.Add(button3);
+            Controls.Add(button2);
+            Controls.Add(button1);
+            Controls.Add(heroReq5);
+            Controls.Add(labelReq);
+            Controls.Add(heroReq4);
+            Controls.Add(heroReq1);
+            Controls.Add(heroReq2);
+            Controls.Add(heroReq3);
+            Controls.Add(clearSecondClass);
             Controls.Add(labelGood);
             Controls.Add(goodOutputText);
             Controls.Add(goodOutputSym);
@@ -655,12 +793,6 @@
             Controls.Add(labelClass);
             Controls.Add(menuStrip1);
             Controls.Add(previewImg);
-            Controls.Add(heroReq5);
-            Controls.Add(labelReq);
-            Controls.Add(heroReq4);
-            Controls.Add(heroReq1);
-            Controls.Add(heroReq2);
-            Controls.Add(heroReq3);
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MainMenuStrip = menuStrip1;
@@ -735,5 +867,11 @@
         private TextBox goodOutputText;
         private ComboBox goodOutputSym;
         private NumericUpDown goodOutputNum;
+        private Button clearSecondClass;
+        private Button button1;
+        private Button button2;
+        private Button button4;
+        private Button button5;
+        private Button button3;
     }
 }
