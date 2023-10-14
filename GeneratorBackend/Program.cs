@@ -403,22 +403,17 @@ namespace GeneratorBackend
             int targetLen = CARD_WIDTH - (DESC_MARGIN * 2);
             int targetLines = 1;
             int currentLine = 0;
-            //int outputPointer = 0;
-            //int lastSpace;
 
             StringBuilder output = new(len);
             StringBuilder word = new(len);
-            //string word = "";
-            string dash = "-";
-            //string space = " ";
 
-            Vector2 dashLen = Raylib.MeasureTextEx(font, dash, DESC_SIZE, DESC_FONT_SPACING);
-            //Vector2 spaceLen = Raylib.MeasureTextEx(font, space, DESC_SIZE, DESC_FONT_SPACING);
             Vector2 wordLen = Raylib.MeasureTextEx(font, word.ToString(), DESC_SIZE, DESC_FONT_SPACING);
             Vector2 currentLen = Raylib.MeasureTextEx(font, output.ToString(), DESC_SIZE, DESC_FONT_SPACING);
 
             for (int i = 0; i < len; i++)
             {
+                currentLen = Raylib.MeasureTextEx(font, output.ToString(), DESC_SIZE, DESC_FONT_SPACING);
+
                 if (text[i] != ' ')
                 {
                     word.Append(text[i]);
@@ -431,8 +426,6 @@ namespace GeneratorBackend
                     word.Clear();
                 }
 
-                currentLen = Raylib.MeasureTextEx(font, output.ToString(), DESC_SIZE, DESC_FONT_SPACING);
-
                 if (currentLen.X + wordLen.X >= targetLen)
                 {
                     targetLines++;
@@ -443,19 +436,16 @@ namespace GeneratorBackend
             output.Clear();
             word.Clear();
 
-            /*if (targetLines < 1) { targetLines = 1; }
-            else { targetLines++; }*/
-
             int offset = 210 - (targetLines * 15); // I'm not sure why it's like this, but this does match the apperance on the real cards. maybe some other code is goofy, but if it works it works.
             float textBlockCenter = ((offset - (targetLines * (DESC_SIZE + DESC_LINE_SPACING))) / 2) + DESC_LINE_SPACING;
 
             for (int i = 0; i < len; i++)
             {
-                //if (text[i] == ' ') { lastSpace = i; }
+                currentLen = Raylib.MeasureTextEx(font, output.ToString(), DESC_SIZE, DESC_FONT_SPACING);
+
                 if (text[i] != ' ')
                 {
                     word.Append(text[i]);
-                    //output.Append(text[i]);
                     wordLen = Raylib.MeasureTextEx(font, word.ToString(), DESC_SIZE, DESC_FONT_SPACING);
                 }
                 else if (text[i] == ' ' && currentLen.X + wordLen.X <= targetLen) 
@@ -464,19 +454,13 @@ namespace GeneratorBackend
                     output.Append(' ');
                     word.Clear();
                 }
-                
-                currentLen = Raylib.MeasureTextEx(font, output.ToString(), DESC_SIZE, DESC_FONT_SPACING);
-                //outputPointer++;
 
-                //if (currentLen.X + dashLen.X >= targetLen)
                 if (currentLen.X + wordLen.X >= targetLen)
                 {
-                    //output.Append(dash);
-                    Raylib.ImageDrawTextEx(ref card, font, output.ToString() /*+ word.ToString()*/, new Vector2(DESC_MARGIN, (CARD_HEIGHT - offset) + textBlockCenter + ((textSize.Y - 5 + DESC_LINE_SPACING) * currentLine)), DESC_SIZE, DESC_FONT_SPACING, descColor);
+                    Raylib.ImageDrawTextEx(ref card, font, output.ToString(), new Vector2(DESC_MARGIN, (CARD_HEIGHT - offset) + textBlockCenter + ((textSize.Y - 5 + DESC_LINE_SPACING) * currentLine)), DESC_SIZE, DESC_FONT_SPACING, descColor);
 
                     output.Clear();
                     currentLine++;
-                    //outputPointer = 0;
                 }
             }
 
