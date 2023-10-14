@@ -152,6 +152,7 @@ namespace HereToSlay
                     gradient.Text = "Tylni gradient";
                     leaderWhite.Text = "Bia³a nazwa";
                     splitClass.Text = "Podwójna Klasa";
+                    this.Text = "To ja go tnê - Generator kart";
                     break;
                 default:
                     logo.Image = Properties.Resources.Logo0;
@@ -165,6 +166,7 @@ namespace HereToSlay
                     gradient.Text = "Back gradient";
                     leaderWhite.Text = "White name";
                     splitClass.Text = "Split Class";
+                    this.Text = "Here to Slay - Card generator";
                     break;
             }
             LocaliseClassOptions(language.SelectedIndex); // change class options based on selected language
