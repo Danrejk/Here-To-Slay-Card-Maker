@@ -74,11 +74,11 @@
             goodOutputSym = new ComboBox();
             goodOutputNum = new NumericUpDown();
             clearSecondClass = new Button();
-            button1 = new Button();
-            button2 = new Button();
-            button4 = new Button();
-            button5 = new Button();
-            button3 = new Button();
+            clearHeroReq1 = new Button();
+            clearHeroReq2 = new Button();
+            clearHeroReq4 = new Button();
+            clearHeroReq5 = new Button();
+            clearHeroReq3 = new Button();
             ((System.ComponentModel.ISupportInitialize)logo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)previewImg).BeginInit();
             advancedNameBox.SuspendLayout();
@@ -442,6 +442,7 @@
             MonsterCard.RightToLeft = RightToLeft.No;
             MonsterCard.Size = new Size(91, 23);
             MonsterCard.Text = "Monster Card";
+            MonsterCard.Visible = false;
             MonsterCard.Click += MonsterCard_Click;
             // 
             // language
@@ -460,7 +461,7 @@
             heroReq3.FlatStyle = FlatStyle.Flat;
             heroReq3.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             heroReq3.FormattingEnabled = true;
-            heroReq3.Location = new Point(564, 320);
+            heroReq3.Location = new Point(495, 292);
             heroReq3.Margin = new Padding(3, 3, 0, 3);
             heroReq3.Name = "heroReq3";
             heroReq3.Size = new Size(120, 25);
@@ -502,7 +503,7 @@
             heroReq4.FlatStyle = FlatStyle.Flat;
             heroReq4.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             heroReq4.FormattingEnabled = true;
-            heroReq4.Location = new Point(495, 292);
+            heroReq4.Location = new Point(632, 292);
             heroReq4.Margin = new Padding(3, 3, 0, 3);
             heroReq4.Name = "heroReq4";
             heroReq4.Size = new Size(120, 25);
@@ -532,7 +533,7 @@
             heroReq5.FlatStyle = FlatStyle.Flat;
             heroReq5.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             heroReq5.FormattingEnabled = true;
-            heroReq5.Location = new Point(632, 292);
+            heroReq5.Location = new Point(564, 320);
             heroReq5.Margin = new Padding(3, 3, 0, 3);
             heroReq5.Name = "heroReq5";
             heroReq5.Size = new Size(120, 25);
@@ -660,90 +661,90 @@
             clearSecondClass.Visible = false;
             clearSecondClass.Click += button1_Click;
             // 
-            // button1
+            // clearHeroReq1
             // 
-            button1.Anchor = AnchorStyles.None;
-            button1.BackColor = SystemColors.ControlLight;
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            button1.ForeColor = Color.FromArgb(230, 44, 47);
-            button1.Location = new Point(614, 264);
-            button1.Margin = new Padding(0);
-            button1.Name = "button1";
-            button1.Size = new Size(15, 25);
-            button1.TabIndex = 45;
-            button1.Text = "X";
-            button1.UseVisualStyleBackColor = false;
-            button1.Visible = false;
+            clearHeroReq1.Anchor = AnchorStyles.None;
+            clearHeroReq1.BackColor = SystemColors.ControlLight;
+            clearHeroReq1.FlatAppearance.BorderSize = 0;
+            clearHeroReq1.FlatStyle = FlatStyle.Flat;
+            clearHeroReq1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            clearHeroReq1.ForeColor = Color.FromArgb(230, 44, 47);
+            clearHeroReq1.Location = new Point(614, 264);
+            clearHeroReq1.Margin = new Padding(0);
+            clearHeroReq1.Name = "clearHeroReq1";
+            clearHeroReq1.Size = new Size(15, 25);
+            clearHeroReq1.TabIndex = 45;
+            clearHeroReq1.Text = "X";
+            clearHeroReq1.UseVisualStyleBackColor = false;
+            clearHeroReq1.Visible = false;
             // 
-            // button2
+            // clearHeroReq2
             // 
-            button2.Anchor = AnchorStyles.None;
-            button2.BackColor = SystemColors.ControlLight;
-            button2.FlatAppearance.BorderSize = 0;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            button2.ForeColor = Color.FromArgb(230, 44, 47);
-            button2.Location = new Point(751, 264);
-            button2.Margin = new Padding(0);
-            button2.Name = "button2";
-            button2.Size = new Size(15, 25);
-            button2.TabIndex = 46;
-            button2.Text = "X";
-            button2.UseVisualStyleBackColor = false;
-            button2.Visible = false;
+            clearHeroReq2.Anchor = AnchorStyles.None;
+            clearHeroReq2.BackColor = SystemColors.ControlLight;
+            clearHeroReq2.FlatAppearance.BorderSize = 0;
+            clearHeroReq2.FlatStyle = FlatStyle.Flat;
+            clearHeroReq2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            clearHeroReq2.ForeColor = Color.FromArgb(230, 44, 47);
+            clearHeroReq2.Location = new Point(751, 264);
+            clearHeroReq2.Margin = new Padding(0);
+            clearHeroReq2.Name = "clearHeroReq2";
+            clearHeroReq2.Size = new Size(15, 25);
+            clearHeroReq2.TabIndex = 46;
+            clearHeroReq2.Text = "X";
+            clearHeroReq2.UseVisualStyleBackColor = false;
+            clearHeroReq2.Visible = false;
             // 
-            // button4
+            // clearHeroReq4
             // 
-            button4.Anchor = AnchorStyles.None;
-            button4.BackColor = SystemColors.ControlLight;
-            button4.FlatAppearance.BorderSize = 0;
-            button4.FlatStyle = FlatStyle.Flat;
-            button4.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            button4.ForeColor = Color.FromArgb(230, 44, 47);
-            button4.Location = new Point(751, 292);
-            button4.Margin = new Padding(0);
-            button4.Name = "button4";
-            button4.Size = new Size(15, 25);
-            button4.TabIndex = 48;
-            button4.Text = "X";
-            button4.UseVisualStyleBackColor = false;
-            button4.Visible = false;
+            clearHeroReq4.Anchor = AnchorStyles.None;
+            clearHeroReq4.BackColor = SystemColors.ControlLight;
+            clearHeroReq4.FlatAppearance.BorderSize = 0;
+            clearHeroReq4.FlatStyle = FlatStyle.Flat;
+            clearHeroReq4.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            clearHeroReq4.ForeColor = Color.FromArgb(230, 44, 47);
+            clearHeroReq4.Location = new Point(751, 292);
+            clearHeroReq4.Margin = new Padding(0);
+            clearHeroReq4.Name = "clearHeroReq4";
+            clearHeroReq4.Size = new Size(15, 25);
+            clearHeroReq4.TabIndex = 48;
+            clearHeroReq4.Text = "X";
+            clearHeroReq4.UseVisualStyleBackColor = false;
+            clearHeroReq4.Visible = false;
             // 
-            // button5
+            // clearHeroReq5
             // 
-            button5.Anchor = AnchorStyles.None;
-            button5.BackColor = SystemColors.ControlLight;
-            button5.FlatAppearance.BorderSize = 0;
-            button5.FlatStyle = FlatStyle.Flat;
-            button5.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            button5.ForeColor = Color.FromArgb(230, 44, 47);
-            button5.Location = new Point(684, 320);
-            button5.Margin = new Padding(0);
-            button5.Name = "button5";
-            button5.Size = new Size(15, 25);
-            button5.TabIndex = 49;
-            button5.Text = "X";
-            button5.UseVisualStyleBackColor = false;
-            button5.Visible = false;
+            clearHeroReq5.Anchor = AnchorStyles.None;
+            clearHeroReq5.BackColor = SystemColors.ControlLight;
+            clearHeroReq5.FlatAppearance.BorderSize = 0;
+            clearHeroReq5.FlatStyle = FlatStyle.Flat;
+            clearHeroReq5.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            clearHeroReq5.ForeColor = Color.FromArgb(230, 44, 47);
+            clearHeroReq5.Location = new Point(684, 320);
+            clearHeroReq5.Margin = new Padding(0);
+            clearHeroReq5.Name = "clearHeroReq5";
+            clearHeroReq5.Size = new Size(15, 25);
+            clearHeroReq5.TabIndex = 49;
+            clearHeroReq5.Text = "X";
+            clearHeroReq5.UseVisualStyleBackColor = false;
+            clearHeroReq5.Visible = false;
             // 
-            // button3
+            // clearHeroReq3
             // 
-            button3.Anchor = AnchorStyles.None;
-            button3.BackColor = SystemColors.ControlLight;
-            button3.FlatAppearance.BorderSize = 0;
-            button3.FlatStyle = FlatStyle.Flat;
-            button3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            button3.ForeColor = Color.FromArgb(230, 44, 47);
-            button3.Location = new Point(614, 292);
-            button3.Margin = new Padding(0);
-            button3.Name = "button3";
-            button3.Size = new Size(15, 25);
-            button3.TabIndex = 47;
-            button3.Text = "X";
-            button3.UseVisualStyleBackColor = false;
-            button3.Visible = false;
+            clearHeroReq3.Anchor = AnchorStyles.None;
+            clearHeroReq3.BackColor = SystemColors.ControlLight;
+            clearHeroReq3.FlatAppearance.BorderSize = 0;
+            clearHeroReq3.FlatStyle = FlatStyle.Flat;
+            clearHeroReq3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            clearHeroReq3.ForeColor = Color.FromArgb(230, 44, 47);
+            clearHeroReq3.Location = new Point(614, 292);
+            clearHeroReq3.Margin = new Padding(0);
+            clearHeroReq3.Name = "clearHeroReq3";
+            clearHeroReq3.Size = new Size(15, 25);
+            clearHeroReq3.TabIndex = 47;
+            clearHeroReq3.Text = "X";
+            clearHeroReq3.UseVisualStyleBackColor = false;
+            clearHeroReq3.Visible = false;
             // 
             // Menu
             // 
@@ -752,11 +753,11 @@
             BackColor = Color.FromArgb(39, 43, 52);
             BackgroundImage = Properties.Resources.gradient;
             ClientSize = new Size(828, 711);
-            Controls.Add(button5);
-            Controls.Add(button4);
-            Controls.Add(button3);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(clearHeroReq5);
+            Controls.Add(clearHeroReq4);
+            Controls.Add(clearHeroReq3);
+            Controls.Add(clearHeroReq2);
+            Controls.Add(clearHeroReq1);
             Controls.Add(heroReq5);
             Controls.Add(labelReq);
             Controls.Add(heroReq4);
@@ -868,10 +869,10 @@
         private ComboBox goodOutputSym;
         private NumericUpDown goodOutputNum;
         private Button clearSecondClass;
-        private Button button1;
-        private Button button2;
-        private Button button4;
-        private Button button5;
-        private Button button3;
+        private Button clearHeroReq1;
+        private Button clearHeroReq2;
+        private Button clearHeroReq4;
+        private Button clearHeroReq5;
+        private Button clearHeroReq3;
     }
 }

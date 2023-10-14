@@ -60,10 +60,16 @@ namespace HereToSlay
             badOutputSym.DrawMode = DrawMode.OwnerDrawFixed;
             badOutputSym.DrawItem += CustomComboBox.ComboBox_DrawItem;
             badOutputSym.Items.Add(new CustomComboBox("+", Color.FromArgb(109, 166, 88)));
+            badOutputSym.Items.Add(new CustomComboBox("-", Color.FromArgb(230, 44, 47)));
+            badOutputSym.SelectedIndex = 1;
+
 
             goodOutputSym.DrawMode = DrawMode.OwnerDrawFixed;
             goodOutputSym.DrawItem += CustomComboBox.ComboBox_DrawItem;
-            badOutputSym.Items.Add(new CustomComboBox("-", Color.FromArgb(230, 44, 47)));
+            goodOutputSym.Items.Add(new CustomComboBox("+", Color.FromArgb(109, 166, 88)));
+            goodOutputSym.Items.Add(new CustomComboBox("-", Color.FromArgb(230, 44, 47)));
+            goodOutputSym.SelectedIndex = 0;
+
 
 #pragma warning restore CS8622
             #endregion
@@ -346,6 +352,11 @@ namespace HereToSlay
                 goodOutputText.Visible = false;
                 goodOutputNum.Visible = false;
                 goodOutputSym.Visible = false;
+
+                foreach (Control c in this.Controls)
+                {
+                    if (c.Name.Contains("clear")) { c.Visible = false; };
+                }
             }
         }
         private void MonsterCard_Click(object? sender, EventArgs? e)
@@ -386,6 +397,10 @@ namespace HereToSlay
                 goodOutputNum.Visible = true;
                 goodOutputSym.Visible = true;
 
+                foreach (Control c in this.Controls)
+                {
+                    if (c.Name.Contains("clear") && c.Name != "clearSecondClass") { c.Visible = true; };
+                }
             }
         }
 
@@ -426,7 +441,7 @@ namespace HereToSlay
         {
             foreach (Control c in control.Controls)
             {
-                if (!c.Name.Contains("clear")) // don't change the font for the X boxes
+                if (!c.Name.Contains("clear") && c.Name != "clearSecondClass") // don't change the font for the X boxes
                 {
                     c.Font = fontUI;
                     if (c.Controls.Count > 0)
