@@ -212,9 +212,10 @@
             selectImgText.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             selectImgText.Location = new Point(119, 349);
             selectImgText.Margin = new Padding(0);
+            selectImgText.Multiline = true;
             selectImgText.Name = "selectImgText";
             selectImgText.PlaceholderText = "e.g. C:\\Users\\Me\\Downloads\\franki.png";
-            selectImgText.Size = new Size(151, 18);
+            selectImgText.Size = new Size(151, 22);
             selectImgText.TabIndex = 11;
             selectImgText.WordWrap = false;
             selectImgText.TextChanged += renderPreview;
