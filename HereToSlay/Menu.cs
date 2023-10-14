@@ -56,6 +56,21 @@ namespace HereToSlay
 
             chosenSecondClass.DrawMode = DrawMode.OwnerDrawFixed;
             chosenSecondClass.DrawItem += ImageCBox.ComboBox_DrawItem;
+
+            badOutputSym.DrawMode = DrawMode.OwnerDrawFixed;
+            badOutputSym.DrawItem += CustomComboBox.ComboBox_DrawItem;
+            badOutputSym.Items.Add(new CustomComboBox("+", Color.FromArgb(109, 166, 88)));
+            badOutputSym.Items.Add(new CustomComboBox("-", Color.FromArgb(230, 44, 47)));
+            badOutputSym.SelectedIndex = 1;
+
+
+            goodOutputSym.DrawMode = DrawMode.OwnerDrawFixed;
+            goodOutputSym.DrawItem += CustomComboBox.ComboBox_DrawItem;
+            goodOutputSym.Items.Add(new CustomComboBox("+", Color.FromArgb(109, 166, 88)));
+            goodOutputSym.Items.Add(new CustomComboBox("-", Color.FromArgb(230, 44, 47)));
+            goodOutputSym.SelectedIndex = 0;
+
+
 #pragma warning restore CS8622
             #endregion
 
@@ -286,15 +301,17 @@ namespace HereToSlay
                 case false:
                     chosenSecondClass.Visible = false;
                     labelSecondClass.Visible = false;
-                    chosenClass.Location = new Point(145, 264);
-                    labelClass.Location = new Point(142, 244);
+                    clearSecondClass.Visible = false;
+                    chosenClass.Location = new Point(chosenClass.Location.X + 63, chosenClass.Location.Y);
+                    labelClass.Location = new Point(labelClass.Location.X + 63, labelClass.Location.Y);
                     chosenSecondClass.SelectedIndex = -1;
                     break;
                 case true:
-                    chosenClass.Location = new Point(82, 264);
-                    labelClass.Location = new Point(79, 244);
+                    chosenClass.Location = new Point(chosenClass.Location.X - 63, chosenClass.Location.Y);
+                    labelClass.Location = new Point(labelClass.Location.X - 63, labelClass.Location.Y);
                     chosenSecondClass.Visible = true;
                     labelSecondClass.Visible = true;
+                    clearSecondClass.Visible = true;
                     break;
             }
         }
@@ -315,11 +332,10 @@ namespace HereToSlay
                 advancedClass.Visible = true;
                 advancedClass.Image = Properties.Resources.closed;
                 splitClass.Checked = false;
-                splitClass_CheckStateChanged(null, null);
 
-                labelImg.Location = new Point(115, 344);
-                selectImgText.Location = new Point(119, 364);
-                selectImg.Location = new Point(270, 364);
+                labelImg.Location = new Point(115, 329);
+                selectImgText.Location = new Point(119, 349);
+                selectImg.Location = new Point(270, 349);
 
                 heroReq1.Visible = false;
                 heroReq2.Visible = false;
@@ -336,6 +352,11 @@ namespace HereToSlay
                 goodOutputText.Visible = false;
                 goodOutputNum.Visible = false;
                 goodOutputSym.Visible = false;
+
+                foreach (Control c in this.Controls)
+                {
+                    if (c.Name.Contains("clear")) { c.Visible = false; };
+                }
             }
         }
         private void MonsterCard_Click(object? sender, EventArgs? e)
@@ -356,9 +377,9 @@ namespace HereToSlay
                 advancedClass.Visible = false;
                 advancedClassBox.Visible = false;
 
-                labelImg.Location = new Point(115, 244);
-                selectImgText.Location = new Point(119, 264);
-                selectImg.Location = new Point(270, 264);
+                labelImg.Location = new Point(115, 229);
+                selectImgText.Location = new Point(119, 249);
+                selectImg.Location = new Point(270, 249);
 
                 heroReq1.Visible = true;
                 heroReq2.Visible = true;
@@ -376,6 +397,28 @@ namespace HereToSlay
                 goodOutputNum.Visible = true;
                 goodOutputSym.Visible = true;
 
+                foreach (Control c in this.Controls)
+                {
+                    if (c.Name.Contains("clear") && c.Name != "clearSecondClass") { c.Visible = true; };
+                }
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            chosenSecondClass.SelectedIndex = -1;
+        }
+
+        private void OutputSym_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (sender is ComboBox comboBox)
+            {
+                comboBox.BackColor = comboBox.SelectedIndex switch
+                {
+                    0 => Color.FromArgb(109, 166, 88),
+                    1 => Color.FromArgb(230, 44, 47),
+                    _ => throw new NotImplementedException(),
+                };
             }
         }
     }
@@ -398,10 +441,13 @@ namespace HereToSlay
         {
             foreach (Control c in control.Controls)
             {
-                c.Font = fontUI;
-                if (c.Controls.Count > 0)
+                if (!c.Name.Contains("clear") && c.Name != "clearSecondClass") // don't change the font for the X boxes
                 {
-                    ChangeFontForAllControls(c, fontUI);
+                    c.Font = fontUI;
+                    if (c.Controls.Count > 0)
+                    {
+                        ChangeFontForAllControls(c, fontUI);
+                    }
                 }
             }
         }
@@ -449,10 +495,45 @@ namespace HereToSlay
 
             e.DrawFocusRectangle();
         }
+    }
 
-        public override string ToString()
+    class CustomComboBox
+    {
+        public string Text { get; set; }
+        public Color BackgroundColor { get; set; }
+
+        public CustomComboBox(string text, Color backgroundColor)
         {
-            return Text;
+            Text = text;
+            BackgroundColor = backgroundColor;
+        }
+
+        public static void ComboBox_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index < 0 || sender == null) return;
+
+            e.DrawBackground();
+
+            if (sender is ComboBox comboBox && comboBox.Items.Count > 0 && comboBox.Items[e.Index] is CustomComboBox item)
+            {
+                if (e.Font != null)
+                {
+                    Brush backgroundColorBrush = new SolidBrush(item.BackgroundColor);
+                    e.Graphics.FillRectangle(backgroundColorBrush, e.Bounds);
+
+                    StringFormat stringFormat = new StringFormat
+                    {
+                        LineAlignment = StringAlignment.Center,
+                        Alignment = StringAlignment.Center
+                    };
+
+                    Font customFont = FontLoader.GetFont(Properties.Resources.PatuaOne_polish, 14);
+                    Brush textColorBrush = Brushes.White;
+                    e.Graphics.DrawString(item.Text, customFont, textColorBrush, e.Bounds, stringFormat);
+                }
+            }
+
+            e.DrawFocusRectangle();
         }
     }
 }
