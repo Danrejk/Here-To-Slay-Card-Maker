@@ -57,19 +57,30 @@ namespace HereToSlay
             chosenSecondClass.DrawMode = DrawMode.OwnerDrawFixed;
             chosenSecondClass.DrawItem += ImageCBox.ComboBox_DrawItem;
 
+            heroReq1.DrawMode = DrawMode.OwnerDrawFixed;
+            heroReq1.DrawItem += ImageCBox.ComboBox_DrawItem;
+            heroReq2.DrawMode = DrawMode.OwnerDrawFixed;
+            heroReq2.DrawItem += ImageCBox.ComboBox_DrawItem;
+            heroReq3.DrawMode = DrawMode.OwnerDrawFixed;
+            heroReq3.DrawItem += ImageCBox.ComboBox_DrawItem;
+            heroReq4.DrawMode = DrawMode.OwnerDrawFixed;
+            heroReq4.DrawItem += ImageCBox.ComboBox_DrawItem;
+            heroReq5.DrawMode = DrawMode.OwnerDrawFixed;
+            heroReq5.DrawItem += ImageCBox.ComboBox_DrawItem;
+
             badOutputSym.DrawMode = DrawMode.OwnerDrawFixed;
             badOutputSym.DrawItem += CustomComboBox.ComboBox_DrawItem;
             badOutputSym.Items.Add(new CustomComboBox("+", Color.FromArgb(109, 166, 88)));
             badOutputSym.Items.Add(new CustomComboBox("-", Color.FromArgb(230, 44, 47)));
             badOutputSym.SelectedIndex = 1;
-
+            badOutputSym.ItemHeight = 17;
 
             goodOutputSym.DrawMode = DrawMode.OwnerDrawFixed;
             goodOutputSym.DrawItem += CustomComboBox.ComboBox_DrawItem;
             goodOutputSym.Items.Add(new CustomComboBox("+", Color.FromArgb(109, 166, 88)));
             goodOutputSym.Items.Add(new CustomComboBox("-", Color.FromArgb(230, 44, 47)));
             goodOutputSym.SelectedIndex = 0;
-
+            goodOutputSym.ItemHeight = 17;
 
 #pragma warning restore CS8622
             #endregion
@@ -102,7 +113,7 @@ namespace HereToSlay
 
         private CancellationTokenSource? cancellationTokenSource;
         bool initialLang = false; //it's so that when the program opens and sets the remembered language, it doesn't render the preview automatically.
-        private async void renderPreview(object sender, EventArgs e)
+        private async void renderPreview(object? sender, EventArgs? e)
         {
             cancellationTokenSource?.Cancel();
             cancellationTokenSource = new CancellationTokenSource();
@@ -130,7 +141,7 @@ namespace HereToSlay
         #endregion
 
         #region Language
-        private void language_SelectedIndexChanged(object sender, EventArgs e)
+        private void language_SelectedIndexChanged(object? sender, EventArgs? e)
         {
             if (initialLang == true) // so that it doesn't overwrite the setting, before it can be read
             {
@@ -142,10 +153,18 @@ namespace HereToSlay
             {
                 case 1:
                     logo.Image = Properties.Resources.Logo1;
-                    labelLeader.Text = "Nazwa lidera";
+                    labelLeader.Text = Properties.Settings.Default.CardType switch
+                    {
+                        1 => "Nazwa potwora",
+                        _ => "Nazwa lidera"
+                    };
                     labelClass.Text = "Klasa lidera";
                     labelSecondClass.Text = "Druga klasa";
-                    labelImg.Text = "Obrazek lidera";
+                    labelImg.Text = Properties.Settings.Default.CardType switch
+                    {
+                        1 => "Obrazek potwora",
+                        _ => "Obrazek lidera"
+                    };
                     labelDescription.Text = "Opis mocy";
                     leaderImgToolTip.ToolTipTitle = "Wymiary obazka";
                     leaderImgToolTip.SetToolTip(selectImg, "Obrazek lidera (nie ca³a karta) ma wymiary 745x1176. \nProgram automatycznie przytnie i przybli¿y obraz, je¿eli bêdzie to potrzebne.\n\nWspierane rozszerzenia plików:\n.png, .jpeg, .jpg, .gif (pierwsza klatka), .bmp, .webp, .pbm, .tiff, .tga");
@@ -153,13 +172,25 @@ namespace HereToSlay
                     leaderWhite.Text = "Bia³a nazwa";
                     splitClass.Text = "Podwójna Klasa";
                     this.Text = "To ja go tnê - Generator kart";
+                    labelBad.Text = "Wymagania rzutu - Pora¿ka";
+                    labelGood.Text = "Wymagania rzutu - UBIJ potwora";
+                    goodOutputText.Text = "UBIJ tego potwora";
+                    labelReq.Text = "Wymagania bohaterów";
                     break;
                 default:
                     logo.Image = Properties.Resources.Logo0;
-                    labelLeader.Text = "Leader name";
+                    labelLeader.Text = Properties.Settings.Default.CardType switch
+                    {
+                        1 => "Monster name",
+                        _ => "Leader name"
+                    };
                     labelClass.Text = "Leader class";
                     labelSecondClass.Text = "Second class";
-                    labelImg.Text = "Leader image";
+                    labelImg.Text = Properties.Settings.Default.CardType switch
+                    {
+                        1 => "Monster image",
+                        _ => "Leader image"
+                    };
                     labelDescription.Text = "Description";
                     leaderImgToolTip.ToolTipTitle = "Image dimentions";
                     leaderImgToolTip.SetToolTip(selectImg, "The leader image (not the whole card) dimentions are 745x1176. \nThe program will automatically crop and zoom the image, if needed.\n\nSupported file extensions:\n.png, .jpeg, .jpg, .gif (first frame), .bmp, .webp, .pbm, .tiff, .tga");
@@ -167,13 +198,23 @@ namespace HereToSlay
                     leaderWhite.Text = "White name";
                     splitClass.Text = "Split Class";
                     this.Text = "Here to Slay - Card generator";
+                    labelBad.Text = "Roll Requirements - Fail";
+                    labelGood.Text = "Roll Requirements - SLAY monster";
+                    goodOutputText.Text = "SLAY this Monster card";
+                    labelReq.Text = "Hero Requirements";
                     break;
+
             }
             LocaliseClassOptions(language.SelectedIndex); // change class options based on selected language
             renderPreview(sender, e);
         }
         int currentClassIndex;
         int currentSecondClassIndex;
+        int currentHeroReq1Index;
+        int currentHeroReq2Index;
+        int currentHeroReq3Index;
+        int currentHeroReq4Index;
+        int currentHeroReq5Index;
         private void LocaliseClassOptions(int lang)
         {
             currentClassIndex = chosenClass.SelectedIndex;
@@ -182,6 +223,16 @@ namespace HereToSlay
             currentSecondClassIndex = chosenSecondClass.SelectedIndex;
             chosenSecondClass.Items.Clear();
 
+            currentHeroReq1Index = heroReq1.SelectedIndex;
+            heroReq1.Items.Clear();
+            currentHeroReq2Index = heroReq2.SelectedIndex;
+            heroReq2.Items.Clear();
+            currentHeroReq3Index = heroReq3.SelectedIndex;
+            heroReq3.Items.Clear();
+            currentHeroReq4Index = heroReq4.SelectedIndex;
+            heroReq4.Items.Clear();
+            currentHeroReq5Index = heroReq5.SelectedIndex;
+            heroReq5.Items.Clear();
 
             switch (lang)
             {
@@ -214,10 +265,25 @@ namespace HereToSlay
                     chosenClass.Items.Add(new ImageCBox("ALL", Properties.Resources.empty.ToBitmap()));
                     break;
             }
-            chosenClass.SelectedIndex = currentClassIndex;
 
-            foreach (var item in chosenClass.Items) { chosenSecondClass.Items.Add(item); }
+            foreach (var item in chosenClass.Items)
+            {
+                chosenSecondClass.Items.Add(item);
+                heroReq1.Items.Add(item);
+                heroReq2.Items.Add(item);
+                heroReq3.Items.Add(item);
+                heroReq4.Items.Add(item);
+                heroReq5.Items.Add(item);
+            }
+
+            chosenClass.SelectedIndex = currentClassIndex;
             chosenSecondClass.SelectedIndex = currentSecondClassIndex;
+
+            heroReq1.SelectedIndex = currentHeroReq1Index;
+            heroReq2.SelectedIndex = currentHeroReq2Index;
+            heroReq3.SelectedIndex = currentHeroReq3Index;
+            heroReq4.SelectedIndex = currentHeroReq4Index;
+            heroReq5.SelectedIndex = currentHeroReq5Index;
         }
         #endregion
         private void chosenClass_SelectedIndexChanged(object sender, EventArgs e)
@@ -284,7 +350,6 @@ namespace HereToSlay
             FlowLayoutPanel list = pictureBox.Name switch
             {
                 "advancedName" => advancedNameBox,
-                "advancedDesc" => advancedDescBox,
                 "advancedClass" => advancedClassBox,
                 _ => throw new NotImplementedException(),
             };
@@ -329,6 +394,8 @@ namespace HereToSlay
                 LeaderCard.Checked = true;
                 LeaderCard.BackColor = SystemColors.ControlDark;
 
+                language_SelectedIndexChanged(sender, e);
+
                 chosenClass.Visible = true;
                 labelClass.Visible = true;
                 advancedClass.Visible = true;
@@ -339,6 +406,11 @@ namespace HereToSlay
                 selectImgText.Location = new Point(119, 349);
                 selectImg.Location = new Point(270, 349);
 
+                descriptionText.Location = new Point(descriptionText.Location.X, descriptionText.Location.Y - 49);
+                labelDescription.Location = new Point(labelDescription.Location.X, labelDescription.Location.Y - 49);
+                RENDER.Location = new Point(RENDER.Location.X, RENDER.Location.Y - 49);
+
+                labelReq.Visible = false;
                 heroReq1.Visible = false;
                 heroReq2.Visible = false;
                 heroReq3.Visible = false;
@@ -359,6 +431,8 @@ namespace HereToSlay
                 {
                     if (c.Name.Contains("clear")) { c.Visible = false; };
                 }
+
+                
             }
         }
         private void MonsterCard_Click(object? sender, EventArgs? e)
@@ -372,9 +446,12 @@ namespace HereToSlay
                 MonsterCard.Checked = true;
                 MonsterCard.BackColor = SystemColors.ControlDark;
 
+                language_SelectedIndexChanged(sender, e);
+
                 chosenClass.Visible = false;
                 labelClass.Visible = false;
                 chosenSecondClass.Visible = false;
+                clearSecondClass.Visible = false;
                 labelSecondClass.Visible = false;
                 advancedClass.Visible = false;
                 advancedClassBox.Visible = false;
@@ -383,6 +460,11 @@ namespace HereToSlay
                 selectImgText.Location = new Point(119, 249);
                 selectImg.Location = new Point(270, 249);
 
+                descriptionText.Location = new Point(descriptionText.Location.X, descriptionText.Location.Y + 49);
+                labelDescription.Location = new Point(labelDescription.Location.X, labelDescription.Location.Y + 49);
+                RENDER.Location = new Point(RENDER.Location.X, RENDER.Location.Y + 49);
+
+                labelReq.Visible = true;
                 heroReq1.Visible = true;
                 heroReq2.Visible = true;
                 heroReq3.Visible = true;
@@ -399,6 +481,7 @@ namespace HereToSlay
                 goodOutputNum.Visible = true;
                 goodOutputSym.Visible = true;
 
+
                 foreach (Control c in this.Controls)
                 {
                     if (c.Name.Contains("clear") && c.Name != "clearSecondClass") { c.Visible = true; };
@@ -406,9 +489,32 @@ namespace HereToSlay
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void clearSelectedClass(object sender, EventArgs e)
         {
-            chosenSecondClass.SelectedIndex = -1;
+            if (sender is Button button)
+            {
+                switch (button.Name)
+                {
+                    case "clearSecondClass":
+                        chosenSecondClass.SelectedIndex = -1;
+                        break;
+                    case "clearHeroReq1":
+                        heroReq1.SelectedIndex = -1;
+                        break;
+                    case "clearHeroReq2":
+                        heroReq2.SelectedIndex = -1;
+                        break;
+                    case "clearHeroReq3":
+                        heroReq3.SelectedIndex = -1;
+                        break;
+                    case "clearHeroReq4":
+                        heroReq4.SelectedIndex = -1;
+                        break;
+                    case "clearHeroReq5":
+                        heroReq5.SelectedIndex = -1;
+                        break;
+                }
+            }
         }
 
         private void OutputSym_SelectedIndexChanged(object sender, EventArgs e)

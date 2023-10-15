@@ -443,7 +443,6 @@
             MonsterCard.RightToLeft = RightToLeft.No;
             MonsterCard.Size = new Size(91, 23);
             MonsterCard.Text = "Monster Card";
-            MonsterCard.Visible = false;
             MonsterCard.Click += MonsterCard_Click;
             // 
             // language
@@ -462,7 +461,7 @@
             heroReq3.FlatStyle = FlatStyle.Flat;
             heroReq3.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             heroReq3.FormattingEnabled = true;
-            heroReq3.Location = new Point(495, 292);
+            heroReq3.Location = new Point(70, 331);
             heroReq3.Margin = new Padding(3, 3, 0, 3);
             heroReq3.Name = "heroReq3";
             heroReq3.Size = new Size(120, 25);
@@ -476,7 +475,7 @@
             heroReq2.FlatStyle = FlatStyle.Flat;
             heroReq2.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             heroReq2.FormattingEnabled = true;
-            heroReq2.Location = new Point(632, 264);
+            heroReq2.Location = new Point(208, 303);
             heroReq2.Margin = new Padding(3, 3, 0, 3);
             heroReq2.Name = "heroReq2";
             heroReq2.Size = new Size(120, 25);
@@ -490,7 +489,7 @@
             heroReq1.FlatStyle = FlatStyle.Flat;
             heroReq1.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             heroReq1.FormattingEnabled = true;
-            heroReq1.Location = new Point(495, 264);
+            heroReq1.Location = new Point(70, 303);
             heroReq1.Margin = new Padding(3, 3, 0, 3);
             heroReq1.Name = "heroReq1";
             heroReq1.Size = new Size(120, 25);
@@ -504,7 +503,7 @@
             heroReq4.FlatStyle = FlatStyle.Flat;
             heroReq4.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             heroReq4.FormattingEnabled = true;
-            heroReq4.Location = new Point(632, 292);
+            heroReq4.Location = new Point(208, 331);
             heroReq4.Margin = new Padding(3, 3, 0, 3);
             heroReq4.Name = "heroReq4";
             heroReq4.Size = new Size(120, 25);
@@ -517,11 +516,11 @@
             labelReq.BackColor = Color.Transparent;
             labelReq.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             labelReq.ForeColor = Color.White;
-            labelReq.Location = new Point(492, 244);
+            labelReq.Location = new Point(67, 283);
             labelReq.Margin = new Padding(0);
             labelReq.Name = "labelReq";
             labelReq.RightToLeft = RightToLeft.No;
-            labelReq.Size = new Size(100, 20);
+            labelReq.Size = new Size(159, 20);
             labelReq.TabIndex = 34;
             labelReq.Text = "Requirements";
             labelReq.TextAlign = ContentAlignment.BottomLeft;
@@ -534,7 +533,7 @@
             heroReq5.FlatStyle = FlatStyle.Flat;
             heroReq5.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             heroReq5.FormattingEnabled = true;
-            heroReq5.Location = new Point(564, 320);
+            heroReq5.Location = new Point(142, 359);
             heroReq5.Margin = new Padding(3, 3, 0, 3);
             heroReq5.Name = "heroReq5";
             heroReq5.Size = new Size(120, 25);
@@ -543,12 +542,12 @@
             // 
             // badOutputNum
             // 
-            badOutputNum.BorderStyle = BorderStyle.FixedSingle;
-            badOutputNum.Location = new Point(326, 397);
+            badOutputNum.Location = new Point(84, 415);
+            badOutputNum.Margin = new Padding(0);
             badOutputNum.Name = "badOutputNum";
             badOutputNum.Size = new Size(35, 23);
             badOutputNum.TabIndex = 36;
-            badOutputNum.TextAlign = HorizontalAlignment.Center;
+            badOutputNum.TextAlign = HorizontalAlignment.Right;
             badOutputNum.Visible = false;
             // 
             // badOutputSym
@@ -557,7 +556,7 @@
             badOutputSym.FlatStyle = FlatStyle.Flat;
             badOutputSym.ForeColor = Color.White;
             badOutputSym.FormattingEnabled = true;
-            badOutputSym.Location = new Point(360, 397);
+            badOutputSym.Location = new Point(118, 416);
             badOutputSym.Margin = new Padding(0);
             badOutputSym.Name = "badOutputSym";
             badOutputSym.Size = new Size(35, 23);
@@ -569,10 +568,11 @@
             // 
             badOutputText.BorderStyle = BorderStyle.None;
             badOutputText.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            badOutputText.Location = new Point(414, 398);
+            badOutputText.Location = new Point(156, 416);
+            badOutputText.Margin = new Padding(0);
             badOutputText.Multiline = true;
             badOutputText.Name = "badOutputText";
-            badOutputText.Size = new Size(146, 23);
+            badOutputText.Size = new Size(175, 23);
             badOutputText.TabIndex = 38;
             badOutputText.Visible = false;
             // 
@@ -582,13 +582,13 @@
             labelBad.BackColor = Color.Transparent;
             labelBad.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             labelBad.ForeColor = Color.White;
-            labelBad.Location = new Point(328, 374);
+            labelBad.Location = new Point(81, 396);
             labelBad.Margin = new Padding(0);
             labelBad.Name = "labelBad";
             labelBad.RightToLeft = RightToLeft.No;
-            labelBad.Size = new Size(100, 20);
+            labelBad.Size = new Size(244, 20);
             labelBad.TabIndex = 39;
-            labelBad.Text = "Fail Condition";
+            labelBad.Text = "Roll Requirement - Fail";
             labelBad.TextAlign = ContentAlignment.BottomLeft;
             labelBad.Visible = false;
             // 
@@ -598,13 +598,13 @@
             labelGood.BackColor = Color.Transparent;
             labelGood.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             labelGood.ForeColor = Color.White;
-            labelGood.Location = new Point(328, 421);
+            labelGood.Location = new Point(81, 437);
             labelGood.Margin = new Padding(0);
             labelGood.Name = "labelGood";
             labelGood.RightToLeft = RightToLeft.No;
-            labelGood.Size = new Size(181, 20);
+            labelGood.Size = new Size(250, 20);
             labelGood.TabIndex = 43;
-            labelGood.Text = "Kill Monster Condition";
+            labelGood.Text = "Roll Requirement - Slay Monster";
             labelGood.TextAlign = ContentAlignment.BottomLeft;
             labelGood.Visible = false;
             // 
@@ -612,10 +612,10 @@
             // 
             goodOutputText.BorderStyle = BorderStyle.None;
             goodOutputText.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            goodOutputText.Location = new Point(414, 445);
+            goodOutputText.Location = new Point(156, 457);
             goodOutputText.Multiline = true;
             goodOutputText.Name = "goodOutputText";
-            goodOutputText.Size = new Size(146, 23);
+            goodOutputText.Size = new Size(175, 23);
             goodOutputText.TabIndex = 42;
             goodOutputText.Text = "UBIJ tego potwora.";
             goodOutputText.Visible = false;
@@ -626,7 +626,7 @@
             goodOutputSym.FlatStyle = FlatStyle.Flat;
             goodOutputSym.ForeColor = Color.White;
             goodOutputSym.FormattingEnabled = true;
-            goodOutputSym.Location = new Point(360, 444);
+            goodOutputSym.Location = new Point(118, 457);
             goodOutputSym.Margin = new Padding(0);
             goodOutputSym.Name = "goodOutputSym";
             goodOutputSym.Size = new Size(35, 23);
@@ -637,11 +637,11 @@
             // goodOutputNum
             // 
             goodOutputNum.BorderStyle = BorderStyle.FixedSingle;
-            goodOutputNum.Location = new Point(326, 444);
+            goodOutputNum.Location = new Point(84, 456);
             goodOutputNum.Name = "goodOutputNum";
             goodOutputNum.Size = new Size(35, 23);
             goodOutputNum.TabIndex = 40;
-            goodOutputNum.TextAlign = HorizontalAlignment.Center;
+            goodOutputNum.TextAlign = HorizontalAlignment.Right;
             goodOutputNum.Visible = false;
             // 
             // clearSecondClass
@@ -660,7 +660,7 @@
             clearSecondClass.Text = "X";
             clearSecondClass.UseVisualStyleBackColor = false;
             clearSecondClass.Visible = false;
-            clearSecondClass.Click += button1_Click;
+            clearSecondClass.Click += clearSelectedClass;
             // 
             // clearHeroReq1
             // 
@@ -670,7 +670,7 @@
             clearHeroReq1.FlatStyle = FlatStyle.Flat;
             clearHeroReq1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             clearHeroReq1.ForeColor = Color.FromArgb(230, 44, 47);
-            clearHeroReq1.Location = new Point(614, 264);
+            clearHeroReq1.Location = new Point(190, 303);
             clearHeroReq1.Margin = new Padding(0);
             clearHeroReq1.Name = "clearHeroReq1";
             clearHeroReq1.Size = new Size(15, 25);
@@ -678,6 +678,7 @@
             clearHeroReq1.Text = "X";
             clearHeroReq1.UseVisualStyleBackColor = false;
             clearHeroReq1.Visible = false;
+            clearHeroReq1.Click += clearSelectedClass;
             // 
             // clearHeroReq2
             // 
@@ -687,7 +688,7 @@
             clearHeroReq2.FlatStyle = FlatStyle.Flat;
             clearHeroReq2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             clearHeroReq2.ForeColor = Color.FromArgb(230, 44, 47);
-            clearHeroReq2.Location = new Point(751, 264);
+            clearHeroReq2.Location = new Point(328, 303);
             clearHeroReq2.Margin = new Padding(0);
             clearHeroReq2.Name = "clearHeroReq2";
             clearHeroReq2.Size = new Size(15, 25);
@@ -695,6 +696,7 @@
             clearHeroReq2.Text = "X";
             clearHeroReq2.UseVisualStyleBackColor = false;
             clearHeroReq2.Visible = false;
+            clearHeroReq2.Click += clearSelectedClass;
             // 
             // clearHeroReq4
             // 
@@ -704,7 +706,7 @@
             clearHeroReq4.FlatStyle = FlatStyle.Flat;
             clearHeroReq4.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             clearHeroReq4.ForeColor = Color.FromArgb(230, 44, 47);
-            clearHeroReq4.Location = new Point(751, 292);
+            clearHeroReq4.Location = new Point(328, 331);
             clearHeroReq4.Margin = new Padding(0);
             clearHeroReq4.Name = "clearHeroReq4";
             clearHeroReq4.Size = new Size(15, 25);
@@ -712,6 +714,7 @@
             clearHeroReq4.Text = "X";
             clearHeroReq4.UseVisualStyleBackColor = false;
             clearHeroReq4.Visible = false;
+            clearHeroReq4.Click += clearSelectedClass;
             // 
             // clearHeroReq5
             // 
@@ -721,7 +724,7 @@
             clearHeroReq5.FlatStyle = FlatStyle.Flat;
             clearHeroReq5.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             clearHeroReq5.ForeColor = Color.FromArgb(230, 44, 47);
-            clearHeroReq5.Location = new Point(684, 320);
+            clearHeroReq5.Location = new Point(262, 359);
             clearHeroReq5.Margin = new Padding(0);
             clearHeroReq5.Name = "clearHeroReq5";
             clearHeroReq5.Size = new Size(15, 25);
@@ -729,6 +732,7 @@
             clearHeroReq5.Text = "X";
             clearHeroReq5.UseVisualStyleBackColor = false;
             clearHeroReq5.Visible = false;
+            clearHeroReq5.Click += clearSelectedClass;
             // 
             // clearHeroReq3
             // 
@@ -738,7 +742,7 @@
             clearHeroReq3.FlatStyle = FlatStyle.Flat;
             clearHeroReq3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             clearHeroReq3.ForeColor = Color.FromArgb(230, 44, 47);
-            clearHeroReq3.Location = new Point(614, 292);
+            clearHeroReq3.Location = new Point(190, 331);
             clearHeroReq3.Margin = new Padding(0);
             clearHeroReq3.Name = "clearHeroReq3";
             clearHeroReq3.Size = new Size(15, 25);
@@ -746,6 +750,7 @@
             clearHeroReq3.Text = "X";
             clearHeroReq3.UseVisualStyleBackColor = false;
             clearHeroReq3.Visible = false;
+            clearHeroReq3.Click += clearSelectedClass;
             // 
             // Menu
             // 
@@ -754,6 +759,7 @@
             BackColor = Color.FromArgb(39, 43, 52);
             BackgroundImage = Properties.Resources.gradient;
             ClientSize = new Size(828, 711);
+            Controls.Add(badOutputText);
             Controls.Add(clearHeroReq5);
             Controls.Add(clearHeroReq4);
             Controls.Add(clearHeroReq3);
@@ -766,12 +772,10 @@
             Controls.Add(heroReq2);
             Controls.Add(heroReq3);
             Controls.Add(clearSecondClass);
-            Controls.Add(labelGood);
             Controls.Add(goodOutputText);
             Controls.Add(goodOutputSym);
             Controls.Add(goodOutputNum);
             Controls.Add(labelBad);
-            Controls.Add(badOutputText);
             Controls.Add(badOutputSym);
             Controls.Add(badOutputNum);
             Controls.Add(chosenSecondClass);
@@ -795,6 +799,7 @@
             Controls.Add(labelClass);
             Controls.Add(menuStrip1);
             Controls.Add(previewImg);
+            Controls.Add(labelGood);
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MainMenuStrip = menuStrip1;
@@ -843,8 +848,6 @@
         private ToolTip leaderImgToolTip;
         private FlowLayoutPanel advancedNameBox;
         private PictureBox advancedName;
-        private FlowLayoutPanel advancedDescBox;
-        private PictureBox advancedDesc;
         private PictureBox advancedClass;
         private FlowLayoutPanel advancedClassBox;
         private CheckBox splitClass;
@@ -861,7 +864,6 @@
         private Label labelReq;
         private ComboBox heroReq5;
         private NumericUpDown badOutputNum;
-        private NumericUpDown badOutput;
         private ComboBox badOutputSym;
         private TextBox badOutputText;
         private Label labelBad;
