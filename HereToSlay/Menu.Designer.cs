@@ -37,7 +37,7 @@
             chosenClass = new ComboBox();
             labelClass = new Label();
             LeaderImgDialog = new OpenFileDialog();
-            selectImg = new Button();
+            selectImgButton = new Button();
             selectImgText = new TextBox();
             labelImg = new Label();
             gradient = new CheckBox();
@@ -97,7 +97,7 @@
             RENDER.FlatAppearance.BorderColor = Color.FromArgb(118, 110, 109);
             RENDER.FlatStyle = FlatStyle.Flat;
             RENDER.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            RENDER.Location = new Point(119, 542);
+            RENDER.Location = new Point(119, 525);
             RENDER.Name = "RENDER";
             RENDER.Size = new Size(175, 75);
             RENDER.TabIndex = 0;
@@ -137,7 +137,7 @@
             labelDescription.BackColor = Color.Transparent;
             labelDescription.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             labelDescription.ForeColor = Color.White;
-            labelDescription.Location = new Point(53, 443);
+            labelDescription.Location = new Point(53, 426);
             labelDescription.Margin = new Padding(0);
             labelDescription.Name = "labelDescription";
             labelDescription.Size = new Size(100, 20);
@@ -188,22 +188,22 @@
             // 
             LeaderImgDialog.FileName = "openFileDialog1";
             // 
-            // selectImg
+            // selectImgButton
             // 
-            selectImg.BackColor = SystemColors.Control;
-            selectImg.Cursor = Cursors.Hand;
-            selectImg.FlatAppearance.BorderColor = Color.White;
-            selectImg.FlatStyle = FlatStyle.Flat;
-            selectImg.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            selectImg.Location = new Point(270, 349);
-            selectImg.Margin = new Padding(0);
-            selectImg.Name = "selectImg";
-            selectImg.Size = new Size(24, 22);
-            selectImg.TabIndex = 10;
-            selectImg.Text = "⋯";
-            selectImg.TextAlign = ContentAlignment.TopCenter;
-            selectImg.UseVisualStyleBackColor = false;
-            selectImg.Click += selectImg_Click;
+            selectImgButton.BackColor = SystemColors.Control;
+            selectImgButton.Cursor = Cursors.Hand;
+            selectImgButton.FlatAppearance.BorderColor = Color.White;
+            selectImgButton.FlatStyle = FlatStyle.Flat;
+            selectImgButton.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            selectImgButton.Location = new Point(270, 349);
+            selectImgButton.Margin = new Padding(0);
+            selectImgButton.Name = "selectImgButton";
+            selectImgButton.Size = new Size(24, 22);
+            selectImgButton.TabIndex = 10;
+            selectImgButton.Text = "⋯";
+            selectImgButton.TextAlign = ContentAlignment.TopCenter;
+            selectImgButton.UseVisualStyleBackColor = false;
+            selectImgButton.Click += selectImg_Click;
             // 
             // selectImgText
             // 
@@ -269,7 +269,7 @@
             // 
             descriptionText.BackColor = Color.White;
             descriptionText.BorderStyle = BorderStyle.None;
-            descriptionText.Location = new Point(57, 463);
+            descriptionText.Location = new Point(57, 446);
             descriptionText.Margin = new Padding(0);
             descriptionText.Multiline = true;
             descriptionText.Name = "descriptionText";
@@ -467,6 +467,7 @@
             heroReq3.Size = new Size(120, 25);
             heroReq3.TabIndex = 30;
             heroReq3.Visible = false;
+            heroReq3.SelectedIndexChanged += renderPreview;
             // 
             // heroReq2
             // 
@@ -481,6 +482,7 @@
             heroReq2.Size = new Size(120, 25);
             heroReq2.TabIndex = 31;
             heroReq2.Visible = false;
+            heroReq2.SelectedIndexChanged += renderPreview;
             // 
             // heroReq1
             // 
@@ -495,6 +497,7 @@
             heroReq1.Size = new Size(120, 25);
             heroReq1.TabIndex = 32;
             heroReq1.Visible = false;
+            heroReq1.SelectedIndexChanged += renderPreview;
             // 
             // heroReq4
             // 
@@ -509,6 +512,7 @@
             heroReq4.Size = new Size(120, 25);
             heroReq4.TabIndex = 33;
             heroReq4.Visible = false;
+            heroReq4.SelectedIndexChanged += renderPreview;
             // 
             // labelReq
             // 
@@ -520,7 +524,7 @@
             labelReq.Margin = new Padding(0);
             labelReq.Name = "labelReq";
             labelReq.RightToLeft = RightToLeft.No;
-            labelReq.Size = new Size(159, 20);
+            labelReq.Size = new Size(172, 20);
             labelReq.TabIndex = 34;
             labelReq.Text = "Requirements";
             labelReq.TextAlign = ContentAlignment.BottomLeft;
@@ -539,6 +543,7 @@
             heroReq5.Size = new Size(120, 25);
             heroReq5.TabIndex = 35;
             heroReq5.Visible = false;
+            heroReq5.SelectedIndexChanged += renderPreview;
             // 
             // badOutputNum
             // 
@@ -549,6 +554,7 @@
             badOutputNum.TabIndex = 36;
             badOutputNum.TextAlign = HorizontalAlignment.Right;
             badOutputNum.Visible = false;
+            badOutputNum.ValueChanged += renderPreview;
             // 
             // badOutputSym
             // 
@@ -575,6 +581,7 @@
             badOutputText.Size = new Size(175, 23);
             badOutputText.TabIndex = 38;
             badOutputText.Visible = false;
+            badOutputText.TextChanged += renderPreview;
             // 
             // labelBad
             // 
@@ -619,6 +626,7 @@
             goodOutputText.TabIndex = 42;
             goodOutputText.Text = "UBIJ tego potwora.";
             goodOutputText.Visible = false;
+            goodOutputText.TextChanged += renderPreview;
             // 
             // goodOutputSym
             // 
@@ -643,6 +651,7 @@
             goodOutputNum.TabIndex = 40;
             goodOutputNum.TextAlign = HorizontalAlignment.Right;
             goodOutputNum.Visible = false;
+            goodOutputNum.ValueChanged += renderPreview;
             // 
             // clearSecondClass
             // 
@@ -788,7 +797,7 @@
             Controls.Add(descriptionText);
             Controls.Add(labelImg);
             Controls.Add(selectImgText);
-            Controls.Add(selectImg);
+            Controls.Add(selectImgButton);
             Controls.Add(chosenClass);
             Controls.Add(labelDescription);
             Controls.Add(leaderNameText);
@@ -836,7 +845,7 @@
         private TextBox descriptionText;
         private Label labelClass;
         private OpenFileDialog LeaderImgDialog;
-        private Button selectImg;
+        private Button selectImgButton;
         private TextBox selectImgText;
         private Label labelImg;
         private CheckBox gradient;

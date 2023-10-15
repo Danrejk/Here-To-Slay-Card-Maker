@@ -53,7 +53,7 @@ namespace GeneratorBackend
     {
         static void Main()
         {
-            Generate("render.png", 0,"Test Leader", 11, -1, "C:\\Users\\SDanr\\Downloads\\uy0c1e63jusb1.jpg", "Test description", false, false); // if you want to test the generator, change the parameters here
+            Generate("render.png", 0,"Test Leader", new int[]{11, -1}, "C:\\Users\\SDanr\\Downloads\\uy0c1e63jusb1.jpg", "Test description", false, false); // if you want to test the generator, change the parameters here
             //"-1" here means that there is only one class.
         }
 
@@ -75,7 +75,7 @@ namespace GeneratorBackend
             //leader = Raylib.LoadImage(path); #TODO
         }
 
-        public static void Generate(string? renderLocation, int language, string leaderName, int desiredClass, int desiredSecondClass, string leaderImg, string leaderDescription, bool addGradient, bool leaderWhite)
+        public static void Generate(string? renderLocation, int language, string leaderName, int[] desiredClass, string leaderImg, string leaderDescription, bool addGradient, bool leaderWhite)
         {
             AssetManager inst = AssetManager.Instance;
 
@@ -104,7 +104,7 @@ namespace GeneratorBackend
             Raylib_cs.Color desiredColor;
             string leaderTitle;
 
-            switch (desiredClass)
+            switch (desiredClass[0])
             {
                 case 0:
                     leaderTitle = language switch{
@@ -194,9 +194,9 @@ namespace GeneratorBackend
 
             Raylib_cs.Image secondClassSymbol = new();
             Raylib_cs.Color desiredSecondColor = new();
-            if (desiredSecondClass != -1)
+            if (desiredClass[1] != -1)
             {
-                switch (desiredSecondClass)
+                switch (desiredClass[1])
                 {
                     case 0:
                         leaderTitle += language switch
@@ -339,7 +339,7 @@ namespace GeneratorBackend
             Raylib.UnloadImage(leader);
 
             Raylib_cs.Image frameTinted = Raylib.ImageCopy(inst.frame);
-            if (desiredSecondClass != -1) {
+            if (desiredClass[1] != -1) {
                 Raylib.ImageCrop(ref frameTinted, new Raylib_cs.Rectangle(0, 0, 414, 1417));
                 Raylib.ImageColorTint(ref frameTinted, desiredColor);
                 Raylib.ImageDraw(ref card, frameTinted, imageRec, new(0, 0, 414, 1417), Raylib_cs.Color.WHITE);
@@ -358,7 +358,7 @@ namespace GeneratorBackend
             Raylib.ImageDraw(ref card, inst.bottom, imageRec, imageRec, Raylib_cs.Color.WHITE);
 
             Raylib.ImageDraw(ref card, classSymbol, imageRec, imageRec, Raylib_cs.Color.WHITE);
-            if (desiredSecondClass != -1){ Raylib.ImageDraw(ref card, secondClassSymbol, imageRec, new(0, 0, 413, 1417), Raylib_cs.Color.WHITE); }
+            if (desiredClass[1] != -1){ Raylib.ImageDraw(ref card, secondClassSymbol, imageRec, new(0, 0, 413, 1417), Raylib_cs.Color.WHITE); }
 
             Raylib_cs.Color leaderColor;
             Raylib_cs.Color leaderShadow;

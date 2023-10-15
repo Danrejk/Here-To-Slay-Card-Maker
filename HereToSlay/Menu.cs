@@ -23,7 +23,7 @@ namespace HereToSlay
             #region Fonts
             Font fontUI = FontLoader.GetFont(Properties.Resources.SourceSansPro, 10);
             FontLoader.ChangeFontForAllControls(this, fontUI);
-            selectImg.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            selectImgButton.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
 
             Font fontUIsmall = FontLoader.GetFont(Properties.Resources.SourceSansPro, 9);
             gradient.Font = fontUIsmall;
@@ -69,16 +69,16 @@ namespace HereToSlay
             heroReq5.DrawItem += ImageCBox.ComboBox_DrawItem;
 
             badOutputSym.DrawMode = DrawMode.OwnerDrawFixed;
-            badOutputSym.DrawItem += CustomComboBox.ComboBox_DrawItem;
-            badOutputSym.Items.Add(new CustomComboBox("+", Color.FromArgb(109, 166, 88)));
-            badOutputSym.Items.Add(new CustomComboBox("-", Color.FromArgb(230, 44, 47)));
+            badOutputSym.DrawItem += BackgroundCBox.ComboBox_DrawItem;
+            badOutputSym.Items.Add(new BackgroundCBox("+", Color.FromArgb(109, 166, 88)));
+            badOutputSym.Items.Add(new BackgroundCBox("-", Color.FromArgb(230, 44, 47)));
             badOutputSym.SelectedIndex = 1;
             badOutputSym.ItemHeight = 17;
 
             goodOutputSym.DrawMode = DrawMode.OwnerDrawFixed;
-            goodOutputSym.DrawItem += CustomComboBox.ComboBox_DrawItem;
-            goodOutputSym.Items.Add(new CustomComboBox("+", Color.FromArgb(109, 166, 88)));
-            goodOutputSym.Items.Add(new CustomComboBox("-", Color.FromArgb(230, 44, 47)));
+            goodOutputSym.DrawItem += BackgroundCBox.ComboBox_DrawItem;
+            goodOutputSym.Items.Add(new BackgroundCBox("+", Color.FromArgb(109, 166, 88)));
+            goodOutputSym.Items.Add(new BackgroundCBox("-", Color.FromArgb(230, 44, 47)));
             goodOutputSym.SelectedIndex = 0;
             goodOutputSym.ItemHeight = 17;
 
@@ -106,7 +106,18 @@ namespace HereToSlay
             if (SaveRenderDialog.ShowDialog() == DialogResult.OK)
             {
                 string filePath = SaveRenderDialog.FileName;
-                GeneratorBackend.Program.Generate(filePath, language.SelectedIndex, leaderNameText.Text, chosenClass.SelectedIndex, chosenSecondClass.SelectedIndex, selectImgText.Text, descriptionText.Text, gradient.Checked, leaderWhite.Checked);
+                switch (Properties.Settings.Default.CardType)
+                {
+                    case 0:
+                        GeneratorBackend.Program.Generate(filePath, language.SelectedIndex, leaderNameText.Text, new int[] { chosenClass.SelectedIndex, chosenSecondClass.SelectedIndex }, selectImgText.Text, descriptionText.Text, gradient.Checked, leaderWhite.Checked);
+                        break;
+                    case 1:
+                        GeneratorBackend.Program.Generate(filePath, language.SelectedIndex, leaderNameText.Text, new int[] { heroReq1.SelectedIndex, heroReq2.SelectedIndex, heroReq3.SelectedIndex, heroReq4.SelectedIndex, heroReq5.SelectedIndex }, selectImgText.Text, descriptionText.Text, gradient.Checked, leaderWhite.Checked);
+                        break;
+                    default:
+                        throw new NotImplementedException();
+                }
+
                 previewImg.ImageLocation = filePath;
             }
         }
@@ -131,7 +142,17 @@ namespace HereToSlay
                     }
                     if (timer >= 0)
                     {
-                        GeneratorBackend.Program.Generate(null, language.SelectedIndex, leaderNameText.Text, chosenClass.SelectedIndex, chosenSecondClass.SelectedIndex, selectImgText.Text, descriptionText.Text, gradient.Checked, leaderWhite.Checked);
+                        switch (Properties.Settings.Default.CardType)
+                        {
+                            case 0:
+                                GeneratorBackend.Program.Generate(null, language.SelectedIndex, leaderNameText.Text, new int[] { chosenClass.SelectedIndex, chosenSecondClass.SelectedIndex }, selectImgText.Text, descriptionText.Text, gradient.Checked, leaderWhite.Checked);
+                                break;
+                            case 1:
+                                GeneratorBackend.Program.Generate(null, language.SelectedIndex, leaderNameText.Text, new int[] { heroReq1.SelectedIndex, heroReq2.SelectedIndex, heroReq3.SelectedIndex, heroReq4.SelectedIndex, heroReq5.SelectedIndex }, selectImgText.Text, descriptionText.Text, gradient.Checked, leaderWhite.Checked);
+                                break;
+                            default:
+                                throw new NotImplementedException();
+                        }
                         previewImg.ImageLocation = Path.Combine(Directory.GetCurrentDirectory(), "preview.png"); ;
                     }
                 }
@@ -167,7 +188,7 @@ namespace HereToSlay
                     };
                     labelDescription.Text = "Opis mocy";
                     leaderImgToolTip.ToolTipTitle = "Wymiary obazka";
-                    leaderImgToolTip.SetToolTip(selectImg, "Obrazek lidera (nie ca³a karta) ma wymiary 745x1176. \nProgram automatycznie przytnie i przybli¿y obraz, je¿eli bêdzie to potrzebne.\n\nWspierane rozszerzenia plików:\n.png, .jpeg, .jpg, .gif (pierwsza klatka), .bmp, .webp, .pbm, .tiff, .tga");
+                    leaderImgToolTip.SetToolTip(selectImgButton, "Obrazek lidera (nie ca³a karta) ma wymiary 745x1176. \nProgram automatycznie przytnie i przybli¿y obraz, je¿eli bêdzie to potrzebne.\n\nWspierane rozszerzenia plików:\n.png, .jpeg, .jpg, .gif (pierwsza klatka), .bmp, .webp, .pbm, .tiff, .tga");
                     gradient.Text = "Tylni gradient";
                     leaderWhite.Text = "Bia³a nazwa";
                     splitClass.Text = "Podwójna Klasa";
@@ -193,7 +214,7 @@ namespace HereToSlay
                     };
                     labelDescription.Text = "Description";
                     leaderImgToolTip.ToolTipTitle = "Image dimentions";
-                    leaderImgToolTip.SetToolTip(selectImg, "The leader image (not the whole card) dimentions are 745x1176. \nThe program will automatically crop and zoom the image, if needed.\n\nSupported file extensions:\n.png, .jpeg, .jpg, .gif (first frame), .bmp, .webp, .pbm, .tiff, .tga");
+                    leaderImgToolTip.SetToolTip(selectImgButton, "The leader image (not the whole card) dimentions are 745x1176. \nThe program will automatically crop and zoom the image, if needed.\n\nSupported file extensions:\n.png, .jpeg, .jpg, .gif (first frame), .bmp, .webp, .pbm, .tiff, .tga");
                     gradient.Text = "Back gradient";
                     leaderWhite.Text = "White name";
                     splitClass.Text = "Split Class";
@@ -402,13 +423,13 @@ namespace HereToSlay
                 advancedClass.Image = Properties.Resources.closed;
                 splitClass.Checked = false;
 
-                labelImg.Location = new Point(115, 329);
-                selectImgText.Location = new Point(119, 349);
-                selectImg.Location = new Point(270, 349);
+                labelImg.Location = new Point(labelImg.Location.X, 329);
+                selectImgText.Location = new Point(selectImgText.Location.X, 349);
+                selectImgButton.Location = new Point(selectImgButton.Location.X, 349);
 
-                descriptionText.Location = new Point(descriptionText.Location.X, descriptionText.Location.Y - 49);
-                labelDescription.Location = new Point(labelDescription.Location.X, labelDescription.Location.Y - 49);
-                RENDER.Location = new Point(RENDER.Location.X, RENDER.Location.Y - 49);
+                labelDescription.Location = new Point(labelDescription.Location.X, 426);
+                descriptionText.Location = new Point(descriptionText.Location.X, 446);
+                RENDER.Location = new Point(RENDER.Location.X, 525);
 
                 labelReq.Visible = false;
                 heroReq1.Visible = false;
@@ -431,8 +452,6 @@ namespace HereToSlay
                 {
                     if (c.Name.Contains("clear")) { c.Visible = false; };
                 }
-
-                
             }
         }
         private void MonsterCard_Click(object? sender, EventArgs? e)
@@ -456,13 +475,13 @@ namespace HereToSlay
                 advancedClass.Visible = false;
                 advancedClassBox.Visible = false;
 
-                labelImg.Location = new Point(115, 229);
-                selectImgText.Location = new Point(119, 249);
-                selectImg.Location = new Point(270, 249);
+                labelImg.Location = new Point(labelImg.Location.X, labelImg.Location.Y - 100);
+                selectImgText.Location = new Point(selectImgText.Location.X, selectImgText.Location.Y - 100);
+                selectImgButton.Location = new Point(selectImgButton.Location.X, selectImgButton.Location.Y - 100);
 
-                descriptionText.Location = new Point(descriptionText.Location.X, descriptionText.Location.Y + 49);
-                labelDescription.Location = new Point(labelDescription.Location.X, labelDescription.Location.Y + 49);
-                RENDER.Location = new Point(RENDER.Location.X, RENDER.Location.Y + 49);
+                descriptionText.Location = new Point(descriptionText.Location.X, descriptionText.Location.Y + 66);
+                labelDescription.Location = new Point(labelDescription.Location.X, labelDescription.Location.Y + 66);
+                RENDER.Location = new Point(RENDER.Location.X, RENDER.Location.Y + 66);
 
                 labelReq.Visible = true;
                 heroReq1.Visible = true;
@@ -480,7 +499,6 @@ namespace HereToSlay
                 goodOutputText.Visible = true;
                 goodOutputNum.Visible = true;
                 goodOutputSym.Visible = true;
-
 
                 foreach (Control c in this.Controls)
                 {
@@ -528,8 +546,10 @@ namespace HereToSlay
                     _ => throw new NotImplementedException(),
                 };
             }
+            renderPreview(sender, e);
         }
     }
+
     class FontLoader
     {
         private static readonly PrivateFontCollection FontCollection = new();
@@ -575,6 +595,7 @@ namespace HereToSlay
             }
         }
     }
+
     class ImageCBox
     {
         public string Text { get; set; }
@@ -604,13 +625,12 @@ namespace HereToSlay
             e.DrawFocusRectangle();
         }
     }
-
-    class CustomComboBox
+    class BackgroundCBox
     {
         public string Text { get; set; }
         public Color BackgroundColor { get; set; }
 
-        public CustomComboBox(string text, Color backgroundColor)
+        public BackgroundCBox(string text, Color backgroundColor)
         {
             Text = text;
             BackgroundColor = backgroundColor;
@@ -622,7 +642,7 @@ namespace HereToSlay
 
             e.DrawBackground();
 
-            if (sender is ComboBox comboBox && comboBox.Items.Count > 0 && comboBox.Items[e.Index] is CustomComboBox item)
+            if (sender is ComboBox comboBox && comboBox.Items.Count > 0 && comboBox.Items[e.Index] is BackgroundCBox item)
             {
                 if (e.Font != null)
                 {
@@ -644,4 +664,5 @@ namespace HereToSlay
             e.DrawFocusRectangle();
         }
     }
+
 }
