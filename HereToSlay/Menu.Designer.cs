@@ -30,7 +30,7 @@
         {
             components = new System.ComponentModel.Container();
             RENDER = new Button();
-            leaderNameText = new TextBox();
+            nameText = new TextBox();
             labelLeader = new Label();
             labelDescription = new Label();
             logo = new PictureBox();
@@ -41,7 +41,7 @@
             selectImgText = new TextBox();
             labelImg = new Label();
             gradient = new CheckBox();
-            leaderWhite = new CheckBox();
+            nameWhite = new CheckBox();
             descriptionText = new TextBox();
             previewImg = new PictureBox();
             gitLabel2 = new LinkLabel();
@@ -107,15 +107,15 @@
             // 
             // leaderNameText
             // 
-            leaderNameText.BackColor = Color.White;
-            leaderNameText.BorderStyle = BorderStyle.None;
-            leaderNameText.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            leaderNameText.Location = new Point(119, 195);
-            leaderNameText.Margin = new Padding(0);
-            leaderNameText.Name = "leaderNameText";
-            leaderNameText.Size = new Size(175, 22);
-            leaderNameText.TabIndex = 2;
-            leaderNameText.TextChanged += renderPreview;
+            nameText.BackColor = Color.White;
+            nameText.BorderStyle = BorderStyle.None;
+            nameText.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            nameText.Location = new Point(119, 195);
+            nameText.Margin = new Padding(0);
+            nameText.Name = "leaderNameText";
+            nameText.Size = new Size(175, 22);
+            nameText.TabIndex = 2;
+            nameText.TextChanged += renderPreview;
             // 
             // labelLeader
             // 
@@ -252,18 +252,18 @@
             // 
             // leaderWhite
             // 
-            leaderWhite.AutoSize = true;
-            leaderWhite.BackColor = Color.Transparent;
-            leaderWhite.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            leaderWhite.ForeColor = Color.White;
-            leaderWhite.Location = new Point(0, 0);
-            leaderWhite.Margin = new Padding(0);
-            leaderWhite.Name = "leaderWhite";
-            leaderWhite.Size = new Size(92, 19);
-            leaderWhite.TabIndex = 14;
-            leaderWhite.Text = "White Name";
-            leaderWhite.UseVisualStyleBackColor = false;
-            leaderWhite.CheckedChanged += renderPreview;
+            nameWhite.AutoSize = true;
+            nameWhite.BackColor = Color.Transparent;
+            nameWhite.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            nameWhite.ForeColor = Color.White;
+            nameWhite.Location = new Point(0, 0);
+            nameWhite.Margin = new Padding(0);
+            nameWhite.Name = "leaderWhite";
+            nameWhite.Size = new Size(92, 19);
+            nameWhite.TabIndex = 14;
+            nameWhite.Text = "White Name";
+            nameWhite.UseVisualStyleBackColor = false;
+            nameWhite.CheckedChanged += renderPreview;
             // 
             // descriptionText
             // 
@@ -329,7 +329,7 @@
             // advancedNameBox
             // 
             advancedNameBox.BackColor = Color.Transparent;
-            advancedNameBox.Controls.Add(leaderWhite);
+            advancedNameBox.Controls.Add(nameWhite);
             advancedNameBox.Controls.Add(gradient);
             advancedNameBox.Location = new Point(134, 217);
             advancedNameBox.Margin = new Padding(0);
@@ -800,7 +800,7 @@
             Controls.Add(selectImgButton);
             Controls.Add(chosenClass);
             Controls.Add(labelDescription);
-            Controls.Add(leaderNameText);
+            Controls.Add(nameText);
             Controls.Add(RENDER);
             Controls.Add(logo);
             Controls.Add(labelLeader);
@@ -837,7 +837,7 @@
         #endregion
 
         private Button RENDER;
-        private TextBox leaderNameText;
+        private TextBox nameText;
         private Label labelLeader;
         private Label labelDescription;
         private PictureBox logo;
@@ -849,7 +849,7 @@
         private TextBox selectImgText;
         private Label labelImg;
         private CheckBox gradient;
-        private CheckBox leaderWhite;
+        private CheckBox nameWhite;
         private PictureBox previewImg;
         private LinkLabel gitLabel2;
         private LinkLabel gitLabel1;

@@ -7,6 +7,7 @@ using Raylib_cs;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
+using System.Xml.Linq;
 
 namespace GeneratorBackend
 {
@@ -57,7 +58,7 @@ namespace GeneratorBackend
     {
         static void Main()
         {
-            Generate("TestRender.png", 0,"Test Leader", new int[]{11, -1}, "", "Test description", false, false); // if you want to test the generator, change the parameters here
+            GenerateLeader("TestRender.png", 0,"Test Leader", new int[]{11, -1}, "", "Test description", false, false); // if you want to test the generator, change the parameters here
                                                                //"-1" here means that there is only one class.
         }
 
@@ -72,10 +73,10 @@ namespace GeneratorBackend
         const int CARD_WIDTH = 827;
         const int CARD_HEIGHT = 1417;
 
-        public static void Generate(string? renderLocation, int language, string leaderName, int[] desiredClass, string leaderImg, string leaderDescription, bool addGradient, bool leaderWhite)
-        {
-            AssetManager inst = AssetManager.Instance;
+        private static AssetManager inst = AssetManager.Instance;
 
+        public static void GenerateLeader(string? renderLocation, int language, string name, int[] desiredClass, string leaderImg, string description, bool addGradient, bool nameWhite)
+        {
             ChangeLeaderImage(leaderImg);
 
             // This has to be loaded each time, to clear the image from the previous render
@@ -327,10 +328,10 @@ namespace GeneratorBackend
             Raylib.UnloadImage(secondClassSymbol);
 
             // Name and Title
-            DrawNameAndTitle(inst, leaderName, leaderTitle, card, leaderWhite);
+            DrawNameAndTitle(name, leaderTitle, card, nameWhite);
 
             // Description
-            DrawDescription(inst, leaderDescription, card);
+            DrawDescription(description, card);
 
             if (renderLocation == null)
             {
@@ -342,8 +343,43 @@ namespace GeneratorBackend
             }
             Raylib.UnloadImage(card);
         }
+        public static void GenerateMonster(string? renderLocation, int language, string name, int[] desiredClass, string monsterImg, string description, bool addGradient, bool nameWhite)
+        {
+            ChangeMonsterImage(monsterImg);
 
-        static void DrawNameAndTitle(AssetManager inst, string nameText, string titleText, Raylib_cs.Image card, bool nameWhite)
+            // This has to be loaded each time, to clear the image from the previous render
+            Raylib_cs.Image card = Raylib.LoadImage("template/background.png");
+            Raylib_cs.Rectangle imageRec = new(0, 0, 827, 1417);
+
+            Raylib.ImageDraw(ref card, monster, imageRec, new(41, 41, 745, 824), Raylib_cs.Color.WHITE);
+            Raylib.ImageDraw(ref card, inst.bottom, imageRec, imageRec, Raylib_cs.Color.WHITE);
+
+            if (addGradient) { Raylib.ImageDraw(ref card, inst.gradient, imageRec, imageRec, Raylib_cs.Color.WHITE); }
+
+            Raylib.ImageDraw(ref card, inst.frameMonster, imageRec, imageRec, Raylib_cs.Color.BLACK); // TODO: ensure correct color
+
+
+            // Name and Title
+            string titleText = language switch{
+                1 => "Potwór",
+                _ => "Monster"
+            };
+            DrawNameAndTitle(name, titleText, card, nameWhite);
+
+            // Description
+            DrawDescription(description, card);
+
+            if (renderLocation == null)
+            {
+                Raylib.ExportImage(card, "preview.png");
+            }
+            else
+            {
+                Raylib.ExportImage(card, renderLocation);
+            }
+            Raylib.UnloadImage(card);
+        }
+        static void DrawNameAndTitle(string nameText, string titleText, Raylib_cs.Image card, bool nameWhite)
         {
             Raylib_cs.Color leaderColor = nameWhite switch
             {
@@ -367,7 +403,7 @@ namespace GeneratorBackend
             Raylib.ImageDrawTextEx(ref card, inst.titleFont, titleText, new Vector2((CARD_WIDTH / 2) - (titleSize.X / 2) + 2, 123 + 2), AssetManager.TITLE_SIZE, TITLE_FONT_SPACING, leaderShadowColor);
             Raylib.ImageDrawTextEx(ref card, inst.titleFont, titleText, new Vector2((CARD_WIDTH / 2) - (titleSize.X / 2), 123), AssetManager.TITLE_SIZE, TITLE_FONT_SPACING, leaderColor);
         }
-        static void DrawDescription(AssetManager inst, string text, Raylib_cs.Image card)
+        static void DrawDescription(string text, Raylib_cs.Image card)
         {
             Raylib_cs.Color descTextColor = new(78, 78, 78, 255); // 78 78 78 is the color of the description text
 
@@ -444,12 +480,15 @@ namespace GeneratorBackend
         }
 
         static Raylib_cs.Image leader = new();
+        static Raylib_cs.Image monster = new();
         static Image<Rgba32>? image;
-        static string lastpath = "";
+        static string lastPathLeader = "";
+        static string lastPathMonster = "";
         static void ChangeLeaderImage(string path)
         {
-            if (path == lastpath) { return; }
-            lastpath = path;
+            if (path == lastPathLeader) { return; }
+            lastPathLeader = path;
+
             if (File.Exists(path))
             {
                 Raylib.UnloadImage(leader);
@@ -480,6 +519,44 @@ namespace GeneratorBackend
 
                 Raylib.ImageCrop(ref leader, new Raylib_cs.Rectangle(cropX, cropY, targetWidth, targetHeight));
                 Raylib.ImageResize(ref leader, 745, 1176);
+                #endregion
+            }
+        }
+        static void ChangeMonsterImage(string path)
+        {
+            if (path == lastPathMonster) { return; }
+            lastPathMonster = path;
+
+            if (File.Exists(path))
+            {
+                Raylib.UnloadImage(monster);
+                using var file = File.OpenRead(path);
+                image = SixLabors.ImageSharp.Image.Load<Rgba32>(file);
+
+                using var memoryStream = new MemoryStream();
+                image.SaveAsPng(memoryStream);
+                memoryStream.Seek(0, SeekOrigin.Begin);
+                monster = Raylib.LoadImageFromMemory(".png", memoryStream.ToArray());
+
+                #region Image Crop
+                float targetAspectRatio = 745.0f / 824.0f;
+                int targetWidth, targetHeight;
+                if (monster.width / (float)monster.height > targetAspectRatio)
+                {
+                    targetWidth = (int)(monster.height * targetAspectRatio);
+                    targetHeight = monster.height;
+                }
+                else
+                {
+                    targetWidth = monster.width;
+                    targetHeight = (int)(monster.width / targetAspectRatio);
+                }
+
+                int cropX = (monster.width - targetWidth) / 2;
+                int cropY = (monster.height - targetHeight) / 2;
+
+                Raylib.ImageCrop(ref monster, new Raylib_cs.Rectangle(cropX, cropY, targetWidth, targetHeight));
+                Raylib.ImageResize(ref monster, 745, 824);
                 #endregion
             }
         }

@@ -27,13 +27,13 @@ namespace HereToSlay
 
             Font fontUIsmall = FontLoader.GetFont(Properties.Resources.SourceSansPro, 9);
             gradient.Font = fontUIsmall;
-            leaderWhite.Font = fontUIsmall;
+            nameWhite.Font = fontUIsmall;
             splitClass.Font = fontUIsmall;
             gitLabel1.Font = fontUIsmall;
             gitLabel2.Font = fontUIsmall;
 
             Font fontLeader = FontLoader.GetFont(Properties.Resources.PatuaOne_polish, 13);
-            leaderNameText.Font = fontLeader;
+            nameText.Font = fontLeader;
             RENDER.Font = fontLeader;
 
             Font fontLeaderSmall = FontLoader.GetFont(Properties.Resources.PatuaOne_polish, 10);
@@ -109,10 +109,10 @@ namespace HereToSlay
                 switch (Properties.Settings.Default.CardType)
                 {
                     case 0:
-                        GeneratorBackend.Program.Generate(filePath, language.SelectedIndex, leaderNameText.Text, new int[] { chosenClass.SelectedIndex, chosenSecondClass.SelectedIndex }, selectImgText.Text, descriptionText.Text, gradient.Checked, leaderWhite.Checked);
+                        GeneratorBackend.Program.GenerateLeader(filePath, language.SelectedIndex, nameText.Text, new int[] { chosenClass.SelectedIndex, chosenSecondClass.SelectedIndex }, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked);
                         break;
                     case 1:
-                        GeneratorBackend.Program.Generate(filePath, language.SelectedIndex, leaderNameText.Text, new int[] { heroReq1.SelectedIndex, heroReq2.SelectedIndex, heroReq3.SelectedIndex, heroReq4.SelectedIndex, heroReq5.SelectedIndex }, selectImgText.Text, descriptionText.Text, gradient.Checked, leaderWhite.Checked);
+                        GeneratorBackend.Program.GenerateLeader(filePath, language.SelectedIndex, nameText.Text, new int[] { heroReq1.SelectedIndex, heroReq2.SelectedIndex, heroReq3.SelectedIndex, heroReq4.SelectedIndex, heroReq5.SelectedIndex }, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked);
                         break;
                     default:
                         throw new NotImplementedException();
@@ -145,10 +145,10 @@ namespace HereToSlay
                         switch (Properties.Settings.Default.CardType)
                         {
                             case 0:
-                                GeneratorBackend.Program.Generate(null, language.SelectedIndex, leaderNameText.Text, new int[] { chosenClass.SelectedIndex, chosenSecondClass.SelectedIndex }, selectImgText.Text, descriptionText.Text, gradient.Checked, leaderWhite.Checked);
+                                GeneratorBackend.Program.GenerateLeader(null, language.SelectedIndex, nameText.Text, new int[] { chosenClass.SelectedIndex, chosenSecondClass.SelectedIndex }, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked);
                                 break;
                             case 1:
-                                GeneratorBackend.Program.Generate(null, language.SelectedIndex, leaderNameText.Text, new int[] { heroReq1.SelectedIndex, heroReq2.SelectedIndex, heroReq3.SelectedIndex, heroReq4.SelectedIndex, heroReq5.SelectedIndex }, selectImgText.Text, descriptionText.Text, gradient.Checked, leaderWhite.Checked);
+                                GeneratorBackend.Program.GenerateMonster(null, language.SelectedIndex, nameText.Text, new int[] { heroReq1.SelectedIndex, heroReq2.SelectedIndex, heroReq3.SelectedIndex, heroReq4.SelectedIndex, heroReq5.SelectedIndex }, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked);
                                 break;
                             default:
                                 throw new NotImplementedException();
@@ -190,7 +190,7 @@ namespace HereToSlay
                     leaderImgToolTip.ToolTipTitle = "Wymiary obazka";
                     leaderImgToolTip.SetToolTip(selectImgButton, "Obrazek lidera (nie ca³a karta) ma wymiary 745x1176. \nProgram automatycznie przytnie i przybli¿y obraz, je¿eli bêdzie to potrzebne.\n\nWspierane rozszerzenia plików:\n.png, .jpeg, .jpg, .gif (pierwsza klatka), .bmp, .webp, .pbm, .tiff, .tga");
                     gradient.Text = "Tylni gradient";
-                    leaderWhite.Text = "Bia³a nazwa";
+                    nameWhite.Text = "Bia³a nazwa";
                     splitClass.Text = "Podwójna Klasa";
                     this.Text = "To ja go tnê - Generator kart";
                     labelBad.Text = "Wymagania rzutu - Pora¿ka";
@@ -216,7 +216,7 @@ namespace HereToSlay
                     leaderImgToolTip.ToolTipTitle = "Image dimentions";
                     leaderImgToolTip.SetToolTip(selectImgButton, "The leader image (not the whole card) dimentions are 745x1176. \nThe program will automatically crop and zoom the image, if needed.\n\nSupported file extensions:\n.png, .jpeg, .jpg, .gif (first frame), .bmp, .webp, .pbm, .tiff, .tga");
                     gradient.Text = "Back gradient";
-                    leaderWhite.Text = "White name";
+                    nameWhite.Text = "White name";
                     splitClass.Text = "Split Class";
                     this.Text = "Here to Slay - Card generator";
                     labelBad.Text = "Roll Requirements - Fail";
@@ -452,6 +452,8 @@ namespace HereToSlay
                 {
                     if (c.Name.Contains("clear")) { c.Visible = false; };
                 }
+
+                nameWhite.Checked = false;
             }
         }
         private void MonsterCard_Click(object? sender, EventArgs? e)
@@ -504,6 +506,8 @@ namespace HereToSlay
                 {
                     if (c.Name.Contains("clear") && c.Name != "clearSecondClass") { c.Visible = true; };
                 }
+
+                nameWhite.Checked = true;
             }
         }
 
