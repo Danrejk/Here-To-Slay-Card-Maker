@@ -14,31 +14,41 @@ namespace GeneratorBackend
     public class AssetManager
     {
         private static AssetManager? instance;
-        public Raylib_cs.Image frame { get; private set; }
-        public Raylib_cs.Image frameMonster { get; private set; }
-        public Raylib_cs.Image bottom { get; private set; }
-        public Raylib_cs.Image gradient { get; private set; }
-        public Font nameFont { get; private set; }
-        public Font titleFont { get; private set; }
-        public Font descFont { get; private set; }
+        public Raylib_cs.Image frame = Raylib.LoadImage("template/frame.png");
+        public Raylib_cs.Image frameMonster = Raylib.LoadImage("template/frame_monster.png");
+        public Raylib_cs.Image bottom = Raylib.LoadImage("template/bottom.png");
+        public Raylib_cs.Image gradient = Raylib.LoadImage("template/gradient.png");
 
         public const int NAME_SIZE = 60; // 60
         public const int TITLE_SIZE = 49; // 49
         public const int DESC_SIZE = 38; // 38
+        public Font nameFont { get; private set; }
+        public Font titleFont { get; private set; }
+        public Font descFont { get; private set; }
+
+        public Raylib_cs.Image Ranger = Raylib.LoadImage("classes/ranger.png");
+        public Raylib_cs.Image Wizard = Raylib.LoadImage("classes/wizard.png");
+        public Raylib_cs.Image Bard = Raylib.LoadImage("classes/bard.png");
+        public Raylib_cs.Image Guardian = Raylib.LoadImage("classes/guardian.png");
+        public Raylib_cs.Image Fighter = Raylib.LoadImage("classes/fighter.png");
+        public Raylib_cs.Image Thief = Raylib.LoadImage("classes/thief.png");
+        public Raylib_cs.Image Druid = Raylib.LoadImage("classes/druid.png");
+        public Raylib_cs.Image Warrior = Raylib.LoadImage("classes/warrior.png");
+        public Raylib_cs.Image Berserker = Raylib.LoadImage("classes/berserker.png");
+        public Raylib_cs.Image Necromancer = Raylib.LoadImage("classes/necromancer.png");
+        public Raylib_cs.Image Sorcerer = Raylib.LoadImage("classes/sorcerer.png");
+        public Raylib_cs.Image None = Raylib.LoadImage("classes/none.png");
 
         private AssetManager()
         {
             Raylib.InitWindow(1, 1, "Font Loader");
             Raylib.SetWindowPosition(-2000, -2000);
+
             nameFont = Raylib.LoadFontEx("fonts/PatuaOne-polish.ttf", NAME_SIZE, null, 382); // this font has limited language support (NOT only Polish and English btw)
             titleFont = Raylib.LoadFontEx("fonts/SourceSansPro.ttf", TITLE_SIZE, null, 1415);
             descFont = Raylib.LoadFontEx("fonts/SourceSansPro.ttf", DESC_SIZE, null, 1415);
-            Raylib.CloseWindow();
 
-            frame = Raylib.LoadImage("template/frame.png");
-            frameMonster = Raylib.LoadImage("template/frame_monster.png");
-            bottom = Raylib.LoadImage("template/bottom.png");
-            gradient = Raylib.LoadImage("template/gradient.png");
+            Raylib.CloseWindow();
         }
 
         public static AssetManager Instance
@@ -73,7 +83,7 @@ namespace GeneratorBackend
         const int CARD_WIDTH = 827;
         const int CARD_HEIGHT = 1417;
 
-        private static AssetManager inst = AssetManager.Instance;
+        private static readonly AssetManager inst = AssetManager.Instance;
 
         public static void GenerateLeader(string? renderLocation, int language, string name, int[] desiredClass, string leaderImg, string description, bool addGradient, bool nameWhite)
         {
@@ -93,84 +103,84 @@ namespace GeneratorBackend
                     leaderTitle = language switch{
                         1 => "Przywódca drużyny: łowca",
                         _ => "Party Leader: Ranger"};
-                    classSymbol = Raylib.LoadImage("classes/lowca.png");
+                    classSymbol = inst.Ranger;
                     desiredColor = new(35, 94, 57, 255);
                     break;
                 case 1:
                     leaderTitle = language switch{
                         1 => "Przywódca drużyny: mag",
                         _ => "Party Leader: Wizard"};
-                    classSymbol = Raylib.LoadImage("classes/mag.png");
+                    classSymbol = inst.Wizard;
                     desiredColor = new(116, 46, 137, 255);
                     break;
                 case 2:
                     leaderTitle = language switch{
                         1 => "Przywódca drużyny: bard",
                         _ => "Party Leader: Bard"};
-                    classSymbol = Raylib.LoadImage("classes/najebus.png");
+                    classSymbol = inst.Bard;
                     desiredColor = new(194, 81, 47, 255);
                     break;
                 case 3:
                     leaderTitle = language switch{
                         1 => "Przywódca drużyny: strażnik",
                         _ => "Party Leader: Guardian"};
-                    classSymbol = Raylib.LoadImage("classes/straznik.png");
+                    classSymbol = inst.Guardian;
                     desiredColor = new(235, 171, 33, 255);
                     break;
                 case 4:
                     leaderTitle = language switch{
                         1 => "Przywódca drużyny: wojownik",
                         _ => "Party Leader: Fighter"};
-                    classSymbol = Raylib.LoadImage("classes/wojownik.png");
+                    classSymbol = inst.Fighter;
                     desiredColor = new(151, 40, 44, 255);
                     break;
                 case 5:
                     leaderTitle = language switch{
                         1 => "Przywódca drużyny: złodziej",
                         _ => "Party Leader: Thief"};
-                    classSymbol = Raylib.LoadImage("classes/zlodziej.png");
+                    classSymbol = inst.Thief;
                     desiredColor = new(0, 78, 125, 255);
                     break;
                 case 6:
                     leaderTitle = language switch{
                         1 => "Przywódca drużyny: druid",
                         _ => "Party Leader: Druid"};
-                    classSymbol = Raylib.LoadImage("classes/druid.png");
+                    classSymbol = inst.Druid;
                     desiredColor = new(0, 171, 143, 255);
                     break;
                 case 7:
                     leaderTitle = language switch{
                         1 => "Przywódca drużyny: awanturnik",
                         _ => "Party Leader: Warrior"};
-                    classSymbol = Raylib.LoadImage("classes/awanturnik.png");
+                    classSymbol =inst.Warrior;
                     desiredColor = new(94, 109, 180, 255);
                     break;
                 case 8:
                     leaderTitle = language switch{
                         1 => "Przywódca drużyny: berserk",
                         _ => "Party Leader: Berserker"};
-                    classSymbol = Raylib.LoadImage("classes/berserk.png");
+                    classSymbol = inst.Berserker;
                     desiredColor = new(225, 131, 51, 255);
                     break;
                 case 9:
                     leaderTitle = language switch{
                         1 => "Przywódca drużyny: nekromanta",
                         _ => "Party Leader: Necromancer"};
-                    classSymbol = Raylib.LoadImage("classes/nekromanta.png");
+                    classSymbol = inst.Necromancer;
                     desiredColor = new(213, 28, 106, 255);
                     break;
                 case 10:
                     leaderTitle = language switch{
                         1 => "Przywódca drużyny: czarownik",
                         _ => "Party Leader: Sorcerer"};
-                    classSymbol = Raylib.LoadImage("classes/czarownik.png");
+                    classSymbol = inst.Sorcerer;
                     desiredColor = new(29, 31, 29, 255);
                     break;
                 default: // when no desired class is given it deafults to an empty class
                     leaderTitle = language switch{
                         1 => "Przywódca drużyny",
                         _ => "Party Leader"};
-                    classSymbol = Raylib.LoadImage("classes/empty.png");
+                    classSymbol = inst.None;
                     desiredColor = new(91, 93, 92, 255);
                     break;
             }
@@ -187,7 +197,7 @@ namespace GeneratorBackend
                             1 => "/łowca",
                             _ => "/Ranger"
                         };
-                        secondClassSymbol = Raylib.LoadImage("classes/lowca.png");
+                        secondClassSymbol = Raylib.ImageCopy(inst.Ranger);
                         desiredSecondColor = new(35, 94, 57, 255);
                         break;
                     case 1:
@@ -196,7 +206,7 @@ namespace GeneratorBackend
                             1 => "/mag",
                             _ => "/Wizard"
                         };
-                        secondClassSymbol = Raylib.LoadImage("classes/mag.png");
+                        secondClassSymbol = Raylib.ImageCopy(inst.Wizard);
                         desiredSecondColor = new(116, 46, 137, 255);
                         break;
                     case 2:
@@ -205,7 +215,7 @@ namespace GeneratorBackend
                             1 => "/bard",
                             _ => "/Bard"
                         };
-                        secondClassSymbol = Raylib.LoadImage("classes/najebus.png");
+                        secondClassSymbol = Raylib.ImageCopy(inst.Bard);
                         desiredSecondColor = new(194, 81, 47, 255);
                         break;
                     case 3:
@@ -214,7 +224,7 @@ namespace GeneratorBackend
                             1 => "/strażnik",
                             _ => "/Guardian"
                         };
-                        secondClassSymbol = Raylib.LoadImage("classes/straznik.png");
+                        secondClassSymbol = Raylib.ImageCopy(inst.Guardian);
                         desiredSecondColor = new(235, 171, 33, 255);
                         break;
                     case 4:
@@ -223,7 +233,7 @@ namespace GeneratorBackend
                             1 => "/wojownik",
                             _ => "/Fighter"
                         };
-                        secondClassSymbol = Raylib.LoadImage("classes/wojownik.png");
+                        secondClassSymbol = Raylib.ImageCopy(inst.Fighter);
                         desiredSecondColor = new(151, 40, 44, 255);
                         break;
                     case 5:
@@ -232,7 +242,7 @@ namespace GeneratorBackend
                             1 => "/złodziej",
                             _ => "/Thief"
                         };
-                        secondClassSymbol = Raylib.LoadImage("classes/zlodziej.png");
+                        secondClassSymbol = Raylib.ImageCopy(inst.Thief);
                         desiredSecondColor = new(0, 78, 125, 255);
                         break;
                     case 6:
@@ -241,7 +251,7 @@ namespace GeneratorBackend
                             1 => "/druid",
                             _ => "/Druid"
                         };
-                        secondClassSymbol = Raylib.LoadImage("classes/druid.png");
+                        secondClassSymbol = Raylib.ImageCopy(inst.Druid);
                         desiredSecondColor = new(0, 171, 143, 255);
                         break;
                     case 7:
@@ -250,7 +260,7 @@ namespace GeneratorBackend
                             1 => "/awanturnik",
                             _ => "/Warrior"
                         };
-                        secondClassSymbol = Raylib.LoadImage("classes/awanturnik.png");
+                        secondClassSymbol = Raylib.ImageCopy(inst.Warrior);
                         desiredSecondColor = new(94, 109, 180, 255);
                         break;
                     case 8:
@@ -259,7 +269,7 @@ namespace GeneratorBackend
                             1 => "/berserk",
                             _ => "/Berserker"
                         };
-                        secondClassSymbol = Raylib.LoadImage("classes/berserk.png");
+                        secondClassSymbol = Raylib.ImageCopy(inst.Berserker);
                         desiredSecondColor = new(225, 131, 51, 255);
                         break;
                     case 9:
@@ -268,7 +278,7 @@ namespace GeneratorBackend
                             1 => "/nekromanta",
                             _ => "/Necromancer"
                         };
-                        secondClassSymbol = Raylib.LoadImage("classes/nekromanta.png");
+                        secondClassSymbol = Raylib.ImageCopy(inst.Necromancer);
                         desiredSecondColor = new(213, 28, 106, 255);
                         break;
                     case 10:
@@ -277,7 +287,7 @@ namespace GeneratorBackend
                             1 => "/czarownik",
                             _ => "/Sorcerer"
                         };
-                        secondClassSymbol = Raylib.LoadImage("classes/czarownik.png");
+                        secondClassSymbol = Raylib.ImageCopy(inst.Sorcerer);
                         desiredSecondColor = new(29, 31, 29, 255);
                         break;
                     default:
@@ -286,7 +296,7 @@ namespace GeneratorBackend
                             1 => "/przywódca",
                             _ => "/Leader"
                         };
-                        secondClassSymbol = Raylib.LoadImage("classes/empty.png");
+                        secondClassSymbol = Raylib.ImageCopy(inst.None);
                         desiredSecondColor = new (91, 93, 92, 255);
                         break;
                 }
@@ -325,7 +335,6 @@ namespace GeneratorBackend
             }
 
             Raylib.UnloadImage(frameTinted);
-            Raylib.UnloadImage(classSymbol);
             Raylib.UnloadImage(secondClassSymbol);
 
             // Name and Title

@@ -13,46 +13,46 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="classes\awanturnik.png">
+    <None Update="classes\warrior.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="classes\berserk.png">
+    <None Update="classes\berserker.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="classes\bohater.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="classes\czarownik.png">
+    <None Update="classes\sorcerer.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="classes\druid.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="classes\empty.png">
+    <None Update="classes\none.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="classes\hero.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="classes\lowca.png">
+    <None Update="classes\ranger.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="classes\mag.png">
+    <None Update="classes\wizard.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="classes\najebus.png">
+    <None Update="classes\bard.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="classes\nekromanta.png">
+    <None Update="classes\necromancer.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="classes\straznik.png">
+    <None Update="classes\guardian.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="classes\wojownik.png">
+    <None Update="classes\fighter.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="classes\zlodziej.png">
+    <None Update="classes\thief.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="fonts\SourceSansPro.ttf">
