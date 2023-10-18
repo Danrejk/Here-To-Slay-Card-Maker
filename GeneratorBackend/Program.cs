@@ -287,10 +287,10 @@ namespace GeneratorBackend
                             _ => "/Leader"
                         };
                         secondClassSymbol = Raylib.LoadImage("classes/empty.png");
-                        desiredSecondColor = new(91, 93, 92, 255);
+                        desiredSecondColor = new (91, 93, 92, 255);
                         break;
                 }
-                Raylib.ImageCrop(ref secondClassSymbol, new Raylib_cs.Rectangle(0, 0, 413, 1417));
+                Raylib.ImageCrop(ref secondClassSymbol, new Raylib_cs.Rectangle(0, 0, 51, 102));
             }
             #endregion
 
@@ -301,11 +301,12 @@ namespace GeneratorBackend
 
             if (addGradient){ Raylib.ImageDraw(ref card, inst.gradient, imageRec, imageRec, Raylib_cs.Color.WHITE); }
 
+            // Draw Class Symbol(s) and Colored Frame(s)
             Raylib_cs.Image frameTinted = Raylib.ImageCopy(inst.frame); // create a copy of the frame asset, so that the original is not modified
-            Raylib.ImageDraw(ref card, classSymbol, imageRec, imageRec, Raylib_cs.Color.WHITE); // Draw Class Symbol(s)
+            Raylib.ImageDraw(ref card, classSymbol, imageRec, new(363, 1167, 102, 102), Raylib_cs.Color.WHITE);
             if (desiredClass[1] != -1) // check if there is a second class
             { 
-                Raylib.ImageDraw(ref card, secondClassSymbol, imageRec, new(0, 0, 413, 1417), Raylib_cs.Color.WHITE);
+                Raylib.ImageDraw(ref card, secondClassSymbol, imageRec, new(363, 1167, 51, 102), Raylib_cs.Color.WHITE);
 
                 Raylib.ImageCrop(ref frameTinted, new Raylib_cs.Rectangle(0, 0, 414, 1417));
                 Raylib.ImageColorTint(ref frameTinted, desiredColor);

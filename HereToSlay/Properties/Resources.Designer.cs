@@ -81,6 +81,16 @@ namespace HereToSlay.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon bohater {
+            get {
+                object obj = ResourceManager.GetObject("bohater", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap closed {
@@ -137,6 +147,16 @@ namespace HereToSlay.Properties {
             get {
                 object obj = ResourceManager.GetObject("gradient", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon hero {
+            get {
+                object obj = ResourceManager.GetObject("hero", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
         
