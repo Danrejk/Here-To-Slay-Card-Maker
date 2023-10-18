@@ -28,6 +28,8 @@ namespace GeneratorBackend
         public Font descFont { get; private set; }
         public Font reqFont { get; private set; }
 
+        public Raylib_cs.Color bottomColor = new(244, 241, 229, 255);
+
         public Raylib_cs.Image Ranger = Raylib.LoadImage("classes/ranger.png");
         public Raylib_cs.Image Wizard = Raylib.LoadImage("classes/wizard.png");
         public Raylib_cs.Image Bard = Raylib.LoadImage("classes/bard.png");
@@ -370,7 +372,7 @@ namespace GeneratorBackend
             Raylib.ImageDraw(ref card, monster, imageRec, new(41, 41, 745, 824), Raylib_cs.Color.WHITE);
             Raylib.ImageDraw(ref card, inst.bottom, imageRec, imageRec, Raylib_cs.Color.WHITE);
             if (addGradient) { Raylib.ImageDraw(ref card, inst.gradient, imageRec, imageRec, Raylib_cs.Color.WHITE); }
-            Raylib.ImageDraw(ref card, inst.frameMonster, imageRec, imageRec, Raylib_cs.Color.BLACK); // TODO: ensure correct color
+            Raylib.ImageDraw(ref card, inst.frameMonster, imageRec, imageRec, new(13, 23, 30, 255));
 
             string reqText = language switch
             {
@@ -378,9 +380,11 @@ namespace GeneratorBackend
                 _ => "REQUIREMENT:"
             };
             Vector2 reqTextSize = Raylib.MeasureTextEx(inst.reqFont, reqText, AssetManager.REQ_SIZE, REQ_FONT_SPACING);
-            Raylib.ImageDrawTextEx(ref card, inst.reqFont, reqText, new(83, 932), AssetManager.REQ_SIZE, REQ_FONT_SPACING, Raylib_cs.Color.WHITE);
+            Raylib.ImageDrawTextEx(ref card, inst.reqFont, reqText, new(87, 920), AssetManager.REQ_SIZE, REQ_FONT_SPACING, inst.bottomColor);
 
-            int[] orderedRequirements = desiredRequirements.OrderBy(x => x == 0).ToArray();
+            #region Class Requirements
+            // put the classless hero requirements at the end
+            int[] orderedRequirements = desiredRequirements.OrderBy(x => x == 0).ToArray(); 
 
             // count how many class requirements there are
             int reqCount = 0;
@@ -415,17 +419,18 @@ namespace GeneratorBackend
                     11 => inst.Sorcerer,
                     _ => inst.None
                 };
-                float iconsMargin = 83 + 18;
+                float iconsMargin = 83 + 13;
                 // change the distance between icons, if there are 5, so that it better fits onto the card
                 if (reqCount > 4){
                     iconsMargin -= language switch{
-                        1 => 3, // polish needs less margin reduction, because the text is shorter
-                        _ => 13
+                        1 => 0, // polish needs less margin reduction, because the "REQUIREMENT" text is shorter
+                        _ => 10 // YOU CAN MODIFY THIS. It might look better for your preferences, but for me I think this is the best option.
                     };
                 }
-                Raylib.ImageDraw(ref card, classSymbol, imageRec, new(83 + reqTextSize.X + 10 + reqIteration * iconsMargin, 915, 83, 83), Raylib_cs.Color.WHITE);
+                Raylib.ImageDraw(ref card, classSymbol, imageRec, new(93 + reqTextSize.X + 10 + reqIteration * iconsMargin, 902, 83, 83), Raylib_cs.Color.WHITE);
                 reqIteration++;
             }
+            #endregion
 
             // Name and Title
             string titleText = language switch{

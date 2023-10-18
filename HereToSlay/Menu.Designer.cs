@@ -105,14 +105,14 @@
             RENDER.UseVisualStyleBackColor = false;
             RENDER.Click += RenderButton_Press;
             // 
-            // leaderNameText
+            // nameText
             // 
             nameText.BackColor = Color.White;
             nameText.BorderStyle = BorderStyle.None;
             nameText.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             nameText.Location = new Point(119, 195);
             nameText.Margin = new Padding(0);
-            nameText.Name = "leaderNameText";
+            nameText.Name = "nameText";
             nameText.Size = new Size(175, 22);
             nameText.TabIndex = 2;
             nameText.TextChanged += renderPreview;
@@ -250,7 +250,7 @@
             gradient.UseVisualStyleBackColor = false;
             gradient.CheckedChanged += renderPreview;
             // 
-            // leaderWhite
+            // nameWhite
             // 
             nameWhite.AutoSize = true;
             nameWhite.BackColor = Color.Transparent;
@@ -258,7 +258,7 @@
             nameWhite.ForeColor = Color.White;
             nameWhite.Location = new Point(0, 0);
             nameWhite.Margin = new Padding(0);
-            nameWhite.Name = "leaderWhite";
+            nameWhite.Name = "nameWhite";
             nameWhite.Size = new Size(92, 19);
             nameWhite.TabIndex = 14;
             nameWhite.Text = "White Name";
@@ -768,6 +768,7 @@
             BackColor = Color.FromArgb(39, 43, 52);
             BackgroundImage = Properties.Resources.gradient;
             ClientSize = new Size(828, 711);
+            Controls.Add(advancedNameBox);
             Controls.Add(badOutputText);
             Controls.Add(clearHeroReq5);
             Controls.Add(clearHeroReq4);
@@ -791,7 +792,6 @@
             Controls.Add(advancedClassBox);
             Controls.Add(advancedClass);
             Controls.Add(advancedName);
-            Controls.Add(advancedNameBox);
             Controls.Add(gitLabel1);
             Controls.Add(gitLabel2);
             Controls.Add(descriptionText);
