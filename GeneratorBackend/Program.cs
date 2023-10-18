@@ -381,7 +381,17 @@ namespace GeneratorBackend
             Raylib.ImageDrawTextEx(ref card, inst.reqFont, reqText, new(83, 932), AssetManager.REQ_SIZE, REQ_FONT_SPACING, Raylib_cs.Color.WHITE);
 
             int[] orderedRequirements = desiredRequirements.OrderBy(x => x == 0).ToArray();
+
+            // count how many class requirements there are
             int reqCount = 0;
+            foreach (int req in orderedRequirements)
+            {
+                if (req== -1) { continue; }
+                reqCount++;
+            }
+
+            // Draw the class requirements
+            int reqIteration = 0;
             foreach ( int req in orderedRequirements)
             {
                 if (req == -1) { continue; }
@@ -405,12 +415,16 @@ namespace GeneratorBackend
                     11 => inst.Sorcerer,
                     _ => inst.None
                 };
-                float reqIconsXoffset = 83 + reqTextSize.X + 10 + reqCount * (83 + 18);
-                if (reqCount >= 4) { 
-                    break;  // TODO: calculate the ammount of icons and if it's 5 then change the margin between all icons.
+                float iconsMargin = 83 + 18;
+                // change the distance between icons, if there are 5, so that it better fits onto the card
+                if (reqCount > 4){
+                    iconsMargin -= language switch{
+                        1 => 3, // polish needs less margin reduction, because the text is shorter
+                        _ => 13
+                    };
                 }
-                Raylib.ImageDraw(ref card, classSymbol, imageRec, new(reqIconsXoffset, 915, 83, 83), Raylib_cs.Color.WHITE);
-                reqCount++;
+                Raylib.ImageDraw(ref card, classSymbol, imageRec, new(83 + reqTextSize.X + 10 + reqIteration * iconsMargin, 915, 83, 83), Raylib_cs.Color.WHITE);
+                reqIteration++;
             }
 
             // Name and Title
