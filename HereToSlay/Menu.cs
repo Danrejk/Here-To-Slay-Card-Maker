@@ -32,11 +32,11 @@ namespace HereToSlay
             gitLabel1.Font = fontUIsmall;
             gitLabel2.Font = fontUIsmall;
 
-            Font fontLeader = FontLoader.GetFont(Properties.Resources.PatuaOne_polish, 13);
+            Font fontLeader = FontLoader.GetFont(Properties.Resources.PatuaOne_Polish, 13);
             nameText.Font = fontLeader;
             RENDER.Font = fontLeader;
 
-            Font fontLeaderSmall = FontLoader.GetFont(Properties.Resources.PatuaOne_polish, 10);
+            Font fontLeaderSmall = FontLoader.GetFont(Properties.Resources.PatuaOne_Polish, 10);
             FontLoader.ChangeFontForAllLabels(this, fontLeaderSmall);
             LeaderCard.Font = fontLeaderSmall;
             MonsterCard.Font = fontLeaderSmall;
@@ -137,7 +137,7 @@ namespace HereToSlay
                     {
                         cancellationTokenSource.Token.ThrowIfCancellationRequested();
 
-                        await Task.Delay(500, cancellationTokenSource.Token);
+                        await Task.Delay(200, cancellationTokenSource.Token);
                         timer--;
                     }
                     if (timer >= 0)
@@ -671,7 +671,7 @@ namespace HereToSlay
                         Alignment = StringAlignment.Center
                     };
 
-                    Font customFont = FontLoader.GetFont(Properties.Resources.PatuaOne_polish, 14);
+                    Font customFont = FontLoader.GetFont(Properties.Resources.PatuaOne_Polish, 14);
                     Brush textColorBrush = Brushes.White;
                     e.Graphics.DrawString(item.Text, customFont, textColorBrush, e.Bounds, stringFormat);
                 }

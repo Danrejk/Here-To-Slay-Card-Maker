@@ -43,7 +43,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="fonts\PatuaOne-polish.ttf">
+    <None Update="fonts\PatuaOne-Polish.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="fonts\SourceSansPro.ttf">

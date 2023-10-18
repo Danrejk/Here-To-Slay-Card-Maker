@@ -243,9 +243,9 @@ namespace HereToSlay.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] PatuaOne_polish {
+        internal static byte[] PatuaOne_Polish {
             get {
-                object obj = ResourceManager.GetObject("PatuaOne_polish", resourceCulture);
+                object obj = ResourceManager.GetObject("PatuaOne_Polish", resourceCulture);
                 return ((byte[])(obj));
             }
         }

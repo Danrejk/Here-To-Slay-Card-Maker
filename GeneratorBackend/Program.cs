@@ -21,10 +21,12 @@ namespace GeneratorBackend
 
         public const int NAME_SIZE = 60; // 60
         public const int TITLE_SIZE = 49; // 49
+        public const int REQ_SIZE = 49; // 49
         public const int DESC_SIZE = 38; // 38
         public Font nameFont { get; private set; }
         public Font titleFont { get; private set; }
         public Font descFont { get; private set; }
+        public Font reqFont { get; private set; }
 
         public Raylib_cs.Image Ranger = Raylib.LoadImage("classes/ranger.png");
         public Raylib_cs.Image Wizard = Raylib.LoadImage("classes/wizard.png");
@@ -38,14 +40,17 @@ namespace GeneratorBackend
         public Raylib_cs.Image Necromancer = Raylib.LoadImage("classes/necromancer.png");
         public Raylib_cs.Image Sorcerer = Raylib.LoadImage("classes/sorcerer.png");
         public Raylib_cs.Image None = Raylib.LoadImage("classes/none.png");
+        public Raylib_cs.Image Hero = Raylib.LoadImage("classes/hero.png");
+        public Raylib_cs.Image Bohater = Raylib.LoadImage("classes/bohater.png");
 
         private AssetManager()
         {
             Raylib.InitWindow(1, 1, "Font Loader");
             Raylib.SetWindowPosition(-2000, -2000);
 
-            nameFont = Raylib.LoadFontEx("fonts/PatuaOne-polish.ttf", NAME_SIZE, null, 382); // this font has limited language support (NOT only Polish and English btw)
+            nameFont = Raylib.LoadFontEx("fonts/PatuaOne-Polish.ttf", NAME_SIZE, null, 382); // this font has limited language support (NOT only Polish and English btw)
             titleFont = Raylib.LoadFontEx("fonts/SourceSansPro.ttf", TITLE_SIZE, null, 1415);
+            reqFont = Raylib.LoadFontEx("fonts/SourceSansPro-Bold.ttf", REQ_SIZE, null, 1415);
             descFont = Raylib.LoadFontEx("fonts/SourceSansPro.ttf", DESC_SIZE, null, 1415);
 
             Raylib.CloseWindow();
@@ -75,6 +80,7 @@ namespace GeneratorBackend
         // all of the font spacings work, but are simply not used as it turned out we don't need them, but YOU might. I dunno.
         const int NAME_FONT_SPACING = 0;
         const int TITLE_FONT_SPACING = 0;
+        const int REQ_FONT_SPACING = 0;
         const int DESC_FONT_SPACING = 0;
         const int DESC_LINE_SPACING = 0;
         const int DESC_MARGIN = 100;
@@ -353,7 +359,7 @@ namespace GeneratorBackend
             }
             Raylib.UnloadImage(card);
         }
-        public static void GenerateMonster(string? renderLocation, int language, string name, int[] desiredClass, string monsterImg, string description, bool addGradient, bool nameWhite)
+        public static void GenerateMonster(string? renderLocation, int language, string name, int[] desiredRequirements, string monsterImg, string description, bool addGradient, bool nameWhite)
         {
             ChangeMonsterImage(monsterImg);
 
@@ -363,11 +369,49 @@ namespace GeneratorBackend
 
             Raylib.ImageDraw(ref card, monster, imageRec, new(41, 41, 745, 824), Raylib_cs.Color.WHITE);
             Raylib.ImageDraw(ref card, inst.bottom, imageRec, imageRec, Raylib_cs.Color.WHITE);
-
             if (addGradient) { Raylib.ImageDraw(ref card, inst.gradient, imageRec, imageRec, Raylib_cs.Color.WHITE); }
-
             Raylib.ImageDraw(ref card, inst.frameMonster, imageRec, imageRec, Raylib_cs.Color.BLACK); // TODO: ensure correct color
 
+            string reqText = language switch
+            {
+                1 => "WYMAGANIA:",
+                _ => "REQUIREMENT:"
+            };
+            Vector2 reqTextSize = Raylib.MeasureTextEx(inst.reqFont, reqText, AssetManager.REQ_SIZE, REQ_FONT_SPACING);
+            Raylib.ImageDrawTextEx(ref card, inst.reqFont, reqText, new(83, 932), AssetManager.REQ_SIZE, REQ_FONT_SPACING, Raylib_cs.Color.WHITE);
+
+            int[] orderedRequirements = desiredRequirements.OrderBy(x => x == 0).ToArray();
+            int reqCount = 0;
+            foreach ( int req in orderedRequirements)
+            {
+                if (req == -1) { continue; }
+                Raylib_cs.Image classSymbol = req switch
+                {
+                    0 => language switch
+                    {
+                        1 => inst.Bohater,
+                        _ => inst.Hero
+                    },
+                    1 => inst.Ranger,
+                    2 => inst.Wizard,
+                    3 => inst.Bard,
+                    4 => inst.Guardian,
+                    5 => inst.Fighter,
+                    6 => inst.Thief,
+                    7 => inst.Druid,
+                    8 => inst.Warrior,
+                    9 => inst.Berserker,
+                    10 => inst.Necromancer,
+                    11 => inst.Sorcerer,
+                    _ => inst.None
+                };
+                float reqIconsXoffset = 83 + reqTextSize.X + 10 + reqCount * (83 + 18);
+                if (reqCount >= 4) { 
+                    break;  // TODO: calculate the ammount of icons and if it's 5 then change the margin between all icons.
+                }
+                Raylib.ImageDraw(ref card, classSymbol, imageRec, new(reqIconsXoffset, 915, 83, 83), Raylib_cs.Color.WHITE);
+                reqCount++;
+            }
 
             // Name and Title
             string titleText = language switch{
