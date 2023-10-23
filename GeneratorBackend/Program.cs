@@ -372,7 +372,7 @@ namespace GeneratorBackend
             Raylib.ImageDraw(ref card, monster, imageRec, new(41, 41, 745, 824), Raylib_cs.Color.WHITE);
             Raylib.ImageDraw(ref card, inst.bottom, imageRec, imageRec, Raylib_cs.Color.WHITE);
             if (addGradient) { Raylib.ImageDraw(ref card, inst.gradient, imageRec, imageRec, Raylib_cs.Color.WHITE); }
-            Raylib.ImageDraw(ref card, inst.frameMonster, imageRec, imageRec, new(13, 23, 30, 255));
+            Raylib.ImageDraw(ref card, inst.frameMonster, imageRec, imageRec, new(23, 26, 30, 255));
 
             string reqText = language switch
             {
