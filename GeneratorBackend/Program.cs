@@ -18,6 +18,8 @@ namespace GeneratorBackend
         public Raylib_cs.Image frameMonster = Raylib.LoadImage("template/frame_monster.png");
         public Raylib_cs.Image bottom = Raylib.LoadImage("template/bottom.png");
         public Raylib_cs.Image gradient = Raylib.LoadImage("template/gradient.png");
+        public Raylib_cs.Image red = Raylib.LoadImage("template/red.png");
+        public Raylib_cs.Image green = Raylib.LoadImage("template/green.png");
 
         public const int NAME_SIZE = 60; // 60
         public const int TITLE_SIZE = 49; // 49
@@ -381,6 +383,9 @@ namespace GeneratorBackend
             };
             Vector2 reqTextSize = Raylib.MeasureTextEx(inst.reqFont, reqText, AssetManager.REQ_SIZE, REQ_FONT_SPACING);
             Raylib.ImageDrawTextEx(ref card, inst.reqFont, reqText, new(87, 920), AssetManager.REQ_SIZE, REQ_FONT_SPACING, inst.bottomColor);
+
+            Raylib.ImageDraw(ref card, inst.red, imageRec, new(87, 1002, 78, 78), Raylib_cs.Color.WHITE);
+            Raylib.ImageDraw(ref card, inst.green, imageRec, new(87, 1099, 78, 78), Raylib_cs.Color.WHITE);
 
             #region Class Requirements
             // put the classless hero requirements at the end
