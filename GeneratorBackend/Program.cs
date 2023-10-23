@@ -76,7 +76,7 @@ namespace GeneratorBackend
         static void Main()
         {
             GenerateLeader("TestRender.png", 0,"Test Leader", new int[]{11, -1}, "", "Test description", false, false); // if you want to test the generator, change the parameters here
-                                                               //"-1" here means that there is only one class.
+                                                                         //"-1" here means that there is only one class.
         }
 
         // all of the font spacings work, but are simply not used as it turned out we don't need them, but YOU might. I dunno.
