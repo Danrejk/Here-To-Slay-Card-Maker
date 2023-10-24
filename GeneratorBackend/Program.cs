@@ -22,10 +22,10 @@ namespace GeneratorBackend
         public Raylib_cs.Image green = Raylib.LoadImage("template/green.png");
 
         public const int NAME_SIZE = 60; // 60
-        public const int TITLE_SIZE = 49; // 49
+        public const int TITLE_SIZE = 52; // 49
         public const int REQ_SIZE = 49; // 49
         public const int ROLL_SIZE = 43; // 49
-        public const int DESC_SIZE = 38; // 38
+        public const int DESC_SIZE = 40; // 38
 
         public Font nameFont { get; private set; }
         public Font titleFont { get; private set; }
@@ -87,12 +87,12 @@ namespace GeneratorBackend
 
         // all of the font spacings work, but are simply not used as it turned out we don't need them, but YOU might. I dunno.
         const int NAME_FONT_SPACING = 0;
-        const int TITLE_FONT_SPACING = 0;
+        const int TITLE_FONT_SPACING = 1;
         const int REQ_FONT_SPACING = 0;
         const int ROLL_FONT_SPACING = 0;
-        const int DESC_FONT_SPACING = 0;
+        const int DESC_FONT_SPACING = 1;
         const int DESC_LINE_SPACING = 0;
-        const int DESC_MARGIN = 100;
+        const int DESC_MARGIN = 87;
 
         // changing this, WON'T properly change the size of the card.
         const int CARD_WIDTH = 827;
