@@ -363,7 +363,7 @@ namespace GeneratorBackend
             }
             Raylib.UnloadImage(card);
         }
-        public static void GenerateMonster(string? renderLocation, int language, string name, int[] desiredRequirements, string monsterImg, string description, bool addGradient, bool nameWhite)
+        public static void GenerateMonster(string? renderLocation, int language, string name, int[] desiredRequirements, RollOutput good, RollOutput bad, string monsterImg, string description, bool addGradient, bool nameWhite)
         {
             ChangeMonsterImage(monsterImg);
 
@@ -438,7 +438,20 @@ namespace GeneratorBackend
             Raylib.ImageDraw(ref card, inst.red, imageRec, new(87, 1002, 78, 78), Raylib_cs.Color.WHITE);
             Raylib.ImageDraw(ref card, inst.green, imageRec, new(87, 1099, 78, 78), Raylib_cs.Color.WHITE);
 
+            RollOutput red = bad;
+            RollOutput green = good;
+            if (bad.Symbol == 0) // check if "bad" has a positive value instead
+            {
+                red = good;
+                green = bad;
+            }
+            Vector2 redNumSize = Raylib.MeasureTextEx(inst.reqFont, red.Value.ToString() + "-", AssetManager.REQ_SIZE, REQ_FONT_SPACING);
+            Raylib.ImageDrawTextEx(ref card, inst.reqFont, red.Value.ToString() + "-", new(87 + 78 / 2 - redNumSize.X / 2, 1002 + 78 / 2 - redNumSize.Y / 2), AssetManager.REQ_SIZE, REQ_FONT_SPACING, inst.bottomColor);
+            Vector2 greenNumSize = Raylib.MeasureTextEx(inst.reqFont, green.Value.ToString() + "+", AssetManager.REQ_SIZE, REQ_FONT_SPACING);
+            Raylib.ImageDrawTextEx(ref card, inst.reqFont, green.Value.ToString() + "+", new(87 + 78 / 2 - greenNumSize.X / 2, 1099 + 78 / 2 - greenNumSize.Y / 2), AssetManager.REQ_SIZE, REQ_FONT_SPACING, inst.bottomColor);
 
+            Raylib.ImageDrawTextEx(ref card, inst.descFont, red.Outcome, new(87 + 78 + 10, 1002 + 78/2 - AssetManager.DESC_SIZE/2), AssetManager.DESC_SIZE, DESC_FONT_SPACING, inst.bottomColor);
+            Raylib.ImageDrawTextEx(ref card, inst.descFont, green.Outcome, new(87 + 78 + 10, 1099 + 78 / 2 - AssetManager.DESC_SIZE / 2), AssetManager.DESC_SIZE, DESC_FONT_SPACING, inst.bottomColor);
 
             // Name and Title
             string titleText = language switch{
@@ -640,6 +653,19 @@ namespace GeneratorBackend
                 Raylib.ImageResize(ref monster, 745, 824);
                 #endregion
             }
+        }
+    }
+    public class RollOutput
+    {
+        public int Value { get; set; }
+        public int Symbol { get; set; } // 0 = +(green), 1 = -(red)
+        public string Outcome { get; set; }
+
+        public RollOutput(int value, int symbol, string outcome)
+        {
+            Value = value;
+            Symbol = symbol;
+            Outcome = outcome;
         }
     }
 }
