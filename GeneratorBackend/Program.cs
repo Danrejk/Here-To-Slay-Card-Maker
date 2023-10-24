@@ -24,11 +24,14 @@ namespace GeneratorBackend
         public const int NAME_SIZE = 60; // 60
         public const int TITLE_SIZE = 49; // 49
         public const int REQ_SIZE = 49; // 49
+        public const int ROLL_SIZE = 43; // 49
         public const int DESC_SIZE = 38; // 38
+
         public Font nameFont { get; private set; }
         public Font titleFont { get; private set; }
         public Font descFont { get; private set; }
         public Font reqFont { get; private set; }
+        public Font rollFont { get; private set; }
 
         public Raylib_cs.Color bottomColor = new(244, 241, 229, 255);
 
@@ -55,6 +58,7 @@ namespace GeneratorBackend
             nameFont = Raylib.LoadFontEx("fonts/PatuaOne-Polish.ttf", NAME_SIZE, null, 382); // this font has limited language support (NOT only Polish and English btw)
             titleFont = Raylib.LoadFontEx("fonts/SourceSansPro.ttf", TITLE_SIZE, null, 1415);
             reqFont = Raylib.LoadFontEx("fonts/SourceSansPro-Bold.ttf", REQ_SIZE, null, 1415);
+            rollFont = Raylib.LoadFontEx("fonts/PatuaOne-Polish.ttf", ROLL_SIZE, null, 1415);
             descFont = Raylib.LoadFontEx("fonts/SourceSansPro.ttf", DESC_SIZE, null, 1415);
 
             Raylib.CloseWindow();
@@ -85,6 +89,7 @@ namespace GeneratorBackend
         const int NAME_FONT_SPACING = 0;
         const int TITLE_FONT_SPACING = 0;
         const int REQ_FONT_SPACING = 0;
+        const int ROLL_FONT_SPACING = 0;
         const int DESC_FONT_SPACING = 0;
         const int DESC_LINE_SPACING = 0;
         const int DESC_MARGIN = 100;
@@ -445,13 +450,13 @@ namespace GeneratorBackend
                 red = good;
                 green = bad;
             }
-            Vector2 redNumSize = Raylib.MeasureTextEx(inst.reqFont, red.Value.ToString() + "-", AssetManager.REQ_SIZE, REQ_FONT_SPACING);
-            Raylib.ImageDrawTextEx(ref card, inst.reqFont, red.Value.ToString() + "-", new(87 + 78 / 2 - redNumSize.X / 2, 1002 + 78 / 2 - redNumSize.Y / 2), AssetManager.REQ_SIZE, REQ_FONT_SPACING, inst.bottomColor);
-            Vector2 greenNumSize = Raylib.MeasureTextEx(inst.reqFont, green.Value.ToString() + "+", AssetManager.REQ_SIZE, REQ_FONT_SPACING);
-            Raylib.ImageDrawTextEx(ref card, inst.reqFont, green.Value.ToString() + "+", new(87 + 78 / 2 - greenNumSize.X / 2, 1099 + 78 / 2 - greenNumSize.Y / 2), AssetManager.REQ_SIZE, REQ_FONT_SPACING, inst.bottomColor);
+            Vector2 redNumSize = Raylib.MeasureTextEx(inst.rollFont, red.Value.ToString() + "-", AssetManager.ROLL_SIZE, ROLL_FONT_SPACING);
+            Raylib.ImageDrawTextEx(ref card, inst.rollFont, red.Value.ToString() + "-", new(87 + 78 / 2 - redNumSize.X / 2, 1002 + 78 / 2 - redNumSize.Y / 2), AssetManager.ROLL_SIZE, ROLL_FONT_SPACING, inst.bottomColor);
+            Vector2 greenNumSize = Raylib.MeasureTextEx(inst.rollFont, green.Value.ToString() + "+", AssetManager.ROLL_SIZE, ROLL_FONT_SPACING);
+            Raylib.ImageDrawTextEx(ref card, inst.rollFont, green.Value.ToString() + "+", new(87 + 78 / 2 - greenNumSize.X / 2, 1099 + 78 / 2 - greenNumSize.Y / 2), AssetManager.ROLL_SIZE, ROLL_FONT_SPACING, inst.bottomColor);
 
-            Raylib.ImageDrawTextEx(ref card, inst.descFont, red.Outcome, new(87 + 78 + 10, 1002 + 78/2 - AssetManager.DESC_SIZE/2), AssetManager.DESC_SIZE, DESC_FONT_SPACING, inst.bottomColor);
-            Raylib.ImageDrawTextEx(ref card, inst.descFont, green.Outcome, new(87 + 78 + 10, 1099 + 78 / 2 - AssetManager.DESC_SIZE / 2), AssetManager.DESC_SIZE, DESC_FONT_SPACING, inst.bottomColor);
+            Raylib.ImageDrawTextEx(ref card, inst.descFont, red.Outcome, new(87 + 78 + 24, 1002 + 78/2 - AssetManager.DESC_SIZE/2), AssetManager.DESC_SIZE, DESC_FONT_SPACING, inst.bottomColor);
+            Raylib.ImageDrawTextEx(ref card, inst.descFont, green.Outcome, new(87 + 78 + 24, 1099 + 78 / 2 - AssetManager.DESC_SIZE / 2), AssetManager.DESC_SIZE, DESC_FONT_SPACING, inst.bottomColor);
 
             // Name and Title
             string titleText = language switch{
@@ -490,12 +495,12 @@ namespace GeneratorBackend
             Vector2 titleSize = Raylib.MeasureTextEx(inst.titleFont, titleText, AssetManager.TITLE_SIZE, TITLE_FONT_SPACING);
 
             // Name
-            Raylib.ImageDrawTextEx(ref card, inst.nameFont, nameText, new Vector2((CARD_WIDTH / 2) - (nameSize.X / 2) + 3, 70 + 3), AssetManager.NAME_SIZE, NAME_FONT_SPACING, leaderShadowColor);
-            Raylib.ImageDrawTextEx(ref card, inst.nameFont, nameText, new Vector2((CARD_WIDTH / 2) - (nameSize.X / 2), 70), AssetManager.NAME_SIZE, NAME_FONT_SPACING, leaderColor);
+            Raylib.ImageDrawTextEx(ref card, inst.nameFont, nameText, new Vector2((CARD_WIDTH / 2) - (nameSize.X / 2) + 3, 67 + 3), AssetManager.NAME_SIZE, NAME_FONT_SPACING, leaderShadowColor);
+            Raylib.ImageDrawTextEx(ref card, inst.nameFont, nameText, new Vector2((CARD_WIDTH / 2) - (nameSize.X / 2), 67), AssetManager.NAME_SIZE, NAME_FONT_SPACING, leaderColor);
 
             // Title
-            Raylib.ImageDrawTextEx(ref card, inst.titleFont, titleText, new Vector2((CARD_WIDTH / 2) - (titleSize.X / 2) + 2, 123 + 2), AssetManager.TITLE_SIZE, TITLE_FONT_SPACING, leaderShadowColor);
-            Raylib.ImageDrawTextEx(ref card, inst.titleFont, titleText, new Vector2((CARD_WIDTH / 2) - (titleSize.X / 2), 123), AssetManager.TITLE_SIZE, TITLE_FONT_SPACING, leaderColor);
+            Raylib.ImageDrawTextEx(ref card, inst.titleFont, titleText, new Vector2((CARD_WIDTH / 2) - (titleSize.X / 2) + 2, 118 + 2), AssetManager.TITLE_SIZE, TITLE_FONT_SPACING, leaderShadowColor);
+            Raylib.ImageDrawTextEx(ref card, inst.titleFont, titleText, new Vector2((CARD_WIDTH / 2) - (titleSize.X / 2), 118), AssetManager.TITLE_SIZE, TITLE_FONT_SPACING, leaderColor);
         }
         static void DrawDescription(string text, Raylib_cs.Image card)
         {
