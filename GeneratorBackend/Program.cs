@@ -384,9 +384,6 @@ namespace GeneratorBackend
             Vector2 reqTextSize = Raylib.MeasureTextEx(inst.reqFont, reqText, AssetManager.REQ_SIZE, REQ_FONT_SPACING);
             Raylib.ImageDrawTextEx(ref card, inst.reqFont, reqText, new(87, 920), AssetManager.REQ_SIZE, REQ_FONT_SPACING, inst.bottomColor);
 
-            Raylib.ImageDraw(ref card, inst.red, imageRec, new(87, 1002, 78, 78), Raylib_cs.Color.WHITE);
-            Raylib.ImageDraw(ref card, inst.green, imageRec, new(87, 1099, 78, 78), Raylib_cs.Color.WHITE);
-
             #region Class Requirements
             // put the classless hero requirements at the end
             int[] orderedRequirements = desiredRequirements.OrderBy(x => x == 0).ToArray(); 
@@ -436,6 +433,12 @@ namespace GeneratorBackend
                 reqIteration++;
             }
             #endregion
+
+            // Draw roll requirements and their outcomes
+            Raylib.ImageDraw(ref card, inst.red, imageRec, new(87, 1002, 78, 78), Raylib_cs.Color.WHITE);
+            Raylib.ImageDraw(ref card, inst.green, imageRec, new(87, 1099, 78, 78), Raylib_cs.Color.WHITE);
+
+
 
             // Name and Title
             string titleText = language switch{

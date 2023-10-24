@@ -72,15 +72,16 @@ namespace HereToSlay
             badOutputSym.DrawItem += BackgroundCBox.ComboBox_DrawItem;
             badOutputSym.Items.Add(new BackgroundCBox("+", Color.FromArgb(109, 166, 88)));
             badOutputSym.Items.Add(new BackgroundCBox("-", Color.FromArgb(230, 44, 47)));
-            badOutputSym.SelectedIndex = 1;
             badOutputSym.ItemHeight = 17;
 
             goodOutputSym.DrawMode = DrawMode.OwnerDrawFixed;
             goodOutputSym.DrawItem += BackgroundCBox.ComboBox_DrawItem;
             goodOutputSym.Items.Add(new BackgroundCBox("+", Color.FromArgb(109, 166, 88)));
             goodOutputSym.Items.Add(new BackgroundCBox("-", Color.FromArgb(230, 44, 47)));
-            goodOutputSym.SelectedIndex = 0;
             goodOutputSym.ItemHeight = 17;
+
+            badOutputSym.SelectedIndex = 1;
+            goodOutputSym.SelectedIndex = 0;
 
 #pragma warning restore CS8622
             #endregion
@@ -561,6 +562,24 @@ namespace HereToSlay
                     1 => Color.FromArgb(230, 44, 47),
                     _ => throw new NotImplementedException(),
                 };
+
+                switch (comboBox.Name)
+                {
+                   case "goodOutputSym":
+                        badOutputSym.SelectedIndex = goodOutputSym.SelectedIndex switch
+                        {
+                            0 => 1,
+                            1 => 0,
+                        };
+                        break;
+                   case "badOutputSym":
+                        goodOutputSym.SelectedIndex = badOutputSym.SelectedIndex switch
+                        {
+                            0 => 1,
+                            1 => 0,
+                        };
+                        break;
+                }
             }
             renderPreview(sender, e);
         }
