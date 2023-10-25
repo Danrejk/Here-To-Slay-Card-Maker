@@ -9,7 +9,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Windows.Forms;
-
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using Button = System.Windows.Forms.Button;
+using ComboBox = System.Windows.Forms.ComboBox;
 
 namespace HereToSlay
 {
@@ -21,7 +23,7 @@ namespace HereToSlay
             this.Icon = Properties.Resources.LEADER;
 
             #region Fonts
-            Font fontUI = FontLoader.GetFont(Properties.Resources.SourceSansPro, 10);
+            Font fontUI = FontLoader.GetFont(Properties.Resources.SourceSans3, 10);
             FontLoader.ChangeFontForAllControls(this, fontUI);
             selectImgButton.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
 
@@ -53,29 +55,38 @@ namespace HereToSlay
 
             chosenClass.DrawMode = DrawMode.OwnerDrawFixed;
             chosenClass.DrawItem += ImageCBox.ComboBox_DrawItem;
+            chosenClass.ItemHeight = 19;
 
             chosenSecondClass.DrawMode = DrawMode.OwnerDrawFixed;
             chosenSecondClass.DrawItem += ImageCBox.ComboBox_DrawItem;
+            chosenSecondClass.ItemHeight = 19;
 
             heroReq1.DrawMode = DrawMode.OwnerDrawFixed;
             heroReq1.DrawItem += ImageCBox.ComboBox_DrawItem;
+            heroReq1.ItemHeight = 19;
             heroReq2.DrawMode = DrawMode.OwnerDrawFixed;
             heroReq2.DrawItem += ImageCBox.ComboBox_DrawItem;
+            heroReq2.ItemHeight = 19;
             heroReq3.DrawMode = DrawMode.OwnerDrawFixed;
             heroReq3.DrawItem += ImageCBox.ComboBox_DrawItem;
+            heroReq3.ItemHeight = 19;
             heroReq4.DrawMode = DrawMode.OwnerDrawFixed;
             heroReq4.DrawItem += ImageCBox.ComboBox_DrawItem;
+            heroReq4.ItemHeight = 19;
             heroReq5.DrawMode = DrawMode.OwnerDrawFixed;
             heroReq5.DrawItem += ImageCBox.ComboBox_DrawItem;
+            heroReq5.ItemHeight = 19;
 
             badOutputSym.DrawMode = DrawMode.OwnerDrawFixed;
             badOutputSym.DrawItem += BackgroundCBox.ComboBox_DrawItem;
+            badOutputSym.ItemHeight = 19;
             badOutputSym.Items.Add(new BackgroundCBox("+", Color.FromArgb(109, 166, 88)));
             badOutputSym.Items.Add(new BackgroundCBox("-", Color.FromArgb(230, 44, 47)));
             badOutputSym.ItemHeight = 17;
 
             goodOutputSym.DrawMode = DrawMode.OwnerDrawFixed;
             goodOutputSym.DrawItem += BackgroundCBox.ComboBox_DrawItem;
+            goodOutputSym.ItemHeight = 19;
             goodOutputSym.Items.Add(new BackgroundCBox("+", Color.FromArgb(109, 166, 88)));
             goodOutputSym.Items.Add(new BackgroundCBox("-", Color.FromArgb(230, 44, 47)));
             goodOutputSym.ItemHeight = 17;

@@ -263,9 +263,29 @@ namespace HereToSlay.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] SourceSans3 {
+            get {
+                object obj = ResourceManager.GetObject("SourceSans3", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] SourceSansPro {
             get {
                 object obj = ResourceManager.GetObject("SourceSansPro", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] SourceSansPro_Bold {
+            get {
+                object obj = ResourceManager.GetObject("SourceSansPro_Bold", resourceCulture);
                 return ((byte[])(obj));
             }
         }

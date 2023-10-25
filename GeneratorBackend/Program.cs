@@ -8,18 +8,21 @@ using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
 using System.Xml.Linq;
+using Color = Raylib_cs.Color;
+using Image = Raylib_cs.Image;
+using Rectangle = Raylib_cs.Rectangle;
 
 namespace GeneratorBackend
 {
     public class AssetManager
     {
         private static AssetManager? instance;
-        public Raylib_cs.Image frame = Raylib.LoadImage("template/frame.png");
-        public Raylib_cs.Image frameMonster = Raylib.LoadImage("template/frame_monster.png");
-        public Raylib_cs.Image bottom = Raylib.LoadImage("template/bottom.png");
-        public Raylib_cs.Image gradient = Raylib.LoadImage("template/gradient.png");
-        public Raylib_cs.Image red = Raylib.LoadImage("template/red.png");
-        public Raylib_cs.Image green = Raylib.LoadImage("template/green.png");
+        public Image frame = Raylib.LoadImage("template/frame.png");
+        public Image frameMonster = Raylib.LoadImage("template/frame_monster.png");
+        public Image bottom = Raylib.LoadImage("template/bottom.png");
+        public Image gradient = Raylib.LoadImage("template/gradient.png");
+        public Image red = Raylib.LoadImage("template/red.png");
+        public Image green = Raylib.LoadImage("template/green.png");
 
         public const int NAME_SIZE = 60; // 60
         public const int TITLE_SIZE = 52; // 49
@@ -33,22 +36,22 @@ namespace GeneratorBackend
         public Font reqFont { get; private set; }
         public Font rollFont { get; private set; }
 
-        public Raylib_cs.Color bottomColor = new(244, 241, 229, 255);
+        public Color bottomColor = new(244, 241, 229, 255);
 
-        public Raylib_cs.Image Ranger = Raylib.LoadImage("classes/ranger.png");
-        public Raylib_cs.Image Wizard = Raylib.LoadImage("classes/wizard.png");
-        public Raylib_cs.Image Bard = Raylib.LoadImage("classes/bard.png");
-        public Raylib_cs.Image Guardian = Raylib.LoadImage("classes/guardian.png");
-        public Raylib_cs.Image Fighter = Raylib.LoadImage("classes/fighter.png");
-        public Raylib_cs.Image Thief = Raylib.LoadImage("classes/thief.png");
-        public Raylib_cs.Image Druid = Raylib.LoadImage("classes/druid.png");
-        public Raylib_cs.Image Warrior = Raylib.LoadImage("classes/warrior.png");
-        public Raylib_cs.Image Berserker = Raylib.LoadImage("classes/berserker.png");
-        public Raylib_cs.Image Necromancer = Raylib.LoadImage("classes/necromancer.png");
-        public Raylib_cs.Image Sorcerer = Raylib.LoadImage("classes/sorcerer.png");
-        public Raylib_cs.Image None = Raylib.LoadImage("classes/none.png");
-        public Raylib_cs.Image Hero = Raylib.LoadImage("classes/hero.png");
-        public Raylib_cs.Image Bohater = Raylib.LoadImage("classes/bohater.png");
+        public Image Ranger = Raylib.LoadImage("classes/ranger.png");
+        public Image Wizard = Raylib.LoadImage("classes/wizard.png");
+        public Image Bard = Raylib.LoadImage("classes/bard.png");
+        public Image Guardian = Raylib.LoadImage("classes/guardian.png");
+        public Image Fighter = Raylib.LoadImage("classes/fighter.png");
+        public Image Thief = Raylib.LoadImage("classes/thief.png");
+        public Image Druid = Raylib.LoadImage("classes/druid.png");
+        public Image Warrior = Raylib.LoadImage("classes/warrior.png");
+        public Image Berserker = Raylib.LoadImage("classes/berserker.png");
+        public Image Necromancer = Raylib.LoadImage("classes/necromancer.png");
+        public Image Sorcerer = Raylib.LoadImage("classes/sorcerer.png");
+        public Image None = Raylib.LoadImage("classes/none.png");
+        public Image Hero = Raylib.LoadImage("classes/hero.png");
+        public Image Bohater = Raylib.LoadImage("classes/bohater.png");
 
         private AssetManager()
         {
@@ -83,6 +86,8 @@ namespace GeneratorBackend
         {
             GenerateLeader("TestRender.png", 0,"Test Leader", new int[]{11, -1}, "", "Test description", false, false); // if you want to test the generator, change the parameters here
                                                                          //"-1" here means that there is only one class.
+
+            //this might not work because I moved all of the fonts to the "HereToSlay" or Menu project.
         }
 
         // all of the font spacings work, but are simply not used as it turned out we don't need them, but YOU might. I dunno.
@@ -105,10 +110,10 @@ namespace GeneratorBackend
             ChangeLeaderImage(leaderImg);
 
             // This has to be loaded each time, to clear the image from the previous render
-            Raylib_cs.Image card = Raylib.LoadImage("template/background.png");
+            Image card = Raylib.LoadImage("template/background.png");
 
-            Raylib_cs.Image classSymbol;
-            Raylib_cs.Color desiredColor;
+            Image classSymbol;
+            Color desiredColor;
             string leaderTitle;
 
             #region Classes
@@ -200,8 +205,8 @@ namespace GeneratorBackend
                     break;
             }
 
-            Raylib_cs.Image secondClassSymbol = new();
-            Raylib_cs.Color desiredSecondColor = new();
+            Image secondClassSymbol = new();
+            Color desiredSecondColor = new();
             if (desiredClass[1] != -1)
             {
                 switch (desiredClass[1])
@@ -315,38 +320,38 @@ namespace GeneratorBackend
                         desiredSecondColor = new (91, 93, 92, 255);
                         break;
                 }
-                Raylib.ImageCrop(ref secondClassSymbol, new Raylib_cs.Rectangle(0, 0, 51, 102));
+                Raylib.ImageCrop(ref secondClassSymbol, new Rectangle(0, 0, 51, 102));
             }
             #endregion
 
-            Raylib_cs.Rectangle imageRec = new(0, 0, 827, 1417);
+            Rectangle imageRec = new(0, 0, 827, 1417);
 
-            Raylib.ImageDraw(ref card, leader, imageRec, new(41, 41, 745, 1176), Raylib_cs.Color.WHITE);
-            Raylib.ImageDraw(ref card, inst.bottom, imageRec, imageRec, Raylib_cs.Color.WHITE);
+            Raylib.ImageDraw(ref card, leader, imageRec, new(41, 41, 745, 1176), Color.WHITE);
+            Raylib.ImageDraw(ref card, inst.bottom, imageRec, imageRec, Color.WHITE);
 
-            if (addGradient){ Raylib.ImageDraw(ref card, inst.gradient, imageRec, imageRec, Raylib_cs.Color.WHITE); }
+            if (addGradient){ Raylib.ImageDraw(ref card, inst.gradient, imageRec, imageRec, Color.WHITE); }
 
             // Draw Class Symbol(s) and Colored Frame(s)
-            Raylib_cs.Image frameTinted = Raylib.ImageCopy(inst.frame); // create a copy of the frame asset, so that the original is not modified
-            Raylib.ImageDraw(ref card, classSymbol, imageRec, new(363, 1167, 102, 102), Raylib_cs.Color.WHITE);
+            Image frameTinted = Raylib.ImageCopy(inst.frame); // create a copy of the frame asset, so that the original is not modified
+            Raylib.ImageDraw(ref card, classSymbol, imageRec, new(363, 1167, 102, 102), Color.WHITE);
             if (desiredClass[1] != -1) // check if there is a second class
             { 
-                Raylib.ImageDraw(ref card, secondClassSymbol, imageRec, new(363, 1167, 51, 102), Raylib_cs.Color.WHITE);
+                Raylib.ImageDraw(ref card, secondClassSymbol, imageRec, new(363, 1167, 51, 102), Color.WHITE);
 
-                Raylib.ImageCrop(ref frameTinted, new Raylib_cs.Rectangle(0, 0, 414, 1417));
+                Raylib.ImageCrop(ref frameTinted, new Rectangle(0, 0, 414, 1417));
                 Raylib.ImageColorTint(ref frameTinted, desiredColor);
-                Raylib.ImageDraw(ref card, frameTinted, imageRec, new(0, 0, 414, 1417), Raylib_cs.Color.WHITE);
+                Raylib.ImageDraw(ref card, frameTinted, imageRec, new(0, 0, 414, 1417), Color.WHITE);
 
                 frameTinted = Raylib.ImageCopy(inst.frame); // clear the tinted frame for the second class
 
-                Raylib.ImageCrop(ref frameTinted, new Raylib_cs.Rectangle(413, 0, 414, 1417)); // while the sizes might look irregular. It's all because the image is 827px wide, so I have to compensate the 0,5px offset.
+                Raylib.ImageCrop(ref frameTinted, new Rectangle(413, 0, 414, 1417)); // while the sizes might look irregular. It's all because the image is 827px wide, so I have to compensate the 0,5px offset.
                 Raylib.ImageColorTint(ref frameTinted, desiredSecondColor);
-                Raylib.ImageDraw(ref card, frameTinted, imageRec, new(414, 0, 413, 1417), Raylib_cs.Color.WHITE);
+                Raylib.ImageDraw(ref card, frameTinted, imageRec, new(414, 0, 413, 1417), Color.WHITE);
             }
             else 
             {
                 Raylib.ImageColorTint(ref frameTinted, desiredColor);
-                Raylib.ImageDraw(ref card, frameTinted, imageRec, imageRec, Raylib_cs.Color.WHITE);
+                Raylib.ImageDraw(ref card, frameTinted, imageRec, imageRec, Color.WHITE);
             }
 
             Raylib.UnloadImage(frameTinted);
@@ -373,12 +378,12 @@ namespace GeneratorBackend
             ChangeMonsterImage(monsterImg);
 
             // This has to be loaded each time, to clear the image from the previous render
-            Raylib_cs.Image card = Raylib.LoadImage("template/background.png");
-            Raylib_cs.Rectangle imageRec = new(0, 0, 827, 1417);
+            Image card = Raylib.LoadImage("template/background.png");
+            Rectangle imageRec = new(0, 0, 827, 1417);
 
-            Raylib.ImageDraw(ref card, monster, imageRec, new(41, 41, 745, 824), Raylib_cs.Color.WHITE);
-            Raylib.ImageDraw(ref card, inst.bottom, imageRec, imageRec, Raylib_cs.Color.WHITE);
-            if (addGradient) { Raylib.ImageDraw(ref card, inst.gradient, imageRec, imageRec, Raylib_cs.Color.WHITE); }
+            Raylib.ImageDraw(ref card, monster, imageRec, new(41, 41, 745, 824), Color.WHITE);
+            Raylib.ImageDraw(ref card, inst.bottom, imageRec, imageRec, Color.WHITE);
+            if (addGradient) { Raylib.ImageDraw(ref card, inst.gradient, imageRec, imageRec, Color.WHITE); }
             Raylib.ImageDraw(ref card, inst.frameMonster, imageRec, imageRec, new(23, 26, 30, 255));
 
             string reqText = language switch
@@ -406,7 +411,7 @@ namespace GeneratorBackend
             foreach ( int req in orderedRequirements)
             {
                 if (req == -1) { continue; }
-                Raylib_cs.Image classSymbol = req switch
+                Image classSymbol = req switch
                 {
                     0 => language switch
                     {
@@ -434,14 +439,14 @@ namespace GeneratorBackend
                         _ => 10 // YOU CAN MODIFY THIS. It might look better for your preferences, but for me I think this is the best option.
                     };
                 }
-                Raylib.ImageDraw(ref card, classSymbol, imageRec, new(93 + reqTextSize.X + 10 + reqIteration * iconsMargin, 902, 83, 83), Raylib_cs.Color.WHITE);
+                Raylib.ImageDraw(ref card, classSymbol, imageRec, new(93 + reqTextSize.X + 10 + reqIteration * iconsMargin, 902, 83, 83), Color.WHITE);
                 reqIteration++;
             }
             #endregion
 
             // Draw roll requirements and their outcomes
-            Raylib.ImageDraw(ref card, inst.red, imageRec, new(87, 1002, 78, 78), Raylib_cs.Color.WHITE);
-            Raylib.ImageDraw(ref card, inst.green, imageRec, new(87, 1099, 78, 78), Raylib_cs.Color.WHITE);
+            Raylib.ImageDraw(ref card, inst.red, imageRec, new(87, 1002, 78, 78), Color.WHITE);
+            Raylib.ImageDraw(ref card, inst.green, imageRec, new(87, 1099, 78, 78), Color.WHITE);
 
             RollOutput red = bad;
             RollOutput green = good;
@@ -451,12 +456,12 @@ namespace GeneratorBackend
                 green = bad;
             }
             Vector2 redNumSize = Raylib.MeasureTextEx(inst.rollFont, red.Value.ToString() + "-", AssetManager.ROLL_SIZE, ROLL_FONT_SPACING);
-            Raylib.ImageDrawTextEx(ref card, inst.rollFont, red.Value.ToString() + "-", new(87 + 78 / 2 - redNumSize.X / 2, 1002 + 78 / 2 - redNumSize.Y / 2), AssetManager.ROLL_SIZE, ROLL_FONT_SPACING, inst.bottomColor);
+            Raylib.ImageDrawTextEx(ref card, inst.rollFont, red.Value.ToString() + "-", new(87 + 78/2 - redNumSize.X/2, 1002 + 78/2 - redNumSize.Y/2), AssetManager.ROLL_SIZE, ROLL_FONT_SPACING, inst.bottomColor);
             Vector2 greenNumSize = Raylib.MeasureTextEx(inst.rollFont, green.Value.ToString() + "+", AssetManager.ROLL_SIZE, ROLL_FONT_SPACING);
-            Raylib.ImageDrawTextEx(ref card, inst.rollFont, green.Value.ToString() + "+", new(87 + 78 / 2 - greenNumSize.X / 2, 1099 + 78 / 2 - greenNumSize.Y / 2), AssetManager.ROLL_SIZE, ROLL_FONT_SPACING, inst.bottomColor);
+            Raylib.ImageDrawTextEx(ref card, inst.rollFont, green.Value.ToString() + "+", new(87 + 78/2 - greenNumSize.X/2, 1099 + 78/2 - greenNumSize.Y/2), AssetManager.ROLL_SIZE, ROLL_FONT_SPACING, inst.bottomColor);
 
-            Raylib.ImageDrawTextEx(ref card, inst.descFont, red.Outcome, new(87 + 78 + 24, 1002 + 78/2 - AssetManager.DESC_SIZE/2), AssetManager.DESC_SIZE, DESC_FONT_SPACING, inst.bottomColor);
-            Raylib.ImageDrawTextEx(ref card, inst.descFont, green.Outcome, new(87 + 78 + 24, 1099 + 78 / 2 - AssetManager.DESC_SIZE / 2), AssetManager.DESC_SIZE, DESC_FONT_SPACING, inst.bottomColor);
+            Raylib.ImageDrawTextEx(ref card, inst.descFont, red.Outcome, new(87 + 78 + 24, 1002 + 78/2 - AssetManager.DESC_SIZE/2 + 2), AssetManager.DESC_SIZE, DESC_FONT_SPACING, inst.bottomColor);
+            Raylib.ImageDrawTextEx(ref card, inst.descFont, green.Outcome, new(87 + 78 + 24, 1099 + 78/2 - AssetManager.DESC_SIZE/2 + 2), AssetManager.DESC_SIZE, DESC_FONT_SPACING, inst.bottomColor);
 
             // Name and Title
             string titleText = language switch{
@@ -478,14 +483,14 @@ namespace GeneratorBackend
             }
             Raylib.UnloadImage(card);
         }
-        static void DrawNameAndTitle(string nameText, string titleText, Raylib_cs.Image card, bool nameWhite)
+        static void DrawNameAndTitle(string nameText, string titleText, Image card, bool nameWhite)
         {
-            Raylib_cs.Color leaderColor = nameWhite switch
+            Color leaderColor = nameWhite switch
             {
-                true => Raylib_cs.Color.WHITE,
-                false => Raylib_cs.Color.BLACK
+                true => Color.WHITE,
+                false => Color.BLACK
             };
-            Raylib_cs.Color leaderShadowColor = nameWhite switch
+            Color leaderShadowColor = nameWhite switch
             {
                 true => new(0, 0, 0, 127),
                 false => new(255, 255, 255, 127)
@@ -502,9 +507,9 @@ namespace GeneratorBackend
             Raylib.ImageDrawTextEx(ref card, inst.titleFont, titleText, new Vector2((CARD_WIDTH / 2) - (titleSize.X / 2) + 2, 118 + 2), AssetManager.TITLE_SIZE, TITLE_FONT_SPACING, leaderShadowColor);
             Raylib.ImageDrawTextEx(ref card, inst.titleFont, titleText, new Vector2((CARD_WIDTH / 2) - (titleSize.X / 2), 118), AssetManager.TITLE_SIZE, TITLE_FONT_SPACING, leaderColor);
         }
-        static void DrawDescription(string text, Raylib_cs.Image card)
+        static void DrawDescription(string text, Image card)
         {
-            Raylib_cs.Color descTextColor = new(78, 78, 78, 255); // 78 78 78 is the color of the description text
+            Color descTextColor = new(78, 78, 78, 255); // 78 78 78 is the color of the description text
 
             Vector2 textSize = Raylib.MeasureTextEx(inst.descFont, text, AssetManager.DESC_SIZE, DESC_FONT_SPACING);
 
@@ -578,8 +583,8 @@ namespace GeneratorBackend
             Raylib.ImageDrawTextEx(ref card, inst.descFont, output.ToString() + word.ToString(), new Vector2(DESC_MARGIN, (CARD_HEIGHT - offset) + textBlockCenter + ((textSize.Y - 5 + DESC_LINE_SPACING) * currentLine)), AssetManager.DESC_SIZE, DESC_FONT_SPACING, descTextColor);
         }
 
-        static Raylib_cs.Image leader = new();
-        static Raylib_cs.Image monster = new();
+        static Image leader = new();
+        static Image monster = new();
         static Image<Rgba32>? image;
         static string lastPathLeader = "";
         static string lastPathMonster = "";
@@ -616,7 +621,7 @@ namespace GeneratorBackend
                 int cropX = (leader.width - targetWidth) / 2;
                 int cropY = (leader.height - targetHeight) / 2;
 
-                Raylib.ImageCrop(ref leader, new Raylib_cs.Rectangle(cropX, cropY, targetWidth, targetHeight));
+                Raylib.ImageCrop(ref leader, new Rectangle(cropX, cropY, targetWidth, targetHeight));
                 Raylib.ImageResize(ref leader, 745, 1176);
                 #endregion
             }
@@ -654,7 +659,7 @@ namespace GeneratorBackend
                 int cropX = (monster.width - targetWidth) / 2;
                 int cropY = (monster.height - targetHeight) / 2;
 
-                Raylib.ImageCrop(ref monster, new Raylib_cs.Rectangle(cropX, cropY, targetWidth, targetHeight));
+                Raylib.ImageCrop(ref monster, new Rectangle(cropX, cropY, targetWidth, targetHeight));
                 Raylib.ImageResize(ref monster, 745, 824);
                 #endregion
             }

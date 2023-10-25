@@ -46,8 +46,11 @@
     <None Update="fonts\PatuaOne-Polish.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="fonts\SourceSansPro-Bold.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="fonts\SourceSansPro.ttf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="MenuAssets\gradient.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
