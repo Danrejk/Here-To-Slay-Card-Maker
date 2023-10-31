@@ -7,14 +7,14 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <StartupObject>HereToSlay.Program</StartupObject>
-    <ApplicationIcon>icons\LEADER.ico</ApplicationIcon>
+    <ApplicationIcon>icons\icon.ico</ApplicationIcon>
     <NoWin32Manifest>true</NoWin32Manifest>
     <SignAssembly>True</SignAssembly>
     <BaseOutputPath>bin\</BaseOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="icons\LEADER.ico" />
+    <Content Include="icons\icon.ico" />
   </ItemGroup>
 
   <ItemGroup>
