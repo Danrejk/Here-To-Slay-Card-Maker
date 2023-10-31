@@ -337,7 +337,7 @@ namespace HereToSlay
             heroReq5.SelectedIndex = currentHeroReq5Index;
         }
         #endregion
-        private void chosenClass_SelectedIndexChanged(object sender, EventArgs e)
+        private void chosenClass_SelectedIndexChanged(object? sender, EventArgs? e)
         {
             this.Icon = chosenClass.SelectedIndex switch
             {
@@ -438,6 +438,7 @@ namespace HereToSlay
         {
             if (LeaderCard.Checked == false)
             {
+                chosenClass_SelectedIndexChanged(null, null);
                 Properties.Settings.Default.CardType = 0;
                 Properties.Settings.Default.Save();
                 MonsterCard.Checked = false;
@@ -490,6 +491,7 @@ namespace HereToSlay
         {
             if (MonsterCard.Checked == false)
             {
+                this.Icon = Properties.Resources.monster;
                 Properties.Settings.Default.CardType = 1;
                 Properties.Settings.Default.Save();
                 LeaderCard.Checked = false;
@@ -586,14 +588,14 @@ namespace HereToSlay
                         badOutputSym.SelectedIndex = goodOutputSym.SelectedIndex switch
                         {
                             0 => 1,
-                            1 => 0,
+                            _ => 0,
                         };
                         break;
                    case "badOutputSym":
                         goodOutputSym.SelectedIndex = badOutputSym.SelectedIndex switch
                         {
                             0 => 1,
-                            1 => 0,
+                            _ => 0,
                         };
                         break;
                 }

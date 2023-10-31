@@ -8,14 +8,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <StartupObject>HereToSlay.Program</StartupObject>
     <ApplicationIcon>icons\LEADER.ico</ApplicationIcon>
+    <NoWin32Manifest>true</NoWin32Manifest>
+    <SignAssembly>True</SignAssembly>
+    <BaseOutputPath>bin\</BaseOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
     <Content Include="icons\LEADER.ico" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="bin\Debug\net6.0-windows\test.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -56,7 +55,7 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Update="icons\LEADER.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Update="icons\lowca.ico">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
