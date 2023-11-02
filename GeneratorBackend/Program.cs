@@ -1,13 +1,6 @@
-﻿using System;
+﻿using Raylib_cs;
 using System.Numerics;
-using System.Resources;
 using System.Text;
-using System.Runtime.InteropServices;
-using Raylib_cs;
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.PixelFormats;
-using SixLabors.ImageSharp.Processing;
-using System.Xml.Linq;
 using Color = Raylib_cs.Color;
 using Image = Raylib_cs.Image;
 using Rectangle = Raylib_cs.Rectangle;
@@ -84,8 +77,8 @@ namespace GeneratorBackend
     {
         static void Main()
         {
-            GenerateLeader("TestRender.png", 0,"Test Leader", new int[]{11, -1}, "", "Test description", false, false); // if you want to test the generator, change the parameters here
-                                                                         //"-1" here means that there is only one class.
+            GenerateLeader("TestRender.png", 0, "Test Leader", new int[] { 11, -1 }, "", "Test description", false, false); // if you want to test the generator, change the parameters here
+                                                                                                                            //"-1" here means that there is only one class.
 
             //this might not work because I moved all of the fonts to the "HereToSlay" or Menu project.
         }
@@ -120,86 +113,110 @@ namespace GeneratorBackend
             switch (desiredClass[0])
             {
                 case 0:
-                    leaderTitle = language switch{
+                    leaderTitle = language switch
+                    {
                         1 => "Przywódca drużyny: łowca",
-                        _ => "Party Leader: Ranger"};
+                        _ => "Party Leader: Ranger"
+                    };
                     classSymbol = inst.Ranger;
                     desiredColor = new(35, 94, 57, 255);
                     break;
                 case 1:
-                    leaderTitle = language switch{
+                    leaderTitle = language switch
+                    {
                         1 => "Przywódca drużyny: mag",
-                        _ => "Party Leader: Wizard"};
+                        _ => "Party Leader: Wizard"
+                    };
                     classSymbol = inst.Wizard;
                     desiredColor = new(116, 46, 137, 255);
                     break;
                 case 2:
-                    leaderTitle = language switch{
+                    leaderTitle = language switch
+                    {
                         1 => "Przywódca drużyny: bard",
-                        _ => "Party Leader: Bard"};
+                        _ => "Party Leader: Bard"
+                    };
                     classSymbol = inst.Bard;
                     desiredColor = new(194, 81, 47, 255);
                     break;
                 case 3:
-                    leaderTitle = language switch{
+                    leaderTitle = language switch
+                    {
                         1 => "Przywódca drużyny: strażnik",
-                        _ => "Party Leader: Guardian"};
+                        _ => "Party Leader: Guardian"
+                    };
                     classSymbol = inst.Guardian;
                     desiredColor = new(235, 171, 33, 255);
                     break;
                 case 4:
-                    leaderTitle = language switch{
+                    leaderTitle = language switch
+                    {
                         1 => "Przywódca drużyny: wojownik",
-                        _ => "Party Leader: Fighter"};
+                        _ => "Party Leader: Fighter"
+                    };
                     classSymbol = inst.Fighter;
                     desiredColor = new(151, 40, 44, 255);
                     break;
                 case 5:
-                    leaderTitle = language switch{
+                    leaderTitle = language switch
+                    {
                         1 => "Przywódca drużyny: złodziej",
-                        _ => "Party Leader: Thief"};
+                        _ => "Party Leader: Thief"
+                    };
                     classSymbol = inst.Thief;
                     desiredColor = new(0, 78, 125, 255);
                     break;
                 case 6:
-                    leaderTitle = language switch{
+                    leaderTitle = language switch
+                    {
                         1 => "Przywódca drużyny: druid",
-                        _ => "Party Leader: Druid"};
+                        _ => "Party Leader: Druid"
+                    };
                     classSymbol = inst.Druid;
                     desiredColor = new(0, 171, 143, 255);
                     break;
                 case 7:
-                    leaderTitle = language switch{
+                    leaderTitle = language switch
+                    {
                         1 => "Przywódca drużyny: awanturnik",
-                        _ => "Party Leader: Warrior"};
-                    classSymbol =inst.Warrior;
+                        _ => "Party Leader: Warrior"
+                    };
+                    classSymbol = inst.Warrior;
                     desiredColor = new(94, 109, 180, 255);
                     break;
                 case 8:
-                    leaderTitle = language switch{
+                    leaderTitle = language switch
+                    {
                         1 => "Przywódca drużyny: berserk",
-                        _ => "Party Leader: Berserker"};
+                        _ => "Party Leader: Berserker"
+                    };
                     classSymbol = inst.Berserker;
                     desiredColor = new(225, 131, 51, 255);
                     break;
                 case 9:
-                    leaderTitle = language switch{
+                    leaderTitle = language switch
+                    {
                         1 => "Przywódca drużyny: nekromanta",
-                        _ => "Party Leader: Necromancer"};
+                        _ => "Party Leader: Necromancer"
+                    };
                     classSymbol = inst.Necromancer;
                     desiredColor = new(213, 28, 106, 255);
                     break;
                 case 10:
-                    leaderTitle = language switch{
+                    leaderTitle = language switch
+                    {
                         1 => "Przywódca drużyny: czarownik",
-                        _ => "Party Leader: Sorcerer"};
+                        _ => "Party Leader: Sorcerer"
+                    };
                     classSymbol = inst.Sorcerer;
                     desiredColor = new(29, 31, 29, 255);
                     break;
                 default: // when no desired class is given it deafults to an empty class
-                    leaderTitle = language switch{
+                    leaderTitle = language switch
+                    {
                         1 => "Przywódca drużyny",
-                        _ => "Party Leader"};
+                        _ => "Party Leader"
+                    };
                     classSymbol = inst.None;
                     desiredColor = new(91, 93, 92, 255);
                     break;
@@ -317,7 +334,7 @@ namespace GeneratorBackend
                             _ => "/Leader"
                         };
                         secondClassSymbol = Raylib.ImageCopy(inst.None);
-                        desiredSecondColor = new (91, 93, 92, 255);
+                        desiredSecondColor = new(91, 93, 92, 255);
                         break;
                 }
                 Raylib.ImageCrop(ref secondClassSymbol, new Rectangle(0, 0, 51, 102));
@@ -329,13 +346,13 @@ namespace GeneratorBackend
             Raylib.ImageDraw(ref card, leader, imageRec, new(41, 41, 745, 1176), Color.WHITE);
             Raylib.ImageDraw(ref card, inst.bottom, imageRec, imageRec, Color.WHITE);
 
-            if (addGradient){ Raylib.ImageDraw(ref card, inst.gradient, imageRec, imageRec, Color.WHITE); }
+            if (addGradient) { Raylib.ImageDraw(ref card, inst.gradient, imageRec, imageRec, Color.WHITE); }
 
             // Draw Class Symbol(s) and Colored Frame(s)
             Image frameTinted = Raylib.ImageCopy(inst.frame); // create a copy of the frame asset, so that the original is not modified
             Raylib.ImageDraw(ref card, classSymbol, imageRec, new(363, 1167, 102, 102), Color.WHITE);
             if (desiredClass[1] != -1) // check if there is a second class
-            { 
+            {
                 Raylib.ImageDraw(ref card, secondClassSymbol, imageRec, new(363, 1167, 51, 102), Color.WHITE);
 
                 Raylib.ImageCrop(ref frameTinted, new Rectangle(0, 0, 414, 1417));
@@ -348,7 +365,7 @@ namespace GeneratorBackend
                 Raylib.ImageColorTint(ref frameTinted, desiredSecondColor);
                 Raylib.ImageDraw(ref card, frameTinted, imageRec, new(414, 0, 413, 1417), Color.WHITE);
             }
-            else 
+            else
             {
                 Raylib.ImageColorTint(ref frameTinted, desiredColor);
                 Raylib.ImageDraw(ref card, frameTinted, imageRec, imageRec, Color.WHITE);
@@ -396,19 +413,19 @@ namespace GeneratorBackend
 
             #region Class Requirements
             // put the classless hero requirements at the end
-            int[] orderedRequirements = desiredRequirements.OrderBy(x => x == 0).ToArray(); 
+            int[] orderedRequirements = desiredRequirements.OrderBy(x => x == 0).ToArray();
 
             // count how many class requirements there are
             int reqCount = 0;
             foreach (int req in orderedRequirements)
             {
-                if (req== -1) { continue; }
+                if (req == -1) { continue; }
                 reqCount++;
             }
 
             // Draw the class requirements
             int reqIteration = 0;
-            foreach ( int req in orderedRequirements)
+            foreach (int req in orderedRequirements)
             {
                 if (req == -1) { continue; }
                 Image classSymbol = req switch
@@ -433,8 +450,10 @@ namespace GeneratorBackend
                 };
                 float iconsMargin = 83 + 13;
                 // change the distance between icons, if there are 5, so that it better fits onto the card
-                if (reqCount > 4){
-                    iconsMargin -= language switch{
+                if (reqCount > 4)
+                {
+                    iconsMargin -= language switch
+                    {
                         1 => 0, // polish needs less margin reduction, because the "REQUIREMENT" text is shorter
                         _ => 10 // YOU CAN MODIFY THIS. It might look better for your preferences, but for me I think this is the best option.
                     };
@@ -456,15 +475,16 @@ namespace GeneratorBackend
                 green = bad;
             }
             Vector2 redNumSize = Raylib.MeasureTextEx(inst.rollFont, red.Value.ToString() + "-", AssetManager.ROLL_SIZE, ROLL_FONT_SPACING);
-            Raylib.ImageDrawTextEx(ref card, inst.rollFont, red.Value.ToString() + "-", new(87 + 78/2 - redNumSize.X/2, 1002 + 78/2 - redNumSize.Y/2), AssetManager.ROLL_SIZE, ROLL_FONT_SPACING, inst.bottomColor);
+            Raylib.ImageDrawTextEx(ref card, inst.rollFont, red.Value.ToString() + "-", new(87 + 78 / 2 - redNumSize.X / 2, 1002 + 78 / 2 - redNumSize.Y / 2), AssetManager.ROLL_SIZE, ROLL_FONT_SPACING, inst.bottomColor);
             Vector2 greenNumSize = Raylib.MeasureTextEx(inst.rollFont, green.Value.ToString() + "+", AssetManager.ROLL_SIZE, ROLL_FONT_SPACING);
-            Raylib.ImageDrawTextEx(ref card, inst.rollFont, green.Value.ToString() + "+", new(87 + 78/2 - greenNumSize.X/2, 1099 + 78/2 - greenNumSize.Y/2), AssetManager.ROLL_SIZE, ROLL_FONT_SPACING, inst.bottomColor);
+            Raylib.ImageDrawTextEx(ref card, inst.rollFont, green.Value.ToString() + "+", new(87 + 78 / 2 - greenNumSize.X / 2, 1099 + 78 / 2 - greenNumSize.Y / 2), AssetManager.ROLL_SIZE, ROLL_FONT_SPACING, inst.bottomColor);
 
-            Raylib.ImageDrawTextEx(ref card, inst.descFont, red.Outcome, new(87 + 78 + 24, 1002 + 78/2 - AssetManager.DESC_SIZE/2 + 2), AssetManager.DESC_SIZE, DESC_FONT_SPACING, inst.bottomColor);
-            Raylib.ImageDrawTextEx(ref card, inst.descFont, green.Outcome, new(87 + 78 + 24, 1099 + 78/2 - AssetManager.DESC_SIZE/2 + 2), AssetManager.DESC_SIZE, DESC_FONT_SPACING, inst.bottomColor);
+            Raylib.ImageDrawTextEx(ref card, inst.descFont, red.Outcome, new(87 + 78 + 24, 1002 + 78 / 2 - AssetManager.DESC_SIZE / 2 + 2), AssetManager.DESC_SIZE, DESC_FONT_SPACING, inst.bottomColor);
+            Raylib.ImageDrawTextEx(ref card, inst.descFont, green.Outcome, new(87 + 78 + 24, 1099 + 78 / 2 - AssetManager.DESC_SIZE / 2 + 2), AssetManager.DESC_SIZE, DESC_FONT_SPACING, inst.bottomColor);
 
             // Name and Title
-            string titleText = language switch{
+            string titleText = language switch
+            {
                 1 => "Potwór",
                 _ => "Monster"
             };
@@ -564,8 +584,8 @@ namespace GeneratorBackend
                     word.Append(text[i]);
                     wordLen = Raylib.MeasureTextEx(inst.descFont, word.ToString(), AssetManager.DESC_SIZE, DESC_FONT_SPACING);
                 }
-                else if (text[i] == ' ' && currentLen.X + wordLen.X <= targetLen) 
-                { 
+                else if (text[i] == ' ' && currentLen.X + wordLen.X <= targetLen)
+                {
                     output.Append(word);
                     output.Append(' ');
                     word.Clear();
