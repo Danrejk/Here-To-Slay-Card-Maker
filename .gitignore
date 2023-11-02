@@ -24,7 +24,7 @@
 # Compiled binary files
 obj/
 Debug/
-Release/
+#Release/
 publish/
 
 # Signature
