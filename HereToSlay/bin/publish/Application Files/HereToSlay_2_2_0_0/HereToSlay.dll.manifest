@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="HereToSlay.exe" version="2.2.0.0" publicKeyToken="3b0311b233adcdbb" language="neutral" processorArchitecture="msil" type="win32" />
+  <description asmv2:iconFile="MenuAssets\icons\icon.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="Launcher" version="8.0.0.0" language="neutral" processorArchitecture="msil" />
+    <commandLine file="Launcher.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC Manifest Options
+          If you want to change the Windows User Account Control level replace the
+          requestedExecutionLevel node with one of the following.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+         If you want to utilize File and Registry Virtualization for backward
+         compatibility then delete the requestedExecutionLevel node.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Launcher.exe" size="17776">
+      <assemblyIdentity name="Launcher" version="8.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>4kdELmBajDqi2RhDSC9GPS5wHcV4Yb6JG+8+wpp56jg=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="HereToSlay.deps.json" size="57964">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>Nm5Jz/aA90A6s+28gdHG68+cudlCnSIsGwwfvTeu0Hw=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="HereToSlay.dll" size="8020848">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>H7AF9cnjQw4X3DDMN2T7m8jRMJRPu4mrnmKhyfPerwQ=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="HereToSlay.dll.config" size="1395">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>903yVUF1FAj9x8r8O0w2IGCOGKicfwd00tLoqqc3A3s=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="HereToSlay.exe" size="167280">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>X4OFE73Rsi0iHJOSfgJO2JWlXBlWHS+XRend4KeqF0w=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="HereToSlay.runtimeconfig.json" size="372">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>HsoPDHAHCqg7tgnkt0mybctECXhDJgMnJjlHIiJKCYo=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="MenuAssets\icons\icon.ico" size="16958">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>JTGXj6i3yo1wk8IvMjD0sS+omGiDEWs57hnbu7oQaog=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="runtimes\linux-x64\native\libraylib.so" size="2359072">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>vmb+boomLe3X6kgY9fd1TZlaQeOBOFFs2+imM/hmyaQ=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="runtimes\osx-arm64\native\libraylib.dylib" size="1741120">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>9u/iv5hzX2t4XzBFXkMKz7tLkqT17aj+MoMNUbIvGBw=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="runtimes\osx-x64\native\libraylib.dylib" size="1982872">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>hB1iMfTYFCei1y0Ezmet+Hsg+jY8AAdxzG8uV0IByx0=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="runtimes\win-x64\native\raylib.dll" size="1418240">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>IaEniKHFiHyhT4TVnIVUQw4eK0nPxEQfI7tHoYFKKsQ=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="runtimes\win-x86\native\raylib.dll" size="1241088">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>AdKGY7XXdGscP8fa4bEvWNin5cQGpRurVpzPIzC34q0=</dsig:DigestValue>
+    </hash>
+  </file>
+<publisherIdentity name="CN=Dankot Interactive" issuerKeyHash="b18a8eebd8ce0368cee88541794716106f21233b" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>AuLJ50wGiWs9Kxu6897m5+mn5f8cG9Bd1+eMOL4HdcI=</DigestValue></Reference></SignedInfo><SignatureValue>fCxa/eeZXud8Q1GyXGjvZWPqOVH+fol15bT7DphpLRRovAIkTz2Pn7yDsYasRNm4fj6/GOUw4Kio//XK7miM095PIgN38JuhXYnik3XYkEt+ekXK2WJrkWo4Gf/gwzDq5VOlKhX3m2G5N1dqgBVxAq4knP+w249IWm247KnmWQcgeYMo/+k5WTiPlMT3kX2TjafpE7zymdFnjmMLCjsGMXHSXC1D6C9zK6C3iiA5q+ETF1J1mnPZGlnDPbKH8W1ljCN6r5c/D51SC88zsBpa9ZcGqALz4jTtJ1U2XKkT32D8KDV/evnnol1fnOO0N4mfD1VvsV3C8LbSWMBI6ofYDw==</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>u4SqvAdJrs/9050YTH2o93bsbGZpBif3GAx3sFOUbiNB4dazZmDqdQ9LAt1q4puUDXvHbOGcewAfGcGxW2GneWaZx3iZ5nVumX5bdZ42PAZCOwo/HZ68x5wfFr3sOeoGjKdS+k4bKmupd0iwL6oQnYp2zQe0sHM5f93swp5spSUn4ahD7c+7d6D6nWGXEWkMKI6iqwb5VPJrMzXuey8Skdv30rVfn5qiHEZBO28Ig/aa4ODiHNS+Pvy/wevUSCKTZg3v2fNlLBtMKZuCgIo35uAheZgqYbAUIq1Uo7UX4zjitiPjiEKiMaPoA6oYfuMGleSKE/FpN5SVEesxY/fE6Q==</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="c27507be388ce7d75dd01b1cffe5a7e9e7e6def3ba1b2b3d6b89064ce7c9e202" Description="" Url=""><as:assemblyIdentity name="HereToSlay.exe" version="2.2.0.0" publicKeyToken="3b0311b233adcdbb" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=Dankot Interactive</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>9ftmw0rkgInF0J7WxwsOSJWcnbM6jM64p1HQD+L6zwM=</DigestValue></Reference></SignedInfo><SignatureValue>rZb+evC07yIkZWbGQpiICsr6BJMHDiwTJPmzHE2Keosd3joXefOgX9lYEL6Fi2pfR6YuA2psBO2TR2MzvrpUDGGewtbDTaJIOkDYl2uwMCq4kYSWe9aKjbMRd6SvJ/4kKkN8lBQ422ZUQ0c3rTA6XhuYtXGfdD5cK8VjD496i3S6ZeNOT9xMwLF7uWJ8XSNtkXUun3QYYRiBheYu8o3KYomdYbxgBECvx8oLbJ6JPVvb6f52BQSPZ628zZuyRWwDb9sBI2J6Ale5yaq05jbp9s2sjWHhnWvfyp/6DWfl4BrKhP3Kyp/hiTiqUUA0ih8AsdPPYK1hG2JehlD0FWR4wQ==</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>u4SqvAdJrs/9050YTH2o93bsbGZpBif3GAx3sFOUbiNB4dazZmDqdQ9LAt1q4puUDXvHbOGcewAfGcGxW2GneWaZx3iZ5nVumX5bdZ42PAZCOwo/HZ68x5wfFr3sOeoGjKdS+k4bKmupd0iwL6oQnYp2zQe0sHM5f93swp5spSUn4ahD7c+7d6D6nWGXEWkMKI6iqwb5VPJrMzXuey8Skdv30rVfn5qiHEZBO28Ig/aa4ODiHNS+Pvy/wevUSCKTZg3v2fNlLBtMKZuCgIo35uAheZgqYbAUIq1Uo7UX4zjitiPjiEKiMaPoA6oYfuMGleSKE/FpN5SVEesxY/fE6Q==</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIDFjCCAf6gAwIBAgIQGIXt8R9SXLRNHSUvglkuRDANBgkqhkiG9w0BAQsFADAdMRswGQYDVQQDExJEYW5rb3QgSW50ZXJhY3RpdmUwHhcNMjMxMTAyMTg1MDE4WhcNMzkxMjMxMjM1OTU5WjAdMRswGQYDVQQDExJEYW5rb3QgSW50ZXJhY3RpdmUwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC7hKq8B0muz/3TnRhMfaj3duxsZmkGJ/cYDHewU5RuI0Hh1rNmYOp1D0sC3Wrim5QNe8ds4Zx7AB8ZwbFbYad5ZpnHeJnmdW6Zflt1njY8BkI7Cj8dnrzHnB8Wvew56gaMp1L6Thsqa6l3SLAvqhCdinbNB7Swczl/3ezCnmylJSfhqEPtz7t3oPqdYZcRaQwojqKrBvlU8mszNe57LxKR2/fStV+fmqIcRkE7bwiD9prg4OIc1L4+/L/B69RIIpNmDe/Z82UsG0wpm4KAijfm4CF5mCphsBQirVSjtRfjOOK2I+OIQqIxo+gDqhh+4waV5IoT8Wk3lJUR6zFj98TpAgMBAAGjUjBQME4GA1UdAQRHMEWAEAkNjQ1Ipx0o7qR14uNVkpahHzAdMRswGQYDVQQDExJEYW5rb3QgSW50ZXJhY3RpdmWCEBiF7fEfUly0TR0lL4JZLkQwDQYJKoZIhvcNAQELBQADggEBABI0Ly9TrId4JBPSXo+2FskC8Rxx1Nm4lKHGyzP1fa0Z7XqrKf7opKU7wXBwr+Je6hVoaLbIlufFmppvwMsc6p4Up8AzwuUmXE7cX1zXE/ayUKTPHmYAVHSFw4WbP7inZg9eT978BWAbQpqrPnWkWrMDsG1oM3fMlme5VozvqQJ8lkJqNoaALHvrAw1Nm1+lg8nF12bAonRK47WGPp14EWGODXN4OIXO2Q33VirB6+R/j/+x27XLs+6tgZ2Onj4vQa1ClvWxZkU5p2BEpjQXxbzs/X8hyffeGJ5N7AhC99q1+bfp5pB09xDBdoaeHvlTd1BhlMjaAW6BlG0atFI0rg8=</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>

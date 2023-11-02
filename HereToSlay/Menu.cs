@@ -13,7 +13,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using Button = System.Windows.Forms.Button;
 using ComboBox = System.Windows.Forms.ComboBox;
 
-#pragma warning disable CA1416 // It onlyworks on Windows
+#pragma warning disable CA1416 // It onlyworks on Windows test
 
 namespace HereToSlay
 {
