@@ -25,3 +25,7 @@
 obj/
 Debug/
 Release/
+publish/
+
+# Signature
+sign.bat
