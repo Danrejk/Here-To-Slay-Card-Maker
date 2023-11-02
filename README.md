@@ -26,10 +26,6 @@
 <p>Generator dokładnie zrobionych kart liderów do gry karcianej "To ja go tnę", który zapewnia spójność z oryginalnym designem kart jak najbardziej jak jest to możliwe.</p>
 <p>Istnieje oficjalny generator kart liderów (ale nie potworów) na stronie unstablegames.com, ALE ma na tyle niespójności, że trudno go nazwać reprezentującym wygląd prawdziwych kart. W dodatku brakuje mu wielu klas z dlc, podwójnych klas, no i oczywiście wsparcia języka Polskiego.</p>
 
-<h2>Otwieranie generatora</h2>
-<p>Plik <code>.exe</code> generatora znajduje się w <code>HereToSlay/bin/Release/net6.0-windows/HereToSlay.exe</code>.<br>
-  Zalecamy stworzenie gdzieś skrótu, aby nie musieć przechodzić przez te pliki za każdym razem.</p>
-
 <h2>Funkcje generatora w porównaniu z generatorem na unstablegames.com</h2>
 <p>Wszystkie te funkcje/cechy zostały starannie zrobione, aby jak najbardziej przyrównać tym na prawdziwych kartach:</p>
 <ul>
