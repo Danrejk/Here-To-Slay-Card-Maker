@@ -339,23 +339,27 @@ namespace HereToSlay
         #endregion
         private void chosenClass_SelectedIndexChanged(object? sender, EventArgs? e)
         {
-            this.Icon = chosenClass.SelectedIndex switch
+            if(Properties.Settings.Default.CardType == 0)
             {
-                0 => Properties.Resources.lowca,
-                1 => Properties.Resources.mag,
-                2 => Properties.Resources.najebus,
-                3 => Properties.Resources.straznik,
-                4 => Properties.Resources.wojownik,
-                5 => Properties.Resources.zlodziej,
-                6 => Properties.Resources.druid,
-                7 => Properties.Resources.awanturnik,
-                8 => Properties.Resources.berserk,
-                9 => Properties.Resources.nekromanta,
-                10 => Properties.Resources.czarownik,
-                11 => Properties.Resources.empty,
-                _ => Properties.Resources.LEADER
-            };
-            renderPreview(sender, e);
+                this.Icon = chosenClass.SelectedIndex switch
+                {
+                    0 => Properties.Resources.lowca,
+                    1 => Properties.Resources.mag,
+                    2 => Properties.Resources.najebus,
+                    3 => Properties.Resources.straznik,
+                    4 => Properties.Resources.wojownik,
+                    5 => Properties.Resources.zlodziej,
+                    6 => Properties.Resources.druid,
+                    7 => Properties.Resources.awanturnik,
+                    8 => Properties.Resources.berserk,
+                    9 => Properties.Resources.nekromanta,
+                    10 => Properties.Resources.czarownik,
+                    11 => Properties.Resources.empty,
+                    _ => Properties.Resources.LEADER
+                };
+                renderPreview(sender, e);
+            }
+            
         }
         private void chosenSecondClass_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -438,9 +442,9 @@ namespace HereToSlay
         {
             if (LeaderCard.Checked == false)
             {
-                chosenClass_SelectedIndexChanged(null, null);
                 Properties.Settings.Default.CardType = 0;
                 Properties.Settings.Default.Save();
+                chosenClass_SelectedIndexChanged(null, null);
                 MonsterCard.Checked = false;
                 MonsterCard.BackColor = SystemColors.Control;
                 LeaderCard.Checked = true;
@@ -491,9 +495,9 @@ namespace HereToSlay
         {
             if (MonsterCard.Checked == false)
             {
-                this.Icon = Properties.Resources.monster;
                 Properties.Settings.Default.CardType = 1;
                 Properties.Settings.Default.Save();
+                this.Icon = Properties.Resources.monster;
                 LeaderCard.Checked = false;
                 LeaderCard.BackColor = SystemColors.Control;
                 MonsterCard.Checked = true;

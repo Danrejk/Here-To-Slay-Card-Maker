@@ -17,12 +17,12 @@ namespace GeneratorBackend
     public class AssetManager
     {
         private static AssetManager? instance;
-        public Image frame = Raylib.LoadImage("template/frame.png");
-        public Image frameMonster = Raylib.LoadImage("template/frame_monster.png");
-        public Image bottom = Raylib.LoadImage("template/bottom.png");
-        public Image gradient = Raylib.LoadImage("template/gradient.png");
-        public Image red = Raylib.LoadImage("template/red.png");
-        public Image green = Raylib.LoadImage("template/green.png");
+        public Image frame = Raylib.LoadImage("GeneratorAssets/template/frame.png");
+        public Image frameMonster = Raylib.LoadImage("GeneratorAssets/template/frame_monster.png");
+        public Image bottom = Raylib.LoadImage("GeneratorAssets/template/bottom.png");
+        public Image gradient = Raylib.LoadImage("GeneratorAssets/template/gradient.png");
+        public Image red = Raylib.LoadImage("GeneratorAssets/template/red.png");
+        public Image green = Raylib.LoadImage("GeneratorAssets/template/green.png");
 
         public const int NAME_SIZE = 60; // 60
         public const int TITLE_SIZE = 52; // 49
@@ -38,20 +38,20 @@ namespace GeneratorBackend
 
         public Color bottomColor = new(244, 241, 229, 255);
 
-        public Image Ranger = Raylib.LoadImage("classes/ranger.png");
-        public Image Wizard = Raylib.LoadImage("classes/wizard.png");
-        public Image Bard = Raylib.LoadImage("classes/bard.png");
-        public Image Guardian = Raylib.LoadImage("classes/guardian.png");
-        public Image Fighter = Raylib.LoadImage("classes/fighter.png");
-        public Image Thief = Raylib.LoadImage("classes/thief.png");
-        public Image Druid = Raylib.LoadImage("classes/druid.png");
-        public Image Warrior = Raylib.LoadImage("classes/warrior.png");
-        public Image Berserker = Raylib.LoadImage("classes/berserker.png");
-        public Image Necromancer = Raylib.LoadImage("classes/necromancer.png");
-        public Image Sorcerer = Raylib.LoadImage("classes/sorcerer.png");
-        public Image None = Raylib.LoadImage("classes/none.png");
-        public Image Hero = Raylib.LoadImage("classes/hero.png");
-        public Image Bohater = Raylib.LoadImage("classes/bohater.png");
+        public Image Ranger = Raylib.LoadImage("GeneratorAssets/classes/ranger.png");
+        public Image Wizard = Raylib.LoadImage("GeneratorAssets/classes/wizard.png");
+        public Image Bard = Raylib.LoadImage("GeneratorAssets/classes/bard.png");
+        public Image Guardian = Raylib.LoadImage("GeneratorAssets/classes/guardian.png");
+        public Image Fighter = Raylib.LoadImage("GeneratorAssets/classes/fighter.png");
+        public Image Thief = Raylib.LoadImage("GeneratorAssets/classes/thief.png");
+        public Image Druid = Raylib.LoadImage("GeneratorAssets/classes/druid.png");
+        public Image Warrior = Raylib.LoadImage("GeneratorAssets/classes/warrior.png");
+        public Image Berserker = Raylib.LoadImage("GeneratorAssets/classes/berserker.png");
+        public Image Necromancer = Raylib.LoadImage("GeneratorAssets/classes/necromancer.png");
+        public Image Sorcerer = Raylib.LoadImage("GeneratorAssets/classes/sorcerer.png");
+        public Image None = Raylib.LoadImage("GeneratorAssets/classes/none.png");
+        public Image Hero = Raylib.LoadImage("GeneratorAssets/classes/hero.png");
+        public Image Bohater = Raylib.LoadImage("GeneratorAssets/classes/bohater.png");
 
         private AssetManager()
         {
@@ -110,7 +110,7 @@ namespace GeneratorBackend
             ChangeLeaderImage(leaderImg);
 
             // This has to be loaded each time, to clear the image from the previous render
-            Image card = Raylib.LoadImage("template/background.png");
+            Image card = Raylib.LoadImage("GeneratorAssets/template/background.png");
 
             Image classSymbol;
             Color desiredColor;
@@ -378,7 +378,7 @@ namespace GeneratorBackend
             ChangeMonsterImage(monsterImg);
 
             // This has to be loaded each time, to clear the image from the previous render
-            Image card = Raylib.LoadImage("template/background.png");
+            Image card = Raylib.LoadImage("GeneratorAssets/template/background.png");
             Rectangle imageRec = new(0, 0, 827, 1417);
 
             Raylib.ImageDraw(ref card, monster, imageRec, new(41, 41, 745, 824), Color.WHITE);

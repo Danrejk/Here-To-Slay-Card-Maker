@@ -15,67 +15,67 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="classes\warrior.png">
+    <None Update="GeneratorAssets\classes\warrior.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="classes\berserker.png">
+    <None Update="GeneratorAssets\classes\berserker.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="classes\bohater.png">
+    <None Update="GeneratorAssets\classes\bohater.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="classes\sorcerer.png">
+    <None Update="GeneratorAssets\classes\sorcerer.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="classes\druid.png">
+    <None Update="GeneratorAssets\classes\druid.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="classes\none.png">
+    <None Update="GeneratorAssets\classes\none.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="classes\hero.png">
+    <None Update="GeneratorAssets\classes\hero.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="classes\ranger.png">
+    <None Update="GeneratorAssets\classes\ranger.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="classes\wizard.png">
+    <None Update="GeneratorAssets\classes\wizard.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="classes\bard.png">
+    <None Update="GeneratorAssets\classes\bard.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="classes\necromancer.png">
+    <None Update="GeneratorAssets\classes\necromancer.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="classes\guardian.png">
+    <None Update="GeneratorAssets\classes\guardian.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="classes\fighter.png">
+    <None Update="GeneratorAssets\classes\fighter.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="classes\thief.png">
+    <None Update="GeneratorAssets\classes\thief.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="template\background.png">
+    <None Update="GeneratorAssets\template\background.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="template\bottom.png">
+    <None Update="GeneratorAssets\template\bottom.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="template\frame.png">
+    <None Update="GeneratorAssets\template\frame.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="template\frame_monster.png">
+    <None Update="GeneratorAssets\template\frame_monster.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="template\gradient.png">
+    <None Update="GeneratorAssets\template\gradient.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="template\green.png">
+    <None Update="GeneratorAssets\template\green.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="template\red.png">
+    <None Update="GeneratorAssets\template\red.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

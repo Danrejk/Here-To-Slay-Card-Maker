@@ -7,14 +7,32 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <StartupObject>HereToSlay.Program</StartupObject>
-    <ApplicationIcon>icons\icon.ico</ApplicationIcon>
     <NoWin32Manifest>true</NoWin32Manifest>
     <SignAssembly>True</SignAssembly>
     <BaseOutputPath>bin\</BaseOutputPath>
+    <AssemblyName>$(MSBuildProjectName)</AssemblyName>
+    <ApplicationIcon>MenuAssets\icons\icon.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <DebugType>none</DebugType>
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="icons\icon.ico" />
+    <Content Include="MenuAssets\icons\icon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Costura.Fody" Version="5.7.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
@@ -42,37 +60,43 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="fonts\PatuaOne-Polish.ttf">
+    <None Update="Fonts\PatuaOne-Polish.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="fonts\SourceSansPro-Bold.ttf">
+    <None Update="Fonts\SourceSansPro-Bold.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="fonts\SourceSansPro.ttf">
+    <None Update="Fonts\SourceSansPro.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="PrintingAssets\leaderBack.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="PrintingAssets\leaderBack_pl.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="MenuAssets\gradient.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
-    <None Update="icons\LEADER.ico">
+    <None Update="MenuAssets\icons\LEADER.ico">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
-    <None Update="icons\lowca.ico">
+    <None Update="MenuAssets\icons\lowca.ico">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
-    <None Update="icons\mag.ico">
+    <None Update="MenuAssets\icons\mag.ico">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
-    <None Update="icons\najebus.ico">
+    <None Update="MenuAssets\icons\najebus.ico">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
-    <None Update="icons\straznik.ico">
+    <None Update="MenuAssets\icons\straznik.ico">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
-    <None Update="icons\wojownik.ico">
+    <None Update="MenuAssets\icons\wojownik.ico">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
-    <None Update="icons\zlodziej.ico">
+    <None Update="MenuAssets\icons\zlodziej.ico">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Update="MenuAssets\Logo0.png">
@@ -80,6 +104,12 @@
     </None>
     <None Update="MenuAssets\Logo1.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Update="PrintingAssets\monsterBack.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="PrintingAssets\monsterBack_pl.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
