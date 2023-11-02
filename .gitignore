@@ -24,8 +24,8 @@
 # Compiled binary files
 obj/
 Debug/
-#Release/
-#publish/
+Release/
+publish/
 
 # Signature
 sign.bat
