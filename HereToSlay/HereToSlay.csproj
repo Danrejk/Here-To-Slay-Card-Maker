@@ -13,6 +13,12 @@
     <AssemblyName>$(MSBuildProjectName)</AssemblyName>
     <ApplicationIcon>MenuAssets\icons\icon.ico</ApplicationIcon>
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
+    <Authors>Danrejk &amp; Beukot</Authors>
+    <Company>Dankot Interactive</Company>
+    <Product>HereToSlay-CardGenerator</Product>
+    <RepositoryUrl>https://github.com/Danrejk/HereToSlay-Generator</RepositoryUrl>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <NeutralLanguage>en</NeutralLanguage>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -28,13 +34,6 @@
 
   <ItemGroup>
     <Content Include="MenuAssets\icons\icon.ico" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Costura.Fody" Version="5.7.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
