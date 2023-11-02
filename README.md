@@ -1,6 +1,6 @@
 <h1>Custom Leader and Monster Card generator - Here To Slay (ENG)</h1>
 <p>A generator for accurate custom leader cards for the card game "Here To Slay", which ensures that the generated cards are as close to the original designs as possible.</p>
-<p>There is an official one for leader (but now monsters) on unstablegames.com, BUT it has so many inaccuracies that it can barely represent the look of the real cards, as well as lacking several classes and split classes.</p>
+<p>There is an official one for leader (but not monsters) on unstablegames.com, BUT it has so many inaccuracies that it can barely represent the look of the real cards, as well as lacking several classes and split classes.</p>
 
 <h2>Features of the Generator over the one on unstablegames.com</h2>
 <p>All of these features were carefully made to be as close to real cards as possible:</p>
