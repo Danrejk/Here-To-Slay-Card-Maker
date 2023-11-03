@@ -8,7 +8,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <StartupObject>HereToSlay.Program</StartupObject>
     <NoWin32Manifest>true</NoWin32Manifest>
-    <SignAssembly>True</SignAssembly>
+    <SignAssembly>False</SignAssembly>
     <BaseOutputPath>bin\</BaseOutputPath>
     <AssemblyName>$(MSBuildProjectName)</AssemblyName>
     <ApplicationIcon>MenuAssets\icons\icon.ico</ApplicationIcon>
