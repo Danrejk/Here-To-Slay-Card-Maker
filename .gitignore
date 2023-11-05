@@ -22,10 +22,11 @@
 *.sln.docstates
 
 # Compiled binary files
-obj/
-Debug/
+#obj/
+#Debug/
 #Release/
 #publish/
+#*.zip
 
 # Signature
 sign.bat
