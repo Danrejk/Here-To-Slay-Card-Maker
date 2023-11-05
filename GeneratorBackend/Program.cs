@@ -51,11 +51,11 @@ namespace GeneratorBackend
             Raylib.InitWindow(1, 1, "Font Loader");
             Raylib.SetWindowPosition(-2000, -2000);
 
-            nameFont = Raylib.LoadFontEx("fonts/PatuaOne-Polish.ttf", NAME_SIZE, null, 382); // this font has limited language support (NOT only Polish and English btw)
-            titleFont = Raylib.LoadFontEx("fonts/SourceSansPro.ttf", TITLE_SIZE, null, 1415);
-            reqFont = Raylib.LoadFontEx("fonts/SourceSansPro-Bold.ttf", REQ_SIZE, null, 1415);
-            rollFont = Raylib.LoadFontEx("fonts/PatuaOne-Polish.ttf", ROLL_SIZE, null, 1415);
-            descFont = Raylib.LoadFontEx("fonts/SourceSansPro.ttf", DESC_SIZE, null, 1415);
+            nameFont = Raylib.LoadFontEx("Fonts/PatuaOne-Polish.ttf", NAME_SIZE, null, 382); // this font has limited language support (NOT only Polish and English btw)
+            titleFont = Raylib.LoadFontEx("Fonts/SourceSansPro.ttf", TITLE_SIZE, null, 1415);
+            reqFont = Raylib.LoadFontEx("Fonts/SourceSansPro-Bold.ttf", REQ_SIZE, null, 1415);
+            rollFont = Raylib.LoadFontEx("Fonts/PatuaOne-Polish.ttf", ROLL_SIZE, null, 1415);
+            descFont = Raylib.LoadFontEx("Fonts/SourceSansPro.ttf", DESC_SIZE, null, 1415);
 
             Raylib.CloseWindow();
         }
@@ -80,7 +80,7 @@ namespace GeneratorBackend
             GenerateLeader("TestRender.png", 0, "Test Leader", new int[] { 11, -1 }, "", "Test description", false, false); // if you want to test the generator, change the parameters here
                                                                                                                             //"-1" here means that there is only one class.
 
-            //this might not work because I moved all of the fonts to the "HereToSlay" or Menu project.
+            //this might not work because I moved all of the Fonts to the "HereToSlay" or Menu project.
         }
 
         // all of the font spacings work, but are simply not used as it turned out we don't need them, but YOU might. I dunno.

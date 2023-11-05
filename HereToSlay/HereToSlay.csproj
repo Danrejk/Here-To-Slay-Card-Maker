@@ -61,7 +61,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Fonts\PatuaOne-Polish.ttf">
+    <None Update="Fonts\PatuaOne-polish.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Fonts\SourceSansPro-Bold.ttf">
