@@ -8,16 +8,23 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <StartupObject>HereToSlay.Program</StartupObject>
     <NoWin32Manifest>true</NoWin32Manifest>
-    <SignAssembly>True</SignAssembly>
+    <SignAssembly>False</SignAssembly>
     <BaseOutputPath>bin\</BaseOutputPath>
     <AssemblyName>$(MSBuildProjectName)</AssemblyName>
     <ApplicationIcon>MenuAssets\icons\icon.ico</ApplicationIcon>
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
+    <Authors>Danrejk &amp; Beukot</Authors>
+    <Company>Dankot Interactive</Company>
+    <Product>HereToSlay-CardGenerator</Product>
+    <RepositoryUrl>https://github.com/Danrejk/HereToSlay-Generator</RepositoryUrl>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <NeutralLanguage>en</NeutralLanguage>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
     <DebugType>none</DebugType>
+    <Optimize>True</Optimize>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -27,13 +34,6 @@
 
   <ItemGroup>
     <Content Include="MenuAssets\icons\icon.ico" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Costura.Fody" Version="5.7.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
@@ -61,13 +61,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Fonts\PatuaOne-Polish.ttf">
+    <None Update="Fonts\PatuaOne-polish.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Fonts\SourceSansPro-Bold.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Fonts\SourceSansPro.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="PrintingAssets\herocard.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="PrintingAssets\herocard_pl.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="PrintingAssets\leaderBack.png">

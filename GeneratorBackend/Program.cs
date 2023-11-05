@@ -51,11 +51,11 @@ namespace GeneratorBackend
             Raylib.InitWindow(1, 1, "Font Loader");
             Raylib.SetWindowPosition(-2000, -2000);
 
-            nameFont = Raylib.LoadFontEx("fonts/PatuaOne-Polish.ttf", NAME_SIZE, null, 382); // this font has limited language support (NOT only Polish and English btw)
-            titleFont = Raylib.LoadFontEx("fonts/SourceSansPro.ttf", TITLE_SIZE, null, 1415);
-            reqFont = Raylib.LoadFontEx("fonts/SourceSansPro-Bold.ttf", REQ_SIZE, null, 1415);
-            rollFont = Raylib.LoadFontEx("fonts/PatuaOne-Polish.ttf", ROLL_SIZE, null, 1415);
-            descFont = Raylib.LoadFontEx("fonts/SourceSansPro.ttf", DESC_SIZE, null, 1415);
+            nameFont = Raylib.LoadFontEx("Fonts/PatuaOne-Polish.ttf", NAME_SIZE, null, 382); // this font has limited language support (NOT only Polish and English btw)
+            titleFont = Raylib.LoadFontEx("Fonts/SourceSansPro.ttf", TITLE_SIZE, null, 1415);
+            reqFont = Raylib.LoadFontEx("Fonts/SourceSansPro-Bold.ttf", REQ_SIZE, null, 1415);
+            rollFont = Raylib.LoadFontEx("Fonts/PatuaOne-Polish.ttf", ROLL_SIZE, null, 1415);
+            descFont = Raylib.LoadFontEx("Fonts/SourceSansPro.ttf", DESC_SIZE, null, 1415);
 
             Raylib.CloseWindow();
         }
@@ -80,7 +80,7 @@ namespace GeneratorBackend
             GenerateLeader("TestRender.png", 0, "Test Leader", new int[] { 11, -1 }, "", "Test description", false, false); // if you want to test the generator, change the parameters here
                                                                                                                             //"-1" here means that there is only one class.
 
-            //this might not work because I moved all of the fonts to the "HereToSlay" or Menu project.
+            //this might not work because I moved all of the Fonts to the "HereToSlay" or Menu project.
         }
 
         // all of the font spacings work, but are simply not used as it turned out we don't need them, but YOU might. I dunno.
@@ -627,19 +627,19 @@ namespace GeneratorBackend
                 #region Image Crop
                 float targetAspectRatio = 745.0f / 1176.0f;
                 int targetWidth, targetHeight;
-                if (leader.width / (float)leader.height > targetAspectRatio)
+                if (leader.Width / (float)leader.Height > targetAspectRatio)
                 {
-                    targetWidth = (int)(leader.height * targetAspectRatio);
-                    targetHeight = leader.height;
+                    targetWidth = (int)(leader.Height * targetAspectRatio);
+                    targetHeight = leader.Height;
                 }
                 else
                 {
-                    targetWidth = leader.width;
-                    targetHeight = (int)(leader.width / targetAspectRatio);
+                    targetWidth = leader.Width;
+                    targetHeight = (int)(leader.Width / targetAspectRatio);
                 }
 
-                int cropX = (leader.width - targetWidth) / 2;
-                int cropY = (leader.height - targetHeight) / 2;
+                int cropX = (leader.Width - targetWidth) / 2;
+                int cropY = (leader.Height - targetHeight) / 2;
 
                 Raylib.ImageCrop(ref leader, new Rectangle(cropX, cropY, targetWidth, targetHeight));
                 Raylib.ImageResize(ref leader, 745, 1176);
@@ -665,19 +665,19 @@ namespace GeneratorBackend
                 #region Image Crop
                 float targetAspectRatio = 745.0f / 824.0f;
                 int targetWidth, targetHeight;
-                if (monster.width / (float)monster.height > targetAspectRatio)
+                if (monster.Width / (float)monster.Height > targetAspectRatio)
                 {
-                    targetWidth = (int)(monster.height * targetAspectRatio);
-                    targetHeight = monster.height;
+                    targetWidth = (int)(monster.Height * targetAspectRatio);
+                    targetHeight = monster.Height;
                 }
                 else
                 {
-                    targetWidth = monster.width;
-                    targetHeight = (int)(monster.width / targetAspectRatio);
+                    targetWidth = monster.Width;
+                    targetHeight = (int)(monster.Width / targetAspectRatio);
                 }
 
-                int cropX = (monster.width - targetWidth) / 2;
-                int cropY = (monster.height - targetHeight) / 2;
+                int cropX = (monster.Width - targetWidth) / 2;
+                int cropY = (monster.Height - targetHeight) / 2;
 
                 Raylib.ImageCrop(ref monster, new Rectangle(cropX, cropY, targetWidth, targetHeight));
                 Raylib.ImageResize(ref monster, 745, 824);
