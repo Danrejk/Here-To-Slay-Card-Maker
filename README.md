@@ -1,8 +1,8 @@
-<h1>Custom Leader and Monster Card generator - Here To Slay (ENG)</h1>
-<p>A generator for accurate custom leader cards for the card game "Here To Slay", which ensures that the generated cards are as close to the original designs as possible.</p>
-<p>There is an official one for leader (but now monsters) on unstablegames.com, BUT it has so many inaccuracies that it can barely represent the look of the real cards, as well as lacking several classes and split classes.</p>
+<h1>Here To Slay - Custom Card Maker (ENG)</h1>
+<p>A generator for accurate custom cards for the card game "Here To Slay", which goal is to ensure that the generated cards are as close to the original designs as possible.</p>
+<p>There is an official one for leaders only on unstablegames.com, BUT even it has so many inaccuracies that it barely represents the look of the real cards, and it lacks several classes, split classes and other features.</p>
 
-<h2>Downloading and running the Generator</h2>
+<h2>Instalation</h2>
 <p>Download the latest <b>Release</b> of the program displayed on the right. The <code>.exe</code> is located inside of the <code>.zip</code>.<br>
 The <code>.exe</code> must remain along the other files inside of the folder or else the program will not work.
 </p>
@@ -26,11 +26,11 @@ The <code>.exe</code> must remain along the other files inside of the folder or 
 
 <hr>
 
-<h1>Generator customowych kart liderów i potworów - To ja go tnę (PL)</h1>
-<p>Generator dokładnie zrobionych kart liderów do gry karcianej "To ja go tnę", który zapewnia spójność z oryginalnym designem kart jak najbardziej jak jest to możliwe.</p>
-<p>Istnieje oficjalny generator kart liderów (ale nie potworów) na stronie unstablegames.com, ALE ma na tyle niespójności, że trudno go nazwać reprezentującym wygląd prawdziwych kart. W dodatku brakuje mu wielu klas z dlc, podwójnych klas, no i oczywiście wsparcia języka Polskiego.</p>
+<h1>To ja go Tnę - Kreator customowych kart (PL)</h1>
+<p>Generator customowych kart do gry karcianej "To ja go tnę", którego głównym celem jest zapewnie spójność z oryginalnym designem kart jak najbardziej jak jest to możliwe.</p>
+<p>Istnieje oficjalny generator kart liderów na stronie unstablegames.com, ALE ma on tyle niespójności, że trudno go nazwać reprezentującym wygląd prawdziwych kart. W dodatku brakuje mu wielu klas z dlc, podwójnych klas, innych funkcji, no i oczywiście wsparcia języka Polskiego.</p>
 
-<h2>Otwieranie generatora</h2>
+<h2>Instalacja</h2>
 <p>Pobierz najnowszy <b>Release</b> programu pokazany po prawej stronie. Plik <code>.exe</code> znajduje się w zipie.<br>
 Plik <code>.exe</code> musi pozostać z resztą plików, albo inaczej nie będzie działał.
 </p>
