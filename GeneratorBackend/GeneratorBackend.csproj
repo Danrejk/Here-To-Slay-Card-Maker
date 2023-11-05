@@ -9,8 +9,16 @@
     <ProduceReferenceAssembly>True</ProduceReferenceAssembly>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+
   <ItemGroup>
-    <PackageReference Include="Raylib-cs" Version="4.5.0.4" />
+    <PackageReference Include="Raylib-cs" Version="5.0.0" />
     <PackageReference Include="SixLabors.ImageSharp" Version="3.0.2" />
   </ItemGroup>
 

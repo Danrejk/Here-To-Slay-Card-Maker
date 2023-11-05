@@ -70,6 +70,12 @@
     <None Update="Fonts\SourceSansPro.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="PrintingAssets\herocard.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="PrintingAssets\herocard_pl.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="PrintingAssets\leaderBack.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

@@ -627,19 +627,19 @@ namespace GeneratorBackend
                 #region Image Crop
                 float targetAspectRatio = 745.0f / 1176.0f;
                 int targetWidth, targetHeight;
-                if (leader.width / (float)leader.height > targetAspectRatio)
+                if (leader.Width / (float)leader.Height > targetAspectRatio)
                 {
-                    targetWidth = (int)(leader.height * targetAspectRatio);
-                    targetHeight = leader.height;
+                    targetWidth = (int)(leader.Height * targetAspectRatio);
+                    targetHeight = leader.Height;
                 }
                 else
                 {
-                    targetWidth = leader.width;
-                    targetHeight = (int)(leader.width / targetAspectRatio);
+                    targetWidth = leader.Width;
+                    targetHeight = (int)(leader.Width / targetAspectRatio);
                 }
 
-                int cropX = (leader.width - targetWidth) / 2;
-                int cropY = (leader.height - targetHeight) / 2;
+                int cropX = (leader.Width - targetWidth) / 2;
+                int cropY = (leader.Height - targetHeight) / 2;
 
                 Raylib.ImageCrop(ref leader, new Rectangle(cropX, cropY, targetWidth, targetHeight));
                 Raylib.ImageResize(ref leader, 745, 1176);
@@ -665,19 +665,19 @@ namespace GeneratorBackend
                 #region Image Crop
                 float targetAspectRatio = 745.0f / 824.0f;
                 int targetWidth, targetHeight;
-                if (monster.width / (float)monster.height > targetAspectRatio)
+                if (monster.Width / (float)monster.Height > targetAspectRatio)
                 {
-                    targetWidth = (int)(monster.height * targetAspectRatio);
-                    targetHeight = monster.height;
+                    targetWidth = (int)(monster.Height * targetAspectRatio);
+                    targetHeight = monster.Height;
                 }
                 else
                 {
-                    targetWidth = monster.width;
-                    targetHeight = (int)(monster.width / targetAspectRatio);
+                    targetWidth = monster.Width;
+                    targetHeight = (int)(monster.Width / targetAspectRatio);
                 }
 
-                int cropX = (monster.width - targetWidth) / 2;
-                int cropY = (monster.height - targetHeight) / 2;
+                int cropX = (monster.Width - targetWidth) / 2;
+                int cropY = (monster.Height - targetHeight) / 2;
 
                 Raylib.ImageCrop(ref monster, new Rectangle(cropX, cropY, targetWidth, targetHeight));
                 Raylib.ImageResize(ref monster, 745, 824);
