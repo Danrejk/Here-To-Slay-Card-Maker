@@ -165,8 +165,8 @@ namespace HereToSlay
                                 GeneratorBackend.Program.GenerateLeader(null, language.SelectedIndex, nameText.Text, new int[] { chosenClass.SelectedIndex, chosenSecondClass.SelectedIndex }, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked);
                                 break;
                             case 1:
-                                RollOutput good = new((int)goodOutputNum.Value,goodOutputSym.SelectedIndex,goodOutputText.Text);
-                                RollOutput bad = new((int)badOutputNum.Value,badOutputSym.SelectedIndex,badOutputText.Text);
+                                RollOutput good = new((int)goodOutputNum.Value, goodOutputSym.SelectedIndex, goodOutputText.Text);
+                                RollOutput bad = new((int)badOutputNum.Value, badOutputSym.SelectedIndex, badOutputText.Text);
                                 int[] desiredRequirements = new int[] { heroReq1.SelectedIndex, heroReq2.SelectedIndex, heroReq3.SelectedIndex, heroReq4.SelectedIndex, heroReq5.SelectedIndex };
                                 GeneratorBackend.Program.GenerateMonster(null, language.SelectedIndex, nameText.Text, desiredRequirements, good, bad, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked);
                                 break;
@@ -341,7 +341,7 @@ namespace HereToSlay
         #endregion
         private void chosenClass_SelectedIndexChanged(object? sender, EventArgs? e)
         {
-            if(Properties.Settings.Default.CardType == 0)
+            if (Properties.Settings.Default.CardType == 0)
             {
                 this.Icon = chosenClass.SelectedIndex switch
                 {
@@ -361,7 +361,7 @@ namespace HereToSlay
                 };
                 renderPreview(sender, e);
             }
-            
+
         }
         private void chosenSecondClass_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -590,14 +590,14 @@ namespace HereToSlay
 
                 switch (comboBox.Name)
                 {
-                   case "goodOutputSym":
+                    case "goodOutputSym":
                         badOutputSym.SelectedIndex = goodOutputSym.SelectedIndex switch
                         {
                             0 => 1,
                             _ => 0,
                         };
                         break;
-                   case "badOutputSym":
+                    case "badOutputSym":
                         goodOutputSym.SelectedIndex = badOutputSym.SelectedIndex switch
                         {
                             0 => 1,
@@ -739,5 +739,5 @@ namespace HereToSlay
         }
     }
 
-    
+
 }

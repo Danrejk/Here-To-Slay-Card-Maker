@@ -763,8 +763,7 @@
             // 
             // Menu
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.None;
             BackColor = Color.FromArgb(39, 43, 52);
             BackgroundImage = Properties.Resources.gradient;
             ClientSize = new Size(828, 711);
