@@ -261,52 +261,12 @@ namespace HereToSlay.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] PatuaOne_Polish {
-            get {
-                object obj = ResourceManager.GetObject("PatuaOne_Polish", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap pl {
             get {
                 object obj = ResourceManager.GetObject("pl", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] SourceSans3 {
-            get {
-                object obj = ResourceManager.GetObject("SourceSans3", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] SourceSansPro {
-            get {
-                object obj = ResourceManager.GetObject("SourceSansPro", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] SourceSansPro_Bold {
-            get {
-                object obj = ResourceManager.GetObject("SourceSansPro_Bold", resourceCulture);
-                return ((byte[])(obj));
             }
         }
         

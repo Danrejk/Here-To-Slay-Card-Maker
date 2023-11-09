@@ -25,22 +25,22 @@ namespace HereToSlay
             this.Icon = Properties.Resources.LEADER;
 
             #region Fonts
-            Font fontUI = FontLoader.GetFont(Properties.Resources.SourceSans3, 10);
+            Font fontUI = FontLoader.GetFont("SourceSans3.ttf", 10);
             FontLoader.ChangeFontForAllControls(this, fontUI);
             selectImgButton.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
 
-            Font fontUIsmall = FontLoader.GetFont(Properties.Resources.SourceSansPro, 9);
+            Font fontUIsmall = FontLoader.GetFont("SourceSansPro.ttf", 9);
             gradient.Font = fontUIsmall;
             nameWhite.Font = fontUIsmall;
             splitClass.Font = fontUIsmall;
             gitLabel1.Font = fontUIsmall;
             gitLabel2.Font = fontUIsmall;
 
-            Font fontLeader = FontLoader.GetFont(Properties.Resources.PatuaOne_Polish, 13);
+            Font fontLeader = FontLoader.GetFont("PatuaOne_Polish.ttf", 13);
             nameText.Font = fontLeader;
             RENDER.Font = fontLeader;
 
-            Font fontLeaderSmall = FontLoader.GetFont(Properties.Resources.PatuaOne_Polish, 10);
+            Font fontLeaderSmall = FontLoader.GetFont("PatuaOne_Polish.ttf", 10);
             FontLoader.ChangeFontForAllLabels(this, fontLeaderSmall);
             LeaderCard.Font = fontLeaderSmall;
             MonsterCard.Font = fontLeaderSmall;
@@ -614,13 +614,27 @@ namespace HereToSlay
     {
         private static readonly PrivateFontCollection FontCollection = new();
 
-        public static Font GetFont(byte[] fontData, float size)
+        public static Font GetFont(string fontFileName, float size)
         {
-            new PrivateFontCollection();
+            string executableLocation = AppDomain.CurrentDomain.BaseDirectory;
+            string fontPath = Path.Combine(executableLocation, "Fonts", fontFileName);
 
-            IntPtr fontBuffer = Marshal.AllocCoTaskMem(fontData.Length);
-            Marshal.Copy(fontData, 0, fontBuffer, fontData.Length);
-            FontCollection.AddMemoryFont(fontBuffer, fontData.Length);
+            if (!File.Exists(fontPath))
+            {
+                throw new FileNotFoundException("Font file not found.");
+            }
+
+            using (FileStream fontStream = new FileStream(fontPath, FileMode.Open))
+            {
+                byte[] fontData = new byte[fontStream.Length];
+                fontStream.Read(fontData, 0, (int)fontStream.Length);
+
+                IntPtr fontBuffer = Marshal.AllocCoTaskMem(fontData.Length);
+                Marshal.Copy(fontData, 0, fontBuffer, fontData.Length);
+                FontCollection.AddMemoryFont(fontBuffer, fontData.Length);
+
+                Marshal.FreeCoTaskMem(fontBuffer);
+            }
 
             return new Font(FontCollection.Families[0], size);
         }
@@ -715,7 +729,7 @@ namespace HereToSlay
                         Alignment = StringAlignment.Center
                     };
 
-                    Font customFont = FontLoader.GetFont(Properties.Resources.PatuaOne_Polish, 14);
+                    Font customFont = FontLoader.GetFont("PatuaOne_Polish.ttf", 14);
                     Brush textColorBrush = Brushes.White;
                     e.Graphics.DrawString(item.Text, customFont, textColorBrush, e.Bounds, stringFormat);
                 }

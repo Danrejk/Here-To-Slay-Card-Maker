@@ -51,10 +51,10 @@ namespace GeneratorBackend
             Raylib.InitWindow(1, 1, "Font Loader");
             Raylib.SetWindowPosition(-2000, -2000);
 
-            nameFont = Raylib.LoadFontEx("Fonts/PatuaOne-Polish.ttf", NAME_SIZE, null, 382); // this font has limited language support (NOT only Polish and English btw)
+            nameFont = Raylib.LoadFontEx("Fonts/PatuaOne_Polish.ttf", NAME_SIZE, null, 382); // this font has limited language support (NOT only Polish and English btw)
             titleFont = Raylib.LoadFontEx("Fonts/SourceSansPro.ttf", TITLE_SIZE, null, 1415);
-            reqFont = Raylib.LoadFontEx("Fonts/SourceSansPro-Bold.ttf", REQ_SIZE, null, 1415);
-            rollFont = Raylib.LoadFontEx("Fonts/PatuaOne-Polish.ttf", ROLL_SIZE, null, 1415);
+            reqFont = Raylib.LoadFontEx("Fonts/SourceSansPro_Bold.ttf", REQ_SIZE, null, 1415);
+            rollFont = Raylib.LoadFontEx("Fonts/PatuaOne_Polish.ttf", ROLL_SIZE, null, 1415);
             descFont = Raylib.LoadFontEx("Fonts/SourceSansPro.ttf", DESC_SIZE, null, 1415);
 
             Raylib.CloseWindow();
