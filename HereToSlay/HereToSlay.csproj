@@ -73,16 +73,34 @@
     <None Update="Fonts\SourceSansPro.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="PrintingAssets\herocard.png">
+    <None Update="PrintingAssets\cardPlacement_A4_template.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="PrintingAssets\herocard_pl.png">
+    <None Update="PrintingAssets\English\herocard.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="PrintingAssets\leaderBack.png">
+    <None Update="PrintingAssets\English\leaderBack_A4_template.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="PrintingAssets\leaderBack_pl.png">
+    <None Update="PrintingAssets\English\monsterBack_A4_template.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="PrintingAssets\leaderImgSize_template.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="PrintingAssets\monsterImgSize_template.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="PrintingAssets\Polski\herocard_pl.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="PrintingAssets\English\leaderBack.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="PrintingAssets\Polski\leaderBack_A4_template_pl.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="PrintingAssets\Polski\leaderBack_pl.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="MenuAssets\gradient.png">
@@ -115,10 +133,13 @@
     <None Update="MenuAssets\Logo1.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
-    <None Update="PrintingAssets\monsterBack.png">
+    <None Update="PrintingAssets\English\monsterBack.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="PrintingAssets\monsterBack_pl.png">
+    <None Update="PrintingAssets\Polski\monsterBack_A4_template_pl.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="PrintingAssets\Polski\monsterBack_pl.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Properties\Settings.settings">

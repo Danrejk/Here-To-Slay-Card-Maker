@@ -59,6 +59,7 @@
             LeaderCard = new ToolStripMenuItem();
             MonsterCard = new ToolStripMenuItem();
             language = new ToolStripComboBox();
+            HeroCard = new ToolStripMenuItem();
             heroReq3 = new ComboBox();
             heroReq2 = new ComboBox();
             heroReq1 = new ComboBox();
@@ -419,7 +420,7 @@
             // 
             menuStrip1.BackColor = Color.FromArgb(17, 19, 23);
             menuStrip1.GripMargin = new Padding(2);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { LeaderCard, MonsterCard, language });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { LeaderCard, MonsterCard, language, HeroCard });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(6, 0, 0, 2);
@@ -453,6 +454,15 @@
             language.Name = "language";
             language.Size = new Size(85, 23);
             language.SelectedIndexChanged += language_SelectedIndexChanged;
+            // 
+            // HeroCard
+            // 
+            HeroCard.BackColor = SystemColors.Control;
+            HeroCard.Margin = new Padding(6, 0, 0, 0);
+            HeroCard.Name = "HeroCard";
+            HeroCard.Size = new Size(73, 23);
+            HeroCard.Text = "Hero Card";
+            HeroCard.Visible = false;
             // 
             // heroReq3
             // 
@@ -885,5 +895,6 @@
         private Button clearHeroReq4;
         private Button clearHeroReq5;
         private Button clearHeroReq3;
+        private ToolStripMenuItem HeroCard;
     }
 }

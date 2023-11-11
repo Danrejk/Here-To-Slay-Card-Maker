@@ -44,6 +44,7 @@ namespace HereToSlay
             FontLoader.ChangeFontForAllLabels(this, fontLeaderSmall);
             LeaderCard.Font = fontLeaderSmall;
             MonsterCard.Font = fontLeaderSmall;
+            HeroCard.Font = fontLeaderSmall;
             #endregion
 
             #region ComboBoxes
@@ -208,7 +209,11 @@ namespace HereToSlay
                     };
                     labelDescription.Text = "Opis mocy";
                     leaderImgToolTip.ToolTipTitle = "Wymiary obazka";
-                    leaderImgToolTip.SetToolTip(selectImgButton, "Obrazek lidera (nie ca³a karta) ma wymiary 745x1176. \nProgram automatycznie przytnie i przybli¿y obraz, je¿eli bêdzie to potrzebne.\n\nWspierane rozszerzenia plików:\n.png, .jpeg, .jpg, .gif (pierwsza klatka), .bmp, .webp, .pbm, .tiff, .tga");
+                    leaderImgToolTip.SetToolTip(selectImgButton, Properties.Settings.Default.CardType switch
+                    {
+                        1 => "Obrazek potwora (nie ca³a karta) ma wymiary 745x817. \nProgram automatycznie przytnie i przybli¿y obraz, je¿eli bêdzie to potrzebne.\n\nWspierane rozszerzenia plików:\n.png, .jpeg, .jpg, .gif (pierwsza klatka), .bmp, .webp, .pbm, .tiff, .tga",
+                        _ => "Obrazek lidera (nie ca³a karta) ma wymiary 745x1176. \nProgram automatycznie przytnie i przybli¿y obraz, je¿eli bêdzie to potrzebne.\n\nWspierane rozszerzenia plików:\n.png, .jpeg, .jpg, .gif (pierwsza klatka), .bmp, .webp, .pbm, .tiff, .tga"
+                    });
                     gradient.Text = "Tylni gradient";
                     nameWhite.Text = "Bia³a nazwa";
                     splitClass.Text = "Podwójna Klasa";
@@ -234,7 +239,11 @@ namespace HereToSlay
                     };
                     labelDescription.Text = "Description";
                     leaderImgToolTip.ToolTipTitle = "Image dimentions";
-                    leaderImgToolTip.SetToolTip(selectImgButton, "The leader image (not the whole card) dimentions are 745x1176. \nThe program will automatically crop and zoom the image, if needed.\n\nSupported file extensions:\n.png, .jpeg, .jpg, .gif (first frame), .bmp, .webp, .pbm, .tiff, .tga");
+                    leaderImgToolTip.SetToolTip(selectImgButton, Properties.Settings.Default.CardType switch
+                    {
+                        1 => "The monster image (not the whole card) dimentions are 745x817. \nThe program will automatically crop and zoom the image, if needed.\n\nSupported file extensions:\n.png, .jpeg, .jpg, .gif (first frame), .bmp, .webp, .pbm, .tiff, .tga",
+                        _ => "The leader image (not the whole card) dimentions are 745x1176. \nThe program will automatically crop and zoom the image, if needed.\n\nSupported file extensions:\n.png, .jpeg, .jpg, .gif (first frame), .bmp, .webp, .pbm, .tiff, .tga"
+                    });
                     gradient.Text = "Back gradient";
                     nameWhite.Text = "White name";
                     splitClass.Text = "Split Class";
@@ -622,7 +631,7 @@ namespace HereToSlay
             {
                 throw new FileNotFoundException("Font file not found.");
             }
-            
+
             FontCollection.AddFontFile(fontPath);
             FontFamily fontFamily = FontCollection.Families[0];
 
@@ -630,11 +639,11 @@ namespace HereToSlay
             return font;
         }
 
-    public static void ChangeFontForAllControls(Control control, Font fontUI)
+        public static void ChangeFontForAllControls(Control control, Font fontUI)
         {
             foreach (Control c in control.Controls)
             {
-                if (!c.Name.Contains("clear") && c.Name != "clearSecondClass") // don't change the font for the X boxes
+                if (!c.Name.Contains("clear")) // don't change the font for the X boxes
                 {
                     c.Font = fontUI;
                     if (c.Controls.Count > 0)
