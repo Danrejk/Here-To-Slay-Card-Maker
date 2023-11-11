@@ -361,7 +361,7 @@ namespace GeneratorBackend
 
                 frameTinted = Raylib.ImageCopy(inst.frame); // clear the tinted frame for the second class
 
-                Raylib.ImageCrop(ref frameTinted, new Rectangle(413, 0, 414, 1417)); // while the sizes might look irregular. It's all because the image is 827px wide, so I have to compensate the 0,5px offset.
+                Raylib.ImageCrop(ref frameTinted, new Rectangle(414, 0, 413, 1417)); // while the sizes might look irregular. It's all because the image is 827px wide, so I have to compensate the 0,5px offset. One side is wider by 1px
                 Raylib.ImageColorTint(ref frameTinted, desiredSecondColor);
                 Raylib.ImageDraw(ref card, frameTinted, imageRec, new(414, 0, 413, 1417), Color.WHITE);
             }
