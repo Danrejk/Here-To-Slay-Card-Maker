@@ -612,34 +612,25 @@ namespace HereToSlay
 
     class FontLoader
     {
-        private static readonly PrivateFontCollection FontCollection = new();
+        private static readonly PrivateFontCollection FontCollection = new PrivateFontCollection();
 
         public static Font GetFont(string fontFileName, float size)
         {
             string executableLocation = AppDomain.CurrentDomain.BaseDirectory;
             string fontPath = Path.Combine(executableLocation, "Fonts", fontFileName);
-
             if (!File.Exists(fontPath))
             {
                 throw new FileNotFoundException("Font file not found.");
             }
+            
+            FontCollection.AddFontFile(fontPath);
+            FontFamily fontFamily = FontCollection.Families[0];
 
-            using (FileStream fontStream = new FileStream(fontPath, FileMode.Open))
-            {
-                byte[] fontData = new byte[fontStream.Length];
-                fontStream.Read(fontData, 0, (int)fontStream.Length);
-
-                IntPtr fontBuffer = Marshal.AllocCoTaskMem(fontData.Length);
-                Marshal.Copy(fontData, 0, fontBuffer, fontData.Length);
-                FontCollection.AddMemoryFont(fontBuffer, fontData.Length);
-
-                Marshal.FreeCoTaskMem(fontBuffer);
-            }
-
-            return new Font(FontCollection.Families[0], size);
+            Font font = new(fontFamily, size);
+            return font;
         }
 
-        public static void ChangeFontForAllControls(Control control, Font fontUI)
+    public static void ChangeFontForAllControls(Control control, Font fontUI)
         {
             foreach (Control c in control.Controls)
             {
