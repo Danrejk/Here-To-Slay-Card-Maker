@@ -115,7 +115,7 @@ namespace HereToSlay
         private void RenderButton_Press(object sender, EventArgs e)
         {
             using SaveFileDialog SaveRenderDialog = new();
-            SaveRenderDialog.Filter = "Supported Image Files (*.png;*.jpeg;*.jpg;*.gif;*.bmp;*.webp;*.pbm;*.tiff;*.tga;)|*.png;*.jpeg;*.jpg;*.gif;*.bmp;*.webp;*.pbm;*.tiff;*.tga;|All Files (*.*)|*.*";
+            SaveRenderDialog.Filter = "Supported Image Files (*.png;)|*.png;|All Files (*.*)|*.*";
             SaveRenderDialog.FilterIndex = 1;
 
             if (SaveRenderDialog.ShowDialog() == DialogResult.OK)

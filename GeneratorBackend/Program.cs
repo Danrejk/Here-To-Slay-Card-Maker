@@ -390,6 +390,7 @@ namespace GeneratorBackend
             }
             Raylib.UnloadImage(card);
         }
+
         public static void GenerateMonster(string? renderLocation, int language, string name, int[] desiredRequirements, RollOutput good, RollOutput bad, string monsterImg, string description, bool addGradient, bool nameWhite)
         {
             ChangeMonsterImage(monsterImg);
@@ -408,6 +409,7 @@ namespace GeneratorBackend
                 1 => "WYMAGANIA:",
                 _ => "REQUIREMENT:"
             };
+
             Vector2 reqTextSize = Raylib.MeasureTextEx(inst.reqFont, reqText, AssetManager.REQ_SIZE, REQ_FONT_SPACING);
             Raylib.ImageDrawTextEx(ref card, inst.reqFont, reqText, new(87, 920), AssetManager.REQ_SIZE, REQ_FONT_SPACING, inst.bottomColor);
 
@@ -503,6 +505,7 @@ namespace GeneratorBackend
             }
             Raylib.UnloadImage(card);
         }
+
         static void DrawNameAndTitle(string nameText, string titleText, Image card, bool nameWhite)
         {
             Color leaderColor = nameWhite switch
@@ -527,6 +530,7 @@ namespace GeneratorBackend
             Raylib.ImageDrawTextEx(ref card, inst.titleFont, titleText, new Vector2((CARD_WIDTH / 2) - (titleSize.X / 2) + 2, 118 + 2), AssetManager.TITLE_SIZE, TITLE_FONT_SPACING, leaderShadowColor);
             Raylib.ImageDrawTextEx(ref card, inst.titleFont, titleText, new Vector2((CARD_WIDTH / 2) - (titleSize.X / 2), 118), AssetManager.TITLE_SIZE, TITLE_FONT_SPACING, leaderColor);
         }
+
         static void DrawDescription(string text, Image card)
         {
             Color descTextColor = new(78, 78, 78, 255); // 78 78 78 is the color of the description text
@@ -606,8 +610,10 @@ namespace GeneratorBackend
         static Image leader = new();
         static Image monster = new();
         static Image<Rgba32>? image;
+
         static string lastPathLeader = "";
         static string lastPathMonster = "";
+
         static void ChangeLeaderImage(string path)
         {
             if (path == lastPathLeader) { return; }
@@ -646,6 +652,7 @@ namespace GeneratorBackend
                 #endregion
             }
         }
+
         static void ChangeMonsterImage(string path)
         {
             if (path == lastPathMonster) { return; }
@@ -685,6 +692,7 @@ namespace GeneratorBackend
             }
         }
     }
+
     public class RollOutput
     {
         public int Value { get; set; }
@@ -694,7 +702,7 @@ namespace GeneratorBackend
         public RollOutput(int value, int symbol, string outcome)
         {
             Value = value;
-            Symbol = symbol;
+            Symbol = symbol; //kotek
             Outcome = outcome;
         }
     }
