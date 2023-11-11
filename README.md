@@ -19,33 +19,68 @@ This program is what the official one should be, accurate and with more features
         <th colspan="2">Leader Generation</th>
     </tr>
     <tr>
-        <th>Here To Slay - Custom Card Maker</td>
-        <th>Maker on Unstablegames.com</th>
+        <th width="50%">Here To Slay - Custom Card Maker</td>
+        <th width="50%">Maker on Unstablegames.com</th>
     </tr>
     </thead>
     <tbody>
         <tr>
+            <td>✔️Includes ALL classes (from all DLCs).</td>
+            <td>❌Has only base classes + Druid & Warrior.</td>
+        </tr>
+        <tr>
+            <td>✔️Has Split-classes.</td>
+            <td>❌Doesn't have Split-classes.</td>
+        </tr> 
+        <tr>
+            <td>✔️Uses the correct fonts and their sizes.</td>
+            <td>❌Uses a wrong font, with a wrong size for everything.</td>
+        </tr> 
+        <tr>
+            <td>✔️The card has correct dimentions for printing.</td>
+            <td>✔️The card has correct dimentions for printing.</td>
+        </tr>
+        <tr>
+            <td>✔️Has correct borders.</td>
+            <td>⚠️Has too thick borders.</td>
+        </tr> 
+        <tr>
+            <td>✔️Allows for around 200 letters in the description.</td>
+            <td>⚠️Descriptions have max 120 characters.</td>
+        </tr> 
+        <tr>
+            <td>✔️Description text is aligned to the left.</td>
+            <td>❌Description text is aligned to the center.</td>
+        </tr> 
+        <tr>
+            <td>✔️Uses black for the name and title text.</td>
+            <td>❌For some reason uses white for name and title text.</td>
+        </tr> 
+        <tr>
+            <td>✔️Has slight transparency of the name and title shadows.</td>
+            <td>⚠️Has solid shadows for the name and title.</td>
+        </tr> 
+        <tr>
+            <td>✔️Has an optional back gradient behind the name, which ISN't upside down.</td>
+            <td>❌For some reason automatically includes a back gradient behind the name, which is upside down.</td>
+        </tr>
+        <tr>
+            <td>⚠️Automatically crops the image to fit onto the card.</td>
+            <td>⚠️Gives the user control over which parts are cut out, but it still cuts out the edges regardless of what you do.</td>
+        </tr>
+        <tr>
+            <td>✔️Doesn't compress the image.</td>
+            <td>❌Compresses the image.</td>
+        </tr>
+        <tr>
+            <td>✔️Many more fine accuracy adjustments...</td>
+        </tr>
+        <tr>
             <td>
-                ✔️Includes ALL classes (from all DLCs). <br>
-                ✔️Has Split-classes. <br>
-                ✔️Uses the correct fonts and their sizes. <br>
-                ✔️Allows for around 200 letters in the description. <br>
-                ✔️Has correct borders. <br>
-                ✔️Uses black for the name and title text. <br>
-                ✔️Has slight transparency of the name and title shadows. <br>
-                ✔️Description text is aligned to the left. <br>
-                ✔️Has an optional back gradient behind the name, which ISN't upside down.
+                <p align="center"> <img width="350px" src="ReadmeAssets/Comparison_Ours.png"> </p>
             </td>
             <td>
-                ❌Has only base classes + Druid & Warrior. <br>
-                ❌Doesn't have Split-classes. <br>
-                ❌Uses a wrong font, with a wrong size for everything. <br>
-                ⚠️Descriptions have max 120 characters. <br>
-                ⚠️Has too thick borders. <br>
-                ❌For some reason uses white for name and title text. <br>
-                ⚠️Has solid shadows for the name and title. <br>
-                ❌Description text is aligned to the center. <br>
-                ❌Automatically includes a back gradient behind the name, which is upside down.
+                <p align="center"> <img width="350px" src="ReadmeAssets/Comparison_Theirs.png"> </p>
             </td>
         </tr>
     </tbody>
