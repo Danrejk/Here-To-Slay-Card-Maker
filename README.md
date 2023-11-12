@@ -13,15 +13,17 @@ Unzip it, the <code>.exe</code> is inside of it, it must remain along the other 
 <h2>Features</h2>
 <p>There is an <a href="https://www.unstablegames.com/community-cards/here-to-slay">official creator</a> by the Here To Slay makers for leaders only, BUT it has so many inaccuracies that it barely represents the look of the real cards, AND it lacks <b>many</b> features</p>
 This program is what the official one should be, accurate and with more features:
+
+### Leader
 <table>
     <thead>
-    <tr>
-        <th colspan="2">Leader Generation</th>
-    </tr>
-    <tr>
-        <th width="50%">Here To Slay - Custom Card Maker</td>
-        <th width="50%">Maker on Unstablegames.com</th>
-    </tr>
+        <tr>
+            <th colspan="2">Leader Generation</th>
+        </tr>
+        <tr>
+            <th width="50%">Here To Slay - Custom Card Maker</td>
+            <th width="50%">Maker on <a href="https://www.unstablegames.com/community-cards/here-to-slay">Unstablegames.com</a></th>
+        </tr>
     </thead>
     <tbody>
         <tr>
@@ -57,10 +59,6 @@ This program is what the official one should be, accurate and with more features
             <td>❌For some reason uses white for name and title text.</td>
         </tr> 
         <tr>
-            <td>✔️Has slight transparency of the name and title shadows.</td>
-            <td>⚠️Has solid shadows for the name and title.</td>
-        </tr> 
-        <tr>
             <td>✔️Has an optional back gradient behind the name, which ISN't upside down.</td>
             <td>❌For some reason automatically includes a back gradient behind the name, which is upside down.</td>
         </tr>
@@ -74,6 +72,7 @@ This program is what the official one should be, accurate and with more features
         </tr>
         <tr>
             <td>✔️Many more fine accuracy adjustments...</td>
+            <td></td>
         </tr>
         <tr>
             <td>
@@ -83,5 +82,45 @@ This program is what the official one should be, accurate and with more features
                 <p align="center"> <img width="350px" src="ReadmeAssets/Comparison_Theirs.png"> </p>
             </td>
         </tr>
+    </tbody>
+</table>
+
+<br>
+
+### Monster
+<img align="left" width="250px" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/Demo_Monster.png">
+<table>
+    <thead>
+        <tr>
+            <th colspan="1">Monster Generation</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td width="50%">✔️✔️✔️Accurate Monster Card's design.</td>
+        </tr>
+        <tr><td>⚠️Maximum 5 hero requirements.</td></tr>
+        <tr><td>✔️Fully custimisable roll outcomes.</td></tr>
+        <tr><td>✔️Optional Back Gradient and black name text.</td></tr>
+        <tr><td>✔️Automatically orders class requirements to put generic Heros at the back.</td></tr>
+        <tr><td>❌No "+ Discard Card" option... yet.</td></tr>
+        <tr><td>❌No bonus to roll for each additional hero card option... yet.</td></tr>
+    </tbody>
+</table>
+<br>
+
+<hr>
+
+<h3 align="right">Hero❌</h3>
+<img align="right" width="250px" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/No_HeroCard.png">
+<table align="right">
+    <thead>
+        <tr>
+            <th>Hero Generation❌</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td>❌ Hero card generation is NOT yet implemented.</td></tr>
+        <tr><td>⚠️ We are still working on implementing it.</td></tr>
     </tbody>
 </table>
