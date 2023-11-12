@@ -55,7 +55,7 @@ This program is what the official one should be, accurate and with more features
             <td>❌Description text is aligned to the center.</td>
         </tr> 
         <tr>
-            <td>✔️Uses black for the name and title text.</td>
+            <td>✔️Uses black for the name and title text. (There's also a toggleable white color option)</td>
             <td>❌For some reason uses white for name and title text.</td>
         </tr> 
         <tr>
