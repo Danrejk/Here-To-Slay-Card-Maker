@@ -64,7 +64,7 @@ This program is what the official one should be, accurate and with more features
         </tr>
         <tr>
             <td>⚠️Automatically crops the image to fit onto the card.</td>
-            <td>⚠️Gives the user control over which parts are cut out, but it still cuts out the edges regardless of what you do.</td>
+            <td>⚠️Gives the user control over which parts are cut out, but it cuts out the edges no matter what you do.</td>
         </tr>
         <tr>
             <td>✔️Doesn't compress the image.</td>
