@@ -89,7 +89,7 @@ This program is what the official one should be, accurate and with more features
 
 ### Monster
 <img align="left" width="250px" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/Demo_Monster.png">
-<table>
+<table align="left">
     <thead>
         <tr>
             <th colspan="1">Monster Generation</th>
