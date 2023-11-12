@@ -3,7 +3,7 @@
 # Here To Slay - Custom Card Maker
 Using this program you can make <b>accurate</b> custom cards for the card game "Here To Slay". The main goal of our program is to ensure that the generated cards follow the original designs as best as possible.
 <br><br>
-Polska werjsa językowa: [README.pl.md](https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/README.pl.md)
+Polska wersja językowa: [README.pl.md](https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/README.pl.md)
 
 ## Instalation
 <a href="https://github.com/Danrejk/Here-To-Slay-Card-Maker/releases/tag/v2.3"> <img alt="Latest Version" src="https://img.shields.io/badge/Latest_Version-v.2.3-green"> </a>
