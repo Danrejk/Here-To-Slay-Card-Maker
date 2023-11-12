@@ -136,6 +136,7 @@ This program is what the official one should be, accurate and with more features
 ### Printing at Home
 In the files included with the program there are attached printing assets for printing at home. Backs of the cards for leaders, monsters and heros, their cards placements on A4 papers, as well as a template for positioning your own generated cards.<br>
 <img width="33%" align="right" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/HereToSlay/PrintingAssets/English/leaderBack_A4_template.png">
+<br>
 Printing methods may differ depending on your printer, but what I found to work was to:
 <ol>
     <li>Align my generated cards like on the image on the right.</li>
