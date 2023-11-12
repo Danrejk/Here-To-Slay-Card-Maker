@@ -1,17 +1,18 @@
 <img src="HereToSlay/MenuAssets/Logo0.png" width="33%" align="right">
-<h1>Here To Slay - Custom Card Maker</h1>
-<p>A maker for <b>accurate</b> custom cards for the card game "Here To Slay", which goal is to ensure that the generated cards follow the original designs as best as possible.</p>
 
-<h2>Instalation</h2>
-<p>
+# Here To Slay - Custom Card Maker
+Using this program you can make <b>accurate</b> custom cards for the card game "Here To Slay". The main goal of our program is to ensure that the generated cards follow the original designs as best as possible.
+
+## Instalation
 <a href="https://github.com/Danrejk/Here-To-Slay-Card-Maker/releases/tag/v2.3"> <img alt="Latest Version" src="https://img.shields.io/badge/Latest_Version-v.2.3-green"> </a>
 <br>
 Download the <code>.zip</code> file from the latest <b>Release</b> of the program displayed above, or on the right side of the page.<br>
 Unzip it, the <code>.exe</code> is inside of it, it must remain along the other files inside of the folder or else the program will not work.
-</p>
 
-<h2>Features</h2>
-<p>There is an <a href="https://www.unstablegames.com/community-cards/here-to-slay">official creator</a> by the Here To Slay makers for leaders only, BUT it has so many inaccuracies that it barely represents the look of the real cards, AND it lacks <b>many</b> features</p>
+<hr>
+
+## Features
+There is an <a href="https://www.unstablegames.com/community-cards/here-to-slay">official creator</a> by the Here To Slay makers for leaders only, BUT it has so many inaccuracies that it barely represents the look of the real cards, AND it lacks <b>many</b> features
 This program is what the official one should be, accurate and with more features:
 
 ### Leader
@@ -85,16 +86,12 @@ This program is what the official one should be, accurate and with more features
     </tbody>
 </table>
 
-<br>
-
 ### Monster
-<div>
-    
 <img align="left" width="33%" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/Demo_Monster.png">
 <table>
     <thead>
         <tr>
-            <th width="500px" >Monster Generation</th>
+            <th width="500px">Monster Generation</th>
         </tr>
     </thead>
     <tbody>
@@ -110,19 +107,15 @@ This program is what the official one should be, accurate and with more features
     </tbody>
 </table>
 
-</div>
-
 <br>
-<hr>
-
-<div>
+<img src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/LazyDevider.png">
     
-<h3 align="right">Hero❌</h3>
-<img align="right" width="250px" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/No_HeroCard.png">
-<table align="right">
+### Hero❌
+<img align="left" width="33%" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/No_HeroCard.png">
+<table>
     <thead>
         <tr>
-            <th>Hero Generation❌</th>
+            <th width="500px">Hero Generation❌</th>
         </tr>
     </thead>
     <tbody>
@@ -131,4 +124,31 @@ This program is what the official one should be, accurate and with more features
     </tbody>
 </table>
 
-</div>
+<br>
+<img src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/LazyDevider.png">
+
+## Screenshots
+<p align="center">
+    <img width="75%" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/screenshot1.png">
+    <br>
+    <img width="75%" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/screenshot2.png">
+</p>
+
+<img width="33%" align="right" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/HereToSlay/PrintingAssets/cardPlacement_A4_template.png">
+
+## Printing
+### Printing at Home
+In the files included with the program there are attached printing assets for printing at home. Backs of the cards for leaders, monsters and heros, their cards placements on A4 papers, as well as a template for positioning your own generated cards.<br>
+Printing methods may differ depending on your printer, but what I found to work was to:
+<ol>
+    <li>Align my generated cards like on the image on the right.</li>
+    <li><b>ROTATE the image by 180°</b> to negate the default bottom margin on many printers.</li>
+    <li>Print the front card with the setting to automatically crop the image <b>turned OFF</b>.</li>
+<img width="33%" align="right" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/HereToSlay/PrintingAssets/English/leaderBack_A4_template.png">
+    <li>Rotate the paper <b>ONLY on the Y axis</b> and put it back into the printer.</li>
+    <li>Print the backsides of the cards, which are attached in the assets.</li>
+</ol>
+I hope this works for you as well, before printing with color I would test it by making a black ink only draft first, just to check if everything is aligned properly and has the right scale.
+
+### Printing Proffesionally
+Unforunatelly I don't know how that works exactly. But I saw there are many posts about printing proffesionally on sites like reddit, so I reccomend you search there.
