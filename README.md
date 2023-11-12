@@ -88,16 +88,18 @@ This program is what the official one should be, accurate and with more features
 <br>
 
 ### Monster
+<div>
+    
 <img align="left" width="33%" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/Demo_Monster.png">
-<table width="66%">
+<table>
     <thead>
         <tr>
-            <th colspan="1">Monster Generation</th>
+            <th width="500px" >Monster Generation</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td width="50%">✔️✔️✔️Accurate Monster Card's design.</td>
+            <td>✔️✔️✔️Accurate Monster Card's design.</td>
         </tr>
         <tr><td>⚠️Maximum 5 hero requirements.</td></tr>
         <tr><td>✔️Fully custimisable roll outcomes.</td></tr>
@@ -107,10 +109,14 @@ This program is what the official one should be, accurate and with more features
         <tr><td>❌No bonus to roll for each additional hero card option... yet.</td></tr>
     </tbody>
 </table>
-<br>
 
+</div>
+
+<br>
 <hr>
 
+<div>
+    
 <h3 align="right">Hero❌</h3>
 <img align="right" width="250px" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/No_HeroCard.png">
 <table align="right">
@@ -124,3 +130,5 @@ This program is what the official one should be, accurate and with more features
         <tr><td>⚠️ We are still working on implementing it.</td></tr>
     </tbody>
 </table>
+
+</div>
