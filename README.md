@@ -2,6 +2,8 @@
 
 # Here To Slay - Custom Card Maker
 Using this program you can make <b>accurate</b> custom cards for the card game "Here To Slay". The main goal of our program is to ensure that the generated cards follow the original designs as best as possible.
+<br><br>
+Polska werjsa językowa: [README.pl.md](https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/README.pl.md)
 
 ## Instalation
 <a href="https://github.com/Danrejk/Here-To-Slay-Card-Maker/releases/tag/v2.3"> <img alt="Latest Version" src="https://img.shields.io/badge/Latest_Version-v.2.3-green"> </a>
@@ -126,13 +128,7 @@ This program is what the official one should be, accurate and with more features
 
 <br>
 <img src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/LazyDevider.png">
-
-## Screenshots
-<p align="center">
-    <img width="75%" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/screenshot1.png">
-    <br>
-    <img width="75%" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/screenshot2.png">
-</p>
+<hr>
 
 <img width="33%" align="right" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/HereToSlay/PrintingAssets/cardPlacement_A4_template.png">
 
@@ -152,3 +148,12 @@ I hope this works for you as well, before printing with color I would test it by
 
 ### Printing Proffesionally
 Unforunatelly I don't know how that works exactly. But I saw there are many posts about printing proffesionally on sites like reddit, so I reccomend you search there.
+
+<hr>
+
+## Screenshots
+<p align="center">
+    <img width="75%" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/screenshot1.png">
+    <br>
+    <img width="75%" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/screenshot2.png">
+</p>
