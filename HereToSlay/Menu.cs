@@ -198,21 +198,21 @@ namespace HereToSlay
                     labelLeader.Text = Properties.Settings.Default.CardType switch
                     {
                         1 => "Nazwa potwora",
-                        _ => "Nazwa lidera"
+                        _ => "Nazwa przywódcy"
                     };
-                    labelClass.Text = "Klasa lidera";
+                    labelClass.Text = "Klasa przywódcy";
                     labelSecondClass.Text = "Druga klasa";
                     labelImg.Text = Properties.Settings.Default.CardType switch
                     {
                         1 => "Obrazek potwora",
-                        _ => "Obrazek lidera"
+                        _ => "Obrazek przywódcy"
                     };
                     labelDescription.Text = "Opis mocy";
                     leaderImgToolTip.ToolTipTitle = "Wymiary obazka";
                     leaderImgToolTip.SetToolTip(selectImgButton, Properties.Settings.Default.CardType switch
                     {
                         1 => "Obrazek potwora (nie ca³a karta) ma wymiary 745x817. \nProgram automatycznie przytnie i przybli¿y obraz, je¿eli bêdzie to potrzebne.\n\nWspierane rozszerzenia plików:\n.png, .jpeg, .jpg, .gif (pierwsza klatka), .bmp, .webp, .pbm, .tiff, .tga",
-                        _ => "Obrazek lidera (nie ca³a karta) ma wymiary 745x1176. \nProgram automatycznie przytnie i przybli¿y obraz, je¿eli bêdzie to potrzebne.\n\nWspierane rozszerzenia plików:\n.png, .jpeg, .jpg, .gif (pierwsza klatka), .bmp, .webp, .pbm, .tiff, .tga"
+                        _ => "Obrazek przywódcy (nie ca³a karta) ma wymiary 745x1176. \nProgram automatycznie przytnie i przybli¿y obraz, je¿eli bêdzie to potrzebne.\n\nWspierane rozszerzenia plików:\n.png, .jpeg, .jpg, .gif (pierwsza klatka), .bmp, .webp, .pbm, .tiff, .tga"
                     });
                     gradient.Text = "Tylni gradient";
                     nameWhite.Text = "Bia³a nazwa";
