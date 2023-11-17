@@ -10,9 +10,8 @@ namespace GeneratorBackend
     public class AssetManager
     {
         private static AssetManager? instance;
-        public Image frame = Raylib.LoadImage("GeneratorAssets/template/frame.png");
+        public Image frameLeader = Raylib.LoadImage("GeneratorAssets/template/frame_leader.png");
         public Image frameMonster = Raylib.LoadImage("GeneratorAssets/template/frame_monster.png");
-        public Image bottom = Raylib.LoadImage("GeneratorAssets/template/bottom.png");
         public Image gradient = Raylib.LoadImage("GeneratorAssets/template/gradient.png");
         public Image red = Raylib.LoadImage("GeneratorAssets/template/red.png");
         public Image green = Raylib.LoadImage("GeneratorAssets/template/green.png");
@@ -103,7 +102,7 @@ namespace GeneratorBackend
             ChangeLeaderImage(leaderImg);
 
             // This has to be loaded each time, to clear the image from the previous render
-            Image card = Raylib.LoadImage("GeneratorAssets/template/background.png");
+            Image card = Raylib.LoadImage("GeneratorAssets/template/card_tarrot.png");
 
             Image classSymbol;
             Color desiredColor;
@@ -344,12 +343,12 @@ namespace GeneratorBackend
             Rectangle imageRec = new(0, 0, 827, 1417);
 
             Raylib.ImageDraw(ref card, leader, imageRec, new(41, 41, 745, 1176), Color.WHITE);
-            Raylib.ImageDraw(ref card, inst.bottom, imageRec, imageRec, Color.WHITE);
+            //Raylib.ImageDraw(ref card, inst.bottom, imageRec, imageRec, Color.WHITE);
 
             if (addGradient) { Raylib.ImageDraw(ref card, inst.gradient, imageRec, imageRec, Color.WHITE); }
 
             // Draw Class Symbol(s) and Colored Frame(s)
-            Image frameTinted = Raylib.ImageCopy(inst.frame); // create a copy of the frame asset, so that the original is not modified
+            Image frameTinted = Raylib.ImageCopy(inst.frameLeader); // create a copy of the frame asset, so that the original is not modified
             Raylib.ImageDraw(ref card, classSymbol, imageRec, new(363, 1167, 102, 102), Color.WHITE);
             if (desiredClass[1] != -1) // check if there is a second class
             {
@@ -359,7 +358,7 @@ namespace GeneratorBackend
                 Raylib.ImageColorTint(ref frameTinted, desiredColor);
                 Raylib.ImageDraw(ref card, frameTinted, imageRec, new(0, 0, 414, 1417), Color.WHITE);
 
-                frameTinted = Raylib.ImageCopy(inst.frame); // clear the tinted frame for the second class
+                frameTinted = Raylib.ImageCopy(inst.frameLeader); // clear the tinted frame for the second class
 
                 Raylib.ImageCrop(ref frameTinted, new Rectangle(414, 0, 413, 1417)); // while the sizes might look irregular. It's all because the image is 827px wide, so I have to compensate the 0,5px offset. One side is wider by 1px
                 Raylib.ImageColorTint(ref frameTinted, desiredSecondColor);
@@ -396,11 +395,10 @@ namespace GeneratorBackend
             ChangeMonsterImage(monsterImg);
 
             // This has to be loaded each time, to clear the image from the previous render
-            Image card = Raylib.LoadImage("GeneratorAssets/template/background.png");
+            Image card = Raylib.LoadImage("GeneratorAssets/template/card_tarrot.png");
             Rectangle imageRec = new(0, 0, 827, 1417);
 
             Raylib.ImageDraw(ref card, monster, imageRec, new(41, 41, 745, 824), Color.WHITE);
-            Raylib.ImageDraw(ref card, inst.bottom, imageRec, imageRec, Color.WHITE);
             if (addGradient) { Raylib.ImageDraw(ref card, inst.gradient, imageRec, imageRec, Color.WHITE); }
             Raylib.ImageDraw(ref card, inst.frameMonster, imageRec, imageRec, new(23, 26, 30, 255));
 
