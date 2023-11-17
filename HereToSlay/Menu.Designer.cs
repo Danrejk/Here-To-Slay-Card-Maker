@@ -462,6 +462,7 @@
             HeroCard.Name = "HeroCard";
             HeroCard.Size = new Size(73, 23);
             HeroCard.Text = "Hero Card";
+            HeroCard.Click += HeroCard_Click;
             // 
             // heroReq3
             // 
@@ -556,10 +557,11 @@
             // 
             // badOutputNum
             // 
+            badOutputNum.Font = new Font("Symbol", 10F, FontStyle.Regular, GraphicsUnit.Point);
             badOutputNum.Location = new Point(84, 415);
             badOutputNum.Margin = new Padding(0);
             badOutputNum.Name = "badOutputNum";
-            badOutputNum.Size = new Size(35, 23);
+            badOutputNum.Size = new Size(35, 24);
             badOutputNum.TabIndex = 36;
             badOutputNum.TextAlign = HorizontalAlignment.Right;
             badOutputNum.Visible = false;
@@ -654,9 +656,10 @@
             // goodOutputNum
             // 
             goodOutputNum.BorderStyle = BorderStyle.FixedSingle;
-            goodOutputNum.Location = new Point(84, 456);
+            goodOutputNum.Font = new Font("Symbol", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            goodOutputNum.Location = new Point(84, 457);
             goodOutputNum.Name = "goodOutputNum";
-            goodOutputNum.Size = new Size(35, 23);
+            goodOutputNum.Size = new Size(35, 24);
             goodOutputNum.TabIndex = 40;
             goodOutputNum.TextAlign = HorizontalAlignment.Right;
             goodOutputNum.Visible = false;

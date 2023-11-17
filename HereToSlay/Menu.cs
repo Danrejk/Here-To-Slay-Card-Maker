@@ -132,6 +132,9 @@ namespace HereToSlay
                         int[] desiredRequirements = new int[] { heroReq1.SelectedIndex, heroReq2.SelectedIndex, heroReq3.SelectedIndex, heroReq4.SelectedIndex, heroReq5.SelectedIndex };
                         GeneratorBackend.Program.GenerateMonster(filePath, language.SelectedIndex, nameText.Text, desiredRequirements, good, bad, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked);
                         break;
+                    case 2:
+                        GeneratorBackend.Program.GenerateLeader(filePath, language.SelectedIndex, nameText.Text, new int[] { chosenClass.SelectedIndex, chosenSecondClass.SelectedIndex }, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked);
+                        break;
                     default:
                         throw new NotImplementedException();
                 }
@@ -170,6 +173,9 @@ namespace HereToSlay
                                 RollOutput bad = new((int)badOutputNum.Value, badOutputSym.SelectedIndex, badOutputText.Text);
                                 int[] desiredRequirements = new int[] { heroReq1.SelectedIndex, heroReq2.SelectedIndex, heroReq3.SelectedIndex, heroReq4.SelectedIndex, heroReq5.SelectedIndex };
                                 GeneratorBackend.Program.GenerateMonster(null, language.SelectedIndex, nameText.Text, desiredRequirements, good, bad, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked);
+                                break;
+                            case 2:
+                                GeneratorBackend.Program.GenerateLeader(null, language.SelectedIndex, nameText.Text, new int[] { chosenClass.SelectedIndex, chosenSecondClass.SelectedIndex }, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked);
                                 break;
                             default:
                                 throw new NotImplementedException();
@@ -449,6 +455,7 @@ namespace HereToSlay
             }
         }
 
+        #region Card Type Selection
         private void LeaderCard_Click(object? sender, EventArgs? e) // TODO: make it one method
         {
             if (LeaderCard.Checked == false)
@@ -460,6 +467,8 @@ namespace HereToSlay
                 MonsterCard.BackColor = SystemColors.Control;
                 LeaderCard.Checked = true;
                 LeaderCard.BackColor = SystemColors.ControlDark;
+                HeroCard.Checked = false;
+                HeroCard.BackColor = SystemColors.Control;
 
                 language_SelectedIndexChanged(sender, e);
 
@@ -473,8 +482,6 @@ namespace HereToSlay
                 selectImgText.Location = new Point(selectImgText.Location.X, 349);
                 selectImgButton.Location = new Point(selectImgButton.Location.X, 349);
 
-                labelDescription.Location = new Point(labelDescription.Location.X, 426);
-                descriptionText.Location = new Point(descriptionText.Location.X, 446);
                 RENDER.Location = new Point(RENDER.Location.X, 525);
 
                 labelReq.Visible = false;
@@ -494,6 +501,10 @@ namespace HereToSlay
                 goodOutputNum.Visible = false;
                 goodOutputSym.Visible = false;
 
+                descriptionText.Size = new Size(300, descriptionText.Size.Height);
+                labelDescription.Location = new Point(53, 426);
+                descriptionText.Location = new Point(57, 446);
+
                 foreach (Control c in this.Controls)
                 {
                     if (c.Name.Contains("clear")) { c.Visible = false; };
@@ -502,6 +513,7 @@ namespace HereToSlay
                 nameWhite.Checked = false;
             }
         }
+
         private void MonsterCard_Click(object? sender, EventArgs? e)
         {
             if (MonsterCard.Checked == false)
@@ -513,6 +525,8 @@ namespace HereToSlay
                 LeaderCard.BackColor = SystemColors.Control;
                 MonsterCard.Checked = true;
                 MonsterCard.BackColor = SystemColors.ControlDark;
+                HeroCard.Checked = false;
+                HeroCard.BackColor = SystemColors.Control;
 
                 language_SelectedIndexChanged(sender, e);
 
@@ -524,13 +538,11 @@ namespace HereToSlay
                 advancedClass.Visible = false;
                 advancedClassBox.Visible = false;
 
-                labelImg.Location = new Point(labelImg.Location.X, labelImg.Location.Y - 100);
-                selectImgText.Location = new Point(selectImgText.Location.X, selectImgText.Location.Y - 100);
-                selectImgButton.Location = new Point(selectImgButton.Location.X, selectImgButton.Location.Y - 100);
+                labelImg.Location = new Point(labelImg.Location.X, 229);
+                selectImgText.Location = new Point(selectImgText.Location.X, 249);
+                selectImgButton.Location = new Point(selectImgButton.Location.X, 249);
 
-                descriptionText.Location = new Point(descriptionText.Location.X, descriptionText.Location.Y + 66);
-                labelDescription.Location = new Point(labelDescription.Location.X, labelDescription.Location.Y + 66);
-                RENDER.Location = new Point(RENDER.Location.X, RENDER.Location.Y + 66);
+                RENDER.Location = new Point(RENDER.Location.X, 591);
 
                 labelReq.Visible = true;
                 heroReq1.Visible = true;
@@ -546,8 +558,15 @@ namespace HereToSlay
 
                 labelGood.Visible = true;
                 goodOutputText.Visible = true;
+
                 goodOutputNum.Visible = true;
                 goodOutputSym.Visible = true;
+                goodOutputNum.Location = new Point(84, 457);
+                goodOutputSym.Location = new Point(118, 457);
+
+                descriptionText.Size = new Size(300, descriptionText.Size.Height);
+                labelDescription.Location = new Point(53, 492);
+                descriptionText.Location = new Point(57, 512);
 
                 foreach (Control c in this.Controls)
                 {
@@ -557,6 +576,69 @@ namespace HereToSlay
                 nameWhite.Checked = true;
             }
         }
+
+        private void HeroCard_Click(object sender, EventArgs e)
+        {
+            if (HeroCard.Checked == false)
+            {
+                Properties.Settings.Default.CardType = 2;
+                Properties.Settings.Default.Save();
+                this.Icon = Properties.Resources.monster;
+                LeaderCard.Checked = false;
+                LeaderCard.BackColor = SystemColors.Control;
+                MonsterCard.Checked = false;
+                MonsterCard.BackColor = SystemColors.Control;
+                HeroCard.Checked = true;
+                HeroCard.BackColor = SystemColors.ControlDark;
+
+                language_SelectedIndexChanged(sender, e);
+
+                chosenClass.Visible = true;
+                labelClass.Visible = true;
+                advancedClass.Visible = false;
+                advancedClass.Image = Properties.Resources.closed;
+                splitClass.Checked = false;
+                advancedClassBox.Visible = false;
+
+                labelImg.Location = new Point(labelImg.Location.X, 329);
+                selectImgText.Location = new Point(selectImgText.Location.X, 349);
+                selectImgButton.Location = new Point(selectImgButton.Location.X, 349);
+                
+                RENDER.Location = new Point(RENDER.Location.X, 525);
+
+                labelReq.Visible = false;
+                heroReq1.Visible = false;
+                heroReq2.Visible = false;
+                heroReq3.Visible = false;
+                heroReq4.Visible = false;
+                heroReq5.Visible = false;
+
+                labelBad.Visible = false;
+                badOutputText.Visible = false;
+                badOutputNum.Visible = false;
+                badOutputSym.Visible = false;
+
+                labelGood.Visible = false;
+                goodOutputText.Visible = false;
+
+                goodOutputNum.Visible = true;
+                goodOutputSym.Visible = true;
+                goodOutputNum.Location = new Point(57, 466);
+                goodOutputSym.Location = new Point(92, 466);
+
+                descriptionText.Size = new Size(225, descriptionText.Size.Height);
+                labelDescription.Location = new Point(128, 426);
+                descriptionText.Location = new Point(132, 446);
+
+                foreach (Control c in this.Controls)
+                {
+                    if (c.Name.Contains("clear")) { c.Visible = false; };
+                }
+
+                nameWhite.Checked = false;
+            }
+        }
+        #endregion
 
         private void clearSelectedClass(object sender, EventArgs e)
         {
@@ -617,6 +699,7 @@ namespace HereToSlay
             }
             renderPreview(sender, e);
         }
+
     }
 
     class FontLoader
@@ -643,7 +726,7 @@ namespace HereToSlay
         {
             foreach (Control c in control.Controls)
             {
-                if (!c.Name.Contains("clear")) // don't change the font for the X boxes
+                if (!c.Name.Contains("clear") && !c.Name.Contains("OutputNum")) // don't change the font for the X boxes or the OutputNum boxes
                 {
                     c.Font = fontUI;
                     if (c.Controls.Count > 0)

@@ -12,6 +12,7 @@ namespace GeneratorBackend
         private static AssetManager? instance;
         public Image frameLeader = Raylib.LoadImage("GeneratorAssets/template/frame_leader.png");
         public Image frameMonster = Raylib.LoadImage("GeneratorAssets/template/frame_monster.png");
+        public Image frameHero = Raylib.LoadImage("GeneratorAssets/template/frame_hero.png");
         public Image gradient = Raylib.LoadImage("GeneratorAssets/template/gradient.png");
         public Image red = Raylib.LoadImage("GeneratorAssets/template/red.png");
         public Image green = Raylib.LoadImage("GeneratorAssets/template/green.png");
@@ -74,14 +75,6 @@ namespace GeneratorBackend
 
     public class Program
     {
-        static void Main()
-        {
-            GenerateLeader("TestRender.png", 0, "Test Leader", new int[] { 11, -1 }, "", "Test description", false, false); // if you want to test the generator, change the parameters here
-                                                                                                                            //"-1" here means that there is only one class.
-
-            //this might not work because I moved all of the Fonts to the "HereToSlay" or Menu project.
-        }
-
         // all of the font spacings work, but are simply not used as it turned out we don't need them, but YOU might. I dunno.
         const int NAME_FONT_SPACING = 0;
         const int TITLE_FONT_SPACING = 1;
