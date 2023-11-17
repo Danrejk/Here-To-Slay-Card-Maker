@@ -462,7 +462,6 @@
             HeroCard.Name = "HeroCard";
             HeroCard.Size = new Size(73, 23);
             HeroCard.Text = "Hero Card";
-            HeroCard.Visible = false;
             // 
             // heroReq3
             // 

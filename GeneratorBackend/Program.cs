@@ -29,7 +29,7 @@ namespace GeneratorBackend
         public Font reqFont { get; private set; }
         public Font rollFont { get; private set; }
 
-        public Color bottomColor = new(244, 241, 229, 255);
+        public Color bottomColor = new(245, 241, 231, 255);
 
         public Image Ranger = Raylib.LoadImage("GeneratorAssets/classes/ranger.png");
         public Image Wizard = Raylib.LoadImage("GeneratorAssets/classes/wizard.png");
