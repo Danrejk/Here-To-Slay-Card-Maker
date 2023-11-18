@@ -84,18 +84,24 @@ namespace GeneratorBackend
         const int DESC_LINE_SPACING = 0;
         const int DESC_MARGIN = 87;
 
-        // changing this, WON'T properly change the size of the card.
-        const int CARD_WIDTH = 827;
-        const int CARD_HEIGHT = 1417;
+        // changing these, won't PROPERLY change the size of the card.
+        // Tall cards
+        const int CARD_WIDTH_TARROT = 827;
+        const int CARD_HEIGHT_TARROT = 1417;
+        // Normal cards
+        const int CARD_WIDTH_POKER = 745;
+        const int CARD_HEIGHT_POKER = 1040;
 
         private static readonly AssetManager inst = AssetManager.Instance;
 
+        #region Generation
         public static void GenerateLeader(string? renderLocation, int language, string name, int[] desiredClass, string leaderImg, string description, bool addGradient, bool nameWhite)
         {
             ChangeLeaderImage(leaderImg);
 
             // This has to be loaded each time, to clear the image from the previous render
             Image card = Raylib.LoadImage("GeneratorAssets/template/card_tarrot.png");
+            Rectangle imageRec = new(0, 0, CARD_WIDTH_TARROT, CARD_HEIGHT_TARROT);
 
             Image classSymbol;
             Color desiredColor;
@@ -333,8 +339,6 @@ namespace GeneratorBackend
             }
             #endregion
 
-            Rectangle imageRec = new(0, 0, 827, 1417);
-
             Raylib.ImageDraw(ref card, leader, imageRec, new(41, 41, 745, 1176), Color.WHITE);
             //Raylib.ImageDraw(ref card, inst.bottom, imageRec, imageRec, Color.WHITE);
 
@@ -389,7 +393,7 @@ namespace GeneratorBackend
 
             // This has to be loaded each time, to clear the image from the previous render
             Image card = Raylib.LoadImage("GeneratorAssets/template/card_tarrot.png");
-            Rectangle imageRec = new(0, 0, 827, 1417);
+            Rectangle imageRec = new(0, 0, CARD_WIDTH_TARROT, CARD_HEIGHT_TARROT);
 
             Raylib.ImageDraw(ref card, monster, imageRec, new(41, 41, 745, 824), Color.WHITE);
             if (addGradient) { Raylib.ImageDraw(ref card, inst.gradient, imageRec, imageRec, Color.WHITE); }
@@ -497,6 +501,161 @@ namespace GeneratorBackend
             Raylib.UnloadImage(card);
         }
 
+        public static void GenerateHero(string? renderLocation, int language, string name, int desiredClass, string heroImg, string description, int maxItems)
+        {
+            ChangeHeroImage(heroImg);
+
+            // This has to be loaded each time, to clear the image from the previous render
+            Image card = Raylib.LoadImage("GeneratorAssets/template/card_poker.png");
+            Rectangle imageRec = new(0, 0, CARD_WIDTH_POKER, CARD_HEIGHT_POKER);
+
+            Image classSymbol;
+            Color desiredColor;
+            string leaderTitle;
+
+            // Class
+            switch (desiredClass)
+            {
+                case 0:
+                    leaderTitle = language switch
+                    {
+                        1 => "Bohater: łowca",
+                        _ => "Hero: Ranger"
+                    };
+                    classSymbol = inst.Ranger;
+                    desiredColor = new(35, 94, 57, 255);
+                    break;
+                case 1:
+                    leaderTitle = language switch
+                    {
+                        1 => "Bohater: mag",
+                        _ => "Hero: Wizard"
+                    };
+                    classSymbol = inst.Wizard;
+                    desiredColor = new(116, 46, 137, 255);
+                    break;
+                case 2:
+                    leaderTitle = language switch
+                    {
+                        1 => "Bohater: bard",
+                        _ => "Hero: Bard"
+                    };
+                    classSymbol = inst.Bard;
+                    desiredColor = new(194, 81, 47, 255);
+                    break;
+                case 3:
+                    leaderTitle = language switch
+                    {
+                        1 => "Bohater: strażnik",
+                        _ => "Hero: Guardian"
+                    };
+                    classSymbol = inst.Guardian;
+                    desiredColor = new(235, 171, 33, 255);
+                    break;
+                case 4:
+                    leaderTitle = language switch
+                    {
+                        1 => "Bohater: wojownik",
+                        _ => "Hero: Fighter"
+                    };
+                    classSymbol = inst.Fighter;
+                    desiredColor = new(151, 40, 44, 255);
+                    break;
+                case 5:
+                    leaderTitle = language switch
+                    {
+                        1 => "Bohater: złodziej",
+                        _ => "Hero: Thief"
+                    };
+                    classSymbol = inst.Thief;
+                    desiredColor = new(0, 78, 125, 255);
+                    break;
+                case 6:
+                    leaderTitle = language switch
+                    {
+                        1 => "Bohater: druid",
+                        _ => "Hero: Druid"
+                    };
+                    classSymbol = inst.Druid;
+                    desiredColor = new(0, 171, 143, 255);
+                    break;
+                case 7:
+                    leaderTitle = language switch
+                    {
+                        1 => "Bohater: awanturnik",
+                        _ => "Hero: Warrior"
+                    };
+                    classSymbol = inst.Warrior;
+                    desiredColor = new(94, 109, 180, 255);
+                    break;
+                case 8:
+                    leaderTitle = language switch
+                    {
+                        1 => "Bohater: berserk",
+                        _ => "Hero: Berserker"
+                    };
+                    classSymbol = inst.Berserker;
+                    desiredColor = new(225, 131, 51, 255);
+                    break;
+                case 9:
+                    leaderTitle = language switch
+                    {
+                        1 => "Bohater: nekromanta",
+                        _ => "Hero: Necromancer"
+                    };
+                    classSymbol = inst.Necromancer;
+                    desiredColor = new(213, 28, 106, 255);
+                    break;
+                case 10:
+                    leaderTitle = language switch
+                    {
+                        1 => "Bohater: czarownik",
+                        _ => "Hero: Sorcerer"
+                    };
+                    classSymbol = inst.Sorcerer;
+                    desiredColor = new(29, 31, 29, 255);
+                    break;
+                default: // when no desired class is given, it deafults to an empty class
+                    leaderTitle = language switch
+                    {
+                        1 => "Bohater",
+                        _ => "Hero"
+                    };
+                    classSymbol = inst.None;
+                    desiredColor = new(91, 93, 92, 255);
+                    break;
+            }
+
+            Raylib.ImageDraw(ref card, leader, imageRec, new(100, 236, 545, 545), Color.WHITE);
+            //Raylib.ImageDraw(ref card, inst.bottom, imageRec, imageRec, Color.WHITE);
+
+            // Draw Class Symbol(s) and Colored Frame(s)
+            Image frameTinted = Raylib.ImageCopy(inst.frameHero); // create a copy of the frame asset, so that the original is not modified
+            Raylib.ImageDraw(ref card, classSymbol, imageRec, new(363, 1167, 102, 102), Color.WHITE);
+
+            Raylib.ImageColorTint(ref frameTinted, desiredColor);
+            Raylib.ImageDraw(ref card, frameTinted, imageRec, imageRec, Color.WHITE);
+
+            Raylib.UnloadImage(frameTinted);
+
+            // Name and Title
+            DrawNameAndTitle(name, leaderTitle, card, false);
+
+            // Description
+            DrawDescription(description, card);
+
+            if (renderLocation == null)
+            {
+                Raylib.ExportImage(card, "preview.png");
+            }
+            else
+            {
+                Raylib.ExportImage(card, renderLocation);
+            }
+            Raylib.UnloadImage(card);
+        }
+        #endregion
+
         static void DrawNameAndTitle(string nameText, string titleText, Image card, bool nameWhite)
         {
             Color leaderColor = nameWhite switch
@@ -514,12 +673,12 @@ namespace GeneratorBackend
             Vector2 titleSize = Raylib.MeasureTextEx(inst.titleFont, titleText, AssetManager.TITLE_SIZE, TITLE_FONT_SPACING);
 
             // Name
-            Raylib.ImageDrawTextEx(ref card, inst.nameFont, nameText, new Vector2((CARD_WIDTH / 2) - (nameSize.X / 2) + 3, 67 + 3), AssetManager.NAME_SIZE, NAME_FONT_SPACING, leaderShadowColor);
-            Raylib.ImageDrawTextEx(ref card, inst.nameFont, nameText, new Vector2((CARD_WIDTH / 2) - (nameSize.X / 2), 67), AssetManager.NAME_SIZE, NAME_FONT_SPACING, leaderColor);
+            Raylib.ImageDrawTextEx(ref card, inst.nameFont, nameText, new Vector2((CARD_WIDTH_TARROT / 2) - (nameSize.X / 2) + 3, 67 + 3), AssetManager.NAME_SIZE, NAME_FONT_SPACING, leaderShadowColor);
+            Raylib.ImageDrawTextEx(ref card, inst.nameFont, nameText, new Vector2((CARD_WIDTH_TARROT / 2) - (nameSize.X / 2), 67), AssetManager.NAME_SIZE, NAME_FONT_SPACING, leaderColor);
 
             // Title
-            Raylib.ImageDrawTextEx(ref card, inst.titleFont, titleText, new Vector2((CARD_WIDTH / 2) - (titleSize.X / 2) + 2, 118 + 2), AssetManager.TITLE_SIZE, TITLE_FONT_SPACING, leaderShadowColor);
-            Raylib.ImageDrawTextEx(ref card, inst.titleFont, titleText, new Vector2((CARD_WIDTH / 2) - (titleSize.X / 2), 118), AssetManager.TITLE_SIZE, TITLE_FONT_SPACING, leaderColor);
+            Raylib.ImageDrawTextEx(ref card, inst.titleFont, titleText, new Vector2((CARD_WIDTH_TARROT / 2) - (titleSize.X / 2) + 2, 118 + 2), AssetManager.TITLE_SIZE, TITLE_FONT_SPACING, leaderShadowColor);
+            Raylib.ImageDrawTextEx(ref card, inst.titleFont, titleText, new Vector2((CARD_WIDTH_TARROT / 2) - (titleSize.X / 2), 118), AssetManager.TITLE_SIZE, TITLE_FONT_SPACING, leaderColor);
         }
 
         static void DrawDescription(string text, Image card)
@@ -529,7 +688,7 @@ namespace GeneratorBackend
             Vector2 textSize = Raylib.MeasureTextEx(inst.descFont, text, AssetManager.DESC_SIZE, DESC_FONT_SPACING);
 
             int len = text.Length;
-            int targetLen = CARD_WIDTH - (DESC_MARGIN * 2);
+            int targetLen = CARD_WIDTH_TARROT - (DESC_MARGIN * 2);
             int targetLines = 1;
             int currentLine = 0;
 
@@ -589,13 +748,13 @@ namespace GeneratorBackend
                 if (currentLen.X + wordLen.X >= targetLen)
                 {
                     // Draw the whole line
-                    Raylib.ImageDrawTextEx(ref card, inst.descFont, output.ToString(), new Vector2(DESC_MARGIN, (CARD_HEIGHT - offset) + textBlockCenter + ((textSize.Y - 5 + DESC_LINE_SPACING) * currentLine)), AssetManager.DESC_SIZE, DESC_FONT_SPACING, descTextColor);
+                    Raylib.ImageDrawTextEx(ref card, inst.descFont, output.ToString(), new Vector2(DESC_MARGIN, (CARD_HEIGHT_TARROT - offset) + textBlockCenter + ((textSize.Y - 5 + DESC_LINE_SPACING) * currentLine)), AssetManager.DESC_SIZE, DESC_FONT_SPACING, descTextColor);
 
                     output.Clear();
                     currentLine++; // move to the next line
                 }
             }
-            Raylib.ImageDrawTextEx(ref card, inst.descFont, output.ToString() + word.ToString(), new Vector2(DESC_MARGIN, (CARD_HEIGHT - offset) + textBlockCenter + ((textSize.Y - 5 + DESC_LINE_SPACING) * currentLine)), AssetManager.DESC_SIZE, DESC_FONT_SPACING, descTextColor);
+            Raylib.ImageDrawTextEx(ref card, inst.descFont, output.ToString() + word.ToString(), new Vector2(DESC_MARGIN, (CARD_HEIGHT_TARROT - offset) + textBlockCenter + ((textSize.Y - 5 + DESC_LINE_SPACING) * currentLine)), AssetManager.DESC_SIZE, DESC_FONT_SPACING, descTextColor);
         }
 
         static Image leader = new();
@@ -605,6 +764,7 @@ namespace GeneratorBackend
         static string lastPathLeader = "";
         static string lastPathMonster = "";
 
+        #region Change Image
         static void ChangeLeaderImage(string path)
         {
             if (path == lastPathLeader) { return; }
@@ -682,6 +842,47 @@ namespace GeneratorBackend
                 #endregion
             }
         }
+
+        static void ChangeHeroImage(string path)
+        {
+            if (path == lastPathLeader) { return; }
+            lastPathLeader = path;
+
+            if (File.Exists(path))
+            {
+                Raylib.UnloadImage(leader);
+                using var file = File.OpenRead(path);
+                image = SixLabors.ImageSharp.Image.Load<Rgba32>(file);
+
+                using var memoryStream = new MemoryStream();
+                image.SaveAsPng(memoryStream);
+                memoryStream.Seek(0, SeekOrigin.Begin);
+                leader = Raylib.LoadImageFromMemory(".png", memoryStream.ToArray());
+
+                #region Image Crop
+                float targetAspectRatio = 545f / 545f;
+                int targetWidth, targetHeight;
+                if (leader.Width / (float)leader.Height > targetAspectRatio)
+                {
+                    targetWidth = (int)(leader.Height * targetAspectRatio);
+                    targetHeight = leader.Height;
+                }
+                else
+                {
+                    targetWidth = leader.Width;
+                    targetHeight = (int)(leader.Width / targetAspectRatio);
+                }
+
+                int cropX = (leader.Width - targetWidth) / 2;
+                int cropY = (leader.Height - targetHeight) / 2;
+
+                Raylib.ImageCrop(ref leader, new Rectangle(cropX, cropY, targetWidth, targetHeight));
+                Raylib.ImageResize(ref leader, 545, 545);
+                #endregion
+            }
+        }
+
+        #endregion
     }
 
     public class RollOutput

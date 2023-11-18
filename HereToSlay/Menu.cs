@@ -125,15 +125,12 @@ namespace HereToSlay
             {
                 Properties.Settings.Default.CardType = 0;
                 Properties.Settings.Default.Save();
-                chosenClass_SelectedIndexChanged(null, null);
                 MonsterCard.Checked = false;
                 MonsterCard.BackColor = SystemColors.Control;
                 LeaderCard.Checked = true;
                 LeaderCard.BackColor = SystemColors.ControlDark;
                 HeroCard.Checked = false;
                 HeroCard.BackColor = SystemColors.Control;
-
-                language_SelectedIndexChanged(sender, e);
 
                 chosenClass.Visible = true;
                 labelClass.Visible = true;
@@ -182,6 +179,11 @@ namespace HereToSlay
                 }
 
                 nameWhite.Checked = false;
+
+                renderPreviewNow(sender, e);
+                previewImg.ImageLocation = Path.Combine(Directory.GetCurrentDirectory(), "preview.png");
+                updateLanguage(sender, e);
+                previewImg.SizeMode = PictureBoxSizeMode.StretchImage;
             }
         }
 
@@ -198,8 +200,6 @@ namespace HereToSlay
                 MonsterCard.BackColor = SystemColors.ControlDark;
                 HeroCard.Checked = false;
                 HeroCard.BackColor = SystemColors.Control;
-
-                language_SelectedIndexChanged(sender, e);
 
                 chosenClass.Visible = false;
                 labelClass.Visible = false;
@@ -253,6 +253,11 @@ namespace HereToSlay
                 }
 
                 nameWhite.Checked = true;
+
+                renderPreviewNow(sender, e);
+                previewImg.ImageLocation = Path.Combine(Directory.GetCurrentDirectory(), "preview.png");
+                updateLanguage(sender, e);
+                previewImg.SizeMode = PictureBoxSizeMode.StretchImage;
             }
         }
 
@@ -278,8 +283,6 @@ namespace HereToSlay
                 MonsterCard.BackColor = SystemColors.Control;
                 HeroCard.Checked = true;
                 HeroCard.BackColor = SystemColors.ControlDark;
-
-                language_SelectedIndexChanged(sender, e);
 
                 chosenClass.Visible = true;
                 labelClass.Visible = true;
@@ -331,7 +334,10 @@ namespace HereToSlay
                     if (c.Name.Contains("clear")) { c.Visible = false; };
                 }
 
-                nameWhite.Checked = false;
+                renderPreviewNow(sender, e);
+                previewImg.ImageLocation = Path.Combine(Directory.GetCurrentDirectory(), "preview.png");
+                updateLanguage(sender, e);
+                previewImg.SizeMode = PictureBoxSizeMode.Zoom;
             }
         }
         #endregion
@@ -358,7 +364,7 @@ namespace HereToSlay
                         GeneratorBackend.Program.GenerateMonster(filePath, language.SelectedIndex, nameText.Text, desiredRequirements, good, bad, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked);
                         break;
                     case 2:
-                        GeneratorBackend.Program.GenerateLeader(filePath, language.SelectedIndex, nameText.Text, new int[] { chosenClass.SelectedIndex, chosenSecondClass.SelectedIndex }, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked);
+                        GeneratorBackend.Program.GenerateHero(filePath, language.SelectedIndex, nameText.Text, chosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text, (int)maxItems.Value);
                         break;
                     default:
                         throw new NotImplementedException();
@@ -388,27 +394,32 @@ namespace HereToSlay
                     }
                     if (timer >= 0)
                     {
-                        switch (Properties.Settings.Default.CardType)
-                        {
-                            case 0:
-                                GeneratorBackend.Program.GenerateLeader(null, language.SelectedIndex, nameText.Text, new int[] { chosenClass.SelectedIndex, chosenSecondClass.SelectedIndex }, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked);
-                                break;
-                            case 1:
-                                RollOutput good = new((int)goodOutputNum.Value, goodOutputSym.SelectedIndex, goodOutputText.Text);
-                                RollOutput bad = new((int)badOutputNum.Value, badOutputSym.SelectedIndex, badOutputText.Text);
-                                int[] desiredRequirements = new int[] { heroReq1.SelectedIndex, heroReq2.SelectedIndex, heroReq3.SelectedIndex, heroReq4.SelectedIndex, heroReq5.SelectedIndex };
-                                GeneratorBackend.Program.GenerateMonster(null, language.SelectedIndex, nameText.Text, desiredRequirements, good, bad, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked);
-                                break;
-                            case 2:
-                                GeneratorBackend.Program.GenerateLeader(null, language.SelectedIndex, nameText.Text, new int[] { chosenClass.SelectedIndex, chosenSecondClass.SelectedIndex }, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked);
-                                break;
-                            default:
-                                throw new NotImplementedException();
-                        }
+                        renderPreviewNow(sender, e);
                         previewImg.ImageLocation = Path.Combine(Directory.GetCurrentDirectory(), "preview.png"); ;
                     }
                 }
                 catch (OperationCanceledException) { }
+            }
+        }
+
+        private void renderPreviewNow(object? sender, EventArgs? e)
+        {
+            switch (Properties.Settings.Default.CardType)
+            {
+                case 0:
+                    GeneratorBackend.Program.GenerateLeader(null, language.SelectedIndex, nameText.Text, new int[] { chosenClass.SelectedIndex, chosenSecondClass.SelectedIndex }, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked);
+                    break;
+                case 1:
+                    RollOutput good = new((int)goodOutputNum.Value, goodOutputSym.SelectedIndex, goodOutputText.Text);
+                    RollOutput bad = new((int)badOutputNum.Value, badOutputSym.SelectedIndex, badOutputText.Text);
+                    int[] desiredRequirements = new int[] { heroReq1.SelectedIndex, heroReq2.SelectedIndex, heroReq3.SelectedIndex, heroReq4.SelectedIndex, heroReq5.SelectedIndex };
+                    GeneratorBackend.Program.GenerateMonster(null, language.SelectedIndex, nameText.Text, desiredRequirements, good, bad, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked);
+                    break;
+                case 2:
+                    GeneratorBackend.Program.GenerateHero(null, language.SelectedIndex, nameText.Text, chosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text, (int)maxItems.Value);
+                    break;
+                default:
+                    throw new NotImplementedException();
             }
         }
         #endregion
@@ -428,7 +439,7 @@ namespace HereToSlay
         }
 
         #region Language
-        private void language_SelectedIndexChanged(object? sender, EventArgs? e)
+        private void updateLanguage(object? sender, EventArgs? e)
         {
             if (initialLang == true) // so that it doesn't overwrite the setting, before it can be read
             {
@@ -471,11 +482,11 @@ namespace HereToSlay
                     goodOutputText.Text = "UBIJ tego potwora";
                     labelReq.Text = "Wymagania bohaterów";
 
-                    if(chosenClass.SelectedIndex == -1 && Properties.Settings.Default.CardType == 2)
+                    if (chosenClass.SelectedIndex == -1 && Properties.Settings.Default.CardType == 2)
                     {
                         this.Icon = Properties.Resources.bohater;
                     }
-                    
+
                     break;
 
                 default:
@@ -511,7 +522,7 @@ namespace HereToSlay
                     goodOutputText.Text = "SLAY this Monster card";
                     labelReq.Text = "Hero Requirements";
 
-                    if(chosenClass.SelectedIndex == -1 && Properties.Settings.Default.CardType == 2)
+                    if (chosenClass.SelectedIndex == -1 && Properties.Settings.Default.CardType == 2)
                     {
                         this.Icon = Properties.Resources.hero;
                     }
@@ -519,7 +530,6 @@ namespace HereToSlay
                     break;
             }
             LocaliseClassOptions(language.SelectedIndex); // change class options based on selected language
-            renderPreview(sender, e);
         }
 
         int currentClassIndex;
@@ -614,7 +624,7 @@ namespace HereToSlay
         #endregion
 
         #region Class Related Methods
-        private void chosenClass_SelectedIndexChanged(object? sender, EventArgs? e)
+        private void updateIcon_to_chosenClass(object? sender, EventArgs? e)
         {
             if (Properties.Settings.Default.CardType == 0 || Properties.Settings.Default.CardType == 2)
             {
@@ -634,13 +644,7 @@ namespace HereToSlay
                     11 => Properties.Resources.empty,
                     _ => Properties.Resources.LEADER
                 };
-                renderPreview(sender, e);
             }
-
-        }
-        private void chosenSecondClass_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            renderPreview(sender, e);
         }
 
         private void splitClass_CheckStateChanged(object sender, EventArgs e)

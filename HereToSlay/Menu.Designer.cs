@@ -178,7 +178,8 @@
             chosenClass.Name = "chosenClass";
             chosenClass.Size = new Size(120, 25);
             chosenClass.TabIndex = 7;
-            chosenClass.SelectedIndexChanged += chosenClass_SelectedIndexChanged;
+            chosenClass.SelectedIndexChanged += updateIcon_to_chosenClass;
+            chosenClass.SelectedIndexChanged += renderPreview;
             // 
             // labelClass
             // 
@@ -289,7 +290,7 @@
             // 
             // previewImg
             // 
-            previewImg.BackColor = SystemColors.ControlLight;
+            previewImg.BackColor = SystemColors.ActiveCaptionText;
             previewImg.Cursor = Cursors.Hand;
             previewImg.Dock = DockStyle.Right;
             previewImg.Location = new Point(414, 0);
@@ -408,7 +409,7 @@
             chosenSecondClass.Size = new Size(120, 25);
             chosenSecondClass.TabIndex = 27;
             chosenSecondClass.Visible = false;
-            chosenSecondClass.SelectedIndexChanged += chosenSecondClass_SelectedIndexChanged;
+            chosenSecondClass.SelectedIndexChanged += renderPreview;
             // 
             // labelSecondClass
             // 
@@ -461,7 +462,8 @@
             language.Margin = new Padding(0);
             language.Name = "language";
             language.Size = new Size(85, 23);
-            language.SelectedIndexChanged += language_SelectedIndexChanged;
+            language.SelectedIndexChanged += updateLanguage;
+            language.SelectedIndexChanged += renderPreview;
             // 
             // HeroCard
             // 
@@ -693,7 +695,6 @@
             // 
             // clearHeroReq1
             // 
-            clearHeroReq1.Anchor = AnchorStyles.None;
             clearHeroReq1.BackColor = SystemColors.ControlLight;
             clearHeroReq1.FlatAppearance.BorderSize = 0;
             clearHeroReq1.FlatStyle = FlatStyle.Flat;
@@ -711,7 +712,6 @@
             // 
             // clearHeroReq2
             // 
-            clearHeroReq2.Anchor = AnchorStyles.None;
             clearHeroReq2.BackColor = SystemColors.ControlLight;
             clearHeroReq2.FlatAppearance.BorderSize = 0;
             clearHeroReq2.FlatStyle = FlatStyle.Flat;
@@ -729,7 +729,6 @@
             // 
             // clearHeroReq4
             // 
-            clearHeroReq4.Anchor = AnchorStyles.None;
             clearHeroReq4.BackColor = SystemColors.ControlLight;
             clearHeroReq4.FlatAppearance.BorderSize = 0;
             clearHeroReq4.FlatStyle = FlatStyle.Flat;
@@ -747,7 +746,6 @@
             // 
             // clearHeroReq5
             // 
-            clearHeroReq5.Anchor = AnchorStyles.None;
             clearHeroReq5.BackColor = SystemColors.ControlLight;
             clearHeroReq5.FlatAppearance.BorderSize = 0;
             clearHeroReq5.FlatStyle = FlatStyle.Flat;
@@ -765,7 +763,6 @@
             // 
             // clearHeroReq3
             // 
-            clearHeroReq3.Anchor = AnchorStyles.None;
             clearHeroReq3.BackColor = SystemColors.ControlLight;
             clearHeroReq3.FlatAppearance.BorderSize = 0;
             clearHeroReq3.FlatStyle = FlatStyle.Flat;
@@ -813,7 +810,7 @@
             // itemImg
             // 
             itemImg.Image = Properties.Resources.item;
-            itemImg.Location = new Point(210, 398);
+            itemImg.Location = new Point(212, 398);
             itemImg.Margin = new Padding(1);
             itemImg.Name = "itemImg";
             itemImg.Size = new Size(24, 24);
@@ -824,7 +821,7 @@
             // itemImg2
             // 
             itemImg2.Image = Properties.Resources.item;
-            itemImg2.Location = new Point(236, 398);
+            itemImg2.Location = new Point(238, 398);
             itemImg2.Margin = new Padding(1);
             itemImg2.Name = "itemImg2";
             itemImg2.Size = new Size(24, 24);
@@ -839,7 +836,7 @@
             itemImgMore.BackColor = Color.Transparent;
             itemImgMore.Font = new Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point);
             itemImgMore.ForeColor = Color.White;
-            itemImgMore.Location = new Point(258, 397);
+            itemImgMore.Location = new Point(260, 397);
             itemImgMore.Margin = new Padding(0);
             itemImgMore.Name = "itemImgMore";
             itemImgMore.Size = new Size(24, 25);
@@ -855,6 +852,7 @@
             ClientSize = new Size(828, 711);
             Controls.Add(itemImg2);
             Controls.Add(itemImg);
+            Controls.Add(itemImgMore);
             Controls.Add(labelMaxItem);
             Controls.Add(maxItems);
             Controls.Add(advancedNameBox);
@@ -897,7 +895,6 @@
             Controls.Add(menuStrip1);
             Controls.Add(previewImg);
             Controls.Add(labelGood);
-            Controls.Add(itemImgMore);
             Controls.Add(labelBad);
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.FixedSingle;
