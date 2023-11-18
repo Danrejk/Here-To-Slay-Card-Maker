@@ -236,7 +236,14 @@ namespace HereToSlay
                     labelGood.Text = "Wymagania rzutu - UBIJ potwora";
                     goodOutputText.Text = "UBIJ tego potwora";
                     labelReq.Text = "Wymagania bohaterów";
+
+                    if(chosenClass.SelectedIndex == -1 && Properties.Settings.Default.CardType == 2)
+                    {
+                        this.Icon = Properties.Resources.bohater;
+                    }
+                    
                     break;
+
                 default:
                     logo.Image = Properties.Resources.Logo0;
                     labelLeader.Text = Properties.Settings.Default.CardType switch
@@ -269,12 +276,19 @@ namespace HereToSlay
                     labelGood.Text = "Roll Requirements - SLAY monster";
                     goodOutputText.Text = "SLAY this Monster card";
                     labelReq.Text = "Hero Requirements";
-                    break;
+                    descriptionText.Text = this.Icon.ToString();
 
+                    if(chosenClass.SelectedIndex == -1 && Properties.Settings.Default.CardType == 2)
+                    {
+                        this.Icon = Properties.Resources.hero;
+                    }
+
+                    break;
             }
             LocaliseClassOptions(language.SelectedIndex); // change class options based on selected language
             renderPreview(sender, e);
         }
+
         int currentClassIndex;
         int currentSecondClassIndex;
         int currentHeroReq1Index;
@@ -365,6 +379,7 @@ namespace HereToSlay
             heroReq5.SelectedIndex = currentHeroReq5Index;
         }
         #endregion
+
         private void chosenClass_SelectedIndexChanged(object? sender, EventArgs? e)
         {
             if (Properties.Settings.Default.CardType == 0 || Properties.Settings.Default.CardType == 2)
@@ -490,6 +505,8 @@ namespace HereToSlay
                 advancedClass.Image = Properties.Resources.closed;
                 splitClass.Checked = false;
 
+                advancedName.Visible = true;
+
                 labelImg.Location = new Point(labelImg.Location.X, 329);
                 selectImgText.Location = new Point(selectImgText.Location.X, 349);
                 selectImgButton.Location = new Point(selectImgButton.Location.X, 349);
@@ -556,6 +573,8 @@ namespace HereToSlay
                 advancedClass.Visible = false;
                 advancedClassBox.Visible = false;
 
+                advancedName.Visible = true;
+
                 labelImg.Location = new Point(labelImg.Location.X, 229);
                 selectImgText.Location = new Point(selectImgText.Location.X, 249);
                 selectImgButton.Location = new Point(selectImgButton.Location.X, 249);
@@ -607,10 +626,15 @@ namespace HereToSlay
             {
                 Properties.Settings.Default.CardType = 2;
                 Properties.Settings.Default.Save();
-                this.Icon = Properties.Settings.Default.Language switch {
-                    1 => Properties.Resources.bohater,
-                    _ => Properties.Resources.hero
+
+                if (chosenClass.SelectedIndex == -1) {
+                    this.Icon = Properties.Settings.Default.Language switch
+                    {
+                        1 => Properties.Resources.bohater,
+                        _ => Properties.Resources.hero
                     };
+                }
+
                 LeaderCard.Checked = false;
                 LeaderCard.BackColor = SystemColors.Control;
                 MonsterCard.Checked = false;
@@ -626,6 +650,10 @@ namespace HereToSlay
                 advancedClass.Image = Properties.Resources.closed;
                 splitClass.Checked = false;
                 advancedClassBox.Visible = false;
+
+                advancedName.Visible = false;
+                advancedName.Image = Properties.Resources.closed;
+                advancedNameBox.Visible = false;
 
                 labelImg.Location = new Point(labelImg.Location.X, 304);
                 selectImgText.Location = new Point(selectImgText.Location.X, 324);
