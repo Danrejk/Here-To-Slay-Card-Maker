@@ -116,372 +116,8 @@ namespace HereToSlay
             }
         }
 
-        #region The Rendering ones
-        private void RenderButton_Press(object sender, EventArgs e)
-        {
-            using SaveFileDialog SaveRenderDialog = new();
-            SaveRenderDialog.Filter = "Supported Image Files (*.png;)|*.png;|All Files (*.*)|*.*";
-            SaveRenderDialog.FilterIndex = 1;
-
-            if (SaveRenderDialog.ShowDialog() == DialogResult.OK)
-            {
-                string filePath = SaveRenderDialog.FileName;
-                switch (Properties.Settings.Default.CardType)
-                {
-                    case 0:
-                        GeneratorBackend.Program.GenerateLeader(filePath, language.SelectedIndex, nameText.Text, new int[] { chosenClass.SelectedIndex, chosenSecondClass.SelectedIndex }, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked);
-                        break;
-                    case 1:
-                        RollOutput good = new((int)goodOutputNum.Value, goodOutputSym.SelectedIndex, goodOutputText.Text);
-                        RollOutput bad = new((int)badOutputNum.Value, badOutputSym.SelectedIndex, badOutputText.Text);
-                        int[] desiredRequirements = new int[] { heroReq1.SelectedIndex, heroReq2.SelectedIndex, heroReq3.SelectedIndex, heroReq4.SelectedIndex, heroReq5.SelectedIndex };
-                        GeneratorBackend.Program.GenerateMonster(filePath, language.SelectedIndex, nameText.Text, desiredRequirements, good, bad, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked);
-                        break;
-                    case 2:
-                        GeneratorBackend.Program.GenerateLeader(filePath, language.SelectedIndex, nameText.Text, new int[] { chosenClass.SelectedIndex, chosenSecondClass.SelectedIndex }, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked);
-                        break;
-                    default:
-                        throw new NotImplementedException();
-                }
-
-                previewImg.ImageLocation = filePath;
-            }
-        }
-
-        private CancellationTokenSource? cancellationTokenSource;
-        bool initialLang = false; //it's so that when the program opens and sets the remembered language, it doesn't render the preview automatically.
-        private async void renderPreview(object? sender, EventArgs? e)
-        {
-            cancellationTokenSource?.Cancel();
-            cancellationTokenSource = new CancellationTokenSource();
-            if (initialLang)
-            {
-                try
-                {
-                    int timer = 1;
-                    while (timer > 0)
-                    {
-                        cancellationTokenSource.Token.ThrowIfCancellationRequested();
-
-                        await Task.Delay(200, cancellationTokenSource.Token);
-                        timer--;
-                    }
-                    if (timer >= 0)
-                    {
-                        switch (Properties.Settings.Default.CardType)
-                        {
-                            case 0:
-                                GeneratorBackend.Program.GenerateLeader(null, language.SelectedIndex, nameText.Text, new int[] { chosenClass.SelectedIndex, chosenSecondClass.SelectedIndex }, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked);
-                                break;
-                            case 1:
-                                RollOutput good = new((int)goodOutputNum.Value, goodOutputSym.SelectedIndex, goodOutputText.Text);
-                                RollOutput bad = new((int)badOutputNum.Value, badOutputSym.SelectedIndex, badOutputText.Text);
-                                int[] desiredRequirements = new int[] { heroReq1.SelectedIndex, heroReq2.SelectedIndex, heroReq3.SelectedIndex, heroReq4.SelectedIndex, heroReq5.SelectedIndex };
-                                GeneratorBackend.Program.GenerateMonster(null, language.SelectedIndex, nameText.Text, desiredRequirements, good, bad, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked);
-                                break;
-                            case 2:
-                                GeneratorBackend.Program.GenerateLeader(null, language.SelectedIndex, nameText.Text, new int[] { chosenClass.SelectedIndex, chosenSecondClass.SelectedIndex }, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked);
-                                break;
-                            default:
-                                throw new NotImplementedException();
-                        }
-                        previewImg.ImageLocation = Path.Combine(Directory.GetCurrentDirectory(), "preview.png"); ;
-                    }
-                }
-                catch (OperationCanceledException) { }
-            }
-        }
-        #endregion
-
-        #region Language
-        private void language_SelectedIndexChanged(object? sender, EventArgs? e)
-        {
-            if (initialLang == true) // so that it doesn't overwrite the setting, before it can be read
-            {
-                Properties.Settings.Default.Language = language.SelectedIndex;
-                Properties.Settings.Default.Save();
-            }
-
-            switch (language.SelectedIndex)
-            {
-                case 1:
-                    logo.Image = Properties.Resources.Logo1;
-                    labelLeader.Text = Properties.Settings.Default.CardType switch
-                    {
-                        1 => "Nazwa potwora",
-                        2 => "Nazwa bohatera",
-                        _ => "Nazwa przywódcy"
-                    };
-                    labelClass.Text = "Klasa przywódcy";
-                    labelSecondClass.Text = "Druga klasa";
-                    labelImg.Text = Properties.Settings.Default.CardType switch
-                    {
-                        1 => "Obrazek potwora",
-                        2 => "Obrazek bohatera",
-                        _ => "Obrazek przywódcy"
-                    };
-                    labelDescription.Text = "Opis mocy";
-                    leaderImgToolTip.ToolTipTitle = "Wymiary obazka";
-                    leaderImgToolTip.SetToolTip(selectImgButton, Properties.Settings.Default.CardType switch
-                    {
-                        1 => "Obrazek potwora (nie ca³a karta) ma wymiary 745x817. \nProgram automatycznie przytnie i przybli¿y obraz, je¿eli bêdzie to potrzebne.\n\nWspierane rozszerzenia plików:\n.png, .jpeg, .jpg, .gif (pierwsza klatka), .bmp, .webp, .pbm, .tiff, .tga",
-                        2 => "#TODO",
-                        _ => "Obrazek przywódcy (nie ca³a karta) ma wymiary 745x1176. \nProgram automatycznie przytnie i przybli¿y obraz, je¿eli bêdzie to potrzebne.\n\nWspierane rozszerzenia plików:\n.png, .jpeg, .jpg, .gif (pierwsza klatka), .bmp, .webp, .pbm, .tiff, .tga"
-                    });
-                    gradient.Text = "Tylni gradient";
-                    nameWhite.Text = "Bia³a nazwa";
-                    splitClass.Text = "Podwójna Klasa";
-                    this.Text = "To ja go tnê - Generator kart";
-                    labelBad.Text = "Wymagania rzutu - Pora¿ka";
-                    labelGood.Text = "Wymagania rzutu - UBIJ potwora";
-                    goodOutputText.Text = "UBIJ tego potwora";
-                    labelReq.Text = "Wymagania bohaterów";
-
-                    if(chosenClass.SelectedIndex == -1 && Properties.Settings.Default.CardType == 2)
-                    {
-                        this.Icon = Properties.Resources.bohater;
-                    }
-                    
-                    break;
-
-                default:
-                    logo.Image = Properties.Resources.Logo0;
-                    labelLeader.Text = Properties.Settings.Default.CardType switch
-                    {
-                        1 => "Monster name",
-                        2 => "Hero name",
-                        _ => "Leader name"
-                    };
-                    labelClass.Text = "Leader class";
-                    labelSecondClass.Text = "Second class";
-                    labelImg.Text = Properties.Settings.Default.CardType switch
-                    {
-                        1 => "Monster image",
-                        2 => "Hero image",
-                        _ => "Leader image"
-                    };
-                    labelDescription.Text = "Description";
-                    leaderImgToolTip.ToolTipTitle = "Image dimentions";
-                    leaderImgToolTip.SetToolTip(selectImgButton, Properties.Settings.Default.CardType switch
-                    {
-                        1 => "The monster image (not the whole card) dimentions are 745x817. \nThe program will automatically crop and zoom the image, if needed.\n\nSupported file extensions:\n.png, .jpeg, .jpg, .gif (first frame), .bmp, .webp, .pbm, .tiff, .tga",
-                        2 => "#TODO",
-                        _ => "The leader image (not the whole card) dimentions are 745x1176. \nThe program will automatically crop and zoom the image, if needed.\n\nSupported file extensions:\n.png, .jpeg, .jpg, .gif (first frame), .bmp, .webp, .pbm, .tiff, .tga"
-                    });
-                    gradient.Text = "Back gradient";
-                    nameWhite.Text = "White name";
-                    splitClass.Text = "Split Class";
-                    this.Text = "Here to Slay - Card generator";
-                    labelBad.Text = "Roll Requirements - Fail";
-                    labelGood.Text = "Roll Requirements - SLAY monster";
-                    goodOutputText.Text = "SLAY this Monster card";
-                    labelReq.Text = "Hero Requirements";
-                    descriptionText.Text = this.Icon.ToString();
-
-                    if(chosenClass.SelectedIndex == -1 && Properties.Settings.Default.CardType == 2)
-                    {
-                        this.Icon = Properties.Resources.hero;
-                    }
-
-                    break;
-            }
-            LocaliseClassOptions(language.SelectedIndex); // change class options based on selected language
-            renderPreview(sender, e);
-        }
-
-        int currentClassIndex;
-        int currentSecondClassIndex;
-        int currentHeroReq1Index;
-        int currentHeroReq2Index;
-        int currentHeroReq3Index;
-        int currentHeroReq4Index;
-        int currentHeroReq5Index;
-        private void LocaliseClassOptions(int lang)
-        {
-            currentClassIndex = chosenClass.SelectedIndex;
-            chosenClass.Items.Clear();
-
-            currentSecondClassIndex = chosenSecondClass.SelectedIndex;
-            chosenSecondClass.Items.Clear();
-
-            currentHeroReq1Index = heroReq1.SelectedIndex;
-            heroReq1.Items.Clear();
-            currentHeroReq2Index = heroReq2.SelectedIndex;
-            heroReq2.Items.Clear();
-            currentHeroReq3Index = heroReq3.SelectedIndex;
-            heroReq3.Items.Clear();
-            currentHeroReq4Index = heroReq4.SelectedIndex;
-            heroReq4.Items.Clear();
-            currentHeroReq5Index = heroReq5.SelectedIndex;
-            heroReq5.Items.Clear();
-
-            switch (lang)
-            {
-                case 1:
-                    heroReq1.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
-                    heroReq2.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
-                    heroReq3.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
-                    heroReq4.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
-                    heroReq5.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
-
-                    chosenClass.Items.Add(new ImageCBox("£owca", Properties.Resources.lowca.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Mag", Properties.Resources.mag.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Bard", Properties.Resources.najebus.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Stra¿nik", Properties.Resources.straznik.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Wojownik", Properties.Resources.wojownik.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Z³odziej", Properties.Resources.zlodziej.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Druid", Properties.Resources.druid.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Awanturnik", Properties.Resources.awanturnik.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Berserk", Properties.Resources.berserk.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Nekromanta", Properties.Resources.nekromanta.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Czarownik", Properties.Resources.czarownik.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("BRAK KLASY", Properties.Resources.empty.ToBitmap()));
-                    break;
-                default:
-                    heroReq1.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
-                    heroReq2.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
-                    heroReq3.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
-                    heroReq4.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
-                    heroReq5.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
-
-                    chosenClass.Items.Add(new ImageCBox("Ranger", Properties.Resources.lowca.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Wizard", Properties.Resources.mag.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Bard", Properties.Resources.najebus.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Guardian", Properties.Resources.straznik.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Fighter", Properties.Resources.wojownik.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Thief", Properties.Resources.zlodziej.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Druid", Properties.Resources.druid.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Warrior", Properties.Resources.awanturnik.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Berserker", Properties.Resources.berserk.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Necromancer", Properties.Resources.nekromanta.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Sorcerer", Properties.Resources.czarownik.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("NO CLASS", Properties.Resources.empty.ToBitmap()));
-                    break;
-            }
-
-            foreach (var item in chosenClass.Items)
-            {
-                chosenSecondClass.Items.Add(item);
-                heroReq1.Items.Add(item);
-                heroReq2.Items.Add(item);
-                heroReq3.Items.Add(item);
-                heroReq4.Items.Add(item);
-                heroReq5.Items.Add(item);
-            }
-
-            chosenClass.SelectedIndex = currentClassIndex;
-            chosenSecondClass.SelectedIndex = currentSecondClassIndex;
-
-            heroReq1.SelectedIndex = currentHeroReq1Index;
-            heroReq2.SelectedIndex = currentHeroReq2Index;
-            heroReq3.SelectedIndex = currentHeroReq3Index;
-            heroReq4.SelectedIndex = currentHeroReq4Index;
-            heroReq5.SelectedIndex = currentHeroReq5Index;
-        }
-        #endregion
-
-        private void chosenClass_SelectedIndexChanged(object? sender, EventArgs? e)
-        {
-            if (Properties.Settings.Default.CardType == 0 || Properties.Settings.Default.CardType == 2)
-            {
-                this.Icon = chosenClass.SelectedIndex switch
-                {
-                    0 => Properties.Resources.lowca,
-                    1 => Properties.Resources.mag,
-                    2 => Properties.Resources.najebus,
-                    3 => Properties.Resources.straznik,
-                    4 => Properties.Resources.wojownik,
-                    5 => Properties.Resources.zlodziej,
-                    6 => Properties.Resources.druid,
-                    7 => Properties.Resources.awanturnik,
-                    8 => Properties.Resources.berserk,
-                    9 => Properties.Resources.nekromanta,
-                    10 => Properties.Resources.czarownik,
-                    11 => Properties.Resources.empty,
-                    _ => Properties.Resources.LEADER
-                };
-                renderPreview(sender, e);
-            }
-
-        }
-        private void chosenSecondClass_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            renderPreview(sender, e);
-        }
-
-        private void selectImg_Click(object sender, EventArgs e)
-        {
-            using OpenFileDialog openFileDialog = new();
-            openFileDialog.Title = "Select a File";
-            openFileDialog.Filter = "Supported Image Files (*.png;*.jpeg;*.jpg;*.gif;*.bmp;*.webp;*.pbm;*.tiff;*.tga;)|*.png;*.jpeg;*.jpg;*.gif;*.bmp;*.webp;*.pbm;*.tiff;*.tga;|All Files (*.*)|*.*"; ;
-
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                string selectedFilePath = openFileDialog.FileName;
-                selectImgText.Text = selectedFilePath;
-            }
-        }
-
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        { System.Diagnostics.Process.Start(new ProcessStartInfo { FileName = "https://github.com/Danrejk", UseShellExecute = true }); }
-        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        { System.Diagnostics.Process.Start(new ProcessStartInfo { FileName = "https://github.com/Beukot", UseShellExecute = true }); }
-
-        private void previewImg_Click(object sender, EventArgs e)
-        {
-            PictureBox? pictureBox = sender as PictureBox;
-
-            if (pictureBox != null)
-            {
-                string previewImgPath = pictureBox.ImageLocation;
-                string? folderPath = Path.GetDirectoryName(previewImgPath);
-                if (folderPath != null)
-                {
-                    Process.Start("explorer.exe", folderPath);
-                }
-            }
-        }
-
-        private void advanced_Click(object sender, EventArgs e)
-        {
-            PictureBox? pictureBox = sender as PictureBox ?? throw new NotImplementedException();
-            FlowLayoutPanel list = pictureBox.Name switch
-            {
-                "advancedName" => advancedNameBox,
-                "advancedClass" => advancedClassBox,
-                _ => throw new NotImplementedException(),
-            };
-            list.Visible = !list.Visible;
-            pictureBox.Image = list.Visible switch
-            {
-                true => Properties.Resources.open,
-                false => Properties.Resources.closed
-            };
-        }
-
-        private void splitClass_CheckStateChanged(object sender, EventArgs e)
-        {
-            switch (splitClass.Checked)
-            {
-                case false:
-                    chosenSecondClass.Visible = false;
-                    labelSecondClass.Visible = false;
-                    clearSecondClass.Visible = false;
-                    chosenClass.Location = new Point(chosenClass.Location.X + 63, chosenClass.Location.Y);
-                    labelClass.Location = new Point(labelClass.Location.X + 63, labelClass.Location.Y);
-                    chosenSecondClass.SelectedIndex = -1;
-                    break;
-                case true:
-                    chosenClass.Location = new Point(chosenClass.Location.X - 63, chosenClass.Location.Y);
-                    labelClass.Location = new Point(labelClass.Location.X - 63, labelClass.Location.Y);
-                    chosenSecondClass.Visible = true;
-                    labelSecondClass.Visible = true;
-                    clearSecondClass.Visible = true;
-                    break;
-            }
-        }
-
         // TODO: make it one method
+        // To anyone trying to understand the code below: I'm sorry, I'm not proud of it either. The lazynies is too great.
         #region Card Type Selection 
         private void LeaderCard_Click(object? sender, EventArgs? e)
         {
@@ -627,7 +263,8 @@ namespace HereToSlay
                 Properties.Settings.Default.CardType = 2;
                 Properties.Settings.Default.Save();
 
-                if (chosenClass.SelectedIndex == -1) {
+                if (chosenClass.SelectedIndex == -1)
+                {
                     this.Icon = Properties.Settings.Default.Language switch
                     {
                         1 => Properties.Resources.bohater,
@@ -699,6 +336,334 @@ namespace HereToSlay
         }
         #endregion
 
+        #region Direct Rendering (Preview and Save)
+        private void RenderButton_Press(object sender, EventArgs e)
+        {
+            using SaveFileDialog SaveRenderDialog = new();
+            SaveRenderDialog.Filter = "Supported Image Files (*.png;)|*.png;|All Files (*.*)|*.*";
+            SaveRenderDialog.FilterIndex = 1;
+
+            if (SaveRenderDialog.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = SaveRenderDialog.FileName;
+                switch (Properties.Settings.Default.CardType)
+                {
+                    case 0:
+                        GeneratorBackend.Program.GenerateLeader(filePath, language.SelectedIndex, nameText.Text, new int[] { chosenClass.SelectedIndex, chosenSecondClass.SelectedIndex }, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked);
+                        break;
+                    case 1:
+                        RollOutput good = new((int)goodOutputNum.Value, goodOutputSym.SelectedIndex, goodOutputText.Text);
+                        RollOutput bad = new((int)badOutputNum.Value, badOutputSym.SelectedIndex, badOutputText.Text);
+                        int[] desiredRequirements = new int[] { heroReq1.SelectedIndex, heroReq2.SelectedIndex, heroReq3.SelectedIndex, heroReq4.SelectedIndex, heroReq5.SelectedIndex };
+                        GeneratorBackend.Program.GenerateMonster(filePath, language.SelectedIndex, nameText.Text, desiredRequirements, good, bad, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked);
+                        break;
+                    case 2:
+                        GeneratorBackend.Program.GenerateLeader(filePath, language.SelectedIndex, nameText.Text, new int[] { chosenClass.SelectedIndex, chosenSecondClass.SelectedIndex }, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked);
+                        break;
+                    default:
+                        throw new NotImplementedException();
+                }
+
+                previewImg.ImageLocation = filePath;
+            }
+        }
+
+        private CancellationTokenSource? cancellationTokenSource;
+        bool initialLang = false; //it's so that when the program opens and sets the remembered language, it doesn't render the preview automatically.
+        private async void renderPreview(object? sender, EventArgs? e)
+        {
+            cancellationTokenSource?.Cancel();
+            cancellationTokenSource = new CancellationTokenSource();
+            if (initialLang)
+            {
+                try
+                {
+                    int timer = 1;
+                    while (timer > 0)
+                    {
+                        cancellationTokenSource.Token.ThrowIfCancellationRequested();
+
+                        await Task.Delay(200, cancellationTokenSource.Token);
+                        timer--;
+                    }
+                    if (timer >= 0)
+                    {
+                        switch (Properties.Settings.Default.CardType)
+                        {
+                            case 0:
+                                GeneratorBackend.Program.GenerateLeader(null, language.SelectedIndex, nameText.Text, new int[] { chosenClass.SelectedIndex, chosenSecondClass.SelectedIndex }, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked);
+                                break;
+                            case 1:
+                                RollOutput good = new((int)goodOutputNum.Value, goodOutputSym.SelectedIndex, goodOutputText.Text);
+                                RollOutput bad = new((int)badOutputNum.Value, badOutputSym.SelectedIndex, badOutputText.Text);
+                                int[] desiredRequirements = new int[] { heroReq1.SelectedIndex, heroReq2.SelectedIndex, heroReq3.SelectedIndex, heroReq4.SelectedIndex, heroReq5.SelectedIndex };
+                                GeneratorBackend.Program.GenerateMonster(null, language.SelectedIndex, nameText.Text, desiredRequirements, good, bad, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked);
+                                break;
+                            case 2:
+                                GeneratorBackend.Program.GenerateLeader(null, language.SelectedIndex, nameText.Text, new int[] { chosenClass.SelectedIndex, chosenSecondClass.SelectedIndex }, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked);
+                                break;
+                            default:
+                                throw new NotImplementedException();
+                        }
+                        previewImg.ImageLocation = Path.Combine(Directory.GetCurrentDirectory(), "preview.png"); ;
+                    }
+                }
+                catch (OperationCanceledException) { }
+            }
+        }
+        #endregion
+        private void previewImg_Click(object sender, EventArgs e)
+        {
+            PictureBox? pictureBox = sender as PictureBox;
+
+            if (pictureBox != null)
+            {
+                string previewImgPath = pictureBox.ImageLocation;
+                string? folderPath = Path.GetDirectoryName(previewImgPath);
+                if (folderPath != null)
+                {
+                    Process.Start("explorer.exe", folderPath);
+                }
+            }
+        }
+
+        #region Language
+        private void language_SelectedIndexChanged(object? sender, EventArgs? e)
+        {
+            if (initialLang == true) // so that it doesn't overwrite the setting, before it can be read
+            {
+                Properties.Settings.Default.Language = language.SelectedIndex;
+                Properties.Settings.Default.Save();
+            }
+
+            switch (language.SelectedIndex)
+            {
+                case 1:
+                    logo.Image = Properties.Resources.Logo1;
+                    labelLeader.Text = Properties.Settings.Default.CardType switch
+                    {
+                        1 => "Nazwa potwora",
+                        2 => "Nazwa bohatera",
+                        _ => "Nazwa przywódcy"
+                    };
+                    labelClass.Text = "Klasa przywódcy";
+                    labelSecondClass.Text = "Druga klasa";
+                    labelImg.Text = Properties.Settings.Default.CardType switch
+                    {
+                        1 => "Obrazek potwora",
+                        2 => "Obrazek bohatera",
+                        _ => "Obrazek przywódcy"
+                    };
+                    labelDescription.Text = "Opis mocy";
+                    leaderImgToolTip.ToolTipTitle = "Wymiary obazka";
+                    leaderImgToolTip.SetToolTip(selectImgButton, Properties.Settings.Default.CardType switch
+                    {
+                        1 => "Obrazek potwora (nie ca³a karta) ma wymiary 745x817. \nProgram automatycznie przytnie i przybli¿y obraz, je¿eli bêdzie to potrzebne.\n\nWspierane rozszerzenia plików:\n.png, .jpeg, .jpg, .gif (pierwsza klatka), .bmp, .webp, .pbm, .tiff, .tga",
+                        2 => "#TODO",
+                        _ => "Obrazek przywódcy (nie ca³a karta) ma wymiary 745x1176. \nProgram automatycznie przytnie i przybli¿y obraz, je¿eli bêdzie to potrzebne.\n\nWspierane rozszerzenia plików:\n.png, .jpeg, .jpg, .gif (pierwsza klatka), .bmp, .webp, .pbm, .tiff, .tga"
+                    });
+                    gradient.Text = "Tylni gradient";
+                    nameWhite.Text = "Bia³a nazwa";
+                    splitClass.Text = "Podwójna Klasa";
+                    this.Text = "To ja go tnê - Generator kart";
+                    labelBad.Text = "Wymagania rzutu - Pora¿ka";
+                    labelGood.Text = "Wymagania rzutu - UBIJ potwora";
+                    goodOutputText.Text = "UBIJ tego potwora";
+                    labelReq.Text = "Wymagania bohaterów";
+
+                    if(chosenClass.SelectedIndex == -1 && Properties.Settings.Default.CardType == 2)
+                    {
+                        this.Icon = Properties.Resources.bohater;
+                    }
+                    
+                    break;
+
+                default:
+                    logo.Image = Properties.Resources.Logo0;
+                    labelLeader.Text = Properties.Settings.Default.CardType switch
+                    {
+                        1 => "Monster name",
+                        2 => "Hero name",
+                        _ => "Leader name"
+                    };
+                    labelClass.Text = "Leader class";
+                    labelSecondClass.Text = "Second class";
+                    labelImg.Text = Properties.Settings.Default.CardType switch
+                    {
+                        1 => "Monster image",
+                        2 => "Hero image",
+                        _ => "Leader image"
+                    };
+                    labelDescription.Text = "Description";
+                    leaderImgToolTip.ToolTipTitle = "Image dimentions";
+                    leaderImgToolTip.SetToolTip(selectImgButton, Properties.Settings.Default.CardType switch
+                    {
+                        1 => "The monster image (not the whole card) dimentions are 745x817. \nThe program will automatically crop and zoom the image, if needed.\n\nSupported file extensions:\n.png, .jpeg, .jpg, .gif (first frame), .bmp, .webp, .pbm, .tiff, .tga",
+                        2 => "#TODO",
+                        _ => "The leader image (not the whole card) dimentions are 745x1176. \nThe program will automatically crop and zoom the image, if needed.\n\nSupported file extensions:\n.png, .jpeg, .jpg, .gif (first frame), .bmp, .webp, .pbm, .tiff, .tga"
+                    });
+                    gradient.Text = "Back gradient";
+                    nameWhite.Text = "White name";
+                    splitClass.Text = "Split Class";
+                    this.Text = "Here to Slay - Card generator";
+                    labelBad.Text = "Roll Requirements - Fail";
+                    labelGood.Text = "Roll Requirements - SLAY monster";
+                    goodOutputText.Text = "SLAY this Monster card";
+                    labelReq.Text = "Hero Requirements";
+
+                    if(chosenClass.SelectedIndex == -1 && Properties.Settings.Default.CardType == 2)
+                    {
+                        this.Icon = Properties.Resources.hero;
+                    }
+
+                    break;
+            }
+            LocaliseClassOptions(language.SelectedIndex); // change class options based on selected language
+            renderPreview(sender, e);
+        }
+
+        int currentClassIndex;
+        int currentSecondClassIndex;
+        int currentHeroReq1Index;
+        int currentHeroReq2Index;
+        int currentHeroReq3Index;
+        int currentHeroReq4Index;
+        int currentHeroReq5Index;
+        private void LocaliseClassOptions(int lang)
+        {
+            currentClassIndex = chosenClass.SelectedIndex;
+            chosenClass.Items.Clear();
+
+            currentSecondClassIndex = chosenSecondClass.SelectedIndex;
+            chosenSecondClass.Items.Clear();
+
+            currentHeroReq1Index = heroReq1.SelectedIndex;
+            heroReq1.Items.Clear();
+            currentHeroReq2Index = heroReq2.SelectedIndex;
+            heroReq2.Items.Clear();
+            currentHeroReq3Index = heroReq3.SelectedIndex;
+            heroReq3.Items.Clear();
+            currentHeroReq4Index = heroReq4.SelectedIndex;
+            heroReq4.Items.Clear();
+            currentHeroReq5Index = heroReq5.SelectedIndex;
+            heroReq5.Items.Clear();
+
+            switch (lang)
+            {
+                case 1:
+                    heroReq1.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
+                    heroReq2.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
+                    heroReq3.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
+                    heroReq4.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
+                    heroReq5.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
+
+                    chosenClass.Items.Add(new ImageCBox("£owca", Properties.Resources.lowca.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Mag", Properties.Resources.mag.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Bard", Properties.Resources.najebus.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Stra¿nik", Properties.Resources.straznik.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Wojownik", Properties.Resources.wojownik.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Z³odziej", Properties.Resources.zlodziej.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Druid", Properties.Resources.druid.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Awanturnik", Properties.Resources.awanturnik.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Berserk", Properties.Resources.berserk.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Nekromanta", Properties.Resources.nekromanta.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Czarownik", Properties.Resources.czarownik.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("BRAK KLASY", Properties.Resources.empty.ToBitmap()));
+                    break;
+                default:
+                    heroReq1.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
+                    heroReq2.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
+                    heroReq3.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
+                    heroReq4.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
+                    heroReq5.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
+
+                    chosenClass.Items.Add(new ImageCBox("Ranger", Properties.Resources.lowca.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Wizard", Properties.Resources.mag.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Bard", Properties.Resources.najebus.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Guardian", Properties.Resources.straznik.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Fighter", Properties.Resources.wojownik.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Thief", Properties.Resources.zlodziej.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Druid", Properties.Resources.druid.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Warrior", Properties.Resources.awanturnik.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Berserker", Properties.Resources.berserk.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Necromancer", Properties.Resources.nekromanta.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Sorcerer", Properties.Resources.czarownik.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("NO CLASS", Properties.Resources.empty.ToBitmap()));
+                    break;
+            }
+
+            foreach (var item in chosenClass.Items)
+            {
+                chosenSecondClass.Items.Add(item);
+                heroReq1.Items.Add(item);
+                heroReq2.Items.Add(item);
+                heroReq3.Items.Add(item);
+                heroReq4.Items.Add(item);
+                heroReq5.Items.Add(item);
+            }
+
+            chosenClass.SelectedIndex = currentClassIndex;
+            chosenSecondClass.SelectedIndex = currentSecondClassIndex;
+
+            heroReq1.SelectedIndex = currentHeroReq1Index;
+            heroReq2.SelectedIndex = currentHeroReq2Index;
+            heroReq3.SelectedIndex = currentHeroReq3Index;
+            heroReq4.SelectedIndex = currentHeroReq4Index;
+            heroReq5.SelectedIndex = currentHeroReq5Index;
+        }
+        #endregion
+
+        #region Class Related Methods
+        private void chosenClass_SelectedIndexChanged(object? sender, EventArgs? e)
+        {
+            if (Properties.Settings.Default.CardType == 0 || Properties.Settings.Default.CardType == 2)
+            {
+                this.Icon = chosenClass.SelectedIndex switch
+                {
+                    0 => Properties.Resources.lowca,
+                    1 => Properties.Resources.mag,
+                    2 => Properties.Resources.najebus,
+                    3 => Properties.Resources.straznik,
+                    4 => Properties.Resources.wojownik,
+                    5 => Properties.Resources.zlodziej,
+                    6 => Properties.Resources.druid,
+                    7 => Properties.Resources.awanturnik,
+                    8 => Properties.Resources.berserk,
+                    9 => Properties.Resources.nekromanta,
+                    10 => Properties.Resources.czarownik,
+                    11 => Properties.Resources.empty,
+                    _ => Properties.Resources.LEADER
+                };
+                renderPreview(sender, e);
+            }
+
+        }
+        private void chosenSecondClass_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            renderPreview(sender, e);
+        }
+
+        private void splitClass_CheckStateChanged(object sender, EventArgs e)
+        {
+            switch (splitClass.Checked)
+            {
+                case false:
+                    chosenSecondClass.Visible = false;
+                    labelSecondClass.Visible = false;
+                    clearSecondClass.Visible = false;
+                    chosenClass.Location = new Point(chosenClass.Location.X + 63, chosenClass.Location.Y);
+                    labelClass.Location = new Point(labelClass.Location.X + 63, labelClass.Location.Y);
+                    chosenSecondClass.SelectedIndex = -1;
+                    break;
+                case true:
+                    chosenClass.Location = new Point(chosenClass.Location.X - 63, chosenClass.Location.Y);
+                    labelClass.Location = new Point(labelClass.Location.X - 63, labelClass.Location.Y);
+                    chosenSecondClass.Visible = true;
+                    labelSecondClass.Visible = true;
+                    clearSecondClass.Visible = true;
+                    break;
+            }
+        }
         private void clearSelectedClass(object sender, EventArgs e)
         {
             if (sender is Button button)
@@ -726,6 +691,42 @@ namespace HereToSlay
                 }
             }
         }
+        #endregion
+
+        private void advanced_Click(object sender, EventArgs e)
+        {
+            PictureBox? pictureBox = sender as PictureBox ?? throw new NotImplementedException();
+            FlowLayoutPanel list = pictureBox.Name switch
+            {
+                "advancedName" => advancedNameBox,
+                "advancedClass" => advancedClassBox,
+                _ => throw new NotImplementedException(),
+            };
+            list.Visible = !list.Visible;
+            pictureBox.Image = list.Visible switch
+            {
+                true => Properties.Resources.open,
+                false => Properties.Resources.closed
+            };
+        }
+
+        private void selectImg_Click(object sender, EventArgs e)
+        {
+            using OpenFileDialog openFileDialog = new();
+            openFileDialog.Title = "Select a File";
+            openFileDialog.Filter = "Supported Image Files (*.png;*.jpeg;*.jpg;*.gif;*.bmp;*.webp;*.pbm;*.tiff;*.tga;)|*.png;*.jpeg;*.jpg;*.gif;*.bmp;*.webp;*.pbm;*.tiff;*.tga;|All Files (*.*)|*.*"; ;
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string selectedFilePath = openFileDialog.FileName;
+                selectImgText.Text = selectedFilePath;
+            }
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        { System.Diagnostics.Process.Start(new ProcessStartInfo { FileName = "https://github.com/Danrejk", UseShellExecute = true }); }
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        { System.Diagnostics.Process.Start(new ProcessStartInfo { FileName = "https://github.com/Beukot", UseShellExecute = true }); }
 
         private void OutputSym_SelectedIndexChanged(object sender, EventArgs e)
         {
