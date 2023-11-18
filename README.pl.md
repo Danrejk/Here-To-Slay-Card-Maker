@@ -142,13 +142,15 @@ W plikach dołączonych do programu znajdują się zasoby do drukowania w domu. 
 Metody drukowania mogą się różnić w zależności od drukarki, ale to, co udało mi się sprawdzić, to:
 <ol>
 <img width="33%" align="right" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/HereToSlay/PrintingAssets/English/leaderBack_A4_template.png">
+    <li>Włóż grubszą kartę A4 do drukarki</li>
     <li>Wyrównaj wygenerowane karty jak na obrazie po prawej stronie.</li>
     <li><b>OBRÓĆ obraz o 180°</b>, aby zniwelować domyślny margines dolny na wielu drukarkach.</li>
     <li>Wydrukuj przednią kartę z ustawieniem automatycznego przycinania obrazu <b>WYŁĄCZONE</b>.</li>
     <li>Obróć papier <b>TYLKO na osi Y</b> i wsuń go z powrotem do drukarki.</li>
     <li>Wydrukuj tyły kart, które są dołączone w zasobach.</li>
 </ol>
-Mam nadzieję, że to również zadziała u innych. Przed drukowaniem w kolorze zalecam przetestowanie go, wykonując pierwszy wers druku tylko czarnym tuszem, aby sprawdzić, czy wszystko jest odpowiednio wyrównane i ma właściwą skalę.
+Mam nadzieję, że to również zadziała u innych. Przed drukowaniem w kolorze zalecam przetestowanie go, wykonując pierwszy wers druku tylko czarnym tuszem, aby sprawdzić, czy wszystko jest odpowiednio wyrównane i ma właściwą skalę.<br>
+Oczywiście można drukować różne typy kart na raz na tej samej kartce, np. 1 Potwór, 2 Przywódców i 2 Bohaterów, ale do tego trzeba odrobiny własnej pracy, aby dopasować wszystko do waszego przypadku.
 
 ### Drukowanie Profesjonalne
 Niestety nie wiem dokładnie, jak to działa. Ale widziałem wiele postów na temat profesjonalnego drukowania tych kart na stronach takich jak reddit, więc polecam tam poszukać.
