@@ -22,7 +22,7 @@ namespace HereToSlay
         public Menu()
         {
             InitializeComponent();
-            this.Icon = Properties.Resources.LEADER;
+            this.DoubleBuffered = true;
 
             #region Fonts
             Font fontUI = FontLoader.GetFont("SourceSans3.ttf", 10);
@@ -125,6 +125,12 @@ namespace HereToSlay
             {
                 Properties.Settings.Default.CardType = 0;
                 Properties.Settings.Default.Save();
+
+                if (chosenClass.SelectedIndex == -1)
+                {
+                    this.Icon = Properties.Resources.LEADER;
+                }
+
                 MonsterCard.Checked = false;
                 MonsterCard.BackColor = SystemColors.Control;
                 LeaderCard.Checked = true;
@@ -193,7 +199,9 @@ namespace HereToSlay
             {
                 Properties.Settings.Default.CardType = 1;
                 Properties.Settings.Default.Save();
+
                 this.Icon = Properties.Resources.monster;
+
                 LeaderCard.Checked = false;
                 LeaderCard.BackColor = SystemColors.Control;
                 MonsterCard.Checked = true;
