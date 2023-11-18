@@ -80,6 +80,11 @@
             clearHeroReq4 = new Button();
             clearHeroReq5 = new Button();
             clearHeroReq3 = new Button();
+            maxItems = new NumericUpDown();
+            labelMaxItem = new Label();
+            itemImg = new PictureBox();
+            itemImg2 = new PictureBox();
+            itemImgMore = new Label();
             ((System.ComponentModel.ISupportInitialize)logo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)previewImg).BeginInit();
             advancedNameBox.SuspendLayout();
@@ -89,6 +94,9 @@
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)badOutputNum).BeginInit();
             ((System.ComponentModel.ISupportInitialize)goodOutputNum).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)maxItems).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)itemImg).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)itemImg2).BeginInit();
             SuspendLayout();
             // 
             // RENDER
@@ -557,7 +565,7 @@
             // 
             // badOutputNum
             // 
-            badOutputNum.Font = new Font("Symbol", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            badOutputNum.Font = new Font("Microsoft Sans Serif", 10.75F, FontStyle.Regular, GraphicsUnit.Point);
             badOutputNum.Location = new Point(84, 415);
             badOutputNum.Margin = new Padding(0);
             badOutputNum.Name = "badOutputNum";
@@ -656,7 +664,7 @@
             // goodOutputNum
             // 
             goodOutputNum.BorderStyle = BorderStyle.FixedSingle;
-            goodOutputNum.Font = new Font("Symbol", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            goodOutputNum.Font = new Font("Microsoft Sans Serif", 10.75F, FontStyle.Regular, GraphicsUnit.Point);
             goodOutputNum.Location = new Point(84, 457);
             goodOutputNum.Name = "goodOutputNum";
             goodOutputNum.Size = new Size(35, 24);
@@ -773,12 +781,82 @@
             clearHeroReq3.Visible = false;
             clearHeroReq3.Click += clearSelectedClass;
             // 
+            // maxItems
+            // 
+            maxItems.BorderStyle = BorderStyle.FixedSingle;
+            maxItems.Font = new Font("Microsoft Sans Serif", 10.75F, FontStyle.Regular, GraphicsUnit.Point);
+            maxItems.Location = new Point(177, 398);
+            maxItems.Name = "maxItems";
+            maxItems.Size = new Size(35, 24);
+            maxItems.TabIndex = 50;
+            maxItems.TextAlign = HorizontalAlignment.Right;
+            maxItems.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            maxItems.Visible = false;
+            maxItems.ValueChanged += maxItems_ValueChanged;
+            // 
+            // labelMaxItem
+            // 
+            labelMaxItem.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            labelMaxItem.BackColor = Color.Transparent;
+            labelMaxItem.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            labelMaxItem.ForeColor = Color.White;
+            labelMaxItem.Location = new Point(0, 379);
+            labelMaxItem.Margin = new Padding(0);
+            labelMaxItem.Name = "labelMaxItem";
+            labelMaxItem.RightToLeft = RightToLeft.No;
+            labelMaxItem.Size = new Size(414, 20);
+            labelMaxItem.TabIndex = 51;
+            labelMaxItem.Text = "Max Item Ammount";
+            labelMaxItem.TextAlign = ContentAlignment.BottomCenter;
+            labelMaxItem.Visible = false;
+            // 
+            // itemImg
+            // 
+            itemImg.Image = Properties.Resources.item;
+            itemImg.Location = new Point(210, 398);
+            itemImg.Margin = new Padding(1);
+            itemImg.Name = "itemImg";
+            itemImg.Size = new Size(24, 24);
+            itemImg.SizeMode = PictureBoxSizeMode.Zoom;
+            itemImg.TabIndex = 52;
+            itemImg.TabStop = false;
+            // 
+            // itemImg2
+            // 
+            itemImg2.Image = Properties.Resources.item;
+            itemImg2.Location = new Point(236, 398);
+            itemImg2.Margin = new Padding(1);
+            itemImg2.Name = "itemImg2";
+            itemImg2.Size = new Size(24, 24);
+            itemImg2.SizeMode = PictureBoxSizeMode.Zoom;
+            itemImg2.TabIndex = 53;
+            itemImg2.TabStop = false;
+            itemImg2.Visible = false;
+            // 
+            // itemImgMore
+            // 
+            itemImgMore.AutoSize = true;
+            itemImgMore.BackColor = Color.Transparent;
+            itemImgMore.Font = new Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point);
+            itemImgMore.ForeColor = Color.White;
+            itemImgMore.Location = new Point(258, 397);
+            itemImgMore.Margin = new Padding(0);
+            itemImgMore.Name = "itemImgMore";
+            itemImgMore.Size = new Size(24, 25);
+            itemImgMore.TabIndex = 54;
+            itemImgMore.Text = "+";
+            itemImgMore.Visible = false;
+            // 
             // Menu
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackColor = Color.FromArgb(39, 43, 52);
             BackgroundImage = Properties.Resources.gradient;
             ClientSize = new Size(828, 711);
+            Controls.Add(itemImg2);
+            Controls.Add(itemImg);
+            Controls.Add(labelMaxItem);
+            Controls.Add(maxItems);
             Controls.Add(advancedNameBox);
             Controls.Add(badOutputText);
             Controls.Add(clearHeroReq5);
@@ -796,7 +874,6 @@
             Controls.Add(goodOutputText);
             Controls.Add(goodOutputSym);
             Controls.Add(goodOutputNum);
-            Controls.Add(labelBad);
             Controls.Add(badOutputSym);
             Controls.Add(badOutputNum);
             Controls.Add(chosenSecondClass);
@@ -820,6 +897,8 @@
             Controls.Add(menuStrip1);
             Controls.Add(previewImg);
             Controls.Add(labelGood);
+            Controls.Add(itemImgMore);
+            Controls.Add(labelBad);
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MainMenuStrip = menuStrip1;
@@ -841,6 +920,9 @@
             menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)badOutputNum).EndInit();
             ((System.ComponentModel.ISupportInitialize)goodOutputNum).EndInit();
+            ((System.ComponentModel.ISupportInitialize)maxItems).EndInit();
+            ((System.ComponentModel.ISupportInitialize)itemImg).EndInit();
+            ((System.ComponentModel.ISupportInitialize)itemImg2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -898,5 +980,10 @@
         private Button clearHeroReq5;
         private Button clearHeroReq3;
         private ToolStripMenuItem HeroCard;
+        private NumericUpDown maxItems;
+        private Label labelMaxItem;
+        private PictureBox itemImg;
+        private PictureBox itemImg2;
+        private Label itemImgMore;
     }
 }
