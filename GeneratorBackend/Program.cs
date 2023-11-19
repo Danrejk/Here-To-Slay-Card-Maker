@@ -103,6 +103,8 @@ namespace GeneratorBackend
             Image card = Raylib.LoadImage("GeneratorAssets/template/card_tarrot.png");
             Rectangle imageRec = new(0, 0, CARD_WIDTH_TARROT, CARD_HEIGHT_TARROT);
 
+            Raylib.ImageDraw(ref card, leader, imageRec, new(41, 41, 745, 1176), Color.WHITE);
+
             Image classSymbol;
             Color desiredColor;
             string leaderTitle;
@@ -338,15 +340,13 @@ namespace GeneratorBackend
                 Raylib.ImageCrop(ref secondClassSymbol, new Rectangle(0, 0, 51, 102));
             }
             #endregion
-
-            Raylib.ImageDraw(ref card, leader, imageRec, new(41, 41, 745, 1176), Color.WHITE);
-            //Raylib.ImageDraw(ref card, inst.bottom, imageRec, imageRec, Color.WHITE);
-
+           
             if (addGradient) { Raylib.ImageDraw(ref card, inst.gradient, imageRec, imageRec, Color.WHITE); }
 
             // Draw Class Symbol(s) and Colored Frame(s)
-            Image frameTinted = Raylib.ImageCopy(inst.frameLeader); // create a copy of the frame asset, so that the original is not modified
             Raylib.ImageDraw(ref card, classSymbol, imageRec, new(363, 1167, 102, 102), Color.WHITE);
+
+            Image frameTinted = Raylib.ImageCopy(inst.frameLeader); // create a copy of the frame asset, so that the original is not modified
             if (desiredClass[1] != -1) // check if there is a second class
             {
                 Raylib.ImageDraw(ref card, secondClassSymbol, imageRec, new(363, 1167, 51, 102), Color.WHITE);
@@ -396,6 +396,7 @@ namespace GeneratorBackend
             Rectangle imageRec = new(0, 0, CARD_WIDTH_TARROT, CARD_HEIGHT_TARROT);
 
             Raylib.ImageDraw(ref card, monster, imageRec, new(41, 41, 745, 824), Color.WHITE);
+
             if (addGradient) { Raylib.ImageDraw(ref card, inst.gradient, imageRec, imageRec, Color.WHITE); }
             Raylib.ImageDraw(ref card, inst.frameMonster, imageRec, imageRec, new(23, 26, 30, 255));
 
@@ -508,6 +509,8 @@ namespace GeneratorBackend
             // This has to be loaded each time, to clear the image from the previous render
             Image card = Raylib.LoadImage("GeneratorAssets/template/card_poker.png");
             Rectangle imageRec = new(0, 0, CARD_WIDTH_POKER, CARD_HEIGHT_POKER);
+
+            Raylib.ImageDraw(ref card, leader, imageRec, new(100, 236, 545, 545), Color.WHITE);
 
             Image classSymbol;
             Color desiredColor;
@@ -626,13 +629,12 @@ namespace GeneratorBackend
                     break;
             }
 
-            Raylib.ImageDraw(ref card, leader, imageRec, new(100, 236, 545, 545), Color.WHITE);
             //Raylib.ImageDraw(ref card, inst.bottom, imageRec, imageRec, Color.WHITE);
 
             // Draw Class Symbol(s) and Colored Frame(s)
-            Image frameTinted = Raylib.ImageCopy(inst.frameHero); // create a copy of the frame asset, so that the original is not modified
-            Raylib.ImageDraw(ref card, classSymbol, imageRec, new(363, 1167, 102, 102), Color.WHITE);
+            Raylib.ImageDraw(ref card, classSymbol, imageRec, new(321, 727, 102, 102), Color.WHITE);
 
+            Image frameTinted = Raylib.ImageCopy(inst.frameHero); // create a copy of the frame asset, so that the original is not 
             Raylib.ImageColorTint(ref frameTinted, desiredColor);
             Raylib.ImageDraw(ref card, frameTinted, imageRec, imageRec, Color.WHITE);
 
@@ -757,14 +759,16 @@ namespace GeneratorBackend
             Raylib.ImageDrawTextEx(ref card, inst.descFont, output.ToString() + word.ToString(), new Vector2(DESC_MARGIN, (CARD_HEIGHT_TARROT - offset) + textBlockCenter + ((textSize.Y - 5 + DESC_LINE_SPACING) * currentLine)), AssetManager.DESC_SIZE, DESC_FONT_SPACING, descTextColor);
         }
 
+        #region Change Image
         static Image leader = new();
         static Image monster = new();
+        static Image hero = new();
         static Image<Rgba32>? image;
 
         static string lastPathLeader = "";
         static string lastPathMonster = "";
+        static string lastPathHero = "";
 
-        #region Change Image
         static void ChangeLeaderImage(string path)
         {
             if (path == lastPathLeader) { return; }
@@ -845,12 +849,12 @@ namespace GeneratorBackend
 
         static void ChangeHeroImage(string path)
         {
-            if (path == lastPathLeader) { return; }
-            lastPathLeader = path;
+            if (path == lastPathHero) { return; }
+            lastPathHero = path;
 
             if (File.Exists(path))
             {
-                Raylib.UnloadImage(leader);
+                Raylib.UnloadImage(hero);
                 using var file = File.OpenRead(path);
                 image = SixLabors.ImageSharp.Image.Load<Rgba32>(file);
 
@@ -881,7 +885,6 @@ namespace GeneratorBackend
                 #endregion
             }
         }
-
         #endregion
     }
 

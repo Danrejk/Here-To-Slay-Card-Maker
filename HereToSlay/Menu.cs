@@ -186,9 +186,12 @@ namespace HereToSlay
 
                 nameWhite.Checked = false;
 
+                this.Update();
+                updateLanguage(sender, e);
+                this.Update();
+
                 renderPreviewNow(sender, e);
                 previewImg.ImageLocation = Path.Combine(Directory.GetCurrentDirectory(), "preview.png");
-                updateLanguage(sender, e);
                 previewImg.SizeMode = PictureBoxSizeMode.StretchImage;
             }
         }
@@ -262,9 +265,12 @@ namespace HereToSlay
 
                 nameWhite.Checked = true;
 
+                this.Update();
+                updateLanguage(sender, e);
+                this.Update();
+
                 renderPreviewNow(sender, e);
                 previewImg.ImageLocation = Path.Combine(Directory.GetCurrentDirectory(), "preview.png");
-                updateLanguage(sender, e);
                 previewImg.SizeMode = PictureBoxSizeMode.StretchImage;
             }
         }
@@ -342,9 +348,12 @@ namespace HereToSlay
                     if (c.Name.Contains("clear")) { c.Visible = false; };
                 }
 
+                this.Update();
+                updateLanguage(sender, e);
+                this.Update();
+
                 renderPreviewNow(sender, e);
                 previewImg.ImageLocation = Path.Combine(Directory.GetCurrentDirectory(), "preview.png");
-                updateLanguage(sender, e);
                 previewImg.SizeMode = PictureBoxSizeMode.Zoom;
             }
         }
