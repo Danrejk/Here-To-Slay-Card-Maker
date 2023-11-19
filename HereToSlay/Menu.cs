@@ -130,7 +130,7 @@ namespace HereToSlay
                 {
                     this.Icon = Properties.Resources.LEADER;
                 }
-                
+
                 MonsterCard.Checked = false;
                 MonsterCard.BackColor = SystemColors.Control;
                 LeaderCard.Checked = true;
@@ -442,22 +442,14 @@ namespace HereToSlay
             }
         }
         #endregion
-        private void previewImg_Click(object sender, EventArgs e)
+       
+        #region Language
+        private void language_SelectedIndexChanged(object sender, EventArgs e)
         {
-            PictureBox? pictureBox = sender as PictureBox;
-
-            if (pictureBox != null)
-            {
-                string previewImgPath = pictureBox.ImageLocation;
-                string? folderPath = Path.GetDirectoryName(previewImgPath);
-                if (folderPath != null)
-                {
-                    Process.Start("explorer.exe", folderPath);
-                }
-            }
+            updateLanguage(sender, e);
+            renderPreview(sender, e);
         }
 
-        #region Language
         private void updateLanguage(object? sender, EventArgs? e)
         {
             if (initialLang == true) // so that it doesn't overwrite the setting, before it can be read
@@ -551,6 +543,7 @@ namespace HereToSlay
             LocaliseClassOptions(language.SelectedIndex); // change class options based on selected language
         }
 
+        // These are made so that after changing the language, the selected classes stay the same.
         int currentClassIndex;
         int currentSecondClassIndex;
         int currentHeroReq1Index;
@@ -643,6 +636,12 @@ namespace HereToSlay
         #endregion
 
         #region Class Related Methods
+        private void chosenClass_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            updateIcon_to_chosenClass(sender, e);
+            renderPreview(sender, e);
+        }
+
         private void updateIcon_to_chosenClass(object? sender, EventArgs? e)
         {
             if (Properties.Settings.Default.CardType == 0 || Properties.Settings.Default.CardType == 2)
@@ -687,6 +686,7 @@ namespace HereToSlay
                     break;
             }
         }
+
         private void clearSelectedClass(object sender, EventArgs e)
         {
             if (sender is Button button)
@@ -716,6 +716,7 @@ namespace HereToSlay
         }
         #endregion
 
+        #region UI Elements
         private void advanced_Click(object sender, EventArgs e)
         {
             PictureBox? pictureBox = sender as PictureBox ?? throw new NotImplementedException();
@@ -746,10 +747,26 @@ namespace HereToSlay
             }
         }
 
+        private void previewImg_Click(object sender, EventArgs e)
+        {
+            PictureBox? pictureBox = sender as PictureBox;
+
+            if (pictureBox != null)
+            {
+                string previewImgPath = pictureBox.ImageLocation;
+                string? folderPath = Path.GetDirectoryName(previewImgPath);
+                if (folderPath != null)
+                {
+                    Process.Start("explorer.exe", folderPath);
+                }
+            }
+        }
+
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         { System.Diagnostics.Process.Start(new ProcessStartInfo { FileName = "https://github.com/Danrejk", UseShellExecute = true }); }
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         { System.Diagnostics.Process.Start(new ProcessStartInfo { FileName = "https://github.com/Beukot", UseShellExecute = true }); }
+        #endregion
 
         private void OutputSym_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -813,6 +830,8 @@ namespace HereToSlay
                 0 => Properties.Resources.noItem,
                 _ => Properties.Resources.item,
             };
+
+            renderPreview(sender, e);
         }
     }
 

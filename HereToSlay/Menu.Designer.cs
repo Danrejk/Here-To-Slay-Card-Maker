@@ -178,8 +178,7 @@
             chosenClass.Name = "chosenClass";
             chosenClass.Size = new Size(120, 25);
             chosenClass.TabIndex = 7;
-            chosenClass.SelectedIndexChanged += renderPreview;
-            chosenClass.SelectedIndexChanged += updateIcon_to_chosenClass;
+            chosenClass.SelectedIndexChanged += chosenClass_SelectedIndexChanged;
             // 
             // labelClass
             // 
@@ -462,7 +461,7 @@
             language.Margin = new Padding(0);
             language.Name = "language";
             language.Size = new Size(85, 23);
-            language.SelectedIndexChanged += renderPreview;
+            language.SelectedIndexChanged += language_SelectedIndexChanged;
             // 
             // HeroCard
             // 
@@ -789,7 +788,7 @@
             maxItems.TextAlign = HorizontalAlignment.Right;
             maxItems.Value = new decimal(new int[] { 1, 0, 0, 0 });
             maxItems.Visible = false;
-            maxItems.ValueChanged += renderPreview;
+            maxItems.ValueChanged += maxItems_ValueChanged;
             // 
             // labelMaxItem
             // 
