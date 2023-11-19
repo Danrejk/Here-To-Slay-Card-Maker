@@ -513,18 +513,18 @@ namespace GeneratorBackend
             Rectangle imageRec = new(0, 0, CARD_WIDTH_POKER, CARD_HEIGHT_POKER);
 
             // Draw Hero Image
-            Raylib.ImageDraw(ref card, hero, imageRec, new(100, 236, 545, 545), Color.WHITE);
+            Raylib.ImageDraw(ref card, hero, imageRec, new(100, 231, 545, 545), Color.WHITE);
 
             // Max Items
             if (maxItems == 0)
             {
-                Raylib.ImageDraw(ref card, inst.noItem, imageRec, new(637, 932, 50, 50), Color.WHITE);
+                Raylib.ImageDraw(ref card, inst.noItem, imageRec, new(637, 935, 47, 47), Color.WHITE);
             }
             else if (maxItems != 1)
             {
                 for (int i = 0; i < maxItems; i++)
                 {
-                    Raylib.ImageDraw(ref card, inst.Item, imageRec, new(637 - i * (50 + 10), 932, 50, 50), Color.WHITE);
+                    Raylib.ImageDraw(ref card, inst.Item, imageRec, new(637 - i * (50 + 10), 935, 47, 47), Color.WHITE);
                 }
             }
 
@@ -646,7 +646,7 @@ namespace GeneratorBackend
             }
 
             // Draw Class Symbol
-            Raylib.ImageDraw(ref card, classSymbol, imageRec, new(321, 729, 102, 102), Color.WHITE);
+            Raylib.ImageDraw(ref card, classSymbol, imageRec, new(321, 724, 102, 102), Color.WHITE);
 
             // Draw Colored Frame
             Image frameTinted = Raylib.ImageCopy(inst.frameHero); // create a copy of the frame asset, so that the original is not 
@@ -727,8 +727,8 @@ namespace GeneratorBackend
             Vector2 nameSize = Raylib.MeasureTextEx(inst.nameFont, nameText, AssetManager.NAME_SIZE, NAME_FONT_SPACING);
             Vector2 titleSize = Raylib.MeasureTextEx(inst.titleFont, titleText, AssetManager.TITLE_SIZE, TITLE_FONT_SPACING);
 
-            int nameY = 85;
-            int titleY = 128;
+            int nameY = 80;
+            int titleY = 132;
 
             // Name
             Raylib.ImageDrawTextEx(ref card, inst.nameFont, nameText, new Vector2((CARD_WIDTH_POKER / 2) - (nameSize.X / 2), nameY), AssetManager.NAME_SIZE, NAME_FONT_SPACING, Color.BLACK);
