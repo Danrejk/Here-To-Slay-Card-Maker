@@ -502,7 +502,7 @@ namespace GeneratorBackend
             Raylib.UnloadImage(card);
         }
 
-        public static void GenerateHero(string? renderLocation, int language, string name, int desiredClass, string heroImg, string description, int maxItems)
+        public static void GenerateHero(string? renderLocation, int language, string name, int desiredClass, string heroImg, RollOutput description, int maxItems)
         {
             ChangeHeroImage(heroImg);
 
@@ -629,11 +629,10 @@ namespace GeneratorBackend
                     break;
             }
 
-            //Raylib.ImageDraw(ref card, inst.bottom, imageRec, imageRec, Color.WHITE);
-
-            // Draw Class Symbol(s) and Colored Frame(s)
+            // Draw Class Symbol
             Raylib.ImageDraw(ref card, classSymbol, imageRec, new(321, 727, 102, 102), Color.WHITE);
 
+            // Draw Colored Frame
             Image frameTinted = Raylib.ImageCopy(inst.frameHero); // create a copy of the frame asset, so that the original is not 
             Raylib.ImageColorTint(ref frameTinted, desiredColor);
             Raylib.ImageDraw(ref card, frameTinted, imageRec, imageRec, Color.WHITE);
@@ -644,8 +643,28 @@ namespace GeneratorBackend
             DrawNameAndTitleHero(name, leaderTitle, card, desiredColor);
 
             // Description
-            DrawDescription(description, card);
+            switch (description.Symbol)
+            {
+                case 0:
+                    Raylib.ImageDraw(ref card, inst.green, imageRec, new(94, 851, 78, 78), Color.WHITE);
+                    break;
+                case 1:
+                    Raylib.ImageDraw(ref card, inst.red, imageRec, new(94, 851, 78, 78), Color.WHITE);
+                    break;
+            }
 
+            char descSymbol = description.Symbol switch
+            {
+                0 => '+',
+                1 => '-',
+                _ => ' '
+            };
+            Vector2 descNumSize = Raylib.MeasureTextEx(inst.rollFont, description.Value.ToString() + descSymbol, AssetManager.ROLL_SIZE, ROLL_FONT_SPACING);
+            Raylib.ImageDrawTextEx(ref card, inst.rollFont, description.Value.ToString() + descSymbol, new(94 + 78 / 2 - descNumSize.X / 2, 851 + 78 / 2 - descNumSize.Y / 2), AssetManager.ROLL_SIZE, ROLL_FONT_SPACING, inst.bottomColor);
+
+            //DrawDescription(description, card);
+
+            // Final Render
             if (renderLocation == null)
             {
                 Raylib.ExportImage(card, "preview.png");

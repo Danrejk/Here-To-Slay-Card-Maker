@@ -381,7 +381,8 @@ namespace HereToSlay
                         GeneratorBackend.Program.GenerateMonster(filePath, language.SelectedIndex, nameText.Text, desiredRequirements, good, bad, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked);
                         break;
                     case 2:
-                        GeneratorBackend.Program.GenerateHero(filePath, language.SelectedIndex, nameText.Text, chosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text, (int)maxItems.Value);
+                        RollOutput description = new((int)goodOutputNum.Value, goodOutputSym.SelectedIndex, descriptionText.Text);
+                        GeneratorBackend.Program.GenerateHero(filePath, language.SelectedIndex, nameText.Text, chosenClass.SelectedIndex, selectImgText.Text, description, (int)maxItems.Value);
                         break;
                     default:
                         throw new NotImplementedException();
@@ -433,7 +434,8 @@ namespace HereToSlay
                     GeneratorBackend.Program.GenerateMonster(null, language.SelectedIndex, nameText.Text, desiredRequirements, good, bad, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked);
                     break;
                 case 2:
-                    GeneratorBackend.Program.GenerateHero(null, language.SelectedIndex, nameText.Text, chosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text, (int)maxItems.Value);
+                    RollOutput description = new((int)goodOutputNum.Value, goodOutputSym.SelectedIndex, descriptionText.Text);
+                    GeneratorBackend.Program.GenerateHero(null, language.SelectedIndex, nameText.Text, chosenClass.SelectedIndex, selectImgText.Text, description, (int)maxItems.Value); 
                     break;
                 default:
                     throw new NotImplementedException();
