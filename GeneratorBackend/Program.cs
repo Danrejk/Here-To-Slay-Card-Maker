@@ -513,7 +513,7 @@ namespace GeneratorBackend
             Rectangle imageRec = new(0, 0, CARD_WIDTH_POKER, CARD_HEIGHT_POKER);
 
             // Draw Hero Image
-            Raylib.ImageDraw(ref card, leader, imageRec, new(100, 236, 545, 545), Color.WHITE);
+            Raylib.ImageDraw(ref card, hero, imageRec, new(100, 236, 545, 545), Color.WHITE);
 
             // Max Items
             if (maxItems == 0)
@@ -916,27 +916,27 @@ namespace GeneratorBackend
                 using var memoryStream = new MemoryStream();
                 image.SaveAsPng(memoryStream);
                 memoryStream.Seek(0, SeekOrigin.Begin);
-                leader = Raylib.LoadImageFromMemory(".png", memoryStream.ToArray());
+                hero = Raylib.LoadImageFromMemory(".png", memoryStream.ToArray());
 
                 #region Image Crop
                 float targetAspectRatio = 545f / 545f;
                 int targetWidth, targetHeight;
-                if (leader.Width / (float)leader.Height > targetAspectRatio)
+                if (hero.Width / (float)hero.Height > targetAspectRatio)
                 {
                     targetWidth = (int)(leader.Height * targetAspectRatio);
-                    targetHeight = leader.Height;
+                    targetHeight = hero.Height;
                 }
                 else
                 {
-                    targetWidth = leader.Width;
-                    targetHeight = (int)(leader.Width / targetAspectRatio);
+                    targetWidth = hero.Width;
+                    targetHeight = (int)(hero.Width / targetAspectRatio);
                 }
 
-                int cropX = (leader.Width - targetWidth) / 2;
-                int cropY = (leader.Height - targetHeight) / 2;
+                int cropX = (hero.Width - targetWidth) / 2;
+                int cropY = (hero.Height - targetHeight) / 2;
 
-                Raylib.ImageCrop(ref leader, new Rectangle(cropX, cropY, targetWidth, targetHeight));
-                Raylib.ImageResize(ref leader, 545, 545);
+                Raylib.ImageCrop(ref hero, new Rectangle(cropX, cropY, targetWidth, targetHeight));
+                Raylib.ImageResize(ref hero, 545, 545);
                 #endregion
             }
         }
