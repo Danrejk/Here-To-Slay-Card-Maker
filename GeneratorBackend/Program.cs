@@ -83,7 +83,7 @@ namespace GeneratorBackend
         const int REQ_FONT_SPACING = 0;
         const int ROLL_FONT_SPACING = 0;
         const int DESC_FONT_SPACING = 1;
-        const int DESC_LINE_SPACING = 0;
+        const int DESC_LINE_SPACING = 9; // the greater the value, the closer the lines are to each other, I know it's weird, but it's how it works.
         const int DESC_MARGIN = 87;
 
         // changing these, won't PROPERLY change the size of the card.
@@ -781,8 +781,8 @@ namespace GeneratorBackend
             output.Clear();
             word.Clear();
 
-            int offset = 210 - (targetLines * 15); // On real cards, the offset changes with the ammount of lines, probably to better center the text visually.
-            float textBlockCenter = ((offset - (targetLines * (AssetManager.DESC_SIZE + DESC_LINE_SPACING))) / 2) + DESC_LINE_SPACING;
+            int offset = 210 - (targetLines * 16); // On real cards, the offset changes with the ammount of lines, probably to better center the text visually.
+            float textBlockCenter = ((offset - (targetLines * AssetManager.DESC_SIZE)) / 2);
 
             // Draw the text
             for (int i = 0; i < len; i++)
