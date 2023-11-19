@@ -642,7 +642,7 @@ namespace GeneratorBackend
             // Name and Title
             DrawNameAndTitleHero(name, leaderTitle, card, desiredColor);
 
-            // Description
+            // Roll Output Symbol and Value
             switch (description.Symbol)
             {
                 case 0:
@@ -661,7 +661,8 @@ namespace GeneratorBackend
             };
             Vector2 descNumSize = Raylib.MeasureTextEx(inst.rollFont, description.Value.ToString() + descSymbol, AssetManager.ROLL_SIZE, ROLL_FONT_SPACING);
             Raylib.ImageDrawTextEx(ref card, inst.rollFont, description.Value.ToString() + descSymbol, new(94 + 78 / 2 - descNumSize.X / 2, 851 + 78 / 2 - descNumSize.Y / 2), AssetManager.ROLL_SIZE, ROLL_FONT_SPACING, inst.bottomColor);
-
+            
+            // Description
             //DrawDescription(description, card);
 
             // Final Render
@@ -710,8 +711,8 @@ namespace GeneratorBackend
             Vector2 nameSize = Raylib.MeasureTextEx(inst.nameFont, nameText, AssetManager.NAME_SIZE, NAME_FONT_SPACING);
             Vector2 titleSize = Raylib.MeasureTextEx(inst.titleFont, titleText, AssetManager.TITLE_SIZE, TITLE_FONT_SPACING);
 
-            int nameY = 83;
-            int titleY = 135;
+            int nameY = 85;
+            int titleY = 128;
 
             // Name
             Raylib.ImageDrawTextEx(ref card, inst.nameFont, nameText, new Vector2((CARD_WIDTH_POKER / 2) - (nameSize.X / 2), nameY), AssetManager.NAME_SIZE, NAME_FONT_SPACING, Color.BLACK);
