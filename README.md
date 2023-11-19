@@ -139,13 +139,15 @@ In the files included with the program there are attached printing assets for pr
 <br>
 Printing methods may differ depending on your printer, but what I found to work was to:
 <ol>
+    <li>Put a thicker A4 paper sheet into the printer.</li>
     <li>Align my generated cards like on the image on the right.</li>
     <li><b>ROTATE the image by 180°</b> to negate the default bottom margin on many printers.</li>
     <li>Print the front card with the setting to automatically crop the image <b>turned OFF</b>.</li>
     <li>Rotate the paper <b>ONLY on the Y axis</b> and put it back into the printer.</li>
     <li>Print the backsides of the cards, which are attached in the assets.</li>
 </ol>
-I hope this works for you as well, before printing with color I would test it by making a black ink only draft first, just to check if everything is aligned properly and has the right scale.
+I hope this works for you as well, before printing with color I would test it by making a black ink only draft first, just to check if everything is aligned properly and has the right scale.<br>
+You can of course print mixed card types on 1 piece of paper like: 1 Monster, 2 Leaders and 2 Heros on one piece of paper, but you gotta do some manual work and figure it out for your particular case yourself. 
 
 ### Printing Proffesionally
 Unforunatelly I don't know how that works exactly. But I saw there are many posts about printing proffesionally on sites like reddit, so I reccomend you search there.
