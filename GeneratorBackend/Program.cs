@@ -454,8 +454,8 @@ namespace GeneratorBackend
                 {
                     iconsMargin -= language switch
                     {
-                        1 => 0, // polish needs less margin reduction, because the "REQUIREMENT" text is shorter
-                        _ => 10 // YOU CAN MODIFY THIS. It might look better for your preferences, but for me I think this is the best option.
+                        1 => 0, // polish doesn't need margin reduction, because the "REQUIREMENT" text is shorter
+                        _ => 8 // YOU CAN MODIFY THIS. It might look better for your preferences, but for me I think this is the best option.
                     };
                 }
                 Raylib.ImageDraw(ref card, classSymbol, imageRec, new(93 + reqTextSize.X + 10 + reqIteration * iconsMargin, 902, 83, 83), Color.WHITE);
