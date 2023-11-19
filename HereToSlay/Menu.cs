@@ -130,7 +130,7 @@ namespace HereToSlay
                 {
                     this.Icon = Properties.Resources.LEADER;
                 }
-
+                
                 MonsterCard.Checked = false;
                 MonsterCard.BackColor = SystemColors.Control;
                 LeaderCard.Checked = true;

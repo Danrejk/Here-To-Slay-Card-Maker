@@ -179,6 +179,7 @@
             chosenClass.Size = new Size(120, 25);
             chosenClass.TabIndex = 7;
             chosenClass.SelectedIndexChanged += renderPreview;
+            chosenClass.SelectedIndexChanged += updateIcon_to_chosenClass;
             // 
             // labelClass
             // 
