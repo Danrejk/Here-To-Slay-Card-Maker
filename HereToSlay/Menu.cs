@@ -275,7 +275,7 @@ namespace HereToSlay
             }
         }
 
-        private void HeroCard_Click(object sender, EventArgs e)
+        private void HeroCard_Click(object? sender, EventArgs? e)
         {
             if (HeroCard.Checked == false)
             {
@@ -435,7 +435,7 @@ namespace HereToSlay
                     break;
                 case 2:
                     RollOutput description = new((int)goodOutputNum.Value, goodOutputSym.SelectedIndex, descriptionText.Text);
-                    GeneratorBackend.Program.GenerateHero(null, language.SelectedIndex, nameText.Text, chosenClass.SelectedIndex, selectImgText.Text, description, (int)maxItems.Value); 
+                    GeneratorBackend.Program.GenerateHero(null, language.SelectedIndex, nameText.Text, chosenClass.SelectedIndex, selectImgText.Text, description, (int)maxItems.Value);
                     break;
                 default:
                     throw new NotImplementedException();

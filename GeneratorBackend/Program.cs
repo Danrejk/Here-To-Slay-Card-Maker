@@ -16,6 +16,8 @@ namespace GeneratorBackend
         public Image gradient = Raylib.LoadImage("GeneratorAssets/template/gradient.png");
         public Image red = Raylib.LoadImage("GeneratorAssets/template/red.png");
         public Image green = Raylib.LoadImage("GeneratorAssets/template/green.png");
+        public Image noItem = Raylib.LoadImage("GeneratorAssets/template/noItem.png");
+        public Image Item = Raylib.LoadImage("GeneratorAssets/template/item.png");
 
         public const int NAME_SIZE = 60; // 60
         public const int TITLE_SIZE = 52; // 49
@@ -510,13 +512,27 @@ namespace GeneratorBackend
             Image card = Raylib.LoadImage("GeneratorAssets/template/card_poker.png");
             Rectangle imageRec = new(0, 0, CARD_WIDTH_POKER, CARD_HEIGHT_POKER);
 
+            // Draw Hero Image
             Raylib.ImageDraw(ref card, leader, imageRec, new(100, 236, 545, 545), Color.WHITE);
 
+            // Max Items
+            if (maxItems == 0)
+            {
+                Raylib.ImageDraw(ref card, inst.noItem, imageRec, new(637, 932, 50, 50), Color.WHITE);
+            }
+            else if (maxItems != 1)
+            {
+                for (int i = 0; i < maxItems; i++)
+                {
+                    Raylib.ImageDraw(ref card, inst.Item, imageRec, new(637 - i * (50 + 10), 932, 50, 50), Color.WHITE);
+                }
+            }
+
+            // Class and class dependent stuff
             Image classSymbol;
             Color desiredColor;
             string leaderTitle;
 
-            // Class
             switch (desiredClass)
             {
                 case 0:
@@ -630,7 +646,7 @@ namespace GeneratorBackend
             }
 
             // Draw Class Symbol
-            Raylib.ImageDraw(ref card, classSymbol, imageRec, new(321, 727, 102, 102), Color.WHITE);
+            Raylib.ImageDraw(ref card, classSymbol, imageRec, new(321, 729, 102, 102), Color.WHITE);
 
             // Draw Colored Frame
             Image frameTinted = Raylib.ImageCopy(inst.frameHero); // create a copy of the frame asset, so that the original is not 
@@ -639,29 +655,28 @@ namespace GeneratorBackend
 
             Raylib.UnloadImage(frameTinted);
 
+
             // Name and Title
             DrawNameAndTitleHero(name, leaderTitle, card, desiredColor);
 
             // Roll Output Symbol and Value
+            char descSymbol = ' ';
+
             switch (description.Symbol)
             {
                 case 0:
                     Raylib.ImageDraw(ref card, inst.green, imageRec, new(94, 851, 78, 78), Color.WHITE);
+                    descSymbol = '+';
                     break;
                 case 1:
                     Raylib.ImageDraw(ref card, inst.red, imageRec, new(94, 851, 78, 78), Color.WHITE);
+                    descSymbol = '-';
                     break;
             }
 
-            char descSymbol = description.Symbol switch
-            {
-                0 => '+',
-                1 => '-',
-                _ => ' '
-            };
             Vector2 descNumSize = Raylib.MeasureTextEx(inst.rollFont, description.Value.ToString() + descSymbol, AssetManager.ROLL_SIZE, ROLL_FONT_SPACING);
             Raylib.ImageDrawTextEx(ref card, inst.rollFont, description.Value.ToString() + descSymbol, new(94 + 78 / 2 - descNumSize.X / 2, 851 + 78 / 2 - descNumSize.Y / 2), AssetManager.ROLL_SIZE, ROLL_FONT_SPACING, inst.bottomColor);
-            
+
             // Description
             //DrawDescription(description, card);
 
@@ -678,6 +693,7 @@ namespace GeneratorBackend
         }
         #endregion
 
+        #region Common Draw Text
         static void DrawNameAndTitle(string nameText, string titleText, Image card, bool nameWhite)
         {
             Color leaderColor = nameWhite switch
@@ -796,6 +812,7 @@ namespace GeneratorBackend
             }
             Raylib.ImageDrawTextEx(ref card, inst.descFont, output.ToString() + word.ToString(), new Vector2(DESC_MARGIN, (CARD_HEIGHT_TARROT - offset) + textBlockCenter + ((textSize.Y - 5 + DESC_LINE_SPACING) * currentLine)), AssetManager.DESC_SIZE, DESC_FONT_SPACING, descTextColor);
         }
+        #endregion
 
         #region Change Image
         static Image leader = new();
