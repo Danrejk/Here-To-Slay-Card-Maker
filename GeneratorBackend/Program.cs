@@ -20,10 +20,10 @@ namespace GeneratorBackend
         public Image Item = Raylib.LoadImage("GeneratorAssets/template/item.png");
 
         public const int NAME_SIZE = 60; // 60
-        public const int TITLE_SIZE = 52; // 49
+        public const int TITLE_SIZE = 47; // 49
         public const int REQ_SIZE = 49; // 49
         public const int ROLL_SIZE = 43; // 49
-        public const int DESC_SIZE = 40; // 38
+        public const int DESC_SIZE = 36; // 38
 
         public Font nameFont { get; private set; }
         public Font titleFont { get; private set; }
@@ -83,7 +83,7 @@ namespace GeneratorBackend
         const int REQ_FONT_SPACING = 0;
         const int ROLL_FONT_SPACING = 0;
         const int DESC_FONT_SPACING = 1;
-        const int DESC_LINE_SPACING = 9; // the greater the value, the closer the lines are to each other, I know it's weird, but it's how it works.
+        const int DESC_LINE_SPACING = 5; // the greater the value, the closer the lines are to each other, I know it's weird, but it's how it works.
         const int DESC_MARGIN = 87;
 
         // changing these, won't PROPERLY change the size of the card.
@@ -704,7 +704,7 @@ namespace GeneratorBackend
             Color leaderShadowColor = nameWhite switch
             {
                 true => new(0, 0, 0, 127),
-                false => new(255, 255, 255, 127)
+                false => new(255, 255, 255, 100)
             };
 
             Vector2 nameSize = Raylib.MeasureTextEx(inst.nameFont, nameText, AssetManager.NAME_SIZE, NAME_FONT_SPACING);
@@ -781,7 +781,7 @@ namespace GeneratorBackend
             output.Clear();
             word.Clear();
 
-            int offset = 210 - (targetLines * 16); // On real cards, the offset changes with the ammount of lines, probably to better center the text visually.
+            int offset = 210 - (targetLines * 15); // On real cards, the offset changes with the ammount of lines, probably to better center the text visually, because of the Class Icon.
             float textBlockCenter = ((offset - (targetLines * AssetManager.DESC_SIZE)) / 2);
 
             // Draw the text
@@ -804,13 +804,13 @@ namespace GeneratorBackend
                 if (currentLen.X + wordLen.X >= targetLen)
                 {
                     // Draw the whole line
-                    Raylib.ImageDrawTextEx(ref card, inst.descFont, output.ToString(), new Vector2(DESC_MARGIN, (CARD_HEIGHT_TARROT - offset) + textBlockCenter + ((textSize.Y - 5 + DESC_LINE_SPACING) * currentLine)), AssetManager.DESC_SIZE, DESC_FONT_SPACING, descTextColor);
+                    Raylib.ImageDrawTextEx(ref card, inst.descFont, output.ToString(), new Vector2(DESC_MARGIN, (CARD_HEIGHT_TARROT - offset) + textBlockCenter + ((textSize.Y - DESC_LINE_SPACING) * currentLine)), AssetManager.DESC_SIZE, DESC_FONT_SPACING, descTextColor);
 
                     output.Clear();
                     currentLine++; // move to the next line
                 }
             }
-            Raylib.ImageDrawTextEx(ref card, inst.descFont, output.ToString() + word.ToString(), new Vector2(DESC_MARGIN, (CARD_HEIGHT_TARROT - offset) + textBlockCenter + ((textSize.Y - 5 + DESC_LINE_SPACING) * currentLine)), AssetManager.DESC_SIZE, DESC_FONT_SPACING, descTextColor);
+            Raylib.ImageDrawTextEx(ref card, inst.descFont, output.ToString() + word.ToString(), new Vector2(DESC_MARGIN, (CARD_HEIGHT_TARROT - offset) + textBlockCenter + ((textSize.Y - DESC_LINE_SPACING) * currentLine)), AssetManager.DESC_SIZE, DESC_FONT_SPACING, descTextColor);
         }
         #endregion
 
