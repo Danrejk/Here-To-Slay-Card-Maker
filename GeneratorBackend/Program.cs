@@ -923,7 +923,7 @@ namespace GeneratorBackend
                 int targetWidth, targetHeight;
                 if (hero.Width / (float)hero.Height > targetAspectRatio)
                 {
-                    targetWidth = (int)(leader.Height * targetAspectRatio);
+                    targetWidth = (int)(hero.Height * targetAspectRatio);
                     targetHeight = hero.Height;
                 }
                 else
