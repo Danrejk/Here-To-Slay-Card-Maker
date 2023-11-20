@@ -442,7 +442,7 @@ namespace HereToSlay
             }
         }
         #endregion
-       
+
         #region Language
         private void language_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -832,6 +832,11 @@ namespace HereToSlay
             };
 
             renderPreview(sender, e);
+        }
+
+        private void copyImageToClipboardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetImage(previewImg.Image);
         }
     }
 

@@ -44,6 +44,9 @@
             nameWhite = new CheckBox();
             descriptionText = new TextBox();
             previewImg = new PictureBox();
+            previewContextMenu = new ContextMenuStrip(components);
+            copyImageToClipboardToolStripMenuItem = new ToolStripMenuItem();
+            openImageLocationToolStripMenuItem = new ToolStripMenuItem();
             gitLabel2 = new LinkLabel();
             gitLabel1 = new LinkLabel();
             SaveRenderDialog = new SaveFileDialog();
@@ -87,6 +90,7 @@
             itemImgMore = new Label();
             ((System.ComponentModel.ISupportInitialize)logo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)previewImg).BeginInit();
+            previewContextMenu.SuspendLayout();
             advancedNameBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)advancedName).BeginInit();
             ((System.ComponentModel.ISupportInitialize)advancedClass).BeginInit();
@@ -290,6 +294,7 @@
             // previewImg
             // 
             previewImg.BackColor = SystemColors.ActiveCaptionText;
+            previewImg.ContextMenuStrip = previewContextMenu;
             previewImg.Cursor = Cursors.Hand;
             previewImg.Dock = DockStyle.Right;
             previewImg.Location = new Point(414, 0);
@@ -299,6 +304,28 @@
             previewImg.TabIndex = 16;
             previewImg.TabStop = false;
             previewImg.Click += previewImg_Click;
+            // 
+            // previewContextMenu
+            // 
+            previewContextMenu.Items.AddRange(new ToolStripItem[] { openImageLocationToolStripMenuItem, copyImageToClipboardToolStripMenuItem });
+            previewContextMenu.Name = "previewContextMenu";
+            previewContextMenu.RenderMode = ToolStripRenderMode.System;
+            previewContextMenu.ShowImageMargin = false;
+            previewContextMenu.Size = new Size(161, 70);
+            // 
+            // copyImageToClipboardToolStripMenuItem
+            // 
+            copyImageToClipboardToolStripMenuItem.Name = "copyImageToClipboardToolStripMenuItem";
+            copyImageToClipboardToolStripMenuItem.Size = new Size(160, 22);
+            copyImageToClipboardToolStripMenuItem.Text = "Copy";
+            copyImageToClipboardToolStripMenuItem.Click += copyImageToClipboardToolStripMenuItem_Click;
+            // 
+            // openImageLocationToolStripMenuItem
+            // 
+            openImageLocationToolStripMenuItem.Name = "openImageLocationToolStripMenuItem";
+            openImageLocationToolStripMenuItem.Size = new Size(160, 22);
+            openImageLocationToolStripMenuItem.Text = "Open image location";
+            openImageLocationToolStripMenuItem.Click += previewImg_Click;
             // 
             // gitLabel2
             // 
@@ -906,6 +933,7 @@
             Load += renderPreview;
             ((System.ComponentModel.ISupportInitialize)logo).EndInit();
             ((System.ComponentModel.ISupportInitialize)previewImg).EndInit();
+            previewContextMenu.ResumeLayout(false);
             advancedNameBox.ResumeLayout(false);
             advancedNameBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)advancedName).EndInit();
@@ -981,5 +1009,8 @@
         private PictureBox itemImg;
         private PictureBox itemImg2;
         private Label itemImgMore;
+        private ContextMenuStrip previewContextMenu;
+        private ToolStripMenuItem copyImageToClipboardToolStripMenuItem;
+        private ToolStripMenuItem openImageLocationToolStripMenuItem;
     }
 }
