@@ -45,8 +45,9 @@
             descriptionText = new TextBox();
             previewImg = new PictureBox();
             previewContextMenu = new ContextMenuStrip(components);
-            copyImageToClipboardToolStripMenuItem = new ToolStripMenuItem();
             openImageLocationToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator1 = new ToolStripSeparator();
+            copyImageToClipboardToolStripMenuItem = new ToolStripMenuItem();
             gitLabel2 = new LinkLabel();
             gitLabel1 = new LinkLabel();
             SaveRenderDialog = new SaveFileDialog();
@@ -307,25 +308,31 @@
             // 
             // previewContextMenu
             // 
-            previewContextMenu.Items.AddRange(new ToolStripItem[] { openImageLocationToolStripMenuItem, copyImageToClipboardToolStripMenuItem });
+            previewContextMenu.Items.AddRange(new ToolStripItem[] { openImageLocationToolStripMenuItem, toolStripSeparator1, copyImageToClipboardToolStripMenuItem });
             previewContextMenu.Name = "previewContextMenu";
             previewContextMenu.RenderMode = ToolStripRenderMode.System;
-            previewContextMenu.ShowImageMargin = false;
-            previewContextMenu.Size = new Size(161, 70);
-            // 
-            // copyImageToClipboardToolStripMenuItem
-            // 
-            copyImageToClipboardToolStripMenuItem.Name = "copyImageToClipboardToolStripMenuItem";
-            copyImageToClipboardToolStripMenuItem.Size = new Size(160, 22);
-            copyImageToClipboardToolStripMenuItem.Text = "Copy";
-            copyImageToClipboardToolStripMenuItem.Click += copyImageToClipboardToolStripMenuItem_Click;
+            previewContextMenu.Size = new Size(189, 76);
             // 
             // openImageLocationToolStripMenuItem
             // 
+            openImageLocationToolStripMenuItem.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             openImageLocationToolStripMenuItem.Name = "openImageLocationToolStripMenuItem";
-            openImageLocationToolStripMenuItem.Size = new Size(160, 22);
+            openImageLocationToolStripMenuItem.Size = new Size(188, 22);
             openImageLocationToolStripMenuItem.Text = "Open image location";
             openImageLocationToolStripMenuItem.Click += previewImg_Click;
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new Size(185, 6);
+            // 
+            // copyImageToClipboardToolStripMenuItem
+            // 
+            copyImageToClipboardToolStripMenuItem.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            copyImageToClipboardToolStripMenuItem.Name = "copyImageToClipboardToolStripMenuItem";
+            copyImageToClipboardToolStripMenuItem.Size = new Size(188, 22);
+            copyImageToClipboardToolStripMenuItem.Text = "Copy";
+            copyImageToClipboardToolStripMenuItem.Click += copyImageToClipboardToolStripMenuItem_Click;
             // 
             // gitLabel2
             // 
@@ -1012,5 +1019,6 @@
         private ContextMenuStrip previewContextMenu;
         private ToolStripMenuItem copyImageToClipboardToolStripMenuItem;
         private ToolStripMenuItem openImageLocationToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator1;
     }
 }

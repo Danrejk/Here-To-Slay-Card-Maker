@@ -749,11 +749,9 @@ namespace HereToSlay
 
         private void previewImg_Click(object sender, EventArgs e)
         {
-            PictureBox? pictureBox = sender as PictureBox;
-
-            if (pictureBox != null)
+            if (previewImg != null)
             {
-                string previewImgPath = pictureBox.ImageLocation;
+                string previewImgPath = previewImg.ImageLocation;
                 string? folderPath = Path.GetDirectoryName(previewImgPath);
                 if (folderPath != null)
                 {
@@ -766,6 +764,11 @@ namespace HereToSlay
         { System.Diagnostics.Process.Start(new ProcessStartInfo { FileName = "https://github.com/Danrejk", UseShellExecute = true }); }
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         { System.Diagnostics.Process.Start(new ProcessStartInfo { FileName = "https://github.com/Beukot", UseShellExecute = true }); }
+
+        private void copyImageToClipboardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetImage(previewImg.Image);
+        }
         #endregion
 
         private void OutputSym_SelectedIndexChanged(object sender, EventArgs e)
@@ -832,11 +835,6 @@ namespace HereToSlay
             };
 
             renderPreview(sender, e);
-        }
-
-        private void copyImageToClipboardToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Clipboard.SetImage(previewImg.Image);
         }
     }
 
