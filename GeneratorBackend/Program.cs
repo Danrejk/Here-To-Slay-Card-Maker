@@ -97,9 +97,9 @@ namespace GeneratorBackend
         private static readonly AssetManager inst = AssetManager.Instance;
 
         #region Generation
-        public static void GenerateLeader(string? renderLocation, int language, string name, int[] desiredClass, string leaderImg, string description, bool addGradient, bool nameWhite)
+        public static void GenerateLeader(string? renderLocation, int language, string name, int[] desiredClass, string leaderImg, string description, bool addGradient, bool nameWhite, bool outOfBounds)
         {
-            ChangeLeaderImage(leaderImg);
+            ChangeImage(leaderImg, 0);
 
             // This has to be loaded each time, to clear the image from the previous render
             Image card = Raylib.LoadImage("GeneratorAssets/template/card_tarrot.png");
@@ -389,9 +389,9 @@ namespace GeneratorBackend
             Raylib.UnloadImage(card);
         }
 
-        public static void GenerateMonster(string? renderLocation, int language, string name, int[] desiredRequirements, RollOutput good, RollOutput bad, string monsterImg, string description, bool addGradient, bool nameWhite)
+        public static void GenerateMonster(string? renderLocation, int language, string name, int[] desiredRequirements, RollOutput good, RollOutput bad, string monsterImg, string description, bool addGradient, bool nameWhite, bool outOfBounds)
         {
-            ChangeMonsterImage(monsterImg);
+            ChangeImage(monsterImg, 1);
 
             // This has to be loaded each time, to clear the image from the previous render
             Image card = Raylib.LoadImage("GeneratorAssets/template/card_tarrot.png");
@@ -504,9 +504,9 @@ namespace GeneratorBackend
             Raylib.UnloadImage(card);
         }
 
-        public static void GenerateHero(string? renderLocation, int language, string name, int desiredClass, string heroImg, RollOutput description, int maxItems)
+        public static void GenerateHero(string? renderLocation, int language, string name, int desiredClass, string heroImg, RollOutput description, int maxItems, bool outOfBounds)
         {
-            ChangeHeroImage(heroImg);
+            ChangeImage(heroImg, 2);
 
             // This has to be loaded each time, to clear the image from the previous render
             Image card = Raylib.LoadImage("GeneratorAssets/template/card_poker.png");
@@ -824,121 +824,72 @@ namespace GeneratorBackend
         static string lastPathMonster = "";
         static string lastPathHero = "";
 
-        static void ChangeLeaderImage(string path)
+        static void ChangeImage(string path, int cardType)
         {
-            if (path == lastPathLeader) { return; }
-            lastPathLeader = path;
+            ref string lastPath = ref lastPathLeader;
+            ref Image outputImage = ref leader;
+            int height = 1176;
+            int width = 745;
+            switch (cardType)
+            {
+                case 0: // Leader
+                    //lastPath = ref lastPathLeader;
+                    //outputImage = ref leader;
+                    //height = 1176;
+                    //width = 745;
+                    break;
+                case 1: // Monster
+                    lastPath = ref lastPathMonster;
+                    outputImage = ref monster;
+                    height = 824;
+                    width = 745;
+                    break;
+                case 2: // Hero
+                    lastPath = ref lastPathHero;
+                    outputImage = ref hero;
+                    height = 545;
+                    width = 545;
+                    break;
+            }
+
+            if (path == lastPath) { return; }
+            lastPath = path;
 
             if (File.Exists(path))
             {
-                Raylib.UnloadImage(leader);
+                Raylib.UnloadImage(outputImage);
                 using var file = File.OpenRead(path);
                 image = SixLabors.ImageSharp.Image.Load<Rgba32>(file);
 
                 using var memoryStream = new MemoryStream();
                 image.SaveAsPng(memoryStream);
                 memoryStream.Seek(0, SeekOrigin.Begin);
-                leader = Raylib.LoadImageFromMemory(".png", memoryStream.ToArray());
+                outputImage = Raylib.LoadImageFromMemory(".png", memoryStream.ToArray());
 
-                #region Image Crop
-                float targetAspectRatio = 745.0f / 1176.0f;
-                int targetWidth, targetHeight;
-                if (leader.Width / (float)leader.Height > targetAspectRatio)
-                {
-                    targetWidth = (int)(leader.Height * targetAspectRatio);
-                    targetHeight = leader.Height;
-                }
-                else
-                {
-                    targetWidth = leader.Width;
-                    targetHeight = (int)(leader.Width / targetAspectRatio);
-                }
-
-                int cropX = (leader.Width - targetWidth) / 2;
-                int cropY = (leader.Height - targetHeight) / 2;
-
-                Raylib.ImageCrop(ref leader, new Rectangle(cropX, cropY, targetWidth, targetHeight));
-                Raylib.ImageResize(ref leader, 745, 1176);
-                #endregion
+                CropImage(ref outputImage, width, height);
             }
         }
 
-        static void ChangeMonsterImage(string path)
+        static void CropImage(ref Image image, int width, int height)
         {
-            if (path == lastPathMonster) { return; }
-            lastPathMonster = path;
-
-            if (File.Exists(path))
+            float targetAspectRatio = (float)width / (float)height;
+            int targetWidth, targetHeight;
+            if (image.Width / (float)image.Height > targetAspectRatio)
             {
-                Raylib.UnloadImage(monster);
-                using var file = File.OpenRead(path);
-                image = SixLabors.ImageSharp.Image.Load<Rgba32>(file);
-
-                using var memoryStream = new MemoryStream();
-                image.SaveAsPng(memoryStream);
-                memoryStream.Seek(0, SeekOrigin.Begin);
-                monster = Raylib.LoadImageFromMemory(".png", memoryStream.ToArray());
-
-                #region Image Crop
-                float targetAspectRatio = 745.0f / 824.0f;
-                int targetWidth, targetHeight;
-                if (monster.Width / (float)monster.Height > targetAspectRatio)
-                {
-                    targetWidth = (int)(monster.Height * targetAspectRatio);
-                    targetHeight = monster.Height;
-                }
-                else
-                {
-                    targetWidth = monster.Width;
-                    targetHeight = (int)(monster.Width / targetAspectRatio);
-                }
-
-                int cropX = (monster.Width - targetWidth) / 2;
-                int cropY = (monster.Height - targetHeight) / 2;
-
-                Raylib.ImageCrop(ref monster, new Rectangle(cropX, cropY, targetWidth, targetHeight));
-                Raylib.ImageResize(ref monster, 745, 824);
-                #endregion
+                targetWidth = (int)(image.Height * targetAspectRatio);
+                targetHeight = image.Height;
             }
-        }
-
-        static void ChangeHeroImage(string path)
-        {
-            if (path == lastPathHero) { return; }
-            lastPathHero = path;
-
-            if (File.Exists(path))
+            else
             {
-                Raylib.UnloadImage(hero);
-                using var file = File.OpenRead(path);
-                image = SixLabors.ImageSharp.Image.Load<Rgba32>(file);
-
-                using var memoryStream = new MemoryStream();
-                image.SaveAsPng(memoryStream);
-                memoryStream.Seek(0, SeekOrigin.Begin);
-                hero = Raylib.LoadImageFromMemory(".png", memoryStream.ToArray());
-
-                #region Image Crop
-                float targetAspectRatio = 545f / 545f;
-                int targetWidth, targetHeight;
-                if (hero.Width / (float)hero.Height > targetAspectRatio)
-                {
-                    targetWidth = (int)(hero.Height * targetAspectRatio);
-                    targetHeight = hero.Height;
-                }
-                else
-                {
-                    targetWidth = hero.Width;
-                    targetHeight = (int)(hero.Width / targetAspectRatio);
-                }
-
-                int cropX = (hero.Width - targetWidth) / 2;
-                int cropY = (hero.Height - targetHeight) / 2;
-
-                Raylib.ImageCrop(ref hero, new Rectangle(cropX, cropY, targetWidth, targetHeight));
-                Raylib.ImageResize(ref hero, 545, 545);
-                #endregion
+                targetWidth = image.Width;
+                targetHeight = (int)(image.Width / targetAspectRatio);
             }
+
+            int cropX = (image.Width - targetWidth) / 2;
+            int cropY = (image.Height - targetHeight) / 2;
+
+            Raylib.ImageCrop(ref image, new Rectangle(cropX, cropY, targetWidth, targetHeight));
+            Raylib.ImageResize(ref image, width, height);
         }
         #endregion
     }
