@@ -149,6 +149,8 @@ namespace HereToSlay
                 labelImg.Location = new Point(labelImg.Location.X, 329);
                 selectImgText.Location = new Point(selectImgText.Location.X, 349);
                 selectImgButton.Location = new Point(selectImgButton.Location.X, 349);
+                advancedImg.Location = new Point(advancedImg.Location.X, 372);
+                advancedImgBox.Location = new Point(advancedImgBox.Location.X, 370);
 
                 RENDER.Location = new Point(RENDER.Location.X, 525);
 
@@ -225,6 +227,8 @@ namespace HereToSlay
                 labelImg.Location = new Point(labelImg.Location.X, 229);
                 selectImgText.Location = new Point(selectImgText.Location.X, 249);
                 selectImgButton.Location = new Point(selectImgButton.Location.X, 249);
+                advancedImg.Location = new Point(advancedImg.Location.X, 272);
+                advancedImgBox.Location = new Point(advancedImgBox.Location.X, 270);
 
                 RENDER.Location = new Point(RENDER.Location.X, 591);
 
@@ -312,6 +316,8 @@ namespace HereToSlay
                 labelImg.Location = new Point(labelImg.Location.X, 304);
                 selectImgText.Location = new Point(selectImgText.Location.X, 324);
                 selectImgButton.Location = new Point(selectImgButton.Location.X, 324);
+                advancedImg.Location = new Point(advancedImg.Location.X, 347);
+                advancedImgBox.Location = new Point(advancedImgBox.Location.X, 345);
 
                 RENDER.Location = new Point(RENDER.Location.X, 525);
 
@@ -724,6 +730,7 @@ namespace HereToSlay
             {
                 "advancedName" => advancedNameBox,
                 "advancedClass" => advancedClassBox,
+                "advancedImg" => advancedImgBox,
                 _ => throw new NotImplementedException(),
             };
             list.Visible = !list.Visible;
