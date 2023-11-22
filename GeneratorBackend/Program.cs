@@ -99,19 +99,27 @@ namespace GeneratorBackend
         #region Generation
         public static void GenerateLeader(string? renderLocation, int language, string name, int[] desiredClass, string leaderImg, string description, bool addGradient, bool nameWhite, bool outOfBounds)
         {
-            ChangeImage(leaderImg, 0);
+            ChangeLeaderImage(leaderImg, outOfBounds);
 
             // This has to be loaded each time, to clear the image from the previous render
             Image card = Raylib.LoadImage("GeneratorAssets/template/card_tarrot.png");
             Rectangle imageRec = new(0, 0, CARD_WIDTH_TARROT, CARD_HEIGHT_TARROT);
 
-            Raylib.ImageDraw(ref card, leader, imageRec, new(41, 41, 745, 1176), Color.WHITE);
+            // Draw Leader Image
+            if (!outOfBounds)
+            {
+                Raylib.ImageDraw(ref card, leader, imageRec, new(41, 41, 745, 1176), Color.WHITE);
+            }
+            else
+            {
+                Raylib.ImageDraw(ref card, leader, imageRec, new(0, 0, CARD_WIDTH_TARROT, CARD_HEIGHT_TARROT), Color.WHITE);
+            }
 
+            #region Classes
             Image classSymbol;
             Color desiredColor;
             string leaderTitle;
 
-            #region Classes
             switch (desiredClass[0])
             {
                 case 0:
@@ -345,9 +353,8 @@ namespace GeneratorBackend
            
             if (addGradient) { Raylib.ImageDraw(ref card, inst.gradient, imageRec, imageRec, Color.WHITE); }
 
-            // Draw Class Symbol(s) and Colored Frame(s)
-            Raylib.ImageDraw(ref card, classSymbol, imageRec, new(363, 1167, 102, 102), Color.WHITE);
 
+            // Draw Colored Frame(s)
             Image frameTinted = Raylib.ImageCopy(inst.frameLeader); // create a copy of the frame asset, so that the original is not modified
             if (desiredClass[1] != -1) // check if there is a second class
             {
@@ -372,6 +379,9 @@ namespace GeneratorBackend
             Raylib.UnloadImage(frameTinted);
             Raylib.UnloadImage(secondClassSymbol);
 
+            // Draw Class Symbol(s)
+            Raylib.ImageDraw(ref card, classSymbol, imageRec, new(363, 1167, 102, 102), Color.WHITE);
+
             // Name and Title
             DrawNameAndTitle(name, leaderTitle, card, nameWhite);
 
@@ -391,13 +401,21 @@ namespace GeneratorBackend
 
         public static void GenerateMonster(string? renderLocation, int language, string name, int[] desiredRequirements, RollOutput good, RollOutput bad, string monsterImg, string description, bool addGradient, bool nameWhite, bool outOfBounds)
         {
-            ChangeImage(monsterImg, 1);
+            ChangeMonsterImage(monsterImg, outOfBounds);
 
             // This has to be loaded each time, to clear the image from the previous render
             Image card = Raylib.LoadImage("GeneratorAssets/template/card_tarrot.png");
             Rectangle imageRec = new(0, 0, CARD_WIDTH_TARROT, CARD_HEIGHT_TARROT);
 
-            Raylib.ImageDraw(ref card, monster, imageRec, new(41, 41, 745, 824), Color.WHITE);
+            // Draw Monster Image
+            if (!outOfBounds)
+            {
+                Raylib.ImageDraw(ref card, monster, imageRec, new(41, 41, 745, 824), Color.WHITE);
+            }
+            else
+            {
+                Raylib.ImageDraw(ref card, monster, imageRec, new(0, 0, CARD_WIDTH_TARROT, CARD_HEIGHT_TARROT), Color.WHITE);
+            }
 
             if (addGradient) { Raylib.ImageDraw(ref card, inst.gradient, imageRec, imageRec, Color.WHITE); }
             Raylib.ImageDraw(ref card, inst.frameMonster, imageRec, imageRec, new(23, 26, 30, 255));
@@ -506,14 +524,21 @@ namespace GeneratorBackend
 
         public static void GenerateHero(string? renderLocation, int language, string name, int desiredClass, string heroImg, RollOutput description, int maxItems, bool outOfBounds)
         {
-            ChangeImage(heroImg, 2);
+            ChangeHeroImage(heroImg, outOfBounds);
 
             // This has to be loaded each time, to clear the image from the previous render
             Image card = Raylib.LoadImage("GeneratorAssets/template/card_poker.png");
             Rectangle imageRec = new(0, 0, CARD_WIDTH_POKER, CARD_HEIGHT_POKER);
 
             // Draw Hero Image
-            Raylib.ImageDraw(ref card, hero, imageRec, new(100, 231, 545, 545), Color.WHITE);
+            if (!outOfBounds)
+            {
+                Raylib.ImageDraw(ref card, hero, imageRec, new(100, 231, 545, 545), Color.WHITE);
+            }
+            else
+            {
+                Raylib.ImageDraw(ref card, hero, imageRec, new(0, 0, CARD_WIDTH_POKER, CARD_HEIGHT_POKER), Color.WHITE);
+            }
 
             // Max Items
             if (maxItems == 0)
@@ -818,57 +843,84 @@ namespace GeneratorBackend
         static Image leader = new();
         static Image monster = new();
         static Image hero = new();
-        static Image<Rgba32>? image;
 
         static string lastPathLeader = "";
         static string lastPathMonster = "";
         static string lastPathHero = "";
 
-        static void ChangeImage(string path, int cardType)
+        static bool currentOOB = false; // remember if the current image is out of bounds
+
+        static void ChangeLeaderImage(string path, bool outOfBounds)
         {
-            ref string lastPath = ref lastPathLeader;
-            ref Image outputImage = ref leader;
+            if (path == lastPathLeader && currentOOB == outOfBounds) { return; }
+            lastPathLeader = path;
+
             int height = 1176;
             int width = 745;
-            switch (cardType)
+            if (outOfBounds)
             {
-                case 0: // Leader
-                    //lastPath = ref lastPathLeader;
-                    //outputImage = ref leader;
-                    //height = 1176;
-                    //width = 745;
-                    break;
-                case 1: // Monster
-                    lastPath = ref lastPathMonster;
-                    outputImage = ref monster;
-                    height = 824;
-                    width = 745;
-                    break;
-                case 2: // Hero
-                    lastPath = ref lastPathHero;
-                    outputImage = ref hero;
-                    height = 545;
-                    width = 545;
-                    break;
+                height = CARD_HEIGHT_TARROT;
+                width = CARD_WIDTH_TARROT;
             }
 
-            if (path == lastPath) { return; }
-            lastPath = path;
+            LoadImage(ref leader, path);
 
+            CropImage(ref leader, width, height);
+        }
+
+        static void ChangeMonsterImage(string path, bool outOfBounds)
+        {
+            if (path == lastPathMonster && currentOOB == outOfBounds) { return; }
+            lastPathMonster = path;
+
+            int height = 824;
+            int width = 745;
+            if (outOfBounds)
+            {
+                height = CARD_HEIGHT_TARROT;
+                width = CARD_WIDTH_TARROT;
+            }
+
+            LoadImage(ref monster, path);
+
+            CropImage(ref monster, width, height);
+        }
+
+        static void ChangeHeroImage(string path, bool outOfBounds)
+        {
+            if (path == lastPathHero && currentOOB == outOfBounds) { return; }
+            lastPathHero = path;
+
+            int height = 545;
+            int width = 545;
+            if (outOfBounds)
+            {
+                height = CARD_HEIGHT_POKER;
+                width = CARD_WIDTH_POKER;
+            }
+
+            LoadImage(ref hero, path);
+
+            CropImage(ref hero, width, height);
+        }
+
+        static void LoadImage(ref Image image, string path)
+        {
             if (File.Exists(path))
             {
-                Raylib.UnloadImage(outputImage);
+                Image<Rgba32>? imageSharp;
+
+                Raylib.UnloadImage(image);
                 using var file = File.OpenRead(path);
-                image = SixLabors.ImageSharp.Image.Load<Rgba32>(file);
+                imageSharp = SixLabors.ImageSharp.Image.Load<Rgba32>(file);
 
                 using var memoryStream = new MemoryStream();
-                image.SaveAsPng(memoryStream);
+                imageSharp.SaveAsPng(memoryStream);
                 memoryStream.Seek(0, SeekOrigin.Begin);
-                outputImage = Raylib.LoadImageFromMemory(".png", memoryStream.ToArray());
-
-                CropImage(ref outputImage, width, height);
+                image = Raylib.LoadImageFromMemory(".png", memoryStream.ToArray());
             }
         }
+
 
         static void CropImage(ref Image image, int width, int height)
         {
