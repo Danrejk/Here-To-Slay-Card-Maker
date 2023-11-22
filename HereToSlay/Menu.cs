@@ -13,7 +13,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using Button = System.Windows.Forms.Button;
 using ComboBox = System.Windows.Forms.ComboBox;
 
-#pragma warning disable CA1416 // It onlyworks on Windows test
+#pragma warning disable CA1416 // It onlyworks on Windows
 
 namespace HereToSlay
 {
@@ -115,9 +115,9 @@ namespace HereToSlay
             }
         }
 
-        // TODO: make it one method
-        // To anyone trying to understand the code below: I'm sorry, I'm not proud of it either. The lazynies is too great.
         #region Card Type Selection 
+        // TODO: possibly make it one method
+        // To anyone trying to understand the code below: I'm sorry, I'm not proud of it either. The lazynies is too great.
         private void LeaderCard_Click(object? sender, EventArgs? e)
         {
             if (LeaderCard.Checked == false)
@@ -769,7 +769,6 @@ namespace HereToSlay
         {
             Clipboard.SetImage(previewImg.Image);
         }
-        #endregion
 
         private void OutputSym_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -837,6 +836,7 @@ namespace HereToSlay
             renderPreview(sender, e);
         }
     }
+    #endregion
 
     class FontLoader
     {
@@ -942,7 +942,7 @@ namespace HereToSlay
                     Brush backgroundColorBrush = new SolidBrush(item.BackgroundColor);
                     e.Graphics.FillRectangle(backgroundColorBrush, e.Bounds);
 
-                    StringFormat stringFormat = new StringFormat
+                    StringFormat stringFormat = new()
                     {
                         LineAlignment = StringAlignment.Center,
                         Alignment = StringAlignment.Center
