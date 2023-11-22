@@ -452,6 +452,7 @@ namespace HereToSlay
 
             switch (language.SelectedIndex)
             {
+                // POLISH
                 case 1:
                     logo.Image = Properties.Resources.Logo1;
                     labelLeader.Text = Properties.Settings.Default.CardType switch
@@ -473,7 +474,7 @@ namespace HereToSlay
                     leaderImgToolTip.SetToolTip(selectImgButton, Properties.Settings.Default.CardType switch
                     {
                         1 => "Obrazek potwora (nie ca³a karta) ma wymiary 745x817. \nProgram automatycznie przytnie i przybli¿y obraz, je¿eli bêdzie to potrzebne.\n\nWspierane rozszerzenia plików:\n.png, .jpeg, .jpg, .gif (pierwsza klatka), .bmp, .webp, .pbm, .tiff, .tga",
-                        2 => "#TODO",
+                        2 => "Obrazek bohatera (nie ca³a karta) ma wymiary 545x545. \nProgram automatycznie przytnie i przybli¿y obraz, je¿eli bêdzie to potrzebne.\n\nWspierane rozszerzenia plików:\n.png, .jpeg, .jpg, .gif (pierwsza klatka), .bmp, .webp, .pbm, .tiff, .tga",
                         _ => "Obrazek przywódcy (nie ca³a karta) ma wymiary 745x1176. \nProgram automatycznie przytnie i przybli¿y obraz, je¿eli bêdzie to potrzebne.\n\nWspierane rozszerzenia plików:\n.png, .jpeg, .jpg, .gif (pierwsza klatka), .bmp, .webp, .pbm, .tiff, .tga"
                     });
                     gradient.Text = "Tylni gradient";
@@ -484,6 +485,7 @@ namespace HereToSlay
                     labelGood.Text = "Wymagania rzutu - UBIJ potwora";
                     goodOutputText.Text = "UBIJ tego potwora";
                     labelReq.Text = "Wymagania bohaterów";
+                    RENDER.Text = "ZAPISZ ZDJÊCIE";
 
                     if (chosenClass.SelectedIndex == -1 && Properties.Settings.Default.CardType == 2)
                     {
@@ -492,6 +494,7 @@ namespace HereToSlay
 
                     break;
 
+                // ENGLISH
                 default:
                     logo.Image = Properties.Resources.Logo0;
                     labelLeader.Text = Properties.Settings.Default.CardType switch
@@ -513,7 +516,7 @@ namespace HereToSlay
                     leaderImgToolTip.SetToolTip(selectImgButton, Properties.Settings.Default.CardType switch
                     {
                         1 => "The monster image (not the whole card) dimentions are 745x817. \nThe program will automatically crop and zoom the image, if needed.\n\nSupported file extensions:\n.png, .jpeg, .jpg, .gif (first frame), .bmp, .webp, .pbm, .tiff, .tga",
-                        2 => "#TODO",
+                        2 => "The hero image (not the whole card) dimentions are 545x545. \nThe program will automatically crop and zoom the image, if needed.\n\nSupported file extensions:\n.png, .jpeg, .jpg, .gif (first frame), .bmp, .webp, .pbm, .tiff, .tga",
                         _ => "The leader image (not the whole card) dimentions are 745x1176. \nThe program will automatically crop and zoom the image, if needed.\n\nSupported file extensions:\n.png, .jpeg, .jpg, .gif (first frame), .bmp, .webp, .pbm, .tiff, .tga"
                     });
                     gradient.Text = "Back gradient";
@@ -524,6 +527,7 @@ namespace HereToSlay
                     labelGood.Text = "Roll Requirements - SLAY monster";
                     goodOutputText.Text = "SLAY this Monster card";
                     labelReq.Text = "Hero Requirements";
+                    RENDER.Text = "SAVE IMAGE";
 
                     if (chosenClass.SelectedIndex == -1 && Properties.Settings.Default.CardType == 2)
                     {
