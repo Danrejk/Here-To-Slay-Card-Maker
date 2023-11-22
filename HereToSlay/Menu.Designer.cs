@@ -89,9 +89,6 @@
             itemImg = new PictureBox();
             itemImg2 = new PictureBox();
             itemImgMore = new Label();
-            advancedImg = new PictureBox();
-            advancedImgBox = new FlowLayoutPanel();
-            outOfBounds = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)logo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)previewImg).BeginInit();
             previewContextMenu.SuspendLayout();
@@ -105,8 +102,6 @@
             ((System.ComponentModel.ISupportInitialize)maxItems).BeginInit();
             ((System.ComponentModel.ISupportInitialize)itemImg).BeginInit();
             ((System.ComponentModel.ISupportInitialize)itemImg2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)advancedImg).BeginInit();
-            advancedImgBox.SuspendLayout();
             SuspendLayout();
             // 
             // RENDER
@@ -210,7 +205,7 @@
             // selectImgButton
             // 
             selectImgButton.BackColor = SystemColors.Control;
-            selectImgButton.Cursor = Cursors.Help;
+            selectImgButton.Cursor = Cursors.Hand;
             selectImgButton.FlatAppearance.BorderColor = Color.White;
             selectImgButton.FlatStyle = FlatStyle.Flat;
             selectImgButton.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
@@ -884,48 +879,12 @@
             itemImgMore.Text = "+";
             itemImgMore.Visible = false;
             // 
-            // advancedImg
-            // 
-            advancedImg.BackColor = Color.Transparent;
-            advancedImg.Cursor = Cursors.Hand;
-            advancedImg.Image = Properties.Resources.closed;
-            advancedImg.Location = new Point(119, 372);
-            advancedImg.Name = "advancedImg";
-            advancedImg.Size = new Size(12, 12);
-            advancedImg.SizeMode = PictureBoxSizeMode.Zoom;
-            advancedImg.TabIndex = 55;
-            advancedImg.TabStop = false;
-            advancedImg.Click += advanced_Click;
-            // 
-            // advancedImgBox
-            // 
-            advancedImgBox.Controls.Add(outOfBounds);
-            advancedImgBox.Location = new Point(134, 370);
-            advancedImgBox.Margin = new Padding(0);
-            advancedImgBox.Name = "advancedImgBox";
-            advancedImgBox.Size = new Size(200, 18);
-            advancedImgBox.TabIndex = 56;
-            advancedImgBox.Visible = false;
-            // 
-            // outOfBounds
-            // 
-            outOfBounds.AutoSize = true;
-            outOfBounds.ForeColor = Color.White;
-            outOfBounds.Location = new Point(0, 0);
-            outOfBounds.Margin = new Padding(0);
-            outOfBounds.Name = "outOfBounds";
-            outOfBounds.Size = new Size(103, 19);
-            outOfBounds.TabIndex = 57;
-            outOfBounds.Text = "Out of Bounds";
-            outOfBounds.UseVisualStyleBackColor = true;
-            // 
             // Menu
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackColor = Color.FromArgb(39, 43, 52);
             BackgroundImage = Properties.Resources.gradient;
             ClientSize = new Size(828, 711);
-            Controls.Add(advancedImg);
             Controls.Add(itemImg2);
             Controls.Add(itemImg);
             Controls.Add(itemImgMore);
@@ -970,7 +929,6 @@
             Controls.Add(previewImg);
             Controls.Add(labelGood);
             Controls.Add(labelBad);
-            Controls.Add(advancedImgBox);
             Controls.Add(labelMaxItem);
             Controls.Add(labelReq);
             DoubleBuffered = true;
@@ -998,9 +956,6 @@
             ((System.ComponentModel.ISupportInitialize)maxItems).EndInit();
             ((System.ComponentModel.ISupportInitialize)itemImg).EndInit();
             ((System.ComponentModel.ISupportInitialize)itemImg2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)advancedImg).EndInit();
-            advancedImgBox.ResumeLayout(false);
-            advancedImgBox.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -1067,8 +1022,5 @@
         private ToolStripMenuItem copyImageToClipboardToolStripMenuItem;
         private ToolStripMenuItem openImageLocationToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator1;
-        private PictureBox advancedImg;
-        private FlowLayoutPanel advancedImgBox;
-        private CheckBox outOfBounds;
     }
 }

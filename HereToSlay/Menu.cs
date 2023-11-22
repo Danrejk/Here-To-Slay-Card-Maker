@@ -149,8 +149,6 @@ namespace HereToSlay
                 labelImg.Location = new Point(labelImg.Location.X, 329);
                 selectImgText.Location = new Point(selectImgText.Location.X, 349);
                 selectImgButton.Location = new Point(selectImgButton.Location.X, 349);
-                advancedImg.Location = new Point(advancedImg.Location.X, 372);
-                advancedImgBox.Location = new Point(advancedImgBox.Location.X, 370);
 
                 RENDER.Location = new Point(RENDER.Location.X, 525);
 
@@ -227,8 +225,6 @@ namespace HereToSlay
                 labelImg.Location = new Point(labelImg.Location.X, 229);
                 selectImgText.Location = new Point(selectImgText.Location.X, 249);
                 selectImgButton.Location = new Point(selectImgButton.Location.X, 249);
-                advancedImg.Location = new Point(advancedImg.Location.X, 272);
-                advancedImgBox.Location = new Point(advancedImgBox.Location.X, 270);
 
                 RENDER.Location = new Point(RENDER.Location.X, 591);
 
@@ -316,8 +312,6 @@ namespace HereToSlay
                 labelImg.Location = new Point(labelImg.Location.X, 304);
                 selectImgText.Location = new Point(selectImgText.Location.X, 324);
                 selectImgButton.Location = new Point(selectImgButton.Location.X, 324);
-                advancedImg.Location = new Point(advancedImg.Location.X, 347);
-                advancedImgBox.Location = new Point(advancedImgBox.Location.X, 345);
 
                 RENDER.Location = new Point(RENDER.Location.X, 525);
 
@@ -378,17 +372,17 @@ namespace HereToSlay
                 switch (Properties.Settings.Default.CardType)
                 {
                     case 0:
-                        GeneratorBackend.Program.GenerateLeader(filePath, language.SelectedIndex, nameText.Text, new int[] { chosenClass.SelectedIndex, chosenSecondClass.SelectedIndex }, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked, outOfBounds.Checked);
+                        GeneratorBackend.Program.GenerateLeader(filePath, language.SelectedIndex, nameText.Text, new int[] { chosenClass.SelectedIndex, chosenSecondClass.SelectedIndex }, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked);
                         break;
                     case 1:
                         RollOutput good = new((int)goodOutputNum.Value, goodOutputSym.SelectedIndex, goodOutputText.Text);
                         RollOutput bad = new((int)badOutputNum.Value, badOutputSym.SelectedIndex, badOutputText.Text);
                         int[] desiredRequirements = new int[] { heroReq1.SelectedIndex, heroReq2.SelectedIndex, heroReq3.SelectedIndex, heroReq4.SelectedIndex, heroReq5.SelectedIndex };
-                        GeneratorBackend.Program.GenerateMonster(filePath, language.SelectedIndex, nameText.Text, desiredRequirements, good, bad, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked, outOfBounds.Checked);
+                        GeneratorBackend.Program.GenerateMonster(filePath, language.SelectedIndex, nameText.Text, desiredRequirements, good, bad, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked);
                         break;
                     case 2:
                         RollOutput description = new((int)goodOutputNum.Value, goodOutputSym.SelectedIndex, descriptionText.Text);
-                        GeneratorBackend.Program.GenerateHero(filePath, language.SelectedIndex, nameText.Text, chosenClass.SelectedIndex, selectImgText.Text, description, (int)maxItems.Value, outOfBounds.Checked);
+                        GeneratorBackend.Program.GenerateHero(filePath, language.SelectedIndex, nameText.Text, chosenClass.SelectedIndex, selectImgText.Text, description, (int)maxItems.Value);
                         break;
                     default:
                         throw new NotImplementedException();
@@ -431,17 +425,17 @@ namespace HereToSlay
             switch (Properties.Settings.Default.CardType)
             {
                 case 0:
-                    GeneratorBackend.Program.GenerateLeader(null, language.SelectedIndex, nameText.Text, new int[] { chosenClass.SelectedIndex, chosenSecondClass.SelectedIndex }, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked, outOfBounds.Checked);
+                    GeneratorBackend.Program.GenerateLeader(null, language.SelectedIndex, nameText.Text, new int[] { chosenClass.SelectedIndex, chosenSecondClass.SelectedIndex }, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked);
                     break;
                 case 1:
                     RollOutput good = new((int)goodOutputNum.Value, goodOutputSym.SelectedIndex, goodOutputText.Text);
                     RollOutput bad = new((int)badOutputNum.Value, badOutputSym.SelectedIndex, badOutputText.Text);
                     int[] desiredRequirements = new int[] { heroReq1.SelectedIndex, heroReq2.SelectedIndex, heroReq3.SelectedIndex, heroReq4.SelectedIndex, heroReq5.SelectedIndex };
-                    GeneratorBackend.Program.GenerateMonster(null, language.SelectedIndex, nameText.Text, desiredRequirements, good, bad, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked, outOfBounds.Checked);
+                    GeneratorBackend.Program.GenerateMonster(null, language.SelectedIndex, nameText.Text, desiredRequirements, good, bad, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked);
                     break;
                 case 2:
                     RollOutput description = new((int)goodOutputNum.Value, goodOutputSym.SelectedIndex, descriptionText.Text);
-                    GeneratorBackend.Program.GenerateHero(null, language.SelectedIndex, nameText.Text, chosenClass.SelectedIndex, selectImgText.Text, description, (int)maxItems.Value, outOfBounds.Checked);
+                    GeneratorBackend.Program.GenerateHero(null, language.SelectedIndex, nameText.Text, chosenClass.SelectedIndex, selectImgText.Text, description, (int)maxItems.Value);
                     break;
                 default:
                     throw new NotImplementedException();
@@ -730,7 +724,6 @@ namespace HereToSlay
             {
                 "advancedName" => advancedNameBox,
                 "advancedClass" => advancedClassBox,
-                "advancedImg" => advancedImgBox,
                 _ => throw new NotImplementedException(),
             };
             list.Visible = !list.Visible;
