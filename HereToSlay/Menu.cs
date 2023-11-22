@@ -485,7 +485,9 @@ namespace HereToSlay
                     labelGood.Text = "Wymagania rzutu - UBIJ potwora";
                     goodOutputText.Text = "UBIJ tego potwora";
                     labelReq.Text = "Wymagania bohaterów";
-                    RENDER.Text = "ZAPISZ ZDJÊCIE";
+                    RENDER.Text = "ZAPISZ OBRAZ";
+                    copyImageToClipboardToolStripMenuItem.Text = "Kopiuj obraz";
+                    openImageLocationToolStripMenuItem.Text = "Otwórz lokalizacjê obrazu";
 
                     if (chosenClass.SelectedIndex == -1 && Properties.Settings.Default.CardType == 2)
                     {
@@ -528,6 +530,8 @@ namespace HereToSlay
                     goodOutputText.Text = "SLAY this Monster card";
                     labelReq.Text = "Hero Requirements";
                     RENDER.Text = "SAVE IMAGE";
+                    copyImageToClipboardToolStripMenuItem.Text = "Copy image";
+                    openImageLocationToolStripMenuItem.Text = "Open image location";
 
                     if (chosenClass.SelectedIndex == -1 && Properties.Settings.Default.CardType == 2)
                     {
