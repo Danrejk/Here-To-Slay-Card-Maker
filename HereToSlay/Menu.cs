@@ -56,7 +56,6 @@ namespace HereToSlay
             language.Items.Add(new ImageCBox("English", Properties.Resources.en));
             language.Items.Add(new ImageCBox("Polski", Properties.Resources.pl));
             language.SelectedIndex = Properties.Settings.Default.Language;
-            initialLang = true;
 
             chosenClass.DrawMode = DrawMode.OwnerDrawFixed;
             chosenClass.DrawItem += ImageCBox.ComboBox_DrawItem;
@@ -393,31 +392,27 @@ namespace HereToSlay
         }
 
         private CancellationTokenSource? cancellationTokenSource;
-        bool initialLang = false; //it's so that when the program opens and sets the remembered language, it doesn't render the preview automatically.
         private async void renderPreview(object? sender, EventArgs? e)
         {
             cancellationTokenSource?.Cancel();
             cancellationTokenSource = new CancellationTokenSource();
-            if (initialLang)
+            try
             {
-                try
+                int timer = 1;
+                while (timer > 0)
                 {
-                    int timer = 1;
-                    while (timer > 0)
-                    {
-                        cancellationTokenSource.Token.ThrowIfCancellationRequested();
+                    cancellationTokenSource.Token.ThrowIfCancellationRequested();
 
-                        await Task.Delay(200, cancellationTokenSource.Token);
-                        timer--;
-                    }
-                    if (timer >= 0)
-                    {
-                        renderPreviewNow(sender, e);
-                        previewImg.ImageLocation = Path.Combine(Directory.GetCurrentDirectory(), "preview.png"); ;
-                    }
+                    await Task.Delay(200, cancellationTokenSource.Token);
+                    timer--;
                 }
-                catch (OperationCanceledException) { }
+                if (timer >= 0)
+                {
+                    renderPreviewNow(sender, e);
+                    previewImg.ImageLocation = Path.Combine(Directory.GetCurrentDirectory(), "preview.png"); ;
+                }
             }
+            catch (OperationCanceledException) { }
         }
 
         private void renderPreviewNow(object? sender, EventArgs? e)
@@ -452,11 +447,8 @@ namespace HereToSlay
 
         private void updateLanguage(object? sender, EventArgs? e)
         {
-            if (initialLang == true) // so that it doesn't overwrite the setting, before it can be read
-            {
-                Properties.Settings.Default.Language = language.SelectedIndex;
-                Properties.Settings.Default.Save();
-            }
+            Properties.Settings.Default.Language = language.SelectedIndex;
+            Properties.Settings.Default.Save();
 
             switch (language.SelectedIndex)
             {
