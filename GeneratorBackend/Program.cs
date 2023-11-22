@@ -97,23 +97,16 @@ namespace GeneratorBackend
         private static readonly AssetManager inst = AssetManager.Instance;
 
         #region Generation
-        public static void GenerateLeader(string? renderLocation, int language, string name, int[] desiredClass, string leaderImg, string description, bool addGradient, bool nameWhite, bool outOfBounds)
+        public static void GenerateLeader(string? renderLocation, int language, string name, int[] desiredClass, string leaderImg, string description, bool addGradient, bool nameWhite)
         {
-            ChangeLeaderImage(leaderImg, outOfBounds);
-
             // This has to be loaded each time, to clear the image from the previous render
             Image card = Raylib.LoadImage("GeneratorAssets/template/card_tarrot.png");
             Rectangle imageRec = new(0, 0, CARD_WIDTH_TARROT, CARD_HEIGHT_TARROT);
 
             // Draw Leader Image
-            if (!outOfBounds)
-            {
-                Raylib.ImageDraw(ref card, leader, imageRec, new(41, 41, 745, 1176), Color.WHITE);
-            }
-            else
-            {
-                Raylib.ImageDraw(ref card, leader, imageRec, new(0, 0, CARD_WIDTH_TARROT, CARD_HEIGHT_TARROT), Color.WHITE);
-            }
+            ChangeLeaderImage(leaderImg);
+
+            Raylib.ImageDraw(ref card, leader, imageRec, new(41, 41, 745, 1176), Color.WHITE);
 
             #region Classes
             Image classSymbol;
@@ -399,24 +392,18 @@ namespace GeneratorBackend
             Raylib.UnloadImage(card);
         }
 
-        public static void GenerateMonster(string? renderLocation, int language, string name, int[] desiredRequirements, RollOutput good, RollOutput bad, string monsterImg, string description, bool addGradient, bool nameWhite, bool outOfBounds)
+        public static void GenerateMonster(string? renderLocation, int language, string name, int[] desiredRequirements, RollOutput good, RollOutput bad, string monsterImg, string description, bool addGradient, bool nameWhite)
         {
-            ChangeMonsterImage(monsterImg, outOfBounds);
-
             // This has to be loaded each time, to clear the image from the previous render
             Image card = Raylib.LoadImage("GeneratorAssets/template/card_tarrot.png");
             Rectangle imageRec = new(0, 0, CARD_WIDTH_TARROT, CARD_HEIGHT_TARROT);
 
             // Draw Monster Image
-            if (!outOfBounds)
-            {
-                Raylib.ImageDraw(ref card, monster, imageRec, new(41, 41, 745, 824), Color.WHITE);
-            }
-            else
-            {
-                Raylib.ImageDraw(ref card, monster, imageRec, new(0, 0, CARD_WIDTH_TARROT, CARD_HEIGHT_TARROT), Color.WHITE);
-            }
-
+            ChangeMonsterImage(monsterImg);
+            
+            Raylib.ImageDraw(ref card, monster, imageRec, new(41, 41, 745, 824), Color.WHITE);
+            
+            // Draw Colored Frame
             if (addGradient) { Raylib.ImageDraw(ref card, inst.gradient, imageRec, imageRec, Color.WHITE); }
             Raylib.ImageDraw(ref card, inst.frameMonster, imageRec, imageRec, new(23, 26, 30, 255));
 
@@ -522,24 +509,17 @@ namespace GeneratorBackend
             Raylib.UnloadImage(card);
         }
 
-        public static void GenerateHero(string? renderLocation, int language, string name, int desiredClass, string heroImg, RollOutput description, int maxItems, bool outOfBounds)
+        public static void GenerateHero(string? renderLocation, int language, string name, int desiredClass, string heroImg, RollOutput description, int maxItems)
         {
-            ChangeHeroImage(heroImg, outOfBounds);
-
             // This has to be loaded each time, to clear the image from the previous render
             Image card = Raylib.LoadImage("GeneratorAssets/template/card_poker.png");
             Rectangle imageRec = new(0, 0, CARD_WIDTH_POKER, CARD_HEIGHT_POKER);
 
             // Draw Hero Image
-            if (!outOfBounds)
-            {
-                Raylib.ImageDraw(ref card, hero, imageRec, new(100, 231, 545, 545), Color.WHITE);
-            }
-            else
-            {
-                Raylib.ImageDraw(ref card, hero, imageRec, new(0, 0, CARD_WIDTH_POKER, CARD_HEIGHT_POKER), Color.WHITE);
-            }
+            ChangeHeroImage(heroImg);
 
+            Raylib.ImageDraw(ref card, hero, imageRec, new(100, 231, 545, 545), Color.WHITE);
+            
             // Max Items
             if (maxItems == 0)
             {
@@ -848,60 +828,31 @@ namespace GeneratorBackend
         static string lastPathMonster = "";
         static string lastPathHero = "";
 
-        static bool currentOOB = false; // remember if the current image is out of bounds
-
-        static void ChangeLeaderImage(string path, bool outOfBounds)
+        static void ChangeLeaderImage(string path)
         {
-            if (path == lastPathLeader && currentOOB == outOfBounds) { return; }
+            if (path == lastPathLeader) { return; }
             lastPathLeader = path;
 
-            int height = 1176;
-            int width = 745;
-            if (outOfBounds)
-            {
-                height = CARD_HEIGHT_TARROT;
-                width = CARD_WIDTH_TARROT;
-            }
-
             LoadImage(ref leader, path);
-
-            CropImage(ref leader, width, height);
+            CropImage(ref leader, 745, 1176);
         }
 
-        static void ChangeMonsterImage(string path, bool outOfBounds)
+        static void ChangeMonsterImage(string path)
         {
-            if (path == lastPathMonster && currentOOB == outOfBounds) { return; }
+            if (path == lastPathMonster) { return; }
             lastPathMonster = path;
 
-            int height = 824;
-            int width = 745;
-            if (outOfBounds)
-            {
-                height = CARD_HEIGHT_TARROT;
-                width = CARD_WIDTH_TARROT;
-            }
-
             LoadImage(ref monster, path);
-
-            CropImage(ref monster, width, height);
+            CropImage(ref monster, 745, 824);
         }
 
-        static void ChangeHeroImage(string path, bool outOfBounds)
+        static void ChangeHeroImage(string path)
         {
-            if (path == lastPathHero && currentOOB == outOfBounds) { return; }
+            if (path == lastPathHero) { return; }
             lastPathHero = path;
 
-            int height = 545;
-            int width = 545;
-            if (outOfBounds)
-            {
-                height = CARD_HEIGHT_POKER;
-                width = CARD_WIDTH_POKER;
-            }
-
             LoadImage(ref hero, path);
-
-            CropImage(ref hero, width, height);
+            CropImage(ref hero, 545, 545);
         }
 
         static void LoadImage(ref Image image, string path)
@@ -920,7 +871,6 @@ namespace GeneratorBackend
                 image = Raylib.LoadImageFromMemory(".png", memoryStream.ToArray());
             }
         }
-
 
         static void CropImage(ref Image image, int width, int height)
         {
