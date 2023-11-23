@@ -84,7 +84,10 @@ namespace GeneratorBackend
         const int ROLL_FONT_SPACING = 0;
         const int DESC_FONT_SPACING = 1;
         const int DESC_LINE_SPACING = 5; // the greater the value, the closer the lines are to each other, I know it's weird, but it's how it works.
-        const int DESC_MARGIN = 87;
+
+        const int DESC_MARGIN_LEADER = 87;
+        const int DESC_MARGIN_MONSTER = 87;
+        const int DESC_MARGIN_HERO = 87;
 
         // changing these, won't PROPERLY change the size of the card.
         // Tall cards
@@ -379,7 +382,7 @@ namespace GeneratorBackend
             DrawNameAndTitle(name, leaderTitle, card, nameWhite);
 
             // Description
-            DrawDescription(description, card);
+            DrawDescription(description, card, DESC_MARGIN_LEADER, 0);
 
             if (renderLocation == null)
             {
@@ -496,7 +499,7 @@ namespace GeneratorBackend
             DrawNameAndTitle(name, titleText, card, nameWhite);
 
             // Description
-            DrawDescription(description, card);
+            DrawDescription(description, card, DESC_MARGIN_MONSTER, 0);
 
             if (renderLocation == null)
             {
@@ -742,14 +745,39 @@ namespace GeneratorBackend
             Raylib.ImageDrawTextEx(ref card, inst.titleFont, titleText, new Vector2((CARD_WIDTH_POKER / 2) - (titleSize.X / 2), titleY), AssetManager.TITLE_SIZE, TITLE_FONT_SPACING, titleColor);
         }
 
-        static void DrawDescription(string text, Image card)
+        static void DrawDescription(string text, Image card, int offset_left, int size_set) // size_set - which set of card size to use; 0 - tarrot (tall/monster/leader); 1 - poker (short/hero); default - tarrot
         {
             Color descTextColor = new(78, 78, 78, 255); // 78 78 78 is the color of the description text
 
             Vector2 textSize = Raylib.MeasureTextEx(inst.descFont, text, AssetManager.DESC_SIZE, DESC_FONT_SPACING);
+            Vector2 card_size;
+
+            int desc_space; // (most probably) how much space there is for description counting from bottom of the card
+
+            switch(size_set)
+            {
+                case 0:
+                    card_size.X = CARD_WIDTH_TARROT;
+                    card_size.Y = CARD_HEIGHT_TARROT;
+
+                    desc_space = 210; // not sure where did this value come from, most likely from trial and error method (works only for leaders, need to find it for other cards)
+                    break;
+                case 1:
+                    card_size.X = CARD_WIDTH_POKER;
+                    card_size.Y = CARD_HEIGHT_POKER;
+
+                    desc_space = 210;
+                    break;
+                default:
+                    card_size.X = CARD_WIDTH_TARROT;
+                    card_size.Y = CARD_HEIGHT_TARROT;
+
+                    desc_space = 210;
+                    break;
+            }
 
             int len = text.Length;
-            int targetLen = CARD_WIDTH_TARROT - (DESC_MARGIN * 2);
+            int targetLen = (int)card_size.X - (offset_left * 2);
             int targetLines = 1;
             int currentLine = 0;
 
@@ -786,8 +814,8 @@ namespace GeneratorBackend
             output.Clear();
             word.Clear();
 
-            int offset = 210 - (targetLines * 15); // On real cards, the offset changes with the ammount of lines, probably to better center the text visually, because of the Class Icon.
-            float textBlockCenter = ((offset - (targetLines * AssetManager.DESC_SIZE)) / 2);
+            int offset_bottom = desc_space - (targetLines * 15); // On real cards, the offset changes with the ammount of lines, probably to better center the text visually, because of the Class Icon.
+            float textBlockCenter = ((offset_bottom - (targetLines * AssetManager.DESC_SIZE)) / 2);
 
             // Draw the text
             for (int i = 0; i < len; i++)
@@ -809,13 +837,13 @@ namespace GeneratorBackend
                 if (currentLen.X + wordLen.X >= targetLen)
                 {
                     // Draw the whole line
-                    Raylib.ImageDrawTextEx(ref card, inst.descFont, output.ToString(), new Vector2(DESC_MARGIN, (CARD_HEIGHT_TARROT - offset) + textBlockCenter + ((textSize.Y - DESC_LINE_SPACING) * currentLine)), AssetManager.DESC_SIZE, DESC_FONT_SPACING, descTextColor);
+                    Raylib.ImageDrawTextEx(ref card, inst.descFont, output.ToString(), new Vector2(offset_left, (card_size.Y - offset_bottom) + textBlockCenter + ((textSize.Y - DESC_LINE_SPACING) * currentLine)), AssetManager.DESC_SIZE, DESC_FONT_SPACING, descTextColor);
 
                     output.Clear();
                     currentLine++; // move to the next line
                 }
             }
-            Raylib.ImageDrawTextEx(ref card, inst.descFont, output.ToString() + word.ToString(), new Vector2(DESC_MARGIN, (CARD_HEIGHT_TARROT - offset) + textBlockCenter + ((textSize.Y - DESC_LINE_SPACING) * currentLine)), AssetManager.DESC_SIZE, DESC_FONT_SPACING, descTextColor);
+            Raylib.ImageDrawTextEx(ref card, inst.descFont, output.ToString() + word.ToString(), new Vector2(offset_left, (card_size.Y - offset_bottom) + textBlockCenter + ((textSize.Y - DESC_LINE_SPACING) * currentLine)), AssetManager.DESC_SIZE, DESC_FONT_SPACING, descTextColor);
         }
         #endregion
 
