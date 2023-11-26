@@ -82,8 +82,10 @@ namespace GeneratorBackend
         const int TITLE_FONT_SPACING = 1;
         const int REQ_FONT_SPACING = 0;
         const int ROLL_FONT_SPACING = 0;
+
         const int DESC_FONT_SPACING = 1;
         const float DESC_LINE_SPACING = 4.5f; // the greater the value, the closer the lines are to each other, I know it's weird, but it's how it works.
+        const int DESC_BIG_LINE_SPACING = 13; // this is used when ENTER is typed.
 
         const int DESC_MARGIN_LEADER = 87;
         const int DESC_MARGIN_MONSTER = 87;
@@ -790,26 +792,26 @@ namespace GeneratorBackend
             {
                 currentLen = Raylib.MeasureTextEx(inst.descFont, output.ToString(), AssetManager.DESC_SIZE, DESC_FONT_SPACING);
 
-                if (text[i] != ' ' && text[i] != '\r')
+                if (text[i] != ' ' && text[i] != '\r' && text[i] != '\n')
                 {
                     word.Append(text[i]);
                     wordLen = Raylib.MeasureTextEx(inst.descFont, word.ToString(), AssetManager.DESC_SIZE, DESC_FONT_SPACING);
                 }
-                else if ((text[i] == ' ' || text[i] == '\r') && currentLen.X + wordLen.X <= targetLen)
+                else if (((text[i] == ' ' || text[i] == '\r') && text[i] != '\n') && currentLen.X + wordLen.X <= targetLen)
                 {
                     output.Append(word);
-                    output.Append(' ');
                     word.Clear();
+                    if (text[i] == ' ') output.Append(' ');
                 }
 
-                if (currentLen.X + wordLen.X >= targetLen || text[i] == '\r')
+                if ((currentLen.X + wordLen.X >= targetLen) || text[i] == '\r')
                 {
                     targetLines++;
                     output.Clear();
 
                     if (text[i] == '\r')
                     {
-                        //additionalLineSpace += 5;
+                        additionalLineSpace += DESC_BIG_LINE_SPACING;
                     }
                 }
             }
@@ -817,8 +819,9 @@ namespace GeneratorBackend
             output.Clear();
             word.Clear();
 
-            float textBlockCenter = (desc_space - targetLines * (textSize.Y) + additionalLineSpace) / 2;
-            if (targetLines >= 4) textBlockCenter += 16;
+            float textBlockCenter = (desc_space - targetLines * (textSize.Y) - additionalLineSpace) / 2;
+            if (targetLines >= 4) textBlockCenter += 16; // real cards have a set offset for >=4 lines of text so they don't colide with the Leader Icon
+            if (targetLines == 3 && additionalLineSpace > 0) textBlockCenter += 11; // real cards have this offset for 3 lines WITH a big line spacing. All other cases seem to be without changes so it's kinda weird.
 
             additionalLineSpace = 0;
 
@@ -833,25 +836,21 @@ namespace GeneratorBackend
             {
                 currentLen = Raylib.MeasureTextEx(inst.descFont, output.ToString(), AssetManager.DESC_SIZE, DESC_FONT_SPACING);
 
-                if (text[i] != ' ' && text[i] != '\r')
+                if (text[i] != ' ' && text[i] != '\r' && text[i] != '\n')
                 {
                     word.Append(text[i]);
                     wordLen = Raylib.MeasureTextEx(inst.descFont, word.ToString(), AssetManager.DESC_SIZE, DESC_FONT_SPACING);
                 }
                 // devide by words
-                else if ((text[i] == ' ' || text[i] == '\r') && currentLen.X + wordLen.X < targetLen)
+                else if (((text[i] == ' ' || text[i] == '\r') && text[i] != '\n') && currentLen.X + wordLen.X < targetLen)
                 {
                     output.Append(word);
-                    output.Append(' ');
                     word.Clear();
+                    if (text[i] == ' ') output.Append(' ');
                 }
 
                 if ((currentLen.X + wordLen.X >= targetLen) || text[i] == '\r')
                 {
-                    if (text[i] == '\r')
-                    {
-                        //additionalLineSpace += 5;
-                    }
 
                     // Draw the whole line
                     Raylib.ImageDrawTextEx(ref card, inst.descFont, output.ToString(), new Vector2(offset_left, card_size.Y - desc_space + textBlockCenter + (textSize.Y * currentLine) - lineSpacing + additionalLineSpace), AssetManager.DESC_SIZE, DESC_FONT_SPACING, descTextColor);
@@ -860,10 +859,19 @@ namespace GeneratorBackend
                     currentLine++; // move to the next line
 
                     lineSpacing += DESC_LINE_SPACING;
+
+                    if (text[i] == '\r')
+                    {
+                        additionalLineSpace += DESC_BIG_LINE_SPACING;
+                    }
+                }
+
+                if( i == len - 1)
+                {
+                    Raylib.ImageDrawTextEx(ref card, inst.descFont, output.ToString() + word.ToString(), new Vector2(offset_left, card_size.Y - desc_space + textBlockCenter + (textSize.Y * currentLine) - lineSpacing + additionalLineSpace), AssetManager.DESC_SIZE, DESC_FONT_SPACING, descTextColor);
                 }
             }
             // Draw the last line
-            Raylib.ImageDrawTextEx(ref card, inst.descFont, output.ToString() + word.ToString(), new Vector2(offset_left, card_size.Y - desc_space + textBlockCenter + (textSize.Y * currentLine) - lineSpacing + additionalLineSpace), AssetManager.DESC_SIZE, DESC_FONT_SPACING, descTextColor);
         }
         #endregion
 
