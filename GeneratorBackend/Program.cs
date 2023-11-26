@@ -747,7 +747,7 @@ namespace GeneratorBackend
             Raylib.ImageDrawTextEx(ref card, inst.titleFont, titleText, new Vector2((CARD_WIDTH_POKER / 2) - (titleSize.X / 2), titleY), AssetManager.TITLE_SIZE, TITLE_FONT_SPACING, titleColor);
         }
 
-        static void DrawDescription(string text, Image card, int offset_left, int card_type) // card_type - which set of card size to use; 0 - tarrot (monster/leader); 1 - poker (hero);
+        static void DrawDescription(string text, Image card, int offset_left, int card_type) // card_type - which set of card size to use; 0 - tarrot (leader); 1 - tarrot (monster); 2 - poker (hero);
         {
             Color descTextColor = new(78, 78, 78, 255);
 
@@ -765,6 +765,12 @@ namespace GeneratorBackend
                     desc_space = 200;
                     break;
                 case 1:
+                    card_size.X = CARD_WIDTH_TARROT;
+                    card_size.Y = CARD_HEIGHT_TARROT;
+
+                    desc_space = 200;
+                    break;
+                case 2:
                     card_size.X = CARD_WIDTH_POKER;
                     card_size.Y = CARD_HEIGHT_POKER;
 
