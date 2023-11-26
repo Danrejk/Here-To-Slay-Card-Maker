@@ -83,7 +83,7 @@ namespace GeneratorBackend
         const int REQ_FONT_SPACING = 0;
         const int ROLL_FONT_SPACING = 0;
         const int DESC_FONT_SPACING = 1;
-        const int DESC_LINE_SPACING = 5; // the greater the value, the closer the lines are to each other, I know it's weird, but it's how it works.
+        const float DESC_LINE_SPACING = 4.5f; // the greater the value, the closer the lines are to each other, I know it's weird, but it's how it works.
 
         const int DESC_MARGIN_LEADER = 87;
         const int DESC_MARGIN_MONSTER = 87;
@@ -811,8 +811,9 @@ namespace GeneratorBackend
             word.Clear();
 
             float textBlockCenter = (desc_space - targetLines * (textSize.Y)) /2;
+            if (targetLines >= 4) textBlockCenter += 16;
 
-            int lineSpacing = targetLines switch
+            float lineSpacing = targetLines switch
             {
                 1 => 0, // if there is only one line, there is no need for spacing
                 _ => -DESC_LINE_SPACING
