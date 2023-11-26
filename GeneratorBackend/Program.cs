@@ -749,7 +749,7 @@ namespace GeneratorBackend
         {
             Color descTextColor = new(78, 78, 78, 255);
 
-            Vector2 textSize = Raylib.MeasureTextEx(inst.descFont, text, AssetManager.DESC_SIZE, DESC_FONT_SPACING);
+            Vector2 textSize = Raylib.MeasureTextEx(inst.descFont, text.Replace("\n", ""), AssetManager.DESC_SIZE, DESC_FONT_SPACING);
             Vector2 card_size;
 
             int desc_space; // how much Y space there is for description
@@ -777,6 +777,8 @@ namespace GeneratorBackend
             int targetLines = 1;
             int currentLine = 0;
 
+            int additionalLineSpace = 0;
+
             StringBuilder output = new(len);
             StringBuilder word = new(len);
 
@@ -788,30 +790,37 @@ namespace GeneratorBackend
             {
                 currentLen = Raylib.MeasureTextEx(inst.descFont, output.ToString(), AssetManager.DESC_SIZE, DESC_FONT_SPACING);
 
-                if (text[i] != ' ')
+                if (text[i] != ' ' && text[i] != '\r')
                 {
                     word.Append(text[i]);
                     wordLen = Raylib.MeasureTextEx(inst.descFont, word.ToString(), AssetManager.DESC_SIZE, DESC_FONT_SPACING);
                 }
-                else if (text[i] == ' ' && currentLen.X + wordLen.X <= targetLen)
+                else if ((text[i] == ' ' || text[i] == '\r') && currentLen.X + wordLen.X <= targetLen)
                 {
                     output.Append(word);
                     output.Append(' ');
                     word.Clear();
                 }
 
-                if (currentLen.X + wordLen.X >= targetLen)
+                if (currentLen.X + wordLen.X >= targetLen || text[i] == '\r')
                 {
                     targetLines++;
                     output.Clear();
+
+                    if (text[i] == '\r')
+                    {
+                        //additionalLineSpace += 5;
+                    }
                 }
             }
 
             output.Clear();
             word.Clear();
 
-            float textBlockCenter = (desc_space - targetLines * (textSize.Y)) /2;
+            float textBlockCenter = (desc_space - targetLines * (textSize.Y) + additionalLineSpace) / 2;
             if (targetLines >= 4) textBlockCenter += 16;
+
+            additionalLineSpace = 0;
 
             float lineSpacing = targetLines switch
             {
@@ -824,30 +833,37 @@ namespace GeneratorBackend
             {
                 currentLen = Raylib.MeasureTextEx(inst.descFont, output.ToString(), AssetManager.DESC_SIZE, DESC_FONT_SPACING);
 
-                if (text[i] != ' ')
+                if (text[i] != ' ' && text[i] != '\r')
                 {
                     word.Append(text[i]);
                     wordLen = Raylib.MeasureTextEx(inst.descFont, word.ToString(), AssetManager.DESC_SIZE, DESC_FONT_SPACING);
                 }
-                else if (text[i] == ' ' && currentLen.X + wordLen.X <= targetLen)
+                // devide by words
+                else if ((text[i] == ' ' || text[i] == '\r') && currentLen.X + wordLen.X < targetLen)
                 {
                     output.Append(word);
                     output.Append(' ');
                     word.Clear();
                 }
 
-                if (currentLen.X + wordLen.X >= targetLen)
+                if ((currentLen.X + wordLen.X >= targetLen) || text[i] == '\r')
                 {
+                    if (text[i] == '\r')
+                    {
+                        //additionalLineSpace += 5;
+                    }
+
                     // Draw the whole line
-                    Raylib.ImageDrawTextEx(ref card, inst.descFont, output.ToString(), new Vector2(offset_left, card_size.Y - desc_space + textBlockCenter + (textSize.Y * currentLine) - lineSpacing), AssetManager.DESC_SIZE, DESC_FONT_SPACING, descTextColor);
+                    Raylib.ImageDrawTextEx(ref card, inst.descFont, output.ToString(), new Vector2(offset_left, card_size.Y - desc_space + textBlockCenter + (textSize.Y * currentLine) - lineSpacing + additionalLineSpace), AssetManager.DESC_SIZE, DESC_FONT_SPACING, descTextColor);
 
                     output.Clear();
                     currentLine++; // move to the next line
+
                     lineSpacing += DESC_LINE_SPACING;
                 }
             }
             // Draw the last line
-            Raylib.ImageDrawTextEx(ref card, inst.descFont, output.ToString() + word.ToString(), new Vector2(offset_left, card_size.Y - desc_space + textBlockCenter + (textSize.Y * currentLine) - lineSpacing), AssetManager.DESC_SIZE, DESC_FONT_SPACING, descTextColor);
+            Raylib.ImageDrawTextEx(ref card, inst.descFont, output.ToString() + word.ToString(), new Vector2(offset_left, card_size.Y - desc_space + textBlockCenter + (textSize.Y * currentLine) - lineSpacing + additionalLineSpace), AssetManager.DESC_SIZE, DESC_FONT_SPACING, descTextColor);
         }
         #endregion
 
