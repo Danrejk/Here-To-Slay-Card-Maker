@@ -87,9 +87,9 @@ namespace GeneratorBackend
         const float DESC_LINE_SPACING = 4.5f; // the greater the value, the closer the lines are to each other, I know it's weird, but it's how it works.
         const int DESC_BIG_LINE_SPACING = 13; // this is used when ENTER is typed.
 
-        const int DESC_MARGIN_LEADER = 87;
-        const int DESC_MARGIN_MONSTER = 87;
-        const int DESC_MARGIN_HERO = 87;
+        const int DESC_MARGIN_TARROT = 87;
+        const int DESC_MARGIN_POKER = 200;
+        const int DESC_MARGIN_RIGHT = 100; // the margin on the right is the same for both card sizes
 
         // changing these, won't PROPERLY change the size of the card.
         // Tall cards
@@ -384,7 +384,7 @@ namespace GeneratorBackend
             DrawNameAndTitle(name, leaderTitle, card, nameWhite);
 
             // Description
-            DrawDescription(description, card, DESC_MARGIN_LEADER, 0);
+            DrawDescription(description, card, DESC_MARGIN_TARROT, DESC_MARGIN_RIGHT, 0);
 
             if (renderLocation == null)
             {
@@ -501,7 +501,7 @@ namespace GeneratorBackend
             DrawNameAndTitle(name, titleText, card, nameWhite);
 
             // Description
-            DrawDescription(description, card, DESC_MARGIN_MONSTER, 0);
+            DrawDescription(description, card, DESC_MARGIN_TARROT, DESC_MARGIN_RIGHT, 1);
 
             if (renderLocation == null)
             {
@@ -688,7 +688,7 @@ namespace GeneratorBackend
             Raylib.ImageDrawTextEx(ref card, inst.rollFont, description.Value.ToString() + descSymbol, new(94 + 78 / 2 - descNumSize.X / 2, 851 + 78 / 2 - descNumSize.Y / 2), AssetManager.ROLL_SIZE, ROLL_FONT_SPACING, inst.bottomColor);
 
             // Description
-            DrawDescription(description.Outcome, card, 200, 1);
+            DrawDescription(description.Outcome, card, DESC_MARGIN_POKER, DESC_MARGIN_RIGHT, 2);
 
             // Final Render
             if (renderLocation == null)
@@ -747,7 +747,7 @@ namespace GeneratorBackend
             Raylib.ImageDrawTextEx(ref card, inst.titleFont, titleText, new Vector2((CARD_WIDTH_POKER / 2) - (titleSize.X / 2), titleY), AssetManager.TITLE_SIZE, TITLE_FONT_SPACING, titleColor);
         }
 
-        static void DrawDescription(string text, Image card, int offset_left, int card_type) // card_type - which set of card size to use; 0 - tarrot (leader); 1 - tarrot (monster); 2 - poker (hero);
+        static void DrawDescription(string text, Image card, int padding_left, int padding_right, int card_type) // card_type - which set of card size to use; 0 - tarrot (leader); 1 - tarrot (monster); 2 - poker (hero);
         {
             Color descTextColor = new(78, 78, 78, 255);
 
@@ -774,14 +774,14 @@ namespace GeneratorBackend
                     card_size.X = CARD_WIDTH_POKER;
                     card_size.Y = CARD_HEIGHT_POKER;
 
-                    desc_space = 223 - 15; //41px frame not included
+                    desc_space = 223; //41px frame not included
                     break;
                 default:
                     throw new Exception("Invalid size_set value");
             }
 
             int len = text.Length;
-            int targetLen = (int)card_size.X - (offset_left * 2);
+            int targetLen = (int)card_size.X - padding_left - padding_right;
             int targetLines = 1;
             int currentLine = 0;
 
@@ -826,8 +826,11 @@ namespace GeneratorBackend
             word.Clear();
 
             float textBlockCenter = (desc_space - targetLines * (textSize.Y) - additionalLineSpace) / 2;
-            if (targetLines >= 4) textBlockCenter += 16; // real cards have a set offset for >=4 lines of text so they don't colide with the Leader Icon
-            if (targetLines == 3 && additionalLineSpace > 0) textBlockCenter += 11; // real cards have this offset for 3 lines WITH a big line spacing. All other cases seem to be without changes so it's kinda weird.
+            if (targetLines >= 4 && card_type != 2) textBlockCenter += 16; // real cards have a set offset for >=4 lines of text so they don't colide with the Leader Icon
+            if (targetLines == 3 && additionalLineSpace > 0 && card_type != 2) textBlockCenter += 11; // real cards have this offset for 3 lines WITH a big line spacing. All other cases seem to be without changes so it's kinda weird.
+            if (card_type == 2) textBlockCenter -= 41; // hero cards have a frame that takes up 41px of space, so we need to offset the text by that much
+            // TODO: Make the hero card always center
+
 
             additionalLineSpace = 0;
 
@@ -859,7 +862,7 @@ namespace GeneratorBackend
                 {
 
                     // Draw the whole line
-                    Raylib.ImageDrawTextEx(ref card, inst.descFont, output.ToString(), new Vector2(offset_left, card_size.Y - desc_space + textBlockCenter + (textSize.Y * currentLine) - lineSpacing + additionalLineSpace), AssetManager.DESC_SIZE, DESC_FONT_SPACING, descTextColor);
+                    Raylib.ImageDrawTextEx(ref card, inst.descFont, output.ToString(), new Vector2(padding_left, card_size.Y - desc_space + textBlockCenter + (textSize.Y * currentLine) - lineSpacing + additionalLineSpace), AssetManager.DESC_SIZE, DESC_FONT_SPACING, descTextColor);
 
                     output.Clear();
                     currentLine++; // move to the next line
@@ -874,7 +877,7 @@ namespace GeneratorBackend
 
                 if( i == len - 1)
                 {
-                    Raylib.ImageDrawTextEx(ref card, inst.descFont, output.ToString() + word.ToString(), new Vector2(offset_left, card_size.Y - desc_space + textBlockCenter + (textSize.Y * currentLine) - lineSpacing + additionalLineSpace), AssetManager.DESC_SIZE, DESC_FONT_SPACING, descTextColor);
+                    Raylib.ImageDrawTextEx(ref card, inst.descFont, output.ToString() + word.ToString(), new Vector2(padding_left, card_size.Y - desc_space + textBlockCenter + (textSize.Y * currentLine) - lineSpacing + additionalLineSpace), AssetManager.DESC_SIZE, DESC_FONT_SPACING, descTextColor);
                 }
             }
             // Draw the last line
