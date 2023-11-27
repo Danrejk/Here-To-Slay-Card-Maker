@@ -88,7 +88,7 @@ namespace GeneratorBackend
         const int DESC_BIG_LINE_SPACING = 13; // this is used when ENTER is typed.
 
         const int DESC_MARGIN_TARROT = 87;
-        const int DESC_MARGIN_POKER = 200;
+        const int DESC_MARGIN_POKER = 197;
         const int DESC_MARGIN_RIGHT = 100; // the margin on the right is the same for both card sizes
 
         // changing these, won't PROPERLY change the size of the card.
@@ -656,7 +656,7 @@ namespace GeneratorBackend
             }
 
             // Draw Class Symbol
-            Raylib.ImageDraw(ref card, classSymbol, imageRec, new(321, 724, 102, 102), Color.WHITE);
+            Raylib.ImageDraw(ref card, classSymbol, imageRec, new(321, 721, 102, 102), Color.WHITE);
 
             // Draw Colored Frame
             Image frameTinted = Raylib.ImageCopy(inst.frameHero); // create a copy of the frame asset, so that the original is not 
@@ -774,7 +774,7 @@ namespace GeneratorBackend
                     card_size.X = CARD_WIDTH_POKER;
                     card_size.Y = CARD_HEIGHT_POKER;
 
-                    desc_space = 223; //41px frame not included
+                    desc_space = 222; //41px frame not included
                     break;
                 default:
                     throw new Exception("Invalid size_set value");
@@ -826,9 +826,10 @@ namespace GeneratorBackend
             word.Clear();
 
             float textBlockCenter = (desc_space - targetLines * (textSize.Y) - additionalLineSpace) / 2;
+
             if (targetLines >= 4 && card_type != 2) textBlockCenter += 16; // real cards have a set offset for >=4 lines of text so they don't colide with the Leader Icon
             if (targetLines == 3 && additionalLineSpace > 0 && card_type != 2) textBlockCenter += 11; // real cards have this offset for 3 lines WITH a big line spacing. All other cases seem to be without changes so it's kinda weird.
-            if (card_type == 2) textBlockCenter -= 41; // hero cards have a frame that takes up 41px of space, so we need to offset the text by that much
+            if (card_type == 2) textBlockCenter -= 40; // hero cards have a frame that takes up 41px of space, so we need to offset the text by that much
             // TODO: Make the hero card always center
 
 
