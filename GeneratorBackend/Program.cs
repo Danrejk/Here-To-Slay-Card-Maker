@@ -749,11 +749,7 @@ namespace GeneratorBackend
 
         static void DrawDescription(string text, Image card, int padding_left, int padding_right, int card_type) // card_type - which set of card size to use; 0 - tarrot (leader); 1 - tarrot (monster); 2 - poker (hero);
         {
-            Color descTextColor = new(78, 78, 78, 255);
-
-            Vector2 textSize = Raylib.MeasureTextEx(inst.descFont, text.Replace("\n", ""), AssetManager.DESC_SIZE, DESC_FONT_SPACING);
             Vector2 card_size;
-
             int desc_space; // how much Y space there is for description
 
             switch(card_type)
@@ -780,113 +776,82 @@ namespace GeneratorBackend
                     throw new Exception("Invalid size_set value");
             }
 
-            int len = text.Length;
             int targetLen = (int)card_size.X - padding_left - padding_right;
-            int targetLines = 1;
-            int currentLine = 0;
+
+            List<string> lineList = new();
+            StringBuilder outputLine = new();
+            StringBuilder word = new();
+
+            float wordLen = 0;
+            float currentLen;
 
             int additionalLineSpace = 0;
-            float lineSpacing = 0;
 
-            StringBuilder output = new(len);
-            StringBuilder word = new(len);
-
-            Vector2 wordLen = Raylib.MeasureTextEx(inst.descFont, word.ToString(), AssetManager.DESC_SIZE, DESC_FONT_SPACING);
-            Vector2 currentLen;
-
-            // this is just to calculate the ammount of lines the text will take
-            for (int i = 0; i < len; i++)
+            // Divide the text into lines
+            for (int i = 0; i < text.Length; i++)
             {
-                currentLen = Raylib.MeasureTextEx(inst.descFont, output.ToString(), AssetManager.DESC_SIZE, DESC_FONT_SPACING);
+                currentLen = Raylib.MeasureTextEx(inst.descFont, outputLine.ToString(), AssetManager.DESC_SIZE, DESC_FONT_SPACING).X;
 
                 if (text[i] != ' ' && text[i] != '\r' && text[i] != '\n')
                 {
                     word.Append(text[i]);
-                    wordLen = Raylib.MeasureTextEx(inst.descFont, word.ToString(), AssetManager.DESC_SIZE, DESC_FONT_SPACING);
+                    wordLen = Raylib.MeasureTextEx(inst.descFont, word.ToString(), AssetManager.DESC_SIZE, DESC_FONT_SPACING).X;
                 }
-                else if (((text[i] == ' ' || text[i] == '\r') && text[i] != '\n') && currentLen.X + wordLen.X <= targetLen)
+                else if (((text[i] == ' ' || text[i] == '\r') && text[i] != '\n') && currentLen + wordLen < targetLen)
                 {
-                    output.Append(word);
+                    outputLine.Append(word);
                     word.Clear();
-                    if (text[i] == ' ') output.Append(' ');
+                    if (text[i] == ' ') outputLine.Append(' ');
                 }
 
-                if ((currentLen.X + wordLen.X >= targetLen) || text[i] == '\r')
+                if ((currentLen + wordLen >= targetLen) || text[i] == '\r')
                 {
-                    targetLines++;
-                    output.Clear();
-
-                    lineSpacing += DESC_LINE_SPACING;
-
                     if (text[i] == '\r')
                     {
                         additionalLineSpace += DESC_BIG_LINE_SPACING;
+                        outputLine.Append('\r');
                     }
+
+                    lineList.Add(outputLine.ToString());
+                    outputLine.Clear();
                 }
             }
+            lineList.Add(outputLine.ToString() + word.ToString()); // Add the last line.
 
-            output.Clear();
+            outputLine.Clear();
             word.Clear();
 
-            if (targetLines != 1) lineSpacing += -DESC_LINE_SPACING;
+            Vector2 textSize = Raylib.MeasureTextEx(inst.descFont, text.Replace("\n", ""), AssetManager.DESC_SIZE, DESC_FONT_SPACING);
+
+            int targetLines = lineList.Count;
+            float lineSpacing = (targetLines-1)*DESC_LINE_SPACING; // We subtract one because for example between 3 lines there are 2 spaces.
 
             float textBlockCenter = (desc_space - targetLines * (textSize.Y) - additionalLineSpace + lineSpacing) / 2;
 
-            //if (targetLines >= 4 && card_type != 2) textBlockCenter += 16; // real cards have a set offset for >=4 lines of text so they don't colide with the Leader Icon
-            //if (targetLines == 3 && additionalLineSpace > 0 && card_type != 2) textBlockCenter += 11; // real cards have this offset for 3 lines WITH a big line spacing. All other cases seem to be without changes so it's kinda weird.
+            if (targetLines >= 4 && card_type != 2) textBlockCenter += 16; // real cards have a set offset for >=4 lines of text so they don't colide with the Leader Icon
+            if (targetLines == 3 && additionalLineSpace > 0 && card_type != 2) textBlockCenter += 11; // real cards have this offset for 3 lines WITH a big line spacing. All other cases seem to be without changes so it's kinda weird.
             if (card_type == 2) textBlockCenter -= 41; // hero cards have a frame that takes up 41px of space, so we need to offset the text by that much
-            // TODO: Make the hero card always center
 
+            lineSpacing = 0; // We have to reset the lineSpacing and increase it as we are drawing the lines
+            additionalLineSpace = 0; // Same as with lineSpacing
 
-            additionalLineSpace = 0;
+            Color descTextColor = new(78, 78, 78, 255);
 
-            lineSpacing = targetLines switch
+            // Draw the lines
+            for (int currentLine = 0; currentLine < lineList.Count; currentLine++)
             {
-                1 => 0, // if there is only one line, there is no need for spacing
-                _ => -DESC_LINE_SPACING
-            };
-
-            // Draw the text
-            for (int i = 0; i < len; i++)
-            {
-                currentLen = Raylib.MeasureTextEx(inst.descFont, output.ToString(), AssetManager.DESC_SIZE, DESC_FONT_SPACING);
-
-                if (text[i] != ' ' && text[i] != '\r' && text[i] != '\n')
+                bool bigSpace = false;
+                if (lineList[currentLine].Contains('\r'))
                 {
-                    word.Append(text[i]);
-                    wordLen = Raylib.MeasureTextEx(inst.descFont, word.ToString(), AssetManager.DESC_SIZE, DESC_FONT_SPACING);
-                }
-                // devide by words
-                else if (((text[i] == ' ' || text[i] == '\r') && text[i] != '\n') && currentLen.X + wordLen.X < targetLen)
-                {
-                    output.Append(word);
-                    word.Clear();
-                    if (text[i] == ' ') output.Append(' ');
+                    lineList[currentLine] = lineList[currentLine].Replace('\r', ' ');
+                    bigSpace = true;
                 }
 
-                if ((currentLen.X + wordLen.X >= targetLen) || text[i] == '\r')
-                {
-
-                    // Draw the whole line
-                    Raylib.ImageDrawTextEx(ref card, inst.descFont, output.ToString(), new Vector2(padding_left, card_size.Y - desc_space + textBlockCenter + (textSize.Y * currentLine) - lineSpacing + additionalLineSpace), AssetManager.DESC_SIZE, DESC_FONT_SPACING, descTextColor);
-
-                    output.Clear();
-                    currentLine++; // move to the next line
-
-                    lineSpacing += DESC_LINE_SPACING;
-
-                    if (text[i] == '\r')
-                    {
-                        additionalLineSpace += DESC_BIG_LINE_SPACING;
-                    }
-                }
-
-                if( i == len - 1)
-                {
-                    Raylib.ImageDrawTextEx(ref card, inst.descFont, output.ToString() + word.ToString(), new Vector2(padding_left, card_size.Y - desc_space + textBlockCenter + (textSize.Y * currentLine) - lineSpacing + additionalLineSpace), AssetManager.DESC_SIZE, DESC_FONT_SPACING, descTextColor);
-                }
+                Raylib.ImageDrawTextEx(ref card, inst.descFont, lineList[currentLine], new Vector2(padding_left, card_size.Y - desc_space + textBlockCenter + (textSize.Y * currentLine) - lineSpacing + additionalLineSpace), AssetManager.DESC_SIZE, DESC_FONT_SPACING, descTextColor);
+                
+                lineSpacing += DESC_LINE_SPACING;
+                if (bigSpace) additionalLineSpace += DESC_BIG_LINE_SPACING;
             }
-            // Draw the last line
         }
         #endregion
 
