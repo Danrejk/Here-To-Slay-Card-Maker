@@ -786,6 +786,7 @@ namespace GeneratorBackend
             int currentLine = 0;
 
             int additionalLineSpace = 0;
+            float lineSpacing = 0;
 
             StringBuilder output = new(len);
             StringBuilder word = new(len);
@@ -815,6 +816,8 @@ namespace GeneratorBackend
                     targetLines++;
                     output.Clear();
 
+                    lineSpacing += DESC_LINE_SPACING;
+
                     if (text[i] == '\r')
                     {
                         additionalLineSpace += DESC_BIG_LINE_SPACING;
@@ -825,17 +828,19 @@ namespace GeneratorBackend
             output.Clear();
             word.Clear();
 
-            float textBlockCenter = (desc_space - targetLines * (textSize.Y) - additionalLineSpace) / 2;
+            if (targetLines != 1) lineSpacing += -DESC_LINE_SPACING;
 
-            if (targetLines >= 4 && card_type != 2) textBlockCenter += 16; // real cards have a set offset for >=4 lines of text so they don't colide with the Leader Icon
-            if (targetLines == 3 && additionalLineSpace > 0 && card_type != 2) textBlockCenter += 11; // real cards have this offset for 3 lines WITH a big line spacing. All other cases seem to be without changes so it's kinda weird.
-            if (card_type == 2) textBlockCenter -= 40; // hero cards have a frame that takes up 41px of space, so we need to offset the text by that much
+            float textBlockCenter = (desc_space - targetLines * (textSize.Y) - additionalLineSpace + lineSpacing) / 2;
+
+            //if (targetLines >= 4 && card_type != 2) textBlockCenter += 16; // real cards have a set offset for >=4 lines of text so they don't colide with the Leader Icon
+            //if (targetLines == 3 && additionalLineSpace > 0 && card_type != 2) textBlockCenter += 11; // real cards have this offset for 3 lines WITH a big line spacing. All other cases seem to be without changes so it's kinda weird.
+            if (card_type == 2) textBlockCenter -= 41; // hero cards have a frame that takes up 41px of space, so we need to offset the text by that much
             // TODO: Make the hero card always center
 
 
             additionalLineSpace = 0;
 
-            float lineSpacing = targetLines switch
+            lineSpacing = targetLines switch
             {
                 1 => 0, // if there is only one line, there is no need for spacing
                 _ => -DESC_LINE_SPACING
