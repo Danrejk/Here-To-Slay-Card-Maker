@@ -288,6 +288,7 @@
             descriptionText.Multiline = true;
             descriptionText.Name = "descriptionText";
             descriptionText.RightToLeft = RightToLeft.No;
+            descriptionText.ScrollBars = ScrollBars.Vertical;
             descriptionText.Size = new Size(300, 65);
             descriptionText.TabIndex = 15;
             descriptionText.TextChanged += renderPreview;
