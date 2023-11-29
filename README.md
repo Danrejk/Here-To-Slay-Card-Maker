@@ -125,6 +125,7 @@ This program is what the official one should be, accurate and with more features
     </thead>
     <tbody>
         <tr><td>✔️✔️✔️Accurate Hero Card's design.</td></tr>
+        <tr><td>✔️Fully customisable roll requirement.</td></tr>
         <tr><td>✔️Maximum 6 lines of description.</td></tr>
         <tr><td>✔️Description Line breaks crate larger gaps between the lines.</td></tr>
         <tr><td>✔️Customisable maximum items ammount.</td></tr>
@@ -166,4 +167,6 @@ Unforunatelly I don't know how that works exactly. But I saw there are many post
     <img width="75%" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/screenshot1.png">
     <br>
     <img width="75%" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/screenshot2.png">
+    <br>
+    <img width="75%" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/screenshot3.png">
 </p>
