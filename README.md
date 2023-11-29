@@ -6,7 +6,7 @@ Using this program you can make <b>accurate</b> custom cards for the card game "
 Polska wersja językowa: [README.pl.md](https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/README.pl.md)
 
 ## Instalation
-<a href="https://github.com/Danrejk/Here-To-Slay-Card-Maker/releases/tag/v2.3"> <img alt="Latest Version" src="https://img.shields.io/badge/Latest_Version-v.2.3-green"> </a>
+<a href="https://github.com/Danrejk/Here-To-Slay-Card-Maker/releases/tag/v3.0"> <img alt="Latest Version" src="https://img.shields.io/badge/Latest_Version-v.3.0-green"> </a>
 <br>
 Download the <code>.zip</code> file from the latest <b>Release</b> of the program displayed above, or on the right side of the page.<br>
 Unzip it, the <code>.exe</code> is inside of it, it must remain along the other files inside of the folder or else the program will not work.
@@ -50,24 +50,28 @@ This program is what the official one should be, accurate and with more features
             <td>⚠️Has too thick borders.</td>
         </tr> 
         <tr>
-            <td>✔️Allows for around 200 letters in the description.</td>
-            <td>⚠️Descriptions have max 120 characters.</td>
+            <td>✔️Max 5 lines of description (more don't fit)</td>
+            <td>⚠️Max 120 characters. (~3 lines) of description</td>
         </tr> 
         <tr>
             <td>✔️Description text is aligned to the left.</td>
             <td>❌Description text is aligned to the center.</td>
         </tr> 
         <tr>
+            <td>✔️Description Line breaks crate larger gaps between the lines.</td>
+            <td>❌Description Line breaks simply go to the next line.</td>
+        </tr>
+        <tr>
             <td>✔️Uses black for the name and title text. (There's also a toggleable white color option)</td>
             <td>❌For some reason uses white for name and title text.</td>
         </tr> 
         <tr>
-            <td>✔️Has an optional back gradient behind the name, which ISN't upside down.</td>
+            <td>✔️Optional back gradient behind the name, which ISN't upside down.</td>
             <td>❌For some reason automatically includes a back gradient behind the name, which is upside down.</td>
         </tr>
         <tr>
             <td>⚠️Automatically crops the image to fit onto the card.</td>
-            <td>⚠️Gives the user control over which parts are cut out, but it cuts out the edges no matter what you do.</td>
+            <td>⚠️Gives the user control over which parts are cut out, but it cuts out the edges (zooms in) no matter what you do.</td>
         </tr>
         <tr>
             <td>✔️Doesn't compress the image.</td>
@@ -97,13 +101,12 @@ This program is what the official one should be, accurate and with more features
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>✔️✔️✔️Accurate Monster Card's design.</td>
-        </tr>
+        <tr><td>✔️✔️✔️Accurate Monster Card's design.</td></tr>
         <tr><td>⚠️Maximum 5 hero requirements.</td></tr>
-        <tr><td>✔️Fully custimisable roll outcomes.</td></tr>
+        <tr><td>✔️Fully customisable roll outcomes.</td></tr>
         <tr><td>✔️Optional Back Gradient and black name text.</td></tr>
         <tr><td>✔️Automatically orders class requirements to put generic Heros at the back.</td></tr>
+        <tr><td>✔️Description Line breaks crate larger gaps between the lines.</td></tr>
         <tr><td>❌No "+ Discard Card" option... yet.</td></tr>
         <tr><td>❌No bonus to roll for each additional hero card option... yet.</td></tr>
     </tbody>
@@ -112,17 +115,22 @@ This program is what the official one should be, accurate and with more features
 <br>
 <img src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/LazyDevider.png">
     
-### Hero❌
-<img align="left" width="33%" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/No_HeroCard.png">
+### Hero
+<img align="left" width="33%" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/Demo_Hero.png">
 <table>
     <thead>
         <tr>
-            <th width="500px">Hero Generation❌</th>
+            <th width="500px">Hero Generation</th>
         </tr>
     </thead>
     <tbody>
-        <tr><td>❌ Hero card generation is NOT yet implemented.</td></tr>
-        <tr><td>⚠️ We are still working on implementing it.</td></tr>
+        <tr><td>✔️✔️✔️Accurate Hero Card's design.</td></tr>
+        <tr><td>✔️Fully customisable roll requirement.</td></tr>
+        <tr><td>✔️Maximum 6 lines of description.</td></tr>
+        <tr><td>✔️Description Line breaks crate larger gaps between the lines.</td></tr>
+        <tr><td>✔️Customisable maximum items ammount.</td></tr>
+        <tr><td>✔️Can disalow for items to be given to the card.</td></tr>
+        <tr><td>❌No Here To Sleigh DLC present icon.</td></tr>
     </tbody>
 </table>
 
@@ -159,4 +167,6 @@ Unforunatelly I don't know how that works exactly. But I saw there are many post
     <img width="75%" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/screenshot1.png">
     <br>
     <img width="75%" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/screenshot2.png">
+    <br>
+    <img width="75%" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/screenshot3.png">
 </p>
