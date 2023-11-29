@@ -78,6 +78,7 @@ namespace GeneratorBackend
     public class Program
     {
         // all of the font spacings work, but are simply not used as it turned out we don't need them, but YOU might. I dunno.
+
         const int NAME_FONT_SPACING = 0;
         const int TITLE_FONT_SPACING = 1;
         const int REQ_FONT_SPACING = 0;
@@ -89,7 +90,7 @@ namespace GeneratorBackend
 
         const int DESC_MARGIN_TARROT = 87;
         const int DESC_MARGIN_POKER = 200;
-        const int DESC_MARGIN_RIGHT = 100; // the margin on the right is the same for both card sizes
+        const int DESC_MARGIN_RIGHT = 100; // the margin on the right is the same f
 
         // changing these, won't PROPERLY change the size of the card.
         // Tall cards
@@ -820,7 +821,7 @@ namespace GeneratorBackend
             word.Clear();
 
             Vector2 textSize = Raylib.MeasureTextEx(inst.descFont, text.Replace("\n", ""), AssetManager.DESC_SIZE, DESC_FONT_SPACING);
-
+          
             int targetLines = lineList.Count;
             float lineSpacing = (targetLines-1)*DESC_LINE_SPACING; // We subtract one because for example between 3 lines there are 2 spaces.
 
@@ -832,7 +833,6 @@ namespace GeneratorBackend
             if (card_type == 2 && targetLines >= 5) textBlockCenter += 12;
 
             lineSpacing = 0; // We have to reset the lineSpacing and increase it as we are drawing the lines
-            additionalLineSpace = 0; // Same as with lineSpacing
 
             Color descTextColor = new(78, 78, 78, 255);
 
