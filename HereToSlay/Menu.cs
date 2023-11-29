@@ -488,6 +488,7 @@ namespace HereToSlay
                     RENDER.Text = "ZAPISZ OBRAZ";
                     copyImageToClipboardToolStripMenuItem.Text = "Kopiuj obraz";
                     openImageLocationToolStripMenuItem.Text = "Otwórz lokalizacjê obrazu";
+                    labelMaxItem.Text = "Max. iloœæ przedmiotów";
 
                     if (chosenClass.SelectedIndex == -1 && Properties.Settings.Default.CardType == 2)
                     {
@@ -532,6 +533,7 @@ namespace HereToSlay
                     RENDER.Text = "SAVE IMAGE";
                     copyImageToClipboardToolStripMenuItem.Text = "Copy image";
                     openImageLocationToolStripMenuItem.Text = "Open image location";
+                    labelMaxItem.Text = "Max Item Ammount";
 
                     if (chosenClass.SelectedIndex == -1 && Properties.Settings.Default.CardType == 2)
                     {
