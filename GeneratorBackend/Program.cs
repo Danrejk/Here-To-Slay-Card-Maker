@@ -88,7 +88,7 @@ namespace GeneratorBackend
         const int DESC_BIG_LINE_SPACING = 13; // this is used when ENTER is typed.
 
         const int DESC_MARGIN_TARROT = 87;
-        const int DESC_MARGIN_POKER = 197;
+        const int DESC_MARGIN_POKER = 200;
         const int DESC_MARGIN_RIGHT = 100; // the margin on the right is the same for both card sizes
 
         // changing these, won't PROPERLY change the size of the card.
@@ -522,8 +522,7 @@ namespace GeneratorBackend
 
             // Draw Hero Image
             ChangeHeroImage(heroImg);
-
-            Raylib.ImageDraw(ref card, hero, imageRec, new(100, 231, 545, 545), Color.WHITE);
+            Raylib.ImageDraw(ref card, hero, imageRec, new(100, 232, 545, 545), Color.WHITE);
             
             // Max Items
             if (maxItems == 0)
@@ -656,7 +655,7 @@ namespace GeneratorBackend
             }
 
             // Draw Class Symbol
-            Raylib.ImageDraw(ref card, classSymbol, imageRec, new(321, 721, 102, 102), Color.WHITE);
+            Raylib.ImageDraw(ref card, classSymbol, imageRec, new(322, 722, 102, 102), Color.WHITE);
 
             // Draw Colored Frame
             Image frameTinted = Raylib.ImageCopy(inst.frameHero); // create a copy of the frame asset, so that the original is not 
@@ -675,17 +674,17 @@ namespace GeneratorBackend
             switch (description.Symbol)
             {
                 case 0:
-                    Raylib.ImageDraw(ref card, inst.green, imageRec, new(94, 851, 78, 78), Color.WHITE);
+                    Raylib.ImageDraw(ref card, inst.green, imageRec, new(94, 852, 78, 78), Color.WHITE);
                     descSymbol = '+';
                     break;
                 case 1:
-                    Raylib.ImageDraw(ref card, inst.red, imageRec, new(94, 851, 78, 78), Color.WHITE);
+                    Raylib.ImageDraw(ref card, inst.red, imageRec, new(94, 852, 78, 78), Color.WHITE);
                     descSymbol = '-';
                     break;
             }
 
             Vector2 descNumSize = Raylib.MeasureTextEx(inst.rollFont, description.Value.ToString() + descSymbol, AssetManager.ROLL_SIZE, ROLL_FONT_SPACING);
-            Raylib.ImageDrawTextEx(ref card, inst.rollFont, description.Value.ToString() + descSymbol, new(94 + 78 / 2 - descNumSize.X / 2, 851 + 78 / 2 - descNumSize.Y / 2), AssetManager.ROLL_SIZE, ROLL_FONT_SPACING, inst.bottomColor);
+            Raylib.ImageDrawTextEx(ref card, inst.rollFont, description.Value.ToString() + descSymbol, new(94 + 78 / 2 - descNumSize.X / 2, 852 + 78 / 2 - descNumSize.Y / 2), AssetManager.ROLL_SIZE, ROLL_FONT_SPACING, inst.bottomColor);
 
             // Description
             DrawDescription(description.Outcome, card, DESC_MARGIN_POKER, DESC_MARGIN_RIGHT, 2);
@@ -770,7 +769,7 @@ namespace GeneratorBackend
                     card_size.X = CARD_WIDTH_POKER;
                     card_size.Y = CARD_HEIGHT_POKER;
 
-                    desc_space = 222; //41px frame not included
+                    desc_space = 222;
                     break;
                 default:
                     throw new Exception("Invalid size_set value");
@@ -829,8 +828,9 @@ namespace GeneratorBackend
             float textBlockCenter = (desc_space - targetLines * (textSize.Y) - additionalLineSpace + lineSpacing) / 2;
 
             if (targetLines >= 4 && card_type != 2) textBlockCenter += 16; // real cards have a set offset for >=4 lines of text so they don't colide with the Leader Icon
-            if (targetLines == 3 && additionalLineSpace > 0 && card_type != 2) textBlockCenter += 11; // real cards have this offset for 3 lines WITH a big line spacing. All other cases seem to be without changes so it's kinda weird.
+            if (targetLines == 3 && additionalLineSpace > 0 && card_type != 2) textBlockCenter += 12; // real cards have this offset for 3 lines WITH a big line spacing. All other cases seem to be without changes so it's kinda weird.
             if (card_type == 2) textBlockCenter -= 41; // hero cards have a frame that takes up 41px of space, so we need to offset the text by that much
+            if (card_type == 2 && targetLines >= 5) textBlockCenter += 12;
 
             lineSpacing = 0; // We have to reset the lineSpacing and increase it as we are drawing the lines
             additionalLineSpace = 0; // Same as with lineSpacing
