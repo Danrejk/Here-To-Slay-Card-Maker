@@ -351,6 +351,8 @@ namespace GeneratorBackend
            
             if (addGradient) { Raylib.ImageDraw(ref card, inst.gradient, imageRec, imageRec, Color.WHITE); }
 
+            // Draw Class Symbol(s)
+            Raylib.ImageDraw(ref card, classSymbol, imageRec, new(363, 1167, 102, 102), Color.WHITE);
 
             // Draw Colored Frame(s)
             Image frameTinted = Raylib.ImageCopy(inst.frameLeader); // create a copy of the frame asset, so that the original is not modified
@@ -376,9 +378,6 @@ namespace GeneratorBackend
 
             Raylib.UnloadImage(frameTinted);
             Raylib.UnloadImage(secondClassSymbol);
-
-            // Draw Class Symbol(s)
-            Raylib.ImageDraw(ref card, classSymbol, imageRec, new(363, 1167, 102, 102), Color.WHITE);
 
             // Name and Title
             DrawNameAndTitle(name, leaderTitle, card, nameWhite);
