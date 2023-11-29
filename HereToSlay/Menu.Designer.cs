@@ -44,6 +44,10 @@
             nameWhite = new CheckBox();
             descriptionText = new TextBox();
             previewImg = new PictureBox();
+            previewContextMenu = new ContextMenuStrip(components);
+            openImageLocationToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator1 = new ToolStripSeparator();
+            copyImageToClipboardToolStripMenuItem = new ToolStripMenuItem();
             gitLabel2 = new LinkLabel();
             gitLabel1 = new LinkLabel();
             SaveRenderDialog = new SaveFileDialog();
@@ -80,8 +84,14 @@
             clearHeroReq4 = new Button();
             clearHeroReq5 = new Button();
             clearHeroReq3 = new Button();
+            maxItems = new NumericUpDown();
+            labelMaxItem = new Label();
+            itemImg = new PictureBox();
+            itemImg2 = new PictureBox();
+            itemImgMore = new Label();
             ((System.ComponentModel.ISupportInitialize)logo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)previewImg).BeginInit();
+            previewContextMenu.SuspendLayout();
             advancedNameBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)advancedName).BeginInit();
             ((System.ComponentModel.ISupportInitialize)advancedClass).BeginInit();
@@ -89,6 +99,9 @@
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)badOutputNum).BeginInit();
             ((System.ComponentModel.ISupportInitialize)goodOutputNum).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)maxItems).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)itemImg).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)itemImg2).BeginInit();
             SuspendLayout();
             // 
             // RENDER
@@ -275,13 +288,15 @@
             descriptionText.Multiline = true;
             descriptionText.Name = "descriptionText";
             descriptionText.RightToLeft = RightToLeft.No;
+            descriptionText.ScrollBars = ScrollBars.Vertical;
             descriptionText.Size = new Size(300, 65);
             descriptionText.TabIndex = 15;
             descriptionText.TextChanged += renderPreview;
             // 
             // previewImg
             // 
-            previewImg.BackColor = SystemColors.ControlLight;
+            previewImg.BackColor = SystemColors.ActiveCaptionText;
+            previewImg.ContextMenuStrip = previewContextMenu;
             previewImg.Cursor = Cursors.Hand;
             previewImg.Dock = DockStyle.Right;
             previewImg.Location = new Point(414, 0);
@@ -291,6 +306,34 @@
             previewImg.TabIndex = 16;
             previewImg.TabStop = false;
             previewImg.Click += previewImg_Click;
+            // 
+            // previewContextMenu
+            // 
+            previewContextMenu.Items.AddRange(new ToolStripItem[] { openImageLocationToolStripMenuItem, toolStripSeparator1, copyImageToClipboardToolStripMenuItem });
+            previewContextMenu.Name = "previewContextMenu";
+            previewContextMenu.RenderMode = ToolStripRenderMode.System;
+            previewContextMenu.Size = new Size(189, 54);
+            // 
+            // openImageLocationToolStripMenuItem
+            // 
+            openImageLocationToolStripMenuItem.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            openImageLocationToolStripMenuItem.Name = "openImageLocationToolStripMenuItem";
+            openImageLocationToolStripMenuItem.Size = new Size(188, 22);
+            openImageLocationToolStripMenuItem.Text = "Open image location";
+            openImageLocationToolStripMenuItem.Click += previewImg_Click;
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new Size(185, 6);
+            // 
+            // copyImageToClipboardToolStripMenuItem
+            // 
+            copyImageToClipboardToolStripMenuItem.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            copyImageToClipboardToolStripMenuItem.Name = "copyImageToClipboardToolStripMenuItem";
+            copyImageToClipboardToolStripMenuItem.Size = new Size(188, 22);
+            copyImageToClipboardToolStripMenuItem.Text = "Copy";
+            copyImageToClipboardToolStripMenuItem.Click += copyImageToClipboardToolStripMenuItem_Click;
             // 
             // gitLabel2
             // 
@@ -342,6 +385,7 @@
             // advancedName
             // 
             advancedName.BackColor = Color.Transparent;
+            advancedName.Cursor = Cursors.Hand;
             advancedName.Image = Properties.Resources.closed;
             advancedName.Location = new Point(119, 219);
             advancedName.Name = "advancedName";
@@ -354,6 +398,7 @@
             // advancedClass
             // 
             advancedClass.BackColor = Color.Transparent;
+            advancedClass.Cursor = Cursors.Hand;
             advancedClass.Image = Properties.Resources.closed;
             advancedClass.Location = new Point(145, 277);
             advancedClass.Name = "advancedClass";
@@ -369,7 +414,7 @@
             advancedClassBox.Location = new Point(160, 274);
             advancedClassBox.Margin = new Padding(0);
             advancedClassBox.Name = "advancedClassBox";
-            advancedClassBox.Size = new Size(190, 24);
+            advancedClassBox.Size = new Size(190, 18);
             advancedClassBox.TabIndex = 26;
             advancedClassBox.Visible = false;
             // 
@@ -400,7 +445,7 @@
             chosenSecondClass.Size = new Size(120, 25);
             chosenSecondClass.TabIndex = 27;
             chosenSecondClass.Visible = false;
-            chosenSecondClass.SelectedIndexChanged += chosenSecondClass_SelectedIndexChanged;
+            chosenSecondClass.SelectedIndexChanged += renderPreview;
             // 
             // labelSecondClass
             // 
@@ -462,7 +507,7 @@
             HeroCard.Name = "HeroCard";
             HeroCard.Size = new Size(73, 23);
             HeroCard.Text = "Hero Card";
-            HeroCard.Visible = false;
+            HeroCard.Click += HeroCard_Click;
             // 
             // heroReq3
             // 
@@ -557,10 +602,11 @@
             // 
             // badOutputNum
             // 
+            badOutputNum.Font = new Font("Microsoft Sans Serif", 10.75F, FontStyle.Regular, GraphicsUnit.Point);
             badOutputNum.Location = new Point(84, 415);
             badOutputNum.Margin = new Padding(0);
             badOutputNum.Name = "badOutputNum";
-            badOutputNum.Size = new Size(35, 23);
+            badOutputNum.Size = new Size(35, 24);
             badOutputNum.TabIndex = 36;
             badOutputNum.TextAlign = HorizontalAlignment.Right;
             badOutputNum.Visible = false;
@@ -655,9 +701,10 @@
             // goodOutputNum
             // 
             goodOutputNum.BorderStyle = BorderStyle.FixedSingle;
-            goodOutputNum.Location = new Point(84, 456);
+            goodOutputNum.Font = new Font("Microsoft Sans Serif", 10.75F, FontStyle.Regular, GraphicsUnit.Point);
+            goodOutputNum.Location = new Point(84, 457);
             goodOutputNum.Name = "goodOutputNum";
-            goodOutputNum.Size = new Size(35, 23);
+            goodOutputNum.Size = new Size(35, 24);
             goodOutputNum.TabIndex = 40;
             goodOutputNum.TextAlign = HorizontalAlignment.Right;
             goodOutputNum.Visible = false;
@@ -683,7 +730,6 @@
             // 
             // clearHeroReq1
             // 
-            clearHeroReq1.Anchor = AnchorStyles.None;
             clearHeroReq1.BackColor = SystemColors.ControlLight;
             clearHeroReq1.FlatAppearance.BorderSize = 0;
             clearHeroReq1.FlatStyle = FlatStyle.Flat;
@@ -701,7 +747,6 @@
             // 
             // clearHeroReq2
             // 
-            clearHeroReq2.Anchor = AnchorStyles.None;
             clearHeroReq2.BackColor = SystemColors.ControlLight;
             clearHeroReq2.FlatAppearance.BorderSize = 0;
             clearHeroReq2.FlatStyle = FlatStyle.Flat;
@@ -719,7 +764,6 @@
             // 
             // clearHeroReq4
             // 
-            clearHeroReq4.Anchor = AnchorStyles.None;
             clearHeroReq4.BackColor = SystemColors.ControlLight;
             clearHeroReq4.FlatAppearance.BorderSize = 0;
             clearHeroReq4.FlatStyle = FlatStyle.Flat;
@@ -737,7 +781,6 @@
             // 
             // clearHeroReq5
             // 
-            clearHeroReq5.Anchor = AnchorStyles.None;
             clearHeroReq5.BackColor = SystemColors.ControlLight;
             clearHeroReq5.FlatAppearance.BorderSize = 0;
             clearHeroReq5.FlatStyle = FlatStyle.Flat;
@@ -755,7 +798,6 @@
             // 
             // clearHeroReq3
             // 
-            clearHeroReq3.Anchor = AnchorStyles.None;
             clearHeroReq3.BackColor = SystemColors.ControlLight;
             clearHeroReq3.FlatAppearance.BorderSize = 0;
             clearHeroReq3.FlatStyle = FlatStyle.Flat;
@@ -771,12 +813,83 @@
             clearHeroReq3.Visible = false;
             clearHeroReq3.Click += clearSelectedClass;
             // 
+            // maxItems
+            // 
+            maxItems.BorderStyle = BorderStyle.FixedSingle;
+            maxItems.Font = new Font("Microsoft Sans Serif", 10.75F, FontStyle.Regular, GraphicsUnit.Point);
+            maxItems.Location = new Point(177, 398);
+            maxItems.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
+            maxItems.Name = "maxItems";
+            maxItems.Size = new Size(35, 24);
+            maxItems.TabIndex = 50;
+            maxItems.TextAlign = HorizontalAlignment.Right;
+            maxItems.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            maxItems.Visible = false;
+            maxItems.ValueChanged += maxItems_ValueChanged;
+            // 
+            // labelMaxItem
+            // 
+            labelMaxItem.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            labelMaxItem.BackColor = Color.Transparent;
+            labelMaxItem.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            labelMaxItem.ForeColor = Color.White;
+            labelMaxItem.Location = new Point(0, 379);
+            labelMaxItem.Margin = new Padding(0);
+            labelMaxItem.Name = "labelMaxItem";
+            labelMaxItem.RightToLeft = RightToLeft.No;
+            labelMaxItem.Size = new Size(414, 20);
+            labelMaxItem.TabIndex = 51;
+            labelMaxItem.Text = "Max Item Ammount";
+            labelMaxItem.TextAlign = ContentAlignment.BottomCenter;
+            labelMaxItem.Visible = false;
+            // 
+            // itemImg
+            // 
+            itemImg.Image = Properties.Resources.item;
+            itemImg.Location = new Point(212, 398);
+            itemImg.Margin = new Padding(1);
+            itemImg.Name = "itemImg";
+            itemImg.Size = new Size(24, 24);
+            itemImg.SizeMode = PictureBoxSizeMode.Zoom;
+            itemImg.TabIndex = 52;
+            itemImg.TabStop = false;
+            // 
+            // itemImg2
+            // 
+            itemImg2.Image = Properties.Resources.item;
+            itemImg2.Location = new Point(238, 398);
+            itemImg2.Margin = new Padding(1);
+            itemImg2.Name = "itemImg2";
+            itemImg2.Size = new Size(24, 24);
+            itemImg2.SizeMode = PictureBoxSizeMode.Zoom;
+            itemImg2.TabIndex = 53;
+            itemImg2.TabStop = false;
+            itemImg2.Visible = false;
+            // 
+            // itemImgMore
+            // 
+            itemImgMore.AutoSize = true;
+            itemImgMore.BackColor = Color.Transparent;
+            itemImgMore.Font = new Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point);
+            itemImgMore.ForeColor = Color.White;
+            itemImgMore.Location = new Point(260, 397);
+            itemImgMore.Margin = new Padding(0);
+            itemImgMore.Name = "itemImgMore";
+            itemImgMore.Size = new Size(24, 25);
+            itemImgMore.TabIndex = 54;
+            itemImgMore.Text = "+";
+            itemImgMore.Visible = false;
+            // 
             // Menu
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackColor = Color.FromArgb(39, 43, 52);
             BackgroundImage = Properties.Resources.gradient;
             ClientSize = new Size(828, 711);
+            Controls.Add(itemImg2);
+            Controls.Add(itemImg);
+            Controls.Add(itemImgMore);
+            Controls.Add(maxItems);
             Controls.Add(advancedNameBox);
             Controls.Add(badOutputText);
             Controls.Add(clearHeroReq5);
@@ -785,7 +898,6 @@
             Controls.Add(clearHeroReq2);
             Controls.Add(clearHeroReq1);
             Controls.Add(heroReq5);
-            Controls.Add(labelReq);
             Controls.Add(heroReq4);
             Controls.Add(heroReq1);
             Controls.Add(heroReq2);
@@ -794,7 +906,6 @@
             Controls.Add(goodOutputText);
             Controls.Add(goodOutputSym);
             Controls.Add(goodOutputNum);
-            Controls.Add(labelBad);
             Controls.Add(badOutputSym);
             Controls.Add(badOutputNum);
             Controls.Add(chosenSecondClass);
@@ -818,6 +929,9 @@
             Controls.Add(menuStrip1);
             Controls.Add(previewImg);
             Controls.Add(labelGood);
+            Controls.Add(labelBad);
+            Controls.Add(labelMaxItem);
+            Controls.Add(labelReq);
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MainMenuStrip = menuStrip1;
@@ -829,6 +943,7 @@
             Load += renderPreview;
             ((System.ComponentModel.ISupportInitialize)logo).EndInit();
             ((System.ComponentModel.ISupportInitialize)previewImg).EndInit();
+            previewContextMenu.ResumeLayout(false);
             advancedNameBox.ResumeLayout(false);
             advancedNameBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)advancedName).EndInit();
@@ -839,6 +954,9 @@
             menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)badOutputNum).EndInit();
             ((System.ComponentModel.ISupportInitialize)goodOutputNum).EndInit();
+            ((System.ComponentModel.ISupportInitialize)maxItems).EndInit();
+            ((System.ComponentModel.ISupportInitialize)itemImg).EndInit();
+            ((System.ComponentModel.ISupportInitialize)itemImg2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -896,5 +1014,14 @@
         private Button clearHeroReq5;
         private Button clearHeroReq3;
         private ToolStripMenuItem HeroCard;
+        private NumericUpDown maxItems;
+        private Label labelMaxItem;
+        private PictureBox itemImg;
+        private PictureBox itemImg2;
+        private Label itemImgMore;
+        private ContextMenuStrip previewContextMenu;
+        private ToolStripMenuItem copyImageToClipboardToolStripMenuItem;
+        private ToolStripMenuItem openImageLocationToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator1;
     }
 }
