@@ -737,7 +737,7 @@ namespace GeneratorBackend
             Vector2 titleSize = Raylib.MeasureTextEx(inst.titleFont, titleText, AssetManager.TITLE_SIZE, TITLE_FONT_SPACING);
 
             int nameY = 80;
-            int titleY = 132;
+            int titleY = 134;
 
             // Name
             Raylib.ImageDrawTextEx(ref card, inst.nameFont, nameText, new Vector2((CARD_WIDTH_POKER / 2) - (nameSize.X / 2), nameY), AssetManager.NAME_SIZE, NAME_FONT_SPACING, Color.BLACK);
@@ -769,7 +769,7 @@ namespace GeneratorBackend
                     card_size.X = CARD_WIDTH_POKER;
                     card_size.Y = CARD_HEIGHT_POKER;
 
-                    desc_space = 222;
+                    desc_space = 215; // this one is for some reason smaller than the actual desc space on the card on real cards
                     break;
                 default:
                     throw new Exception("Invalid size_set value");
