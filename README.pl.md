@@ -54,13 +54,17 @@ Ten program to to, co powinno być oficjalnie wypuszczone - dokładne i z brakuj
             <td>⚠️Posiada zbyt grube ramki.</td>
         </tr> 
         <tr>
-            <td>✔️Zezwala na około 200 znaków w opisie.</td>
-            <td>⚠️Opisy mają maksymalnie 120 znaków.</td>
+            <td>✔️Maksimum 5 linijek opisu. (Więcej się nie mieści)</td>
+            <td>⚠️Opisy mają maksymalnie 120 znaków (~3 linijki).</td>
         </tr> 
         <tr>
             <td>✔️Tekst opisu jest wyrównany do lewej.</td>
             <td>❌Tekst opisu jest wyrównany do środka.</td>
         </tr> 
+        <tr>
+            <td>✔️Przerwanie Linii tworzy większą przerwę między liniami.</td>
+            <td>⚠️Przerwanie Linii najzwyczajniej przenosi do następnej linii.</td>
+        </tr>
         <tr>
             <td>✔️Używa czarnego koloru dla nazwy i tytułu. (Istnieje również opcja przełączania na biały kolor)</td>
             <td>❌Z jakiegoś powodu używa białego koloru dla nazwy i tytułu.</td>
@@ -101,13 +105,12 @@ Ten program to to, co powinno być oficjalnie wypuszczone - dokładne i z brakuj
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>✔️✔️✔️Dokładny design Karty Potwora.</td>
-        </tr>
+        <tr><td>✔️✔️✔️Dokładny design Karty Potwora.</td></tr>
         <tr><td>⚠️Maksymalnie 5 wymagań bohatera.</td></tr>
         <tr><td>✔️W pełni dostosowalne wyniki rzutu.</td></tr>
         <tr><td>✔️Opcjonalny gradient z tyłu i czarny tekst nazwy.</td></tr>
         <tr><td>✔️Automatyczne ustawianie wymagań klas, aby umieścić ogólnych bohaterów z tyłu.</td></tr>
+        <tr><td>✔️Przerwanie Linii tworzy większą przerwę między liniami.</td></tr>
         <tr><td>❌Brak opcji "+ Odrzuć Kartę" ... na razie.</td></tr>
         <tr><td>❌Brak premii do rzutu za każdą dodatkową kartę bohatera ... na razie.</td></tr>
     </tbody>
@@ -116,17 +119,22 @@ Ten program to to, co powinno być oficjalnie wypuszczone - dokładne i z brakuj
 <br>
 <img src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/LazyDevider.png">
     
-### Bohaterowie❌
-<img align="left" width="33%" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/No_HeroCard.png">
+### Bohaterowie
+<img align="left" width="33%" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/Demo_Hero.png">
 <table>
     <thead>
         <tr>
-            <th width="500px">Generacja Bohaterów❌</th>
+            <th width="500px">Generacja Bohaterów</th>
         </tr>
     </thead>
     <tbody>
-        <tr><td>❌ Generacja kart bohatera NIE jest jeszcze zaimplementowana.</td></tr>
-        <tr><td>⚠️ Nadal pracujemy nad jej wprowadzeniem.</td></tr>
+        <tr><td>✔️✔️✔️Dokładny design Karty Potwora.</td></tr>
+        <tr><td>✔️W pełni dostosowalne wyniki rzutu.</td></tr>
+        <tr><td>✔️Maksimum 6 linijek opisu.</td></tr>
+        <tr><td>✔️Przerwanie Linii tworzy większą przerwę między liniami.</td></tr>
+        <tr><td>✔️Dostosowalna maksymalna ilość przedmiotów.</td></tr>
+        <tr><td>✔️Można zakazać dawania bohaterowi przedmiotów.</td></tr>
+        <tr><td>❌Brak plakietek prezentów z DLC Here to Sleigh</td></tr>
     </tbody>
 </table>
 
@@ -162,4 +170,6 @@ Niestety nie wiem dokładnie, jak to działa. Ale widziałem wiele postów na te
     <img width="75%" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/screenshot1.png">
     <br>
     <img width="75%" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/screenshot2.png">
+    <br>
+    <img width="75%" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/screenshot3.png">
 </p>
