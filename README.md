@@ -59,7 +59,7 @@ This program is what the official one should be, accurate and with more features
         </tr> 
         <tr>
             <td>✔️Description Line breaks crate larger gaps between the lines.</td>
-            <td>❌Description Line breaks simply go to the next line.</td>
+            <td>⚠️Description Line breaks simply go to the next line.</td>
         </tr>
         <tr>
             <td>✔️Uses black for the name and title text. (There's also a toggleable white color option)</td>
