@@ -76,10 +76,25 @@
     <None Update="Fonts\SourceSansPro.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="PrintingAssets\cardPlacement_A4_template.png">
+    <None Update="PrintingAssets\heroImgSize_template.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="PrintingAssets\English\herocard.png">
+    <None Update="PrintingAssets\hero_cardPlacement_A4_template.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="PrintingAssets\mixed_cardPlacement_A4_example.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="PrintingAssets\mixed_cardPlacement_A4_exampleBack.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="PrintingAssets\tall_cardPlacement_A4_template.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="PrintingAssets\English\heroBack.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="PrintingAssets\English\heroBack_A4_template.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="PrintingAssets\English\leaderBack_A4_template.png">
@@ -94,7 +109,10 @@
     <None Update="PrintingAssets\monsterImgSize_template.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="PrintingAssets\Polski\herocard_pl.png">
+    <None Update="PrintingAssets\Polski\heroBack_A4_template_pl.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="PrintingAssets\Polski\heroBack_pl.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="PrintingAssets\English\leaderBack.png">
