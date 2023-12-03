@@ -89,6 +89,10 @@
             itemImg = new PictureBox();
             itemImg2 = new PictureBox();
             itemImgMore = new Label();
+            advancedGeneral = new PictureBox();
+            advancedGeneralBox = new FlowLayoutPanel();
+            alternativeColor = new CheckBox();
+            altColorToolTip = new ToolTip(components);
             ((System.ComponentModel.ISupportInitialize)logo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)previewImg).BeginInit();
             previewContextMenu.SuspendLayout();
@@ -102,6 +106,8 @@
             ((System.ComponentModel.ISupportInitialize)maxItems).BeginInit();
             ((System.ComponentModel.ISupportInitialize)itemImg).BeginInit();
             ((System.ComponentModel.ISupportInitialize)itemImg2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)advancedGeneral).BeginInit();
+            advancedGeneralBox.SuspendLayout();
             SuspendLayout();
             // 
             // RENDER
@@ -365,7 +371,7 @@
             // 
             // leaderImgToolTip
             // 
-            leaderImgToolTip.AutoPopDelay = 5000;
+            leaderImgToolTip.AutoPopDelay = 50000;
             leaderImgToolTip.InitialDelay = 250;
             leaderImgToolTip.ReshowDelay = 100;
             leaderImgToolTip.ToolTipIcon = ToolTipIcon.Info;
@@ -880,12 +886,59 @@
             itemImgMore.Text = "+";
             itemImgMore.Visible = false;
             // 
+            // advancedGeneral
+            // 
+            advancedGeneral.BackColor = Color.Transparent;
+            advancedGeneral.Cursor = Cursors.Hand;
+            advancedGeneral.Image = Properties.Resources.closed;
+            advancedGeneral.Location = new Point(119, 668);
+            advancedGeneral.Name = "advancedGeneral";
+            advancedGeneral.Size = new Size(12, 12);
+            advancedGeneral.SizeMode = PictureBoxSizeMode.Zoom;
+            advancedGeneral.TabIndex = 55;
+            advancedGeneral.TabStop = false;
+            advancedGeneral.Visible = false;
+            advancedGeneral.Click += advanced_Click;
+            // 
+            // advancedGeneralBox
+            // 
+            advancedGeneralBox.Controls.Add(alternativeColor);
+            advancedGeneralBox.Location = new Point(134, 665);
+            advancedGeneralBox.Margin = new Padding(0);
+            advancedGeneralBox.Name = "advancedGeneralBox";
+            advancedGeneralBox.Size = new Size(190, 18);
+            advancedGeneralBox.TabIndex = 27;
+            advancedGeneralBox.Visible = false;
+            // 
+            // alternativeColor
+            // 
+            alternativeColor.AutoSize = true;
+            alternativeColor.ForeColor = Color.White;
+            alternativeColor.Location = new Point(0, 0);
+            alternativeColor.Margin = new Padding(0);
+            alternativeColor.Name = "alternativeColor";
+            alternativeColor.Padding = new Padding(0, 1, 0, 0);
+            alternativeColor.Size = new Size(131, 20);
+            alternativeColor.TabIndex = 0;
+            alternativeColor.Text = "Alternative Color (?)";
+            alternativeColor.UseVisualStyleBackColor = true;
+            alternativeColor.CheckedChanged += renderPreview;
+            // 
+            // altColorToolTip
+            // 
+            altColorToolTip.AutoPopDelay = 50000;
+            altColorToolTip.InitialDelay = 250;
+            altColorToolTip.ReshowDelay = 100;
+            altColorToolTip.ToolTipIcon = ToolTipIcon.Info;
+            // 
             // Menu
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackColor = Color.FromArgb(39, 43, 52);
             BackgroundImage = Properties.Resources.gradient;
             ClientSize = new Size(828, 711);
+            Controls.Add(advancedGeneralBox);
+            Controls.Add(advancedGeneral);
             Controls.Add(itemImg2);
             Controls.Add(itemImg);
             Controls.Add(itemImgMore);
@@ -957,6 +1010,9 @@
             ((System.ComponentModel.ISupportInitialize)maxItems).EndInit();
             ((System.ComponentModel.ISupportInitialize)itemImg).EndInit();
             ((System.ComponentModel.ISupportInitialize)itemImg2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)advancedGeneral).EndInit();
+            advancedGeneralBox.ResumeLayout(false);
+            advancedGeneralBox.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -1023,5 +1079,9 @@
         private ToolStripMenuItem copyImageToClipboardToolStripMenuItem;
         private ToolStripMenuItem openImageLocationToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator1;
+        private PictureBox advancedGeneral;
+        private FlowLayoutPanel advancedGeneralBox;
+        private CheckBox alternativeColor;
+        private ToolTip altColorToolTip;
     }
 }

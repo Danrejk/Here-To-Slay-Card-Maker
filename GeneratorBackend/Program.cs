@@ -397,7 +397,7 @@ namespace GeneratorBackend
             Raylib.UnloadImage(card);
         }
 
-        public static void GenerateMonster(string? renderLocation, int language, string name, int[] desiredRequirements, RollOutput good, RollOutput bad, string monsterImg, string description, bool addGradient, bool nameWhite)
+        public static void GenerateMonster(string? renderLocation, int language, string name, int[] desiredRequirements, RollOutput good, RollOutput bad, string monsterImg, string description, bool addGradient, bool nameWhite, bool alternativeColor)
         {
             // This has to be loaded each time, to clear the image from the previous render
             Image card = Raylib.LoadImage("GeneratorAssets/template/card_tarrot.png");
@@ -410,7 +410,13 @@ namespace GeneratorBackend
             
             // Draw Colored Frame
             if (addGradient) { Raylib.ImageDraw(ref card, inst.gradient, imageRec, imageRec, Color.WHITE); }
-            Raylib.ImageDraw(ref card, inst.frameMonster, imageRec, imageRec, new(23, 26, 30, 255));
+            Color frameColor = alternativeColor switch
+            {
+                true => new(0, 0, 0, 255),
+                false => new(23, 26, 30, 255)
+            };
+
+            Raylib.ImageDraw(ref card, inst.frameMonster, imageRec, imageRec, frameColor);
 
             string reqText = language switch
             {

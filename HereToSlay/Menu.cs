@@ -178,6 +178,10 @@ namespace HereToSlay
                 labelDescription.Location = new Point(53, 426);
                 descriptionText.Location = new Point(57, 446);
 
+                advancedGeneral.Visible = false;
+                advancedGeneral.Image = Properties.Resources.closed;
+                advancedGeneralBox.Visible = false;
+
                 foreach (Control c in this.Controls)
                 {
                     if (c.Name.Contains("clear")) { c.Visible = false; };
@@ -256,6 +260,8 @@ namespace HereToSlay
                 descriptionText.Size = new Size(300, descriptionText.Size.Height);
                 labelDescription.Location = new Point(53, 492);
                 descriptionText.Location = new Point(57, 512);
+
+                advancedGeneral.Visible = true;
 
                 foreach (Control c in this.Controls)
                 {
@@ -342,6 +348,10 @@ namespace HereToSlay
                 labelDescription.Location = new Point(128, 426);
                 descriptionText.Location = new Point(132, 446);
 
+                advancedGeneral.Visible = false;
+                advancedGeneral.Image = Properties.Resources.closed;
+                advancedGeneralBox.Visible = false;
+
                 foreach (Control c in this.Controls)
                 {
                     if (c.Name.Contains("clear")) { c.Visible = false; };
@@ -377,7 +387,7 @@ namespace HereToSlay
                         RollOutput good = new((int)goodOutputNum.Value, goodOutputSym.SelectedIndex, goodOutputText.Text);
                         RollOutput bad = new((int)badOutputNum.Value, badOutputSym.SelectedIndex, badOutputText.Text);
                         int[] desiredRequirements = new int[] { heroReq1.SelectedIndex, heroReq2.SelectedIndex, heroReq3.SelectedIndex, heroReq4.SelectedIndex, heroReq5.SelectedIndex };
-                        GeneratorBackend.Program.GenerateMonster(filePath, language.SelectedIndex, nameText.Text, desiredRequirements, good, bad, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked);
+                        GeneratorBackend.Program.GenerateMonster(filePath, language.SelectedIndex, nameText.Text, desiredRequirements, good, bad, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked, alternativeColor.Checked);
                         break;
                     case 2:
                         RollOutput description = new((int)goodOutputNum.Value, goodOutputSym.SelectedIndex, descriptionText.Text);
@@ -419,15 +429,18 @@ namespace HereToSlay
         {
             switch (Properties.Settings.Default.CardType)
             {
+                // Leader
                 case 0:
                     GeneratorBackend.Program.GenerateLeader(null, language.SelectedIndex, nameText.Text, new int[] { chosenClass.SelectedIndex, chosenSecondClass.SelectedIndex }, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked);
                     break;
+                // Monster
                 case 1:
                     RollOutput good = new((int)goodOutputNum.Value, goodOutputSym.SelectedIndex, goodOutputText.Text);
                     RollOutput bad = new((int)badOutputNum.Value, badOutputSym.SelectedIndex, badOutputText.Text);
                     int[] desiredRequirements = new int[] { heroReq1.SelectedIndex, heroReq2.SelectedIndex, heroReq3.SelectedIndex, heroReq4.SelectedIndex, heroReq5.SelectedIndex };
-                    GeneratorBackend.Program.GenerateMonster(null, language.SelectedIndex, nameText.Text, desiredRequirements, good, bad, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked);
+                    GeneratorBackend.Program.GenerateMonster(null, language.SelectedIndex, nameText.Text, desiredRequirements, good, bad, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked, alternativeColor.Checked);
                     break;
+                // Hero
                 case 2:
                     RollOutput description = new((int)goodOutputNum.Value, goodOutputSym.SelectedIndex, descriptionText.Text);
                     GeneratorBackend.Program.GenerateHero(null, language.SelectedIndex, nameText.Text, chosenClass.SelectedIndex, selectImgText.Text, description, (int)maxItems.Value);
@@ -489,6 +502,9 @@ namespace HereToSlay
                     copyImageToClipboardToolStripMenuItem.Text = "Kopiuj obraz";
                     openImageLocationToolStripMenuItem.Text = "Otwórz lokalizacjê obrazu";
                     labelMaxItem.Text = "Max. iloœæ przedmiotów";
+                    alternativeColor.Text = "Alternatywny kolor (?)";
+                    altColorToolTip.ToolTipTitle = "Alternatywny kolor";
+                    altColorToolTip.SetToolTip(alternativeColor, "Na niektórych drukarkach, standardowy kolor mo¿e znacznie odstawiaæ od po¿¹danego.\nStandardowy kolor by³ wziêty prosto z instruckji, wiêc powinnien byæ dobry,\nale niektóre durkarki nie maj¹ poprawnej g³ebi kolorów.\n\nAlternatywny kolor (czarny) mo¿e wygl¹daæ lepiej na niektórych drukarkach.");
 
                     if (chosenClass.SelectedIndex == -1 && Properties.Settings.Default.CardType == 2)
                     {
@@ -534,6 +550,9 @@ namespace HereToSlay
                     copyImageToClipboardToolStripMenuItem.Text = "Copy image";
                     openImageLocationToolStripMenuItem.Text = "Open image location";
                     labelMaxItem.Text = "Max Item Ammount";
+                    alternativeColor.Text = "Alternative Color (?)";
+                    altColorToolTip.ToolTipTitle = "Alternative Color";
+                    altColorToolTip.SetToolTip(alternativeColor, "On some printers, the standard color might largely differ from the disered one.\nThe standard color is taken straight from the manual, so it should be good,\nbut some printers don't have a sufficient color depth.\n\nThe alternative color (black), might look better on some printers.");
 
                     if (chosenClass.SelectedIndex == -1 && Properties.Settings.Default.CardType == 2)
                     {
@@ -726,6 +745,7 @@ namespace HereToSlay
             {
                 "advancedName" => advancedNameBox,
                 "advancedClass" => advancedClassBox,
+                "advancedGeneral" => advancedGeneralBox,
                 _ => throw new NotImplementedException(),
             };
             list.Visible = !list.Visible;
