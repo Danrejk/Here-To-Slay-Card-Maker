@@ -6,7 +6,7 @@ Using this program you can make <b>accurate</b> custom cards for the card game "
 Polska wersja językowa: [README.pl.md](https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/README.pl.md)
 
 ## Instalation
-<a href="https://github.com/Danrejk/Here-To-Slay-Card-Maker/releases/tag/v3.0"> <img alt="Latest Version" src="https://img.shields.io/badge/Latest_Version-v.3.0-green"> </a>
+<a href="https://github.com/Danrejk/Here-To-Slay-Card-Maker/releases/tag/v3.1"> <img alt="Latest Version" src="https://img.shields.io/badge/Latest_Version-v.3.1-green"> </a>
 <br>
 Download the <code>.zip</code> file from the latest <b>Release</b> of the program displayed above, or on the right side of the page.<br>
 Unzip it, the <code>.exe</code> is inside of it, it must remain along the other files inside of the folder or else the program will not work.
@@ -107,6 +107,7 @@ This program is what the official one should be, accurate and with more features
         <tr><td>✔️Optional Back Gradient and black name text.</td></tr>
         <tr><td>✔️Automatically orders class requirements to put generic Heros at the back.</td></tr>
         <tr><td>✔️Description Line breaks crate larger gaps between the lines.</td></tr>
+        <tr><td>✔️Alternative card color for weaker printers.</td>
         <tr><td>❌No "+ Discard Card" option... yet.</td></tr>
         <tr><td>❌No bonus to roll for each additional hero card option... yet.</td></tr>
     </tbody>
@@ -138,12 +139,12 @@ This program is what the official one should be, accurate and with more features
 <img src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/LazyDevider.png">
 <hr>
 
-<img width="33%" align="right" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/HereToSlay/PrintingAssets/cardPlacement_A4_template.png">
+<img width="33%" align="right" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/HereToSlay/PrintingAssets/mixed_cardPlacement_A4_example.png">
 
 ## Printing
 ### Printing at Home
 In the files included with the program there are attached printing assets for printing at home. Backs of the cards for leaders, monsters and heros, their cards placements on A4 papers, as well as a template for positioning your own generated cards.<br>
-<img width="33%" align="right" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/HereToSlay/PrintingAssets/English/leaderBack_A4_template.png">
+<img width="33%" align="right" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/HereToSlay/PrintingAssets/mixed_cardPlacement_A4_exampleBack.png">
 <br>
 Printing methods may differ depending on your printer, but what I found to work was to:
 <ol>
