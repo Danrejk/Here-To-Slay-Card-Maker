@@ -75,6 +75,7 @@ namespace GeneratorBackend
             // Load the Class List
             try
             {
+                ClassList = new();
                 foreach (string line in File.ReadLines("Classes/ClassList.txt"))
                 {
                     string[] prop = line.Split(';');
@@ -95,6 +96,8 @@ namespace GeneratorBackend
             {
                 throw new Exception($"Error reading ClassList.txt: {e.Message}");
             }
+
+            Console.WriteLine(Console.ReadLine());
 
             Raylib.CloseWindow();
         }

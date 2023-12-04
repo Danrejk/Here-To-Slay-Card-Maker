@@ -1,2 +1,2 @@
-﻿Elo; zelo; 0,0,0; tam
-Halo; Stachu?; 125,125,125
+﻿Elo; "bard.png"; 0,0,0; tam
+Halo; "hero.png"; 125,125,125
