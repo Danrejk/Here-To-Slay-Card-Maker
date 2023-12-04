@@ -23,6 +23,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="ClassList.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="GeneratorAssets\classes\warrior.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

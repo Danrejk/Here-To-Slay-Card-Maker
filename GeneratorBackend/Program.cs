@@ -1,5 +1,6 @@
 ﻿using Raylib_cs;
 using System.Numerics;
+using System.Reflection.Emit;
 using System.Text;
 using Color = Raylib_cs.Color;
 using Image = Raylib_cs.Image;
@@ -7,6 +8,14 @@ using Rectangle = Raylib_cs.Rectangle;
 
 namespace GeneratorBackend
 {
+    public class ClassListObject
+    {
+        public string NameEN { get; set; }
+        public string ImagePath { get; set; }
+        public Color Color { get; set; }
+        public string NamePL { get; set; }
+    }
+
     public class AssetManager
     {
         private static AssetManager? instance;
@@ -33,6 +42,9 @@ namespace GeneratorBackend
 
         public Color bottomColor = new(245, 241, 231, 255);
 
+        public List<ClassListObject> ClassList { get; private set; }
+
+        // old
         public Image Ranger = Raylib.LoadImage("GeneratorAssets/classes/ranger.png");
         public Image Wizard = Raylib.LoadImage("GeneratorAssets/classes/wizard.png");
         public Image Bard = Raylib.LoadImage("GeneratorAssets/classes/bard.png");
@@ -58,6 +70,26 @@ namespace GeneratorBackend
             reqFont = Raylib.LoadFontEx("Fonts/SourceSansPro_Bold.ttf", REQ_SIZE, null, 1415);
             rollFont = Raylib.LoadFontEx("Fonts/PatuaOne_Polish.ttf", ROLL_SIZE, null, 1415);
             descFont = Raylib.LoadFontEx("Fonts/SourceSansPro.ttf", DESC_SIZE, null, 1415);
+
+            try
+            {
+                foreach (string line in File.ReadLines("ClassList.txt"))
+                {
+                    string[] prop = line.Split(';');
+                    var polishName = prop.Length > 3 ? prop[3] : prop[0];
+
+                    int classRed = Convert.ToInt32(prop[2].Split(',')[0]);
+                    int classGreen = Convert.ToInt32(prop[2].Split(',')[1]);
+                    int classBlue = Convert.ToInt32(prop[2].Split(',')[2]);
+                    Color colorCombined = new(classRed, classGreen, classBlue, 255);
+
+                    ClassList.Add(new ClassListObject { NameEN = prop[0], ImagePath = prop[1], Color = colorCombined, NamePL = polishName });
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception($"Error reading ClassList.txt: {e.Message}");
+            }
 
             Raylib.CloseWindow();
         }

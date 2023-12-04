@@ -1,0 +1,2 @@
+﻿Elo; zelo; 0,0,0; tam
+Halo; Stachu?; 125,125,125
