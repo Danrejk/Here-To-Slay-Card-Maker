@@ -84,6 +84,11 @@ namespace GeneratorBackend
 
                     Image image = Raylib.LoadImage($"Classes/{prop[1]}");
 
+                    if (image.Width == 0 || image.Height == 0)
+                    {
+                     //TODO    
+                    }
+
                     int classRed = Convert.ToInt32(prop[2].Split(',')[0]);
                     int classGreen = Convert.ToInt32(prop[2].Split(',')[1]);
                     int classBlue = Convert.ToInt32(prop[2].Split(',')[2]);
