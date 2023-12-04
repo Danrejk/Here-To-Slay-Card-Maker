@@ -482,28 +482,23 @@ namespace GeneratorBackend
             foreach (int req in orderedRequirements)
             {
                 if (req == -1) { continue; }
-                Image classSymbol = req switch
+
+                Image classSymbol;
+                if (req == 0)
                 {
-                    0 => language switch
+                    classSymbol = language switch
                     {
                         1 => inst.Bohater,
                         _ => inst.Hero
-                    },
-                    1 => inst.Ranger,
-                    2 => inst.Wizard,
-                    3 => inst.Bard,
-                    4 => inst.Guardian,
-                    5 => inst.Fighter,
-                    6 => inst.Thief,
-                    7 => inst.Druid,
-                    8 => inst.Warrior,
-                    9 => inst.Berserker,
-                    10 => inst.Necromancer,
-                    11 => inst.Sorcerer,
-                    _ => inst.None
-                };
-                float iconsMargin = 83 + 13;
+                    };
+                }
+                else
+                {
+                    classSymbol = inst.ClassList[req - 1].Image;
+                }
+
                 // change the distance between icons, if there are 5, so that it better fits onto the card
+                float iconsMargin = 83 + 13;
                 if (reqCount > 4)
                 {
                     iconsMargin -= language switch
@@ -581,19 +576,19 @@ namespace GeneratorBackend
                 }
             }
 
-            // Class and class dependent stuff
-            string leaderTitle;
+            // Classes
+            string heroTitle;
             if (desiredClass == -1) desiredClass = 0; 
 
             Image classSymbol = inst.ClassList[desiredClass].Image;
             Color desiredColor = inst.ClassList[desiredClass].Color;
          
-            leaderTitle = language switch
+            heroTitle = language switch
             {
                 1 => $"Bohater: {inst.ClassList[desiredClass].NamePL}",
                 _ => $"Hero: {inst.ClassList[desiredClass].NameEN}"
             };
-            if (inst.ClassList[desiredClass].NameEN == "") leaderTitle = leaderTitle.Replace(": ", "");
+            if (inst.ClassList[desiredClass].NameEN == "") heroTitle = heroTitle.Replace(": ", "");
 
             // Draw Class Symbol
             Raylib.ImageDraw(ref card, classSymbol, imageRec, new(322, 722, 102, 102), Color.WHITE);
@@ -607,7 +602,7 @@ namespace GeneratorBackend
 
 
             // Name and Title
-            DrawNameAndTitleHero(name, leaderTitle, card, desiredColor);
+            DrawNameAndTitleHero(name, heroTitle, card, desiredColor);
 
             // Roll Output Symbol and Value
             char descSymbol = ' ';

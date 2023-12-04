@@ -603,6 +603,8 @@ namespace HereToSlay
                     heroReq4.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
                     heroReq5.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
 
+
+                    // These have to be hardcoded mainly because they each use an icon from the resources so it looks better in the combobox.
                     chosenClass.Items.Add(new ImageCBox("BRAK KLASY", Properties.Resources.empty.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("£owca", Properties.Resources.lowca.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("Mag", Properties.Resources.mag.ToBitmap()));
@@ -616,6 +618,7 @@ namespace HereToSlay
                     chosenClass.Items.Add(new ImageCBox("Nekromanta", Properties.Resources.nekromanta.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("Czarownik", Properties.Resources.czarownik.ToBitmap()));
 
+                    // Add custom classes
                     inst.ClassList.Skip(12).ToList().ForEach(c =>
                     {
                         string capitalisedName = char.ToUpper(c.NamePL[0]) + c.NamePL.Substring(1);
@@ -630,6 +633,7 @@ namespace HereToSlay
                     heroReq4.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
                     heroReq5.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
 
+                    // These have to be hardcoded mainly because they each use an icon from the resources so it looks better in the combobox.
                     chosenClass.Items.Add(new ImageCBox("NO CLASS", Properties.Resources.empty.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("Ranger", Properties.Resources.lowca.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("Wizard", Properties.Resources.mag.ToBitmap()));
@@ -643,6 +647,7 @@ namespace HereToSlay
                     chosenClass.Items.Add(new ImageCBox("Necromancer", Properties.Resources.nekromanta.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("Sorcerer", Properties.Resources.czarownik.ToBitmap()));
 
+                    // Add custom classes
                     inst.ClassList.Skip(12).ToList().ForEach(c =>
                     {
                         string capitalisedName = char.ToUpper(c.NameEN[0]) + c.NameEN.Substring(1);
