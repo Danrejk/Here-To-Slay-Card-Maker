@@ -19,10 +19,13 @@ namespace HereToSlay
 {
     public partial class Menu : Form
     {
+        private static readonly AssetManager inst = AssetManager.Instance;
+
         public Menu()
         {
             InitializeComponent();
             this.DoubleBuffered = true;
+
 
             #region Fonts
             Font fontUI = FontLoader.GetFont("SourceSans3.ttf", 10);
@@ -600,6 +603,7 @@ namespace HereToSlay
                     heroReq4.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
                     heroReq5.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
 
+                    chosenClass.Items.Add(new ImageCBox("BRAK KLASY", Properties.Resources.empty.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("£owca", Properties.Resources.lowca.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("Mag", Properties.Resources.mag.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("Bard", Properties.Resources.najebus.ToBitmap()));
@@ -611,7 +615,13 @@ namespace HereToSlay
                     chosenClass.Items.Add(new ImageCBox("Berserk", Properties.Resources.berserk.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("Nekromanta", Properties.Resources.nekromanta.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("Czarownik", Properties.Resources.czarownik.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("BRAK KLASY", Properties.Resources.empty.ToBitmap()));
+
+                    inst.ClassList.Skip(12).ToList().ForEach(c =>
+                    {
+                        string capitalisedName = char.ToUpper(c.NamePL[0]) + c.NamePL.Substring(1);
+                        chosenClass.Items.Add(new ImageCBox(capitalisedName, new Bitmap(1, 1) ));
+                    });
+
                     break;
                 default:
                     heroReq1.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
@@ -620,6 +630,7 @@ namespace HereToSlay
                     heroReq4.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
                     heroReq5.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
 
+                    chosenClass.Items.Add(new ImageCBox("NO CLASS", Properties.Resources.empty.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("Ranger", Properties.Resources.lowca.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("Wizard", Properties.Resources.mag.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("Bard", Properties.Resources.najebus.ToBitmap()));
@@ -631,7 +642,13 @@ namespace HereToSlay
                     chosenClass.Items.Add(new ImageCBox("Berserker", Properties.Resources.berserk.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("Necromancer", Properties.Resources.nekromanta.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("Sorcerer", Properties.Resources.czarownik.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("NO CLASS", Properties.Resources.empty.ToBitmap()));
+
+                    inst.ClassList.Skip(12).ToList().ForEach(c =>
+                    {
+                        string capitalisedName = char.ToUpper(c.NameEN[0]) + c.NameEN.Substring(1);
+                        chosenClass.Items.Add(new ImageCBox(capitalisedName, new Bitmap(1, 1) ));
+                    });
+
                     break;
             }
 

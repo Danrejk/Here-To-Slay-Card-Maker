@@ -78,7 +78,7 @@ namespace GeneratorBackend
                 ClassList = new();
                 foreach (string line in File.ReadLines("Classes/ClassList.txt"))
                 {
-                    string[] prop = line.Split(';');
+                    string[] prop = line.Split("; ");
 
                     string polishName = prop.Length > 3 ? prop[3] : prop[0]; // if there is no polish name, use the english one
 
