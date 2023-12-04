@@ -582,121 +582,18 @@ namespace GeneratorBackend
             }
 
             // Class and class dependent stuff
-            Image classSymbol;
-            Color desiredColor;
             string leaderTitle;
+            if (desiredClass == -1) desiredClass = 0; 
 
-            switch (desiredClass)
+            Image classSymbol = inst.ClassList[desiredClass].Image;
+            Color desiredColor = inst.ClassList[desiredClass].Color;
+         
+            leaderTitle = language switch
             {
-                case 0:
-                    leaderTitle = language switch
-                    {
-                        1 => "Bohater: łowca",
-                        _ => "Hero: Ranger"
-                    };
-                    classSymbol = inst.Ranger;
-                    desiredColor = new(35, 94, 57, 255);
-                    break;
-                case 1:
-                    leaderTitle = language switch
-                    {
-                        1 => "Bohater: mag",
-                        _ => "Hero: Wizard"
-                    };
-                    classSymbol = inst.Wizard;
-                    desiredColor = new(116, 46, 137, 255);
-                    break;
-                case 2:
-                    leaderTitle = language switch
-                    {
-                        1 => "Bohater: bard",
-                        _ => "Hero: Bard"
-                    };
-                    classSymbol = inst.Bard;
-                    desiredColor = new(194, 81, 47, 255);
-                    break;
-                case 3:
-                    leaderTitle = language switch
-                    {
-                        1 => "Bohater: strażnik",
-                        _ => "Hero: Guardian"
-                    };
-                    classSymbol = inst.Guardian;
-                    desiredColor = new(235, 171, 33, 255);
-                    break;
-                case 4:
-                    leaderTitle = language switch
-                    {
-                        1 => "Bohater: wojownik",
-                        _ => "Hero: Fighter"
-                    };
-                    classSymbol = inst.Fighter;
-                    desiredColor = new(151, 40, 44, 255);
-                    break;
-                case 5:
-                    leaderTitle = language switch
-                    {
-                        1 => "Bohater: złodziej",
-                        _ => "Hero: Thief"
-                    };
-                    classSymbol = inst.Thief;
-                    desiredColor = new(0, 78, 125, 255);
-                    break;
-                case 6:
-                    leaderTitle = language switch
-                    {
-                        1 => "Bohater: druid",
-                        _ => "Hero: Druid"
-                    };
-                    classSymbol = inst.Druid;
-                    desiredColor = new(0, 171, 143, 255);
-                    break;
-                case 7:
-                    leaderTitle = language switch
-                    {
-                        1 => "Bohater: awanturnik",
-                        _ => "Hero: Warrior"
-                    };
-                    classSymbol = inst.Warrior;
-                    desiredColor = new(94, 109, 180, 255);
-                    break;
-                case 8:
-                    leaderTitle = language switch
-                    {
-                        1 => "Bohater: berserk",
-                        _ => "Hero: Berserker"
-                    };
-                    classSymbol = inst.Berserker;
-                    desiredColor = new(225, 131, 51, 255);
-                    break;
-                case 9:
-                    leaderTitle = language switch
-                    {
-                        1 => "Bohater: nekromanta",
-                        _ => "Hero: Necromancer"
-                    };
-                    classSymbol = inst.Necromancer;
-                    desiredColor = new(213, 28, 106, 255);
-                    break;
-                case 10:
-                    leaderTitle = language switch
-                    {
-                        1 => "Bohater: czarownik",
-                        _ => "Hero: Sorcerer"
-                    };
-                    classSymbol = inst.Sorcerer;
-                    desiredColor = new(29, 31, 29, 255);
-                    break;
-                default: // when no desired class is given, it deafults to an empty class
-                    leaderTitle = language switch
-                    {
-                        1 => "Bohater",
-                        _ => "Hero"
-                    };
-                    classSymbol = inst.None;
-                    desiredColor = new(91, 93, 92, 255);
-                    break;
-            }
+                1 => $"Bohater: {inst.ClassList[desiredClass].NamePL}",
+                _ => $"Hero: {inst.ClassList[desiredClass].NameEN}"
+            };
+            if (inst.ClassList[desiredClass].NameEN == "") leaderTitle = leaderTitle.Replace(": ", "");
 
             // Draw Class Symbol
             Raylib.ImageDraw(ref card, classSymbol, imageRec, new(322, 722, 102, 102), Color.WHITE);
