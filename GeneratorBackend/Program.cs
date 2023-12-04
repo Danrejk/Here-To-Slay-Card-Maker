@@ -83,11 +83,7 @@ namespace GeneratorBackend
                     string polishName = prop.Length > 3 ? prop[3] : prop[0]; // if there is no polish name, use the english one
 
                     Image image = Raylib.LoadImage($"Classes/{prop[1]}");
-
-                    if (image.Width == 0 || image.Height == 0)
-                    {
-                     //TODO    
-                    }
+                    // TODO: It would be good to comunicate to the user that their image didn't load for example, but I tried and it just couldn't get it to work because of Raylib stuff.
 
                     int classRed = Convert.ToInt32(prop[2].Split(',')[0]);
                     int classGreen = Convert.ToInt32(prop[2].Split(',')[1]);
@@ -111,10 +107,7 @@ namespace GeneratorBackend
         {
             get
             {
-                if (instance == null)
-                {
-                    instance = new AssetManager();
-                }
+                instance ??= new();
                 return instance;
             }
         }
@@ -122,7 +115,7 @@ namespace GeneratorBackend
 
     public class Program
     {
-        // all of the font spacings work, but are simply not used as it turned out we don't need them, but YOU might. I dunno.
+        // all of the font spacings work, but are simply not used as it turned out we don't need most of them, but YOU might. I dunno.
 
         const int NAME_FONT_SPACING = 0;
         const int TITLE_FONT_SPACING = 1;
