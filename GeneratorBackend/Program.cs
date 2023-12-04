@@ -11,7 +11,7 @@ namespace GeneratorBackend
     public class ClassListObject
     {
         public string NameEN { get; set; }
-        public string ImagePath { get; set; }
+        public Image Image { get; set; }
         public Color Color { get; set; }
         public string NamePL { get; set; }
     }
@@ -45,45 +45,50 @@ namespace GeneratorBackend
         public List<ClassListObject> ClassList { get; private set; }
 
         // old
-        public Image Ranger = Raylib.LoadImage("GeneratorAssets/classes/ranger.png");
-        public Image Wizard = Raylib.LoadImage("GeneratorAssets/classes/wizard.png");
-        public Image Bard = Raylib.LoadImage("GeneratorAssets/classes/bard.png");
-        public Image Guardian = Raylib.LoadImage("GeneratorAssets/classes/guardian.png");
-        public Image Fighter = Raylib.LoadImage("GeneratorAssets/classes/fighter.png");
-        public Image Thief = Raylib.LoadImage("GeneratorAssets/classes/thief.png");
-        public Image Druid = Raylib.LoadImage("GeneratorAssets/classes/druid.png");
-        public Image Warrior = Raylib.LoadImage("GeneratorAssets/classes/warrior.png");
-        public Image Berserker = Raylib.LoadImage("GeneratorAssets/classes/berserker.png");
-        public Image Necromancer = Raylib.LoadImage("GeneratorAssets/classes/necromancer.png");
-        public Image Sorcerer = Raylib.LoadImage("GeneratorAssets/classes/sorcerer.png");
-        public Image None = Raylib.LoadImage("GeneratorAssets/classes/none.png");
-        public Image Hero = Raylib.LoadImage("GeneratorAssets/classes/hero.png");
-        public Image Bohater = Raylib.LoadImage("GeneratorAssets/classes/bohater.png");
+        public Image Ranger = Raylib.LoadImage("Classes/ranger.png");
+        public Image Wizard = Raylib.LoadImage("Classes/wizard.png");
+        public Image Bard = Raylib.LoadImage("Classes/bard.png");
+        public Image Guardian = Raylib.LoadImage("Classes/guardian.png");
+        public Image Fighter = Raylib.LoadImage("Classes/fighter.png");
+        public Image Thief = Raylib.LoadImage("Classes/thief.png");
+        public Image Druid = Raylib.LoadImage("Classes/druid.png");
+        public Image Warrior = Raylib.LoadImage("Classes/warrior.png");
+        public Image Berserker = Raylib.LoadImage("Classes/berserker.png");
+        public Image Necromancer = Raylib.LoadImage("Classes/necromancer.png");
+        public Image Sorcerer = Raylib.LoadImage("Classes/sorcerer.png");
+        public Image None = Raylib.LoadImage("Classes/none.png");
+        public Image Hero = Raylib.LoadImage("Classes/hero.png");
+        public Image Bohater = Raylib.LoadImage("Classes/bohater.png");
 
         private AssetManager()
         {
             Raylib.InitWindow(1, 1, "Font Loader");
             Raylib.SetWindowPosition(-2000, -2000);
 
+            // Get The Fonts
             nameFont = Raylib.LoadFontEx("Fonts/PatuaOne_Polish.ttf", NAME_SIZE, null, 382); // this font has limited language support (NOT only Polish and English btw)
             titleFont = Raylib.LoadFontEx("Fonts/SourceSansPro.ttf", TITLE_SIZE, null, 1415);
             reqFont = Raylib.LoadFontEx("Fonts/SourceSansPro_Bold.ttf", REQ_SIZE, null, 1415);
             rollFont = Raylib.LoadFontEx("Fonts/PatuaOne_Polish.ttf", ROLL_SIZE, null, 1415);
             descFont = Raylib.LoadFontEx("Fonts/SourceSansPro.ttf", DESC_SIZE, null, 1415);
 
+            // Load the Class List
             try
             {
-                foreach (string line in File.ReadLines("ClassList.txt"))
+                foreach (string line in File.ReadLines("Classes/ClassList.txt"))
                 {
                     string[] prop = line.Split(';');
-                    var polishName = prop.Length > 3 ? prop[3] : prop[0];
+
+                    string polishName = prop.Length > 3 ? prop[3] : prop[0]; // if there is no polish name, use the english one
+
+                    Image image = Raylib.LoadImage($"Classes/{prop[1]}");
 
                     int classRed = Convert.ToInt32(prop[2].Split(',')[0]);
                     int classGreen = Convert.ToInt32(prop[2].Split(',')[1]);
                     int classBlue = Convert.ToInt32(prop[2].Split(',')[2]);
                     Color colorCombined = new(classRed, classGreen, classBlue, 255);
 
-                    ClassList.Add(new ClassListObject { NameEN = prop[0], ImagePath = prop[1], Color = colorCombined, NamePL = polishName });
+                    ClassList.Add(new ClassListObject { NameEN = prop[0], Image = image, Color = colorCombined, NamePL = polishName });
                 }
             }
             catch (Exception e)
