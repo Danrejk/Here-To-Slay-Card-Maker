@@ -691,18 +691,18 @@ namespace HereToSlay
             {
                 this.Icon = chosenClass.SelectedIndex switch
                 {
-                    0 => Properties.Resources.lowca,
-                    1 => Properties.Resources.mag,
-                    2 => Properties.Resources.najebus,
-                    3 => Properties.Resources.straznik,
-                    4 => Properties.Resources.wojownik,
-                    5 => Properties.Resources.zlodziej,
-                    6 => Properties.Resources.druid,
-                    7 => Properties.Resources.awanturnik,
-                    8 => Properties.Resources.berserk,
-                    9 => Properties.Resources.nekromanta,
-                    10 => Properties.Resources.czarownik,
-                    11 => Properties.Resources.empty,
+                    0 => Properties.Resources.empty,
+                    1 => Properties.Resources.lowca,
+                    2 => Properties.Resources.mag,
+                    3 => Properties.Resources.najebus,
+                    4 => Properties.Resources.straznik,
+                    5 => Properties.Resources.wojownik,
+                    6 => Properties.Resources.zlodziej,
+                    7 => Properties.Resources.druid,
+                    8 => Properties.Resources.awanturnik,
+                    9 => Properties.Resources.berserk,
+                    10 => Properties.Resources.nekromanta,
+                    11 => Properties.Resources.czarownik,
                     _ => Properties.Resources.LEADER
                 };
             }
