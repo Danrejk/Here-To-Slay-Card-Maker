@@ -3,7 +3,7 @@
 # Here To Slay - Custom Card Maker
 Using this program you can make <b>accurate</b> custom cards (also with custom classes) for the card game "Here To Slay". The main goal of our program is to ensure that the generated cards follow the original designs as best as possible.
 <br><br>
-Polska wersja językowa: [README.pl.md](https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/README.pl.md)
+Polska wersja językowa: [README.pl.md](README.pl.md)
 
 ## Instalation
 <a href="https://github.com/Danrejk/Here-To-Slay-Card-Maker/releases/tag/v3.2"> <img alt="Latest Version" src="https://img.shields.io/badge/Latest_Version-v.3.2-green"> </a>
@@ -93,7 +93,7 @@ This program is what the official one should be, accurate and with more features
 </table>
 
 ### Monster
-<img align="left" width="33%" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/Demo_Monster.png">
+<img align="left" width="33%" src="ReadmeAssets/Demo_Monster.png">
 <table>
     <thead>
         <tr>
@@ -114,10 +114,10 @@ This program is what the official one should be, accurate and with more features
 </table>
 
 <br>
-<img src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/LazyDevider.png">
+<img src="ReadmeAssets/LazyDevider.png">
     
 ### Hero
-<img align="left" width="33%" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/Demo_Hero.png">
+<img align="left" width="33%" src="ReadmeAssets/Demo_Hero.png">
 <table>
     <thead>
         <tr>
@@ -135,9 +135,9 @@ This program is what the official one should be, accurate and with more features
     </tbody>
 </table>
 <br>
-<img src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/LazyDevider.png">
+<img src="ReadmeAssets/LazyDevider.png">
 
-<img align="right" width="33%" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/Demo_Custom.png">
+<img align="right" width="33%" src="ReadmeAssets/Demo_Custom.png">
 
 ## Custom Classes
 The progam allows you to add your very own custom classes to the generator. With custom colors, custom icons and cusom names. The process of adding them is a bit rough around the edges, but it's fairly simple.<br>
@@ -172,12 +172,12 @@ After you have done all that, you should see your very own Here To Slay custom c
 
 <hr>
 
-<img width="33%" align="right" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/HereToSlay/PrintingAssets/mixed_cardPlacement_A4_example.png">
+<img width="33%" align="right" src="HereToSlay/PrintingAssets/mixed_cardPlacement_A4_example.png">
 
 ## Printing
 ### Printing at Home
 In the files included with the program there are attached printing assets for printing at home. Backs of the cards for leaders, monsters and heros, their cards placements on A4 papers, as well as a template for positioning your own generated cards.<br>
-<img width="33%" align="right" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/HereToSlay/PrintingAssets/mixed_cardPlacement_A4_exampleBack.png">
+<img width="33%" align="right" src="HereToSlay/PrintingAssets/mixed_cardPlacement_A4_exampleBack.png">
 <br>
 Printing methods may differ depending on your printer, but what I found to work was to:
 <ol>
@@ -198,9 +198,9 @@ Unforunatelly I don't know how that works exactly. But I saw there are many post
 
 ## Screenshots
 <p align="center">
-    <img width="75%" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/screenshot1.png">
+    <img width="75%" src="ReadmeAssets/screenshot1.png">
     <br>
-    <img width="75%" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/screenshot2.png">
+    <img width="75%" src="ReadmeAssets/screenshot2.png">
     <br>
-    <img width="75%" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/screenshot3.png">
+    <img width="75%" src="ReadmeAssets/screenshot3.png">
 </p>
