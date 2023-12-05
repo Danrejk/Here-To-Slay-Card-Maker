@@ -19,10 +19,13 @@ namespace HereToSlay
 {
     public partial class Menu : Form
     {
+        private static readonly AssetManager inst = AssetManager.Instance;
+
         public Menu()
         {
             InitializeComponent();
             this.DoubleBuffered = true;
+
 
             #region Fonts
             Font fontUI = FontLoader.GetFont("SourceSans3.ttf", 10);
@@ -600,6 +603,9 @@ namespace HereToSlay
                     heroReq4.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
                     heroReq5.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
 
+
+                    // These have to be hardcoded mainly because they each use an icon from the resources so it looks better in the combobox.
+                    chosenClass.Items.Add(new ImageCBox("BRAK KLASY", Properties.Resources.empty.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("£owca", Properties.Resources.lowca.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("Mag", Properties.Resources.mag.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("Bard", Properties.Resources.najebus.ToBitmap()));
@@ -611,7 +617,14 @@ namespace HereToSlay
                     chosenClass.Items.Add(new ImageCBox("Berserk", Properties.Resources.berserk.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("Nekromanta", Properties.Resources.nekromanta.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("Czarownik", Properties.Resources.czarownik.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("BRAK KLASY", Properties.Resources.empty.ToBitmap()));
+
+                    // Add custom classes
+                    inst.ClassList.Skip(12).ToList().ForEach(c =>
+                    {
+                        string capitalisedName = char.ToUpper(c.NamePL[0]) + c.NamePL.Substring(1);
+                        chosenClass.Items.Add(new ImageCBox(capitalisedName, new Bitmap(1, 1) ));
+                    });
+
                     break;
                 default:
                     heroReq1.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
@@ -620,6 +633,8 @@ namespace HereToSlay
                     heroReq4.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
                     heroReq5.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
 
+                    // These have to be hardcoded mainly because they each use an icon from the resources so it looks better in the combobox.
+                    chosenClass.Items.Add(new ImageCBox("NO CLASS", Properties.Resources.empty.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("Ranger", Properties.Resources.lowca.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("Wizard", Properties.Resources.mag.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("Bard", Properties.Resources.najebus.ToBitmap()));
@@ -631,7 +646,14 @@ namespace HereToSlay
                     chosenClass.Items.Add(new ImageCBox("Berserker", Properties.Resources.berserk.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("Necromancer", Properties.Resources.nekromanta.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("Sorcerer", Properties.Resources.czarownik.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("NO CLASS", Properties.Resources.empty.ToBitmap()));
+
+                    // Add custom classes
+                    inst.ClassList.Skip(12).ToList().ForEach(c =>
+                    {
+                        string capitalisedName = char.ToUpper(c.NameEN[0]) + c.NameEN.Substring(1);
+                        chosenClass.Items.Add(new ImageCBox(capitalisedName, new Bitmap(1, 1) ));
+                    });
+
                     break;
             }
 
@@ -669,18 +691,18 @@ namespace HereToSlay
             {
                 this.Icon = chosenClass.SelectedIndex switch
                 {
-                    0 => Properties.Resources.lowca,
-                    1 => Properties.Resources.mag,
-                    2 => Properties.Resources.najebus,
-                    3 => Properties.Resources.straznik,
-                    4 => Properties.Resources.wojownik,
-                    5 => Properties.Resources.zlodziej,
-                    6 => Properties.Resources.druid,
-                    7 => Properties.Resources.awanturnik,
-                    8 => Properties.Resources.berserk,
-                    9 => Properties.Resources.nekromanta,
-                    10 => Properties.Resources.czarownik,
-                    11 => Properties.Resources.empty,
+                    0 => Properties.Resources.empty,
+                    1 => Properties.Resources.lowca,
+                    2 => Properties.Resources.mag,
+                    3 => Properties.Resources.najebus,
+                    4 => Properties.Resources.straznik,
+                    5 => Properties.Resources.wojownik,
+                    6 => Properties.Resources.zlodziej,
+                    7 => Properties.Resources.druid,
+                    8 => Properties.Resources.awanturnik,
+                    9 => Properties.Resources.berserk,
+                    10 => Properties.Resources.nekromanta,
+                    11 => Properties.Resources.czarownik,
                     _ => Properties.Resources.LEADER
                 };
             }
@@ -867,7 +889,7 @@ namespace HereToSlay
         public static Font GetFont(string fontFileName, float size)
         {
             string executableLocation = AppDomain.CurrentDomain.BaseDirectory;
-            string fontPath = Path.Combine(executableLocation, "Fonts", fontFileName);
+            string fontPath = Path.Combine(executableLocation, "Assets\\Fonts", fontFileName);
             if (!File.Exists(fontPath))
             {
                 throw new FileNotFoundException("Font file not found.");

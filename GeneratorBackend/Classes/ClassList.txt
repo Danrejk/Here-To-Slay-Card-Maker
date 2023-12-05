@@ -1,0 +1,12 @@
+﻿	none.png	91,93,92
+Ranger	ranger.png	35,94,57	łowca
+Wizard	wizard.png	116,46,137	mag
+Bard	bard.png	194,81,47	bard
+Guardian	guardian.png	235,171,33	strażnik
+Fighter	fighter.png	151,40,44	wojownik
+Thief	thief.png	0,78,125	złodziej
+Druid	druid.png	0,171,143	druid
+Warrior	warrior.png	94,109,180	awanturnik
+Berserker	berserker.png	225,131,51	berserk
+Necromancer	necromancer.png	213,28,106	nekromanta
+Sorcerer	sorcerer.png	29,31,29	czarownik
