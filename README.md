@@ -7,6 +7,7 @@ Polska wersja językowa: [README.pl.md](README.pl.md)
 
 ## Instalation
 <a href="https://github.com/Danrejk/Here-To-Slay-Card-Maker/releases/tag/v3.2"> <img alt="Latest Version" src="https://img.shields.io/badge/Latest_Version-v.3.2-green"> </a>
+
 <br>
 Download the <code>.zip</code> file from the latest <b>Release</b> of the program displayed above, or on the right side of the page.<br>
 Unzip it, the <code>.exe</code> is inside of it, it must remain along the other files inside of the folder or else the program will not work.

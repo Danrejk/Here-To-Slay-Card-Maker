@@ -6,7 +6,7 @@ Dzięki temu programowi możesz tworzyć <b>dokładne</b> niestandardowe karty d
 English Version: [README.md](https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/README.md)
 
 ## Instalacja
-<a href="https://github.com/Danrejk/Here-To-Slay-Card-Maker/releases/tag/v2.3"> <img alt="Najnowsza Wersja" src="https://img.shields.io/badge/Najnowsza_Wersja-v.2.3-zielony"> </a>
+<a href="https://github.com/Danrejk/Here-To-Slay-Card-Maker/releases/tag/v3.1"> <img alt="Najnowsza Wersja" src="https://img.shields.io/badge/Najnowsza_Wersja-v.3.1-green"> </a>
 <br>
 Pobierz plik <code>.zip</code> z najnowszego <b>Release</b> programu wyświetlonego powyżej lub po prawej stronie strony.<br>
 Rozpakuj go, a w środku znajdziesz plik <code>.exe</code>; musi pozostać wraz z innymi plikami w folderze, inaczej program nie będzie działać.
@@ -111,6 +111,7 @@ Ten program to to, co powinno być oficjalnie wypuszczone - dokładne i z brakuj
         <tr><td>✔️Opcjonalny gradient z tyłu i czarny tekst nazwy.</td></tr>
         <tr><td>✔️Automatyczne ustawianie wymagań klas, aby umieścić ogólnych bohaterów z tyłu.</td></tr>
         <tr><td>✔️Przerwanie Linii tworzy większą przerwę między liniami.</td></tr>
+        <tr><td>✔️Alternatywny kolor karty dla słabszych drukarek.</td></tr>
         <tr><td>❌Brak opcji "+ Odrzuć Kartę" ... na razie.</td></tr>
         <tr><td>❌Brak premii do rzutu za każdą dodatkową kartę bohatera ... na razie.</td></tr>
     </tbody>
@@ -142,14 +143,14 @@ Ten program to to, co powinno być oficjalnie wypuszczone - dokładne i z brakuj
 <img src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/LazyDevider.png">
 <hr>
 
-<img width="33%" align="right" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/HereToSlay/PrintingAssets/cardPlacement_A4_template.png">
+<img width="33%" align="right" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/HereToSlay/PrintingAssets/mixed_cardPlacement_A4_example.png">
 
 ## Drukowanie
 ### Drukowanie w Domu
 W plikach dołączonych do programu znajdują się zasoby do drukowania w domu. Tyły kart dla liderów, potworów i bohaterów, ich umieszczenie na papierze A4, a także szablon do pozycjonowania własnych wygenerowanych kart. Wszystkie assety są również dostępne z polskim logiem.<br>
 Metody drukowania mogą się różnić w zależności od drukarki, ale to, co udało mi się sprawdzić, to:
 <ol>
-<img width="33%" align="right" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/HereToSlay/PrintingAssets/English/leaderBack_A4_template.png">
+<img width="33%" align="right" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/HereToSlay/PrintingAssets/mixed_cardPlacement_A4_exampleBack.png">
     <li>Włóż grubszą kartę A4 do drukarki</li>
     <li>Wyrównaj wygenerowane karty jak na obrazie po prawej stronie.</li>
     <li><b>OBRÓĆ obraz o 180°</b>, aby zniwelować domyślny margines dolny na wielu drukarkach.</li>
