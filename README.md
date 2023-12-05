@@ -138,6 +138,7 @@ This program is what the official one should be, accurate and with more features
 <img src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/LazyDevider.png">
 
 <img align="right" width="33%" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/Demo_Custom.png">
+
 ## Custom Classes
 The progam allows you to add your very own custom classes to the generator. With custom colors, custom icons and cusom names. The process of adding them is a bit rough around the edges, but it's fairly simple.<br>
 First you will have to make a class icon. You can make it whatever you want, even a picture of your cat, but you have to follow all the steps for it to work.<br>
