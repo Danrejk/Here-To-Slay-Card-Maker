@@ -1,7 +1,7 @@
 ﻿This is a file explaining how to add your own custom classes to use in the maker.
 It might be a bit confusing at first, but it's really not that hard.
 -----------------------------------------------------------------------------------------------
-First, you make your class icon. It has to be in .png format, otherwise it will probably not load.
+First, you make your class icon.
 You put it in the 'Classes' folder, and you name it whatever you want. Just remember the name, you'll need it later.
 
 Then, you open the 'ClassList.txt' file locaded also in the 'Classes' folder.

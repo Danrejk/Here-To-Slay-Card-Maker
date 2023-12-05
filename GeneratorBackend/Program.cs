@@ -1,4 +1,5 @@
 ﻿using Raylib_cs;
+using System.IO;
 using System.Numerics;
 using System.Reflection.Emit;
 using System.Text;
@@ -70,7 +71,21 @@ namespace GeneratorBackend
 
                     string polishName = prop.Length > 3 ? prop[3] : prop[0]; // if there is no polish name, use the english one
 
-                    Image image = Raylib.LoadImage($"Classes/{prop[1]}");
+                    Image image = new();
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "Classes", prop[1]);
+                    if (File.Exists(path))
+                    {
+                        Image<Rgba32>? imageSharp;
+
+                        using var file = File.OpenRead(path);
+                        imageSharp = SixLabors.ImageSharp.Image.Load<Rgba32>(file);
+
+                        using var memoryStream = new MemoryStream();
+                        imageSharp.SaveAsPng(memoryStream);
+                        memoryStream.Seek(0, SeekOrigin.Begin);
+                        image = Raylib.LoadImageFromMemory(".png", memoryStream.ToArray());
+                    }
+
                     if (image.Width == 0) { 
                         // TODO: It would be good to comunicate to the user that their image didn't load for example, but I tried and it just couldn't get it to work because of Raylib stuff.
                     }
