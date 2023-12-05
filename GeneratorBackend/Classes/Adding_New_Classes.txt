@@ -1,0 +1,25 @@
+﻿This is a file explaining how to add your own custom classes to use in the maker.
+It might be a bit confusing at first, but it's really not that hard.
+-----------------------------------------------------------------------------------------------
+First, you make your class icon. It has to be in .png format, otherwise it will probably not load.
+You put it in the 'Classes' folder, and you name it whatever you want. Just remember the name, you'll need it later.
+
+Then, you open the 'ClassList.txt' file locaded also in the 'Classes' folder.
+In the 'ClassList.txt' file you have a list of all the classes that are currently in the maker.
+Each class has 4 values:
+	- English Name
+	- Name of the image file
+	- RGB color
+	- (optional) Polish Name
+
+Each of the values are separated by a TAB character.
+Example:
+
+Name	image.png	255,128,0	PolishName
+
+-----------------------------------------------------------------------------------------------
+NOTES:
+	The color RGB values MUST be separated by a comma.
+	You don't have to put in the PolishName, you can just ignore it entirely.
+	You image will not appear in the lists where you choose a class, but it will appear on the card itself, so don't worry.
+	If it doesn't appear on the card, your image is either in bad format, or you named it wrong.

@@ -23,6 +23,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Classes\Adding_New_Classes.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Classes\bard.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

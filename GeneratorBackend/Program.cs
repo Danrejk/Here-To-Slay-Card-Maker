@@ -66,18 +66,21 @@ namespace GeneratorBackend
                 ClassList = new();
                 foreach (string line in File.ReadLines("Classes/ClassList.txt"))
                 {
-                    string[] prop = line.Split("; ");
+                    string[] prop = line.Split('\t');
 
                     string polishName = prop.Length > 3 ? prop[3] : prop[0]; // if there is no polish name, use the english one
 
                     Image image = Raylib.LoadImage($"Classes/{prop[1]}");
-                    // TODO: It would be good to comunicate to the user that their image didn't load for example, but I tried and it just couldn't get it to work because of Raylib stuff.
+                    if (image.Width == 0) { 
+                        // TODO: It would be good to comunicate to the user that their image didn't load for example, but I tried and it just couldn't get it to work because of Raylib stuff.
+                    }
 
                     int classRed = Convert.ToInt32(prop[2].Split(',')[0]);
                     int classGreen = Convert.ToInt32(prop[2].Split(',')[1]);
                     int classBlue = Convert.ToInt32(prop[2].Split(',')[2]);
                     Color colorCombined = new(classRed, classGreen, classBlue, 255);
 
+                    // Add the class to the list
                     ClassList.Add(new ClassListObject { NameEN = prop[0], Image = image, Color = colorCombined, NamePL = polishName });
                 }
             }
@@ -112,11 +115,11 @@ namespace GeneratorBackend
 
         const int DESC_FONT_SPACING = 1;
         const float DESC_LINE_SPACING = 4.5f; // the greater the value, the closer the lines are to each other, I know it's weird, but it's how it works.
-        const int DESC_BIG_LINE_SPACING = 13; // this is used when ENTER is typed.
+        const int DESC_BIG_LINE_SPACING = 13; // this is used when a line break (ENTER) is typed.
 
         const int DESC_MARGIN_TARROT = 87;
         const int DESC_MARGIN_POKER = 200;
-        const int DESC_MARGIN_RIGHT = 100; // the margin on the right is the same f
+        const int DESC_MARGIN_RIGHT = 100; // the margin on the right is the same for both card sizes
 
         // changing these, won't PROPERLY change the size of the card.
         // Tall cards
