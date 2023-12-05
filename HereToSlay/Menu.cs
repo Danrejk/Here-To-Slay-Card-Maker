@@ -889,7 +889,7 @@ namespace HereToSlay
         public static Font GetFont(string fontFileName, float size)
         {
             string executableLocation = AppDomain.CurrentDomain.BaseDirectory;
-            string fontPath = Path.Combine(executableLocation, "Fonts", fontFileName);
+            string fontPath = Path.Combine(executableLocation, "Assets\\Fonts", fontFileName);
             if (!File.Exists(fontPath))
             {
                 throw new FileNotFoundException("Font file not found.");

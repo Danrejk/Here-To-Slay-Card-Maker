@@ -11,7 +11,6 @@
     <SignAssembly>False</SignAssembly>
     <BaseOutputPath>bin\</BaseOutputPath>
     <AssemblyName>$(MSBuildProjectName)</AssemblyName>
-    <ApplicationIcon>MenuAssets\icons\icon.ico</ApplicationIcon>
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
     <Authors>Danrejk &amp; Beukot</Authors>
     <Company>Dankot Interactive</Company>
@@ -19,6 +18,7 @@
     <RepositoryUrl>https://github.com/Danrejk/HereToSlay-Generator</RepositoryUrl>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <NeutralLanguage>en</NeutralLanguage>
+    <ApplicationIcon>Assets\MenuAssets\icons\icon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -33,7 +33,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="MenuAssets\icons\icon.ico" />
+    <Content Include="Assets\MenuAssets\icons\icon.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -64,16 +64,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Fonts\PatuaOne_Polish.ttf">
+    <None Update="Assets\Fonts\PatuaOne_Polish.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Fonts\SourceSans3.ttf">
+    <None Update="Assets\Fonts\SourceSans3.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Fonts\SourceSansPro_Bold.ttf">
+    <None Update="Assets\Fonts\SourceSansPro_Bold.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Fonts\SourceSansPro.ttf">
+    <None Update="Assets\Fonts\SourceSansPro.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="PrintingAssets\English\monsterBackBlack.png">
@@ -136,34 +136,34 @@
     <None Update="PrintingAssets\Polski\leaderBack_pl.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="MenuAssets\gradient.png">
+    <None Update="Assets\MenuAssets\gradient.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
-    <None Update="MenuAssets\icons\LEADER.ico">
+    <None Update="Assets\MenuAssets\icons\LEADER.ico">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
-    <None Update="MenuAssets\icons\lowca.ico">
+    <None Update="Assets\MenuAssets\icons\lowca.ico">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
-    <None Update="MenuAssets\icons\mag.ico">
+    <None Update="Assets\MenuAssets\icons\mag.ico">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
-    <None Update="MenuAssets\icons\najebus.ico">
+    <None Update="Assets\MenuAssets\icons\najebus.ico">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
-    <None Update="MenuAssets\icons\straznik.ico">
+    <None Update="Assets\MenuAssets\icons\straznik.ico">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
-    <None Update="MenuAssets\icons\wojownik.ico">
+    <None Update="Assets\MenuAssets\icons\wojownik.ico">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
-    <None Update="MenuAssets\icons\zlodziej.ico">
+    <None Update="Assets\MenuAssets\icons\zlodziej.ico">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
-    <None Update="MenuAssets\Logo0.png">
+    <None Update="Assets\MenuAssets\Logo0.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
-    <None Update="MenuAssets\Logo1.png">
+    <None Update="Assets\MenuAssets\Logo1.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Update="PrintingAssets\English\monsterBack.png">

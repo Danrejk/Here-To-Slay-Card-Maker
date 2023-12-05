@@ -19,14 +19,16 @@ namespace GeneratorBackend
     public class AssetManager
     {
         private static AssetManager? instance;
-        public Image frameLeader = Raylib.LoadImage("GeneratorAssets/template/frame_leader.png");
-        public Image frameMonster = Raylib.LoadImage("GeneratorAssets/template/frame_monster.png");
-        public Image frameHero = Raylib.LoadImage("GeneratorAssets/template/frame_hero.png");
-        public Image gradient = Raylib.LoadImage("GeneratorAssets/template/gradient.png");
-        public Image red = Raylib.LoadImage("GeneratorAssets/template/red.png");
-        public Image green = Raylib.LoadImage("GeneratorAssets/template/green.png");
-        public Image noItem = Raylib.LoadImage("GeneratorAssets/template/noItem.png");
-        public Image Item = Raylib.LoadImage("GeneratorAssets/template/item.png");
+        public string cardTarrot = "Assets/GeneratorAssets/card_tarrot.png";
+        public string cardPoker = "Assets/GeneratorAssets/card_poker.png";
+        public Image frameLeader = Raylib.LoadImage("Assets/GeneratorAssets/frame_leader.png");
+        public Image frameMonster = Raylib.LoadImage("Assets/GeneratorAssets/frame_monster.png");
+        public Image frameHero = Raylib.LoadImage("Assets/GeneratorAssets/frame_hero.png");
+        public Image gradient = Raylib.LoadImage("Assets/GeneratorAssets/gradient.png");
+        public Image red = Raylib.LoadImage("Assets/GeneratorAssets/red.png");
+        public Image green = Raylib.LoadImage("Assets/GeneratorAssets/green.png");
+        public Image noItem = Raylib.LoadImage("Assets/GeneratorAssets/noItem.png");
+        public Image Item = Raylib.LoadImage("Assets/GeneratorAssets/item.png");
 
         public const int NAME_SIZE = 60; // 60
         public const int TITLE_SIZE = 47; // 49
@@ -43,20 +45,6 @@ namespace GeneratorBackend
         public Color bottomColor = new(245, 241, 231, 255);
 
         public List<ClassListObject> ClassList { get; private set; }
-
-        // old
-        public Image Ranger = Raylib.LoadImage("Classes/ranger.png");
-        public Image Wizard = Raylib.LoadImage("Classes/wizard.png");
-        public Image Bard = Raylib.LoadImage("Classes/bard.png");
-        public Image Guardian = Raylib.LoadImage("Classes/guardian.png");
-        public Image Fighter = Raylib.LoadImage("Classes/fighter.png");
-        public Image Thief = Raylib.LoadImage("Classes/thief.png");
-        public Image Druid = Raylib.LoadImage("Classes/druid.png");
-        public Image Warrior = Raylib.LoadImage("Classes/warrior.png");
-        public Image Berserker = Raylib.LoadImage("Classes/berserker.png");
-        public Image Necromancer = Raylib.LoadImage("Classes/necromancer.png");
-        public Image Sorcerer = Raylib.LoadImage("Classes/sorcerer.png");
-        public Image None = Raylib.LoadImage("Classes/none.png");
         public Image Hero = Raylib.LoadImage("Classes/hero.png");
         public Image Bohater = Raylib.LoadImage("Classes/bohater.png");
 
@@ -66,11 +54,11 @@ namespace GeneratorBackend
             Raylib.SetWindowPosition(-2000, -2000);
 
             // Get The Fonts
-            nameFont = Raylib.LoadFontEx("Fonts/PatuaOne_Polish.ttf", NAME_SIZE, null, 382); // this font has limited language support (NOT only Polish and English btw)
-            titleFont = Raylib.LoadFontEx("Fonts/SourceSansPro.ttf", TITLE_SIZE, null, 1415);
-            reqFont = Raylib.LoadFontEx("Fonts/SourceSansPro_Bold.ttf", REQ_SIZE, null, 1415);
-            rollFont = Raylib.LoadFontEx("Fonts/PatuaOne_Polish.ttf", ROLL_SIZE, null, 1415);
-            descFont = Raylib.LoadFontEx("Fonts/SourceSansPro.ttf", DESC_SIZE, null, 1415);
+            nameFont = Raylib.LoadFontEx("Assets/Fonts/PatuaOne_Polish.ttf", NAME_SIZE, null, 382); // this font has limited language support (NOT only Polish and English btw)
+            titleFont = Raylib.LoadFontEx("Assets/Fonts/SourceSansPro.ttf", TITLE_SIZE, null, 1415);
+            reqFont = Raylib.LoadFontEx("Assets/Fonts/SourceSansPro_Bold.ttf", REQ_SIZE, null, 1415);
+            rollFont = Raylib.LoadFontEx("Assets/Fonts/PatuaOne_Polish.ttf", ROLL_SIZE, null, 1415);
+            descFont = Raylib.LoadFontEx("Assets/Fonts/SourceSansPro.ttf", DESC_SIZE, null, 1415);
 
             // Load the Class List
             try
@@ -144,7 +132,7 @@ namespace GeneratorBackend
         public static void GenerateLeader(string? renderLocation, int language, string name, int[] desiredClass, string leaderImg, string description, bool addGradient, bool nameWhite)
         {
             // This has to be loaded each time, to clear the image from the previous render
-            Image card = Raylib.LoadImage("GeneratorAssets/template/card_tarrot.png");
+            Image card = Raylib.LoadImage(inst.cardTarrot);
             Rectangle imageRec = new(0, 0, CARD_WIDTH_TARROT, CARD_HEIGHT_TARROT);
 
             // Draw Leader Image
@@ -243,7 +231,7 @@ namespace GeneratorBackend
         public static void GenerateMonster(string? renderLocation, int language, string name, int[] desiredRequirements, RollOutput good, RollOutput bad, string monsterImg, string description, bool addGradient, bool nameWhite, bool alternativeColor)
         {
             // This has to be loaded each time, to clear the image from the previous render
-            Image card = Raylib.LoadImage("GeneratorAssets/template/card_tarrot.png");
+            Image card = Raylib.LoadImage(inst.cardTarrot);
             Rectangle imageRec = new(0, 0, CARD_WIDTH_TARROT, CARD_HEIGHT_TARROT);
 
             // Draw Monster Image
@@ -361,7 +349,7 @@ namespace GeneratorBackend
         public static void GenerateHero(string? renderLocation, int language, string name, int desiredClass, string heroImg, RollOutput description, int maxItems)
         {
             // This has to be loaded each time, to clear the image from the previous render
-            Image card = Raylib.LoadImage("GeneratorAssets/template/card_poker.png");
+            Image card = Raylib.LoadImage(inst.cardPoker);
             Rectangle imageRec = new(0, 0, CARD_WIDTH_POKER, CARD_HEIGHT_POKER);
 
             // Draw Hero Image

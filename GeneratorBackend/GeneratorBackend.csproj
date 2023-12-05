@@ -71,85 +71,34 @@
     <None Update="ClassList.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="GeneratorAssets\classes\warrior.png">
+    <None Update="Assets\GeneratorAssets\card_poker.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="GeneratorAssets\classes\berserker.png">
+    <None Update="Assets\GeneratorAssets\card_tarrot.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="GeneratorAssets\classes\bohater.png">
+    <None Update="Assets\GeneratorAssets\frame_hero.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="GeneratorAssets\classes\sorcerer.png">
+    <None Update="Assets\GeneratorAssets\frame_leader.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="GeneratorAssets\classes\druid.png">
+    <None Update="Assets\GeneratorAssets\frame_monster.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="GeneratorAssets\classes\none.png">
+    <None Update="Assets\GeneratorAssets\gradient.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="GeneratorAssets\classes\hero.png">
+    <None Update="Assets\GeneratorAssets\green.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="GeneratorAssets\classes\ranger.png">
+    <None Update="Assets\GeneratorAssets\item.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="GeneratorAssets\classes\wizard.png">
+    <None Update="Assets\GeneratorAssets\noItem.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="GeneratorAssets\classes\bard.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="GeneratorAssets\classes\necromancer.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="GeneratorAssets\classes\guardian.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="GeneratorAssets\classes\fighter.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="GeneratorAssets\classes\thief.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="GeneratorAssets\template\background.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="GeneratorAssets\template\bottom.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="GeneratorAssets\template\card_poker.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="GeneratorAssets\template\card_tarrot.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="GeneratorAssets\template\frame.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="GeneratorAssets\template\frame_hero.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="GeneratorAssets\template\frame_leader.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="GeneratorAssets\template\frame_monster.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="GeneratorAssets\template\gradient.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="GeneratorAssets\template\green.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="GeneratorAssets\template\item.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="GeneratorAssets\template\noItem.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="GeneratorAssets\template\red.png">
+    <None Update="Assets\GeneratorAssets\red.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
