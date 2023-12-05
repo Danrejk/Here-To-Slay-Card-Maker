@@ -1,19 +1,19 @@
 <img src="HereToSlay/MenuAssets/Logo0.png" width="33%" align="right">
 
 # Here To Slay - Custom Card Maker
-Using this program you can make <b>accurate</b> custom cards (also with custom classes) for the card game "Here To Slay". The main goal of our program is to ensure that the generated cards follow the original designs as best as possible.
+Using this program you can make <b>accurate</b> custom cards for the card game "Here To Slay". The main goal of our program is to ensure that the generated cards follow the original designs as best as possible.
 <br><br>
 Polska wersja językowa: [README.pl.md](https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/README.pl.md)
 
 ## Instalation
-<a href="https://github.com/Danrejk/Here-To-Slay-Card-Maker/releases/tag/v3.2"> <img alt="Latest Version" src="https://img.shields.io/badge/Latest_Version-v.3.2-green"> </a>
+<a href="https://github.com/Danrejk/Here-To-Slay-Card-Maker/releases/tag/v3.1"> <img alt="Latest Version" src="https://img.shields.io/badge/Latest_Version-v.3.1-green"> </a>
 <br>
 Download the <code>.zip</code> file from the latest <b>Release</b> of the program displayed above, or on the right side of the page.<br>
 Unzip it, the <code>.exe</code> is inside of it, it must remain along the other files inside of the folder or else the program will not work.
 
 <hr>
 
-## Card Generation
+## Features
 There is an <a href="https://www.unstablegames.com/community-cards/here-to-slay">official creator</a> by the Here To Slay makers for leaders only, BUT it has so many inaccuracies that it barely represents the look of the real cards, AND it lacks <b>many</b> features
 This program is what the official one should be, accurate and with more features:
 
@@ -134,41 +134,9 @@ This program is what the official one should be, accurate and with more features
         <tr><td>❌No Here To Sleigh DLC present icon.</td></tr>
     </tbody>
 </table>
+
 <br>
 <img src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/LazyDevider.png">
-
-<img align="right" width="33%" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/Demo_Custom.png">
-## Custom Classes
-The progam allows you to add your very own custom classes to the generator. With custom colors, custom icons and cusom names. The process of adding them is a bit rough around the edges, but it's fairly simple.<br>
-First you will have to make a class icon. You can make it whatever you want, even a picture of your cat, but you have to follow all the steps for it to work.<br>
-While making the icon, be sure to add an outline using the <code>#f5f1e7</code> color to match the design on the original cards.<br>
-<br>
-After you made the icon, you put it in the <code>Classes</code> folder, and you name it whatever you want. Just remember the name, you'll need it later.<br>
-<hr>
-Then, you open the <code>ClassList.txt</code> file locaded also in the <code>Classes</code> folder. In the <code>ClassList.txt</code> file you have a list of all the classes that are currently in the maker.<br>
-Each class has 4 values:
-<ul>
-    <li>English Name</li>
-    <li>Name of the image file</li>
-    <li>RGB color</li>
-    <li>(optional) Polish Name</li>
-</ul>
-
-Each of the values are separated by a TAB character. Example:<br>
-
-Name&emsp;image.png&emsp;255,128,0&emsp;PolishName
-
-<hr>
-NOTES:
-<ul>
-    <li>The color RGB values MUST be separated by a comma.</li>
-    <li>You don't have to put in the PolishName, you can just ignore it entirely.</li>
-    <li>You image will not appear in the lists where you choose a class, but it will appear on the card itself, so don't worry.</li>
-    <li>If it doesn't appear on the card, your image is either in bad format, or you named it wrong.</li>
-</ul>
-
-After you have done all that, you should see your very own Here To Slay custom class in the maker!
-
 <hr>
 
 <img width="33%" align="right" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/HereToSlay/PrintingAssets/mixed_cardPlacement_A4_example.png">
