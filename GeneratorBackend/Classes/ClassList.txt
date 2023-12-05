@@ -10,4 +10,3 @@ Warrior	warrior.png	94,109,180	awanturnik
 Berserker	berserker.png	225,131,51	berserk
 Necromancer	necromancer.png	213,28,106	nekromanta
 Sorcerer	sorcerer.png	29,31,29	czarownik
-Paladin	paladin.png	255,255,255	paladyn
