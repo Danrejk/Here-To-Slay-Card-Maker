@@ -1120,7 +1120,6 @@
         private ToolStripMenuItem HeroCard;
         private ToolStripMenuItem ItemCard;
         private ToolStripMenuItem MagicCard;
-        private ToolStripMenuItem monster;
         private ToolStripMenuItem LeaderCard;
         private ComboBox itemChosenClass;
     }

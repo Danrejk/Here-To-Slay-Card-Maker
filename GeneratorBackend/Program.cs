@@ -11,10 +11,10 @@ namespace GeneratorBackend
 {
     public class ClassListObject
     {
-        public string NameEN { get; set; }
+        public string NameEN { get; set; } = "";
         public Image Image { get; set; }
         public Color Color { get; set; }
-        public string NamePL { get; set; }
+        public string NamePL { get; set; } = "";
     }
 
     public class AssetManager
@@ -161,15 +161,15 @@ namespace GeneratorBackend
 
             // Draw Leader Image
             ChangeLeaderImage(leaderImg);
-
             Raylib.ImageDraw(ref card, leader, imageRec, new(41, 41, 745, 1176), Color.WHITE);
+
+            // Add Gradient
+            if (addGradient) { Raylib.ImageDraw(ref card, inst.gradient, imageRec, imageRec, Color.WHITE); }
 
             #region Classes
             string leaderTitle;
 
             // Primary Class
-            if (desiredClass[0] == -1) desiredClass[0] = 0;
-
             Image classSymbol = inst.ClassList[desiredClass[0]].Image;
             Color desiredColor = inst.ClassList[desiredClass[0]].Color;
 
@@ -180,16 +180,14 @@ namespace GeneratorBackend
             };
             if (inst.ClassList[desiredClass[0]].NameEN == "") leaderTitle = leaderTitle.Replace(": ", "");
 
-            // Secondary Class
-            Image secondClassSymbol = new();
-            Color desiredSecondColor = new();
+            // Draw Class Symbol
+            Raylib.ImageDraw(ref card, classSymbol, imageRec, new(363, 1167, 102, 102), Color.WHITE);
 
-            if (desiredClass[1] != -1)
+            if (desiredClass[1] != -1) // check if there is a second class
             {
                 if (desiredClass[1] == -1) desiredClass[1] = 0;
 
-                secondClassSymbol = Raylib.ImageCopy(inst.ClassList[desiredClass[1]].Image); // It has to be copied, because otherwise it will modify the original image
-                desiredSecondColor = inst.ClassList[desiredClass[1]].Color;
+                Image secondClassSymbol = Raylib.ImageCopy(inst.ClassList[desiredClass[1]].Image); // It has to be copied, because otherwise it will modify the original image
 
                 leaderTitle += language switch
                 {
@@ -202,38 +200,34 @@ namespace GeneratorBackend
                     _ => "Leader"
                 };
                 Raylib.ImageCrop(ref secondClassSymbol, new Rectangle(0, 0, 51, 102));
+
+                // Draw the second class symbol
+                Raylib.ImageDraw(ref card, secondClassSymbol, imageRec, new(363, 1167, 51, 102), Color.WHITE);
             }
             #endregion
-           
-            if (addGradient) { Raylib.ImageDraw(ref card, inst.gradient, imageRec, imageRec, Color.WHITE); }
-
-            // Draw Class Symbol(s)
-            Raylib.ImageDraw(ref card, classSymbol, imageRec, new(363, 1167, 102, 102), Color.WHITE);
 
             // Draw Colored Frame(s)
-            Image frameTinted = Raylib.ImageCopy(inst.frameLeader); // create a copy of the frame asset, so that the original is not modified
             if (desiredClass[1] != -1) // check if there is a second class
             {
-                Raylib.ImageDraw(ref card, secondClassSymbol, imageRec, new(363, 1167, 51, 102), Color.WHITE);
+                // Draw the first class frame
+                Image frameSecond = Raylib.ImageCopy(inst.frameLeader); // create a copy of the frame asset, so that the original is not modified
 
-                Raylib.ImageCrop(ref frameTinted, new Rectangle(0, 0, 414, 1417));
-                Raylib.ImageColorTint(ref frameTinted, desiredColor);
-                Raylib.ImageDraw(ref card, frameTinted, imageRec, new(0, 0, 414, 1417), Color.WHITE);
+                Raylib.ImageCrop(ref frameSecond, new Rectangle(0, 0, 414, 1417));
+                Raylib.ImageColorTint(ref frameSecond, desiredColor);
+                Raylib.ImageDraw(ref card, frameSecond, imageRec, new(0, 0, 414, 1417), Color.WHITE);
 
-                frameTinted = Raylib.ImageCopy(inst.frameLeader); // clear the tinted frame for the second class
+                // Draw the second class frame
+                frameSecond = Raylib.ImageCopy(inst.frameLeader); // clear the tinted frame for the second class
+                Color desiredSecondColor = inst.ClassList[desiredClass[1]].Color;
 
-                Raylib.ImageCrop(ref frameTinted, new Rectangle(414, 0, 413, 1417)); // while the sizes might look irregular. It's all because the image is 827px wide, so I have to compensate the 0,5px offset. One side is wider by 1px
-                Raylib.ImageColorTint(ref frameTinted, desiredSecondColor);
-                Raylib.ImageDraw(ref card, frameTinted, imageRec, new(414, 0, 413, 1417), Color.WHITE);
+                Raylib.ImageCrop(ref frameSecond, new Rectangle(414, 0, 413, 1417)); // while the sizes might look irregular. It's all because the image is 827px wide, so I have to compensate the 0,5px offset. One side is wider by 1px
+                Raylib.ImageColorTint(ref frameSecond, desiredSecondColor);
+                Raylib.ImageDraw(ref card, frameSecond, imageRec, new(414, 0, 413, 1417), Color.WHITE);
             }
             else
             {
-                Raylib.ImageColorTint(ref frameTinted, desiredColor);
-                Raylib.ImageDraw(ref card, frameTinted, imageRec, imageRec, Color.WHITE);
+                Raylib.ImageDraw(ref card, inst.frameLeader, imageRec, imageRec, desiredColor);
             }
-
-            Raylib.UnloadImage(frameTinted);
-            Raylib.UnloadImage(secondClassSymbol);
 
             // Name and Title
             DrawNameAndTitleTarrot(name, leaderTitle, card, nameWhite);
@@ -241,14 +235,9 @@ namespace GeneratorBackend
             // Description
             DrawDescription(description, card, DESC_MARGIN_TARROT, DESC_MARGIN_RIGHT, 0, inst.bottomColorDark);
 
-            if (renderLocation == null)
-            {
-                Raylib.ExportImage(card, "preview.png");
-            }
-            else
-            {
-                Raylib.ExportImage(card, renderLocation);
-            }
+            // Save the image
+            renderLocation ??= "preview.png";
+            Raylib.ExportImage(card, renderLocation);
             Raylib.UnloadImage(card);
         }
 
@@ -260,11 +249,12 @@ namespace GeneratorBackend
 
             // Draw Monster Image
             ChangeMonsterImage(monsterImg);
-            
             Raylib.ImageDraw(ref card, monster, imageRec, new(41, 41, 745, 824), Color.WHITE);
-            
-            // Draw Colored Frame
+
+            // Add Gradient
             if (addGradient) { Raylib.ImageDraw(ref card, inst.gradient, imageRec, imageRec, Color.WHITE); }
+
+            // Draw Colored Frame
             Color frameColor = alternativeColor switch
             {
                 true => new(0, 0, 0, 255),
@@ -273,50 +263,36 @@ namespace GeneratorBackend
 
             Raylib.ImageDraw(ref card, inst.frameMonster, imageRec, imageRec, frameColor);
 
+            // Requirements text
             string reqText = language switch
             {
                 1 => "WYMAGANIA:",
                 _ => "REQUIREMENT:"
             };
-
-            Vector2 reqTextSize = Raylib.MeasureTextEx(inst.reqFont, reqText, AssetManager.REQ_SIZE, REQ_FONT_SPACING);
             Raylib.ImageDrawTextEx(ref card, inst.reqFont, reqText, new(87, 920), AssetManager.REQ_SIZE, REQ_FONT_SPACING, inst.bottomColor);
+            float reqTextWidth = Raylib.MeasureTextEx(inst.reqFont, reqText, AssetManager.REQ_SIZE, REQ_FONT_SPACING).X; // get width of the "REQUIREMENT:" text to align the icons properly
 
             #region Class Requirements
             // put the classless hero requirements at the end
-            int[] orderedRequirements = desiredRequirements.OrderBy(x => x == 0).ToArray();
+            int[] orderedRequirements = desiredRequirements.Where(x => x != -1).OrderBy(x => x == 0).ToArray(); // ignore -1, because it's the unassigned value
 
             // count how many class requirements there are
-            int reqCount = 0;
-            foreach (int req in orderedRequirements)
-            {
-                if (req == -1) { continue; }
-                reqCount++;
-            }
+            int reqCount = orderedRequirements.Count(); 
 
             // Draw the class requirements
-            int reqIteration = 0;
-            foreach (int req in orderedRequirements)
+            foreach ((int req, int index) in orderedRequirements.Select((value, index) => (value, index)))
             {
-                if (req == -1) { continue; }
-
                 Image classSymbol;
-                if (req == 0)
-                {
-                    classSymbol = language switch
+                if (req == 0) classSymbol = language switch
                     {
                         1 => inst.Bohater,
                         _ => inst.Hero
                     };
-                }
-                else
-                {
-                    classSymbol = inst.ClassList[req - 1].Image;
-                }
+                else classSymbol = inst.ClassList[req - 1].Image; // -1 because HERO is put in front, so the indexes are shifted by 
 
-                // change the distance between icons, if there are 5, so that it better fits onto the card
+                // distance between icons (13), 83 is the width of the icon
                 float iconsMargin = 83 + 13;
-                if (reqCount > 4)
+                if (reqCount > 4) // if there are more than 4 icons, we need to reduce the margin between them
                 {
                     iconsMargin -= language switch
                     {
@@ -324,8 +300,7 @@ namespace GeneratorBackend
                         _ => 8 // YOU CAN MODIFY THIS. It might look better for your preferences, but for me I think this is the best option.
                     };
                 }
-                Raylib.ImageDraw(ref card, classSymbol, imageRec, new(93 + reqTextSize.X + 10 + reqIteration * iconsMargin, 902, 83, 83), Color.WHITE);
-                reqIteration++;
+                Raylib.ImageDraw(ref card, classSymbol, imageRec, new(93 + reqTextWidth + 10 + index * iconsMargin, 902, 83, 83), Color.WHITE);
             }
             #endregion
 
@@ -359,14 +334,9 @@ namespace GeneratorBackend
             // Description
             DrawDescription(description, card, DESC_MARGIN_TARROT, DESC_MARGIN_RIGHT, 1, inst.bottomColorDark);
 
-            if (renderLocation == null)
-            {
-                Raylib.ExportImage(card, "preview.png");
-            }
-            else
-            {
-                Raylib.ExportImage(card, renderLocation);
-            }
+            // Save the image
+            renderLocation ??= "preview.png";
+            Raylib.ExportImage(card, renderLocation);
             Raylib.UnloadImage(card);
         }
 
@@ -411,12 +381,7 @@ namespace GeneratorBackend
             Raylib.ImageDraw(ref card, classSymbol, imageRec, new(322, 722, 102, 102), Color.WHITE);
 
             // Draw Colored Frame
-            Image frameTinted = Raylib.ImageCopy(inst.frameHero); // create a copy of the frame asset, so that the original is not 
-            Raylib.ImageColorTint(ref frameTinted, desiredColor);
-            Raylib.ImageDraw(ref card, frameTinted, imageRec, imageRec, Color.WHITE);
-
-            Raylib.UnloadImage(frameTinted);
-
+            Raylib.ImageDraw(ref card, inst.frameHero, imageRec, imageRec, desiredColor);
 
             // Name and Title
             DrawNameAndTitlePoker(name, heroTitle, card, desiredColor);
@@ -442,15 +407,9 @@ namespace GeneratorBackend
             // Description
             DrawDescription(description.Outcome, card, DESC_MARGIN_HERO, DESC_MARGIN_RIGHT, 2, inst.bottomColorDark);
 
-            // Final Render
-            if (renderLocation == null)
-            {
-                Raylib.ExportImage(card, "preview.png");
-            }
-            else
-            {
-                Raylib.ExportImage(card, renderLocation);
-            }
+            // Save the image
+            renderLocation ??= "preview.png";
+            Raylib.ExportImage(card, renderLocation);
             Raylib.UnloadImage(card);
         }
         
@@ -460,7 +419,7 @@ namespace GeneratorBackend
             Image card = Raylib.LoadImage(inst.cardPoker);
             Rectangle imageRec = new(0, 0, CARD_WIDTH_POKER, CARD_HEIGHT_POKER);
 
-            // Draw Hero Image
+            // Draw Item Image
             ChangeHeroItemMagicImage(itemImg);
             Raylib.ImageDraw(ref card, heroItemMagic, imageRec, new(100, 232, 545, 545), Color.WHITE);
 
@@ -476,7 +435,8 @@ namespace GeneratorBackend
             };
             Color frameColor = new(68, 64, 61, 255);
             Color titleColor;
-            if (desiredClass == 1)
+
+            if (desiredClass == 1) // check if it's a cursed item
             {
                 titleColor = new(160, 59, 139, 255);
                 itemTitle = language switch
@@ -485,7 +445,7 @@ namespace GeneratorBackend
                     _ => "Cursed Item"
                 };
             }
-            else
+            else // if it's not a cursed item, then it's a normal item
             {
                 titleColor = new(0, 163, 172, 255);
                 itemTitle = language switch
@@ -496,11 +456,7 @@ namespace GeneratorBackend
             }
             
             // Draw Colored Frame
-            Image frameTinted = Raylib.ImageCopy(inst.frameItem); // create a copy of the frame asset, so that the original is not 
-            Raylib.ImageColorTint(ref frameTinted, frameColor);
-            Raylib.ImageDraw(ref card, frameTinted, imageRec, imageRec, Color.WHITE);
-
-            Raylib.UnloadImage(frameTinted);
+            Raylib.ImageDraw(ref card, inst.frameItem, imageRec, imageRec, frameColor);
 
             // Draw Class Symbol
             Raylib.ImageDraw(ref card, classSymbol, imageRec, new(99, 886, 102, 102), Color.WHITE);
@@ -511,15 +467,9 @@ namespace GeneratorBackend
             // Description
             DrawDescription(description, card, DESC_MARGIN_ITEM, DESC_MARGIN_RIGHT, 3, inst.bottomColor);
 
-            // Final Render
-            if (renderLocation == null)
-            {
-                Raylib.ExportImage(card, "preview.png");
-            }
-            else
-            {
-                Raylib.ExportImage(card, renderLocation);
-            }
+            // Save the image
+            renderLocation ??= "preview.png";
+            Raylib.ExportImage(card, renderLocation);
             Raylib.UnloadImage(card);
         }
         
@@ -533,6 +483,7 @@ namespace GeneratorBackend
             ChangeHeroItemMagicImage(magicImg);
             Raylib.ImageDraw(ref card, heroItemMagic, imageRec, new(100, 232, 545, 545), Color.WHITE);
 
+            // Localise the 'title'
             string magicTitle = language switch
             {
                 1 => "Magia",
@@ -540,11 +491,7 @@ namespace GeneratorBackend
             };
 
             // Draw Colored Frame
-            Image frameTinted = Raylib.ImageCopy(inst.frameHero); // create a copy of the frame asset, so that the original is not 
-            Raylib.ImageColorTint(ref frameTinted, inst.magicColor);
-            Raylib.ImageDraw(ref card, frameTinted, imageRec, imageRec, Color.WHITE);
-
-            Raylib.UnloadImage(frameTinted);
+            Raylib.ImageDraw(ref card, inst.frameHero, imageRec, imageRec, inst.magicColor);
 
             // Name and Title
             DrawNameAndTitlePoker(name, magicTitle, card, inst.magicColor);
@@ -552,15 +499,10 @@ namespace GeneratorBackend
             // Description
             DrawDescription(description, card, DESC_MARGIN_RIGHT, DESC_MARGIN_RIGHT, 4, inst.bottomColorDark);
 
-            // Final Render
-            if (renderLocation == null)
-            {
-                Raylib.ExportImage(card, "preview.png");
-            }
-            else
-            {
-                Raylib.ExportImage(card, renderLocation);
-            }
+
+            // Save the image
+            renderLocation ??= "preview.png";
+            Raylib.ExportImage(card, renderLocation);
             Raylib.UnloadImage(card);
         }
         #endregion
