@@ -522,9 +522,9 @@ namespace HereToSlay
                 advancedNameBox.Visible = false;
                 advancedName.Visible = false;
 
-                labelImg.Location = new Point(labelImg.Location.X, 329);
-                selectImgText.Location = new Point(selectImgText.Location.X, 349);
-                selectImgButton.Location = new Point(selectImgButton.Location.X, 349);
+                labelImg.Location = new Point(labelImg.Location.X, 304);
+                selectImgText.Location = new Point(selectImgText.Location.X, 324);
+                selectImgButton.Location = new Point(selectImgButton.Location.X, 324);
 
                 RENDER.Location = new Point(RENDER.Location.X, 525);
 
@@ -643,7 +643,7 @@ namespace HereToSlay
                     break;
                 // Magic
                 case 4:
-                    GeneratorBackend.Program.GenerateItem(null, language.SelectedIndex, nameText.Text, itemChosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text);
+                    GeneratorBackend.Program.GenerateMagic(null, language.SelectedIndex, nameText.Text, selectImgText.Text, descriptionText.Text);
                     break;
                 default:
                     throw new NotImplementedException();

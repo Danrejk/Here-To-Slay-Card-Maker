@@ -550,7 +550,7 @@ namespace GeneratorBackend
             DrawNameAndTitlePoker(name, magicTitle, card, inst.magicColor);
 
             // Description
-            DrawDescription(description, card, DESC_MARGIN_TARROT, DESC_MARGIN_RIGHT, 2, inst.bottomColorDark);
+            DrawDescription(description, card, DESC_MARGIN_RIGHT, DESC_MARGIN_RIGHT, 4, inst.bottomColorDark);
 
             // Final Render
             if (renderLocation == null)
@@ -635,6 +635,12 @@ namespace GeneratorBackend
 
                     desc_space = 205;
                     break;
+                case 4:
+                    card_size.X = CARD_WIDTH_POKER;
+                    card_size.Y = CARD_HEIGHT_POKER;
+
+                    desc_space = 222; // this one is for some reason smaller than the actual desc space on the card on real cards
+                    break;
                 default:
                     throw new Exception("Invalid size_set value");
             }
@@ -691,10 +697,10 @@ namespace GeneratorBackend
 
             float textBlockCenter = (desc_space - targetLines * (textSize.Y) - additionalLineSpace + lineSpacing) / 2;
 
-            if (targetLines >= 4 && card_type != 2) textBlockCenter += 16; // real cards have a set offset for >=4 lines of text so they don't colide with the Leader Icon
-            if (targetLines == 3 && additionalLineSpace > 0 && card_type != 2) textBlockCenter += 12; // real cards have this offset for 3 lines WITH a big line spacing. All other cases seem to be without changes so it's kinda weird.
-            if (card_type == 2) textBlockCenter -= 41; // hero cards have a frame that takes up 41px of space, so we need to offset the text by that much
-            if (card_type == 2 && targetLines >= 5) textBlockCenter += 12;
+            if (targetLines >= 4 && (card_type != 2 && card_type != 4)) textBlockCenter += 16; // real cards have a set offset for >=4 lines of text so they don't colide with the Leader Icon
+            if (targetLines == 3 && additionalLineSpace > 0 && (card_type != 2 && card_type != 4)) textBlockCenter += 12; // real cards have this offset for 3 lines WITH a big line spacing. All other cases seem to be without changes so it's kinda weird.
+            if (card_type == 2 || card_type == 4) textBlockCenter -= 41; // hero cards have a frame that takes up 41px of space, so we need to offset the text by that much
+            if ((card_type == 2 || card_type == 4) && targetLines >= 5) textBlockCenter += 12;
 
             lineSpacing = 0; // We have to reset the lineSpacing and increase it as we are drawing the lines
 
