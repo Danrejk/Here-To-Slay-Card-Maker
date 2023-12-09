@@ -376,8 +376,8 @@ namespace GeneratorBackend
             Rectangle imageRec = new(0, 0, CARD_WIDTH_POKER, CARD_HEIGHT_POKER);
 
             // Draw Hero Image
-            ChangeHeroImage(heroImg);
-            Raylib.ImageDraw(ref card, hero, imageRec, new(100, 232, 545, 545), Color.WHITE);
+            ChangeHeroItemMagicImage(heroImg);
+            Raylib.ImageDraw(ref card, heroItemMagic, imageRec, new(100, 232, 545, 545), Color.WHITE);
             
             // Max Items
             if (maxItems == 0)
@@ -460,8 +460,8 @@ namespace GeneratorBackend
             Rectangle imageRec = new(0, 0, CARD_WIDTH_POKER, CARD_HEIGHT_POKER);
 
             // Draw Hero Image
-            ChangeHeroImage(heroImg);
-            Raylib.ImageDraw(ref card, hero, imageRec, new(100, 232, 545, 545), Color.WHITE);
+            ChangeHeroItemMagicImage(heroImg);
+            Raylib.ImageDraw(ref card, heroItemMagic, imageRec, new(100, 232, 545, 545), Color.WHITE);
 
             // Classes
             string itemTitle;
@@ -677,7 +677,7 @@ namespace GeneratorBackend
         #region Change Image
         static Image leader = new();
         static Image monster = new();
-        static Image hero = new();
+        static Image heroItemMagic = new();
 
         static string lastPathLeader = "";
         static string lastPathMonster = "";
@@ -701,13 +701,13 @@ namespace GeneratorBackend
             CropImage(ref monster, 745, 824);
         }
 
-        static void ChangeHeroImage(string path)
+        static void ChangeHeroItemMagicImage(string path)
         {
             if (path == lastPathHero) { return; }
             lastPathHero = path;
 
-            LoadImage(ref hero, path);
-            CropImage(ref hero, 545, 545);
+            LoadImage(ref heroItemMagic, path);
+            CropImage(ref heroItemMagic, 545, 545);
         }
 
         static void LoadImage(ref Image image, string path)
