@@ -47,6 +47,7 @@ namespace GeneratorBackend
         public Font rollFont { get; private set; }
 
         public Color bottomColor = new(245, 241, 231, 255);
+        public Color bottomColorDark = new(78, 78, 78, 255);
 
         public List<ClassListObject> ClassList { get; private set; }
         public Image Hero = Raylib.LoadImage("Classes/hero.png");
@@ -136,7 +137,8 @@ namespace GeneratorBackend
         const int DESC_BIG_LINE_SPACING = 13; // this is used when a line break (ENTER) is typed.
 
         const int DESC_MARGIN_TARROT = 87;
-        const int DESC_MARGIN_POKER = 200;
+        const int DESC_MARGIN_HERO = 200;
+        const int DESC_MARGIN_ITEM = 225;
         const int DESC_MARGIN_RIGHT = 100; // the margin on the right is the same for both card sizes
 
         // changing these, won't PROPERLY change the size of the card.
@@ -233,10 +235,10 @@ namespace GeneratorBackend
             Raylib.UnloadImage(secondClassSymbol);
 
             // Name and Title
-            DrawNameAndTitle(name, leaderTitle, card, nameWhite);
+            DrawNameAndTitleTarrot(name, leaderTitle, card, nameWhite);
 
             // Description
-            DrawDescription(description, card, DESC_MARGIN_TARROT, DESC_MARGIN_RIGHT, 0);
+            DrawDescription(description, card, DESC_MARGIN_TARROT, DESC_MARGIN_RIGHT, 0, inst.bottomColorDark);
 
             if (renderLocation == null)
             {
@@ -351,10 +353,10 @@ namespace GeneratorBackend
                 1 => "Potwór",
                 _ => "Monster"
             };
-            DrawNameAndTitle(name, titleText, card, nameWhite);
+            DrawNameAndTitleTarrot(name, titleText, card, nameWhite);
 
             // Description
-            DrawDescription(description, card, DESC_MARGIN_TARROT, DESC_MARGIN_RIGHT, 1);
+            DrawDescription(description, card, DESC_MARGIN_TARROT, DESC_MARGIN_RIGHT, 1, inst.bottomColorDark);
 
             if (renderLocation == null)
             {
@@ -416,7 +418,7 @@ namespace GeneratorBackend
 
 
             // Name and Title
-            DrawNameAndTitleHero(name, heroTitle, card, desiredColor);
+            DrawNameAndTitlePoker(name, heroTitle, card, desiredColor);
 
             // Roll Output Symbol and Value
             char descSymbol = ' ';
@@ -437,7 +439,7 @@ namespace GeneratorBackend
             Raylib.ImageDrawTextEx(ref card, inst.rollFont, description.Value.ToString() + descSymbol, new(94 + 78 / 2 - descNumSize.X / 2, 852 + 78 / 2 - descNumSize.Y / 2), AssetManager.ROLL_SIZE, ROLL_FONT_SPACING, inst.bottomColor);
 
             // Description
-            DrawDescription(description.Outcome, card, DESC_MARGIN_POKER, DESC_MARGIN_RIGHT, 2);
+            DrawDescription(description.Outcome, card, DESC_MARGIN_HERO, DESC_MARGIN_RIGHT, 2, inst.bottomColorDark);
 
             // Final Render
             if (renderLocation == null)
@@ -500,13 +502,13 @@ namespace GeneratorBackend
             Raylib.UnloadImage(frameTinted);
 
             // Draw Class Symbol
-            Raylib.ImageDraw(ref card, classSymbol, imageRec, new(94, 887, 102, 102), Color.WHITE);
+            Raylib.ImageDraw(ref card, classSymbol, imageRec, new(99, 886, 102, 102), Color.WHITE);
 
             // Name and Title
-            DrawNameAndTitleHero(name, itemTitle, card, titleColor);
+            DrawNameAndTitlePoker(name, itemTitle, card, titleColor);
 
             // Description
-            DrawDescription(description, card, DESC_MARGIN_POKER, DESC_MARGIN_RIGHT, 2);
+            DrawDescription(description, card, DESC_MARGIN_ITEM, DESC_MARGIN_RIGHT, 3, inst.bottomColor);
 
             // Final Render
             if (renderLocation == null)
@@ -522,7 +524,7 @@ namespace GeneratorBackend
         #endregion
 
         #region Common Draw Text
-        static void DrawNameAndTitle(string nameText, string titleText, Image card, bool nameWhite)
+        static void DrawNameAndTitleTarrot(string nameText, string titleText, Image card, bool nameWhite)
         {
             Color leaderColor = nameWhite switch
             {
@@ -550,7 +552,7 @@ namespace GeneratorBackend
             Raylib.ImageDrawTextEx(ref card, inst.titleFont, titleText, new Vector2((CARD_WIDTH_TARROT / 2) - (titleSize.X / 2), titleY), AssetManager.TITLE_SIZE, TITLE_FONT_SPACING, leaderColor);
         }
 
-        static void DrawNameAndTitleHero(string nameText, string titleText, Image card, Color titleColor)
+        static void DrawNameAndTitlePoker(string nameText, string titleText, Image card, Color titleColor)
         {
             Vector2 nameSize = Raylib.MeasureTextEx(inst.nameFont, nameText, AssetManager.NAME_SIZE, NAME_FONT_SPACING);
             Vector2 titleSize = Raylib.MeasureTextEx(inst.titleFont, titleText, AssetManager.TITLE_SIZE, TITLE_FONT_SPACING);
@@ -565,7 +567,7 @@ namespace GeneratorBackend
             Raylib.ImageDrawTextEx(ref card, inst.titleFont, titleText, new Vector2((CARD_WIDTH_POKER / 2) - (titleSize.X / 2), titleY), AssetManager.TITLE_SIZE, TITLE_FONT_SPACING, titleColor);
         }
 
-        static void DrawDescription(string text, Image card, int padding_left, int padding_right, int card_type) // card_type - which set of card size to use; 0 - tarrot (leader); 1 - tarrot (monster); 2 - poker (hero);
+        static void DrawDescription(string text, Image card, int padding_left, int padding_right, int card_type, Color descTextColor) // card_type - which set of card size to use; 0 - tarrot (leader); 1 - tarrot (monster); 2 - poker (hero);
         {
             Vector2 card_size;
             int desc_space; // how much Y space there is for description
@@ -573,11 +575,6 @@ namespace GeneratorBackend
             switch(card_type)
             {
                 case 0:
-                    card_size.X = CARD_WIDTH_TARROT;
-                    card_size.Y = CARD_HEIGHT_TARROT;
-
-                    desc_space = 200;
-                    break;
                 case 1:
                     card_size.X = CARD_WIDTH_TARROT;
                     card_size.Y = CARD_HEIGHT_TARROT;
@@ -589,6 +586,12 @@ namespace GeneratorBackend
                     card_size.Y = CARD_HEIGHT_POKER;
 
                     desc_space = 215; // this one is for some reason smaller than the actual desc space on the card on real cards
+                    break;
+                case 3:
+                    card_size.X = CARD_WIDTH_POKER;
+                    card_size.Y = CARD_HEIGHT_POKER;
+
+                    desc_space = 205;
                     break;
                 default:
                     throw new Exception("Invalid size_set value");
@@ -652,8 +655,6 @@ namespace GeneratorBackend
             if (card_type == 2 && targetLines >= 5) textBlockCenter += 12;
 
             lineSpacing = 0; // We have to reset the lineSpacing and increase it as we are drawing the lines
-
-            Color descTextColor = new(78, 78, 78, 255);
 
             // Draw the lines
             for (int currentLine = 0; currentLine < lineList.Count; currentLine++)

@@ -837,30 +837,38 @@ namespace HereToSlay
 
         private void updateIcon_to_chosenClass(object? sender, EventArgs? e)
         {
-            int iconIndex = Properties.Settings.Default.CardType switch
+            if(Properties.Settings.Default.CardType != 1 || Properties.Settings.Default.CardType != 4)
             {
-                0 => chosenClass.SelectedIndex,
-                2 => chosenClass.SelectedIndex,
-                3 => itemChosenClass.SelectedIndex == 0 || itemChosenClass.SelectedIndex == 1 ? itemChosenClass.SelectedIndex+100 : itemChosenClass.SelectedIndex-2, // It's 
-            };
-            this.Icon = iconIndex switch
-            {
-                0 => Properties.Resources.empty,
-                1 => Properties.Resources.lowca,
-                2 => Properties.Resources.mag,
-                3 => Properties.Resources.najebus,
-                4 => Properties.Resources.straznik,
-                5 => Properties.Resources.wojownik,
-                6 => Properties.Resources.zlodziej,
-                7 => Properties.Resources.druid,
-                8 => Properties.Resources.awanturnik,
-                9 => Properties.Resources.berserk,
-                10 => Properties.Resources.nekromanta,
-                11 => Properties.Resources.czarownik,
-                100 => Properties.Resources.itemIcon,
-                101 => Properties.Resources.cursed,
-                _ => Properties.Resources.LEADER
-            };
+                int iconIndex;
+                if (Properties.Settings.Default.CardType == 3)
+                {
+                    // This is to handle Item and Cursed Item icons, while still using the normal class icon list.
+                    iconIndex = itemChosenClass.SelectedIndex == 0 || itemChosenClass.SelectedIndex == 1 ? itemChosenClass.SelectedIndex + 100 : itemChosenClass.SelectedIndex - 2;
+                }
+                else
+                {
+                    iconIndex = chosenClass.SelectedIndex;
+                }
+
+                this.Icon = iconIndex switch
+                {
+                    0 => Properties.Resources.empty,
+                    1 => Properties.Resources.lowca,
+                    2 => Properties.Resources.mag,
+                    3 => Properties.Resources.najebus,
+                    4 => Properties.Resources.straznik,
+                    5 => Properties.Resources.wojownik,
+                    6 => Properties.Resources.zlodziej,
+                    7 => Properties.Resources.druid,
+                    8 => Properties.Resources.awanturnik,
+                    9 => Properties.Resources.berserk,
+                    10 => Properties.Resources.nekromanta,
+                    11 => Properties.Resources.czarownik,
+                    100 => Properties.Resources.itemIcon,
+                    101 => Properties.Resources.cursed,
+                    _ => Properties.Resources.LEADER
+                };
+            }
         }
 
         private void splitClass_CheckStateChanged(object sender, EventArgs e)
