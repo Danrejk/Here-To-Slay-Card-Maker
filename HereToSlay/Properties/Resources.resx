@@ -130,6 +130,9 @@
   <data name="closed" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Assets\MenuAssets\closed.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="cursed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\MenuAssets\icons\cursed.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="czarownik" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Assets\MenuAssets\icons\czarownik.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -153,6 +156,9 @@
   </data>
   <data name="item" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Assets\MenuAssets\item.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="itemIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\MenuAssets\icons\item.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="LEADER" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Assets\MenuAssets\icons\LEADER.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

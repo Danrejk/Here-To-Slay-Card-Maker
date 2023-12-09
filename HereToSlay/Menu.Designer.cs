@@ -96,6 +96,7 @@
             advancedGeneralBox = new FlowLayoutPanel();
             alternativeColor = new CheckBox();
             altColorToolTip = new ToolTip(components);
+            itemChosenClass = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)logo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)previewImg).BeginInit();
             previewContextMenu.SuspendLayout();
@@ -516,6 +517,7 @@
             ItemCard.Name = "ItemCard";
             ItemCard.Size = new Size(180, 22);
             ItemCard.Text = "Item";
+            ItemCard.Click += ItemCard_Click;
             // 
             // MagicCard
             // 
@@ -948,12 +950,26 @@
             altColorToolTip.ReshowDelay = 100;
             altColorToolTip.ToolTipIcon = ToolTipIcon.Info;
             // 
+            // itemChosenClass
+            // 
+            itemChosenClass.BackColor = Color.White;
+            itemChosenClass.DropDownStyle = ComboBoxStyle.DropDownList;
+            itemChosenClass.FlatStyle = FlatStyle.Flat;
+            itemChosenClass.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            itemChosenClass.FormattingEnabled = true;
+            itemChosenClass.Location = new Point(142, 249);
+            itemChosenClass.Margin = new Padding(0);
+            itemChosenClass.Name = "itemChosenClass";
+            itemChosenClass.Size = new Size(120, 25);
+            itemChosenClass.TabIndex = 56;
+            // 
             // Menu
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackColor = Color.FromArgb(39, 43, 52);
             BackgroundImage = Properties.Resources.gradient;
             ClientSize = new Size(828, 711);
+            Controls.Add(itemChosenClass);
             Controls.Add(advancedGeneralBox);
             Controls.Add(advancedGeneral);
             Controls.Add(itemImg2);
@@ -1104,5 +1120,6 @@
         private ToolStripMenuItem MagicCard;
         private ToolStripMenuItem monster;
         private ToolStripMenuItem LeaderCard;
+        private ComboBox itemChosenClass;
     }
 }

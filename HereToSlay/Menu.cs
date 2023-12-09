@@ -72,6 +72,10 @@ namespace HereToSlay
             chosenSecondClass.DrawItem += ImageCBox.ComboBox_DrawItem;
             chosenSecondClass.ItemHeight = 19;
 
+            itemChosenClass.DrawMode = DrawMode.OwnerDrawFixed;
+            itemChosenClass.DrawItem += ImageCBox.ComboBox_DrawItem;
+            itemChosenClass.ItemHeight = 19;
+
             heroReq1.DrawMode = DrawMode.OwnerDrawFixed;
             heroReq1.DrawItem += ImageCBox.ComboBox_DrawItem;
             heroReq1.ItemHeight = 19;
@@ -119,6 +123,9 @@ namespace HereToSlay
                 case 2:
                     HeroCard_Click(null, null);
                     break;
+                case 3:
+                    ItemCard_Click(null, null);
+                    break;
             }
         }
 
@@ -143,12 +150,17 @@ namespace HereToSlay
                 LeaderCard.BackColor = SystemColors.ControlLight;
                 HeroCard.Checked = false;
                 HeroCard.BackColor = SystemColors.Control;
+                ItemCard.Checked = false;
+                ItemCard.BackColor = SystemColors.Control;
+                MagicCard.Checked = false;
+                MagicCard.BackColor = SystemColors.Control;
 
                 chosenClass.Visible = true;
                 labelClass.Visible = true;
                 advancedClass.Visible = true;
                 advancedClass.Image = Properties.Resources.closed;
                 splitClass.Checked = false;
+                itemChosenClass.Visible = false;
 
                 advancedName.Visible = true;
 
@@ -221,6 +233,10 @@ namespace HereToSlay
                 MonsterCard.BackColor = SystemColors.ControlLight;
                 HeroCard.Checked = false;
                 HeroCard.BackColor = SystemColors.Control;
+                ItemCard.Checked = false;
+                ItemCard.BackColor = SystemColors.Control;
+                MagicCard.Checked = false;
+                MagicCard.BackColor = SystemColors.Control;
 
                 chosenClass.Visible = false;
                 labelClass.Visible = false;
@@ -229,6 +245,7 @@ namespace HereToSlay
                 labelSecondClass.Visible = false;
                 advancedClass.Visible = false;
                 advancedClassBox.Visible = false;
+                itemChosenClass.Visible = false;
 
                 advancedName.Visible = true;
 
@@ -309,6 +326,10 @@ namespace HereToSlay
                 MonsterCard.BackColor = SystemColors.Control;
                 HeroCard.Checked = true;
                 HeroCard.BackColor = SystemColors.ControlLight;
+                ItemCard.Checked = false;
+                ItemCard.BackColor = SystemColors.Control;
+                MagicCard.Checked = false;
+                MagicCard.BackColor = SystemColors.Control;
 
                 chosenClass.Visible = true;
                 labelClass.Visible = true;
@@ -316,6 +337,7 @@ namespace HereToSlay
                 advancedClass.Image = Properties.Resources.closed;
                 splitClass.Checked = false;
                 advancedClassBox.Visible = false;
+                itemChosenClass.Visible = false;
 
                 advancedName.Visible = false;
                 advancedName.Image = Properties.Resources.closed;
@@ -371,6 +393,95 @@ namespace HereToSlay
                 renderPreviewNow(sender, e);
                 previewImg.ImageLocation = Path.Combine(Directory.GetCurrentDirectory(), "preview.png");
                 previewImg.SizeMode = PictureBoxSizeMode.Zoom;
+            }
+        }
+
+        private void ItemCard_Click(object? sender, EventArgs? e)
+        {
+            if (ItemCard.Checked == false)
+            {
+                Properties.Settings.Default.CardType = 3;
+                Properties.Settings.Default.Save();
+
+                if (chosenClass.SelectedIndex == -1)
+                {
+                    this.Icon = Properties.Resources.itemIcon;
+                }
+
+                LeaderCard.Checked = false;
+                LeaderCard.BackColor = SystemColors.Control;
+                MonsterCard.Checked = false;
+                MonsterCard.BackColor = SystemColors.Control;
+                HeroCard.Checked = false;
+                HeroCard.BackColor = SystemColors.Control;
+                ItemCard.Checked = true;
+                ItemCard.BackColor = SystemColors.ControlLight;
+                MagicCard.Checked = false;
+                MagicCard.BackColor = SystemColors.Control;
+
+                chosenClass.Visible = false;
+                labelClass.Visible = true;
+                advancedClass.Visible = false;
+                advancedClass.Image = Properties.Resources.closed;
+                advancedClassBox.Visible = false;
+                splitClass.Checked = false;
+                itemChosenClass.Visible = true;
+
+                advancedName.Image = Properties.Resources.closed;
+                advancedNameBox.Visible = false;
+                advancedName.Visible = false;
+
+                labelImg.Location = new Point(labelImg.Location.X, 329);
+                selectImgText.Location = new Point(selectImgText.Location.X, 349);
+                selectImgButton.Location = new Point(selectImgButton.Location.X, 349);
+
+                RENDER.Location = new Point(RENDER.Location.X, 525);
+
+                labelReq.Visible = false;
+                heroReq1.Visible = false;
+                heroReq2.Visible = false;
+                heroReq3.Visible = false;
+                heroReq4.Visible = false;
+                heroReq5.Visible = false;
+
+                labelBad.Visible = false;
+                badOutputText.Visible = false;
+                badOutputNum.Visible = false;
+                badOutputSym.Visible = false;
+
+                labelGood.Visible = false;
+                goodOutputText.Visible = false;
+                goodOutputNum.Visible = false;
+                goodOutputSym.Visible = false;
+
+                maxItems.Visible = false;
+                labelMaxItem.Visible = false;
+                itemImg.Visible = false;
+                itemImg2.Visible = false;
+                itemImgMore.Visible = false;
+
+                descriptionText.Size = new Size(300, descriptionText.Size.Height);
+                labelDescription.Location = new Point(53, 426);
+                descriptionText.Location = new Point(57, 446);
+
+                advancedGeneral.Visible = false;
+                advancedGeneral.Image = Properties.Resources.closed;
+                advancedGeneralBox.Visible = false;
+
+                foreach (Control c in this.Controls)
+                {
+                    if (c.Name.Contains("clear")) { c.Visible = false; };
+                }
+
+                nameWhite.Checked = false;
+
+                this.Update();
+                updateLanguage(sender, e);
+                this.Update();
+
+                renderPreviewNow(sender, e);
+                previewImg.ImageLocation = Path.Combine(Directory.GetCurrentDirectory(), "preview.png");
+                previewImg.SizeMode = PictureBoxSizeMode.StretchImage;
             }
         }
         #endregion
@@ -452,6 +563,10 @@ namespace HereToSlay
                     RollOutput description = new((int)goodOutputNum.Value, goodOutputSym.SelectedIndex, descriptionText.Text);
                     GeneratorBackend.Program.GenerateHero(null, language.SelectedIndex, nameText.Text, chosenClass.SelectedIndex, selectImgText.Text, description, (int)maxItems.Value);
                     break;
+                case 3:
+                    RollOutput descriptions = new((int)goodOutputNum.Value, goodOutputSym.SelectedIndex, descriptionText.Text);
+                    GeneratorBackend.Program.GenerateHero(null, language.SelectedIndex, nameText.Text, chosenClass.SelectedIndex, selectImgText.Text, descriptions, (int)maxItems.Value);
+                    break;
                 default:
                     throw new NotImplementedException();
             }
@@ -479,6 +594,7 @@ namespace HereToSlay
                     {
                         1 => "Nazwa potwora",
                         2 => "Nazwa bohatera",
+                        3 => "Nazwa przedmiotu",
                         _ => "Nazwa przywódcy"
                     };
                     labelClass.Text = "Klasa przywódcy";
@@ -487,6 +603,7 @@ namespace HereToSlay
                     {
                         1 => "Obrazek potwora",
                         2 => "Obrazek bohatera",
+                        3 => "Obrazek przedmiotu",
                         _ => "Obrazek przywódcy"
                     };
                     labelDescription.Text = "Opis mocy";
@@ -495,8 +612,9 @@ namespace HereToSlay
                     {
                         1 => "Obrazek potwora (nie ca³a karta) ma wymiary 745x817. \nProgram automatycznie przytnie i przybli¿y obraz, je¿eli bêdzie to potrzebne.\n\nWspierane rozszerzenia plików:\n.png, .jpeg, .jpg, .gif (pierwsza klatka), .bmp, .webp, .pbm, .tiff, .tga",
                         2 => "Obrazek bohatera (nie ca³a karta) ma wymiary 545x545. \nProgram automatycznie przytnie i przybli¿y obraz, je¿eli bêdzie to potrzebne.\n\nWspierane rozszerzenia plików:\n.png, .jpeg, .jpg, .gif (pierwsza klatka), .bmp, .webp, .pbm, .tiff, .tga",
+                        3 => "Obrazek przedmiotu (nie ca³a karta) ma wymiary 545x545. \nProgram automatycznie przytnie i przybli¿y obraz, je¿eli bêdzie to potrzebne.\n\nWspierane rozszerzenia plików:\n.png, .jpeg, .jpg, .gif (pierwsza klatka), .bmp, .webp, .pbm, .tiff, .tga",
                         _ => "Obrazek przywódcy (nie ca³a karta) ma wymiary 745x1176. \nProgram automatycznie przytnie i przybli¿y obraz, je¿eli bêdzie to potrzebne.\n\nWspierane rozszerzenia plików:\n.png, .jpeg, .jpg, .gif (pierwsza klatka), .bmp, .webp, .pbm, .tiff, .tga"
-                    });
+                    }); ;
                     gradient.Text = "Tylni gradient";
                     nameWhite.Text = "Bia³a nazwa";
                     splitClass.Text = "Podwójna Klasa";
@@ -574,6 +692,7 @@ namespace HereToSlay
         // These are made so that after changing the language, the selected classes stay the same.
         int currentClassIndex;
         int currentSecondClassIndex;
+        int currentItemClassIndex;
         int currentHeroReq1Index;
         int currentHeroReq2Index;
         int currentHeroReq3Index;
@@ -586,6 +705,9 @@ namespace HereToSlay
 
             currentSecondClassIndex = chosenSecondClass.SelectedIndex;
             chosenSecondClass.Items.Clear();
+
+            currentItemClassIndex = itemChosenClass.SelectedIndex;
+            itemChosenClass.Items.Clear();
 
             currentHeroReq1Index = heroReq1.SelectedIndex;
             heroReq1.Items.Clear();
@@ -607,7 +729,6 @@ namespace HereToSlay
                     heroReq4.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
                     heroReq5.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
 
-
                     // These have to be hardcoded mainly because they each use an icon from the resources so it looks better in the combobox.
                     chosenClass.Items.Add(new ImageCBox("BRAK KLASY", Properties.Resources.empty.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("£owca", Properties.Resources.lowca.ToBitmap()));
@@ -625,9 +746,12 @@ namespace HereToSlay
                     // Add custom classes
                     inst.ClassList.Skip(12).ToList().ForEach(c =>
                     {
-                        string capitalisedName = char.ToUpper(c.NamePL[0]) + c.NamePL.Substring(1);
+                        string capitalisedName = char.ToUpper(c.NamePL[0]) + c.NamePL[1..];
                         chosenClass.Items.Add(new ImageCBox(capitalisedName, new Bitmap(1, 1) ));
                     });
+
+                    itemChosenClass.Items.Add(new ImageCBox("Przedmiot", Properties.Resources.itemIcon.ToBitmap()));
+                    itemChosenClass.Items.Add(new ImageCBox("Przekêty przed.", Properties.Resources.cursed.ToBitmap()));
 
                     break;
                 default:
@@ -658,6 +782,9 @@ namespace HereToSlay
                         chosenClass.Items.Add(new ImageCBox(capitalisedName, new Bitmap(1, 1) ));
                     });
 
+                    itemChosenClass.Items.Add(new ImageCBox("Item", Properties.Resources.itemIcon.ToBitmap()));
+                    itemChosenClass.Items.Add(new ImageCBox("Cursed Item", Properties.Resources.cursed.ToBitmap()));
+
                     break;
             }
 
@@ -669,10 +796,13 @@ namespace HereToSlay
                 heroReq3.Items.Add(item);
                 heroReq4.Items.Add(item);
                 heroReq5.Items.Add(item);
+                itemChosenClass.Items.Add(item);
             }
 
             chosenClass.SelectedIndex = currentClassIndex;
             chosenSecondClass.SelectedIndex = currentSecondClassIndex;
+
+            itemChosenClass.SelectedIndex = currentItemClassIndex;
 
             heroReq1.SelectedIndex = currentHeroReq1Index;
             heroReq2.SelectedIndex = currentHeroReq2Index;

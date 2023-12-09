@@ -103,6 +103,16 @@ namespace HereToSlay.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
+        internal static System.Drawing.Icon cursed {
+            get {
+                object obj = ResourceManager.GetObject("cursed", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
         internal static System.Drawing.Icon czarownik {
             get {
                 object obj = ResourceManager.GetObject("czarownik", resourceCulture);
@@ -177,6 +187,16 @@ namespace HereToSlay.Properties {
             get {
                 object obj = ResourceManager.GetObject("item", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon itemIcon {
+            get {
+                object obj = ResourceManager.GetObject("itemIcon", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
         
