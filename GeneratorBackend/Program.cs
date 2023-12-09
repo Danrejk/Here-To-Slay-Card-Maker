@@ -29,10 +29,10 @@ namespace GeneratorBackend
         public Image gradient = Raylib.LoadImage("Assets/GeneratorAssets/gradient.png");
         public Image red = Raylib.LoadImage("Assets/GeneratorAssets/red.png");
         public Image green = Raylib.LoadImage("Assets/GeneratorAssets/green.png");
-        public Image noItem = Raylib.LoadImage("Assets/GeneratorAssets/noItem.png");
-        public Image itemHero = Raylib.LoadImage("Assets/GeneratorAssets/item.png");
+        public Image noItem = Raylib.LoadImage("Assets/GeneratorAssets/no_item_hero.png");
+        public Image itemHero = Raylib.LoadImage("Assets/GeneratorAssets/item_hero.png");
         public Image itemItem = Raylib.LoadImage("Assets/GeneratorAssets/item_item.png");
-        public Image cursed = Raylib.LoadImage("Assets/GeneratorAssets/cursed.png");
+        public Image cursed = Raylib.LoadImage("Assets/GeneratorAssets/cursed_item.png");
 
         public const int NAME_SIZE = 60; // 60
         public const int TITLE_SIZE = 47; // 49
@@ -465,7 +465,12 @@ namespace GeneratorBackend
             string itemTitle;
             if (desiredClass == -1) desiredClass = 0;
 
-            Image classSymbol = inst.ClassList[desiredClass].Image;
+            Image classSymbol = desiredClass switch
+            {
+                0 => inst.itemItem,
+                1 => inst.cursed,
+                _ => inst.ClassList[desiredClass-2].Image
+            };
             Color frameColor = new(68, 64, 61, 255);
             Color titleColor;
             if (desiredClass == 1)
@@ -486,10 +491,7 @@ namespace GeneratorBackend
                     _ => "Item"
                 };
             }
-
-            // Draw Class Symbol
-            Raylib.ImageDraw(ref card, classSymbol, imageRec, new(322, 722, 102, 102), Color.WHITE);
-
+            
             // Draw Colored Frame
             Image frameTinted = Raylib.ImageCopy(inst.frameItem); // create a copy of the frame asset, so that the original is not 
             Raylib.ImageColorTint(ref frameTinted, frameColor);
@@ -497,6 +499,8 @@ namespace GeneratorBackend
 
             Raylib.UnloadImage(frameTinted);
 
+            // Draw Class Symbol
+            Raylib.ImageDraw(ref card, classSymbol, imageRec, new(94, 887, 102, 102), Color.WHITE);
 
             // Name and Title
             DrawNameAndTitleHero(name, itemTitle, card, titleColor);
