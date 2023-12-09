@@ -67,6 +67,7 @@ namespace HereToSlay
             chosenClass.DrawMode = DrawMode.OwnerDrawFixed;
             chosenClass.DrawItem += ImageCBox.ComboBox_DrawItem;
             chosenClass.ItemHeight = 19;
+            chosenClass.SelectedIndex = 0;
 
             chosenSecondClass.DrawMode = DrawMode.OwnerDrawFixed;
             chosenSecondClass.DrawItem += ImageCBox.ComboBox_DrawItem;
@@ -75,6 +76,7 @@ namespace HereToSlay
             itemChosenClass.DrawMode = DrawMode.OwnerDrawFixed;
             itemChosenClass.DrawItem += ImageCBox.ComboBox_DrawItem;
             itemChosenClass.ItemHeight = 19;
+            itemChosenClass.SelectedIndex = 0;
 
             heroReq1.DrawMode = DrawMode.OwnerDrawFixed;
             heroReq1.DrawItem += ImageCBox.ComboBox_DrawItem;
@@ -650,6 +652,7 @@ namespace HereToSlay
                     {
                         1 => "Monster name",
                         2 => "Hero name",
+                        3 => "Item name",
                         _ => "Leader name"
                     };
                     labelClass.Text = Properties.Settings.Default.CardType switch
@@ -663,6 +666,7 @@ namespace HereToSlay
                     {
                         1 => "Monster image",
                         2 => "Hero image",
+                        3 => "Item image",
                         _ => "Leader image"
                     };
                     labelDescription.Text = "Description";
@@ -831,25 +835,30 @@ namespace HereToSlay
 
         private void updateIcon_to_chosenClass(object? sender, EventArgs? e)
         {
-            if (Properties.Settings.Default.CardType == 0 || Properties.Settings.Default.CardType == 2)
+            int iconIndex = Properties.Settings.Default.CardType switch
             {
-                this.Icon = chosenClass.SelectedIndex switch
-                {
-                    0 => Properties.Resources.empty,
-                    1 => Properties.Resources.lowca,
-                    2 => Properties.Resources.mag,
-                    3 => Properties.Resources.najebus,
-                    4 => Properties.Resources.straznik,
-                    5 => Properties.Resources.wojownik,
-                    6 => Properties.Resources.zlodziej,
-                    7 => Properties.Resources.druid,
-                    8 => Properties.Resources.awanturnik,
-                    9 => Properties.Resources.berserk,
-                    10 => Properties.Resources.nekromanta,
-                    11 => Properties.Resources.czarownik,
-                    _ => Properties.Resources.LEADER
-                };
-            }
+                0 => chosenClass.SelectedIndex,
+                2 => chosenClass.SelectedIndex,
+                3 => itemChosenClass.SelectedIndex == 0 || itemChosenClass.SelectedIndex == 1 ? itemChosenClass.SelectedIndex+100 : itemChosenClass.SelectedIndex-2, // It's 
+            };
+            this.Icon = iconIndex switch
+            {
+                0 => Properties.Resources.empty,
+                1 => Properties.Resources.lowca,
+                2 => Properties.Resources.mag,
+                3 => Properties.Resources.najebus,
+                4 => Properties.Resources.straznik,
+                5 => Properties.Resources.wojownik,
+                6 => Properties.Resources.zlodziej,
+                7 => Properties.Resources.druid,
+                8 => Properties.Resources.awanturnik,
+                9 => Properties.Resources.berserk,
+                10 => Properties.Resources.nekromanta,
+                11 => Properties.Resources.czarownik,
+                100 => Properties.Resources.itemIcon,
+                101 => Properties.Resources.cursed,
+                _ => Properties.Resources.LEADER
+            };
         }
 
         private void splitClass_CheckStateChanged(object sender, EventArgs e)

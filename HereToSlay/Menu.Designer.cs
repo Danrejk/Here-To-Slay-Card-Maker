@@ -957,11 +957,12 @@
             itemChosenClass.FlatStyle = FlatStyle.Flat;
             itemChosenClass.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             itemChosenClass.FormattingEnabled = true;
-            itemChosenClass.Location = new Point(142, 249);
+            itemChosenClass.Location = new Point(145, 249);
             itemChosenClass.Margin = new Padding(0);
             itemChosenClass.Name = "itemChosenClass";
             itemChosenClass.Size = new Size(120, 25);
             itemChosenClass.TabIndex = 56;
+            itemChosenClass.SelectedIndexChanged += chosenClass_SelectedIndexChanged;
             // 
             // Menu
             // 
