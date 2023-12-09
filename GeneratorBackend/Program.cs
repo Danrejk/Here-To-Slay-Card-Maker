@@ -523,19 +523,19 @@ namespace GeneratorBackend
             Raylib.UnloadImage(card);
         }
         
-        public static void GenerateMagic(string? renderLocation, int language, string name, string heroImg, string description)
+        public static void GenerateMagic(string? renderLocation, int language, string name, string magicImg, string description)
         {
             // This has to be loaded each time, to clear the image from the previous render
             Image card = Raylib.LoadImage(inst.cardPoker);
             Rectangle imageRec = new(0, 0, CARD_WIDTH_POKER, CARD_HEIGHT_POKER);
 
-            // Draw Hero Image
-            ChangeHeroItemMagicImage(heroImg);
+            // Draw Magic Image
+            ChangeHeroItemMagicImage(magicImg);
             Raylib.ImageDraw(ref card, heroItemMagic, imageRec, new(100, 232, 545, 545), Color.WHITE);
 
             string magicTitle = language switch
             {
-                1 => "Czar",
+                1 => "Magia",
                 _ => "Magic"
             };
 
@@ -697,10 +697,11 @@ namespace GeneratorBackend
 
             float textBlockCenter = (desc_space - targetLines * (textSize.Y) - additionalLineSpace + lineSpacing) / 2;
 
-            if (targetLines >= 4 && (card_type != 2 && card_type != 4)) textBlockCenter += 16; // real cards have a set offset for >=4 lines of text so they don't colide with the Leader Icon
-            if (targetLines == 3 && additionalLineSpace > 0 && (card_type != 2 && card_type != 4)) textBlockCenter += 12; // real cards have this offset for 3 lines WITH a big line spacing. All other cases seem to be without changes so it's kinda weird.
-            if (card_type == 2 || card_type == 4) textBlockCenter -= 41; // hero cards have a frame that takes up 41px of space, so we need to offset the text by that much
-            if ((card_type == 2 || card_type == 4) && targetLines >= 5) textBlockCenter += 12;
+            if (targetLines >= 4 && (card_type == 0 || card_type == 1)) textBlockCenter += 16; // real cards have a set offset for >=4 lines of text so they don't colide with the Leader Icon
+            if (targetLines == 3 && additionalLineSpace > 0 && (card_type == 0 || card_type == 1)) textBlockCenter += 12; // real cards have this offset for 3 lines WITH a big line spacing. All other cases seem to be without changes so it's kinda weird.
+            
+            if (card_type == 2 || card_type == 4) textBlockCenter -= 41; // these cards have a frame that takes up 41px of space, so we need to offset the text by that much
+            if ((card_type == 2) && targetLines >= 5) textBlockCenter += 12;
 
             lineSpacing = 0; // We have to reset the lineSpacing and increase it as we are drawing the lines
 
