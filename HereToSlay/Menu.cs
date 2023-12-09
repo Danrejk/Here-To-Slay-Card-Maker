@@ -128,6 +128,9 @@ namespace HereToSlay
                 case 3:
                     ItemCard_Click(null, null);
                     break;
+                case 4:
+                    MagicCard_Click(null, null);
+                    break;
             }
         }
 
@@ -214,7 +217,7 @@ namespace HereToSlay
                 updateLanguage(sender, e);
                 this.Update();
 
-                renderPreviewNow(sender, e);
+                renderNow(sender, e, null);
                 previewImg.ImageLocation = Path.Combine(Directory.GetCurrentDirectory(), "preview.png");
                 previewImg.SizeMode = PictureBoxSizeMode.StretchImage;
             }
@@ -300,7 +303,7 @@ namespace HereToSlay
                 updateLanguage(sender, e);
                 this.Update();
 
-                renderPreviewNow(sender, e);
+                renderNow(sender, e, null);
                 previewImg.ImageLocation = Path.Combine(Directory.GetCurrentDirectory(), "preview.png");
                 previewImg.SizeMode = PictureBoxSizeMode.StretchImage;
             }
@@ -392,7 +395,7 @@ namespace HereToSlay
                 updateLanguage(sender, e);
                 this.Update();
 
-                renderPreviewNow(sender, e);
+                renderNow(sender, e, null);
                 previewImg.ImageLocation = Path.Combine(Directory.GetCurrentDirectory(), "preview.png");
                 previewImg.SizeMode = PictureBoxSizeMode.Zoom;
             }
@@ -481,7 +484,93 @@ namespace HereToSlay
                 updateLanguage(sender, e);
                 this.Update();
 
-                renderPreviewNow(sender, e);
+                renderNow(sender, e, null);
+                previewImg.ImageLocation = Path.Combine(Directory.GetCurrentDirectory(), "preview.png");
+                previewImg.SizeMode = PictureBoxSizeMode.Zoom;
+            }
+        }
+
+        private void MagicCard_Click(object? sender, EventArgs? e)
+        {
+            if (MagicCard.Checked == false)
+            {
+                Properties.Settings.Default.CardType = 4;
+                Properties.Settings.Default.Save();
+
+                this.Icon = Properties.Resources.itemIcon;
+
+                LeaderCard.Checked = false;
+                LeaderCard.BackColor = SystemColors.Control;
+                MonsterCard.Checked = false;
+                MonsterCard.BackColor = SystemColors.Control;
+                HeroCard.Checked = false;
+                HeroCard.BackColor = SystemColors.Control;
+                ItemCard.Checked = false;
+                ItemCard.BackColor = SystemColors.Control;
+                MagicCard.Checked = true;
+                MagicCard.BackColor = SystemColors.ControlLight;
+
+                chosenClass.Visible = false;
+                labelClass.Visible = false;
+                advancedClass.Visible = false;
+                advancedClass.Image = Properties.Resources.closed;
+                advancedClassBox.Visible = false;
+                splitClass.Checked = false;
+                itemChosenClass.Visible = false;
+
+                advancedName.Image = Properties.Resources.closed;
+                advancedNameBox.Visible = false;
+                advancedName.Visible = false;
+
+                labelImg.Location = new Point(labelImg.Location.X, 329);
+                selectImgText.Location = new Point(selectImgText.Location.X, 349);
+                selectImgButton.Location = new Point(selectImgButton.Location.X, 349);
+
+                RENDER.Location = new Point(RENDER.Location.X, 525);
+
+                labelReq.Visible = false;
+                heroReq1.Visible = false;
+                heroReq2.Visible = false;
+                heroReq3.Visible = false;
+                heroReq4.Visible = false;
+                heroReq5.Visible = false;
+
+                labelBad.Visible = false;
+                badOutputText.Visible = false;
+                badOutputNum.Visible = false;
+                badOutputSym.Visible = false;
+
+                labelGood.Visible = false;
+                goodOutputText.Visible = false;
+                goodOutputNum.Visible = false;
+                goodOutputSym.Visible = false;
+
+                maxItems.Visible = false;
+                labelMaxItem.Visible = false;
+                itemImg.Visible = false;
+                itemImg2.Visible = false;
+                itemImgMore.Visible = false;
+
+                descriptionText.Size = new Size(300, descriptionText.Size.Height);
+                labelDescription.Location = new Point(53, 426);
+                descriptionText.Location = new Point(57, 446);
+
+                advancedGeneral.Visible = false;
+                advancedGeneral.Image = Properties.Resources.closed;
+                advancedGeneralBox.Visible = false;
+
+                foreach (Control c in this.Controls)
+                {
+                    if (c.Name.Contains("clear")) { c.Visible = false; };
+                }
+
+                nameWhite.Checked = false;
+
+                this.Update();
+                updateLanguage(sender, e);
+                this.Update();
+
+                renderNow(sender, e, null);
                 previewImg.ImageLocation = Path.Combine(Directory.GetCurrentDirectory(), "preview.png");
                 previewImg.SizeMode = PictureBoxSizeMode.Zoom;
             }
@@ -498,27 +587,7 @@ namespace HereToSlay
             if (SaveRenderDialog.ShowDialog() == DialogResult.OK)
             {
                 string filePath = SaveRenderDialog.FileName;
-                switch (Properties.Settings.Default.CardType)
-                {
-                    case 0:
-                        GeneratorBackend.Program.GenerateLeader(filePath, language.SelectedIndex, nameText.Text, new int[] { chosenClass.SelectedIndex, chosenSecondClass.SelectedIndex }, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked);
-                        break;
-                    case 1:
-                        RollOutput good = new((int)goodOutputNum.Value, goodOutputSym.SelectedIndex, goodOutputText.Text);
-                        RollOutput bad = new((int)badOutputNum.Value, badOutputSym.SelectedIndex, badOutputText.Text);
-                        int[] desiredRequirements = new int[] { heroReq1.SelectedIndex, heroReq2.SelectedIndex, heroReq3.SelectedIndex, heroReq4.SelectedIndex, heroReq5.SelectedIndex };
-                        GeneratorBackend.Program.GenerateMonster(filePath, language.SelectedIndex, nameText.Text, desiredRequirements, good, bad, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked, alternativeColor.Checked);
-                        break;
-                    case 2:
-                        RollOutput description = new((int)goodOutputNum.Value, goodOutputSym.SelectedIndex, descriptionText.Text);
-                        GeneratorBackend.Program.GenerateHero(filePath, language.SelectedIndex, nameText.Text, chosenClass.SelectedIndex, selectImgText.Text, description, (int)maxItems.Value);
-                        break;
-                    case 3:
-                        GeneratorBackend.Program.GenerateItem(filePath, language.SelectedIndex, nameText.Text, itemChosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text);
-                        break;
-                    default:
-                        throw new NotImplementedException();
-                }
+                renderNow(sender, e, filePath);
 
                 previewImg.ImageLocation = filePath;
             }
@@ -541,34 +610,39 @@ namespace HereToSlay
                 }
                 if (timer >= 0)
                 {
-                    renderPreviewNow(sender, e);
+                    renderNow(sender, e, null);
                     previewImg.ImageLocation = Path.Combine(Directory.GetCurrentDirectory(), "preview.png"); ;
                 }
             }
             catch (OperationCanceledException) { }
         }
 
-        private void renderPreviewNow(object? sender, EventArgs? e)
+        private void renderNow(object? sender, EventArgs? e, string? saveLocation)
         {
             switch (Properties.Settings.Default.CardType)
             {
                 // Leader
                 case 0:
-                    GeneratorBackend.Program.GenerateLeader(null, language.SelectedIndex, nameText.Text, new int[] { chosenClass.SelectedIndex, chosenSecondClass.SelectedIndex }, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked);
+                    GeneratorBackend.Program.GenerateLeader(saveLocation, language.SelectedIndex, nameText.Text, new int[] { chosenClass.SelectedIndex, chosenSecondClass.SelectedIndex }, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked);
                     break;
                 // Monster
                 case 1:
                     RollOutput good = new((int)goodOutputNum.Value, goodOutputSym.SelectedIndex, goodOutputText.Text);
                     RollOutput bad = new((int)badOutputNum.Value, badOutputSym.SelectedIndex, badOutputText.Text);
                     int[] desiredRequirements = new int[] { heroReq1.SelectedIndex, heroReq2.SelectedIndex, heroReq3.SelectedIndex, heroReq4.SelectedIndex, heroReq5.SelectedIndex };
-                    GeneratorBackend.Program.GenerateMonster(null, language.SelectedIndex, nameText.Text, desiredRequirements, good, bad, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked, alternativeColor.Checked);
+                    GeneratorBackend.Program.GenerateMonster(saveLocation, language.SelectedIndex, nameText.Text, desiredRequirements, good, bad, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked, alternativeColor.Checked);
                     break;
                 // Hero
                 case 2:
                     RollOutput description = new((int)goodOutputNum.Value, goodOutputSym.SelectedIndex, descriptionText.Text);
-                    GeneratorBackend.Program.GenerateHero(null, language.SelectedIndex, nameText.Text, chosenClass.SelectedIndex, selectImgText.Text, description, (int)maxItems.Value);
+                    GeneratorBackend.Program.GenerateHero(saveLocation, language.SelectedIndex, nameText.Text, chosenClass.SelectedIndex, selectImgText.Text, description, (int)maxItems.Value);
                     break;
+                // Item
                 case 3:
+                    GeneratorBackend.Program.GenerateItem(saveLocation, language.SelectedIndex, nameText.Text, itemChosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text);
+                    break;
+                // Magic
+                case 4:
                     GeneratorBackend.Program.GenerateItem(null, language.SelectedIndex, nameText.Text, itemChosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text);
                     break;
                 default:

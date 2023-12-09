@@ -48,6 +48,7 @@ namespace GeneratorBackend
 
         public Color bottomColor = new(245, 241, 231, 255);
         public Color bottomColorDark = new(78, 78, 78, 255);
+        public Color magicColor = new(127, 117, 116, 255);
 
         public List<ClassListObject> ClassList { get; private set; }
         public Image Hero = Raylib.LoadImage("Classes/hero.png");
@@ -453,14 +454,14 @@ namespace GeneratorBackend
             Raylib.UnloadImage(card);
         }
         
-        public static void GenerateItem(string? renderLocation, int language, string name, int desiredClass, string heroImg, string description)
+        public static void GenerateItem(string? renderLocation, int language, string name, int desiredClass, string itemImg, string description)
         {
             // This has to be loaded each time, to clear the image from the previous render
             Image card = Raylib.LoadImage(inst.cardPoker);
             Rectangle imageRec = new(0, 0, CARD_WIDTH_POKER, CARD_HEIGHT_POKER);
 
             // Draw Hero Image
-            ChangeHeroItemMagicImage(heroImg);
+            ChangeHeroItemMagicImage(itemImg);
             Raylib.ImageDraw(ref card, heroItemMagic, imageRec, new(100, 232, 545, 545), Color.WHITE);
 
             // Classes
@@ -509,6 +510,47 @@ namespace GeneratorBackend
 
             // Description
             DrawDescription(description, card, DESC_MARGIN_ITEM, DESC_MARGIN_RIGHT, 3, inst.bottomColor);
+
+            // Final Render
+            if (renderLocation == null)
+            {
+                Raylib.ExportImage(card, "preview.png");
+            }
+            else
+            {
+                Raylib.ExportImage(card, renderLocation);
+            }
+            Raylib.UnloadImage(card);
+        }
+        
+        public static void GenerateMagic(string? renderLocation, int language, string name, string heroImg, string description)
+        {
+            // This has to be loaded each time, to clear the image from the previous render
+            Image card = Raylib.LoadImage(inst.cardPoker);
+            Rectangle imageRec = new(0, 0, CARD_WIDTH_POKER, CARD_HEIGHT_POKER);
+
+            // Draw Hero Image
+            ChangeHeroItemMagicImage(heroImg);
+            Raylib.ImageDraw(ref card, heroItemMagic, imageRec, new(100, 232, 545, 545), Color.WHITE);
+
+            string magicTitle = language switch
+            {
+                1 => "Czar",
+                _ => "Magic"
+            };
+
+            // Draw Colored Frame
+            Image frameTinted = Raylib.ImageCopy(inst.frameHero); // create a copy of the frame asset, so that the original is not 
+            Raylib.ImageColorTint(ref frameTinted, inst.magicColor);
+            Raylib.ImageDraw(ref card, frameTinted, imageRec, imageRec, Color.WHITE);
+
+            Raylib.UnloadImage(frameTinted);
+
+            // Name and Title
+            DrawNameAndTitlePoker(name, magicTitle, card, inst.magicColor);
+
+            // Description
+            DrawDescription(description, card, DESC_MARGIN_TARROT, DESC_MARGIN_RIGHT, 2, inst.bottomColorDark);
 
             // Final Render
             if (renderLocation == null)

@@ -494,36 +494,37 @@
             // LeaderCard
             // 
             LeaderCard.Name = "LeaderCard";
-            LeaderCard.Size = new Size(118, 22);
+            LeaderCard.Size = new Size(180, 22);
             LeaderCard.Text = "Leader";
             LeaderCard.Click += LeaderCard_Click;
             // 
             // MonsterCard
             // 
             MonsterCard.Name = "MonsterCard";
-            MonsterCard.Size = new Size(118, 22);
+            MonsterCard.Size = new Size(180, 22);
             MonsterCard.Text = "Monster";
             MonsterCard.Click += MonsterCard_Click;
             // 
             // HeroCard
             // 
             HeroCard.Name = "HeroCard";
-            HeroCard.Size = new Size(118, 22);
+            HeroCard.Size = new Size(180, 22);
             HeroCard.Text = "Hero";
             HeroCard.Click += HeroCard_Click;
             // 
             // ItemCard
             // 
             ItemCard.Name = "ItemCard";
-            ItemCard.Size = new Size(118, 22);
+            ItemCard.Size = new Size(180, 22);
             ItemCard.Text = "Item";
             ItemCard.Click += ItemCard_Click;
             // 
             // MagicCard
             // 
             MagicCard.Name = "MagicCard";
-            MagicCard.Size = new Size(118, 22);
+            MagicCard.Size = new Size(180, 22);
             MagicCard.Text = "Magic";
+            MagicCard.Click += MagicCard_Click;
             // 
             // language
             // 
