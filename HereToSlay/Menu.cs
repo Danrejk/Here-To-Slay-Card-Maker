@@ -597,7 +597,12 @@ namespace HereToSlay
                         3 => "Nazwa przedmiotu",
                         _ => "Nazwa przywódcy"
                     };
-                    labelClass.Text = "Klasa przywódcy";
+                    labelClass.Text = Properties.Settings.Default.CardType switch
+                    {
+                        2 => "Klasa bohatera",
+                        3 => "Klasa przedmiotu",
+                        _ => "Klasa przywódcy"
+                    };
                     labelSecondClass.Text = "Druga klasa";
                     labelImg.Text = Properties.Settings.Default.CardType switch
                     {
@@ -606,7 +611,7 @@ namespace HereToSlay
                         3 => "Obrazek przedmiotu",
                         _ => "Obrazek przywódcy"
                     };
-                    labelDescription.Text = "Opis mocy";
+                    labelDescription.Text = "Opis";
                     leaderImgToolTip.ToolTipTitle = "Wymiary obazka";
                     leaderImgToolTip.SetToolTip(selectImgButton, Properties.Settings.Default.CardType switch
                     {
@@ -647,7 +652,12 @@ namespace HereToSlay
                         2 => "Hero name",
                         _ => "Leader name"
                     };
-                    labelClass.Text = "Leader class";
+                    labelClass.Text = Properties.Settings.Default.CardType switch
+                    {
+                        2 => "Hero class",
+                        3 => "Item class",
+                        _ => "Leader class"
+                    };
                     labelSecondClass.Text = "Second class";
                     labelImg.Text = Properties.Settings.Default.CardType switch
                     {

@@ -203,7 +203,7 @@
             labelClass.Location = new Point(142, 229);
             labelClass.Margin = new Padding(0);
             labelClass.Name = "labelClass";
-            labelClass.Size = new Size(100, 20);
+            labelClass.Size = new Size(120, 20);
             labelClass.TabIndex = 9;
             labelClass.Text = "Class";
             labelClass.TextAlign = ContentAlignment.BottomLeft;
@@ -254,7 +254,7 @@
             labelImg.Margin = new Padding(0);
             labelImg.Name = "labelImg";
             labelImg.RightToLeft = RightToLeft.No;
-            labelImg.Size = new Size(100, 20);
+            labelImg.Size = new Size(155, 20);
             labelImg.TabIndex = 12;
             labelImg.Text = "Image Source";
             labelImg.TextAlign = ContentAlignment.BottomLeft;
@@ -494,35 +494,35 @@
             // LeaderCard
             // 
             LeaderCard.Name = "LeaderCard";
-            LeaderCard.Size = new Size(180, 22);
+            LeaderCard.Size = new Size(118, 22);
             LeaderCard.Text = "Leader";
             LeaderCard.Click += LeaderCard_Click;
             // 
             // MonsterCard
             // 
             MonsterCard.Name = "MonsterCard";
-            MonsterCard.Size = new Size(180, 22);
+            MonsterCard.Size = new Size(118, 22);
             MonsterCard.Text = "Monster";
             MonsterCard.Click += MonsterCard_Click;
             // 
             // HeroCard
             // 
             HeroCard.Name = "HeroCard";
-            HeroCard.Size = new Size(180, 22);
+            HeroCard.Size = new Size(118, 22);
             HeroCard.Text = "Hero";
             HeroCard.Click += HeroCard_Click;
             // 
             // ItemCard
             // 
             ItemCard.Name = "ItemCard";
-            ItemCard.Size = new Size(180, 22);
+            ItemCard.Size = new Size(118, 22);
             ItemCard.Text = "Item";
             ItemCard.Click += ItemCard_Click;
             // 
             // MagicCard
             // 
             MagicCard.Name = "MagicCard";
-            MagicCard.Size = new Size(180, 22);
+            MagicCard.Size = new Size(118, 22);
             MagicCard.Text = "Magic";
             // 
             // language
