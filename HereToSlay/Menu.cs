@@ -483,7 +483,7 @@ namespace HereToSlay
 
                 renderPreviewNow(sender, e);
                 previewImg.ImageLocation = Path.Combine(Directory.GetCurrentDirectory(), "preview.png");
-                previewImg.SizeMode = PictureBoxSizeMode.StretchImage;
+                previewImg.SizeMode = PictureBoxSizeMode.Zoom;
             }
         }
         #endregion
@@ -512,6 +512,9 @@ namespace HereToSlay
                     case 2:
                         RollOutput description = new((int)goodOutputNum.Value, goodOutputSym.SelectedIndex, descriptionText.Text);
                         GeneratorBackend.Program.GenerateHero(filePath, language.SelectedIndex, nameText.Text, chosenClass.SelectedIndex, selectImgText.Text, description, (int)maxItems.Value);
+                        break;
+                    case 3:
+                        GeneratorBackend.Program.GenerateItem(filePath, language.SelectedIndex, nameText.Text, itemChosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text);
                         break;
                     default:
                         throw new NotImplementedException();
@@ -566,8 +569,7 @@ namespace HereToSlay
                     GeneratorBackend.Program.GenerateHero(null, language.SelectedIndex, nameText.Text, chosenClass.SelectedIndex, selectImgText.Text, description, (int)maxItems.Value);
                     break;
                 case 3:
-                    RollOutput descriptions = new((int)goodOutputNum.Value, goodOutputSym.SelectedIndex, descriptionText.Text);
-                    GeneratorBackend.Program.GenerateHero(null, language.SelectedIndex, nameText.Text, chosenClass.SelectedIndex, selectImgText.Text, descriptions, (int)maxItems.Value);
+                    GeneratorBackend.Program.GenerateItem(null, language.SelectedIndex, nameText.Text, itemChosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text);
                     break;
                 default:
                     throw new NotImplementedException();

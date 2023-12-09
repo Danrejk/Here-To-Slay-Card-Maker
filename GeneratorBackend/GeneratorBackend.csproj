@@ -23,6 +23,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Assets\GeneratorAssets\cursedItem.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\GeneratorAssets\frame_item.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\GeneratorAssets\item_item.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Classes\Adding_New_Classes.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

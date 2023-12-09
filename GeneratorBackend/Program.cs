@@ -25,11 +25,14 @@ namespace GeneratorBackend
         public Image frameLeader = Raylib.LoadImage("Assets/GeneratorAssets/frame_leader.png");
         public Image frameMonster = Raylib.LoadImage("Assets/GeneratorAssets/frame_monster.png");
         public Image frameHero = Raylib.LoadImage("Assets/GeneratorAssets/frame_hero.png");
+        public Image frameItem = Raylib.LoadImage("Assets/GeneratorAssets/frame_item.png");
         public Image gradient = Raylib.LoadImage("Assets/GeneratorAssets/gradient.png");
         public Image red = Raylib.LoadImage("Assets/GeneratorAssets/red.png");
         public Image green = Raylib.LoadImage("Assets/GeneratorAssets/green.png");
         public Image noItem = Raylib.LoadImage("Assets/GeneratorAssets/noItem.png");
-        public Image Item = Raylib.LoadImage("Assets/GeneratorAssets/item.png");
+        public Image itemHero = Raylib.LoadImage("Assets/GeneratorAssets/item.png");
+        public Image itemItem = Raylib.LoadImage("Assets/GeneratorAssets/item_item.png");
+        public Image cursed = Raylib.LoadImage("Assets/GeneratorAssets/cursed.png");
 
         public const int NAME_SIZE = 60; // 60
         public const int TITLE_SIZE = 47; // 49
@@ -383,7 +386,7 @@ namespace GeneratorBackend
             {
                 for (int i = 0; i < maxItems; i++)
                 {
-                    Raylib.ImageDraw(ref card, inst.Item, imageRec, new(637 - i * (50 + 10), 935, 47, 47), Color.WHITE);
+                    Raylib.ImageDraw(ref card, inst.itemHero, imageRec, new(637 - i * (50 + 10), 935, 47, 47), Color.WHITE);
                 }
             }
 
@@ -435,6 +438,71 @@ namespace GeneratorBackend
 
             // Description
             DrawDescription(description.Outcome, card, DESC_MARGIN_POKER, DESC_MARGIN_RIGHT, 2);
+
+            // Final Render
+            if (renderLocation == null)
+            {
+                Raylib.ExportImage(card, "preview.png");
+            }
+            else
+            {
+                Raylib.ExportImage(card, renderLocation);
+            }
+            Raylib.UnloadImage(card);
+        }
+        
+        public static void GenerateItem(string? renderLocation, int language, string name, int desiredClass, string heroImg, string description)
+        {
+            // This has to be loaded each time, to clear the image from the previous render
+            Image card = Raylib.LoadImage(inst.cardPoker);
+            Rectangle imageRec = new(0, 0, CARD_WIDTH_POKER, CARD_HEIGHT_POKER);
+
+            // Draw Hero Image
+            ChangeHeroImage(heroImg);
+            Raylib.ImageDraw(ref card, hero, imageRec, new(100, 232, 545, 545), Color.WHITE);
+
+            // Classes
+            string itemTitle;
+            if (desiredClass == -1) desiredClass = 0;
+
+            Image classSymbol = inst.ClassList[desiredClass].Image;
+            Color frameColor = new(68, 64, 61, 255);
+            Color titleColor;
+            if (desiredClass == 1)
+            {
+                titleColor = new(160, 59, 139, 255);
+                itemTitle = language switch
+                {
+                    1 => "Przeklęty przedmiot",
+                    _ => "Cursed Item"
+                };
+            }
+            else
+            {
+                titleColor = new(0, 163, 172, 255);
+                itemTitle = language switch
+                {
+                    1 => "Przedmiot",
+                    _ => "Item"
+                };
+            }
+
+            // Draw Class Symbol
+            Raylib.ImageDraw(ref card, classSymbol, imageRec, new(322, 722, 102, 102), Color.WHITE);
+
+            // Draw Colored Frame
+            Image frameTinted = Raylib.ImageCopy(inst.frameItem); // create a copy of the frame asset, so that the original is not 
+            Raylib.ImageColorTint(ref frameTinted, frameColor);
+            Raylib.ImageDraw(ref card, frameTinted, imageRec, imageRec, Color.WHITE);
+
+            Raylib.UnloadImage(frameTinted);
+
+
+            // Name and Title
+            DrawNameAndTitleHero(name, itemTitle, card, titleColor);
+
+            // Description
+            DrawDescription(description, card, DESC_MARGIN_POKER, DESC_MARGIN_RIGHT, 2);
 
             // Final Render
             if (renderLocation == null)
