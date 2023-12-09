@@ -42,12 +42,16 @@ namespace HereToSlay
             Font fontLeader = FontLoader.GetFont("PatuaOne_Polish.ttf", 13);
             nameText.Font = fontLeader;
             RENDER.Font = fontLeader;
+            cardType.Font = fontLeader;
+
 
             Font fontLeaderSmall = FontLoader.GetFont("PatuaOne_Polish.ttf", 10);
             FontLoader.ChangeFontForAllLabels(this, fontLeaderSmall);
             LeaderCard.Font = fontLeaderSmall;
             MonsterCard.Font = fontLeaderSmall;
             HeroCard.Font = fontLeaderSmall;
+            ItemCard.Font = fontLeaderSmall;
+            MagicCard.Font = fontLeaderSmall;
 
             itemImgMore.Font = fontLeader;
             #endregion
@@ -136,7 +140,7 @@ namespace HereToSlay
                 MonsterCard.Checked = false;
                 MonsterCard.BackColor = SystemColors.Control;
                 LeaderCard.Checked = true;
-                LeaderCard.BackColor = SystemColors.ControlDark;
+                LeaderCard.BackColor = SystemColors.ControlLight;
                 HeroCard.Checked = false;
                 HeroCard.BackColor = SystemColors.Control;
 
@@ -214,7 +218,7 @@ namespace HereToSlay
                 LeaderCard.Checked = false;
                 LeaderCard.BackColor = SystemColors.Control;
                 MonsterCard.Checked = true;
-                MonsterCard.BackColor = SystemColors.ControlDark;
+                MonsterCard.BackColor = SystemColors.ControlLight;
                 HeroCard.Checked = false;
                 HeroCard.BackColor = SystemColors.Control;
 
@@ -304,7 +308,7 @@ namespace HereToSlay
                 MonsterCard.Checked = false;
                 MonsterCard.BackColor = SystemColors.Control;
                 HeroCard.Checked = true;
-                HeroCard.BackColor = SystemColors.ControlDark;
+                HeroCard.BackColor = SystemColors.ControlLight;
 
                 chosenClass.Visible = true;
                 labelClass.Visible = true;

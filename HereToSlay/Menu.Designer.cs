@@ -60,10 +60,13 @@
             chosenSecondClass = new ComboBox();
             labelSecondClass = new Label();
             menuStrip1 = new MenuStrip();
+            cardType = new ToolStripMenuItem();
             LeaderCard = new ToolStripMenuItem();
             MonsterCard = new ToolStripMenuItem();
-            language = new ToolStripComboBox();
             HeroCard = new ToolStripMenuItem();
+            ItemCard = new ToolStripMenuItem();
+            MagicCard = new ToolStripMenuItem();
+            language = new ToolStripComboBox();
             heroReq3 = new ComboBox();
             heroReq2 = new ComboBox();
             heroReq1 = new ComboBox();
@@ -471,7 +474,7 @@
             // 
             menuStrip1.BackColor = Color.FromArgb(17, 19, 23);
             menuStrip1.GripMargin = new Padding(2);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { LeaderCard, MonsterCard, language, HeroCard });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { cardType, language });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(6, 0, 0, 2);
@@ -479,23 +482,46 @@
             menuStrip1.TabIndex = 29;
             menuStrip1.Text = "menuStrip1";
             // 
+            // cardType
+            // 
+            cardType.BackColor = SystemColors.Control;
+            cardType.DropDownItems.AddRange(new ToolStripItem[] { LeaderCard, MonsterCard, HeroCard, ItemCard, MagicCard });
+            cardType.Name = "cardType";
+            cardType.Size = new Size(71, 23);
+            cardType.Text = "Card Type";
+            // 
             // LeaderCard
             // 
-            LeaderCard.BackColor = SystemColors.Control;
             LeaderCard.Name = "LeaderCard";
-            LeaderCard.Size = new Size(82, 23);
-            LeaderCard.Text = "Leader Card";
+            LeaderCard.Size = new Size(180, 22);
+            LeaderCard.Text = "Leader";
             LeaderCard.Click += LeaderCard_Click;
             // 
             // MonsterCard
             // 
-            MonsterCard.BackColor = SystemColors.Control;
-            MonsterCard.Margin = new Padding(6, 0, 0, 0);
             MonsterCard.Name = "MonsterCard";
-            MonsterCard.RightToLeft = RightToLeft.No;
-            MonsterCard.Size = new Size(91, 23);
-            MonsterCard.Text = "Monster Card";
+            MonsterCard.Size = new Size(180, 22);
+            MonsterCard.Text = "Monster";
             MonsterCard.Click += MonsterCard_Click;
+            // 
+            // HeroCard
+            // 
+            HeroCard.Name = "HeroCard";
+            HeroCard.Size = new Size(180, 22);
+            HeroCard.Text = "Hero";
+            HeroCard.Click += HeroCard_Click;
+            // 
+            // ItemCard
+            // 
+            ItemCard.Name = "ItemCard";
+            ItemCard.Size = new Size(180, 22);
+            ItemCard.Text = "Item";
+            // 
+            // MagicCard
+            // 
+            MagicCard.Name = "MagicCard";
+            MagicCard.Size = new Size(180, 22);
+            MagicCard.Text = "Magic";
             // 
             // language
             // 
@@ -505,15 +531,6 @@
             language.Name = "language";
             language.Size = new Size(85, 23);
             language.SelectedIndexChanged += language_SelectedIndexChanged;
-            // 
-            // HeroCard
-            // 
-            HeroCard.BackColor = SystemColors.Control;
-            HeroCard.Margin = new Padding(6, 0, 0, 0);
-            HeroCard.Name = "HeroCard";
-            HeroCard.Size = new Size(73, 23);
-            HeroCard.Text = "Hero Card";
-            HeroCard.Click += HeroCard_Click;
             // 
             // heroReq3
             // 
@@ -1046,8 +1063,6 @@
         private ComboBox chosenSecondClass;
         private Label labelSecondClass;
         private MenuStrip menuStrip1;
-        private ToolStripMenuItem LeaderCard;
-        private ToolStripMenuItem MonsterCard;
         private ToolStripComboBox language;
         private ComboBox heroReq3;
         private ComboBox heroReq2;
@@ -1069,7 +1084,6 @@
         private Button clearHeroReq4;
         private Button clearHeroReq5;
         private Button clearHeroReq3;
-        private ToolStripMenuItem HeroCard;
         private NumericUpDown maxItems;
         private Label labelMaxItem;
         private PictureBox itemImg;
@@ -1083,5 +1097,12 @@
         private FlowLayoutPanel advancedGeneralBox;
         private CheckBox alternativeColor;
         private ToolTip altColorToolTip;
+        private ToolStripMenuItem cardType;
+        private ToolStripMenuItem MonsterCard;
+        private ToolStripMenuItem HeroCard;
+        private ToolStripMenuItem ItemCard;
+        private ToolStripMenuItem MagicCard;
+        private ToolStripMenuItem monster;
+        private ToolStripMenuItem LeaderCard;
     }
 }
