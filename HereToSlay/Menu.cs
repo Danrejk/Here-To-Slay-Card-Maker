@@ -725,6 +725,13 @@ namespace HereToSlay
                     }
                     HeroCard.Image = Properties.Resources.bohater.ToBitmap();
 
+                    cardType.Text = "Typ karty";
+                    LeaderCard.Text = "Przywódca";
+                    MonsterCard.Text = "Potwór";
+                    HeroCard.Text = "Bohater";
+                    ItemCard.Text = "Przedmiot";
+                    MagicCard.Text = "Magia";
+
                     break;
 
                 // ENGLISH
@@ -780,6 +787,13 @@ namespace HereToSlay
                         this.Icon = Properties.Resources.hero;
                     }
                     HeroCard.Image = Properties.Resources.hero.ToBitmap();
+
+                    cardType.Text = "Card Type";
+                    LeaderCard.Text = "Leader";
+                    MonsterCard.Text = "Monster";
+                    HeroCard.Text = "Hero";
+                    ItemCard.Text = "Item";
+                    MagicCard.Text = "Magic";
 
                     break;
             }
