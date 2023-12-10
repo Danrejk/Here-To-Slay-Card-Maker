@@ -150,7 +150,7 @@ This program is what the official one should be, accurate and with more features
         <tr><td>✔️✔️✔️Accurate Item Card's design.</td></tr>
         <tr><td>✔️Maximum 6 lines of description.</td></tr>
         <tr><td>✔️Description Line breaks crate larger gaps between the lines.</td></tr>
-        <tr><td>✔️Has Item, Cursed Items, and Class specific items.</td></tr>
+        <tr><td>✔️Has Item, Cursed Items, and Class specific item types.</td></tr>
     </tbody>
 </table>
 <br>
@@ -233,6 +233,7 @@ Unforunatelly I don't know how that works exactly. But I saw there are many post
 <hr>
 
 ## Screenshots
+<a>Screenshots are from before the v4.0 update. They will be soon updated</a>
 <p align="center">
     <img width="75%" src="ReadmeAssets/screenshot1.png">
     <br>
