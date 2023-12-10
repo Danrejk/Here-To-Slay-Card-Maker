@@ -6,7 +6,7 @@ Using this program you can make <b>accurate</b> custom cards (also with custom c
 Polska wersja językowa: [README.pl.md](README.pl.md)
 
 ## Instalation
-<a href="https://github.com/Danrejk/Here-To-Slay-Card-Maker/releases/tag/v3.2"> <img alt="Latest Version" src="https://img.shields.io/badge/Latest_Version-v.3.2-green"> </a>
+<a href="https://github.com/Danrejk/Here-To-Slay-Card-Maker/releases/tag/v4.0"> <img alt="Latest Version" src="https://img.shields.io/badge/Latest_Version-v.4.0-green"> </a>
 
 <br>
 Download the <code>.zip</code> file from the latest <b>Release</b> of the program displayed above, or on the right side of the page.<br>
@@ -133,6 +133,41 @@ This program is what the official one should be, accurate and with more features
         <tr><td>✔️Customisable maximum items ammount.</td></tr>
         <tr><td>✔️Can disalow for items to be given to the card.</td></tr>
         <tr><td>❌No Here To Sleigh DLC present icon.</td></tr>
+    </tbody>
+</table>
+<br>
+<img src="ReadmeAssets/LazyDevider.png">
+
+### Item
+<img align="left" width="33%" src="ReadmeAssets/Demo_Item.png">
+<table>
+    <thead>
+        <tr>
+            <th width="500px">Item Generation</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td>✔️✔️✔️Accurate Item Card's design.</td></tr>
+        <tr><td>✔️Maximum 6 lines of description.</td></tr>
+        <tr><td>✔️Description Line breaks crate larger gaps between the lines.</td></tr>
+        <tr><td>✔️Has Item, Cursed Items, and Class specific items.</td></tr>
+    </tbody>
+</table>
+<br>
+<img src="ReadmeAssets/LazyDevider.png">
+
+### Magic
+<img align="left" width="33%" src="ReadmeAssets/Demo_Magic.png">
+<table>
+    <thead>
+        <tr>
+            <th width="500px">Magic Generation</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td>✔️✔️✔️Accurate Magic Card's design.</td></tr>
+        <tr><td>✔️Maximum 7 lines of description.</td></tr>
+        <tr><td>✔️Description Line breaks crate larger gaps between the lines.</td></tr>
     </tbody>
 </table>
 <br>
