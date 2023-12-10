@@ -141,7 +141,8 @@ namespace GeneratorBackend
         const int DESC_MARGIN_TARROT = 87;
         const int DESC_MARGIN_HERO = 200;
         const int DESC_MARGIN_ITEM = 225;
-        const int DESC_MARGIN_RIGHT = 100; // the margin on the right is the same for both card sizes
+        const int DESC_MARGIN_MAGIC = 100;
+        const int DESC_MARGIN_RIGHT = 90; // the margin on the right is the same for both card sizes
 
         // changing these, won't PROPERLY change the size of the card.
         // Tall cards
@@ -498,7 +499,7 @@ namespace GeneratorBackend
             DrawNameAndTitlePoker(name, magicTitle, card, inst.magicColor);
 
             // Description
-            DrawDescription(description, card, DESC_MARGIN_RIGHT, DESC_MARGIN_RIGHT, 4, inst.bottomColorDark);
+            DrawDescription(description, card, DESC_MARGIN_MAGIC, DESC_MARGIN_RIGHT, 4, inst.bottomColorDark);
 
 
             // Save the image
@@ -640,9 +641,7 @@ namespace GeneratorBackend
 
             float textBlockCenter = (desc_space - targetLines * (textSize.Y) - additionalLineSpace + lineSpacing) / 2;
 
-            if (targetLines >= 4 && card_type == 0) textBlockCenter += 16; // real cards have a set offset for >=4 lines of text so they don't colide with the Leader Icon
-            if (targetLines == 3 && additionalLineSpace > 0 && card_type == 0) textBlockCenter += 12; // real cards have this offset for 3 lines WITH a big line spacing. All other cases seem to be without changes so it's kinda weird.
-            
+            if (targetLines >= 4 && additionalLineSpace == 0 && card_type == 0) textBlockCenter += 16; // real cards have a set offset for >=4 lines of text so they don't colide with the Leader Icon
             if (card_type == 2 || card_type == 4) textBlockCenter -= 41; // these cards have a frame that takes up 41px of space, so we need to offset the text by that much
             if ((card_type == 2) && targetLines >= 5) textBlockCenter += 12;
 
