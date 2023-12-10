@@ -26,7 +26,6 @@ namespace HereToSlay
             InitializeComponent();
             this.DoubleBuffered = true;
 
-
             #region Fonts
             Font fontUI = FontLoader.GetFont("SourceSans3.ttf", 10);
             FontLoader.ChangeFontForAllControls(this, fontUI);
@@ -132,6 +131,12 @@ namespace HereToSlay
                     MagicCard_Click(null, null);
                     break;
             }
+
+            LeaderCard.Image = Properties.Resources.empty.ToBitmap();
+            MonsterCard.Image = Properties.Resources.monster.ToBitmap();
+            //HeroCard.Image = Properties.Resources.hero.ToBitmap(); // this is done in the updateLanguage method
+            ItemCard.Image = Properties.Resources.itemIcon.ToBitmap();
+            MagicCard.Image = Properties.Resources.magic.ToBitmap();
         }
 
         #region Card Type Selection 
@@ -497,7 +502,7 @@ namespace HereToSlay
                 Properties.Settings.Default.CardType = 4;
                 Properties.Settings.Default.Save();
 
-                this.Icon = Properties.Resources.itemIcon;
+                this.Icon = Properties.Resources.magic;
 
                 LeaderCard.Checked = false;
                 LeaderCard.BackColor = SystemColors.Control;
@@ -718,6 +723,7 @@ namespace HereToSlay
                     {
                         this.Icon = Properties.Resources.bohater;
                     }
+                    HeroCard.Image = Properties.Resources.bohater.ToBitmap();
 
                     break;
 
@@ -773,6 +779,7 @@ namespace HereToSlay
                     {
                         this.Icon = Properties.Resources.hero;
                     }
+                    HeroCard.Image = Properties.Resources.hero.ToBitmap();
 
                     break;
             }
@@ -911,7 +918,7 @@ namespace HereToSlay
 
         private void updateIcon_to_chosenClass(object? sender, EventArgs? e)
         {
-            if(Properties.Settings.Default.CardType != 1 || Properties.Settings.Default.CardType != 4)
+            if(Properties.Settings.Default.CardType != 1 && Properties.Settings.Default.CardType != 4)
             {
                 int iconIndex;
                 if (Properties.Settings.Default.CardType == 3)
