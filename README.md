@@ -6,7 +6,7 @@ Using this program you can make <b>accurate</b> custom cards (also with custom c
 Polska wersja językowa: [README.pl.md](README.pl.md)
 
 ## Instalation
-<a href="https://github.com/Danrejk/Here-To-Slay-Card-Maker/releases/tag/v3.2"> <img alt="Latest Version" src="https://img.shields.io/badge/Latest_Version-v.3.2-green"> </a>
+<a href="https://github.com/Danrejk/Here-To-Slay-Card-Maker/releases/tag/v4.0"> <img alt="Latest Version" src="https://img.shields.io/badge/Latest_Version-v.4.0-green"> </a>
 
 <br>
 Download the <code>.zip</code> file from the latest <b>Release</b> of the program displayed above, or on the right side of the page.<br>
@@ -138,6 +138,41 @@ This program is what the official one should be, accurate and with more features
 <br>
 <img src="ReadmeAssets/LazyDevider.png">
 
+### Item
+<img align="left" width="33%" src="ReadmeAssets/Demo_Item.png">
+<table>
+    <thead>
+        <tr>
+            <th width="500px">Item Generation</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td>✔️✔️✔️Accurate Item Card's design.</td></tr>
+        <tr><td>✔️Maximum 6 lines of description.</td></tr>
+        <tr><td>✔️Description Line breaks crate larger gaps between the lines.</td></tr>
+        <tr><td>✔️Has Item, Cursed Items, and Class specific item types.</td></tr>
+    </tbody>
+</table>
+<br>
+<img src="ReadmeAssets/LazyDevider.png">
+
+### Magic
+<img align="left" width="33%" src="ReadmeAssets/Demo_Magic.png">
+<table>
+    <thead>
+        <tr>
+            <th width="500px">Magic Generation</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td>✔️✔️✔️Accurate Magic Card's design.</td></tr>
+        <tr><td>✔️Maximum 7 lines of description.</td></tr>
+        <tr><td>✔️Description Line breaks crate larger gaps between the lines.</td></tr>
+    </tbody>
+</table>
+<br>
+<img src="ReadmeAssets/LazyDevider.png">
+
 <img align="right" width="33%" src="ReadmeAssets/Demo_Custom.png">
 
 ## Custom Classes
@@ -198,6 +233,7 @@ Unforunatelly I don't know how that works exactly. But I saw there are many post
 <hr>
 
 ## Screenshots
+<a>Screenshots are from before the v4.0 update. They will be soon updated</a>
 <p align="center">
     <img width="75%" src="ReadmeAssets/screenshot1.png">
     <br>

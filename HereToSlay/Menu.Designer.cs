@@ -60,10 +60,13 @@
             chosenSecondClass = new ComboBox();
             labelSecondClass = new Label();
             menuStrip1 = new MenuStrip();
+            cardType = new ToolStripMenuItem();
             LeaderCard = new ToolStripMenuItem();
             MonsterCard = new ToolStripMenuItem();
-            language = new ToolStripComboBox();
             HeroCard = new ToolStripMenuItem();
+            ItemCard = new ToolStripMenuItem();
+            MagicCard = new ToolStripMenuItem();
+            language = new ToolStripComboBox();
             heroReq3 = new ComboBox();
             heroReq2 = new ComboBox();
             heroReq1 = new ComboBox();
@@ -93,6 +96,7 @@
             advancedGeneralBox = new FlowLayoutPanel();
             alternativeColor = new CheckBox();
             altColorToolTip = new ToolTip(components);
+            itemChosenClass = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)logo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)previewImg).BeginInit();
             previewContextMenu.SuspendLayout();
@@ -199,7 +203,7 @@
             labelClass.Location = new Point(142, 229);
             labelClass.Margin = new Padding(0);
             labelClass.Name = "labelClass";
-            labelClass.Size = new Size(100, 20);
+            labelClass.Size = new Size(120, 20);
             labelClass.TabIndex = 9;
             labelClass.Text = "Class";
             labelClass.TextAlign = ContentAlignment.BottomLeft;
@@ -250,7 +254,7 @@
             labelImg.Margin = new Padding(0);
             labelImg.Name = "labelImg";
             labelImg.RightToLeft = RightToLeft.No;
-            labelImg.Size = new Size(100, 20);
+            labelImg.Size = new Size(155, 20);
             labelImg.TabIndex = 12;
             labelImg.Text = "Image Source";
             labelImg.TextAlign = ContentAlignment.BottomLeft;
@@ -471,7 +475,7 @@
             // 
             menuStrip1.BackColor = Color.FromArgb(17, 19, 23);
             menuStrip1.GripMargin = new Padding(2);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { LeaderCard, MonsterCard, language, HeroCard });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { cardType, language });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(6, 0, 0, 2);
@@ -479,23 +483,48 @@
             menuStrip1.TabIndex = 29;
             menuStrip1.Text = "menuStrip1";
             // 
+            // cardType
+            // 
+            cardType.BackColor = SystemColors.Control;
+            cardType.DropDownItems.AddRange(new ToolStripItem[] { LeaderCard, MonsterCard, HeroCard, ItemCard, MagicCard });
+            cardType.Name = "cardType";
+            cardType.Size = new Size(71, 23);
+            cardType.Text = "Card Type";
+            // 
             // LeaderCard
             // 
-            LeaderCard.BackColor = SystemColors.Control;
             LeaderCard.Name = "LeaderCard";
-            LeaderCard.Size = new Size(82, 23);
-            LeaderCard.Text = "Leader Card";
+            LeaderCard.Size = new Size(180, 22);
+            LeaderCard.Text = "Leader";
             LeaderCard.Click += LeaderCard_Click;
             // 
             // MonsterCard
             // 
-            MonsterCard.BackColor = SystemColors.Control;
-            MonsterCard.Margin = new Padding(6, 0, 0, 0);
             MonsterCard.Name = "MonsterCard";
-            MonsterCard.RightToLeft = RightToLeft.No;
-            MonsterCard.Size = new Size(91, 23);
-            MonsterCard.Text = "Monster Card";
+            MonsterCard.Size = new Size(180, 22);
+            MonsterCard.Text = "Monster";
             MonsterCard.Click += MonsterCard_Click;
+            // 
+            // HeroCard
+            // 
+            HeroCard.Name = "HeroCard";
+            HeroCard.Size = new Size(180, 22);
+            HeroCard.Text = "Hero";
+            HeroCard.Click += HeroCard_Click;
+            // 
+            // ItemCard
+            // 
+            ItemCard.Name = "ItemCard";
+            ItemCard.Size = new Size(180, 22);
+            ItemCard.Text = "Item";
+            ItemCard.Click += ItemCard_Click;
+            // 
+            // MagicCard
+            // 
+            MagicCard.Name = "MagicCard";
+            MagicCard.Size = new Size(180, 22);
+            MagicCard.Text = "Magic";
+            MagicCard.Click += MagicCard_Click;
             // 
             // language
             // 
@@ -505,15 +534,6 @@
             language.Name = "language";
             language.Size = new Size(85, 23);
             language.SelectedIndexChanged += language_SelectedIndexChanged;
-            // 
-            // HeroCard
-            // 
-            HeroCard.BackColor = SystemColors.Control;
-            HeroCard.Margin = new Padding(6, 0, 0, 0);
-            HeroCard.Name = "HeroCard";
-            HeroCard.Size = new Size(73, 23);
-            HeroCard.Text = "Hero Card";
-            HeroCard.Click += HeroCard_Click;
             // 
             // heroReq3
             // 
@@ -931,12 +951,27 @@
             altColorToolTip.ReshowDelay = 100;
             altColorToolTip.ToolTipIcon = ToolTipIcon.Info;
             // 
+            // itemChosenClass
+            // 
+            itemChosenClass.BackColor = Color.White;
+            itemChosenClass.DropDownStyle = ComboBoxStyle.DropDownList;
+            itemChosenClass.FlatStyle = FlatStyle.Flat;
+            itemChosenClass.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            itemChosenClass.FormattingEnabled = true;
+            itemChosenClass.Location = new Point(145, 249);
+            itemChosenClass.Margin = new Padding(0);
+            itemChosenClass.Name = "itemChosenClass";
+            itemChosenClass.Size = new Size(120, 25);
+            itemChosenClass.TabIndex = 56;
+            itemChosenClass.SelectedIndexChanged += chosenClass_SelectedIndexChanged;
+            // 
             // Menu
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackColor = Color.FromArgb(39, 43, 52);
             BackgroundImage = Properties.Resources.gradient;
             ClientSize = new Size(828, 711);
+            Controls.Add(itemChosenClass);
             Controls.Add(advancedGeneralBox);
             Controls.Add(advancedGeneral);
             Controls.Add(itemImg2);
@@ -1046,8 +1081,6 @@
         private ComboBox chosenSecondClass;
         private Label labelSecondClass;
         private MenuStrip menuStrip1;
-        private ToolStripMenuItem LeaderCard;
-        private ToolStripMenuItem MonsterCard;
         private ToolStripComboBox language;
         private ComboBox heroReq3;
         private ComboBox heroReq2;
@@ -1069,7 +1102,6 @@
         private Button clearHeroReq4;
         private Button clearHeroReq5;
         private Button clearHeroReq3;
-        private ToolStripMenuItem HeroCard;
         private NumericUpDown maxItems;
         private Label labelMaxItem;
         private PictureBox itemImg;
@@ -1083,5 +1115,12 @@
         private FlowLayoutPanel advancedGeneralBox;
         private CheckBox alternativeColor;
         private ToolTip altColorToolTip;
+        private ToolStripMenuItem cardType;
+        private ToolStripMenuItem MonsterCard;
+        private ToolStripMenuItem HeroCard;
+        private ToolStripMenuItem ItemCard;
+        private ToolStripMenuItem MagicCard;
+        private ToolStripMenuItem LeaderCard;
+        private ComboBox itemChosenClass;
     }
 }

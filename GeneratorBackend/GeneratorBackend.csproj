@@ -23,6 +23,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Assets\GeneratorAssets\cursed_item.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\GeneratorAssets\frame_item.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\GeneratorAssets\item_item.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Classes\Adding_New_Classes.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -95,10 +104,10 @@
     <None Update="Assets\GeneratorAssets\green.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Assets\GeneratorAssets\item.png">
+    <None Update="Assets\GeneratorAssets\item_hero.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Assets\GeneratorAssets\noItem.png">
+    <None Update="Assets\GeneratorAssets\no_item_hero.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Assets\GeneratorAssets\red.png">
