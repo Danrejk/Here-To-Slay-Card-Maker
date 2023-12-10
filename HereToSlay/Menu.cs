@@ -20,7 +20,7 @@ namespace HereToSlay
     public partial class Menu : Form
     {
         private static readonly AssetManager inst = AssetManager.Instance;
-
+        bool initLang = false; // this is used to prevent the missing image error from showing twice when first loading the program
         public Menu()
         {
             InitializeComponent();
@@ -55,6 +55,7 @@ namespace HereToSlay
             itemImgMore.Font = fontLeader;
             #endregion
 
+            
             #region ComboBoxes
 #pragma warning disable CS8622 // the warnings were annoying me, so I disabled them
             language.ComboBox.DrawMode = DrawMode.OwnerDrawFixed;
@@ -62,6 +63,7 @@ namespace HereToSlay
             language.Items.Add(new ImageCBox("English", Properties.Resources.en));
             language.Items.Add(new ImageCBox("Polski", Properties.Resources.pl));
             language.SelectedIndex = Properties.Settings.Default.Language;
+            initLang = true;
 
             chosenClass.DrawMode = DrawMode.OwnerDrawFixed;
             chosenClass.DrawItem += ImageCBox.ComboBox_DrawItem;
@@ -858,9 +860,26 @@ namespace HereToSlay
                     inst.ClassList.Skip(12).ToList().ForEach(c =>
                     {
                         string capitalisedName = char.ToUpper(c.NamePL[0]) + c.NamePL[1..];
-                        chosenClass.Items.Add(new ImageCBox(capitalisedName, new Bitmap(1, 1) ));
+
+                        // Load class icon
+                        Bitmap classIcon = new(1, 1);
+                        if (File.Exists(c.ImagePath))
+                        {
+                            classIcon = new Bitmap(c.ImagePath);
+                        }
+                        else
+                        {
+                            if(initLang == true) // don't show this error when first loading the program (it would show up twice, due to lazy programming)
+                            {
+                                MessageBox.Show($"B³¹d podczas ³adowania ikony dla klasy {c.NamePL}.\nNie znaleziono obrazka {c.ImagePath}.\n\nIkona klasy pozostanie pusta.", "B³¹d", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+
+                        // Add class to list
+                        chosenClass.Items.Add(new ImageCBox(capitalisedName, classIcon));
                     });
 
+                    // Add item related options
                     itemChosenClass.Items.Add(new ImageCBox("Przedmiot", Properties.Resources.itemIcon.ToBitmap()));
                     itemChosenClass.Items.Add(new ImageCBox("Przekêty przed.", Properties.Resources.cursed.ToBitmap()));
 
@@ -890,9 +909,24 @@ namespace HereToSlay
                     inst.ClassList.Skip(12).ToList().ForEach(c =>
                     {
                         string capitalisedName = char.ToUpper(c.NameEN[0]) + c.NameEN.Substring(1);
+
+                        // Load class icon
+                        Bitmap classIcon = new(1, 1);
+                        if (File.Exists(c.ImagePath))
+                        {
+                            classIcon = new Bitmap(c.ImagePath);
+                        }
+                        else
+                        {
+                            if (initLang == true) // don't show this error when first loading the program (it would show up twice, due to lazy programming)
+                            {
+                                MessageBox.Show($"Error loading icon for the {c.NameEN} class.\nCould not find image in {c.ImagePath}.\n\nClass icon will be left empty.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
                         chosenClass.Items.Add(new ImageCBox(capitalisedName, new Bitmap(1, 1) ));
                     });
 
+                    // Add item related options
                     itemChosenClass.Items.Add(new ImageCBox("Item", Properties.Resources.itemIcon.ToBitmap()));
                     itemChosenClass.Items.Add(new ImageCBox("Cursed Item", Properties.Resources.cursed.ToBitmap()));
 

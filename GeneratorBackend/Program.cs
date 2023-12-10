@@ -13,6 +13,7 @@ namespace GeneratorBackend
     {
         public string NameEN { get; set; } = "";
         public Image Image { get; set; }
+        public string ImagePath { get; set; } = "";
         public Color Color { get; set; }
         public string NamePL { get; set; } = "";
     }
@@ -60,7 +61,7 @@ namespace GeneratorBackend
             Raylib.SetWindowPosition(-2000, -2000);
 
             // Get The Fonts
-            nameFont = Raylib.LoadFontEx("Assets/Fonts/PatuaOne_Polish.ttf", NAME_SIZE, null, 382); // this font has limited language support (NOT only Polish and English btw)
+            nameFont = Raylib.LoadFontEx("Assets/Fonts/PatuaOne_Polish.ttf", NAME_SIZE, null, 382); // this font has limited language support (Mostly Western European Languages)
             titleFont = Raylib.LoadFontEx("Assets/Fonts/SourceSansPro.ttf", TITLE_SIZE, null, 1415);
             reqFont = Raylib.LoadFontEx("Assets/Fonts/SourceSansPro_Bold.ttf", REQ_SIZE, null, 1415);
             rollFont = Raylib.LoadFontEx("Assets/Fonts/PatuaOne_Polish.ttf", ROLL_SIZE, null, 1415);
@@ -101,7 +102,7 @@ namespace GeneratorBackend
                     Color colorCombined = new(classRed, classGreen, classBlue, 255);
 
                     // Add the class to the list
-                    ClassList.Add(new ClassListObject { NameEN = prop[0], Image = image, Color = colorCombined, NamePL = polishName });
+                    ClassList.Add(new ClassListObject { NameEN = prop[0], Image = image, ImagePath = path ,Color = colorCombined, NamePL = polishName });
                 }
             }
             catch (Exception e)
