@@ -96,17 +96,17 @@ namespace HereToSlay
             heroReq5.ItemHeight = 19;
 
             badOutputSym.DrawMode = DrawMode.OwnerDrawFixed;
-            badOutputSym.DrawItem += BackgroundCBox.ComboBox_DrawItem;
+            badOutputSym.DrawItem += BackgroundColorCBox.ComboBox_DrawItem;
             badOutputSym.ItemHeight = 19;
-            badOutputSym.Items.Add(new BackgroundCBox("+", Color.FromArgb(109, 166, 88)));
-            badOutputSym.Items.Add(new BackgroundCBox("-", Color.FromArgb(230, 44, 47)));
+            badOutputSym.Items.Add(new BackgroundColorCBox("+", Color.FromArgb(109, 166, 88)));
+            badOutputSym.Items.Add(new BackgroundColorCBox("-", Color.FromArgb(230, 44, 47)));
             badOutputSym.ItemHeight = 17;
 
             goodOutputSym.DrawMode = DrawMode.OwnerDrawFixed;
-            goodOutputSym.DrawItem += BackgroundCBox.ComboBox_DrawItem;
+            goodOutputSym.DrawItem += BackgroundColorCBox.ComboBox_DrawItem;
             goodOutputSym.ItemHeight = 19;
-            goodOutputSym.Items.Add(new BackgroundCBox("+", Color.FromArgb(109, 166, 88)));
-            goodOutputSym.Items.Add(new BackgroundCBox("-", Color.FromArgb(230, 44, 47)));
+            goodOutputSym.Items.Add(new BackgroundColorCBox("+", Color.FromArgb(109, 166, 88)));
+            goodOutputSym.Items.Add(new BackgroundColorCBox("-", Color.FromArgb(230, 44, 47)));
             goodOutputSym.ItemHeight = 17;
 
             badOutputSym.SelectedIndex = 1;
@@ -1245,24 +1245,31 @@ namespace HereToSlay
 
             e.DrawBackground();
 
-            if (sender is ComboBox comboBox && comboBox.Items.Count > 0 && comboBox.Items[e.Index] is ImageCBox item)
+            if (sender is ComboBox comboBox &&
+                comboBox.Items.Count > 0 &&
+                comboBox.Items[e.Index] is ImageCBox item &&
+                e.Font != null)
             {
-                if (e.Font != null)
-                {
-                    e.Graphics.DrawImage(item.Image, e.Bounds.Left, e.Bounds.Top, e.Bounds.Height, e.Bounds.Height);
-                    e.Graphics.DrawString(item.Text, e.Font, Brushes.Black, e.Bounds.Left + e.Bounds.Height, e.Bounds.Top);
-                }
+                int imageWidth = e.Bounds.Height;
+                int textStart = e.Bounds.Left + imageWidth;
+
+                e.Graphics.DrawImage(item.Image, e.Bounds.Left, e.Bounds.Top, imageWidth, e.Bounds.Height);
+                e.Graphics.DrawString(item.Text, e.Font, Brushes.Black, textStart, e.Bounds.Top);
+
+                // Set the drop-down width to fit the widest item
+                comboBox.DropDownWidth = Math.Max(comboBox.DropDownWidth, textStart + (int)e.Graphics.MeasureString(item.Text, e.Font).Width);
             }
 
             e.DrawFocusRectangle();
         }
     }
-    class BackgroundCBox
+
+    class BackgroundColorCBox
     {
         public string Text { get; set; }
         public Color BackgroundColor { get; set; }
 
-        public BackgroundCBox(string text, Color backgroundColor)
+        public BackgroundColorCBox(string text, Color backgroundColor)
         {
             Text = text;
             BackgroundColor = backgroundColor;
@@ -1274,7 +1281,7 @@ namespace HereToSlay
 
             e.DrawBackground();
 
-            if (sender is ComboBox comboBox && comboBox.Items.Count > 0 && comboBox.Items[e.Index] is BackgroundCBox item)
+            if (sender is ComboBox comboBox && comboBox.Items.Count > 0 && comboBox.Items[e.Index] is BackgroundColorCBox item)
             {
                 if (e.Font != null)
                 {

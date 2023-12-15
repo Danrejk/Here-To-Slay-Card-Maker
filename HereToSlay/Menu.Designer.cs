@@ -494,35 +494,35 @@
             // LeaderCard
             // 
             LeaderCard.Name = "LeaderCard";
-            LeaderCard.Size = new Size(180, 22);
+            LeaderCard.Size = new Size(118, 22);
             LeaderCard.Text = "Leader";
             LeaderCard.Click += LeaderCard_Click;
             // 
             // MonsterCard
             // 
             MonsterCard.Name = "MonsterCard";
-            MonsterCard.Size = new Size(180, 22);
+            MonsterCard.Size = new Size(118, 22);
             MonsterCard.Text = "Monster";
             MonsterCard.Click += MonsterCard_Click;
             // 
             // HeroCard
             // 
             HeroCard.Name = "HeroCard";
-            HeroCard.Size = new Size(180, 22);
+            HeroCard.Size = new Size(118, 22);
             HeroCard.Text = "Hero";
             HeroCard.Click += HeroCard_Click;
             // 
             // ItemCard
             // 
             ItemCard.Name = "ItemCard";
-            ItemCard.Size = new Size(180, 22);
+            ItemCard.Size = new Size(118, 22);
             ItemCard.Text = "Item";
             ItemCard.Click += ItemCard_Click;
             // 
             // MagicCard
             // 
             MagicCard.Name = "MagicCard";
-            MagicCard.Size = new Size(180, 22);
+            MagicCard.Size = new Size(118, 22);
             MagicCard.Text = "Magic";
             MagicCard.Click += MagicCard_Click;
             // 
@@ -572,10 +572,10 @@
             heroReq1.FlatStyle = FlatStyle.Flat;
             heroReq1.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             heroReq1.FormattingEnabled = true;
-            heroReq1.Location = new Point(70, 303);
+            heroReq1.Location = new Point(115, 303);
             heroReq1.Margin = new Padding(3, 3, 0, 3);
             heroReq1.Name = "heroReq1";
-            heroReq1.Size = new Size(120, 25);
+            heroReq1.Size = new Size(75, 25);
             heroReq1.TabIndex = 32;
             heroReq1.Visible = false;
             heroReq1.SelectedIndexChanged += renderPreview;
