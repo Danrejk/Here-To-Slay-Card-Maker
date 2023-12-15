@@ -6,14 +6,14 @@ Dzięki temu programowi możesz tworzyć <b>dokładne</b> niestandardowe karty d
 English Version: [README.md](https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/README.md)
 
 ## Instalacja
-<a href="https://github.com/Danrejk/Here-To-Slay-Card-Maker/releases/tag/v3.1"> <img alt="Najnowsza Wersja" src="https://img.shields.io/badge/Najnowsza_Wersja-v.3.1-green"> </a>
+<a href="https://github.com/Danrejk/Here-To-Slay-Card-Maker/releases/tag/v4.0"> <img alt="Najnowsza Wersja" src="https://img.shields.io/badge/Najnowsza_Wersja-v.4.0-green"> </a>
 <br>
 Pobierz plik <code>.zip</code> z najnowszego <b>Release</b> programu wyświetlonego powyżej lub po prawej stronie strony.<br>
 Rozpakuj go, a w środku znajdziesz plik <code>.exe</code>; musi pozostać wraz z innymi plikami w folderze, inaczej program nie będzie działać.
 
 <hr>
 
-## Funkcje
+## Generacja Kart
 Istnieje <a href="https://www.unstablegames.com/community-cards/here-to-slay">oficjalny kreator</a> stworzony przez twórców To Ja Go Tnę tylko do tworzenia przywódców, ALE ma tyle niedokładności, że ledwo odzwierciedla wygląd prawdziwych kart i BRAKUJE <b>wiele</b> funkcji.
 Ten program to to, co powinno być oficjalnie wypuszczone - dokładne i z brakującymi funkcjami:
 
@@ -97,7 +97,7 @@ Ten program to to, co powinno być oficjalnie wypuszczone - dokładne i z brakuj
 </table>
 
 ### Potwory
-<img align="left" width="33%" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/Demo_Monster.png">
+<img align="left" width="33%" src="ReadmeAssets/Demo_Monster.png">
 <table>
     <thead>
         <tr>
@@ -118,10 +118,10 @@ Ten program to to, co powinno być oficjalnie wypuszczone - dokładne i z brakuj
 </table>
 
 <br>
-<img src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/LazyDevider.png">
+<img src="ReadmeAssets/LazyDevider.png">
     
 ### Bohaterowie
-<img align="left" width="33%" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/Demo_Hero.png">
+<img align="left" width="33%" src="ReadmeAssets/Demo_Hero.png">
 <table>
     <thead>
         <tr>
@@ -140,17 +140,88 @@ Ten program to to, co powinno być oficjalnie wypuszczone - dokładne i z brakuj
 </table>
 
 <br>
-<img src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/LazyDevider.png">
+<img src="ReadmeAssets/LazyDevider.png">
+
+### Przedmioty
+<img align="left" width="33%" src="ReadmeAssets/Demo_Item.png">
+<table>
+    <thead>
+        <tr>
+            <th width="500px">Generacja przedmiotów</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td>✔️✔️✔️Dokładny design Karty Przedmiotu.</td></tr>
+        <tr><td>✔️Maksimum 6 linijek opisu.</td></tr>
+        <tr><td>✔️Przerwanie Linii tworzy większą przerwę między liniami.</td></tr>
+        <tr><td>✔️Posiada typy karty: Przedmiot, Przeklęty przedmiot, klasa.</td></tr>
+    </tbody>
+</table>
+
+<br>
+<img src="ReadmeAssets/LazyDevider.png">
+
+### Magia
+<img align="left" width="33%" src="ReadmeAssets/Demo_Magic.png">
+<table>
+    <thead>
+        <tr>
+            <th width="500px">Generacja Magii</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td>✔️✔️✔️Dokładny design Karty Magii.</td></tr>
+        <tr><td>✔️Maksimum 7 linijek opisu.</td></tr>
+        <tr><td>✔️Przerwanie Linii tworzy większą przerwę między liniami.</td></tr>
+    </tbody>
+</table>
+<br>
+<img src="ReadmeAssets/LazyDevider.png">
+
+<img align="right" width="33%" src="ReadmeAssets/Demo_Custom.png">
+
+## Własne Klasy
+Program pozwala tobie dodać swoje własne klasy do generatora. Z własnymi kolorami, ikonami i nazwami. Proces dodawania ich jest trochę niezbyt przyjazny użytkownikowi, ale jest dosyć prosty.<br>
+Pierwszą rzeczą, którą będziesz musiał zrobić, to stworzyć ikonę klasy. Możesz zrobić ją taką, jaką chcesz, nawet obrazek twojego kota, ale musisz postępować zgodnie ze wszystkimi krokami, żeby zadziałało.<br>
+Podczas tworzenia ikony, upewnij się, że dodajesz kontur korzystając z koloru <code>#f5f1e7</code>, żeby pasował do wzornictwa oryginalnych kart.<br>
+<br>
+Gdy już stworzysz ikonę, umieść ją w folderze <code>Classes</code> i nadaj jej dowolną nazwę. Po prostu zapamiętaj tę nazwę, będzie ci potrzebna później.<br>
+
+<hr>
+Następnie otwórz plik <code>ClassList.txt</code> znajdujący się również w folderze <code>Classes</code>. W pliku <code>ClassList.txt</code> znajduje się lista wszystkich klas, które obecnie są w programie.
+Każda klasa ma 4 wartości:
+<ul>
+    <li>Angielska Nazwa</li>
+    <li>Nazwa pliku obrazka</li>
+    <li>Kolor RGB</li>
+    <li>(opcjonalnie) Polska Nazwa</li>
+</ul>
+Każda z wartości jest oddzielona znakiem TAB. Przykład:<br>
+
+Nazwa obraz.png 255,128,0 PolskaNazwa
+
+<hr>
+UWAGI:
+<ul>
+    <li>Wartości kolorów RGB MUSZĄ być oddzielone przecinkiem.</li>
+    <li>Nie musisz podawać Polskiej Nazwy, możesz ją całkowicie pomijać.</li>
+    <li>Twoja ikona nie pojawi się na liście wyboru klasy, ale będzie widoczna na karcie, więc nie martw się.</li>
+    <li>Jeśli nie pojawi się na karcie, albo Twój obrazek ma zły format, albo jest źle nazwany.</li>
+</ul>
+Po wykonaniu wszystkich kroków, powinieneś zobaczyć własną, spersonalizowaną klasę w kreatorze Here To Slay!
+
 <hr>
 
-<img width="33%" align="right" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/HereToSlay/PrintingAssets/mixed_cardPlacement_A4_example.png">
+<img width="33%" align="right" src="HereToSlay/PrintingAssets/mixed_cardPlacement_A4_example.png">
+
+<img width="33%" align="right" src="HereToSlay/PrintingAssets/mixed_cardPlacement_A4_example.png">
 
 ## Drukowanie
 ### Drukowanie w Domu
 W plikach dołączonych do programu znajdują się zasoby do drukowania w domu. Tyły kart dla liderów, potworów i bohaterów, ich umieszczenie na papierze A4, a także szablon do pozycjonowania własnych wygenerowanych kart. Wszystkie assety są również dostępne z polskim logiem.<br>
 Metody drukowania mogą się różnić w zależności od drukarki, ale to, co udało mi się sprawdzić, to:
 <ol>
-<img width="33%" align="right" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/HereToSlay/PrintingAssets/mixed_cardPlacement_A4_exampleBack.png">
+<img width="33%" align="right" src="HereToSlay/PrintingAssets/mixed_cardPlacement_A4_exampleBack.png">
     <li>Włóż grubszą kartę A4 do drukarki</li>
     <li>Wyrównaj wygenerowane karty jak na obrazie po prawej stronie.</li>
     <li><b>OBRÓĆ obraz o 180°</b>, aby zniwelować domyślny margines dolny na wielu drukarkach.</li>
@@ -168,9 +239,9 @@ Niestety nie wiem dokładnie, jak to działa. Ale widziałem wiele postów na te
 
 ## Zrzuty Ekranu
 <p align="center">
-    <img width="75%" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/screenshot1.png">
+    <img width="75%" src="ReadmeAssets/screenshot1.png">
     <br>
-    <img width="75%" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/screenshot2.png">
+    <img width="75%" src="ReadmeAssets/screenshot2.png">
     <br>
-    <img width="75%" src="https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/ReadmeAssets/screenshot3.png">
+    <img width="75%" src="ReadmeAssets/screenshot3.png">
 </p>
