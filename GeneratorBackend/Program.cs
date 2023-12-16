@@ -322,8 +322,10 @@ namespace GeneratorBackend
             Vector2 greenNumSize = Raylib.MeasureTextEx(inst.rollFont, green.Value.ToString() + "+", AssetManager.ROLL_SIZE, ROLL_FONT_SPACING);
             Raylib.ImageDrawTextEx(ref card, inst.rollFont, green.Value.ToString() + "+", new(87 + 78 / 2 - greenNumSize.X / 2, 1099 + 78 / 2 - greenNumSize.Y / 2), AssetManager.ROLL_SIZE, ROLL_FONT_SPACING, inst.bottomColor);
 
-            Raylib.ImageDrawTextEx(ref card, inst.descFont, red.Outcome, new(87 + 78 + 24, 1002 + 78 / 2 - AssetManager.DESC_SIZE / 2 + 2), AssetManager.DESC_SIZE, DESC_FONT_SPACING, inst.bottomColor);
-            Raylib.ImageDrawTextEx(ref card, inst.descFont, green.Outcome, new(87 + 78 + 24, 1099 + 78 / 2 - AssetManager.DESC_SIZE / 2 + 2), AssetManager.DESC_SIZE, DESC_FONT_SPACING, inst.bottomColor);
+            DrawMonsterRollOutcome(red.Outcome, card, new(87 + 78 + 24, 1002 + 78 / 2 - AssetManager.DESC_SIZE / 2 + 2), 500, inst.bottomColor);
+            DrawMonsterRollOutcome(green.Outcome, card, new(87 + 78 + 24, 1099 + 78 / 2 - AssetManager.DESC_SIZE / 2 + 2), 500, inst.bottomColor);
+            //Raylib.ImageDrawTextEx(ref card, inst.descFont, red.Outcome, new(87 + 78 + 24, 1002 + 78 / 2 - AssetManager.DESC_SIZE / 2 + 2), AssetManager.DESC_SIZE, DESC_FONT_SPACING, inst.bottomColor);
+            //Raylib.ImageDrawTextEx(ref card, inst.descFont, green.Outcome, new(87 + 78 + 24, 1099 + 78 / 2 - AssetManager.DESC_SIZE / 2 + 2), AssetManager.DESC_SIZE, DESC_FONT_SPACING, inst.bottomColor);
 
             // Name and Title
             string titleText = language switch
@@ -553,11 +555,54 @@ namespace GeneratorBackend
             Raylib.ImageDrawTextEx(ref card, inst.titleFont, titleText, new Vector2((CARD_WIDTH_POKER / 2) - (titleSize.X / 2), titleY), AssetManager.TITLE_SIZE, TITLE_FONT_SPACING, titleColor);
         }
 
+        static (List<string>,int) SplitTextToLines(string text, int targetLen, bool greaterSpace)
+        {
+            List<string> lineList = new();
+            StringBuilder outputLine = new();
+            StringBuilder word = new();
+
+            float wordLen = 0;
+            float currentLen;
+
+            int additionalLineSpace = 0;
+
+            for (int i = 0; i < text.Length; i++)
+            {
+                currentLen = Raylib.MeasureTextEx(inst.descFont, outputLine.ToString(), AssetManager.DESC_SIZE, DESC_FONT_SPACING).X;
+
+                if (text[i] != ' ' && text[i] != '\r' && text[i] != '\n')
+                {
+                    word.Append(text[i]);
+                    wordLen = Raylib.MeasureTextEx(inst.descFont, word.ToString(), AssetManager.DESC_SIZE, DESC_FONT_SPACING).X;
+                }
+                else if (((text[i] == ' ' || text[i] == '\r') && text[i] != '\n') && currentLen + wordLen < targetLen)
+                {
+                    outputLine.Append(word);
+                    word.Clear();
+                    if (text[i] == ' ') outputLine.Append(' ');
+                }
+
+                if ((currentLen + wordLen >= targetLen) || text[i] == '\r')
+                {
+                    if (text[i] == '\r')
+                    {
+                        if(greaterSpace) additionalLineSpace += DESC_BIG_LINE_SPACING;
+                        outputLine.Append('\r');
+                    }
+
+                    lineList.Add(outputLine.ToString());
+                    outputLine.Clear();
+                }
+            }
+            lineList.Add(outputLine.ToString() + word.ToString()); // Add the last line.
+
+            return (lineList, additionalLineSpace);
+        }
+
         static void DrawDescription(string text, Image card, int padding_left, int padding_right, int card_type, Color descTextColor) // card_type - which set of card size to use; 0 - tarrot (leader); 1 - tarrot (monster); 2 - poker (hero);
         {
             Vector2 card_size;
             int desc_space; // how much Y space there is for description
-
             switch(card_type)
             {
                 case 0:
@@ -591,59 +636,18 @@ namespace GeneratorBackend
 
             int targetLen = (int)card_size.X - padding_left - padding_right;
 
-            List<string> lineList = new();
-            StringBuilder outputLine = new();
-            StringBuilder word = new();
-
-            float wordLen = 0;
-            float currentLen;
-
-            int additionalLineSpace = 0;
-
-            // Divide the text into lines
-            for (int i = 0; i < text.Length; i++)
-            {
-                currentLen = Raylib.MeasureTextEx(inst.descFont, outputLine.ToString(), AssetManager.DESC_SIZE, DESC_FONT_SPACING).X;
-
-                if (text[i] != ' ' && text[i] != '\r' && text[i] != '\n')
-                {
-                    word.Append(text[i]);
-                    wordLen = Raylib.MeasureTextEx(inst.descFont, word.ToString(), AssetManager.DESC_SIZE, DESC_FONT_SPACING).X;
-                }
-                else if (((text[i] == ' ' || text[i] == '\r') && text[i] != '\n') && currentLen + wordLen < targetLen)
-                {
-                    outputLine.Append(word);
-                    word.Clear();
-                    if (text[i] == ' ') outputLine.Append(' ');
-                }
-
-                if ((currentLen + wordLen >= targetLen) || text[i] == '\r')
-                {
-                    if (text[i] == '\r')
-                    {
-                        additionalLineSpace += DESC_BIG_LINE_SPACING;
-                        outputLine.Append('\r');
-                    }
-
-                    lineList.Add(outputLine.ToString());
-                    outputLine.Clear();
-                }
-            }
-            lineList.Add(outputLine.ToString() + word.ToString()); // Add the last line.
-
-            outputLine.Clear();
-            word.Clear();
+            // Split the text into lines
+            (List<string> lineList, int additionalLineSpace) = SplitTextToLines(text, targetLen, true);
 
             Vector2 textSize = Raylib.MeasureTextEx(inst.descFont, text.Replace("\n", ""), AssetManager.DESC_SIZE, DESC_FONT_SPACING);
           
-            int targetLines = lineList.Count;
-            float lineSpacing = (targetLines-1)*DESC_LINE_SPACING; // We subtract one because for example between 3 lines there are 2 spaces.
+            float lineSpacing = (lineList.Count - 1)*DESC_LINE_SPACING; // We subtract one because: for example between 3 lines there are 2 spaces.
 
-            float textBlockCenter = (desc_space - targetLines * (textSize.Y) - additionalLineSpace + lineSpacing) / 2;
+            float textBlockCenter = (desc_space - lineList.Count * (textSize.Y) - additionalLineSpace + lineSpacing) / 2;
 
-            if (targetLines >= 4 && additionalLineSpace == 0 && card_type == 0) textBlockCenter += 16; // real cards have a set offset for >=4 lines of text so they don't colide with the Leader Icon
+            if (lineList.Count >= 4 && additionalLineSpace == 0 && card_type == 0) textBlockCenter += 16; // real cards have a set offset for >=4 lines of text so they don't colide with the Leader Icon
             if (card_type == 2 || card_type == 4) textBlockCenter -= 41; // these cards have a frame that takes up 41px of space, so we need to offset the text by that much
-            if ((card_type == 2) && targetLines >= 5) textBlockCenter += 12;
+            if ((card_type == 2) && lineList.Count >= 5) textBlockCenter += 12;
 
             lineSpacing = 0; // We have to reset the lineSpacing and increase it as we are drawing the lines
 
@@ -663,6 +667,27 @@ namespace GeneratorBackend
                 if (bigSpace) additionalLineSpace += DESC_BIG_LINE_SPACING;
             }
         }
+
+        static void DrawMonsterRollOutcome(string text, Image card, Vector2 drawLocation, int maxWidth, Color TextColor)
+        {
+            (List<string> lineList, int additionalLineSpace) = SplitTextToLines(text, maxWidth, false);
+            float textSize = Raylib.MeasureTextEx(inst.descFont, text.Replace("\n", ""), AssetManager.DESC_SIZE, DESC_FONT_SPACING).Y;
+
+            float lineSpacing = (lineList.Count - 1) * DESC_LINE_SPACING; // We subtract one because: for example between 3 lines there are 2 spaces.
+            float textBlockCenter = (lineList.Count * (textSize) - additionalLineSpace + lineSpacing) / 2;
+
+            // Draw the lines
+            for (int currentLine = 0; currentLine < lineList.Count; currentLine++)
+            {
+                if (lineList[currentLine].Contains('\r'))
+                {
+                    lineList[currentLine] = lineList[currentLine].Replace('\r', ' ');
+                }
+
+                Raylib.ImageDrawTextEx(ref card, inst.descFont, lineList[currentLine], new Vector2(drawLocation.X, drawLocation.Y - textBlockCenter + (textSize * currentLine) + additionalLineSpace), AssetManager.DESC_SIZE, DESC_FONT_SPACING, TextColor);
+            }
+        }
+
         #endregion
 
         #region Change Image
