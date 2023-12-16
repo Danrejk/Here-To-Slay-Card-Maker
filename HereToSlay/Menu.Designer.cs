@@ -97,6 +97,10 @@
             alternativeColor = new CheckBox();
             altColorToolTip = new ToolTip(components);
             itemChosenClass = new ComboBox();
+            labelAdditionalReq = new CheckBox();
+            additionalReq = new TextBox();
+            labelHeroBonus = new CheckBox();
+            heroBonus = new TextBox();
             ((System.ComponentModel.ISupportInitialize)logo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)previewImg).BeginInit();
             previewContextMenu.SuspendLayout();
@@ -629,7 +633,7 @@
             // badOutputNum
             // 
             badOutputNum.Font = new Font("Microsoft Sans Serif", 10.75F, FontStyle.Regular, GraphicsUnit.Point);
-            badOutputNum.Location = new Point(84, 415);
+            badOutputNum.Location = new Point(84, 425);
             badOutputNum.Margin = new Padding(0);
             badOutputNum.Name = "badOutputNum";
             badOutputNum.Size = new Size(35, 24);
@@ -644,7 +648,7 @@
             badOutputSym.FlatStyle = FlatStyle.Flat;
             badOutputSym.ForeColor = Color.White;
             badOutputSym.FormattingEnabled = true;
-            badOutputSym.Location = new Point(118, 416);
+            badOutputSym.Location = new Point(118, 426);
             badOutputSym.Margin = new Padding(0);
             badOutputSym.Name = "badOutputSym";
             badOutputSym.Size = new Size(35, 23);
@@ -656,7 +660,7 @@
             // 
             badOutputText.BorderStyle = BorderStyle.None;
             badOutputText.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            badOutputText.Location = new Point(156, 416);
+            badOutputText.Location = new Point(156, 426);
             badOutputText.Margin = new Padding(0);
             badOutputText.Multiline = true;
             badOutputText.Name = "badOutputText";
@@ -671,7 +675,7 @@
             labelBad.BackColor = Color.Transparent;
             labelBad.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             labelBad.ForeColor = Color.White;
-            labelBad.Location = new Point(81, 396);
+            labelBad.Location = new Point(81, 406);
             labelBad.Margin = new Padding(0);
             labelBad.Name = "labelBad";
             labelBad.RightToLeft = RightToLeft.No;
@@ -687,7 +691,7 @@
             labelGood.BackColor = Color.Transparent;
             labelGood.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             labelGood.ForeColor = Color.White;
-            labelGood.Location = new Point(81, 437);
+            labelGood.Location = new Point(81, 447);
             labelGood.Margin = new Padding(0);
             labelGood.Name = "labelGood";
             labelGood.RightToLeft = RightToLeft.No;
@@ -701,7 +705,7 @@
             // 
             goodOutputText.BorderStyle = BorderStyle.None;
             goodOutputText.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            goodOutputText.Location = new Point(156, 457);
+            goodOutputText.Location = new Point(156, 467);
             goodOutputText.Multiline = true;
             goodOutputText.Name = "goodOutputText";
             goodOutputText.Size = new Size(175, 23);
@@ -716,7 +720,7 @@
             goodOutputSym.FlatStyle = FlatStyle.Flat;
             goodOutputSym.ForeColor = Color.White;
             goodOutputSym.FormattingEnabled = true;
-            goodOutputSym.Location = new Point(118, 457);
+            goodOutputSym.Location = new Point(118, 467);
             goodOutputSym.Margin = new Padding(0);
             goodOutputSym.Name = "goodOutputSym";
             goodOutputSym.Size = new Size(35, 23);
@@ -728,7 +732,7 @@
             // 
             goodOutputNum.BorderStyle = BorderStyle.FixedSingle;
             goodOutputNum.Font = new Font("Microsoft Sans Serif", 10.75F, FontStyle.Regular, GraphicsUnit.Point);
-            goodOutputNum.Location = new Point(84, 457);
+            goodOutputNum.Location = new Point(84, 467);
             goodOutputNum.Name = "goodOutputNum";
             goodOutputNum.Size = new Size(35, 24);
             goodOutputNum.TabIndex = 40;
@@ -965,12 +969,58 @@
             itemChosenClass.TabIndex = 56;
             itemChosenClass.SelectedIndexChanged += chosenClass_SelectedIndexChanged;
             // 
+            // labelAdditionalReq
+            // 
+            labelAdditionalReq.AutoSize = true;
+            labelAdditionalReq.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            labelAdditionalReq.ForeColor = Color.White;
+            labelAdditionalReq.Location = new Point(33, 334);
+            labelAdditionalReq.Name = "labelAdditionalReq";
+            labelAdditionalReq.Size = new Size(172, 23);
+            labelAdditionalReq.TabIndex = 57;
+            labelAdditionalReq.Text = "Additional Requirement";
+            labelAdditionalReq.UseVisualStyleBackColor = true;
+            // 
+            // additionalReq
+            // 
+            additionalReq.Location = new Point(33, 354);
+            additionalReq.Multiline = true;
+            additionalReq.Name = "additionalReq";
+            additionalReq.ScrollBars = ScrollBars.Vertical;
+            additionalReq.Size = new Size(171, 48);
+            additionalReq.TabIndex = 58;
+            // 
+            // labelHeroBonus
+            // 
+            labelHeroBonus.AutoSize = true;
+            labelHeroBonus.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            labelHeroBonus.ForeColor = Color.White;
+            labelHeroBonus.Location = new Point(210, 334);
+            labelHeroBonus.Name = "labelHeroBonus";
+            labelHeroBonus.Size = new Size(166, 23);
+            labelHeroBonus.TabIndex = 60;
+            labelHeroBonus.Text = "Additional Hero Bonus";
+            labelHeroBonus.UseVisualStyleBackColor = true;
+            // 
+            // heroBonus
+            // 
+            heroBonus.Location = new Point(210, 353);
+            heroBonus.Multiline = true;
+            heroBonus.Name = "heroBonus";
+            heroBonus.ScrollBars = ScrollBars.Vertical;
+            heroBonus.Size = new Size(171, 48);
+            heroBonus.TabIndex = 61;
+            // 
             // Menu
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackColor = Color.FromArgb(39, 43, 52);
             BackgroundImage = Properties.Resources.gradient;
             ClientSize = new Size(828, 711);
+            Controls.Add(heroBonus);
+            Controls.Add(labelHeroBonus);
+            Controls.Add(additionalReq);
+            Controls.Add(labelAdditionalReq);
             Controls.Add(itemChosenClass);
             Controls.Add(advancedGeneralBox);
             Controls.Add(advancedGeneral);
@@ -1122,5 +1172,9 @@
         private ToolStripMenuItem MagicCard;
         private ToolStripMenuItem LeaderCard;
         private ComboBox itemChosenClass;
+        private CheckBox labelAdditionalReq;
+        private TextBox additionalReq;
+        private CheckBox labelHeroBonus;
+        private TextBox heroBonus;
     }
 }

@@ -43,9 +43,10 @@ namespace HereToSlay
             RENDER.Font = fontLeader;
             cardType.Font = fontLeader;
 
-
             Font fontLeaderSmall = FontLoader.GetFont("PatuaOne_Polish.ttf", 10);
             FontLoader.ChangeFontForAllLabels(this, fontLeaderSmall);
+            labelAdditionalReq.Font = fontLeaderSmall; // This is a checkbox
+            labelHeroBonus.Font = fontLeaderSmall; // This is a checkbox
             LeaderCard.Font = fontLeaderSmall;
             MonsterCard.Font = fontLeaderSmall;
             HeroCard.Font = fontLeaderSmall;
@@ -265,8 +266,8 @@ namespace HereToSlay
 
                 goodOutputNum.Visible = true;
                 goodOutputSym.Visible = true;
-                goodOutputNum.Location = new Point(84, 457);
-                goodOutputSym.Location = new Point(118, 457);
+                goodOutputNum.Location = new Point(84, 467);
+                goodOutputSym.Location = new Point(118, 467);
 
                 maxItems.Visible = false;
                 labelMaxItem.Visible = false;
@@ -716,6 +717,11 @@ namespace HereToSlay
                     ItemCard.Text = "Przedmiot";
                     MagicCard.Text = "Magia";
 
+                    labelAdditionalReq.Text = "Dodatkowe wymagania";
+                    additionalReq.Text = "ODRZUÆ X kart";
+                    labelHeroBonus.Text = "Bonus dodatkowych boh.";
+                    heroBonus.Text = "Za ka¿dego dodatkowego bohatera w twojej dru¿ynie, +X do twojego rzutu";
+
                     break;
 
                 // English
@@ -780,6 +786,11 @@ namespace HereToSlay
                     HeroCard.Text = "Hero";
                     ItemCard.Text = "Item";
                     MagicCard.Text = "Magic";
+
+                    additionalReq.Text = "Addidional Requirements";
+                    additionalReq.Text = "DISCARD X cards";
+                    labelHeroBonus.Text = "Additional Hero Bonus";
+                    heroBonus.Text = "For each additional Hero card in your Party, +X to your roll.";
 
                     break;
             }
