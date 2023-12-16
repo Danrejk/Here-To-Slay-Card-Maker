@@ -19,28 +19,41 @@ namespace HereToSlay
             Image = image;
         }
 
+        public static void ComboBox_WidthAutoAdjust(object sender, EventArgs e)
+        {
+            if (sender is not ComboBox comboBox) return;
+
+            int maxWidth = 0;
+
+            // Calculate the width of the widest item in the combo box
+            foreach (var item in comboBox.Items)
+            {
+                if (item is ImageCBox imageCBox && comboBox.Font != null)
+                {
+                    int imageWidth = comboBox.GetItemHeight(0);
+                    int textWidth = (int)comboBox.CreateGraphics().MeasureString(imageCBox.Text, comboBox.Font).Width;
+                    int totalWidth = imageWidth + textWidth;
+
+                    maxWidth = Math.Max(maxWidth, totalWidth);
+                }
+            }
+            comboBox.DropDownWidth = maxWidth;
+        }
+
         public static void ComboBox_DrawItem(object sender, DrawItemEventArgs e)
         {
             if (e.Index < 0 || sender == null) return;
 
             e.DrawBackground();
 
-            if (sender is ComboBox comboBox &&
-                comboBox.Items.Count > 0 &&
-                comboBox.Items[e.Index] is ImageCBox item &&
-                e.Font != null)
+            if (sender is ComboBox comboBox && comboBox.Items[e.Index] is ImageCBox item && e.Font != null)
             {
                 int imageWidth = e.Bounds.Height;
                 int textStart = e.Bounds.Left + imageWidth;
 
                 e.Graphics.DrawImage(item.Image, e.Bounds.Left, e.Bounds.Top, imageWidth, e.Bounds.Height);
                 e.Graphics.DrawString(item.Text, e.Font, Brushes.Black, textStart, e.Bounds.Top);
-
-                // Set the drop-down width to fit the widest item
-                comboBox.DropDownWidth = Math.Max(comboBox.DropDownWidth, textStart + (int)e.Graphics.MeasureString(item.Text, e.Font).Width);
             }
-
-            e.DrawFocusRectangle();
         }
     }
 

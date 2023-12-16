@@ -60,51 +60,32 @@ namespace HereToSlay
 #pragma warning disable CS8622 // the warnings were annoying me, so I disabled them
             language.ComboBox.DrawMode = DrawMode.OwnerDrawFixed;
             language.ComboBox.DrawItem += ImageCBox.ComboBox_DrawItem;
+            language.DropDown += ImageCBox.ComboBox_WidthAutoAdjust;
             language.Items.Add(new ImageCBox("English", Properties.Resources.en));
             language.Items.Add(new ImageCBox("Polski", Properties.Resources.pl));
             language.SelectedIndex = Properties.Settings.Default.Language;
             initLang = true;
 
-            chosenClass.DrawMode = DrawMode.OwnerDrawFixed;
-            chosenClass.DrawItem += ImageCBox.ComboBox_DrawItem;
-            chosenClass.ItemHeight = 19;
+            // Make all of the class boxes have a custom draw mode with images
+            foreach (ComboBox c in new ComboBox[] { chosenClass, chosenSecondClass, itemChosenClass, heroReq1, heroReq2, heroReq3, heroReq4, heroReq5 })
+            {
+                c.DrawMode = DrawMode.OwnerDrawFixed;
+                c.DrawItem += ImageCBox.ComboBox_DrawItem;
+                c.DropDown += ImageCBox.ComboBox_WidthAutoAdjust;
+                c.ItemHeight = 19;
+            }
             chosenClass.SelectedIndex = 0;
-
-            chosenSecondClass.DrawMode = DrawMode.OwnerDrawFixed;
-            chosenSecondClass.DrawItem += ImageCBox.ComboBox_DrawItem;
-            chosenSecondClass.ItemHeight = 19;
-
-            itemChosenClass.DrawMode = DrawMode.OwnerDrawFixed;
-            itemChosenClass.DrawItem += ImageCBox.ComboBox_DrawItem;
-            itemChosenClass.ItemHeight = 19;
             itemChosenClass.SelectedIndex = 0;
 
-            heroReq1.DrawMode = DrawMode.OwnerDrawFixed;
-            heroReq1.DrawItem += ImageCBox.ComboBox_DrawItem;
-            heroReq1.ItemHeight = 19;
-            heroReq2.DrawMode = DrawMode.OwnerDrawFixed;
-            heroReq2.DrawItem += ImageCBox.ComboBox_DrawItem;
-            heroReq2.ItemHeight = 19;
-            heroReq3.DrawMode = DrawMode.OwnerDrawFixed;
-            heroReq3.DrawItem += ImageCBox.ComboBox_DrawItem;
-            heroReq3.ItemHeight = 19;
-            heroReq4.DrawMode = DrawMode.OwnerDrawFixed;
-            heroReq4.DrawItem += ImageCBox.ComboBox_DrawItem;
-            heroReq4.ItemHeight = 19;
-            heroReq5.DrawMode = DrawMode.OwnerDrawFixed;
-            heroReq5.DrawItem += ImageCBox.ComboBox_DrawItem;
-            heroReq5.ItemHeight = 19;
-
+            // Make the roll symbol boxes have custom draw mode with background colors
             badOutputSym.DrawMode = DrawMode.OwnerDrawFixed;
             badOutputSym.DrawItem += BackgroundColorCBox.ComboBox_DrawItem;
-            badOutputSym.ItemHeight = 19;
             badOutputSym.Items.Add(new BackgroundColorCBox("+", Color.FromArgb(109, 166, 88)));
             badOutputSym.Items.Add(new BackgroundColorCBox("-", Color.FromArgb(230, 44, 47)));
             badOutputSym.ItemHeight = 17;
 
             goodOutputSym.DrawMode = DrawMode.OwnerDrawFixed;
             goodOutputSym.DrawItem += BackgroundColorCBox.ComboBox_DrawItem;
-            goodOutputSym.ItemHeight = 19;
             goodOutputSym.Items.Add(new BackgroundColorCBox("+", Color.FromArgb(109, 166, 88)));
             goodOutputSym.Items.Add(new BackgroundColorCBox("-", Color.FromArgb(230, 44, 47)));
             goodOutputSym.ItemHeight = 17;
@@ -672,8 +653,8 @@ namespace HereToSlay
 
             switch (language.SelectedIndex)
             {
-                // POLISH
-                case 1:
+                // Polish
+                case 1: 
                     logo.Image = Properties.Resources.Logo1;
                     labelLeader.Text = Properties.Settings.Default.CardType switch
                     {
@@ -737,8 +718,8 @@ namespace HereToSlay
 
                     break;
 
-                // ENGLISH
-                default:
+                // English
+                default: 
                     logo.Image = Properties.Resources.Logo0;
                     labelLeader.Text = Properties.Settings.Default.CardType switch
                     {
@@ -838,14 +819,9 @@ namespace HereToSlay
 
             switch (lang)
             {
-                case 1:
-                    heroReq1.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
-                    heroReq2.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
-                    heroReq3.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
-                    heroReq4.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
-                    heroReq5.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
-
-                    // These have to be hardcoded mainly because they each use an icon from the resources so it looks better in the combobox.
+                // Polish
+                case 1: 
+                // These have to be hardcoded mainly because they each use an icon from the resources so it looks better in the combobox.
                     chosenClass.Items.Add(new ImageCBox("BRAK KLASY", Properties.Resources.empty.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("£owca", Properties.Resources.lowca.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("Mag", Properties.Resources.mag.ToBitmap()));
@@ -882,18 +858,21 @@ namespace HereToSlay
                         chosenClass.Items.Add(new ImageCBox(capitalisedName, classIcon));
                     });
 
+                    // Add monster related options
+                    heroReq1.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
+                    heroReq2.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
+                    heroReq3.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
+                    heroReq4.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
+                    heroReq5.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
+
                     // Add item related options
                     itemChosenClass.Items.Add(new ImageCBox("Przedmiot", Properties.Resources.itemIcon.ToBitmap()));
                     itemChosenClass.Items.Add(new ImageCBox("Przekêty przed.", Properties.Resources.cursed.ToBitmap()));
 
                     break;
-                default:
-                    heroReq1.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
-                    heroReq2.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
-                    heroReq3.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
-                    heroReq4.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
-                    heroReq5.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
 
+                // English
+                default:
                     // These have to be hardcoded mainly because they each use an icon from the resources so it looks better in the combobox.
                     chosenClass.Items.Add(new ImageCBox("NO CLASS", Properties.Resources.empty.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("Ranger", Properties.Resources.lowca.ToBitmap()));
@@ -928,6 +907,13 @@ namespace HereToSlay
                         }
                         chosenClass.Items.Add(new ImageCBox(capitalisedName, new Bitmap(1, 1) ));
                     });
+
+                    // Add monster related options
+                    heroReq1.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
+                    heroReq2.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
+                    heroReq3.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
+                    heroReq4.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
+                    heroReq5.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
 
                     // Add item related options
                     itemChosenClass.Items.Add(new ImageCBox("Item", Properties.Resources.itemIcon.ToBitmap()));
