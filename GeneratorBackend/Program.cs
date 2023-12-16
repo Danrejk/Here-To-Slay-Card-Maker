@@ -243,7 +243,7 @@ namespace GeneratorBackend
             Raylib.UnloadImage(card);
         }
 
-        public static void GenerateMonster(string? renderLocation, int language, string name, int[] desiredRequirements, RollOutput good, RollOutput bad, string monsterImg, string description, bool addGradient, bool nameWhite, bool alternativeColor)
+        public static void GenerateMonster(string? renderLocation, int language, string name, int[] desiredRequirements, string monsterImg, RollOutput good, RollOutput bad, string description, string aditionalReq, string heroBonus, bool addGradient, bool nameWhite, bool alternativeColor)
         {
             // This has to be loaded each time, to clear the image from the previous render
             Image card = Raylib.LoadImage(inst.cardTarrot);
@@ -322,8 +322,9 @@ namespace GeneratorBackend
             Vector2 greenNumSize = Raylib.MeasureTextEx(inst.rollFont, green.Value.ToString() + "+", AssetManager.ROLL_SIZE, ROLL_FONT_SPACING);
             Raylib.ImageDrawTextEx(ref card, inst.rollFont, green.Value.ToString() + "+", new(87 + 78 / 2 - greenNumSize.X / 2, 1099 + 78 / 2 - greenNumSize.Y / 2), AssetManager.ROLL_SIZE, ROLL_FONT_SPACING, inst.bottomColor);
 
-            DrawMonsterRollOutcome(red.Outcome, card, new(187, 1002 + 78 / 2), 600, inst.bottomColor);
-            DrawMonsterRollOutcome(green.Outcome, card, new(187, 1099 + 78 / 2), 600, inst.bottomColor);
+            int rollTextWidth = heroBonus == "" ? 600 : 250; // reduce the width of the roll text if there is a additional hero bonus
+            DrawMonsterRollOutcome(red.Outcome, card, new(187, 1002 + 78 / 2), rollTextWidth, inst.bottomColor);
+            DrawMonsterRollOutcome(green.Outcome, card, new(187, 1099 + 78 / 2), rollTextWidth, inst.bottomColor);
             //Raylib.ImageDrawTextEx(ref card, inst.descFont, red.Outcome, new(87 + 78 + 24, 1002 + 78 / 2 - AssetManager.DESC_SIZE / 2 + 2), AssetManager.DESC_SIZE, DESC_FONT_SPACING, inst.bottomColor);
             //Raylib.ImageDrawTextEx(ref card, inst.descFont, green.Outcome, new(87 + 78 + 24, 1099 + 78 / 2 - AssetManager.DESC_SIZE / 2 + 2), AssetManager.DESC_SIZE, DESC_FONT_SPACING, inst.bottomColor);
 
