@@ -56,7 +56,7 @@ namespace HereToSlay
             itemImgMore.Font = fontLeader;
             #endregion
 
-            
+
             #region ComboBoxes
 #pragma warning disable CS8622 // the warnings were annoying me, so I disabled them
             language.ComboBox.DrawMode = DrawMode.OwnerDrawFixed;
@@ -202,6 +202,11 @@ namespace HereToSlay
 
                 nameWhite.Checked = false;
 
+                labelAdditionalReq.Visible = false;
+                additionalReq.Visible = false;
+                labelHeroBonus.Visible = false;
+                heroBonus.Visible = false;
+
                 this.Update();
                 updateLanguage(sender, e);
                 this.Update();
@@ -287,6 +292,11 @@ namespace HereToSlay
                 }
 
                 nameWhite.Checked = true;
+
+                labelAdditionalReq.Visible = true;
+                additionalReq.Visible = true;
+                labelHeroBonus.Visible = true;
+                heroBonus.Visible = true;
 
                 this.Update();
                 updateLanguage(sender, e);
@@ -380,6 +390,11 @@ namespace HereToSlay
                     if (c.Name.Contains("clear")) { c.Visible = false; };
                 }
 
+                labelAdditionalReq.Visible = false;
+                additionalReq.Visible = false;
+                labelHeroBonus.Visible = false;
+                heroBonus.Visible = false;
+
                 this.Update();
                 updateLanguage(sender, e);
                 this.Update();
@@ -469,6 +484,11 @@ namespace HereToSlay
 
                 nameWhite.Checked = false;
 
+                labelAdditionalReq.Visible = false;
+                additionalReq.Visible = false;
+                labelHeroBonus.Visible = false;
+                heroBonus.Visible = false;
+
                 this.Update();
                 updateLanguage(sender, e);
                 this.Update();
@@ -554,6 +574,11 @@ namespace HereToSlay
                 }
 
                 nameWhite.Checked = false;
+
+                labelAdditionalReq.Visible = false;
+                additionalReq.Visible = false;
+                labelHeroBonus.Visible = false;
+                heroBonus.Visible = false;
 
                 this.Update();
                 updateLanguage(sender, e);
@@ -655,7 +680,7 @@ namespace HereToSlay
             switch (language.SelectedIndex)
             {
                 // Polish
-                case 1: 
+                case 1:
                     logo.Image = Properties.Resources.Logo1;
                     labelLeader.Text = Properties.Settings.Default.CardType switch
                     {
@@ -725,7 +750,7 @@ namespace HereToSlay
                     break;
 
                 // English
-                default: 
+                default:
                     logo.Image = Properties.Resources.Logo0;
                     labelLeader.Text = Properties.Settings.Default.CardType switch
                     {
@@ -832,8 +857,8 @@ namespace HereToSlay
             switch (lang)
             {
                 // Polish
-                case 1: 
-                // These have to be hardcoded mainly because they each use an icon from the resources so it looks better in the combobox.
+                case 1:
+                    // These have to be hardcoded mainly because they each use an icon from the resources so it looks better in the combobox.
                     chosenClass.Items.Add(new ImageCBox("BRAK KLASY", Properties.Resources.empty.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("£owca", Properties.Resources.lowca.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("Mag", Properties.Resources.mag.ToBitmap()));
@@ -860,7 +885,7 @@ namespace HereToSlay
                         }
                         else
                         {
-                            if(initLang == true) // don't show this error when first loading the program (it would show up twice, due to lazy programming)
+                            if (initLang == true) // don't show this error when first loading the program (it would show up twice, due to lazy programming)
                             {
                                 MessageBox.Show($"B³¹d podczas ³adowania ikony dla klasy {c.NamePL}.\nNie znaleziono obrazka {c.ImagePath}.\n\nIkona klasy pozostanie pusta.", "B³¹d", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
@@ -917,7 +942,7 @@ namespace HereToSlay
                                 MessageBox.Show($"Error loading icon for the {c.NameEN} class.\nCould not find image in {c.ImagePath}.\n\nClass icon will be left empty.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
-                        chosenClass.Items.Add(new ImageCBox(capitalisedName, new Bitmap(1, 1) ));
+                        chosenClass.Items.Add(new ImageCBox(capitalisedName, new Bitmap(1, 1)));
                     });
 
                     // Add monster related options
@@ -967,7 +992,7 @@ namespace HereToSlay
 
         private void updateIcon_to_chosenClass(object? sender, EventArgs? e)
         {
-            if(Properties.Settings.Default.CardType != 1 && Properties.Settings.Default.CardType != 4)
+            if (Properties.Settings.Default.CardType != 1 && Properties.Settings.Default.CardType != 4)
             {
                 int iconIndex;
                 if (Properties.Settings.Default.CardType == 3)
@@ -1170,6 +1195,30 @@ namespace HereToSlay
                 _ => Properties.Resources.item,
             };
 
+            renderPreview(sender, e);
+        }
+        private void labelAdditionalReq_CheckedChanged(object sender, EventArgs e)
+        {
+            additionalReq.Enabled = labelAdditionalReq.Checked;
+
+            classReq3.Enabled = !labelAdditionalReq.Checked;
+            classReq4.Enabled = !labelAdditionalReq.Checked;
+            classReq5.Enabled = !labelAdditionalReq.Checked;
+
+            clearClassReq3.Enabled = !labelAdditionalReq.Checked;
+            clearClassReq4.Enabled = !labelAdditionalReq.Checked;
+            clearClassReq5.Enabled = !labelAdditionalReq.Checked;
+
+            classReq3.SelectedIndex = -1;
+            classReq4.SelectedIndex = -1;
+            classReq5.SelectedIndex = -1;
+
+            renderPreview(sender, e);
+        }
+
+        private void labelHeroBonus_CheckedChanged(object sender, EventArgs e)
+        {
+            heroBonus.Enabled = labelHeroBonus.Checked;
             renderPreview(sender, e);
         }
     }

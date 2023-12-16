@@ -980,9 +980,11 @@
             labelAdditionalReq.TabIndex = 57;
             labelAdditionalReq.Text = "Additional Requirement";
             labelAdditionalReq.UseVisualStyleBackColor = true;
+            labelAdditionalReq.CheckedChanged += labelAdditionalReq_CheckedChanged;
             // 
             // additionalReq
             // 
+            additionalReq.Enabled = false;
             additionalReq.Location = new Point(33, 354);
             additionalReq.Multiline = true;
             additionalReq.Name = "additionalReq";
@@ -1001,9 +1003,11 @@
             labelHeroBonus.TabIndex = 60;
             labelHeroBonus.Text = "Additional Hero Bonus";
             labelHeroBonus.UseVisualStyleBackColor = true;
+            labelHeroBonus.CheckedChanged += labelHeroBonus_CheckedChanged;
             // 
             // heroBonus
             // 
+            heroBonus.Enabled = false;
             heroBonus.Location = new Point(210, 353);
             heroBonus.Multiline = true;
             heroBonus.Name = "heroBonus";
