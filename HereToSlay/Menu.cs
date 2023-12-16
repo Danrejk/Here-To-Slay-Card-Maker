@@ -67,7 +67,7 @@ namespace HereToSlay
             initLang = true;
 
             // Make all of the class boxes have a custom draw mode with images
-            foreach (ComboBox c in new ComboBox[] { chosenClass, chosenSecondClass, itemChosenClass, heroReq1, heroReq2, heroReq3, heroReq4, heroReq5 })
+            foreach (ComboBox c in new ComboBox[] { chosenClass, chosenSecondClass, itemChosenClass, classReq1, classReq2, classReq3, classReq4, classReq5 })
             {
                 c.DrawMode = DrawMode.OwnerDrawFixed;
                 c.DrawItem += ImageCBox.ComboBox_DrawItem;
@@ -164,11 +164,11 @@ namespace HereToSlay
                 RENDER.Location = new Point(RENDER.Location.X, 525);
 
                 labelReq.Visible = false;
-                heroReq1.Visible = false;
-                heroReq2.Visible = false;
-                heroReq3.Visible = false;
-                heroReq4.Visible = false;
-                heroReq5.Visible = false;
+                classReq1.Visible = false;
+                classReq2.Visible = false;
+                classReq3.Visible = false;
+                classReq4.Visible = false;
+                classReq5.Visible = false;
 
                 labelBad.Visible = false;
                 badOutputText.Visible = false;
@@ -249,11 +249,11 @@ namespace HereToSlay
                 RENDER.Location = new Point(RENDER.Location.X, 591);
 
                 labelReq.Visible = true;
-                heroReq1.Visible = true;
-                heroReq2.Visible = true;
-                heroReq3.Visible = true;
-                heroReq4.Visible = true;
-                heroReq5.Visible = true;
+                classReq1.Visible = true;
+                classReq2.Visible = true;
+                classReq3.Visible = true;
+                classReq4.Visible = true;
+                classReq5.Visible = true;
 
                 labelBad.Visible = true;
                 badOutputText.Visible = true;
@@ -343,11 +343,11 @@ namespace HereToSlay
                 RENDER.Location = new Point(RENDER.Location.X, 525);
 
                 labelReq.Visible = false;
-                heroReq1.Visible = false;
-                heroReq2.Visible = false;
-                heroReq3.Visible = false;
-                heroReq4.Visible = false;
-                heroReq5.Visible = false;
+                classReq1.Visible = false;
+                classReq2.Visible = false;
+                classReq3.Visible = false;
+                classReq4.Visible = false;
+                classReq5.Visible = false;
 
                 labelBad.Visible = false;
                 badOutputText.Visible = false;
@@ -431,11 +431,11 @@ namespace HereToSlay
                 RENDER.Location = new Point(RENDER.Location.X, 525);
 
                 labelReq.Visible = false;
-                heroReq1.Visible = false;
-                heroReq2.Visible = false;
-                heroReq3.Visible = false;
-                heroReq4.Visible = false;
-                heroReq5.Visible = false;
+                classReq1.Visible = false;
+                classReq2.Visible = false;
+                classReq3.Visible = false;
+                classReq4.Visible = false;
+                classReq5.Visible = false;
 
                 labelBad.Visible = false;
                 badOutputText.Visible = false;
@@ -517,11 +517,11 @@ namespace HereToSlay
                 RENDER.Location = new Point(RENDER.Location.X, 525);
 
                 labelReq.Visible = false;
-                heroReq1.Visible = false;
-                heroReq2.Visible = false;
-                heroReq3.Visible = false;
-                heroReq4.Visible = false;
-                heroReq5.Visible = false;
+                classReq1.Visible = false;
+                classReq2.Visible = false;
+                classReq3.Visible = false;
+                classReq4.Visible = false;
+                classReq5.Visible = false;
 
                 labelBad.Visible = false;
                 badOutputText.Visible = false;
@@ -617,7 +617,7 @@ namespace HereToSlay
                 case 1:
                     RollOutput good = new((int)goodOutputNum.Value, goodOutputSym.SelectedIndex, goodOutputText.Text);
                     RollOutput bad = new((int)badOutputNum.Value, badOutputSym.SelectedIndex, badOutputText.Text);
-                    int[] desiredRequirements = new int[] { heroReq1.SelectedIndex, heroReq2.SelectedIndex, heroReq3.SelectedIndex, heroReq4.SelectedIndex, heroReq5.SelectedIndex };
+                    int[] desiredRequirements = new int[] { classReq1.SelectedIndex, classReq2.SelectedIndex, classReq3.SelectedIndex, classReq4.SelectedIndex, classReq5.SelectedIndex };
                     GeneratorBackend.Program.GenerateMonster(saveLocation, language.SelectedIndex, nameText.Text, desiredRequirements, good, bad, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked, alternativeColor.Checked);
                     break;
                 // Hero
@@ -694,7 +694,7 @@ namespace HereToSlay
                     labelBad.Text = "Wymagania rzutu - Pora¿ka";
                     labelGood.Text = "Wymagania rzutu - UBIJ potwora";
                     goodOutputText.Text = "UBIJ tego potwora";
-                    labelReq.Text = "Wymagania bohaterów";
+                    labelReq.Text = "Wymagania klas";
                     RENDER.Text = "ZAPISZ OBRAZ";
                     copyImageToClipboardToolStripMenuItem.Text = "Kopiuj obraz";
                     openImageLocationToolStripMenuItem.Text = "Otwórz lokalizacjê obrazu";
@@ -759,7 +759,7 @@ namespace HereToSlay
                     labelBad.Text = "Roll Requirements - Fail";
                     labelGood.Text = "Roll Requirements - SLAY monster";
                     goodOutputText.Text = "SLAY this Monster card";
-                    labelReq.Text = "Hero Requirements";
+                    labelReq.Text = "Class Requirements";
                     RENDER.Text = "SAVE IMAGE";
                     copyImageToClipboardToolStripMenuItem.Text = "Copy image";
                     openImageLocationToolStripMenuItem.Text = "Open image location";
@@ -787,6 +787,7 @@ namespace HereToSlay
         }
 
         // These are made so that after changing the language, the selected classes stay the same.
+        // TODO: reduce this all to a single operation
         int currentClassIndex;
         int currentSecondClassIndex;
         int currentItemClassIndex;
@@ -806,16 +807,16 @@ namespace HereToSlay
             currentItemClassIndex = itemChosenClass.SelectedIndex;
             itemChosenClass.Items.Clear();
 
-            currentHeroReq1Index = heroReq1.SelectedIndex;
-            heroReq1.Items.Clear();
-            currentHeroReq2Index = heroReq2.SelectedIndex;
-            heroReq2.Items.Clear();
-            currentHeroReq3Index = heroReq3.SelectedIndex;
-            heroReq3.Items.Clear();
-            currentHeroReq4Index = heroReq4.SelectedIndex;
-            heroReq4.Items.Clear();
-            currentHeroReq5Index = heroReq5.SelectedIndex;
-            heroReq5.Items.Clear();
+            currentHeroReq1Index = classReq1.SelectedIndex;
+            classReq1.Items.Clear();
+            currentHeroReq2Index = classReq2.SelectedIndex;
+            classReq2.Items.Clear();
+            currentHeroReq3Index = classReq3.SelectedIndex;
+            classReq3.Items.Clear();
+            currentHeroReq4Index = classReq4.SelectedIndex;
+            classReq4.Items.Clear();
+            currentHeroReq5Index = classReq5.SelectedIndex;
+            classReq5.Items.Clear();
 
             switch (lang)
             {
@@ -859,11 +860,11 @@ namespace HereToSlay
                     });
 
                     // Add monster related options
-                    heroReq1.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
-                    heroReq2.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
-                    heroReq3.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
-                    heroReq4.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
-                    heroReq5.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
+                    classReq1.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
+                    classReq2.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
+                    classReq3.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
+                    classReq4.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
+                    classReq5.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
 
                     // Add item related options
                     itemChosenClass.Items.Add(new ImageCBox("Przedmiot", Properties.Resources.itemIcon.ToBitmap()));
@@ -909,11 +910,11 @@ namespace HereToSlay
                     });
 
                     // Add monster related options
-                    heroReq1.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
-                    heroReq2.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
-                    heroReq3.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
-                    heroReq4.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
-                    heroReq5.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
+                    classReq1.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
+                    classReq2.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
+                    classReq3.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
+                    classReq4.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
+                    classReq5.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
 
                     // Add item related options
                     itemChosenClass.Items.Add(new ImageCBox("Item", Properties.Resources.itemIcon.ToBitmap()));
@@ -925,11 +926,11 @@ namespace HereToSlay
             foreach (var item in chosenClass.Items)
             {
                 chosenSecondClass.Items.Add(item);
-                heroReq1.Items.Add(item);
-                heroReq2.Items.Add(item);
-                heroReq3.Items.Add(item);
-                heroReq4.Items.Add(item);
-                heroReq5.Items.Add(item);
+                classReq1.Items.Add(item);
+                classReq2.Items.Add(item);
+                classReq3.Items.Add(item);
+                classReq4.Items.Add(item);
+                classReq5.Items.Add(item);
                 itemChosenClass.Items.Add(item);
             }
 
@@ -938,11 +939,11 @@ namespace HereToSlay
 
             itemChosenClass.SelectedIndex = currentItemClassIndex;
 
-            heroReq1.SelectedIndex = currentHeroReq1Index;
-            heroReq2.SelectedIndex = currentHeroReq2Index;
-            heroReq3.SelectedIndex = currentHeroReq3Index;
-            heroReq4.SelectedIndex = currentHeroReq4Index;
-            heroReq5.SelectedIndex = currentHeroReq5Index;
+            classReq1.SelectedIndex = currentHeroReq1Index;
+            classReq2.SelectedIndex = currentHeroReq2Index;
+            classReq3.SelectedIndex = currentHeroReq3Index;
+            classReq4.SelectedIndex = currentHeroReq4Index;
+            classReq5.SelectedIndex = currentHeroReq5Index;
         }
         #endregion
 
@@ -1020,20 +1021,20 @@ namespace HereToSlay
                     case "clearSecondClass":
                         chosenSecondClass.SelectedIndex = -1;
                         break;
-                    case "clearHeroReq1":
-                        heroReq1.SelectedIndex = -1;
+                    case "clearClassReq1":
+                        classReq1.SelectedIndex = -1;
                         break;
-                    case "clearHeroReq2":
-                        heroReq2.SelectedIndex = -1;
+                    case "clearClassReq2":
+                        classReq2.SelectedIndex = -1;
                         break;
-                    case "clearHeroReq3":
-                        heroReq3.SelectedIndex = -1;
+                    case "clearClassReq3":
+                        classReq3.SelectedIndex = -1;
                         break;
-                    case "clearHeroReq4":
-                        heroReq4.SelectedIndex = -1;
+                    case "clearClassReq4":
+                        classReq4.SelectedIndex = -1;
                         break;
-                    case "clearHeroReq5":
-                        heroReq5.SelectedIndex = -1;
+                    case "clearClassReq5":
+                        classReq5.SelectedIndex = -1;
                         break;
                 }
             }
