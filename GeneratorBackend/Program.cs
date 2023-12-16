@@ -322,8 +322,8 @@ namespace GeneratorBackend
             Vector2 greenNumSize = Raylib.MeasureTextEx(inst.rollFont, green.Value.ToString() + "+", AssetManager.ROLL_SIZE, ROLL_FONT_SPACING);
             Raylib.ImageDrawTextEx(ref card, inst.rollFont, green.Value.ToString() + "+", new(87 + 78 / 2 - greenNumSize.X / 2, 1099 + 78 / 2 - greenNumSize.Y / 2), AssetManager.ROLL_SIZE, ROLL_FONT_SPACING, inst.bottomColor);
 
-            DrawMonsterRollOutcome(red.Outcome, card, new(87 + 78 + 24, 1002 + 78 / 2 - AssetManager.DESC_SIZE / 2 + 2), 500, inst.bottomColor);
-            DrawMonsterRollOutcome(green.Outcome, card, new(87 + 78 + 24, 1099 + 78 / 2 - AssetManager.DESC_SIZE / 2 + 2), 500, inst.bottomColor);
+            DrawMonsterRollOutcome(red.Outcome, card, new(187, 1002 + 78 / 2), 600, inst.bottomColor);
+            DrawMonsterRollOutcome(green.Outcome, card, new(187, 1099 + 78 / 2), 600, inst.bottomColor);
             //Raylib.ImageDrawTextEx(ref card, inst.descFont, red.Outcome, new(87 + 78 + 24, 1002 + 78 / 2 - AssetManager.DESC_SIZE / 2 + 2), AssetManager.DESC_SIZE, DESC_FONT_SPACING, inst.bottomColor);
             //Raylib.ImageDrawTextEx(ref card, inst.descFont, green.Outcome, new(87 + 78 + 24, 1099 + 78 / 2 - AssetManager.DESC_SIZE / 2 + 2), AssetManager.DESC_SIZE, DESC_FONT_SPACING, inst.bottomColor);
 
@@ -673,8 +673,7 @@ namespace GeneratorBackend
             (List<string> lineList, int additionalLineSpace) = SplitTextToLines(text, maxWidth, false);
             float textSize = Raylib.MeasureTextEx(inst.descFont, text.Replace("\n", ""), AssetManager.DESC_SIZE, DESC_FONT_SPACING).Y;
 
-            float lineSpacing = (lineList.Count - 1) * DESC_LINE_SPACING; // We subtract one because: for example between 3 lines there are 2 spaces.
-            float textBlockCenter = (lineList.Count * (textSize) - additionalLineSpace + lineSpacing) / 2;
+            float textBlockCenter = (lineList.Count * textSize) / 2;
 
             // Draw the lines
             for (int currentLine = 0; currentLine < lineList.Count; currentLine++)
@@ -683,8 +682,7 @@ namespace GeneratorBackend
                 {
                     lineList[currentLine] = lineList[currentLine].Replace('\r', ' ');
                 }
-
-                Raylib.ImageDrawTextEx(ref card, inst.descFont, lineList[currentLine], new Vector2(drawLocation.X, drawLocation.Y - textBlockCenter + (textSize * currentLine) + additionalLineSpace), AssetManager.DESC_SIZE, DESC_FONT_SPACING, TextColor);
+                Raylib.ImageDrawTextEx(ref card, inst.descFont, lineList[currentLine], new Vector2(drawLocation.X, drawLocation.Y - textBlockCenter + (textSize * currentLine)), AssetManager.DESC_SIZE, DESC_FONT_SPACING, TextColor);
             }
         }
 
