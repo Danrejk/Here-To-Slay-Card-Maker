@@ -687,6 +687,7 @@ namespace HereToSlay
                         1 => "Nazwa potwora",
                         2 => "Nazwa bohatera",
                         3 => "Nazwa przedmiotu",
+                        4 => "Nazwa magii",
                         _ => "Nazwa przywódcy"
                     };
                     labelClass.Text = Properties.Settings.Default.CardType switch
@@ -701,6 +702,7 @@ namespace HereToSlay
                         1 => "Obrazek potwora",
                         2 => "Obrazek bohatera",
                         3 => "Obrazek przedmiotu",
+                        4 => "Obrazek magii",
                         _ => "Obrazek przywódcy"
                     };
                     labelDescription.Text = "Opis";
@@ -757,6 +759,7 @@ namespace HereToSlay
                         1 => "Monster name",
                         2 => "Hero name",
                         3 => "Item name",
+                        4 => "Magic name",
                         _ => "Leader name"
                     };
                     labelClass.Text = Properties.Settings.Default.CardType switch
@@ -771,6 +774,7 @@ namespace HereToSlay
                         1 => "Monster image",
                         2 => "Hero image",
                         3 => "Item image",
+                        4 => "Magic image",
                         _ => "Leader image"
                     };
                     labelDescription.Text = "Description";
