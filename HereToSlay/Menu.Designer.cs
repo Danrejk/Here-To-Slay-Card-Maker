@@ -991,6 +991,7 @@
             additionalReq.ScrollBars = ScrollBars.Vertical;
             additionalReq.Size = new Size(171, 48);
             additionalReq.TabIndex = 58;
+            additionalReq.TextChanged += renderPreview;
             // 
             // labelHeroBonus
             // 
@@ -1014,6 +1015,7 @@
             heroBonus.ScrollBars = ScrollBars.Vertical;
             heroBonus.Size = new Size(171, 48);
             heroBonus.TabIndex = 61;
+            heroBonus.TextChanged += renderPreview;
             // 
             // Menu
             // 
