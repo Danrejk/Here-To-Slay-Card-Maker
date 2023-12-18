@@ -1208,15 +1208,12 @@ namespace HereToSlay
         {
             additionalReq.Enabled = labelAdditionalReq.Checked;
 
-            classReq3.Enabled = !labelAdditionalReq.Checked;
             classReq4.Enabled = !labelAdditionalReq.Checked;
             classReq5.Enabled = !labelAdditionalReq.Checked;
 
-            clearClassReq3.Enabled = !labelAdditionalReq.Checked;
             clearClassReq4.Enabled = !labelAdditionalReq.Checked;
             clearClassReq5.Enabled = !labelAdditionalReq.Checked;
 
-            classReq3.SelectedIndex = -1;
             classReq4.SelectedIndex = -1;
             classReq5.SelectedIndex = -1;
 

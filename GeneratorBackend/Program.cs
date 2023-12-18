@@ -316,9 +316,8 @@ namespace GeneratorBackend
                 Raylib.ImageDrawTextEx(ref card, inst.reqFont, "+", new(fullXstart, 911), 63, REQ_FONT_SPACING, inst.bottomColor);
                 float plusWidth = Raylib.MeasureTextEx(inst.reqFont, "+", AssetManager.REQ_SIZE, REQ_FONT_SPACING).X;
 
-                //Raylib.ImageDrawTextEx(ref card, inst.reqFont, aditionalReq, new(93 + reqTextWidth + 10 + orderedRequirements.Length * iconsMargin + plusWidth + 16, 926), AssetManager.ADDITIONAL_REQ_SIZE, ADDITIONAL_REQ_FONT_SPACING, inst.bottomColor);
-
-                DrawAdditionalReq(aditionalReq, card, new(fullXstart + plusWidth + 16, 945), 207, inst.bottomColor);
+                int maxWidth = reqCount > 2 ? CARD_WIDTH_TARROT - fullXstart - (int)plusWidth - 40 : 207; 
+                DrawAdditionalReq(aditionalReq, card, new(fullXstart + plusWidth + 16, 945), maxWidth, inst.bottomColor);
             }
             #endregion
 
