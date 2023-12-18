@@ -273,7 +273,7 @@ namespace GeneratorBackend
                 1 => "WYMAGANIA:",
                 _ => "REQUIREMENT:"
             };
-            Raylib.ImageDrawTextEx(ref card, inst.reqFont, reqText, new(87, 920), AssetManager.REQ_SIZE, REQ_FONT_SPACING, inst.bottomColor);
+            Raylib.ImageDrawTextEx(ref card, inst.reqFont, reqText, new(88, 920), AssetManager.REQ_SIZE, REQ_FONT_SPACING, inst.bottomColor);
             float reqTextWidth = Raylib.MeasureTextEx(inst.reqFont, reqText, AssetManager.REQ_SIZE, REQ_FONT_SPACING).X; // get width of the "REQUIREMENT:" text to align the icons properly
 
             #region Requirements
@@ -310,7 +310,8 @@ namespace GeneratorBackend
             // Additional Requirements
             if (aditionalReq != "")
             {
-                Raylib.ImageDrawTextEx(ref card, inst.reqFont, aditionalReq, new(93 + reqTextWidth + 10 + orderedRequirements.Length * iconsMargin, 902), AssetManager.REQ_SIZE, REQ_FONT_SPACING, inst.bottomColor);
+                Raylib.ImageDrawTextEx(ref card, inst.reqFont, "+", new(93 + reqTextWidth + 10 + orderedRequirements.Length * iconsMargin, 910), 63, REQ_FONT_SPACING, inst.bottomColor);
+                float plusWidth = Raylib.MeasureTextEx(inst.reqFont, "+", AssetManager.REQ_SIZE, REQ_FONT_SPACING).X;
             }
             #endregion
 
