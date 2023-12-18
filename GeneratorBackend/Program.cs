@@ -136,6 +136,7 @@ namespace GeneratorBackend
         const int TITLE_FONT_SPACING = 1;
         const int REQ_FONT_SPACING = 0;
         const int ROLL_FONT_SPACING = 0;
+        const int ADDITIONAL_REQ_FONT_SPACING = 2;
 
         const int DESC_FONT_SPACING = 1;
         const float DESC_LINE_SPACING = 4.5f; // the greater the value, the closer the lines are to each other, I know it's weird, but it's how it works.
@@ -311,10 +312,13 @@ namespace GeneratorBackend
             // Additional Requirements
             if (aditionalReq != "")
             {
-                Raylib.ImageDrawTextEx(ref card, inst.reqFont, "+", new(93 + reqTextWidth + 10 + orderedRequirements.Length * iconsMargin, 910), 63, REQ_FONT_SPACING, inst.bottomColor);
+                int fullXstart = 93 + (int)reqTextWidth + 10 + orderedRequirements.Length * (int)iconsMargin;
+                Raylib.ImageDrawTextEx(ref card, inst.reqFont, "+", new(fullXstart, 911), 63, REQ_FONT_SPACING, inst.bottomColor);
                 float plusWidth = Raylib.MeasureTextEx(inst.reqFont, "+", AssetManager.REQ_SIZE, REQ_FONT_SPACING).X;
 
-                Raylib.ImageDrawTextEx(ref card, inst.reqFont, aditionalReq, new(93 + reqTextWidth + 10 + orderedRequirements.Length * iconsMargin + plusWidth + 20, 926), AssetManager.ADDITIONAL_REQ_SIZE, DESC_FONT_SPACING, inst.bottomColor);
+                //Raylib.ImageDrawTextEx(ref card, inst.reqFont, aditionalReq, new(93 + reqTextWidth + 10 + orderedRequirements.Length * iconsMargin + plusWidth + 16, 926), AssetManager.ADDITIONAL_REQ_SIZE, ADDITIONAL_REQ_FONT_SPACING, inst.bottomColor);
+
+                DrawAdditionalReq(aditionalReq, card, new(fullXstart + plusWidth + 16, 945), 207, inst.bottomColor);
             }
             #endregion
 
@@ -725,6 +729,30 @@ namespace GeneratorBackend
                 float textBlockCenterX = drawLocation.X - textWidth / 2;
 
                 Raylib.ImageDrawTextEx(ref card, inst.descFont, lineList[currentLine], new Vector2(textBlockCenterX, drawLocation.Y - textBlockCenterY + (textHeight * currentLine) - lineSpacing), AssetManager.DESC_SIZE, DESC_FONT_SPACING, TextColor);
+
+                lineSpacing += DESC_LINE_SPACING;
+            }
+        }
+
+        static void DrawAdditionalReq(string text, Image card, Vector2 drawLocation, int maxWidth, Color TextColor)
+        {
+            (List<string> lineList, int additionalLineSpace) = SplitTextToLines(text, maxWidth, false);
+            float textHeight = Raylib.MeasureTextEx(inst.descFont, text.Replace("\n", ""), AssetManager.DESC_SIZE, DESC_FONT_SPACING).Y;
+
+            float lineSpacing = (lineList.Count - 1) * DESC_LINE_SPACING; // We subtract one because: for example between 3 lines there are 2 spaces
+            float textBlockCenterY = (lineList.Count * textHeight - lineSpacing) / 2;
+
+            lineSpacing = 0; // We have to reset the lineSpacing and increase it as we are drawing the lines
+
+            // Draw the lines
+            for (int currentLine = 0; currentLine < lineList.Count; currentLine++)
+            {
+                if (lineList[currentLine].Contains('\r'))
+                {
+                    lineList[currentLine] = lineList[currentLine].Replace('\r', ' ');
+                }
+
+                Raylib.ImageDrawTextEx(ref card, inst.reqFont, lineList[currentLine], new Vector2(drawLocation.X, drawLocation.Y - textBlockCenterY + (textHeight * currentLine) - lineSpacing), AssetManager.DESC_SIZE, ADDITIONAL_REQ_FONT_SPACING, TextColor);
 
                 lineSpacing += DESC_LINE_SPACING;
             }
