@@ -37,10 +37,11 @@ namespace GeneratorBackend
         public Image cursed = Raylib.LoadImage("Assets/GeneratorAssets/cursed_item.png");
 
         public const int NAME_SIZE = 60; // 60
-        public const int TITLE_SIZE = 47; // 49
+        public const int TITLE_SIZE = 47; // 47
         public const int REQ_SIZE = 49; // 49
-        public const int ROLL_SIZE = 43; // 49
-        public const int DESC_SIZE = 36; // 38
+        public const int ADDITIONAL_REQ_SIZE = 36; // 37
+        public const int ROLL_SIZE = 43; // 43
+        public const int DESC_SIZE = 36; // 36
 
         public Font nameFont { get; private set; }
         public Font titleFont { get; private set; }
@@ -312,6 +313,8 @@ namespace GeneratorBackend
             {
                 Raylib.ImageDrawTextEx(ref card, inst.reqFont, "+", new(93 + reqTextWidth + 10 + orderedRequirements.Length * iconsMargin, 910), 63, REQ_FONT_SPACING, inst.bottomColor);
                 float plusWidth = Raylib.MeasureTextEx(inst.reqFont, "+", AssetManager.REQ_SIZE, REQ_FONT_SPACING).X;
+
+                Raylib.ImageDrawTextEx(ref card, inst.reqFont, aditionalReq, new(93 + reqTextWidth + 10 + orderedRequirements.Length * iconsMargin + plusWidth + 20, 926), AssetManager.ADDITIONAL_REQ_SIZE, DESC_FONT_SPACING, inst.bottomColor);
             }
             #endregion
 
