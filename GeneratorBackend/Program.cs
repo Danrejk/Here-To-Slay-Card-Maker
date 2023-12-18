@@ -611,11 +611,25 @@ namespace GeneratorBackend
                         outputLine.Append('\r');
                     }
 
+                    if (outputLine.Length == 0)
+                    {
+                        outputLine.Append(word);
+                        word.Clear();
+
+                        if (i + 1 < text.Length && text[i + 1] != ' ' && text[i + 1] != '\r')
+                        {
+                            word.Append(outputLine[outputLine.Length - 1]);
+
+                            outputLine.Remove(outputLine.Length - 1, 1);
+                            outputLine.Append('-');
+                        }
+                    }
+
                     lineList.Add(outputLine.ToString());
                     outputLine.Clear();
                 }
             }
-            lineList.Add(outputLine.ToString() + word.ToString()); // Add the last line.
+            if (word.Length != 0) lineList.Add(outputLine.ToString() + word.ToString()); // Add the last line.
 
             return (lineList, additionalLineSpace);
         }
