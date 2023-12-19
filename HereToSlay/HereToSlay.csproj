@@ -181,4 +181,8 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Language\" />
+  </ItemGroup>
+
 </Project>
