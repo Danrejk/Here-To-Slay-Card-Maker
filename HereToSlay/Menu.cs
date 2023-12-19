@@ -797,7 +797,7 @@ namespace HereToSlay
                     this.Text = "Here to Slay - Generatore di carte";
                     labelBad.Text = "Requisito di tiro - Fallito";
                     labelGood.Text = "Requisito di tiro - STERMINA mostro";
-                    goodOutputText.Text = "SLAY this Monster card";
+                    goodOutputText.Text = "STERMINA questa carta Monstro";
                     labelReq.Text = "Requisiti di classe";
                     RENDER.Text = "SALVA L' IMMAGINE";
                     copyImageToClipboardToolStripMenuItem.Text = "Copia l'immagine";
