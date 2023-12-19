@@ -57,6 +57,7 @@ namespace GeneratorBackend
         public List<ClassListObject> ClassList { get; private set; }
         public Image Hero = Raylib.LoadImage("Classes/hero.png");
         public Image Bohater = Raylib.LoadImage("Classes/bohater.png");
+        public Image Eroe = Raylib.LoadImage("Classes/eroe.png");
 
         private AssetManager()
         {
@@ -79,6 +80,7 @@ namespace GeneratorBackend
                     string[] prop = line.Split('\t');
 
                     string polishName = prop.Length > 3 ? prop[3] : prop[0]; // if there is no polish name, use the english one
+                    string italianName = prop.Length > 4 ? prop[4] : prop[0]; // if there is no italian name, use the english one
 
                     Image image = new();
                     var path = Path.Combine(Directory.GetCurrentDirectory(), "Classes", prop[1]);
@@ -106,7 +108,7 @@ namespace GeneratorBackend
                     Color colorCombined = new(classRed, classGreen, classBlue, 255);
 
                     // Add the class to the list
-                    ClassList.Add(new ClassListObject { NameEN = prop[0], Image = image, ImagePath = path, Color = colorCombined, NamePL = polishName });
+                    ClassList.Add(new ClassListObject { NameEN = prop[0], Image = image, ImagePath = path, Color = colorCombined, NamePL = polishName, NameIT = italianName });
                 }
             }
             catch (Exception e)
@@ -299,6 +301,7 @@ namespace GeneratorBackend
                 if (req == 0) classSymbol = language switch
                 {
                     1 => inst.Bohater,
+                    2 => inst.Eroe,
                     _ => inst.Hero
                 };
                 else classSymbol = inst.ClassList[req - 1].Image; // -1 because HERO is put in front, so the indexes are shifted by 

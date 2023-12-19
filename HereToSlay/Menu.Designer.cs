@@ -536,7 +536,7 @@
             language.DropDownStyle = ComboBoxStyle.DropDownList;
             language.Margin = new Padding(0);
             language.Name = "language";
-            language.Size = new Size(85, 23);
+            language.Size = new Size(100, 23);
             language.SelectedIndexChanged += language_SelectedIndexChanged;
             // 
             // classReq3

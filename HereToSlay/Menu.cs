@@ -64,7 +64,7 @@ namespace HereToSlay
             language.DropDown += ImageCBox.ComboBox_WidthAutoAdjust;
             language.Items.Add(new ImageCBox("English", Properties.Resources.en));
             language.Items.Add(new ImageCBox("Polski", Properties.Resources.pl));
-            language.Items.Add(new ImageCBox("Italiano", Properties.Resources.pl));
+            language.Items.Add(new ImageCBox("Italiano", Properties.Resources.it));
             language.SelectedIndex = Properties.Settings.Default.Language;
             initLang = true;
 
@@ -809,9 +809,9 @@ namespace HereToSlay
 
                     if (chosenClass.SelectedIndex == -1 && Properties.Settings.Default.CardType == 2)
                     {
-                        this.Icon = Properties.Resources.hero;
+                        this.Icon = Properties.Resources.eroe;
                     }
-                    HeroCard.Image = Properties.Resources.hero.ToBitmap();
+                    HeroCard.Image = Properties.Resources.eroe.ToBitmap();
 
                     cardType.Text = "Tipo di carta";
                     LeaderCard.Text = "Leader";
@@ -988,6 +988,55 @@ namespace HereToSlay
 
                     break;
 
+                // Italian
+                case 2:
+                    // These have to be hardcoded mainly because they each use an icon from the resources so it looks better in the combobox.
+                    chosenClass.Items.Add(new ImageCBox("SENZA CLASSE", Properties.Resources.empty.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Ranger", Properties.Resources.lowca.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Mago", Properties.Resources.mag.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Bardo", Properties.Resources.najebus.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Guardiano", Properties.Resources.straznik.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Guerriero", Properties.Resources.wojownik.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Ladro", Properties.Resources.zlodziej.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Druido", Properties.Resources.druid.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Combattente", Properties.Resources.awanturnik.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Berserker", Properties.Resources.berserk.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Necromante", Properties.Resources.nekromanta.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Stregone", Properties.Resources.czarownik.ToBitmap()));
+
+                    // Add custom classes
+                    inst.ClassList.Skip(12).ToList().ForEach(c =>
+                    {
+                        string capitalisedName = char.ToUpper(c.NameEN[0]) + c.NameEN.Substring(1);
+
+                        // Load class icon
+                        Bitmap classIcon = new(1, 1);
+                        if (File.Exists(c.ImagePath))
+                        {
+                            classIcon = new Bitmap(c.ImagePath);
+                        }
+                        else
+                        {
+                            if (initLang == true) // don't show this error when first loading the program (it would show up twice, due to lazy programming)
+                            {
+                                MessageBox.Show($"Error loading icon for the {c.NameIT} class.\nCould not find image in {c.ImagePath}.\n\nClass icon will be left empty.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                        chosenClass.Items.Add(new ImageCBox(capitalisedName, new Bitmap(1, 1)));
+                    });
+
+                    // Add monster related options
+                    classReq1.Items.Add(new ImageCBox("EROE", Properties.Resources.eroe.ToBitmap()));
+                    classReq2.Items.Add(new ImageCBox("EROE", Properties.Resources.eroe.ToBitmap()));
+                    classReq3.Items.Add(new ImageCBox("EROE", Properties.Resources.eroe.ToBitmap()));
+                    classReq4.Items.Add(new ImageCBox("EROE", Properties.Resources.eroe.ToBitmap()));
+                    classReq5.Items.Add(new ImageCBox("EROE", Properties.Resources.eroe.ToBitmap()));
+
+                    // Add item related options
+                    itemChosenClass.Items.Add(new ImageCBox("Oggetto", Properties.Resources.itemIcon.ToBitmap()));
+                    itemChosenClass.Items.Add(new ImageCBox("Oggetto maledetto", Properties.Resources.cursed.ToBitmap()));
+
+                    break;
                 // English
                 default:
                     // These have to be hardcoded mainly because they each use an icon from the resources so it looks better in the combobox.
