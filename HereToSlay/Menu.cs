@@ -64,6 +64,7 @@ namespace HereToSlay
             language.DropDown += ImageCBox.ComboBox_WidthAutoAdjust;
             language.Items.Add(new ImageCBox("English", Properties.Resources.en));
             language.Items.Add(new ImageCBox("Polski", Properties.Resources.pl));
+            language.Items.Add(new ImageCBox("Italiano", Properties.Resources.pl));
             language.SelectedIndex = Properties.Settings.Default.Language;
             initLang = true;
 
@@ -751,6 +752,78 @@ namespace HereToSlay
                     additionalReq.Text = "ODRZUÆ X kart";
                     labelHeroBonus.Text = "Bonus dodatkowych boh.";
                     heroBonus.Text = "Za ka¿dego dodatkowego bohatera w twojej dru¿ynie, +X do twojego rzutu";
+
+                    break;
+
+                // Italian
+                case 2:
+                    logo.Image = Properties.Resources.Logo0;
+                    labelLeader.Text = Properties.Settings.Default.CardType switch
+                    {
+                        1 => "Nome del mostro",
+                        2 => "Nome dell'eroe",
+                        3 => "Nome dell'oggetto",
+                        4 => "Nome della magia",
+                        _ => "Nome del leader"
+                    };
+                    labelClass.Text = Properties.Settings.Default.CardType switch
+                    {
+                        2 => "Classe dell'eroe",
+                        3 => "Classe dell'oggetto",
+                        _ => "Classe del leader"
+                    };
+                    labelSecondClass.Text = "Seconda classe";
+                    labelImg.Text = Properties.Settings.Default.CardType switch
+                    {
+                        1 => "Immagine del mostro",
+                        2 => "Immagine dell'eroe",
+                        3 => "Immagine dell'oggetto",
+                        4 => "Immagine della magia",
+                        _ => "Immagine del leader"
+                    };
+                    labelDescription.Text = "Descrizione";
+                    leaderImgToolTip.ToolTipTitle = "Dimensioni dell'immagine";
+                    leaderImgToolTip.SetToolTip(selectImgButton, Properties.Settings.Default.CardType switch
+                    {
+                        1 => "Le dimensioni dell'immagine del mostro (non l'intera carta) sono 745x817. \nIl programma ritagliera e zoommera automaticamente l'immagine se necessario.\n\nEstensioni file supportate:\n.png, .jpeg, .jpg, .gif (first frame), .bmp, .webp, .pbm, .tiff, .tga",
+                        2 => "Le dimensioni dell'immagine dell'eroe (non l'intera carta) sono 545x545. \nIl programma ritagliera e zoommera automaticamente l'immagine se necessario.\n\nEstensioni file supportate:\n.png, .jpeg, .jpg, .gif (first frame), .bmp, .webp, .pbm, .tiff, .tga",
+                        3 => "Le dimensioni dell'immagine dell'oggetto (non l'intera carta) sono 545x545. \nIl programma ritagliera e zoommera automaticamente l'immagine se necessario.\n\nEstensioni file supportate:\n.png, .jpeg, .jpg, .gif (first frame), .bmp, .webp, .pbm, .tiff, .tga",
+                        4 => "Le dimensioni dell'immagine della magia (non l'intera carta) sono 545x545. \nIl programma ritagliera e zoommera automaticamente l'immagine se necessario.\n\nEstensioni file supportate:\n.png, .jpeg, .jpg, .gif (first frame), .bmp, .webp, .pbm, .tiff, .tga",
+                        _ => "Le dimensioni dell'immagine del leader (non l'intera carta) sono 745x1176. \nIl programma ritagliera e zoommera automaticamente l'immagine se necessario.\n\nEstensioni file supportate:\n.png, .jpeg, .jpg, .gif (first frame), .bmp, .webp, .pbm, .tiff, .tga"
+                    });
+                    gradient.Text = "Gradiente di sfondo";
+                    nameWhite.Text = "Nome bianco";
+                    splitClass.Text = "Doppia classe";
+                    this.Text = "Here to Slay - Generatore di carte";
+                    labelBad.Text = "Requisito di tiro - Fallito";
+                    labelGood.Text = "Requisito di tiro - STERMINA mostro";
+                    goodOutputText.Text = "SLAY this Monster card";
+                    labelReq.Text = "Requisiti di classe";
+                    RENDER.Text = "SALVA L' IMMAGINE";
+                    copyImageToClipboardToolStripMenuItem.Text = "Copia l'immagine";
+                    openImageLocationToolStripMenuItem.Text = "Apri percorso immagine";
+                    labelMaxItem.Text = "Numero massimo di oggetti";
+                    alternativeColor.Text = "Colore alternativo (?)";
+                    altColorToolTip.ToolTipTitle = "Colore alternativo";
+                    altColorToolTip.SetToolTip(alternativeColor, "Su alcune stampanti, il colore standard potrebbe differire notevolmente da quello desiderato.\nIl colore standard ? preso direttamente dal manuale, quindi dovrebbe essere buono,\nma alcune stampanti non hanno una profondit? di colore sufficiente.\n\nIl colore alternativo (nero), potrebbe sembrare migliore su alcune stampanti.");
+
+                    if (chosenClass.SelectedIndex == -1 && Properties.Settings.Default.CardType == 2)
+                    {
+                        this.Icon = Properties.Resources.hero;
+                    }
+                    HeroCard.Image = Properties.Resources.hero.ToBitmap();
+
+                    cardType.Text = "Tipo di carta";
+                    LeaderCard.Text = "Leader";
+                    MonsterCard.Text = "Mostro";
+                    HeroCard.Text = "Eroe";
+                    ItemCard.Text = "Oggetto";
+                    MagicCard.Text = "Magia";
+
+                    additionalReq.Text = "Requisiti aggiuntivi";
+                    additionalReq.Text = "SCARTA X carte";
+                    labelHeroBonus.Text = "Bonus Eroe aggiuntivo";
+                    heroBonus.Text = "Per ogni carta Eroe aggiuntiva nella tua Squadra, +X al tuo tiro";
 
                     break;
 

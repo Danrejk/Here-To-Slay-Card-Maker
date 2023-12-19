@@ -17,6 +17,7 @@ namespace GeneratorBackend
         public string ImagePath { get; set; } = "";
         public Color Color { get; set; }
         public string NamePL { get; set; } = "";
+        public string NameIT { get; set; } = "";
     }
 
     public class AssetManager
@@ -182,6 +183,7 @@ namespace GeneratorBackend
             leaderTitle = language switch
             {
                 1 => $"Przywódca drużyny: {inst.ClassList[desiredClass[0]].NamePL}",
+                2 => $"Leader del gruppo: {inst.ClassList[desiredClass[0]].NameIT}",
                 _ => $"Party Leader: {inst.ClassList[desiredClass[0]].NameEN}"
             };
             if (inst.ClassList[desiredClass[0]].NameEN == "") leaderTitle = leaderTitle.Replace(": ", "");
@@ -198,11 +200,13 @@ namespace GeneratorBackend
                 leaderTitle += language switch
                 {
                     1 => $"/{inst.ClassList[desiredClass[1]].NamePL}",
+                    2 => $"/{inst.ClassList[desiredClass[1]].NameIT}",
                     _ => $"/{inst.ClassList[desiredClass[1]].NameEN}"
                 };
                 if (inst.ClassList[desiredClass[1]].NameEN == "") leaderTitle += language switch
                 {
                     1 => "przywódca",
+                    2 => "Leader",
                     _ => "Leader"
                 };
                 Raylib.ImageCrop(ref secondClassSymbol, new Rectangle(0, 0, 51, 102));
@@ -273,6 +277,7 @@ namespace GeneratorBackend
             string reqText = language switch
             {
                 1 => "WYMAGANIA:",
+                2 => "REQUISITI:",
                 _ => "REQUIREMENT:"
             };
             Raylib.ImageDrawTextEx(ref card, inst.reqFont, reqText, new(88, 920), AssetManager.REQ_SIZE, REQ_FONT_SPACING, inst.bottomColor);
@@ -303,6 +308,7 @@ namespace GeneratorBackend
                     iconsMargin -= language switch
                     {
                         1 => 0, // polish doesn't need margin reduction, because the "REQUIREMENT" text is shorter
+                        2 => 0, // italian doesn't need margin reduction, because the "REQUIREMENT" text is shorter
                         _ => 8 // YOU CAN MODIFY THIS. It might look better for your preferences, but for me I think this is the best option.
                     };
                 }
@@ -352,6 +358,7 @@ namespace GeneratorBackend
             string titleText = language switch
             {
                 1 => "Potwór",
+                2 => "Mostro",
                 _ => "Monster"
             };
             DrawNameAndTitleTarrot(name, titleText, card, nameWhite);
@@ -398,6 +405,7 @@ namespace GeneratorBackend
             heroTitle = language switch
             {
                 1 => $"Bohater: {inst.ClassList[desiredClass].NamePL}",
+                2 => $"Eroe: {inst.ClassList[desiredClass].NameIT}",
                 _ => $"Hero: {inst.ClassList[desiredClass].NameEN}"
             };
             if (inst.ClassList[desiredClass].NameEN == "") heroTitle = heroTitle.Replace(": ", "");
@@ -467,6 +475,7 @@ namespace GeneratorBackend
                 itemTitle = language switch
                 {
                     1 => "Przeklęty przedmiot",
+                    2 => "Oggetto maledetto",
                     _ => "Cursed Item"
                 };
             }
@@ -476,6 +485,7 @@ namespace GeneratorBackend
                 itemTitle = language switch
                 {
                     1 => "Przedmiot",
+                    2 => "Oggetto",
                     _ => "Item"
                 };
             }
@@ -512,6 +522,7 @@ namespace GeneratorBackend
             string magicTitle = language switch
             {
                 1 => "Magia",
+                2 => "Magia",
                 _ => "Magic"
             };
 
