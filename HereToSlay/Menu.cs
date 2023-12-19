@@ -680,6 +680,7 @@ namespace HereToSlay
         {
             Properties.Settings.Default.Language = language.SelectedIndex;
             Properties.Settings.Default.Save();
+            string toolTipImageDimentions;
 
             switch (language.SelectedIndex)
             {
@@ -711,14 +712,16 @@ namespace HereToSlay
                     };
                     labelDescription.Text = "Opis";
                     leaderImgToolTip.ToolTipTitle = "Wymiary obazka";
-                    leaderImgToolTip.SetToolTip(selectImgButton, Properties.Settings.Default.CardType switch
+                    toolTipImageDimentions = Properties.Settings.Default.CardType switch
                     {
-                        1 => "Obrazek potwora (nie ca³a karta) ma wymiary 745x817. \nProgram automatycznie przytnie i przybli¿y obraz, je¿eli bêdzie to potrzebne.\n\nWspierane rozszerzenia plików:\n.png, .jpeg, .jpg, .gif (pierwsza klatka), .bmp, .webp, .pbm, .tiff, .tga",
-                        2 => "Obrazek bohatera (nie ca³a karta) ma wymiary 545x545. \nProgram automatycznie przytnie i przybli¿y obraz, je¿eli bêdzie to potrzebne.\n\nWspierane rozszerzenia plików:\n.png, .jpeg, .jpg, .gif (pierwsza klatka), .bmp, .webp, .pbm, .tiff, .tga",
-                        3 => "Obrazek przedmiotu (nie ca³a karta) ma wymiary 545x545. \nProgram automatycznie przytnie i przybli¿y obraz, je¿eli bêdzie to potrzebne.\n\nWspierane rozszerzenia plików:\n.png, .jpeg, .jpg, .gif (pierwsza klatka), .bmp, .webp, .pbm, .tiff, .tga",
-                        4 => "Obrazek magii (nie ca³a karta) ma wymiary 545x545. \nProgram automatycznie przytnie i przybli¿y obraz, je¿eli bêdzie to potrzebne.\n\nWspierane rozszerzenia plików:\n.png, .jpeg, .jpg, .gif (pierwsza klatka), .bmp, .webp, .pbm, .tiff, .tga",
-                        _ => "Obrazek przywódcy (nie ca³a karta) ma wymiary 745x1176. \nProgram automatycznie przytnie i przybli¿y obraz, je¿eli bêdzie to potrzebne.\n\nWspierane rozszerzenia plików:\n.png, .jpeg, .jpg, .gif (pierwsza klatka), .bmp, .webp, .pbm, .tiff, .tga"
-                    }); ;
+                        1 => "Obrazek potwora (nie ca³a karta) ma wymiary 745x817.",
+                        2 => "Obrazek bohatera (nie ca³a karta) ma wymiary 545x545.",
+                        3 => "Obrazek przedmiotu (nie ca³a karta) ma wymiary 545x545.",
+                        4 => "Obrazek magii (nie ca³a karta) ma wymiary 545x545.",
+                        _ => "Obrazek przywódcy (nie ca³a karta) ma wymiary 745x1176.",
+                    };
+                    leaderImgToolTip.SetToolTip(selectImgButton, toolTipImageDimentions + "\nProgram automatycznie przytnie i przybli¿y obraz, je¿eli bêdzie to potrzebne.\n\nWspierane rozszerzenia plików:\n.png, .jpeg, .jpg, .gif(pierwsza klatka), .bmp, .webp, .pbm, .tiff, .tga");
+
                     gradient.Text = "Tylni gradient";
                     nameWhite.Text = "Bia³a nazwa";
                     splitClass.Text = "Podwójna Klasa";
@@ -783,14 +786,16 @@ namespace HereToSlay
                     };
                     labelDescription.Text = "Descrizione";
                     leaderImgToolTip.ToolTipTitle = "Dimensioni dell'immagine";
-                    leaderImgToolTip.SetToolTip(selectImgButton, Properties.Settings.Default.CardType switch
+                    toolTipImageDimentions = Properties.Settings.Default.CardType switch
                     {
-                        1 => "Le dimensioni dell'immagine del mostro (non l'intera carta) sono 745x817. \nIl programma ritagliera e zoommera automaticamente l'immagine se necessario.\n\nEstensioni file supportate:\n.png, .jpeg, .jpg, .gif (first frame), .bmp, .webp, .pbm, .tiff, .tga",
-                        2 => "Le dimensioni dell'immagine dell'eroe (non l'intera carta) sono 545x545. \nIl programma ritagliera e zoommera automaticamente l'immagine se necessario.\n\nEstensioni file supportate:\n.png, .jpeg, .jpg, .gif (first frame), .bmp, .webp, .pbm, .tiff, .tga",
-                        3 => "Le dimensioni dell'immagine dell'oggetto (non l'intera carta) sono 545x545. \nIl programma ritagliera e zoommera automaticamente l'immagine se necessario.\n\nEstensioni file supportate:\n.png, .jpeg, .jpg, .gif (first frame), .bmp, .webp, .pbm, .tiff, .tga",
-                        4 => "Le dimensioni dell'immagine della magia (non l'intera carta) sono 545x545. \nIl programma ritagliera e zoommera automaticamente l'immagine se necessario.\n\nEstensioni file supportate:\n.png, .jpeg, .jpg, .gif (first frame), .bmp, .webp, .pbm, .tiff, .tga",
-                        _ => "Le dimensioni dell'immagine del leader (non l'intera carta) sono 745x1176. \nIl programma ritagliera e zoommera automaticamente l'immagine se necessario.\n\nEstensioni file supportate:\n.png, .jpeg, .jpg, .gif (first frame), .bmp, .webp, .pbm, .tiff, .tga"
-                    });
+                        1 => "Le dimensioni dell'immagine del mostro (non l'intera carta) sono 745x817.",
+                        2 => "Le dimensioni dell'immagine dell'eroe (non l'intera carta) sono 545x545.",
+                        3 => "Le dimensioni dell'immagine dell'oggetto (non l'intera carta) sono 545x545.",
+                        4 => "Le dimensioni dell'immagine della magia (non l'intera carta) sono 545x545.",
+                        _ => "Le dimensioni dell'immagine del leader (non l'intera carta) sono 745x1176."
+                    };
+                    leaderImgToolTip.SetToolTip(selectImgButton, toolTipImageDimentions + "\nIl programma ritagliera e zoommera automaticamente l'immagine se necessario.\n\nEstensioni file supportate:\n.png, .jpeg, .jpg, .gif (first frame), .bmp, .webp, .pbm, .tiff, .tga");
+
                     gradient.Text = "Gradiente di sfondo";
                     nameWhite.Text = "Nome bianco";
                     splitClass.Text = "Doppia classe";
@@ -855,14 +860,16 @@ namespace HereToSlay
                     };
                     labelDescription.Text = "Description";
                     leaderImgToolTip.ToolTipTitle = "Image dimentions";
-                    leaderImgToolTip.SetToolTip(selectImgButton, Properties.Settings.Default.CardType switch
+                    toolTipImageDimentions = Properties.Settings.Default.CardType switch
                     {
-                        1 => "The monster image (not the whole card) dimentions are 745x817. \nThe program will automatically crop and zoom the image, if needed.\n\nSupported file extensions:\n.png, .jpeg, .jpg, .gif (first frame), .bmp, .webp, .pbm, .tiff, .tga",
-                        2 => "The hero image (not the whole card) dimentions are 545x545. \nThe program will automatically crop and zoom the image, if needed.\n\nSupported file extensions:\n.png, .jpeg, .jpg, .gif (first frame), .bmp, .webp, .pbm, .tiff, .tga",
-                        3 => "The item image (not the whole card) dimentions are 545x545. \nThe program will automatically crop and zoom the image, if needed.\n\nSupported file extensions:\n.png, .jpeg, .jpg, .gif (first frame), .bmp, .webp, .pbm, .tiff, .tga",
-                        4 => "The magic image (not the whole card) dimentions are 545x545. \nThe program will automatically crop and zoom the image, if needed.\n\nSupported file extensions:\n.png, .jpeg, .jpg, .gif (first frame), .bmp, .webp, .pbm, .tiff, .tga",
-                        _ => "The leader image (not the whole card) dimentions are 745x1176. \nThe program will automatically crop and zoom the image, if needed.\n\nSupported file extensions:\n.png, .jpeg, .jpg, .gif (first frame), .bmp, .webp, .pbm, .tiff, .tga"
-                    });
+                        1 => "The monster image (not the whole card) dimentions are 745x817.",
+                        2 => "The hero image (not the whole card) dimentions are 545x545.",
+                        3 => "The item image (not the whole card) dimentions are 545x545.",
+                        4 => "The magic image (not the whole card) dimentions are 545x545.",
+                        _ => "The leader image (not the whole card) dimentions are 745x1176.",
+                    };
+                    leaderImgToolTip.SetToolTip(selectImgButton, toolTipImageDimentions + "\nThe program will automatically crop and zoom the image, if needed.\n\nSupported file extensions:\n.png, .jpeg, .jpg, .gif(first frame), .bmp, .webp, .pbm, .tiff, .tga");
+                    
                     gradient.Text = "Back gradient";
                     nameWhite.Text = "White name";
                     splitClass.Text = "Split Class";

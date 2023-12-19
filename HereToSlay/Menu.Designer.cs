@@ -379,7 +379,7 @@
             // 
             // leaderImgToolTip
             // 
-            leaderImgToolTip.AutoPopDelay = 50000;
+            leaderImgToolTip.AutoPopDelay = 32766;
             leaderImgToolTip.InitialDelay = 250;
             leaderImgToolTip.ReshowDelay = 100;
             leaderImgToolTip.ToolTipIcon = ToolTipIcon.Info;
@@ -950,7 +950,7 @@
             // 
             // altColorToolTip
             // 
-            altColorToolTip.AutoPopDelay = 50000;
+            altColorToolTip.AutoPopDelay = 32766;
             altColorToolTip.InitialDelay = 250;
             altColorToolTip.ReshowDelay = 100;
             altColorToolTip.ToolTipIcon = ToolTipIcon.Info;
@@ -1023,10 +1023,6 @@
             BackColor = Color.FromArgb(39, 43, 52);
             BackgroundImage = Properties.Resources.gradient;
             ClientSize = new Size(828, 711);
-            Controls.Add(heroBonus);
-            Controls.Add(labelHeroBonus);
-            Controls.Add(additionalReq);
-            Controls.Add(labelAdditionalReq);
             Controls.Add(itemChosenClass);
             Controls.Add(advancedGeneralBox);
             Controls.Add(advancedGeneral);
@@ -1076,6 +1072,10 @@
             Controls.Add(labelBad);
             Controls.Add(labelMaxItem);
             Controls.Add(labelReq);
+            Controls.Add(heroBonus);
+            Controls.Add(labelHeroBonus);
+            Controls.Add(additionalReq);
+            Controls.Add(labelAdditionalReq);
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MainMenuStrip = menuStrip1;
