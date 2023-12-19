@@ -692,20 +692,8 @@ namespace HereToSlay
 
             // English
             logo.Image = Properties.Resources.Logo0;
-            labelLeader.Text = Properties.Settings.Default.CardType switch
-            {
-                1 => "Monster name",
-                2 => "Hero name",
-                3 => "Item name",
-                4 => "Magic name",
-                _ => "Leader name"
-            };
-            labelClass.Text = Properties.Settings.Default.CardType switch
-            {
-                2 => "Hero class",
-                3 => "Item class",
-                _ => "Leader class"
-            };
+            labelLeader.Text = langManager.GetLocalizedString(lang, "labelLeader");
+            labelClass.Text = langManager.GetLocalizedString(lang, "labelClass");
             labelSecondClass.Text = "Second class";
             labelImg.Text = Properties.Settings.Default.CardType switch
             {

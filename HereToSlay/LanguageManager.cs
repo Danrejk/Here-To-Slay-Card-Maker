@@ -27,6 +27,8 @@ namespace HereToSlay
                 {
                     if (language.Attributes == null) throw new Exception("Language node has no attributes");
 
+                    string languageId = language.Attributes?["id"]?.Value ?? throw new Exception("Language has no set id");
+
                     var strings = new Dictionary<string, string>();
                     foreach (XmlNode stringNode in language.ChildNodes)
                     {
@@ -35,8 +37,7 @@ namespace HereToSlay
 
                         strings[key] = value;
                     }
-
-                    string languageId = language.Attributes?["id"]?.Value ?? throw new Exception("Language has no set id");
+                    
                     languageStrings[languageId] = strings;
                 }
             }
