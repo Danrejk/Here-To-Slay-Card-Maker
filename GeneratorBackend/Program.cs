@@ -294,6 +294,16 @@ namespace GeneratorBackend
 
             float iconsMargin = 83 + 13; // distance between icons (13), 83 is the width of the icon
 
+            if (reqCount > 4) // if there are more than 4 icons, we need to reduce the margin between them
+            {
+                iconsMargin -= language switch
+                {
+                    1 => 0, // polish doesn't need margin reduction, because the "REQUIREMENT" text is shorter
+                    2 => 0, // italian doesn't need margin reduction, because the "REQUIREMENT" text is shorter
+                    _ => 8 // YOU CAN MODIFY THIS. It might look better for your preferences, but for me I think this is the best option.
+                };
+            }
+
             // Draw the class requirements
             foreach ((int req, int index) in orderedRequirements.Select((value, index) => (value, index)))
             {
@@ -304,17 +314,8 @@ namespace GeneratorBackend
                     2 => inst.Eroe,
                     _ => inst.Hero
                 };
-                else classSymbol = inst.ClassList[req - 1].Image; // -1 because HERO is put in front, so the indexes are shifted by 
+                else classSymbol = inst.ClassList[req - 1].Image; // -1 because HERO is put in front, so the indexes are shifted
 
-                if (reqCount > 4) // if there are more than 4 icons, we need to reduce the margin between them
-                {
-                    iconsMargin -= language switch
-                    {
-                        1 => 0, // polish doesn't need margin reduction, because the "REQUIREMENT" text is shorter
-                        2 => 0, // italian doesn't need margin reduction, because the "REQUIREMENT" text is shorter
-                        _ => 8 // YOU CAN MODIFY THIS. It might look better for your preferences, but for me I think this is the best option.
-                    };
-                }
                 Raylib.ImageDraw(ref card, classSymbol, imageRec, new(93 + reqTextWidth + 10 + index * iconsMargin, 902, 83, 83), Color.WHITE);
             }
 
