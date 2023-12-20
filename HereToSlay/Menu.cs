@@ -680,303 +680,305 @@ namespace HereToSlay
         {
             Properties.Settings.Default.Language = language.SelectedIndex;
             Properties.Settings.Default.Save();
-            LanguageManager langManager = new("Language/languages.xml");
 
-            string lang = language.SelectedIndex switch
-            {
-                0 => "EN",
-                1 => "PL",
-                2 => "IT",
-                _ => "EN"
-            };
+            #region unfinished custom language code
+            //LanguageManager langManager = new("Language/languages.xml");
 
-            // English
-            logo.Image = Properties.Resources.Logo0;
-            labelLeader.Text = langManager.GetLocalizedString(lang, "labelLeader");
-            labelClass.Text = langManager.GetLocalizedString(lang, "labelClass");
-            labelSecondClass.Text = "Second class";
-            labelImg.Text = Properties.Settings.Default.CardType switch
-            {
-                1 => "Monster image",
-                2 => "Hero image",
-                3 => "Item image",
-                4 => "Magic image",
-                _ => "Leader image"
-            };
-            labelDescription.Text = "Description";
-            leaderImgToolTip.ToolTipTitle = "Image dimentions";
-            string toolTipImageDimentions = Properties.Settings.Default.CardType switch
-            {
-                1 => "The monster image (not the whole card) dimentions are 745x817.",
-                2 => "The hero image (not the whole card) dimentions are 545x545.",
-                3 => "The item image (not the whole card) dimentions are 545x545.",
-                4 => "The magic image (not the whole card) dimentions are 545x545.",
-                _ => "The leader image (not the whole card) dimentions are 745x1176.",
-            };
-            leaderImgToolTip.SetToolTip(selectImgButton, toolTipImageDimentions + "\nThe program will automatically crop and zoom the image, if needed.\n\nSupported file extensions:\n.png, .jpeg, .jpg, .gif(first frame), .bmp, .webp, .pbm, .tiff, .tga");
+            //string lang = language.SelectedIndex switch
+            //{
+            //    0 => "EN",
+            //    1 => "PL",
+            //    2 => "IT",
+            //    _ => "EN"
+            //};
 
-            gradient.Text = "Back gradient";
-            nameWhite.Text = "White name";
-            splitClass.Text = "Split Class";
-            this.Text = "Here to Slay - Card generator";
-            labelBad.Text = "Roll Requirements - Fail";
-            labelGood.Text = "Roll Requirements - SLAY monster";
-            goodOutputText.Text = "SLAY this Monster card";
-            labelReq.Text = "Class Requirements";
-            RENDER.Text = "SAVE IMAGE";
-            copyImageToClipboardToolStripMenuItem.Text = "Copy image";
-            openImageLocationToolStripMenuItem.Text = "Open image location";
-            labelMaxItem.Text = "Max Item Ammount";
-            alternativeColor.Text = "Alternative Color (?)";
-            altColorToolTip.ToolTipTitle = "Alternative Color";
-            altColorToolTip.SetToolTip(alternativeColor, "On some printers, the standard color might largely differ from the disered one.\nThe standard color is taken straight from the manual, so it should be good,\nbut some printers don't have a sufficient color depth.\n\nThe alternative color (black), might look better on some printers.");
+            //// English
+            //logo.Image = Properties.Resources.Logo0;
+            //labelLeader.Text = langManager.GetLocalizedString(lang, "labelLeader");
+            //labelClass.Text = langManager.GetLocalizedString(lang, "labelClass");
+            //labelSecondClass.Text = "Second class";
+            //labelImg.Text = Properties.Settings.Default.CardType switch
+            //{
+            //    1 => "Monster image",
+            //    2 => "Hero image",
+            //    3 => "Item image",
+            //    4 => "Magic image",
+            //    _ => "Leader image"
+            //};
+            //labelDescription.Text = "Description";
+            //leaderImgToolTip.ToolTipTitle = "Image dimentions";
+            //string toolTipImageDimentions = Properties.Settings.Default.CardType switch
+            //{
+            //    1 => "The monster image (not the whole card) dimentions are 745x817.",
+            //    2 => "The hero image (not the whole card) dimentions are 545x545.",
+            //    3 => "The item image (not the whole card) dimentions are 545x545.",
+            //    4 => "The magic image (not the whole card) dimentions are 545x545.",
+            //    _ => "The leader image (not the whole card) dimentions are 745x1176.",
+            //};
+            //leaderImgToolTip.SetToolTip(selectImgButton, toolTipImageDimentions + "\nThe program will automatically crop and zoom the image, if needed.\n\nSupported file extensions:\n.png, .jpeg, .jpg, .gif(first frame), .bmp, .webp, .pbm, .tiff, .tga");
 
-            if (chosenClass.SelectedIndex == -1 && Properties.Settings.Default.CardType == 2)
-            {
-                this.Icon = Properties.Resources.hero;
-            }
-            HeroCard.Image = Properties.Resources.hero.ToBitmap();
+            //gradient.Text = "Back gradient";
+            //nameWhite.Text = "White name";
+            //splitClass.Text = "Split Class";
+            //this.Text = "Here to Slay - Card generator";
+            //labelBad.Text = "Roll Requirements - Fail";
+            //labelGood.Text = "Roll Requirements - SLAY monster";
+            //goodOutputText.Text = "SLAY this Monster card";
+            //labelReq.Text = "Class Requirements";
+            //RENDER.Text = "SAVE IMAGE";
+            //copyImageToClipboardToolStripMenuItem.Text = "Copy image";
+            //openImageLocationToolStripMenuItem.Text = "Open image location";
+            //labelMaxItem.Text = "Max Item Ammount";
+            //alternativeColor.Text = "Alternative Color (?)";
+            //altColorToolTip.ToolTipTitle = "Alternative Color";
+            //altColorToolTip.SetToolTip(alternativeColor, "On some printers, the standard color might largely differ from the disered one.\nThe standard color is taken straight from the manual, so it should be good,\nbut some printers don't have a sufficient color depth.\n\nThe alternative color (black), might look better on some printers.");
 
-            cardType.Text = "Card Type";
-            LeaderCard.Text = "Leader";
-            MonsterCard.Text = "Monster";
-            HeroCard.Text = "Hero";
-            ItemCard.Text = "Item";
-            MagicCard.Text = "Magic";
+            //if (chosenClass.SelectedIndex == -1 && Properties.Settings.Default.CardType == 2)
+            //{
+            //    this.Icon = Properties.Resources.hero;
+            //}
+            //HeroCard.Image = Properties.Resources.hero.ToBitmap();
 
-            additionalReq.Text = "Addidional Requirements";
-            additionalReq.Text = "DISCARD X cards";
-            labelHeroBonus.Text = "Additional Hero Bonus";
-            heroBonus.Text = "For each additional Hero card in your Party, +X to your roll.";
+            //cardType.Text = "Card Type";
+            //LeaderCard.Text = "Leader";
+            //MonsterCard.Text = "Monster";
+            //HeroCard.Text = "Hero";
+            //ItemCard.Text = "Item";
+            //MagicCard.Text = "Magic";
 
+            //additionalReq.Text = "Addidional Requirements";
+            //additionalReq.Text = "DISCARD X cards";
+            //labelHeroBonus.Text = "Additional Hero Bonus";
+            //heroBonus.Text = "For each additional Hero card in your Party, +X to your roll.";
+            #endregion
 
             #region old language code
-            //string toolTipImageDimentions;
+            string toolTipImageDimentions;
 
-            //switch (language.SelectedIndex)
-            //{
-            //    // Polish
-            //    case 1:
-            //        logo.Image = Properties.Resources.Logo1;
-            //        labelLeader.Text = Properties.Settings.Default.CardType switch
-            //        {
-            //            1 => "Nazwa potwora",
-            //            2 => "Nazwa bohatera",
-            //            3 => "Nazwa przedmiotu",
-            //            4 => "Nazwa magii",
-            //            _ => "Nazwa przywódcy"
-            //        };
-            //        labelClass.Text = Properties.Settings.Default.CardType switch
-            //        {
-            //            2 => "Klasa bohatera",
-            //            3 => "Klasa przedmiotu",
-            //            _ => "Klasa przywódcy"
-            //        };
-            //        labelSecondClass.Text = "Druga klasa";
-            //        labelImg.Text = Properties.Settings.Default.CardType switch
-            //        {
-            //            1 => "Obrazek potwora",
-            //            2 => "Obrazek bohatera",
-            //            3 => "Obrazek przedmiotu",
-            //            4 => "Obrazek magii",
-            //            _ => "Obrazek przywódcy"
-            //        };
-            //        labelDescription.Text = "Opis";
-            //        leaderImgToolTip.ToolTipTitle = "Wymiary obazka";
-            //        toolTipImageDimentions = Properties.Settings.Default.CardType switch
-            //        {
-            //            1 => "Obrazek potwora (nie ca³a karta) ma wymiary 745x817.",
-            //            2 => "Obrazek bohatera (nie ca³a karta) ma wymiary 545x545.",
-            //            3 => "Obrazek przedmiotu (nie ca³a karta) ma wymiary 545x545.",
-            //            4 => "Obrazek magii (nie ca³a karta) ma wymiary 545x545.",
-            //            _ => "Obrazek przywódcy (nie ca³a karta) ma wymiary 745x1176.",
-            //        };
-            //        leaderImgToolTip.SetToolTip(selectImgButton, toolTipImageDimentions + "\nProgram automatycznie przytnie i przybli¿y obraz, je¿eli bêdzie to potrzebne.\n\nWspierane rozszerzenia plików:\n.png, .jpeg, .jpg, .gif(pierwsza klatka), .bmp, .webp, .pbm, .tiff, .tga");
+            switch (language.SelectedIndex)
+            {
+                // Polish
+                case 1:
+                    logo.Image = Properties.Resources.Logo1;
+                    labelLeader.Text = Properties.Settings.Default.CardType switch
+                    {
+                        1 => "Nazwa potwora",
+                        2 => "Nazwa bohatera",
+                        3 => "Nazwa przedmiotu",
+                        4 => "Nazwa magii",
+                        _ => "Nazwa przywódcy"
+                    };
+                    labelClass.Text = Properties.Settings.Default.CardType switch
+                    {
+                        2 => "Klasa bohatera",
+                        3 => "Klasa przedmiotu",
+                        _ => "Klasa przywódcy"
+                    };
+                    labelSecondClass.Text = "Druga klasa";
+                    labelImg.Text = Properties.Settings.Default.CardType switch
+                    {
+                        1 => "Obrazek potwora",
+                        2 => "Obrazek bohatera",
+                        3 => "Obrazek przedmiotu",
+                        4 => "Obrazek magii",
+                        _ => "Obrazek przywódcy"
+                    };
+                    labelDescription.Text = "Opis";
+                    leaderImgToolTip.ToolTipTitle = "Wymiary obazka";
+                    toolTipImageDimentions = Properties.Settings.Default.CardType switch
+                    {
+                        1 => "Obrazek potwora (nie ca³a karta) ma wymiary 745x817.",
+                        2 => "Obrazek bohatera (nie ca³a karta) ma wymiary 545x545.",
+                        3 => "Obrazek przedmiotu (nie ca³a karta) ma wymiary 545x545.",
+                        4 => "Obrazek magii (nie ca³a karta) ma wymiary 545x545.",
+                        _ => "Obrazek przywódcy (nie ca³a karta) ma wymiary 745x1176.",
+                    };
+                    leaderImgToolTip.SetToolTip(selectImgButton, toolTipImageDimentions + "\nProgram automatycznie przytnie i przybli¿y obraz, je¿eli bêdzie to potrzebne.\n\nWspierane rozszerzenia plików:\n.png, .jpeg, .jpg, .gif(pierwsza klatka), .bmp, .webp, .pbm, .tiff, .tga");
 
-            //        gradient.Text = "Tylni gradient";
-            //        nameWhite.Text = "Bia³a nazwa";
-            //        splitClass.Text = "Podwójna Klasa";
-            //        this.Text = "To ja go tnê - Generator kart";
-            //        labelBad.Text = "Wymagania rzutu - Pora¿ka";
-            //        labelGood.Text = "Wymagania rzutu - UBIJ potwora";
-            //        goodOutputText.Text = "UBIJ tego potwora";
-            //        labelReq.Text = "Wymagania klas";
-            //        RENDER.Text = "ZAPISZ OBRAZ";
-            //        copyImageToClipboardToolStripMenuItem.Text = "Kopiuj obraz";
-            //        openImageLocationToolStripMenuItem.Text = "Otwórz lokalizacjê obrazu";
-            //        labelMaxItem.Text = "Max. iloœæ przedmiotów";
-            //        alternativeColor.Text = "Alternatywny kolor (?)";
-            //        altColorToolTip.ToolTipTitle = "Alternatywny kolor";
-            //        altColorToolTip.SetToolTip(alternativeColor, "Na niektórych drukarkach, standardowy kolor mo¿e znacznie odstawiaæ od po¿¹danego.\nStandardowy kolor by³ wziêty prosto z instruckji, wiêc powinnien byæ dobry,\nale niektóre durkarki nie maj¹ poprawnej g³ebi kolorów.\n\nAlternatywny kolor (czarny) mo¿e wygl¹daæ lepiej na niektórych drukarkach.");
+                    gradient.Text = "Tylni gradient";
+                    nameWhite.Text = "Bia³a nazwa";
+                    splitClass.Text = "Podwójna Klasa";
+                    this.Text = "To ja go tnê - Generator kart";
+                    labelBad.Text = "Wymagania rzutu - Pora¿ka";
+                    labelGood.Text = "Wymagania rzutu - UBIJ potwora";
+                    goodOutputText.Text = "UBIJ tego potwora";
+                    labelReq.Text = "Wymagania klas";
+                    RENDER.Text = "ZAPISZ OBRAZ";
+                    copyImageToClipboardToolStripMenuItem.Text = "Kopiuj obraz";
+                    openImageLocationToolStripMenuItem.Text = "Otwórz lokalizacjê obrazu";
+                    labelMaxItem.Text = "Max. iloœæ przedmiotów";
+                    alternativeColor.Text = "Alternatywny kolor (?)";
+                    altColorToolTip.ToolTipTitle = "Alternatywny kolor";
+                    altColorToolTip.SetToolTip(alternativeColor, "Na niektórych drukarkach, standardowy kolor mo¿e znacznie odstawiaæ od po¿¹danego.\nStandardowy kolor by³ wziêty prosto z instruckji, wiêc powinnien byæ dobry,\nale niektóre durkarki nie maj¹ poprawnej g³ebi kolorów.\n\nAlternatywny kolor (czarny) mo¿e wygl¹daæ lepiej na niektórych drukarkach.");
 
-            //        if (chosenClass.SelectedIndex == -1 && Properties.Settings.Default.CardType == 2)
-            //        {
-            //            this.Icon = Properties.Resources.bohater;
-            //        }
-            //        HeroCard.Image = Properties.Resources.bohater.ToBitmap();
+                    if (chosenClass.SelectedIndex == -1 && Properties.Settings.Default.CardType == 2)
+                    {
+                        this.Icon = Properties.Resources.bohater;
+                    }
+                    HeroCard.Image = Properties.Resources.bohater.ToBitmap();
 
-            //        cardType.Text = "Typ karty";
-            //        LeaderCard.Text = "Przywódca";
-            //        MonsterCard.Text = "Potwór";
-            //        HeroCard.Text = "Bohater";
-            //        ItemCard.Text = "Przedmiot";
-            //        MagicCard.Text = "Magia";
+                    cardType.Text = "Typ karty";
+                    LeaderCard.Text = "Przywódca";
+                    MonsterCard.Text = "Potwór";
+                    HeroCard.Text = "Bohater";
+                    ItemCard.Text = "Przedmiot";
+                    MagicCard.Text = "Magia";
 
-            //        labelAdditionalReq.Text = "Dodatkowe wymagania";
-            //        additionalReq.Text = "ODRZUÆ X kart";
-            //        labelHeroBonus.Text = "Bonus dodatkowych boh.";
-            //        heroBonus.Text = "Za ka¿dego dodatkowego bohatera w twojej dru¿ynie, +X do twojego rzutu";
+                    labelAdditionalReq.Text = "Dodatkowe wymagania";
+                    additionalReq.Text = "ODRZUÆ X kart";
+                    labelHeroBonus.Text = "Bonus dodatkowych boh.";
+                    heroBonus.Text = "Za ka¿dego dodatkowego bohatera w twojej dru¿ynie, +X do twojego rzutu";
 
-            //        break;
+                    break;
 
-            //    // Italian
-            //    case 2:
-            //        logo.Image = Properties.Resources.Logo0;
-            //        labelLeader.Text = Properties.Settings.Default.CardType switch
-            //        {
-            //            1 => "Nome del mostro",
-            //            2 => "Nome dell'eroe",
-            //            3 => "Nome dell'oggetto",
-            //            4 => "Nome della magia",
-            //            _ => "Nome del leader"
-            //        };
-            //        labelClass.Text = Properties.Settings.Default.CardType switch
-            //        {
-            //            2 => "Classe dell'eroe",
-            //            3 => "Classe dell'oggetto",
-            //            _ => "Classe del leader"
-            //        };
-            //        labelSecondClass.Text = "Seconda classe";
-            //        labelImg.Text = Properties.Settings.Default.CardType switch
-            //        {
-            //            1 => "Immagine del mostro",
-            //            2 => "Immagine dell'eroe",
-            //            3 => "Immagine dell'oggetto",
-            //            4 => "Immagine della magia",
-            //            _ => "Immagine del leader"
-            //        };
-            //        labelDescription.Text = "Descrizione";
-            //        leaderImgToolTip.ToolTipTitle = "Dimensioni dell'immagine";
-            //        toolTipImageDimentions = Properties.Settings.Default.CardType switch
-            //        {
-            //            1 => "Le dimensioni dell'immagine del mostro (non l'intera carta) sono 745x817.",
-            //            2 => "Le dimensioni dell'immagine dell'eroe (non l'intera carta) sono 545x545.",
-            //            3 => "Le dimensioni dell'immagine dell'oggetto (non l'intera carta) sono 545x545.",
-            //            4 => "Le dimensioni dell'immagine della magia (non l'intera carta) sono 545x545.",
-            //            _ => "Le dimensioni dell'immagine del leader (non l'intera carta) sono 745x1176."
-            //        };
-            //        leaderImgToolTip.SetToolTip(selectImgButton, toolTipImageDimentions + "\nIl programma ritagliera e zoommera automaticamente l'immagine se necessario.\n\nEstensioni file supportate:\n.png, .jpeg, .jpg, .gif (first frame), .bmp, .webp, .pbm, .tiff, .tga");
+                // Italian
+                case 2:
+                    logo.Image = Properties.Resources.Logo0;
+                    labelLeader.Text = Properties.Settings.Default.CardType switch
+                    {
+                        1 => "Nome del mostro",
+                        2 => "Nome dell'eroe",
+                        3 => "Nome dell'oggetto",
+                        4 => "Nome della magia",
+                        _ => "Nome del leader"
+                    };
+                    labelClass.Text = Properties.Settings.Default.CardType switch
+                    {
+                        2 => "Classe dell'eroe",
+                        3 => "Classe dell'oggetto",
+                        _ => "Classe del leader"
+                    };
+                    labelSecondClass.Text = "Seconda classe";
+                    labelImg.Text = Properties.Settings.Default.CardType switch
+                    {
+                        1 => "Immagine del mostro",
+                        2 => "Immagine dell'eroe",
+                        3 => "Immagine dell'oggetto",
+                        4 => "Immagine della magia",
+                        _ => "Immagine del leader"
+                    };
+                    labelDescription.Text = "Descrizione";
+                    leaderImgToolTip.ToolTipTitle = "Dimensioni dell'immagine";
+                    toolTipImageDimentions = Properties.Settings.Default.CardType switch
+                    {
+                        1 => "Le dimensioni dell'immagine del mostro (non l'intera carta) sono 745x817.",
+                        2 => "Le dimensioni dell'immagine dell'eroe (non l'intera carta) sono 545x545.",
+                        3 => "Le dimensioni dell'immagine dell'oggetto (non l'intera carta) sono 545x545.",
+                        4 => "Le dimensioni dell'immagine della magia (non l'intera carta) sono 545x545.",
+                        _ => "Le dimensioni dell'immagine del leader (non l'intera carta) sono 745x1176."
+                    };
+                    leaderImgToolTip.SetToolTip(selectImgButton, toolTipImageDimentions + "\nIl programma ritagliera e zoommera automaticamente l'immagine se necessario.\n\nEstensioni file supportate:\n.png, .jpeg, .jpg, .gif (first frame), .bmp, .webp, .pbm, .tiff, .tga");
 
-            //        gradient.Text = "Gradiente di sfondo";
-            //        nameWhite.Text = "Nome bianco";
-            //        splitClass.Text = "Doppia classe";
-            //        this.Text = "Here to Slay - Generatore di carte";
-            //        labelBad.Text = "Requisito di tiro - Fallito";
-            //        labelGood.Text = "Requisito di tiro - STERMINA mostro";
-            //        goodOutputText.Text = "STERMINA questa carta Monstro";
-            //        labelReq.Text = "Requisiti di classe";
-            //        RENDER.Text = "SALVA L' IMMAGINE";
-            //        copyImageToClipboardToolStripMenuItem.Text = "Copia l'immagine";
-            //        openImageLocationToolStripMenuItem.Text = "Apri percorso immagine";
-            //        labelMaxItem.Text = "Numero massimo di oggetti";
-            //        alternativeColor.Text = "Colore alternativo (?)";
-            //        altColorToolTip.ToolTipTitle = "Colore alternativo";
-            //        altColorToolTip.SetToolTip(alternativeColor, "Su alcune stampanti, il colore standard potrebbe differire notevolmente da quello desiderato.\nIl colore standard ? preso direttamente dal manuale, quindi dovrebbe essere buono,\nma alcune stampanti non hanno una profondit? di colore sufficiente.\n\nIl colore alternativo (nero), potrebbe sembrare migliore su alcune stampanti.");
+                    gradient.Text = "Gradiente di sfondo";
+                    nameWhite.Text = "Nome bianco";
+                    splitClass.Text = "Doppia classe";
+                    this.Text = "Here to Slay - Generatore di carte";
+                    labelBad.Text = "Requisito di tiro - Fallito";
+                    labelGood.Text = "Requisito di tiro - STERMINA mostro";
+                    goodOutputText.Text = "STERMINA questa carta Monstro";
+                    labelReq.Text = "Requisiti di classe";
+                    RENDER.Text = "SALVA L' IMMAGINE";
+                    copyImageToClipboardToolStripMenuItem.Text = "Copia l'immagine";
+                    openImageLocationToolStripMenuItem.Text = "Apri percorso immagine";
+                    labelMaxItem.Text = "Numero massimo di oggetti";
+                    alternativeColor.Text = "Colore alternativo (?)";
+                    altColorToolTip.ToolTipTitle = "Colore alternativo";
+                    altColorToolTip.SetToolTip(alternativeColor, "Su alcune stampanti, il colore standard potrebbe differire notevolmente da quello desiderato.\nIl colore standard ? preso direttamente dal manuale, quindi dovrebbe essere buono,\nma alcune stampanti non hanno una profondit? di colore sufficiente.\n\nIl colore alternativo (nero), potrebbe sembrare migliore su alcune stampanti.");
 
-            //        if (chosenClass.SelectedIndex == -1 && Properties.Settings.Default.CardType == 2)
-            //        {
-            //            this.Icon = Properties.Resources.eroe;
-            //        }
-            //        HeroCard.Image = Properties.Resources.eroe.ToBitmap();
+                    if (chosenClass.SelectedIndex == -1 && Properties.Settings.Default.CardType == 2)
+                    {
+                        this.Icon = Properties.Resources.eroe;
+                    }
+                    HeroCard.Image = Properties.Resources.eroe.ToBitmap();
 
-            //        cardType.Text = "Tipo di carta";
-            //        LeaderCard.Text = "Leader";
-            //        MonsterCard.Text = "Mostro";
-            //        HeroCard.Text = "Eroe";
-            //        ItemCard.Text = "Oggetto";
-            //        MagicCard.Text = "Magia";
+                    cardType.Text = "Tipo di carta";
+                    LeaderCard.Text = "Leader";
+                    MonsterCard.Text = "Mostro";
+                    HeroCard.Text = "Eroe";
+                    ItemCard.Text = "Oggetto";
+                    MagicCard.Text = "Magia";
 
-            //        additionalReq.Text = "Requisiti aggiuntivi";
-            //        additionalReq.Text = "SCARTA X carte";
-            //        labelHeroBonus.Text = "Bonus Eroe aggiuntivo";
-            //        heroBonus.Text = "Per ogni carta Eroe aggiuntiva nella tua Squadra, +X al tuo tiro";
+                    additionalReq.Text = "Requisiti aggiuntivi";
+                    additionalReq.Text = "SCARTA X carte";
+                    labelHeroBonus.Text = "Bonus Eroe aggiuntivo";
+                    heroBonus.Text = "Per ogni carta Eroe aggiuntiva nella tua Squadra, +X al tuo tiro";
 
-            //        break;
+                    break;
 
-            //    // English
-            //    default:
-            //        logo.Image = Properties.Resources.Logo0;
-            //        labelLeader.Text = Properties.Settings.Default.CardType switch
-            //        {
-            //            1 => "Monster name",
-            //            2 => "Hero name",
-            //            3 => "Item name",
-            //            4 => "Magic name",
-            //            _ => "Leader name"
-            //        };
-            //        labelClass.Text = Properties.Settings.Default.CardType switch
-            //        {
-            //            2 => "Hero class",
-            //            3 => "Item class",
-            //            _ => "Leader class"
-            //        };
-            //        labelSecondClass.Text = "Second class";
-            //        labelImg.Text = Properties.Settings.Default.CardType switch
-            //        {
-            //            1 => "Monster image",
-            //            2 => "Hero image",
-            //            3 => "Item image",
-            //            4 => "Magic image",
-            //            _ => "Leader image"
-            //        };
-            //        labelDescription.Text = "Description";
-            //        leaderImgToolTip.ToolTipTitle = "Image dimentions";
-            //        toolTipImageDimentions = Properties.Settings.Default.CardType switch
-            //        {
-            //            1 => "The monster image (not the whole card) dimentions are 745x817.",
-            //            2 => "The hero image (not the whole card) dimentions are 545x545.",
-            //            3 => "The item image (not the whole card) dimentions are 545x545.",
-            //            4 => "The magic image (not the whole card) dimentions are 545x545.",
-            //            _ => "The leader image (not the whole card) dimentions are 745x1176.",
-            //        };
-            //        leaderImgToolTip.SetToolTip(selectImgButton, toolTipImageDimentions + "\nThe program will automatically crop and zoom the image, if needed.\n\nSupported file extensions:\n.png, .jpeg, .jpg, .gif(first frame), .bmp, .webp, .pbm, .tiff, .tga");
+                // English
+                default:
+                    logo.Image = Properties.Resources.Logo0;
+                    labelLeader.Text = Properties.Settings.Default.CardType switch
+                    {
+                        1 => "Monster name",
+                        2 => "Hero name",
+                        3 => "Item name",
+                        4 => "Magic name",
+                        _ => "Leader name"
+                    };
+                    labelClass.Text = Properties.Settings.Default.CardType switch
+                    {
+                        2 => "Hero class",
+                        3 => "Item class",
+                        _ => "Leader class"
+                    };
+                    labelSecondClass.Text = "Second class";
+                    labelImg.Text = Properties.Settings.Default.CardType switch
+                    {
+                        1 => "Monster image",
+                        2 => "Hero image",
+                        3 => "Item image",
+                        4 => "Magic image",
+                        _ => "Leader image"
+                    };
+                    labelDescription.Text = "Description";
+                    leaderImgToolTip.ToolTipTitle = "Image dimentions";
+                    toolTipImageDimentions = Properties.Settings.Default.CardType switch
+                    {
+                        1 => "The monster image (not the whole card) dimentions are 745x817.",
+                        2 => "The hero image (not the whole card) dimentions are 545x545.",
+                        3 => "The item image (not the whole card) dimentions are 545x545.",
+                        4 => "The magic image (not the whole card) dimentions are 545x545.",
+                        _ => "The leader image (not the whole card) dimentions are 745x1176.",
+                    };
+                    leaderImgToolTip.SetToolTip(selectImgButton, toolTipImageDimentions + "\nThe program will automatically crop and zoom the image, if needed.\n\nSupported file extensions:\n.png, .jpeg, .jpg, .gif(first frame), .bmp, .webp, .pbm, .tiff, .tga");
 
-            //        gradient.Text = "Back gradient";
-            //        nameWhite.Text = "White name";
-            //        splitClass.Text = "Split Class";
-            //        this.Text = "Here to Slay - Card generator";
-            //        labelBad.Text = "Roll Requirements - Fail";
-            //        labelGood.Text = "Roll Requirements - SLAY monster";
-            //        goodOutputText.Text = "SLAY this Monster card";
-            //        labelReq.Text = "Class Requirements";
-            //        RENDER.Text = "SAVE IMAGE";
-            //        copyImageToClipboardToolStripMenuItem.Text = "Copy image";
-            //        openImageLocationToolStripMenuItem.Text = "Open image location";
-            //        labelMaxItem.Text = "Max Item Ammount";
-            //        alternativeColor.Text = "Alternative Color (?)";
-            //        altColorToolTip.ToolTipTitle = "Alternative Color";
-            //        altColorToolTip.SetToolTip(alternativeColor, "On some printers, the standard color might largely differ from the disered one.\nThe standard color is taken straight from the manual, so it should be good,\nbut some printers don't have a sufficient color depth.\n\nThe alternative color (black), might look better on some printers.");
+                    gradient.Text = "Back gradient";
+                    nameWhite.Text = "White name";
+                    splitClass.Text = "Split Class";
+                    this.Text = "Here to Slay - Card generator";
+                    labelBad.Text = "Roll Requirements - Fail";
+                    labelGood.Text = "Roll Requirements - SLAY monster";
+                    goodOutputText.Text = "SLAY this Monster card";
+                    labelReq.Text = "Class Requirements";
+                    RENDER.Text = "SAVE IMAGE";
+                    copyImageToClipboardToolStripMenuItem.Text = "Copy image";
+                    openImageLocationToolStripMenuItem.Text = "Open image location";
+                    labelMaxItem.Text = "Max Item Ammount";
+                    alternativeColor.Text = "Alternative Color (?)";
+                    altColorToolTip.ToolTipTitle = "Alternative Color";
+                    altColorToolTip.SetToolTip(alternativeColor, "On some printers, the standard color might largely differ from the disered one.\nThe standard color is taken straight from the manual, so it should be good,\nbut some printers don't have a sufficient color depth.\n\nThe alternative color (black), might look better on some printers.");
 
-            //        if (chosenClass.SelectedIndex == -1 && Properties.Settings.Default.CardType == 2)
-            //        {
-            //            this.Icon = Properties.Resources.hero;
-            //        }
-            //        HeroCard.Image = Properties.Resources.hero.ToBitmap();
+                    if (chosenClass.SelectedIndex == -1 && Properties.Settings.Default.CardType == 2)
+                    {
+                        this.Icon = Properties.Resources.hero;
+                    }
+                    HeroCard.Image = Properties.Resources.hero.ToBitmap();
 
-            //        cardType.Text = "Card Type";
-            //        LeaderCard.Text = "Leader";
-            //        MonsterCard.Text = "Monster";
-            //        HeroCard.Text = "Hero";
-            //        ItemCard.Text = "Item";
-            //        MagicCard.Text = "Magic";
+                    cardType.Text = "Card Type";
+                    LeaderCard.Text = "Leader";
+                    MonsterCard.Text = "Monster";
+                    HeroCard.Text = "Hero";
+                    ItemCard.Text = "Item";
+                    MagicCard.Text = "Magic";
 
-            //        additionalReq.Text = "Addidional Requirements";
-            //        additionalReq.Text = "DISCARD X cards";
-            //        labelHeroBonus.Text = "Additional Hero Bonus";
-            //        heroBonus.Text = "For each additional Hero card in your Party, +X to your roll.";
+                    additionalReq.Text = "Addidional Requirements";
+                    additionalReq.Text = "DISCARD X cards";
+                    labelHeroBonus.Text = "Additional Hero Bonus";
+                    heroBonus.Text = "For each additional Hero card in your Party, +X to your roll.";
 
-            //        break;
-            //}
+                    break;
+            }
             #endregion
             LocaliseClassOptions(language.SelectedIndex); // change class options based on selected language
         }

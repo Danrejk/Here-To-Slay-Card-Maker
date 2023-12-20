@@ -77,7 +77,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Language\languages.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Update="PrintingAssets\English\monsterBackBlack.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
