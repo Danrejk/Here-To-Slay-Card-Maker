@@ -611,7 +611,7 @@ namespace GeneratorBackend
                     word.Append(text[i]);
                     wordLen = Raylib.MeasureTextEx(inst.descFont, word.ToString(), AssetManager.DESC_SIZE, DESC_FONT_SPACING).X;
                 }
-                else if (((text[i] == ' ' || text[i] == '\r') && text[i] != '\n') && currentLen + wordLen < targetLen)
+                else if (((text[i] == ' ' || text[i] == '\r') && i < text.Length-1) && currentLen + wordLen < targetLen)
                 {
                     outputLine.Append(word);
                     word.Clear();
