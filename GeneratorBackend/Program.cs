@@ -613,9 +613,9 @@ namespace GeneratorBackend
                 }
                 else if (((text[i] == ' ' || text[i] == '\r')) && currentLen + wordLen < targetLen)
                 {
+                    word.Append(text[i]);
                     outputLine.Append(word);
                     word.Clear();
-                    if (text[i] == ' ') word.Append(' ');
                 }
 
                 if ((currentLen + wordLen >= targetLen) || text[i] == '\r')
@@ -623,7 +623,6 @@ namespace GeneratorBackend
                     if (text[i] == '\r')
                     {
                         if (greaterSpace) additionalLineSpace += DESC_BIG_LINE_SPACING;
-                        outputLine.Append('\r');
                     }
 
                     // Handeling the case when the word spans the entire line
@@ -645,7 +644,7 @@ namespace GeneratorBackend
                     outputLine.Clear();
                 }
             }
-            if (word.Length != 0) lineList.Add(outputLine.ToString() + word.ToString()); // Add the last line.
+            if (word.Length != 0 || outputLine.Length != 0) lineList.Add(outputLine.ToString() + word.ToString()); // Add the last line.
 
             return (lineList, additionalLineSpace);
         }
