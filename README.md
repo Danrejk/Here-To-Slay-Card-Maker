@@ -4,9 +4,10 @@
 Using this program you can make <b>accurate</b> custom cards (also with custom classes) for the card game "Here To Slay". The main goal of our program is to ensure that the generated cards follow the original designs as best as possible.
 <br><br>
 Polska wersja językowa: [README.pl.md](README.pl.md)
+Versione in lingua italiana: NESSUNA
 
 ## Instalation
-<a href="https://github.com/Danrejk/Here-To-Slay-Card-Maker/releases/tag/v4.0"> <img alt="Latest Version" src="https://img.shields.io/badge/Latest_Version-v.4.0-green"> </a>
+<a href="https://github.com/Danrejk/Here-To-Slay-Card-Maker/releases/tag/v4.1"> <img alt="Latest Version" src="https://img.shields.io/badge/Latest_Version-v4.1-green"> </a>
 
 <br>
 Download the <code>.zip</code> file from the latest <b>Release</b> of the program displayed above, or on the right side of the page.<br>
@@ -104,13 +105,13 @@ This program is what the official one should be, accurate and with more features
     <tbody>
         <tr><td>✔️✔️✔️Accurate Monster Card's design.</td></tr>
         <tr><td>⚠️Maximum 5 hero requirements.</td></tr>
+        <tr><td>✔️Support for Additional Requirements (ex. "+ Discard Card").</td></tr>
+        <tr><td>✔️Support for bonuses for each additional hero.</td></tr>
         <tr><td>✔️Fully customisable roll outcomes.</td></tr>
         <tr><td>✔️Optional Back Gradient and black name text.</td></tr>
         <tr><td>✔️Automatically orders class requirements to put generic Heros at the back.</td></tr>
         <tr><td>✔️Description Line breaks crate larger gaps between the lines.</td></tr>
         <tr><td>✔️Alternative card color for weaker printers.</td>
-        <tr><td>❌No "+ Discard Card" option... yet.</td></tr>
-        <tr><td>❌No bonus to roll for each additional hero card option... yet.</td></tr>
     </tbody>
 </table>
 
