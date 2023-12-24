@@ -3,7 +3,7 @@
 # Here To Slay - Custom Card Maker
 Using this program you can make <b>accurate</b> custom cards (also with custom classes) for the card game "Here To Slay". The main goal of our program is to ensure that the generated cards follow the original designs as best as possible.
 <br><br>
-Polska wersja językowa: [README.pl.md](README.pl.md)
+Polska wersja językowa: [README.pl.md](README.pl.md)<br>
 Versione in lingua italiana: NESSUNA
 
 ## Instalation
