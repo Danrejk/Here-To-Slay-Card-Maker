@@ -696,7 +696,8 @@ namespace GeneratorBackend
 
             float textBlockCenter = (desc_space - lineList.Count * textSize.Y + lineSpacing - additionalLineSpace) / 2;
 
-            if (lineList.Count >= 4 && additionalLineSpace == 0 && card_type == 0) textBlockCenter += 16; // real cards have a set offset for >=4 lines of text so they don't colide with the Leader Icon
+            if (lineList.Count >= 4 && card_type == 0) textBlockCenter += 16; // real cards have a set offset for >=4 lines of text so they don't colide with the Leader Icon
+            if (lineList.Count == 3 && additionalLineSpace > 0 && card_type == 0) textBlockCenter += 11; // real cards have a set offset for >=4 lines of text so they don't colide with the Leader Icon
             if (card_type == 2 || card_type == 4) textBlockCenter -= 41; // these cards have a frame that takes up 41px of space, so we need to offset the text by that much
             if ((card_type == 2) && lineList.Count >= 5) textBlockCenter += 12;
 
