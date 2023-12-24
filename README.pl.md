@@ -3,13 +3,14 @@
 # To Ja Go Tnę - Kreator Własnych Kart
 Dzięki temu programowi możesz tworzyć <b>dokładne</b> niestandardowe karty do gry karcianej "To Ja Go Tnę". Głównym celem naszego programu jest zapewnienie, że wygenerowane karty będą jak najbardziej zgodne z oryginalnymi wzorami, na tyle ile jest to możliwe.
 <br><br>
-English Version: [README.md](https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/README.md)
+English Version: [README.md](README.md)<br>
+Versione in lingua italiana: NESSUNA
 
 ## Instalacja
 <a href="https://github.com/Danrejk/Here-To-Slay-Card-Maker/releases/tag/v4.1"> <img alt="Najnowsza Wersja" src="https://img.shields.io/badge/Najnowsza_Wersja-v4.1-green"> </a>
 <br>
 Pobierz plik <code>.zip</code> z najnowszego <b>Release</b> programu wyświetlonego powyżej lub po prawej stronie strony.<br>
-Rozpakuj go, a w środku znajdziesz plik <code>.exe</code>; musi pozostać wraz z innymi plikami w folderze, inaczej program nie będzie działać.
+Rozpakuj go, a w środku znajdziesz plik <code>.exe</code> musi pozostać wraz z innymi plikami w folderze, inaczej program nie będzie działać.
 
 <hr>
 
