@@ -6,7 +6,7 @@ Dzięki temu programowi możesz tworzyć <b>dokładne</b> niestandardowe karty d
 English Version: [README.md](https://github.com/Danrejk/Here-To-Slay-Card-Maker/blob/main/README.md)
 
 ## Instalacja
-<a href="https://github.com/Danrejk/Here-To-Slay-Card-Maker/releases/tag/v4.0"> <img alt="Najnowsza Wersja" src="https://img.shields.io/badge/Najnowsza_Wersja-v.4.0-green"> </a>
+<a href="https://github.com/Danrejk/Here-To-Slay-Card-Maker/releases/tag/v4.1"> <img alt="Najnowsza Wersja" src="https://img.shields.io/badge/Najnowsza_Wersja-v4.1-green"> </a>
 <br>
 Pobierz plik <code>.zip</code> z najnowszego <b>Release</b> programu wyświetlonego powyżej lub po prawej stronie strony.<br>
 Rozpakuj go, a w środku znajdziesz plik <code>.exe</code>; musi pozostać wraz z innymi plikami w folderze, inaczej program nie będzie działać.
@@ -107,13 +107,13 @@ Ten program to to, co powinno być oficjalnie wypuszczone - dokładne i z brakuj
     <tbody>
         <tr><td>✔️✔️✔️Dokładny design Karty Potwora.</td></tr>
         <tr><td>⚠️Maksymalnie 5 wymagań bohatera.</td></tr>
+        <tr><td>✔️Wsparcie dla dodatkowych wymagań (np. "+ ODRZUĆ kartę").</td></tr>
+        <tr><td>✔️Wsparcie dla bonusu za dodatkowych bohaterów.</td></tr>
         <tr><td>✔️W pełni dostosowalne wyniki rzutu.</td></tr>
         <tr><td>✔️Opcjonalny gradient z tyłu i czarny tekst nazwy.</td></tr>
         <tr><td>✔️Automatyczne ustawianie wymagań klas, aby umieścić ogólnych bohaterów z tyłu.</td></tr>
         <tr><td>✔️Przerwanie Linii tworzy większą przerwę między liniami.</td></tr>
         <tr><td>✔️Alternatywny kolor karty dla słabszych drukarek.</td></tr>
-        <tr><td>❌Brak opcji "+ Odrzuć Kartę" ... na razie.</td></tr>
-        <tr><td>❌Brak premii do rzutu za każdą dodatkową kartę bohatera ... na razie.</td></tr>
     </tbody>
 </table>
 
