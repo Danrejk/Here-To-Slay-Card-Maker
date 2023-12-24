@@ -645,6 +645,7 @@ namespace GeneratorBackend
                 }
             }
             if (word.Length != 0 || outputLine.Length != 0) lineList.Add(outputLine.ToString() + word.ToString()); // Add the last line.
+            if (text.Length > 0 && text[^1] == '\n') lineList.Add(""); // Add an empty line if the last line is a line break
 
             return (lineList, additionalLineSpace);
         }
@@ -708,7 +709,7 @@ namespace GeneratorBackend
                 bool bigSpace = false;
                 if (lineList[currentLine].Contains('\r'))
                 {
-                    lineList[currentLine] = lineList[currentLine].Replace('\r', ' ');
+                    lineList[currentLine] = lineList[currentLine].Replace("\r", "");
                     bigSpace = true;
                 }
 
