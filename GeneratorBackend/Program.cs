@@ -1,4 +1,5 @@
 ﻿using Raylib_cs;
+using System;
 using System.IO;
 using System.Numerics;
 using System.Reflection.Emit;
@@ -16,6 +17,7 @@ namespace GeneratorBackend
         public string ImagePath { get; set; } = "";
         public Color Color { get; set; }
         public string NamePL { get; set; } = "";
+        public string NameIT { get; set; } = "";
     }
 
     public class AssetManager
@@ -36,10 +38,11 @@ namespace GeneratorBackend
         public Image cursed = Raylib.LoadImage("Assets/GeneratorAssets/cursed_item.png");
 
         public const int NAME_SIZE = 60; // 60
-        public const int TITLE_SIZE = 47; // 49
+        public const int TITLE_SIZE = 47; // 47
         public const int REQ_SIZE = 49; // 49
-        public const int ROLL_SIZE = 43; // 49
-        public const int DESC_SIZE = 36; // 38
+        public const int ADDITIONAL_REQ_SIZE = 36; // 37
+        public const int ROLL_SIZE = 43; // 43
+        public const int DESC_SIZE = 36; // 36
 
         public Font nameFont { get; private set; }
         public Font titleFont { get; private set; }
@@ -54,6 +57,7 @@ namespace GeneratorBackend
         public List<ClassListObject> ClassList { get; private set; }
         public Image Hero = Raylib.LoadImage("Classes/hero.png");
         public Image Bohater = Raylib.LoadImage("Classes/bohater.png");
+        public Image Eroe = Raylib.LoadImage("Classes/eroe.png");
 
         private AssetManager()
         {
@@ -76,6 +80,7 @@ namespace GeneratorBackend
                     string[] prop = line.Split('\t');
 
                     string polishName = prop.Length > 3 ? prop[3] : prop[0]; // if there is no polish name, use the english one
+                    string italianName = prop.Length > 4 ? prop[4] : prop[0]; // if there is no italian name, use the english one
 
                     Image image = new();
                     var path = Path.Combine(Directory.GetCurrentDirectory(), "Classes", prop[1]);
@@ -92,7 +97,8 @@ namespace GeneratorBackend
                         image = Raylib.LoadImageFromMemory(".png", memoryStream.ToArray());
                     }
 
-                    if (image.Width == 0) { 
+                    if (image.Width == 0)
+                    {
                         // TODO: It would be good to comunicate to the user that their image didn't load for example, but I tried and it just couldn't get it to work because of Raylib stuff.
                     }
 
@@ -102,7 +108,7 @@ namespace GeneratorBackend
                     Color colorCombined = new(classRed, classGreen, classBlue, 255);
 
                     // Add the class to the list
-                    ClassList.Add(new ClassListObject { NameEN = prop[0], Image = image, ImagePath = path ,Color = colorCombined, NamePL = polishName });
+                    ClassList.Add(new ClassListObject { NameEN = prop[0], Image = image, ImagePath = path, Color = colorCombined, NamePL = polishName, NameIT = italianName });
                 }
             }
             catch (Exception e)
@@ -133,6 +139,7 @@ namespace GeneratorBackend
         const int TITLE_FONT_SPACING = 1;
         const int REQ_FONT_SPACING = 0;
         const int ROLL_FONT_SPACING = 0;
+        const int ADDITIONAL_REQ_FONT_SPACING = 2;
 
         const int DESC_FONT_SPACING = 1;
         const float DESC_LINE_SPACING = 4.5f; // the greater the value, the closer the lines are to each other, I know it's weird, but it's how it works.
@@ -178,6 +185,7 @@ namespace GeneratorBackend
             leaderTitle = language switch
             {
                 1 => $"Przywódca drużyny: {inst.ClassList[desiredClass[0]].NamePL}",
+                2 => $"Leader del gruppo: {inst.ClassList[desiredClass[0]].NameIT}",
                 _ => $"Party Leader: {inst.ClassList[desiredClass[0]].NameEN}"
             };
             if (inst.ClassList[desiredClass[0]].NameEN == "") leaderTitle = leaderTitle.Replace(": ", "");
@@ -194,11 +202,13 @@ namespace GeneratorBackend
                 leaderTitle += language switch
                 {
                     1 => $"/{inst.ClassList[desiredClass[1]].NamePL}",
+                    2 => $"/{inst.ClassList[desiredClass[1]].NameIT}",
                     _ => $"/{inst.ClassList[desiredClass[1]].NameEN}"
                 };
                 if (inst.ClassList[desiredClass[1]].NameEN == "") leaderTitle += language switch
                 {
                     1 => "przywódca",
+                    2 => "Leader",
                     _ => "Leader"
                 };
                 Raylib.ImageCrop(ref secondClassSymbol, new Rectangle(0, 0, 51, 102));
@@ -243,7 +253,7 @@ namespace GeneratorBackend
             Raylib.UnloadImage(card);
         }
 
-        public static void GenerateMonster(string? renderLocation, int language, string name, int[] desiredRequirements, RollOutput good, RollOutput bad, string monsterImg, string description, bool addGradient, bool nameWhite, bool alternativeColor)
+        public static void GenerateMonster(string? renderLocation, int language, string name, int[] desiredRequirements, string monsterImg, RollOutput good, RollOutput bad, string description, string aditionalReq, string heroBonus, bool addGradient, bool nameWhite, bool alternativeColor)
         {
             // This has to be loaded each time, to clear the image from the previous render
             Image card = Raylib.LoadImage(inst.cardTarrot);
@@ -269,40 +279,55 @@ namespace GeneratorBackend
             string reqText = language switch
             {
                 1 => "WYMAGANIA:",
+                2 => "REQUISITI:",
                 _ => "REQUIREMENT:"
             };
-            Raylib.ImageDrawTextEx(ref card, inst.reqFont, reqText, new(87, 920), AssetManager.REQ_SIZE, REQ_FONT_SPACING, inst.bottomColor);
+            Raylib.ImageDrawTextEx(ref card, inst.reqFont, reqText, new(88, 920), AssetManager.REQ_SIZE, REQ_FONT_SPACING, inst.bottomColor);
             float reqTextWidth = Raylib.MeasureTextEx(inst.reqFont, reqText, AssetManager.REQ_SIZE, REQ_FONT_SPACING).X; // get width of the "REQUIREMENT:" text to align the icons properly
 
-            #region Class Requirements
+            #region Requirements
             // put the classless hero requirements at the end
             int[] orderedRequirements = desiredRequirements.Where(x => x != -1).OrderBy(x => x == 0).ToArray(); // ignore -1, because it's the unassigned value
 
             // count how many class requirements there are
-            int reqCount = orderedRequirements.Count(); 
+            int reqCount = orderedRequirements.Count();
+
+            float iconsMargin = 83 + 13; // distance between icons (13), 83 is the width of the icon
+
+            if (reqCount > 4) // if there are more than 4 icons, we need to reduce the margin between them
+            {
+                iconsMargin -= language switch
+                {
+                    1 => 0, // polish doesn't need margin reduction, because the "REQUIREMENT" text is shorter
+                    2 => 0, // italian doesn't need margin reduction, because the "REQUIREMENT" text is shorter
+                    _ => 8 // YOU CAN MODIFY THIS. It might look better for your preferences, but for me I think this is the best option.
+                };
+            }
 
             // Draw the class requirements
             foreach ((int req, int index) in orderedRequirements.Select((value, index) => (value, index)))
             {
                 Image classSymbol;
                 if (req == 0) classSymbol = language switch
-                    {
-                        1 => inst.Bohater,
-                        _ => inst.Hero
-                    };
-                else classSymbol = inst.ClassList[req - 1].Image; // -1 because HERO is put in front, so the indexes are shifted by 
-
-                // distance between icons (13), 83 is the width of the icon
-                float iconsMargin = 83 + 13;
-                if (reqCount > 4) // if there are more than 4 icons, we need to reduce the margin between them
                 {
-                    iconsMargin -= language switch
-                    {
-                        1 => 0, // polish doesn't need margin reduction, because the "REQUIREMENT" text is shorter
-                        _ => 8 // YOU CAN MODIFY THIS. It might look better for your preferences, but for me I think this is the best option.
-                    };
-                }
+                    1 => inst.Bohater,
+                    2 => inst.Eroe,
+                    _ => inst.Hero
+                };
+                else classSymbol = inst.ClassList[req - 1].Image; // -1 because HERO is put in front, so the indexes are shifted
+
                 Raylib.ImageDraw(ref card, classSymbol, imageRec, new(93 + reqTextWidth + 10 + index * iconsMargin, 902, 83, 83), Color.WHITE);
+            }
+
+            // Additional Requirements
+            if (aditionalReq != "")
+            {
+                int fullXstart = 93 + (int)reqTextWidth + 10 + orderedRequirements.Length * (int)iconsMargin;
+                Raylib.ImageDrawTextEx(ref card, inst.reqFont, "+", new(fullXstart, 911), 63, REQ_FONT_SPACING, inst.bottomColor);
+                float plusWidth = Raylib.MeasureTextEx(inst.reqFont, "+", AssetManager.REQ_SIZE, REQ_FONT_SPACING).X;
+
+                int maxWidth = reqCount > 2 ? CARD_WIDTH_TARROT - fullXstart - (int)plusWidth - 40 : 207; 
+                DrawAdditionalReq(aditionalReq, card, new(fullXstart + plusWidth + 16, 945), maxWidth, inst.bottomColor);
             }
             #endregion
 
@@ -322,13 +347,22 @@ namespace GeneratorBackend
             Vector2 greenNumSize = Raylib.MeasureTextEx(inst.rollFont, green.Value.ToString() + "+", AssetManager.ROLL_SIZE, ROLL_FONT_SPACING);
             Raylib.ImageDrawTextEx(ref card, inst.rollFont, green.Value.ToString() + "+", new(87 + 78 / 2 - greenNumSize.X / 2, 1099 + 78 / 2 - greenNumSize.Y / 2), AssetManager.ROLL_SIZE, ROLL_FONT_SPACING, inst.bottomColor);
 
-            Raylib.ImageDrawTextEx(ref card, inst.descFont, red.Outcome, new(87 + 78 + 24, 1002 + 78 / 2 - AssetManager.DESC_SIZE / 2 + 2), AssetManager.DESC_SIZE, DESC_FONT_SPACING, inst.bottomColor);
-            Raylib.ImageDrawTextEx(ref card, inst.descFont, green.Outcome, new(87 + 78 + 24, 1099 + 78 / 2 - AssetManager.DESC_SIZE / 2 + 2), AssetManager.DESC_SIZE, DESC_FONT_SPACING, inst.bottomColor);
+            int rollTextWidth = heroBonus == "" ? 600 : 300; // reduce the width of the roll text if there is a additional hero bonus
+            DrawMonsterRollOutcome(red.Outcome, card, new(187, 1002 + 78 / 2), rollTextWidth, inst.bottomColor);
+            DrawMonsterRollOutcome(green.Outcome, card, new(187, 1099 + 78 / 2), rollTextWidth, inst.bottomColor);
+
+            // Additional Hero Bonus
+            if (heroBonus != "")
+            {
+                Raylib.ImageDrawRectangle(ref card, 490, 1000, 252, 175, new(59, 59, 59, 255));
+                DrawHeroBonus(heroBonus, card, new(490 + 252 / 2, 1000 + 175 / 2), 230, inst.bottomColor);
+            }
 
             // Name and Title
             string titleText = language switch
             {
                 1 => "Potwór",
+                2 => "Mostro",
                 _ => "Monster"
             };
             DrawNameAndTitleTarrot(name, titleText, card, nameWhite);
@@ -351,7 +385,7 @@ namespace GeneratorBackend
             // Draw Hero Image
             ChangeHeroItemMagicImage(heroImg);
             Raylib.ImageDraw(ref card, heroItemMagic, imageRec, new(100, 232, 545, 545), Color.WHITE);
-            
+
             // Max Items
             if (maxItems == 0)
             {
@@ -367,14 +401,15 @@ namespace GeneratorBackend
 
             // Classes
             string heroTitle;
-            if (desiredClass == -1) desiredClass = 0; 
+            if (desiredClass == -1) desiredClass = 0;
 
             Image classSymbol = inst.ClassList[desiredClass].Image;
             Color desiredColor = inst.ClassList[desiredClass].Color;
-         
+
             heroTitle = language switch
             {
                 1 => $"Bohater: {inst.ClassList[desiredClass].NamePL}",
+                2 => $"Eroe: {inst.ClassList[desiredClass].NameIT}",
                 _ => $"Hero: {inst.ClassList[desiredClass].NameEN}"
             };
             if (inst.ClassList[desiredClass].NameEN == "") heroTitle = heroTitle.Replace(": ", "");
@@ -414,7 +449,7 @@ namespace GeneratorBackend
             Raylib.ExportImage(card, renderLocation);
             Raylib.UnloadImage(card);
         }
-        
+
         public static void GenerateItem(string? renderLocation, int language, string name, int desiredClass, string itemImg, string description)
         {
             // This has to be loaded each time, to clear the image from the previous render
@@ -433,7 +468,7 @@ namespace GeneratorBackend
             {
                 0 => inst.itemItem,
                 1 => inst.cursed,
-                _ => inst.ClassList[desiredClass-2].Image
+                _ => inst.ClassList[desiredClass - 2].Image
             };
             Color frameColor = new(68, 64, 61, 255);
             Color titleColor;
@@ -444,6 +479,7 @@ namespace GeneratorBackend
                 itemTitle = language switch
                 {
                     1 => "Przeklęty przedmiot",
+                    2 => "Oggetto maledetto",
                     _ => "Cursed Item"
                 };
             }
@@ -453,10 +489,11 @@ namespace GeneratorBackend
                 itemTitle = language switch
                 {
                     1 => "Przedmiot",
+                    2 => "Oggetto",
                     _ => "Item"
                 };
             }
-            
+
             // Draw Colored Frame
             Raylib.ImageDraw(ref card, inst.frameItem, imageRec, imageRec, frameColor);
 
@@ -474,7 +511,7 @@ namespace GeneratorBackend
             Raylib.ExportImage(card, renderLocation);
             Raylib.UnloadImage(card);
         }
-        
+
         public static void GenerateMagic(string? renderLocation, int language, string name, string magicImg, string description)
         {
             // This has to be loaded each time, to clear the image from the previous render
@@ -489,6 +526,7 @@ namespace GeneratorBackend
             string magicTitle = language switch
             {
                 1 => "Magia",
+                2 => "Magia",
                 _ => "Magic"
             };
 
@@ -553,12 +591,70 @@ namespace GeneratorBackend
             Raylib.ImageDrawTextEx(ref card, inst.titleFont, titleText, new Vector2((CARD_WIDTH_POKER / 2) - (titleSize.X / 2), titleY), AssetManager.TITLE_SIZE, TITLE_FONT_SPACING, titleColor);
         }
 
+        static (List<string>, int) SplitTextToLines(string text, int targetLen, bool greaterSpace)
+        {
+            List<string> lineList = new();
+            StringBuilder outputLine = new();
+            StringBuilder word = new();
+
+            float wordLen = 0;
+            float currentLen;
+
+            int additionalLineSpace = 0;
+
+            for (int i = 0; i < text.Length; i++)
+            {
+                currentLen = Raylib.MeasureTextEx(inst.descFont, outputLine.ToString(), AssetManager.DESC_SIZE, DESC_FONT_SPACING).X;
+
+                if (text[i] != ' ' && text[i] != '\r' && text[i] != '\n')
+                {
+                    word.Append(text[i]);
+                    wordLen = Raylib.MeasureTextEx(inst.descFont, word.ToString(), AssetManager.DESC_SIZE, DESC_FONT_SPACING).X;
+                }
+                else if (((text[i] == ' ' || text[i] == '\r')) && currentLen + wordLen < targetLen)
+                {
+                    word.Append(text[i]);
+                    outputLine.Append(word);
+                    word.Clear();
+                }
+
+                if ((currentLen + wordLen >= targetLen) || text[i] == '\r')
+                {
+                    if (text[i] == '\r')
+                    {
+                        if (greaterSpace) additionalLineSpace += DESC_BIG_LINE_SPACING;
+                    }
+
+                    // Handeling the case when the word spans the entire line
+                    if (outputLine.Length == 0)
+                    {
+                        outputLine.Append(word);
+                        word.Clear();
+
+                        if (i + 1 < text.Length && text[i + 1] != ' ' && text[i + 1] != '\r')
+                        {
+                            word.Append(outputLine[outputLine.Length - 1]);
+
+                            outputLine.Remove(outputLine.Length - 1, 1);
+                            outputLine.Append('-');
+                        }
+                    }
+
+                    lineList.Add(outputLine.ToString());
+                    outputLine.Clear();
+                }
+            }
+            if (word.Length != 0 || outputLine.Length != 0) lineList.Add(outputLine.ToString() + word.ToString()); // Add the last line.
+            if (text.Length > 0 && text[^1] == '\n') lineList.Add(""); // Add an empty line if the last line is a line break
+
+            return (lineList, additionalLineSpace);
+        }
+
         static void DrawDescription(string text, Image card, int padding_left, int padding_right, int card_type, Color descTextColor) // card_type - which set of card size to use; 0 - tarrot (leader); 1 - tarrot (monster); 2 - poker (hero);
         {
             Vector2 card_size;
             int desc_space; // how much Y space there is for description
-
-            switch(card_type)
+            switch (card_type)
             {
                 case 0:
                 case 1:
@@ -591,61 +687,22 @@ namespace GeneratorBackend
 
             int targetLen = (int)card_size.X - padding_left - padding_right;
 
-            List<string> lineList = new();
-            StringBuilder outputLine = new();
-            StringBuilder word = new();
-
-            float wordLen = 0;
-            float currentLen;
-
-            int additionalLineSpace = 0;
-
-            // Divide the text into lines
-            for (int i = 0; i < text.Length; i++)
-            {
-                currentLen = Raylib.MeasureTextEx(inst.descFont, outputLine.ToString(), AssetManager.DESC_SIZE, DESC_FONT_SPACING).X;
-
-                if (text[i] != ' ' && text[i] != '\r' && text[i] != '\n')
-                {
-                    word.Append(text[i]);
-                    wordLen = Raylib.MeasureTextEx(inst.descFont, word.ToString(), AssetManager.DESC_SIZE, DESC_FONT_SPACING).X;
-                }
-                else if (((text[i] == ' ' || text[i] == '\r') && text[i] != '\n') && currentLen + wordLen < targetLen)
-                {
-                    outputLine.Append(word);
-                    word.Clear();
-                    if (text[i] == ' ') outputLine.Append(' ');
-                }
-
-                if ((currentLen + wordLen >= targetLen) || text[i] == '\r')
-                {
-                    if (text[i] == '\r')
-                    {
-                        additionalLineSpace += DESC_BIG_LINE_SPACING;
-                        outputLine.Append('\r');
-                    }
-
-                    lineList.Add(outputLine.ToString());
-                    outputLine.Clear();
-                }
-            }
-            lineList.Add(outputLine.ToString() + word.ToString()); // Add the last line.
-
-            outputLine.Clear();
-            word.Clear();
+            // Split the text into lines
+            (List<string> lineList, int additionalLineSpace) = SplitTextToLines(text, targetLen, true);
 
             Vector2 textSize = Raylib.MeasureTextEx(inst.descFont, text.Replace("\n", ""), AssetManager.DESC_SIZE, DESC_FONT_SPACING);
-          
-            int targetLines = lineList.Count;
-            float lineSpacing = (targetLines-1)*DESC_LINE_SPACING; // We subtract one because for example between 3 lines there are 2 spaces.
 
-            float textBlockCenter = (desc_space - targetLines * (textSize.Y) - additionalLineSpace + lineSpacing) / 2;
+            float lineSpacing = (lineList.Count - 1) * DESC_LINE_SPACING; // We subtract one because: for example between 3 lines there are 2 spaces.
 
-            if (targetLines >= 4 && additionalLineSpace == 0 && card_type == 0) textBlockCenter += 16; // real cards have a set offset for >=4 lines of text so they don't colide with the Leader Icon
+            float textBlockCenter = (desc_space - lineList.Count * textSize.Y + lineSpacing - additionalLineSpace) / 2;
+
+            if (lineList.Count >= 4 && card_type == 0) textBlockCenter += 16; // real cards have a set offset for >=4 lines of text so they don't colide with the Leader Icon
+            if (lineList.Count == 3 && additionalLineSpace > 0 && card_type == 0) textBlockCenter += 11; // real cards have a set offset for >=4 lines of text so they don't colide with the Leader Icon
             if (card_type == 2 || card_type == 4) textBlockCenter -= 41; // these cards have a frame that takes up 41px of space, so we need to offset the text by that much
-            if ((card_type == 2) && targetLines >= 5) textBlockCenter += 12;
+            if ((card_type == 2) && lineList.Count >= 5) textBlockCenter += 12;
 
             lineSpacing = 0; // We have to reset the lineSpacing and increase it as we are drawing the lines
+            additionalLineSpace = 0;
 
             // Draw the lines
             for (int currentLine = 0; currentLine < lineList.Count; currentLine++)
@@ -653,16 +710,85 @@ namespace GeneratorBackend
                 bool bigSpace = false;
                 if (lineList[currentLine].Contains('\r'))
                 {
-                    lineList[currentLine] = lineList[currentLine].Replace('\r', ' ');
+                    lineList[currentLine] = lineList[currentLine].Replace("\r", "");
                     bigSpace = true;
                 }
 
                 Raylib.ImageDrawTextEx(ref card, inst.descFont, lineList[currentLine], new Vector2(padding_left, card_size.Y - desc_space + textBlockCenter + (textSize.Y * currentLine) - lineSpacing + additionalLineSpace), AssetManager.DESC_SIZE, DESC_FONT_SPACING, descTextColor);
-                
+
                 lineSpacing += DESC_LINE_SPACING;
                 if (bigSpace) additionalLineSpace += DESC_BIG_LINE_SPACING;
             }
         }
+
+        static void DrawMonsterRollOutcome(string text, Image card, Vector2 drawLocation, int maxWidth, Color TextColor)
+        {
+            (List<string> lineList, int additionalLineSpace) = SplitTextToLines(text, maxWidth, false);
+            float textSize = Raylib.MeasureTextEx(inst.descFont, text.Replace("\n", ""), AssetManager.DESC_SIZE, DESC_FONT_SPACING).Y;
+
+            float textBlockCenter = (lineList.Count * textSize) / 2;
+
+            // Draw the lines
+            for (int currentLine = 0; currentLine < lineList.Count; currentLine++)
+            {
+                if (lineList[currentLine].Contains('\r'))
+                {
+                    lineList[currentLine] = lineList[currentLine].Replace('\r', ' ');
+                }
+                Raylib.ImageDrawTextEx(ref card, inst.descFont, lineList[currentLine], new Vector2(drawLocation.X, drawLocation.Y - textBlockCenter + (textSize * currentLine)), AssetManager.DESC_SIZE, DESC_FONT_SPACING, TextColor);
+            }
+        }
+
+        static void DrawHeroBonus(string text, Image card, Vector2 drawLocation, int maxWidth, Color TextColor)
+        {
+            (List<string> lineList, int additionalLineSpace) = SplitTextToLines(text, maxWidth, false);
+            float textHeight = Raylib.MeasureTextEx(inst.descFont, text.Replace("\n", ""), AssetManager.DESC_SIZE, DESC_FONT_SPACING).Y;
+
+            float lineSpacing = (lineList.Count - 1) * DESC_LINE_SPACING; // We subtract one because: for example between 3 lines there are 2 spaces
+            float textBlockCenterY = (lineList.Count * textHeight - lineSpacing) / 2;
+
+            lineSpacing = 0; // We have to reset the lineSpacing and increase it as we are drawing the lines
+
+            // Draw the lines
+            for (int currentLine = 0; currentLine < lineList.Count; currentLine++)
+            {
+                if (lineList[currentLine].Contains('\r'))
+                {
+                    lineList[currentLine] = lineList[currentLine].Replace('\r', ' ');
+                }
+                int textWidth = (int)Raylib.MeasureTextEx(inst.descFont, lineList[currentLine], AssetManager.DESC_SIZE, DESC_FONT_SPACING).X;
+                float textBlockCenterX = drawLocation.X - textWidth / 2;
+
+                Raylib.ImageDrawTextEx(ref card, inst.descFont, lineList[currentLine], new Vector2(textBlockCenterX, drawLocation.Y - textBlockCenterY + (textHeight * currentLine) - lineSpacing), AssetManager.DESC_SIZE, DESC_FONT_SPACING, TextColor);
+
+                lineSpacing += DESC_LINE_SPACING;
+            }
+        }
+
+        static void DrawAdditionalReq(string text, Image card, Vector2 drawLocation, int maxWidth, Color TextColor)
+        {
+            (List<string> lineList, int additionalLineSpace) = SplitTextToLines(text, maxWidth, false);
+            float textHeight = Raylib.MeasureTextEx(inst.descFont, text.Replace("\n", ""), AssetManager.DESC_SIZE, DESC_FONT_SPACING).Y;
+
+            float lineSpacing = (lineList.Count - 1) * DESC_LINE_SPACING; // We subtract one because: for example between 3 lines there are 2 spaces
+            float textBlockCenterY = (lineList.Count * textHeight - lineSpacing) / 2;
+
+            lineSpacing = 0; // We have to reset the lineSpacing and increase it as we are drawing the lines
+
+            // Draw the lines
+            for (int currentLine = 0; currentLine < lineList.Count; currentLine++)
+            {
+                if (lineList[currentLine].Contains('\r'))
+                {
+                    lineList[currentLine] = lineList[currentLine].Replace('\r', ' ');
+                }
+
+                Raylib.ImageDrawTextEx(ref card, inst.reqFont, lineList[currentLine], new Vector2(drawLocation.X, drawLocation.Y - textBlockCenterY + (textHeight * currentLine) - lineSpacing), AssetManager.DESC_SIZE, ADDITIONAL_REQ_FONT_SPACING, TextColor);
+
+                lineSpacing += DESC_LINE_SPACING;
+            }
+        }
+
         #endregion
 
         #region Change Image

@@ -43,9 +43,10 @@ namespace HereToSlay
             RENDER.Font = fontLeader;
             cardType.Font = fontLeader;
 
-
             Font fontLeaderSmall = FontLoader.GetFont("PatuaOne_Polish.ttf", 10);
             FontLoader.ChangeFontForAllLabels(this, fontLeaderSmall);
+            labelAdditionalReq.Font = fontLeaderSmall; // This is a checkbox
+            labelHeroBonus.Font = fontLeaderSmall; // This is a checkbox
             LeaderCard.Font = fontLeaderSmall;
             MonsterCard.Font = fontLeaderSmall;
             HeroCard.Font = fontLeaderSmall;
@@ -55,58 +56,40 @@ namespace HereToSlay
             itemImgMore.Font = fontLeader;
             #endregion
 
-            
+
             #region ComboBoxes
 #pragma warning disable CS8622 // the warnings were annoying me, so I disabled them
             language.ComboBox.DrawMode = DrawMode.OwnerDrawFixed;
             language.ComboBox.DrawItem += ImageCBox.ComboBox_DrawItem;
+            language.DropDown += ImageCBox.ComboBox_WidthAutoAdjust;
             language.Items.Add(new ImageCBox("English", Properties.Resources.en));
             language.Items.Add(new ImageCBox("Polski", Properties.Resources.pl));
+            language.Items.Add(new ImageCBox("Italiano", Properties.Resources.it));
             language.SelectedIndex = Properties.Settings.Default.Language;
             initLang = true;
 
-            chosenClass.DrawMode = DrawMode.OwnerDrawFixed;
-            chosenClass.DrawItem += ImageCBox.ComboBox_DrawItem;
-            chosenClass.ItemHeight = 19;
+            // Make all of the class boxes have a custom draw mode with images
+            foreach (ComboBox c in new ComboBox[] { chosenClass, chosenSecondClass, itemChosenClass, classReq1, classReq2, classReq3, classReq4, classReq5 })
+            {
+                c.DrawMode = DrawMode.OwnerDrawFixed;
+                c.DrawItem += ImageCBox.ComboBox_DrawItem;
+                c.DropDown += ImageCBox.ComboBox_WidthAutoAdjust;
+                c.ItemHeight = 19;
+            }
             chosenClass.SelectedIndex = 0;
-
-            chosenSecondClass.DrawMode = DrawMode.OwnerDrawFixed;
-            chosenSecondClass.DrawItem += ImageCBox.ComboBox_DrawItem;
-            chosenSecondClass.ItemHeight = 19;
-
-            itemChosenClass.DrawMode = DrawMode.OwnerDrawFixed;
-            itemChosenClass.DrawItem += ImageCBox.ComboBox_DrawItem;
-            itemChosenClass.ItemHeight = 19;
             itemChosenClass.SelectedIndex = 0;
 
-            heroReq1.DrawMode = DrawMode.OwnerDrawFixed;
-            heroReq1.DrawItem += ImageCBox.ComboBox_DrawItem;
-            heroReq1.ItemHeight = 19;
-            heroReq2.DrawMode = DrawMode.OwnerDrawFixed;
-            heroReq2.DrawItem += ImageCBox.ComboBox_DrawItem;
-            heroReq2.ItemHeight = 19;
-            heroReq3.DrawMode = DrawMode.OwnerDrawFixed;
-            heroReq3.DrawItem += ImageCBox.ComboBox_DrawItem;
-            heroReq3.ItemHeight = 19;
-            heroReq4.DrawMode = DrawMode.OwnerDrawFixed;
-            heroReq4.DrawItem += ImageCBox.ComboBox_DrawItem;
-            heroReq4.ItemHeight = 19;
-            heroReq5.DrawMode = DrawMode.OwnerDrawFixed;
-            heroReq5.DrawItem += ImageCBox.ComboBox_DrawItem;
-            heroReq5.ItemHeight = 19;
-
+            // Make the roll symbol boxes have custom draw mode with background colors
             badOutputSym.DrawMode = DrawMode.OwnerDrawFixed;
-            badOutputSym.DrawItem += BackgroundCBox.ComboBox_DrawItem;
-            badOutputSym.ItemHeight = 19;
-            badOutputSym.Items.Add(new BackgroundCBox("+", Color.FromArgb(109, 166, 88)));
-            badOutputSym.Items.Add(new BackgroundCBox("-", Color.FromArgb(230, 44, 47)));
+            badOutputSym.DrawItem += BackgroundColorCBox.ComboBox_DrawItem;
+            badOutputSym.Items.Add(new BackgroundColorCBox("+", Color.FromArgb(109, 166, 88)));
+            badOutputSym.Items.Add(new BackgroundColorCBox("-", Color.FromArgb(230, 44, 47)));
             badOutputSym.ItemHeight = 17;
 
             goodOutputSym.DrawMode = DrawMode.OwnerDrawFixed;
-            goodOutputSym.DrawItem += BackgroundCBox.ComboBox_DrawItem;
-            goodOutputSym.ItemHeight = 19;
-            goodOutputSym.Items.Add(new BackgroundCBox("+", Color.FromArgb(109, 166, 88)));
-            goodOutputSym.Items.Add(new BackgroundCBox("-", Color.FromArgb(230, 44, 47)));
+            goodOutputSym.DrawItem += BackgroundColorCBox.ComboBox_DrawItem;
+            goodOutputSym.Items.Add(new BackgroundColorCBox("+", Color.FromArgb(109, 166, 88)));
+            goodOutputSym.Items.Add(new BackgroundColorCBox("-", Color.FromArgb(230, 44, 47)));
             goodOutputSym.ItemHeight = 17;
 
             badOutputSym.SelectedIndex = 1;
@@ -183,11 +166,11 @@ namespace HereToSlay
                 RENDER.Location = new Point(RENDER.Location.X, 525);
 
                 labelReq.Visible = false;
-                heroReq1.Visible = false;
-                heroReq2.Visible = false;
-                heroReq3.Visible = false;
-                heroReq4.Visible = false;
-                heroReq5.Visible = false;
+                classReq1.Visible = false;
+                classReq2.Visible = false;
+                classReq3.Visible = false;
+                classReq4.Visible = false;
+                classReq5.Visible = false;
 
                 labelBad.Visible = false;
                 badOutputText.Visible = false;
@@ -219,6 +202,11 @@ namespace HereToSlay
                 }
 
                 nameWhite.Checked = false;
+
+                labelAdditionalReq.Visible = false;
+                additionalReq.Visible = false;
+                labelHeroBonus.Visible = false;
+                heroBonus.Visible = false;
 
                 this.Update();
                 updateLanguage(sender, e);
@@ -268,11 +256,11 @@ namespace HereToSlay
                 RENDER.Location = new Point(RENDER.Location.X, 591);
 
                 labelReq.Visible = true;
-                heroReq1.Visible = true;
-                heroReq2.Visible = true;
-                heroReq3.Visible = true;
-                heroReq4.Visible = true;
-                heroReq5.Visible = true;
+                classReq1.Visible = true;
+                classReq2.Visible = true;
+                classReq3.Visible = true;
+                classReq4.Visible = true;
+                classReq5.Visible = true;
 
                 labelBad.Visible = true;
                 badOutputText.Visible = true;
@@ -284,8 +272,8 @@ namespace HereToSlay
 
                 goodOutputNum.Visible = true;
                 goodOutputSym.Visible = true;
-                goodOutputNum.Location = new Point(84, 457);
-                goodOutputSym.Location = new Point(118, 457);
+                goodOutputNum.Location = new Point(84, 467);
+                goodOutputSym.Location = new Point(118, 467);
 
                 maxItems.Visible = false;
                 labelMaxItem.Visible = false;
@@ -305,6 +293,11 @@ namespace HereToSlay
                 }
 
                 nameWhite.Checked = true;
+
+                labelAdditionalReq.Visible = true;
+                additionalReq.Visible = true;
+                labelHeroBonus.Visible = true;
+                heroBonus.Visible = true;
 
                 this.Update();
                 updateLanguage(sender, e);
@@ -362,11 +355,11 @@ namespace HereToSlay
                 RENDER.Location = new Point(RENDER.Location.X, 525);
 
                 labelReq.Visible = false;
-                heroReq1.Visible = false;
-                heroReq2.Visible = false;
-                heroReq3.Visible = false;
-                heroReq4.Visible = false;
-                heroReq5.Visible = false;
+                classReq1.Visible = false;
+                classReq2.Visible = false;
+                classReq3.Visible = false;
+                classReq4.Visible = false;
+                classReq5.Visible = false;
 
                 labelBad.Visible = false;
                 badOutputText.Visible = false;
@@ -397,6 +390,11 @@ namespace HereToSlay
                 {
                     if (c.Name.Contains("clear")) { c.Visible = false; };
                 }
+
+                labelAdditionalReq.Visible = false;
+                additionalReq.Visible = false;
+                labelHeroBonus.Visible = false;
+                heroBonus.Visible = false;
 
                 this.Update();
                 updateLanguage(sender, e);
@@ -450,11 +448,11 @@ namespace HereToSlay
                 RENDER.Location = new Point(RENDER.Location.X, 525);
 
                 labelReq.Visible = false;
-                heroReq1.Visible = false;
-                heroReq2.Visible = false;
-                heroReq3.Visible = false;
-                heroReq4.Visible = false;
-                heroReq5.Visible = false;
+                classReq1.Visible = false;
+                classReq2.Visible = false;
+                classReq3.Visible = false;
+                classReq4.Visible = false;
+                classReq5.Visible = false;
 
                 labelBad.Visible = false;
                 badOutputText.Visible = false;
@@ -486,6 +484,11 @@ namespace HereToSlay
                 }
 
                 nameWhite.Checked = false;
+
+                labelAdditionalReq.Visible = false;
+                additionalReq.Visible = false;
+                labelHeroBonus.Visible = false;
+                heroBonus.Visible = false;
 
                 this.Update();
                 updateLanguage(sender, e);
@@ -536,11 +539,11 @@ namespace HereToSlay
                 RENDER.Location = new Point(RENDER.Location.X, 525);
 
                 labelReq.Visible = false;
-                heroReq1.Visible = false;
-                heroReq2.Visible = false;
-                heroReq3.Visible = false;
-                heroReq4.Visible = false;
-                heroReq5.Visible = false;
+                classReq1.Visible = false;
+                classReq2.Visible = false;
+                classReq3.Visible = false;
+                classReq4.Visible = false;
+                classReq5.Visible = false;
 
                 labelBad.Visible = false;
                 badOutputText.Visible = false;
@@ -572,6 +575,11 @@ namespace HereToSlay
                 }
 
                 nameWhite.Checked = false;
+
+                labelAdditionalReq.Visible = false;
+                additionalReq.Visible = false;
+                labelHeroBonus.Visible = false;
+                heroBonus.Visible = false;
 
                 this.Update();
                 updateLanguage(sender, e);
@@ -636,8 +644,11 @@ namespace HereToSlay
                 case 1:
                     RollOutput good = new((int)goodOutputNum.Value, goodOutputSym.SelectedIndex, goodOutputText.Text);
                     RollOutput bad = new((int)badOutputNum.Value, badOutputSym.SelectedIndex, badOutputText.Text);
-                    int[] desiredRequirements = new int[] { heroReq1.SelectedIndex, heroReq2.SelectedIndex, heroReq3.SelectedIndex, heroReq4.SelectedIndex, heroReq5.SelectedIndex };
-                    GeneratorBackend.Program.GenerateMonster(saveLocation, language.SelectedIndex, nameText.Text, desiredRequirements, good, bad, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked, alternativeColor.Checked);
+                    int[] desiredRequirements = new int[] { classReq1.SelectedIndex, classReq2.SelectedIndex, classReq3.SelectedIndex, classReq4.SelectedIndex, classReq5.SelectedIndex };
+                    string adReq = labelAdditionalReq.Checked ? additionalReq.Text : "";
+                    string hBon = labelHeroBonus.Checked ? heroBonus.Text : "";
+
+                    GeneratorBackend.Program.GenerateMonster(saveLocation, language.SelectedIndex, nameText.Text, desiredRequirements, selectImgText.Text, good, bad, descriptionText.Text, adReq, hBon, gradient.Checked, nameWhite.Checked, alternativeColor.Checked);
                     break;
                 // Hero
                 case 2:
@@ -670,9 +681,83 @@ namespace HereToSlay
             Properties.Settings.Default.Language = language.SelectedIndex;
             Properties.Settings.Default.Save();
 
+            #region unfinished custom language code
+            //LanguageManager langManager = new("Language/languages.xml");
+
+            //string lang = language.SelectedIndex switch
+            //{
+            //    0 => "EN",
+            //    1 => "PL",
+            //    2 => "IT",
+            //    _ => "EN"
+            //};
+
+            //// English
+            //logo.Image = Properties.Resources.Logo0;
+            //labelLeader.Text = langManager.GetLocalizedString(lang, "labelLeader");
+            //labelClass.Text = langManager.GetLocalizedString(lang, "labelClass");
+            //labelSecondClass.Text = "Second class";
+            //labelImg.Text = Properties.Settings.Default.CardType switch
+            //{
+            //    1 => "Monster image",
+            //    2 => "Hero image",
+            //    3 => "Item image",
+            //    4 => "Magic image",
+            //    _ => "Leader image"
+            //};
+            //labelDescription.Text = "Description";
+            //leaderImgToolTip.ToolTipTitle = "Image dimentions";
+            //string toolTipImageDimentions = Properties.Settings.Default.CardType switch
+            //{
+            //    1 => "The monster image (not the whole card) dimentions are 745x817.",
+            //    2 => "The hero image (not the whole card) dimentions are 545x545.",
+            //    3 => "The item image (not the whole card) dimentions are 545x545.",
+            //    4 => "The magic image (not the whole card) dimentions are 545x545.",
+            //    _ => "The leader image (not the whole card) dimentions are 745x1176.",
+            //};
+            //leaderImgToolTip.SetToolTip(selectImgButton, toolTipImageDimentions + "\nThe program will automatically crop and zoom the image, if needed.\n\nSupported file extensions:\n.png, .jpeg, .jpg, .gif(first frame), .bmp, .webp, .pbm, .tiff, .tga");
+
+            //gradient.Text = "Back gradient";
+            //nameWhite.Text = "White name";
+            //splitClass.Text = "Split Class";
+            //this.Text = "Here to Slay - Card generator";
+            //labelBad.Text = "Roll Requirements - Fail";
+            //labelGood.Text = "Roll Requirements - SLAY monster";
+            //goodOutputText.Text = "SLAY this Monster card";
+            //labelReq.Text = "Class Requirements";
+            //RENDER.Text = "SAVE IMAGE";
+            //copyImageToClipboardToolStripMenuItem.Text = "Copy image";
+            //openImageLocationToolStripMenuItem.Text = "Open image location";
+            //labelMaxItem.Text = "Max Item Ammount";
+            //alternativeColor.Text = "Alternative Color (?)";
+            //altColorToolTip.ToolTipTitle = "Alternative Color";
+            //altColorToolTip.SetToolTip(alternativeColor, "On some printers, the standard color might largely differ from the disered one.\nThe standard color is taken straight from the manual, so it should be good,\nbut some printers don't have a sufficient color depth.\n\nThe alternative color (black), might look better on some printers.");
+
+            //if (chosenClass.SelectedIndex == -1 && Properties.Settings.Default.CardType == 2)
+            //{
+            //    this.Icon = Properties.Resources.hero;
+            //}
+            //HeroCard.Image = Properties.Resources.hero.ToBitmap();
+
+            //cardType.Text = "Card Type";
+            //LeaderCard.Text = "Leader";
+            //MonsterCard.Text = "Monster";
+            //HeroCard.Text = "Hero";
+            //ItemCard.Text = "Item";
+            //MagicCard.Text = "Magic";
+
+            //additionalReq.Text = "Addidional Requirements";
+            //additionalReq.Text = "DISCARD X cards";
+            //labelHeroBonus.Text = "Additional Hero Bonus";
+            //heroBonus.Text = "For each additional Hero card in your Party, +X to your roll.";
+            #endregion
+
+            #region old language code
+            string toolTipImageDimentions;
+
             switch (language.SelectedIndex)
             {
-                // POLISH
+                // Polish
                 case 1:
                     logo.Image = Properties.Resources.Logo1;
                     labelLeader.Text = Properties.Settings.Default.CardType switch
@@ -680,6 +765,7 @@ namespace HereToSlay
                         1 => "Nazwa potwora",
                         2 => "Nazwa bohatera",
                         3 => "Nazwa przedmiotu",
+                        4 => "Nazwa magii",
                         _ => "Nazwa przywódcy"
                     };
                     labelClass.Text = Properties.Settings.Default.CardType switch
@@ -694,18 +780,21 @@ namespace HereToSlay
                         1 => "Obrazek potwora",
                         2 => "Obrazek bohatera",
                         3 => "Obrazek przedmiotu",
+                        4 => "Obrazek magii",
                         _ => "Obrazek przywódcy"
                     };
                     labelDescription.Text = "Opis";
                     leaderImgToolTip.ToolTipTitle = "Wymiary obazka";
-                    leaderImgToolTip.SetToolTip(selectImgButton, Properties.Settings.Default.CardType switch
+                    toolTipImageDimentions = Properties.Settings.Default.CardType switch
                     {
-                        1 => "Obrazek potwora (nie ca³a karta) ma wymiary 745x817. \nProgram automatycznie przytnie i przybli¿y obraz, je¿eli bêdzie to potrzebne.\n\nWspierane rozszerzenia plików:\n.png, .jpeg, .jpg, .gif (pierwsza klatka), .bmp, .webp, .pbm, .tiff, .tga",
-                        2 => "Obrazek bohatera (nie ca³a karta) ma wymiary 545x545. \nProgram automatycznie przytnie i przybli¿y obraz, je¿eli bêdzie to potrzebne.\n\nWspierane rozszerzenia plików:\n.png, .jpeg, .jpg, .gif (pierwsza klatka), .bmp, .webp, .pbm, .tiff, .tga",
-                        3 => "Obrazek przedmiotu (nie ca³a karta) ma wymiary 545x545. \nProgram automatycznie przytnie i przybli¿y obraz, je¿eli bêdzie to potrzebne.\n\nWspierane rozszerzenia plików:\n.png, .jpeg, .jpg, .gif (pierwsza klatka), .bmp, .webp, .pbm, .tiff, .tga",
-                        4 => "Obrazek magii (nie ca³a karta) ma wymiary 545x545. \nProgram automatycznie przytnie i przybli¿y obraz, je¿eli bêdzie to potrzebne.\n\nWspierane rozszerzenia plików:\n.png, .jpeg, .jpg, .gif (pierwsza klatka), .bmp, .webp, .pbm, .tiff, .tga",
-                        _ => "Obrazek przywódcy (nie ca³a karta) ma wymiary 745x1176. \nProgram automatycznie przytnie i przybli¿y obraz, je¿eli bêdzie to potrzebne.\n\nWspierane rozszerzenia plików:\n.png, .jpeg, .jpg, .gif (pierwsza klatka), .bmp, .webp, .pbm, .tiff, .tga"
-                    }); ;
+                        1 => "Obrazek potwora (nie ca³a karta) ma wymiary 745x817.",
+                        2 => "Obrazek bohatera (nie ca³a karta) ma wymiary 545x545.",
+                        3 => "Obrazek przedmiotu (nie ca³a karta) ma wymiary 545x545.",
+                        4 => "Obrazek magii (nie ca³a karta) ma wymiary 545x545.",
+                        _ => "Obrazek przywódcy (nie ca³a karta) ma wymiary 745x1176.",
+                    };
+                    leaderImgToolTip.SetToolTip(selectImgButton, toolTipImageDimentions + "\nProgram automatycznie przytnie i przybli¿y obraz, je¿eli bêdzie to potrzebne.\n\nWspierane rozszerzenia plików:\n.png, .jpeg, .jpg, .gif(pierwsza klatka), .bmp, .webp, .pbm, .tiff, .tga");
+
                     gradient.Text = "Tylni gradient";
                     nameWhite.Text = "Bia³a nazwa";
                     splitClass.Text = "Podwójna Klasa";
@@ -713,7 +802,7 @@ namespace HereToSlay
                     labelBad.Text = "Wymagania rzutu - Pora¿ka";
                     labelGood.Text = "Wymagania rzutu - UBIJ potwora";
                     goodOutputText.Text = "UBIJ tego potwora";
-                    labelReq.Text = "Wymagania bohaterów";
+                    labelReq.Text = "Wymagania klas";
                     RENDER.Text = "ZAPISZ OBRAZ";
                     copyImageToClipboardToolStripMenuItem.Text = "Kopiuj obraz";
                     openImageLocationToolStripMenuItem.Text = "Otwórz lokalizacjê obrazu";
@@ -735,9 +824,88 @@ namespace HereToSlay
                     ItemCard.Text = "Przedmiot";
                     MagicCard.Text = "Magia";
 
+                    labelAdditionalReq.Text = "Dodatkowe wymagania";
+                    additionalReq.Text = "ODRZUÆ X kart";
+                    labelHeroBonus.Text = "Bonus dodatkowych boh.";
+                    heroBonus.Text = "Za ka¿dego dodatkowego bohatera w twojej dru¿ynie, +X do twojego rzutu";
+
                     break;
 
-                // ENGLISH
+                // Italian
+                case 2:
+                    logo.Image = Properties.Resources.Logo0;
+                    labelLeader.Text = Properties.Settings.Default.CardType switch
+                    {
+                        1 => "Nome del mostro",
+                        2 => "Nome dell'eroe",
+                        3 => "Nome dell'oggetto",
+                        4 => "Nome della magia",
+                        _ => "Nome del leader"
+                    };
+                    labelClass.Text = Properties.Settings.Default.CardType switch
+                    {
+                        2 => "Classe dell'eroe",
+                        3 => "Classe dell'oggetto",
+                        _ => "Classe del leader"
+                    };
+                    labelSecondClass.Text = "Seconda classe";
+                    labelImg.Text = Properties.Settings.Default.CardType switch
+                    {
+                        1 => "Immagine del mostro",
+                        2 => "Immagine dell'eroe",
+                        3 => "Immagine dell'oggetto",
+                        4 => "Immagine della magia",
+                        _ => "Immagine del leader"
+                    };
+                    labelDescription.Text = "Descrizione";
+                    leaderImgToolTip.ToolTipTitle = "Dimensioni dell'immagine";
+                    toolTipImageDimentions = Properties.Settings.Default.CardType switch
+                    {
+                        1 => "Le dimensioni dell'immagine del mostro (non l'intera carta) sono 745x817.",
+                        2 => "Le dimensioni dell'immagine dell'eroe (non l'intera carta) sono 545x545.",
+                        3 => "Le dimensioni dell'immagine dell'oggetto (non l'intera carta) sono 545x545.",
+                        4 => "Le dimensioni dell'immagine della magia (non l'intera carta) sono 545x545.",
+                        _ => "Le dimensioni dell'immagine del leader (non l'intera carta) sono 745x1176."
+                    };
+                    leaderImgToolTip.SetToolTip(selectImgButton, toolTipImageDimentions + "\nIl programma ritagliera e zoommera automaticamente l'immagine se necessario.\n\nEstensioni file supportate:\n.png, .jpeg, .jpg, .gif (first frame), .bmp, .webp, .pbm, .tiff, .tga");
+
+                    gradient.Text = "Gradiente di sfondo";
+                    nameWhite.Text = "Nome bianco";
+                    splitClass.Text = "Doppia classe";
+                    this.Text = "Here to Slay - Generatore di carte";
+                    labelBad.Text = "Requisito di tiro - Fallito";
+                    labelGood.Text = "Requisito di tiro - STERMINA mostro";
+                    goodOutputText.Text = "STERMINA questa carta Monstro";
+                    labelReq.Text = "Requisiti di classe";
+                    RENDER.Text = "SALVA L' IMMAGINE";
+                    copyImageToClipboardToolStripMenuItem.Text = "Copia l'immagine";
+                    openImageLocationToolStripMenuItem.Text = "Apri percorso immagine";
+                    labelMaxItem.Text = "Numero massimo di oggetti";
+                    alternativeColor.Text = "Colore alternativo (?)";
+                    altColorToolTip.ToolTipTitle = "Colore alternativo";
+                    altColorToolTip.SetToolTip(alternativeColor, "Su alcune stampanti, il colore standard potrebbe differire notevolmente da quello desiderato.\nIl colore standard ? preso direttamente dal manuale, quindi dovrebbe essere buono,\nma alcune stampanti non hanno una profondit? di colore sufficiente.\n\nIl colore alternativo (nero), potrebbe sembrare migliore su alcune stampanti.");
+
+                    if (chosenClass.SelectedIndex == -1 && Properties.Settings.Default.CardType == 2)
+                    {
+                        this.Icon = Properties.Resources.eroe;
+                    }
+                    HeroCard.Image = Properties.Resources.eroe.ToBitmap();
+
+                    cardType.Text = "Tipo di carta";
+                    LeaderCard.Text = "Leader";
+                    MonsterCard.Text = "Mostro";
+                    HeroCard.Text = "Eroe";
+                    ItemCard.Text = "Oggetto";
+                    MagicCard.Text = "Magia";
+
+                    additionalReq.Text = "Requisiti aggiuntivi";
+                    additionalReq.Text = "SCARTA X carte";
+                    labelHeroBonus.Text = "Bonus Eroe aggiuntivo";
+                    heroBonus.Text = "Per ogni carta Eroe aggiuntiva nella tua Squadra, +X al tuo tiro";
+
+                    break;
+
+                // English
                 default:
                     logo.Image = Properties.Resources.Logo0;
                     labelLeader.Text = Properties.Settings.Default.CardType switch
@@ -745,6 +913,7 @@ namespace HereToSlay
                         1 => "Monster name",
                         2 => "Hero name",
                         3 => "Item name",
+                        4 => "Magic name",
                         _ => "Leader name"
                     };
                     labelClass.Text = Properties.Settings.Default.CardType switch
@@ -759,18 +928,21 @@ namespace HereToSlay
                         1 => "Monster image",
                         2 => "Hero image",
                         3 => "Item image",
+                        4 => "Magic image",
                         _ => "Leader image"
                     };
                     labelDescription.Text = "Description";
                     leaderImgToolTip.ToolTipTitle = "Image dimentions";
-                    leaderImgToolTip.SetToolTip(selectImgButton, Properties.Settings.Default.CardType switch
+                    toolTipImageDimentions = Properties.Settings.Default.CardType switch
                     {
-                        1 => "The monster image (not the whole card) dimentions are 745x817. \nThe program will automatically crop and zoom the image, if needed.\n\nSupported file extensions:\n.png, .jpeg, .jpg, .gif (first frame), .bmp, .webp, .pbm, .tiff, .tga",
-                        2 => "The hero image (not the whole card) dimentions are 545x545. \nThe program will automatically crop and zoom the image, if needed.\n\nSupported file extensions:\n.png, .jpeg, .jpg, .gif (first frame), .bmp, .webp, .pbm, .tiff, .tga",
-                        3 => "The item image (not the whole card) dimentions are 545x545. \nThe program will automatically crop and zoom the image, if needed.\n\nSupported file extensions:\n.png, .jpeg, .jpg, .gif (first frame), .bmp, .webp, .pbm, .tiff, .tga",
-                        4 => "The magic image (not the whole card) dimentions are 545x545. \nThe program will automatically crop and zoom the image, if needed.\n\nSupported file extensions:\n.png, .jpeg, .jpg, .gif (first frame), .bmp, .webp, .pbm, .tiff, .tga",
-                        _ => "The leader image (not the whole card) dimentions are 745x1176. \nThe program will automatically crop and zoom the image, if needed.\n\nSupported file extensions:\n.png, .jpeg, .jpg, .gif (first frame), .bmp, .webp, .pbm, .tiff, .tga"
-                    });
+                        1 => "The monster image (not the whole card) dimentions are 745x817.",
+                        2 => "The hero image (not the whole card) dimentions are 545x545.",
+                        3 => "The item image (not the whole card) dimentions are 545x545.",
+                        4 => "The magic image (not the whole card) dimentions are 545x545.",
+                        _ => "The leader image (not the whole card) dimentions are 745x1176.",
+                    };
+                    leaderImgToolTip.SetToolTip(selectImgButton, toolTipImageDimentions + "\nThe program will automatically crop and zoom the image, if needed.\n\nSupported file extensions:\n.png, .jpeg, .jpg, .gif(first frame), .bmp, .webp, .pbm, .tiff, .tga");
+
                     gradient.Text = "Back gradient";
                     nameWhite.Text = "White name";
                     splitClass.Text = "Split Class";
@@ -778,7 +950,7 @@ namespace HereToSlay
                     labelBad.Text = "Roll Requirements - Fail";
                     labelGood.Text = "Roll Requirements - SLAY monster";
                     goodOutputText.Text = "SLAY this Monster card";
-                    labelReq.Text = "Hero Requirements";
+                    labelReq.Text = "Class Requirements";
                     RENDER.Text = "SAVE IMAGE";
                     copyImageToClipboardToolStripMenuItem.Text = "Copy image";
                     openImageLocationToolStripMenuItem.Text = "Open image location";
@@ -800,12 +972,19 @@ namespace HereToSlay
                     ItemCard.Text = "Item";
                     MagicCard.Text = "Magic";
 
+                    additionalReq.Text = "Addidional Requirements";
+                    additionalReq.Text = "DISCARD X cards";
+                    labelHeroBonus.Text = "Additional Hero Bonus";
+                    heroBonus.Text = "For each additional Hero card in your Party, +X to your roll.";
+
                     break;
             }
+            #endregion
             LocaliseClassOptions(language.SelectedIndex); // change class options based on selected language
         }
 
         // These are made so that after changing the language, the selected classes stay the same.
+        // TODO: reduce this all to a single operation
         int currentClassIndex;
         int currentSecondClassIndex;
         int currentItemClassIndex;
@@ -825,26 +1004,21 @@ namespace HereToSlay
             currentItemClassIndex = itemChosenClass.SelectedIndex;
             itemChosenClass.Items.Clear();
 
-            currentHeroReq1Index = heroReq1.SelectedIndex;
-            heroReq1.Items.Clear();
-            currentHeroReq2Index = heroReq2.SelectedIndex;
-            heroReq2.Items.Clear();
-            currentHeroReq3Index = heroReq3.SelectedIndex;
-            heroReq3.Items.Clear();
-            currentHeroReq4Index = heroReq4.SelectedIndex;
-            heroReq4.Items.Clear();
-            currentHeroReq5Index = heroReq5.SelectedIndex;
-            heroReq5.Items.Clear();
+            currentHeroReq1Index = classReq1.SelectedIndex;
+            classReq1.Items.Clear();
+            currentHeroReq2Index = classReq2.SelectedIndex;
+            classReq2.Items.Clear();
+            currentHeroReq3Index = classReq3.SelectedIndex;
+            classReq3.Items.Clear();
+            currentHeroReq4Index = classReq4.SelectedIndex;
+            classReq4.Items.Clear();
+            currentHeroReq5Index = classReq5.SelectedIndex;
+            classReq5.Items.Clear();
 
             switch (lang)
             {
+                // Polish
                 case 1:
-                    heroReq1.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
-                    heroReq2.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
-                    heroReq3.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
-                    heroReq4.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
-                    heroReq5.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
-
                     // These have to be hardcoded mainly because they each use an icon from the resources so it looks better in the combobox.
                     chosenClass.Items.Add(new ImageCBox("BRAK KLASY", Properties.Resources.empty.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("£owca", Properties.Resources.lowca.ToBitmap()));
@@ -872,7 +1046,7 @@ namespace HereToSlay
                         }
                         else
                         {
-                            if(initLang == true) // don't show this error when first loading the program (it would show up twice, due to lazy programming)
+                            if (initLang == true) // don't show this error when first loading the program (it would show up twice, due to lazy programming)
                             {
                                 MessageBox.Show($"B³¹d podczas ³adowania ikony dla klasy {c.NamePL}.\nNie znaleziono obrazka {c.ImagePath}.\n\nIkona klasy pozostanie pusta.", "B³¹d", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
@@ -882,18 +1056,70 @@ namespace HereToSlay
                         chosenClass.Items.Add(new ImageCBox(capitalisedName, classIcon));
                     });
 
+                    // Add monster related options
+                    classReq1.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
+                    classReq2.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
+                    classReq3.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
+                    classReq4.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
+                    classReq5.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
+
                     // Add item related options
                     itemChosenClass.Items.Add(new ImageCBox("Przedmiot", Properties.Resources.itemIcon.ToBitmap()));
                     itemChosenClass.Items.Add(new ImageCBox("Przekêty przed.", Properties.Resources.cursed.ToBitmap()));
 
                     break;
-                default:
-                    heroReq1.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
-                    heroReq2.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
-                    heroReq3.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
-                    heroReq4.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
-                    heroReq5.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
 
+                // Italian
+                case 2:
+                    // These have to be hardcoded mainly because they each use an icon from the resources so it looks better in the combobox.
+                    chosenClass.Items.Add(new ImageCBox("SENZA CLASSE", Properties.Resources.empty.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Ranger", Properties.Resources.lowca.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Mago", Properties.Resources.mag.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Bardo", Properties.Resources.najebus.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Guardiano", Properties.Resources.straznik.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Guerriero", Properties.Resources.wojownik.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Ladro", Properties.Resources.zlodziej.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Druido", Properties.Resources.druid.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Combattente", Properties.Resources.awanturnik.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Berserker", Properties.Resources.berserk.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Necromante", Properties.Resources.nekromanta.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Stregone", Properties.Resources.czarownik.ToBitmap()));
+
+                    // Add custom classes
+                    inst.ClassList.Skip(12).ToList().ForEach(c =>
+                    {
+                        string capitalisedName = char.ToUpper(c.NameEN[0]) + c.NameEN.Substring(1);
+
+                        // Load class icon
+                        Bitmap classIcon = new(1, 1);
+                        if (File.Exists(c.ImagePath))
+                        {
+                            classIcon = new Bitmap(c.ImagePath);
+                        }
+                        else
+                        {
+                            if (initLang == true) // don't show this error when first loading the program (it would show up twice, due to lazy programming)
+                            {
+                                MessageBox.Show($"Error loading icon for the {c.NameIT} class.\nCould not find image in {c.ImagePath}.\n\nClass icon will be left empty.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                        chosenClass.Items.Add(new ImageCBox(capitalisedName, new Bitmap(1, 1)));
+                    });
+
+                    // Add monster related options
+                    classReq1.Items.Add(new ImageCBox("EROE", Properties.Resources.eroe.ToBitmap()));
+                    classReq2.Items.Add(new ImageCBox("EROE", Properties.Resources.eroe.ToBitmap()));
+                    classReq3.Items.Add(new ImageCBox("EROE", Properties.Resources.eroe.ToBitmap()));
+                    classReq4.Items.Add(new ImageCBox("EROE", Properties.Resources.eroe.ToBitmap()));
+                    classReq5.Items.Add(new ImageCBox("EROE", Properties.Resources.eroe.ToBitmap()));
+
+                    // Add item related options
+                    itemChosenClass.Items.Add(new ImageCBox("Oggetto", Properties.Resources.itemIcon.ToBitmap()));
+                    itemChosenClass.Items.Add(new ImageCBox("Oggetto maledetto", Properties.Resources.cursed.ToBitmap()));
+
+                    break;
+                // English
+                default:
                     // These have to be hardcoded mainly because they each use an icon from the resources so it looks better in the combobox.
                     chosenClass.Items.Add(new ImageCBox("NO CLASS", Properties.Resources.empty.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("Ranger", Properties.Resources.lowca.ToBitmap()));
@@ -926,8 +1152,15 @@ namespace HereToSlay
                                 MessageBox.Show($"Error loading icon for the {c.NameEN} class.\nCould not find image in {c.ImagePath}.\n\nClass icon will be left empty.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
-                        chosenClass.Items.Add(new ImageCBox(capitalisedName, new Bitmap(1, 1) ));
+                        chosenClass.Items.Add(new ImageCBox(capitalisedName, new Bitmap(1, 1)));
                     });
+
+                    // Add monster related options
+                    classReq1.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
+                    classReq2.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
+                    classReq3.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
+                    classReq4.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
+                    classReq5.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
 
                     // Add item related options
                     itemChosenClass.Items.Add(new ImageCBox("Item", Properties.Resources.itemIcon.ToBitmap()));
@@ -939,11 +1172,11 @@ namespace HereToSlay
             foreach (var item in chosenClass.Items)
             {
                 chosenSecondClass.Items.Add(item);
-                heroReq1.Items.Add(item);
-                heroReq2.Items.Add(item);
-                heroReq3.Items.Add(item);
-                heroReq4.Items.Add(item);
-                heroReq5.Items.Add(item);
+                classReq1.Items.Add(item);
+                classReq2.Items.Add(item);
+                classReq3.Items.Add(item);
+                classReq4.Items.Add(item);
+                classReq5.Items.Add(item);
                 itemChosenClass.Items.Add(item);
             }
 
@@ -952,11 +1185,11 @@ namespace HereToSlay
 
             itemChosenClass.SelectedIndex = currentItemClassIndex;
 
-            heroReq1.SelectedIndex = currentHeroReq1Index;
-            heroReq2.SelectedIndex = currentHeroReq2Index;
-            heroReq3.SelectedIndex = currentHeroReq3Index;
-            heroReq4.SelectedIndex = currentHeroReq4Index;
-            heroReq5.SelectedIndex = currentHeroReq5Index;
+            classReq1.SelectedIndex = currentHeroReq1Index;
+            classReq2.SelectedIndex = currentHeroReq2Index;
+            classReq3.SelectedIndex = currentHeroReq3Index;
+            classReq4.SelectedIndex = currentHeroReq4Index;
+            classReq5.SelectedIndex = currentHeroReq5Index;
         }
         #endregion
 
@@ -969,7 +1202,7 @@ namespace HereToSlay
 
         private void updateIcon_to_chosenClass(object? sender, EventArgs? e)
         {
-            if(Properties.Settings.Default.CardType != 1 && Properties.Settings.Default.CardType != 4)
+            if (Properties.Settings.Default.CardType != 1 && Properties.Settings.Default.CardType != 4)
             {
                 int iconIndex;
                 if (Properties.Settings.Default.CardType == 3)
@@ -1034,20 +1267,20 @@ namespace HereToSlay
                     case "clearSecondClass":
                         chosenSecondClass.SelectedIndex = -1;
                         break;
-                    case "clearHeroReq1":
-                        heroReq1.SelectedIndex = -1;
+                    case "clearClassReq1":
+                        classReq1.SelectedIndex = -1;
                         break;
-                    case "clearHeroReq2":
-                        heroReq2.SelectedIndex = -1;
+                    case "clearClassReq2":
+                        classReq2.SelectedIndex = -1;
                         break;
-                    case "clearHeroReq3":
-                        heroReq3.SelectedIndex = -1;
+                    case "clearClassReq3":
+                        classReq3.SelectedIndex = -1;
                         break;
-                    case "clearHeroReq4":
-                        heroReq4.SelectedIndex = -1;
+                    case "clearClassReq4":
+                        classReq4.SelectedIndex = -1;
                         break;
-                    case "clearHeroReq5":
-                        heroReq5.SelectedIndex = -1;
+                    case "clearClassReq5":
+                        classReq5.SelectedIndex = -1;
                         break;
                 }
             }
@@ -1174,128 +1407,27 @@ namespace HereToSlay
 
             renderPreview(sender, e);
         }
+        private void labelAdditionalReq_CheckedChanged(object sender, EventArgs e)
+        {
+            additionalReq.Enabled = labelAdditionalReq.Checked;
+
+            classReq4.Enabled = !labelAdditionalReq.Checked;
+            classReq5.Enabled = !labelAdditionalReq.Checked;
+
+            clearClassReq4.Enabled = !labelAdditionalReq.Checked;
+            clearClassReq5.Enabled = !labelAdditionalReq.Checked;
+
+            classReq4.SelectedIndex = -1;
+            classReq5.SelectedIndex = -1;
+
+            renderPreview(sender, e);
+        }
+
+        private void labelHeroBonus_CheckedChanged(object sender, EventArgs e)
+        {
+            heroBonus.Enabled = labelHeroBonus.Checked;
+            renderPreview(sender, e);
+        }
     }
     #endregion
-
-    class FontLoader
-    {
-        private static readonly PrivateFontCollection FontCollection = new PrivateFontCollection();
-
-        public static Font GetFont(string fontFileName, float size)
-        {
-            string executableLocation = AppDomain.CurrentDomain.BaseDirectory;
-            string fontPath = Path.Combine(executableLocation, "Assets\\Fonts", fontFileName);
-            if (!File.Exists(fontPath))
-            {
-                throw new FileNotFoundException("Font file not found.");
-            }
-
-            FontCollection.AddFontFile(fontPath);
-            FontFamily fontFamily = FontCollection.Families[0];
-
-            Font font = new(fontFamily, size);
-            return font;
-        }
-
-        public static void ChangeFontForAllControls(Control control, Font fontUI)
-        {
-            foreach (Control c in control.Controls)
-            {
-                if (!c.Name.Contains("clear") && c is not NumericUpDown) // don't change the font for the X boxes or the Numeric boxes
-                {
-                    c.Font = fontUI;
-                    if (c.Controls.Count > 0)
-                    {
-                        ChangeFontForAllControls(c, fontUI);
-                    }
-                }
-            }
-        }
-
-        public static void ChangeFontForAllLabels(Control control, Font fontUI)
-        {
-            foreach (Control c in control.Controls)
-            {
-                if (c is Label label)
-                {
-                    label.Font = fontUI;
-                }
-                if (c.Controls.Count > 0)
-                {
-                    ChangeFontForAllLabels(c, fontUI);
-                }
-            }
-        }
-    }
-
-    class ImageCBox
-    {
-        public string Text { get; set; }
-        public Image Image { get; set; }
-
-        public ImageCBox(string text, Image image)
-        {
-            Text = text;
-            Image = image;
-        }
-
-        public static void ComboBox_DrawItem(object sender, DrawItemEventArgs e)
-        {
-            if (e.Index < 0 || sender == null) return;
-
-            e.DrawBackground();
-
-            if (sender is ComboBox comboBox && comboBox.Items.Count > 0 && comboBox.Items[e.Index] is ImageCBox item)
-            {
-                if (e.Font != null)
-                {
-                    e.Graphics.DrawImage(item.Image, e.Bounds.Left, e.Bounds.Top, e.Bounds.Height, e.Bounds.Height);
-                    e.Graphics.DrawString(item.Text, e.Font, Brushes.Black, e.Bounds.Left + e.Bounds.Height, e.Bounds.Top);
-                }
-            }
-
-            e.DrawFocusRectangle();
-        }
-    }
-    class BackgroundCBox
-    {
-        public string Text { get; set; }
-        public Color BackgroundColor { get; set; }
-
-        public BackgroundCBox(string text, Color backgroundColor)
-        {
-            Text = text;
-            BackgroundColor = backgroundColor;
-        }
-
-        public static void ComboBox_DrawItem(object sender, DrawItemEventArgs e)
-        {
-            if (e.Index < 0 || sender == null) return;
-
-            e.DrawBackground();
-
-            if (sender is ComboBox comboBox && comboBox.Items.Count > 0 && comboBox.Items[e.Index] is BackgroundCBox item)
-            {
-                if (e.Font != null)
-                {
-                    Brush backgroundColorBrush = new SolidBrush(item.BackgroundColor);
-                    e.Graphics.FillRectangle(backgroundColorBrush, e.Bounds);
-
-                    StringFormat stringFormat = new()
-                    {
-                        LineAlignment = StringAlignment.Center,
-                        Alignment = StringAlignment.Center
-                    };
-
-                    Font customFont = FontLoader.GetFont("PatuaOne_Polish.ttf", 14);
-                    Brush textColorBrush = Brushes.White;
-                    e.Graphics.DrawString(item.Text, customFont, textColorBrush, e.Bounds, stringFormat);
-                }
-            }
-
-            e.DrawFocusRectangle();
-        }
-    }
-
-
 }

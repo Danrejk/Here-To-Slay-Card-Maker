@@ -67,12 +67,12 @@
             ItemCard = new ToolStripMenuItem();
             MagicCard = new ToolStripMenuItem();
             language = new ToolStripComboBox();
-            heroReq3 = new ComboBox();
-            heroReq2 = new ComboBox();
-            heroReq1 = new ComboBox();
-            heroReq4 = new ComboBox();
+            classReq3 = new ComboBox();
+            classReq2 = new ComboBox();
+            classReq1 = new ComboBox();
+            classReq4 = new ComboBox();
             labelReq = new Label();
-            heroReq5 = new ComboBox();
+            classReq5 = new ComboBox();
             badOutputNum = new NumericUpDown();
             badOutputSym = new ComboBox();
             badOutputText = new TextBox();
@@ -82,11 +82,11 @@
             goodOutputSym = new ComboBox();
             goodOutputNum = new NumericUpDown();
             clearSecondClass = new Button();
-            clearHeroReq1 = new Button();
-            clearHeroReq2 = new Button();
-            clearHeroReq4 = new Button();
-            clearHeroReq5 = new Button();
-            clearHeroReq3 = new Button();
+            clearClassReq1 = new Button();
+            clearClassReq2 = new Button();
+            clearClassReq4 = new Button();
+            clearClassReq5 = new Button();
+            clearClassReq3 = new Button();
             maxItems = new NumericUpDown();
             labelMaxItem = new Label();
             itemImg = new PictureBox();
@@ -97,6 +97,10 @@
             alternativeColor = new CheckBox();
             altColorToolTip = new ToolTip(components);
             itemChosenClass = new ComboBox();
+            labelAdditionalReq = new CheckBox();
+            additionalReq = new TextBox();
+            labelHeroBonus = new CheckBox();
+            heroBonus = new TextBox();
             ((System.ComponentModel.ISupportInitialize)logo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)previewImg).BeginInit();
             previewContextMenu.SuspendLayout();
@@ -375,7 +379,7 @@
             // 
             // leaderImgToolTip
             // 
-            leaderImgToolTip.AutoPopDelay = 50000;
+            leaderImgToolTip.AutoPopDelay = 32766;
             leaderImgToolTip.InitialDelay = 250;
             leaderImgToolTip.ReshowDelay = 100;
             leaderImgToolTip.ToolTipIcon = ToolTipIcon.Info;
@@ -494,35 +498,35 @@
             // LeaderCard
             // 
             LeaderCard.Name = "LeaderCard";
-            LeaderCard.Size = new Size(180, 22);
+            LeaderCard.Size = new Size(118, 22);
             LeaderCard.Text = "Leader";
             LeaderCard.Click += LeaderCard_Click;
             // 
             // MonsterCard
             // 
             MonsterCard.Name = "MonsterCard";
-            MonsterCard.Size = new Size(180, 22);
+            MonsterCard.Size = new Size(118, 22);
             MonsterCard.Text = "Monster";
             MonsterCard.Click += MonsterCard_Click;
             // 
             // HeroCard
             // 
             HeroCard.Name = "HeroCard";
-            HeroCard.Size = new Size(180, 22);
+            HeroCard.Size = new Size(118, 22);
             HeroCard.Text = "Hero";
             HeroCard.Click += HeroCard_Click;
             // 
             // ItemCard
             // 
             ItemCard.Name = "ItemCard";
-            ItemCard.Size = new Size(180, 22);
+            ItemCard.Size = new Size(118, 22);
             ItemCard.Text = "Item";
             ItemCard.Click += ItemCard_Click;
             // 
             // MagicCard
             // 
             MagicCard.Name = "MagicCard";
-            MagicCard.Size = new Size(180, 22);
+            MagicCard.Size = new Size(118, 22);
             MagicCard.Text = "Magic";
             MagicCard.Click += MagicCard_Click;
             // 
@@ -532,68 +536,68 @@
             language.DropDownStyle = ComboBoxStyle.DropDownList;
             language.Margin = new Padding(0);
             language.Name = "language";
-            language.Size = new Size(85, 23);
+            language.Size = new Size(100, 23);
             language.SelectedIndexChanged += language_SelectedIndexChanged;
             // 
-            // heroReq3
+            // classReq3
             // 
-            heroReq3.BackColor = Color.White;
-            heroReq3.DropDownStyle = ComboBoxStyle.DropDownList;
-            heroReq3.FlatStyle = FlatStyle.Flat;
-            heroReq3.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            heroReq3.FormattingEnabled = true;
-            heroReq3.Location = new Point(70, 331);
-            heroReq3.Margin = new Padding(3, 3, 0, 3);
-            heroReq3.Name = "heroReq3";
-            heroReq3.Size = new Size(120, 25);
-            heroReq3.TabIndex = 30;
-            heroReq3.Visible = false;
-            heroReq3.SelectedIndexChanged += renderPreview;
+            classReq3.BackColor = Color.White;
+            classReq3.DropDownStyle = ComboBoxStyle.DropDownList;
+            classReq3.FlatStyle = FlatStyle.Flat;
+            classReq3.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            classReq3.FormattingEnabled = true;
+            classReq3.Location = new Point(180, 303);
+            classReq3.Margin = new Padding(3, 3, 0, 3);
+            classReq3.Name = "classReq3";
+            classReq3.Size = new Size(42, 25);
+            classReq3.TabIndex = 30;
+            classReq3.Visible = false;
+            classReq3.SelectedIndexChanged += renderPreview;
             // 
-            // heroReq2
+            // classReq2
             // 
-            heroReq2.BackColor = Color.White;
-            heroReq2.DropDownStyle = ComboBoxStyle.DropDownList;
-            heroReq2.FlatStyle = FlatStyle.Flat;
-            heroReq2.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            heroReq2.FormattingEnabled = true;
-            heroReq2.Location = new Point(208, 303);
-            heroReq2.Margin = new Padding(3, 3, 0, 3);
-            heroReq2.Name = "heroReq2";
-            heroReq2.Size = new Size(120, 25);
-            heroReq2.TabIndex = 31;
-            heroReq2.Visible = false;
-            heroReq2.SelectedIndexChanged += renderPreview;
+            classReq2.BackColor = Color.White;
+            classReq2.DropDownStyle = ComboBoxStyle.DropDownList;
+            classReq2.FlatStyle = FlatStyle.Flat;
+            classReq2.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            classReq2.FormattingEnabled = true;
+            classReq2.Location = new Point(122, 303);
+            classReq2.Margin = new Padding(3, 3, 0, 3);
+            classReq2.Name = "classReq2";
+            classReq2.Size = new Size(42, 25);
+            classReq2.TabIndex = 31;
+            classReq2.Visible = false;
+            classReq2.SelectedIndexChanged += renderPreview;
             // 
-            // heroReq1
+            // classReq1
             // 
-            heroReq1.BackColor = Color.White;
-            heroReq1.DropDownStyle = ComboBoxStyle.DropDownList;
-            heroReq1.FlatStyle = FlatStyle.Flat;
-            heroReq1.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            heroReq1.FormattingEnabled = true;
-            heroReq1.Location = new Point(70, 303);
-            heroReq1.Margin = new Padding(3, 3, 0, 3);
-            heroReq1.Name = "heroReq1";
-            heroReq1.Size = new Size(120, 25);
-            heroReq1.TabIndex = 32;
-            heroReq1.Visible = false;
-            heroReq1.SelectedIndexChanged += renderPreview;
+            classReq1.BackColor = Color.White;
+            classReq1.DropDownStyle = ComboBoxStyle.DropDownList;
+            classReq1.FlatStyle = FlatStyle.Flat;
+            classReq1.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            classReq1.FormattingEnabled = true;
+            classReq1.Location = new Point(64, 303);
+            classReq1.Margin = new Padding(3, 3, 0, 3);
+            classReq1.Name = "classReq1";
+            classReq1.Size = new Size(42, 25);
+            classReq1.TabIndex = 32;
+            classReq1.Visible = false;
+            classReq1.SelectedIndexChanged += renderPreview;
             // 
-            // heroReq4
+            // classReq4
             // 
-            heroReq4.BackColor = Color.White;
-            heroReq4.DropDownStyle = ComboBoxStyle.DropDownList;
-            heroReq4.FlatStyle = FlatStyle.Flat;
-            heroReq4.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            heroReq4.FormattingEnabled = true;
-            heroReq4.Location = new Point(208, 331);
-            heroReq4.Margin = new Padding(3, 3, 0, 3);
-            heroReq4.Name = "heroReq4";
-            heroReq4.Size = new Size(120, 25);
-            heroReq4.TabIndex = 33;
-            heroReq4.Visible = false;
-            heroReq4.SelectedIndexChanged += renderPreview;
+            classReq4.BackColor = Color.White;
+            classReq4.DropDownStyle = ComboBoxStyle.DropDownList;
+            classReq4.FlatStyle = FlatStyle.Flat;
+            classReq4.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            classReq4.FormattingEnabled = true;
+            classReq4.Location = new Point(238, 303);
+            classReq4.Margin = new Padding(3, 3, 0, 3);
+            classReq4.Name = "classReq4";
+            classReq4.Size = new Size(42, 25);
+            classReq4.TabIndex = 33;
+            classReq4.Visible = false;
+            classReq4.SelectedIndexChanged += renderPreview;
             // 
             // labelReq
             // 
@@ -601,7 +605,7 @@
             labelReq.BackColor = Color.Transparent;
             labelReq.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             labelReq.ForeColor = Color.White;
-            labelReq.Location = new Point(67, 283);
+            labelReq.Location = new Point(60, 283);
             labelReq.Margin = new Padding(0);
             labelReq.Name = "labelReq";
             labelReq.RightToLeft = RightToLeft.No;
@@ -611,25 +615,25 @@
             labelReq.TextAlign = ContentAlignment.BottomLeft;
             labelReq.Visible = false;
             // 
-            // heroReq5
+            // classReq5
             // 
-            heroReq5.BackColor = Color.White;
-            heroReq5.DropDownStyle = ComboBoxStyle.DropDownList;
-            heroReq5.FlatStyle = FlatStyle.Flat;
-            heroReq5.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            heroReq5.FormattingEnabled = true;
-            heroReq5.Location = new Point(142, 359);
-            heroReq5.Margin = new Padding(3, 3, 0, 3);
-            heroReq5.Name = "heroReq5";
-            heroReq5.Size = new Size(120, 25);
-            heroReq5.TabIndex = 35;
-            heroReq5.Visible = false;
-            heroReq5.SelectedIndexChanged += renderPreview;
+            classReq5.BackColor = Color.White;
+            classReq5.DropDownStyle = ComboBoxStyle.DropDownList;
+            classReq5.FlatStyle = FlatStyle.Flat;
+            classReq5.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            classReq5.FormattingEnabled = true;
+            classReq5.Location = new Point(296, 303);
+            classReq5.Margin = new Padding(3, 3, 0, 3);
+            classReq5.Name = "classReq5";
+            classReq5.Size = new Size(42, 25);
+            classReq5.TabIndex = 35;
+            classReq5.Visible = false;
+            classReq5.SelectedIndexChanged += renderPreview;
             // 
             // badOutputNum
             // 
             badOutputNum.Font = new Font("Microsoft Sans Serif", 10.75F, FontStyle.Regular, GraphicsUnit.Point);
-            badOutputNum.Location = new Point(84, 415);
+            badOutputNum.Location = new Point(84, 425);
             badOutputNum.Margin = new Padding(0);
             badOutputNum.Name = "badOutputNum";
             badOutputNum.Size = new Size(35, 24);
@@ -644,7 +648,7 @@
             badOutputSym.FlatStyle = FlatStyle.Flat;
             badOutputSym.ForeColor = Color.White;
             badOutputSym.FormattingEnabled = true;
-            badOutputSym.Location = new Point(118, 416);
+            badOutputSym.Location = new Point(118, 426);
             badOutputSym.Margin = new Padding(0);
             badOutputSym.Name = "badOutputSym";
             badOutputSym.Size = new Size(35, 23);
@@ -656,7 +660,7 @@
             // 
             badOutputText.BorderStyle = BorderStyle.None;
             badOutputText.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            badOutputText.Location = new Point(156, 416);
+            badOutputText.Location = new Point(156, 426);
             badOutputText.Margin = new Padding(0);
             badOutputText.Multiline = true;
             badOutputText.Name = "badOutputText";
@@ -671,7 +675,7 @@
             labelBad.BackColor = Color.Transparent;
             labelBad.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             labelBad.ForeColor = Color.White;
-            labelBad.Location = new Point(81, 396);
+            labelBad.Location = new Point(81, 406);
             labelBad.Margin = new Padding(0);
             labelBad.Name = "labelBad";
             labelBad.RightToLeft = RightToLeft.No;
@@ -687,7 +691,7 @@
             labelGood.BackColor = Color.Transparent;
             labelGood.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             labelGood.ForeColor = Color.White;
-            labelGood.Location = new Point(81, 437);
+            labelGood.Location = new Point(81, 447);
             labelGood.Margin = new Padding(0);
             labelGood.Name = "labelGood";
             labelGood.RightToLeft = RightToLeft.No;
@@ -701,7 +705,7 @@
             // 
             goodOutputText.BorderStyle = BorderStyle.None;
             goodOutputText.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            goodOutputText.Location = new Point(156, 457);
+            goodOutputText.Location = new Point(156, 467);
             goodOutputText.Multiline = true;
             goodOutputText.Name = "goodOutputText";
             goodOutputText.Size = new Size(175, 23);
@@ -716,7 +720,7 @@
             goodOutputSym.FlatStyle = FlatStyle.Flat;
             goodOutputSym.ForeColor = Color.White;
             goodOutputSym.FormattingEnabled = true;
-            goodOutputSym.Location = new Point(118, 457);
+            goodOutputSym.Location = new Point(118, 467);
             goodOutputSym.Margin = new Padding(0);
             goodOutputSym.Name = "goodOutputSym";
             goodOutputSym.Size = new Size(35, 23);
@@ -728,7 +732,7 @@
             // 
             goodOutputNum.BorderStyle = BorderStyle.FixedSingle;
             goodOutputNum.Font = new Font("Microsoft Sans Serif", 10.75F, FontStyle.Regular, GraphicsUnit.Point);
-            goodOutputNum.Location = new Point(84, 457);
+            goodOutputNum.Location = new Point(84, 467);
             goodOutputNum.Name = "goodOutputNum";
             goodOutputNum.Size = new Size(35, 24);
             goodOutputNum.TabIndex = 40;
@@ -754,90 +758,90 @@
             clearSecondClass.Visible = false;
             clearSecondClass.Click += clearSelectedClass;
             // 
-            // clearHeroReq1
+            // clearClassReq1
             // 
-            clearHeroReq1.BackColor = SystemColors.ControlLight;
-            clearHeroReq1.FlatAppearance.BorderSize = 0;
-            clearHeroReq1.FlatStyle = FlatStyle.Flat;
-            clearHeroReq1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            clearHeroReq1.ForeColor = Color.FromArgb(230, 44, 47);
-            clearHeroReq1.Location = new Point(190, 303);
-            clearHeroReq1.Margin = new Padding(0);
-            clearHeroReq1.Name = "clearHeroReq1";
-            clearHeroReq1.Size = new Size(15, 25);
-            clearHeroReq1.TabIndex = 45;
-            clearHeroReq1.Text = "X";
-            clearHeroReq1.UseVisualStyleBackColor = false;
-            clearHeroReq1.Visible = false;
-            clearHeroReq1.Click += clearSelectedClass;
+            clearClassReq1.BackColor = SystemColors.ControlLight;
+            clearClassReq1.FlatAppearance.BorderSize = 0;
+            clearClassReq1.FlatStyle = FlatStyle.Flat;
+            clearClassReq1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            clearClassReq1.ForeColor = Color.FromArgb(230, 44, 47);
+            clearClassReq1.Location = new Point(106, 303);
+            clearClassReq1.Margin = new Padding(0);
+            clearClassReq1.Name = "clearClassReq1";
+            clearClassReq1.Size = new Size(13, 25);
+            clearClassReq1.TabIndex = 45;
+            clearClassReq1.Text = "X";
+            clearClassReq1.UseVisualStyleBackColor = false;
+            clearClassReq1.Visible = false;
+            clearClassReq1.Click += clearSelectedClass;
             // 
-            // clearHeroReq2
+            // clearClassReq2
             // 
-            clearHeroReq2.BackColor = SystemColors.ControlLight;
-            clearHeroReq2.FlatAppearance.BorderSize = 0;
-            clearHeroReq2.FlatStyle = FlatStyle.Flat;
-            clearHeroReq2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            clearHeroReq2.ForeColor = Color.FromArgb(230, 44, 47);
-            clearHeroReq2.Location = new Point(328, 303);
-            clearHeroReq2.Margin = new Padding(0);
-            clearHeroReq2.Name = "clearHeroReq2";
-            clearHeroReq2.Size = new Size(15, 25);
-            clearHeroReq2.TabIndex = 46;
-            clearHeroReq2.Text = "X";
-            clearHeroReq2.UseVisualStyleBackColor = false;
-            clearHeroReq2.Visible = false;
-            clearHeroReq2.Click += clearSelectedClass;
+            clearClassReq2.BackColor = SystemColors.ControlLight;
+            clearClassReq2.FlatAppearance.BorderSize = 0;
+            clearClassReq2.FlatStyle = FlatStyle.Flat;
+            clearClassReq2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            clearClassReq2.ForeColor = Color.FromArgb(230, 44, 47);
+            clearClassReq2.Location = new Point(164, 303);
+            clearClassReq2.Margin = new Padding(0);
+            clearClassReq2.Name = "clearClassReq2";
+            clearClassReq2.Size = new Size(13, 25);
+            clearClassReq2.TabIndex = 46;
+            clearClassReq2.Text = "X";
+            clearClassReq2.UseVisualStyleBackColor = false;
+            clearClassReq2.Visible = false;
+            clearClassReq2.Click += clearSelectedClass;
             // 
-            // clearHeroReq4
+            // clearClassReq4
             // 
-            clearHeroReq4.BackColor = SystemColors.ControlLight;
-            clearHeroReq4.FlatAppearance.BorderSize = 0;
-            clearHeroReq4.FlatStyle = FlatStyle.Flat;
-            clearHeroReq4.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            clearHeroReq4.ForeColor = Color.FromArgb(230, 44, 47);
-            clearHeroReq4.Location = new Point(328, 331);
-            clearHeroReq4.Margin = new Padding(0);
-            clearHeroReq4.Name = "clearHeroReq4";
-            clearHeroReq4.Size = new Size(15, 25);
-            clearHeroReq4.TabIndex = 48;
-            clearHeroReq4.Text = "X";
-            clearHeroReq4.UseVisualStyleBackColor = false;
-            clearHeroReq4.Visible = false;
-            clearHeroReq4.Click += clearSelectedClass;
+            clearClassReq4.BackColor = SystemColors.ControlLight;
+            clearClassReq4.FlatAppearance.BorderSize = 0;
+            clearClassReq4.FlatStyle = FlatStyle.Flat;
+            clearClassReq4.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            clearClassReq4.ForeColor = Color.FromArgb(230, 44, 47);
+            clearClassReq4.Location = new Point(280, 303);
+            clearClassReq4.Margin = new Padding(0);
+            clearClassReq4.Name = "clearClassReq4";
+            clearClassReq4.Size = new Size(13, 25);
+            clearClassReq4.TabIndex = 48;
+            clearClassReq4.Text = "X";
+            clearClassReq4.UseVisualStyleBackColor = false;
+            clearClassReq4.Visible = false;
+            clearClassReq4.Click += clearSelectedClass;
             // 
-            // clearHeroReq5
+            // clearClassReq5
             // 
-            clearHeroReq5.BackColor = SystemColors.ControlLight;
-            clearHeroReq5.FlatAppearance.BorderSize = 0;
-            clearHeroReq5.FlatStyle = FlatStyle.Flat;
-            clearHeroReq5.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            clearHeroReq5.ForeColor = Color.FromArgb(230, 44, 47);
-            clearHeroReq5.Location = new Point(262, 359);
-            clearHeroReq5.Margin = new Padding(0);
-            clearHeroReq5.Name = "clearHeroReq5";
-            clearHeroReq5.Size = new Size(15, 25);
-            clearHeroReq5.TabIndex = 49;
-            clearHeroReq5.Text = "X";
-            clearHeroReq5.UseVisualStyleBackColor = false;
-            clearHeroReq5.Visible = false;
-            clearHeroReq5.Click += clearSelectedClass;
+            clearClassReq5.BackColor = SystemColors.ControlLight;
+            clearClassReq5.FlatAppearance.BorderSize = 0;
+            clearClassReq5.FlatStyle = FlatStyle.Flat;
+            clearClassReq5.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            clearClassReq5.ForeColor = Color.FromArgb(230, 44, 47);
+            clearClassReq5.Location = new Point(338, 303);
+            clearClassReq5.Margin = new Padding(0);
+            clearClassReq5.Name = "clearClassReq5";
+            clearClassReq5.Size = new Size(13, 25);
+            clearClassReq5.TabIndex = 49;
+            clearClassReq5.Text = "X";
+            clearClassReq5.UseVisualStyleBackColor = false;
+            clearClassReq5.Visible = false;
+            clearClassReq5.Click += clearSelectedClass;
             // 
-            // clearHeroReq3
+            // clearClassReq3
             // 
-            clearHeroReq3.BackColor = SystemColors.ControlLight;
-            clearHeroReq3.FlatAppearance.BorderSize = 0;
-            clearHeroReq3.FlatStyle = FlatStyle.Flat;
-            clearHeroReq3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            clearHeroReq3.ForeColor = Color.FromArgb(230, 44, 47);
-            clearHeroReq3.Location = new Point(190, 331);
-            clearHeroReq3.Margin = new Padding(0);
-            clearHeroReq3.Name = "clearHeroReq3";
-            clearHeroReq3.Size = new Size(15, 25);
-            clearHeroReq3.TabIndex = 47;
-            clearHeroReq3.Text = "X";
-            clearHeroReq3.UseVisualStyleBackColor = false;
-            clearHeroReq3.Visible = false;
-            clearHeroReq3.Click += clearSelectedClass;
+            clearClassReq3.BackColor = SystemColors.ControlLight;
+            clearClassReq3.FlatAppearance.BorderSize = 0;
+            clearClassReq3.FlatStyle = FlatStyle.Flat;
+            clearClassReq3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            clearClassReq3.ForeColor = Color.FromArgb(230, 44, 47);
+            clearClassReq3.Location = new Point(222, 303);
+            clearClassReq3.Margin = new Padding(0);
+            clearClassReq3.Name = "clearClassReq3";
+            clearClassReq3.Size = new Size(13, 25);
+            clearClassReq3.TabIndex = 47;
+            clearClassReq3.Text = "X";
+            clearClassReq3.UseVisualStyleBackColor = false;
+            clearClassReq3.Visible = false;
+            clearClassReq3.Click += clearSelectedClass;
             // 
             // maxItems
             // 
@@ -946,7 +950,7 @@
             // 
             // altColorToolTip
             // 
-            altColorToolTip.AutoPopDelay = 50000;
+            altColorToolTip.AutoPopDelay = 32766;
             altColorToolTip.InitialDelay = 250;
             altColorToolTip.ReshowDelay = 100;
             altColorToolTip.ToolTipIcon = ToolTipIcon.Info;
@@ -965,6 +969,54 @@
             itemChosenClass.TabIndex = 56;
             itemChosenClass.SelectedIndexChanged += chosenClass_SelectedIndexChanged;
             // 
+            // labelAdditionalReq
+            // 
+            labelAdditionalReq.AutoSize = true;
+            labelAdditionalReq.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            labelAdditionalReq.ForeColor = Color.White;
+            labelAdditionalReq.Location = new Point(33, 334);
+            labelAdditionalReq.Name = "labelAdditionalReq";
+            labelAdditionalReq.Size = new Size(172, 23);
+            labelAdditionalReq.TabIndex = 57;
+            labelAdditionalReq.Text = "Additional Requirement";
+            labelAdditionalReq.UseVisualStyleBackColor = true;
+            labelAdditionalReq.CheckedChanged += labelAdditionalReq_CheckedChanged;
+            // 
+            // additionalReq
+            // 
+            additionalReq.Enabled = false;
+            additionalReq.Location = new Point(33, 354);
+            additionalReq.Multiline = true;
+            additionalReq.Name = "additionalReq";
+            additionalReq.ScrollBars = ScrollBars.Vertical;
+            additionalReq.Size = new Size(171, 48);
+            additionalReq.TabIndex = 58;
+            additionalReq.TextChanged += renderPreview;
+            // 
+            // labelHeroBonus
+            // 
+            labelHeroBonus.AutoSize = true;
+            labelHeroBonus.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            labelHeroBonus.ForeColor = Color.White;
+            labelHeroBonus.Location = new Point(210, 334);
+            labelHeroBonus.Name = "labelHeroBonus";
+            labelHeroBonus.Size = new Size(166, 23);
+            labelHeroBonus.TabIndex = 60;
+            labelHeroBonus.Text = "Additional Hero Bonus";
+            labelHeroBonus.UseVisualStyleBackColor = true;
+            labelHeroBonus.CheckedChanged += labelHeroBonus_CheckedChanged;
+            // 
+            // heroBonus
+            // 
+            heroBonus.Enabled = false;
+            heroBonus.Location = new Point(210, 353);
+            heroBonus.Multiline = true;
+            heroBonus.Name = "heroBonus";
+            heroBonus.ScrollBars = ScrollBars.Vertical;
+            heroBonus.Size = new Size(171, 48);
+            heroBonus.TabIndex = 61;
+            heroBonus.TextChanged += renderPreview;
+            // 
             // Menu
             // 
             AutoScaleMode = AutoScaleMode.None;
@@ -980,16 +1032,16 @@
             Controls.Add(maxItems);
             Controls.Add(advancedNameBox);
             Controls.Add(badOutputText);
-            Controls.Add(clearHeroReq5);
-            Controls.Add(clearHeroReq4);
-            Controls.Add(clearHeroReq3);
-            Controls.Add(clearHeroReq2);
-            Controls.Add(clearHeroReq1);
-            Controls.Add(heroReq5);
-            Controls.Add(heroReq4);
-            Controls.Add(heroReq1);
-            Controls.Add(heroReq2);
-            Controls.Add(heroReq3);
+            Controls.Add(clearClassReq5);
+            Controls.Add(clearClassReq4);
+            Controls.Add(clearClassReq3);
+            Controls.Add(clearClassReq2);
+            Controls.Add(clearClassReq1);
+            Controls.Add(classReq5);
+            Controls.Add(classReq4);
+            Controls.Add(classReq1);
+            Controls.Add(classReq2);
+            Controls.Add(classReq3);
             Controls.Add(clearSecondClass);
             Controls.Add(goodOutputText);
             Controls.Add(goodOutputSym);
@@ -1020,6 +1072,10 @@
             Controls.Add(labelBad);
             Controls.Add(labelMaxItem);
             Controls.Add(labelReq);
+            Controls.Add(heroBonus);
+            Controls.Add(labelHeroBonus);
+            Controls.Add(additionalReq);
+            Controls.Add(labelAdditionalReq);
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MainMenuStrip = menuStrip1;
@@ -1082,12 +1138,12 @@
         private Label labelSecondClass;
         private MenuStrip menuStrip1;
         private ToolStripComboBox language;
-        private ComboBox heroReq3;
-        private ComboBox heroReq2;
-        private ComboBox heroReq1;
-        private ComboBox heroReq4;
+        private ComboBox classReq3;
+        private ComboBox classReq2;
+        private ComboBox classReq1;
+        private ComboBox classReq4;
         private Label labelReq;
-        private ComboBox heroReq5;
+        private ComboBox classReq5;
         private NumericUpDown badOutputNum;
         private ComboBox badOutputSym;
         private TextBox badOutputText;
@@ -1097,11 +1153,11 @@
         private ComboBox goodOutputSym;
         private NumericUpDown goodOutputNum;
         private Button clearSecondClass;
-        private Button clearHeroReq1;
-        private Button clearHeroReq2;
-        private Button clearHeroReq4;
-        private Button clearHeroReq5;
-        private Button clearHeroReq3;
+        private Button clearClassReq1;
+        private Button clearClassReq2;
+        private Button clearClassReq4;
+        private Button clearClassReq5;
+        private Button clearClassReq3;
         private NumericUpDown maxItems;
         private Label labelMaxItem;
         private PictureBox itemImg;
@@ -1122,5 +1178,9 @@
         private ToolStripMenuItem MagicCard;
         private ToolStripMenuItem LeaderCard;
         private ComboBox itemChosenClass;
+        private CheckBox labelAdditionalReq;
+        private TextBox additionalReq;
+        private CheckBox labelHeroBonus;
+        private TextBox heroBonus;
     }
 }
