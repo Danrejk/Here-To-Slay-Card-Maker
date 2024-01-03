@@ -3,6 +3,8 @@
 # To Ja Go Tnę - Kreator Własnych Kart
 Dzięki temu programowi możesz tworzyć <b>dokładne</b> niestandardowe karty do gry karcianej "To Ja Go Tnę". Głównym celem naszego programu jest zapewnienie, że wygenerowane karty będą jak najbardziej zgodne z oryginalnymi wzorami, na tyle ile jest to możliwe.
 <br><br>
+DZIAŁA TYLKO NA WINDOWS
+<br><br>
 English Version: [README.md](README.md)<br>
 Versione in lingua italiana: NESSUNA
 
