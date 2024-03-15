@@ -186,12 +186,13 @@ While making the icon, be sure to add an outline using the <code>#f5f1e7</code> 
 After you made the icon, you put it in the <code>Classes</code> folder, and you name it whatever you want. Just remember the name, you'll need it later.<br>
 <hr>
 Then, you open the <code>ClassList.txt</code> file locaded also in the <code>Classes</code> folder. In the <code>ClassList.txt</code> file you have a list of all the classes that are currently in the maker.<br>
-Each class has 4 values:
+Each class has 5 values:
 <ul>
     <li>English Name</li>
     <li>Name of the image file</li>
     <li>RGB color</li>
     <li>(optional) Polish Name</li>
+    <li>(optional) Italian Name</li>
 </ul>
 
 Each of the values are separated by a TAB character. Example:<br>
