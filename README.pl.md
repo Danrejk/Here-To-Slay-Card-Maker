@@ -192,12 +192,13 @@ Gdy już stworzysz ikonę, umieść ją w folderze <code>Classes</code> i nadaj 
 
 <hr>
 Następnie otwórz plik <code>ClassList.txt</code> znajdujący się również w folderze <code>Classes</code>. W pliku <code>ClassList.txt</code> znajduje się lista wszystkich klas, które obecnie są w programie.
-Każda klasa ma 4 wartości:
+Każda klasa ma 5 wartości:
 <ul>
     <li>Angielska Nazwa</li>
     <li>Nazwa pliku obrazka</li>
     <li>Kolor RGB</li>
     <li>(opcjonalnie) Polska Nazwa</li>
+    <li>(opcjonalnie) Włoska Nazwa</li>
 </ul>
 Każda z wartości jest oddzielona znakiem TAB. Przykład:<br>
 
