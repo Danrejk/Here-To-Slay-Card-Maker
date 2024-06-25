@@ -7,6 +7,8 @@ using System.Text;
 using Color = Raylib_cs.Color;
 using Image = Raylib_cs.Image;
 using Rectangle = Raylib_cs.Rectangle;
+using SixLabors.ImageSharp.PixelFormats;
+using SixLabors.ImageSharp.Formats.Png;
 
 namespace GeneratorBackend
 {
@@ -86,13 +88,13 @@ namespace GeneratorBackend
                     var path = Path.Combine(Directory.GetCurrentDirectory(), "Classes", prop[1]);
                     if (File.Exists(path))
                     {
-                        Image<Rgba32>? imageSharp;
+                        SixLabors.ImageSharp.Image<Rgba32>? imageSharp;
 
                         using var file = File.OpenRead(path);
                         imageSharp = SixLabors.ImageSharp.Image.Load<Rgba32>(file);
 
                         using var memoryStream = new MemoryStream();
-                        imageSharp.SaveAsPng(memoryStream);
+                        imageSharp.Save(memoryStream, new PngEncoder());
                         memoryStream.Seek(0, SeekOrigin.Begin);
                         image = Raylib.LoadImageFromMemory(".png", memoryStream.ToArray());
                     }
@@ -170,10 +172,10 @@ namespace GeneratorBackend
 
             // Draw Leader Image
             ChangeLeaderImage(leaderImg);
-            Raylib.ImageDraw(ref card, leader, imageRec, new(41, 41, 745, 1176), Color.WHITE);
+            Raylib.ImageDraw(ref card, leader, imageRec, new Rectangle(41, 41, 745, 1176), Color.White);
 
             // Add Gradient
-            if (addGradient) { Raylib.ImageDraw(ref card, inst.gradient, imageRec, imageRec, Color.WHITE); }
+            if (addGradient) { Raylib.ImageDraw(ref card, inst.gradient, imageRec, imageRec, Color.White); }
 
             #region Classes
             string leaderTitle;
@@ -191,7 +193,7 @@ namespace GeneratorBackend
             if (inst.ClassList[desiredClass[0]].NameEN == "") leaderTitle = leaderTitle.Replace(": ", "");
 
             // Draw Class Symbol
-            Raylib.ImageDraw(ref card, classSymbol, imageRec, new(363, 1167, 102, 102), Color.WHITE);
+            Raylib.ImageDraw(ref card, classSymbol, imageRec, new Rectangle(363, 1167, 102, 102), Color.White);
 
             if (desiredClass[1] != -1) // check if there is a second class
             {
@@ -214,7 +216,7 @@ namespace GeneratorBackend
                 Raylib.ImageCrop(ref secondClassSymbol, new Rectangle(0, 0, 51, 102));
 
                 // Draw the second class symbol
-                Raylib.ImageDraw(ref card, secondClassSymbol, imageRec, new(363, 1167, 51, 102), Color.WHITE);
+                Raylib.ImageDraw(ref card, secondClassSymbol, imageRec, new Rectangle(363, 1167, 51, 102), Color.White);
             }
             #endregion
 
@@ -226,7 +228,7 @@ namespace GeneratorBackend
 
                 Raylib.ImageCrop(ref frameSecond, new Rectangle(0, 0, 414, 1417));
                 Raylib.ImageColorTint(ref frameSecond, desiredColor);
-                Raylib.ImageDraw(ref card, frameSecond, imageRec, new(0, 0, 414, 1417), Color.WHITE);
+                Raylib.ImageDraw(ref card, frameSecond, imageRec, new Rectangle(0, 0, 414, 1417), Color.White);
 
                 // Draw the second class frame
                 frameSecond = Raylib.ImageCopy(inst.frameLeader); // clear the tinted frame for the second class
@@ -234,7 +236,7 @@ namespace GeneratorBackend
 
                 Raylib.ImageCrop(ref frameSecond, new Rectangle(414, 0, 413, 1417)); // while the sizes might look irregular. It's all because the image is 827px wide, so I have to compensate the 0,5px offset. One side is wider by 1px
                 Raylib.ImageColorTint(ref frameSecond, desiredSecondColor);
-                Raylib.ImageDraw(ref card, frameSecond, imageRec, new(414, 0, 413, 1417), Color.WHITE);
+                Raylib.ImageDraw(ref card, frameSecond, imageRec, new Rectangle(414, 0, 413, 1417), Color.White);
             }
             else
             {
@@ -261,10 +263,10 @@ namespace GeneratorBackend
 
             // Draw Monster Image
             ChangeMonsterImage(monsterImg);
-            Raylib.ImageDraw(ref card, monster, imageRec, new(41, 41, 745, 824), Color.WHITE);
+            Raylib.ImageDraw(ref card, monster, imageRec, new Rectangle(41, 41, 745, 824), Color.White);
 
             // Add Gradient
-            if (addGradient) { Raylib.ImageDraw(ref card, inst.gradient, imageRec, imageRec, Color.WHITE); }
+            if (addGradient) { Raylib.ImageDraw(ref card, inst.gradient, imageRec, imageRec, Color.White); }
 
             // Draw Colored Frame
             Color frameColor = alternativeColor switch
@@ -316,7 +318,7 @@ namespace GeneratorBackend
                 };
                 else classSymbol = inst.ClassList[req - 1].Image; // -1 because HERO is put in front, so the indexes are shifted
 
-                Raylib.ImageDraw(ref card, classSymbol, imageRec, new(93 + reqTextWidth + 10 + index * iconsMargin, 902, 83, 83), Color.WHITE);
+                Raylib.ImageDraw(ref card, classSymbol, imageRec, new Rectangle(93 + reqTextWidth + 10 + index * iconsMargin, 902, 83, 83), Color.White);
             }
 
             // Additional Requirements
@@ -332,8 +334,8 @@ namespace GeneratorBackend
             #endregion
 
             // Draw roll requirements and their outcomes
-            Raylib.ImageDraw(ref card, inst.red, imageRec, new(87, 1002, 78, 78), Color.WHITE);
-            Raylib.ImageDraw(ref card, inst.green, imageRec, new(87, 1099, 78, 78), Color.WHITE);
+            Raylib.ImageDraw(ref card, inst.red, imageRec, new Rectangle(87, 1002, 78, 78), Color.White);
+            Raylib.ImageDraw(ref card, inst.green, imageRec, new Rectangle(87, 1099, 78, 78), Color.White);
 
             RollOutput red = bad;
             RollOutput green = good;
@@ -384,18 +386,18 @@ namespace GeneratorBackend
 
             // Draw Hero Image
             ChangeHeroItemMagicImage(heroImg);
-            Raylib.ImageDraw(ref card, heroItemMagic, imageRec, new(100, 232, 545, 545), Color.WHITE);
+            Raylib.ImageDraw(ref card, heroItemMagic, imageRec, new Rectangle(100, 232, 545, 545), Color.White);
 
             // Max Items
             if (maxItems == 0)
             {
-                Raylib.ImageDraw(ref card, inst.noItem, imageRec, new(637, 935, 47, 47), Color.WHITE);
+                Raylib.ImageDraw(ref card, inst.noItem, imageRec, new Rectangle(637, 935, 47, 47), Color.White);
             }
             else if (maxItems != 1)
             {
                 for (int i = 0; i < maxItems; i++)
                 {
-                    Raylib.ImageDraw(ref card, inst.itemHero, imageRec, new(637 - i * (50 + 10), 935, 47, 47), Color.WHITE);
+                    Raylib.ImageDraw(ref card, inst.itemHero, imageRec, new Rectangle(637 - i * (50 + 10), 935, 47, 47), Color.White);
                 }
             }
 
@@ -415,7 +417,7 @@ namespace GeneratorBackend
             if (inst.ClassList[desiredClass].NameEN == "") heroTitle = heroTitle.Replace(": ", "");
 
             // Draw Class Symbol
-            Raylib.ImageDraw(ref card, classSymbol, imageRec, new(322, 722, 102, 102), Color.WHITE);
+            Raylib.ImageDraw(ref card, classSymbol, imageRec, new Rectangle(322, 722, 102, 102), Color.White);
 
             // Draw Colored Frame
             Raylib.ImageDraw(ref card, inst.frameHero, imageRec, imageRec, desiredColor);
@@ -429,11 +431,11 @@ namespace GeneratorBackend
             switch (description.Symbol)
             {
                 case 0:
-                    Raylib.ImageDraw(ref card, inst.green, imageRec, new(94, 852, 78, 78), Color.WHITE);
+                    Raylib.ImageDraw(ref card, inst.green, imageRec, new Rectangle(94, 852, 78, 78), Color.White);
                     descSymbol = '+';
                     break;
                 case 1:
-                    Raylib.ImageDraw(ref card, inst.red, imageRec, new(94, 852, 78, 78), Color.WHITE);
+                    Raylib.ImageDraw(ref card, inst.red, imageRec, new Rectangle(94, 852, 78, 78), Color.White);
                     descSymbol = '-';
                     break;
             }
@@ -458,7 +460,7 @@ namespace GeneratorBackend
 
             // Draw Item Image
             ChangeHeroItemMagicImage(itemImg);
-            Raylib.ImageDraw(ref card, heroItemMagic, imageRec, new(100, 232, 545, 545), Color.WHITE);
+            Raylib.ImageDraw(ref card, heroItemMagic, imageRec, new Rectangle(100, 232, 545, 545), Color.White);
 
             // Classes
             string itemTitle;
@@ -498,7 +500,7 @@ namespace GeneratorBackend
             Raylib.ImageDraw(ref card, inst.frameItem, imageRec, imageRec, frameColor);
 
             // Draw Class Symbol
-            Raylib.ImageDraw(ref card, classSymbol, imageRec, new(99, 886, 102, 102), Color.WHITE);
+            Raylib.ImageDraw(ref card, classSymbol, imageRec, new Rectangle(99, 886, 102, 102), Color.White);
 
             // Name and Title
             DrawNameAndTitlePoker(name, itemTitle, card, titleColor);
@@ -520,7 +522,7 @@ namespace GeneratorBackend
 
             // Draw Magic Image
             ChangeHeroItemMagicImage(magicImg);
-            Raylib.ImageDraw(ref card, heroItemMagic, imageRec, new(100, 232, 545, 545), Color.WHITE);
+            Raylib.ImageDraw(ref card, heroItemMagic, imageRec, new Rectangle(100, 232, 545, 545), Color.White);
 
             // Localise the 'title'
             string magicTitle = language switch
@@ -552,8 +554,8 @@ namespace GeneratorBackend
         {
             Color leaderColor = nameWhite switch
             {
-                true => Color.WHITE,
-                false => Color.BLACK
+                true => Color.White,
+                false => Color.Black
             };
             Color leaderShadowColor = nameWhite switch
             {
@@ -585,7 +587,7 @@ namespace GeneratorBackend
             int titleY = 134;
 
             // Name
-            Raylib.ImageDrawTextEx(ref card, inst.nameFont, nameText, new Vector2((CARD_WIDTH_POKER / 2) - (nameSize.X / 2), nameY), AssetManager.NAME_SIZE, NAME_FONT_SPACING, Color.BLACK);
+            Raylib.ImageDrawTextEx(ref card, inst.nameFont, nameText, new Vector2((CARD_WIDTH_POKER / 2) - (nameSize.X / 2), nameY), AssetManager.NAME_SIZE, NAME_FONT_SPACING, Color.Black);
 
             // Title
             Raylib.ImageDrawTextEx(ref card, inst.titleFont, titleText, new Vector2((CARD_WIDTH_POKER / 2) - (titleSize.X / 2), titleY), AssetManager.TITLE_SIZE, TITLE_FONT_SPACING, titleColor);
@@ -831,14 +833,14 @@ namespace GeneratorBackend
         {
             if (File.Exists(path))
             {
-                Image<Rgba32>? imageSharp;
+                SixLabors.ImageSharp.Image<Rgba32>? imageSharp;
 
                 Raylib.UnloadImage(image);
                 using var file = File.OpenRead(path);
                 imageSharp = SixLabors.ImageSharp.Image.Load<Rgba32>(file);
 
                 using var memoryStream = new MemoryStream();
-                imageSharp.SaveAsPng(memoryStream);
+                imageSharp.Save(memoryStream, new PngEncoder());
                 memoryStream.Seek(0, SeekOrigin.Begin);
                 image = Raylib.LoadImageFromMemory(".png", memoryStream.ToArray());
             }
