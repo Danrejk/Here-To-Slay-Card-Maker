@@ -64,9 +64,14 @@ namespace HereToSlay
             language.ComboBox.DrawMode = DrawMode.OwnerDrawFixed;
             language.ComboBox.DrawItem += ImageCBox.ComboBox_DrawItem;
             language.DropDown += ImageCBox.ComboBox_WidthAutoAdjust;
-            language.Items.Add(new ImageCBox("English", Properties.Resources.en));
-            language.Items.Add(new ImageCBox("Polski", Properties.Resources.pl));
-            language.Items.Add(new ImageCBox("Italiano", Properties.Resources.it));
+
+            List<LanguageManager.Manager.Language> languages = LanguageManager.Manager.LoadJson();
+
+            Console.WriteLine(languages);
+
+            language.Items.Add(new ImageCBox("nigger", Properties.Resources.missingno));
+            language.Items.Add(new ImageCBox("Polski", Properties.Resources.missingno));
+            language.Items.Add(new ImageCBox("Italiano", Properties.Resources.missingno));
             language.SelectedIndex = Properties.Settings.Default.Language;
             initLang = true;
 
@@ -1077,7 +1082,7 @@ namespace HereToSlay
                     chosenClass.Items.Add(new ImageCBox("SENZA CLASSE", Properties.Resources.empty.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("Ranger", Properties.Resources.lowca.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("Mago", Properties.Resources.mag.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Bardo", Properties.Resources.najebus.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Bardo", Properties.Resources.najebus.ToBitmap())); //œwietnie
                     chosenClass.Items.Add(new ImageCBox("Guardiano", Properties.Resources.straznik.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("Guerriero", Properties.Resources.wojownik.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("Ladro", Properties.Resources.zlodziej.ToBitmap()));
@@ -1126,7 +1131,7 @@ namespace HereToSlay
                     chosenClass.Items.Add(new ImageCBox("NO CLASS", Properties.Resources.empty.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("Ranger", Properties.Resources.lowca.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("Wizard", Properties.Resources.mag.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Bard", Properties.Resources.najebus.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Bard", Properties.Resources.najebus.ToBitmap())); //przewybornie
                     chosenClass.Items.Add(new ImageCBox("Guardian", Properties.Resources.straznik.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("Fighter", Properties.Resources.wojownik.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("Thief", Properties.Resources.zlodziej.ToBitmap()));
@@ -1222,7 +1227,7 @@ namespace HereToSlay
                     0 => Properties.Resources.empty,
                     1 => Properties.Resources.lowca,
                     2 => Properties.Resources.mag,
-                    3 => Properties.Resources.najebus,
+                    3 => Properties.Resources.najebus, // wspaniale
                     4 => Properties.Resources.straznik,
                     5 => Properties.Resources.wojownik,
                     6 => Properties.Resources.zlodziej,
