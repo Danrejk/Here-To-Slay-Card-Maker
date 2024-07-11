@@ -67,7 +67,10 @@ namespace HereToSlay
 
             List<LanguageManager.Manager.Language> languages = LanguageManager.Manager.LoadJson();
 
-            Console.WriteLine(languages);
+            foreach (var language in languages)
+            {
+                MessageBox.Show($"{language}");
+            }
 
             language.Items.Add(new ImageCBox("nigger", Properties.Resources.missingno));
             language.Items.Add(new ImageCBox("Polski", Properties.Resources.missingno));
