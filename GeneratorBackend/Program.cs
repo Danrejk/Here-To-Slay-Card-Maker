@@ -42,7 +42,7 @@ namespace GeneratorBackend
         public const int NAME_SIZE = 60; // 60
         public const int TITLE_SIZE = 47; // 47
         public const int REQ_SIZE = 49; // 49
-        public const int ADDITIONAL_REQ_SIZE = 36; // 37
+        public const int ADDITIONAL_REQ_SIZE = 36; // 37 (god knows what this commented values here are)
         public const int ROLL_SIZE = 43; // 43
         public const int DESC_SIZE = 36; // 36
 

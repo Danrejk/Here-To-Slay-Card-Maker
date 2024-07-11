@@ -1,0 +1,27 @@
+{
+  "lang": "Polski",
+
+  "class.name.ranger": "łowca",
+  "class.name.wizard": "mag",
+  "class.name.bard": "bard",
+  "class.name.guardian": "strażnik",
+  "class.name.fighter": "wojownik",
+  "class.name.thief": "złodziej",
+  "class.name.druid": "druid",
+  "class.name.warrior": "awanturnik",
+  "class.name.berserker": "berserk",
+  "class.name.necromancer": "nekromanta",
+  "class.name.sorcerer": "czarownik",
+
+  "card.leader.label": "Przywódca drużyny",
+
+  "card.monster.label": "Potwór",
+  "card.monster.requirement": "Wymagania",
+
+  "card.hero.label": "Bohater",
+
+  "card.item.label": "Przedmiot",
+  "card.item.label.cursed": "Przeklęty Przedmiot",
+
+  "card.magic.label": "Magia"
+}

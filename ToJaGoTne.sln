@@ -10,6 +10,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HereToSlay", "HereToSlay\He
 		{F361E0ED-5193-4769-853C-798394B2ECBF} = {F361E0ED-5193-4769-853C-798394B2ECBF}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LanguageManager", "LanguageManager\LanguageManager.csproj", "{320B9FA8-6DDE-4652-BFB5-1BFA1C64CDC6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +26,10 @@ Global
 		{1BB2DF6C-3DC7-43D7-964F-6F2353AD5A0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1BB2DF6C-3DC7-43D7-964F-6F2353AD5A0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1BB2DF6C-3DC7-43D7-964F-6F2353AD5A0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{320B9FA8-6DDE-4652-BFB5-1BFA1C64CDC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{320B9FA8-6DDE-4652-BFB5-1BFA1C64CDC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{320B9FA8-6DDE-4652-BFB5-1BFA1C64CDC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{320B9FA8-6DDE-4652-BFB5-1BFA1C64CDC6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

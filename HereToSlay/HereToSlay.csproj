@@ -38,6 +38,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GeneratorBackend\GeneratorBackend.csproj" />
+    <ProjectReference Include="..\LanguageManager\LanguageManager.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -75,9 +76,6 @@
     </None>
     <None Update="Assets\Fonts\SourceSansPro.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Language\languages.xml">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Update="PrintingAssets\English\monsterBackBlack.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -182,6 +180,14 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Languages\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,5 @@
 using GeneratorBackend;
+using LanguageManager;
 using HereToSlay.Properties;
 using System.Diagnostics;
 using System.Drawing.Text;
@@ -9,6 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Text.Json;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using Button = System.Windows.Forms.Button;
 using ComboBox = System.Windows.Forms.ComboBox;
@@ -1023,7 +1025,7 @@ namespace HereToSlay
                     chosenClass.Items.Add(new ImageCBox("BRAK KLASY", Properties.Resources.empty.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("£owca", Properties.Resources.lowca.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("Mag", Properties.Resources.mag.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Bard", Properties.Resources.najebus.ToBitmap()));
+                    chosenClass.Items.Add(new ImageCBox("Bard", Properties.Resources.najebus.ToBitmap())); //XD
                     chosenClass.Items.Add(new ImageCBox("Stra¿nik", Properties.Resources.straznik.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("Wojownik", Properties.Resources.wojownik.ToBitmap()));
                     chosenClass.Items.Add(new ImageCBox("Z³odziej", Properties.Resources.zlodziej.ToBitmap()));
