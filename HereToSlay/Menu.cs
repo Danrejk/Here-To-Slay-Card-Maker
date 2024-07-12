@@ -21,7 +21,7 @@ namespace HereToSlay
 {
     public partial class Menu : Form
     {
-        private static readonly AssetManager inst = AssetManager.Instance;
+        private static readonly Backend.AssetManager inst = Backend.AssetManager.Instance;
         bool initLang = false; // this is used to prevent the missing image error from showing twice when first loading the program
 
         private static List<LanguageManager.Manager.Language> tounges = LanguageManager.Manager.LoadJson(); // load languages
@@ -73,7 +73,6 @@ namespace HereToSlay
                 language.Items.Add(new ImageCBox(i.lang_name, Properties.Resources.missingno));
             }
 
-            //LanguageManager.Manager.Language selectedLanguage = tounges[language.SelectedIndex];
             language.SelectedIndex = Properties.Settings.Default.Language;
             initLang = true;
 
@@ -647,30 +646,30 @@ namespace HereToSlay
             {
                 // Leader
                 case 0:
-                    GeneratorBackend.Program.GenerateLeader(saveLocation, language.SelectedIndex, nameText.Text, new int[] { chosenClass.SelectedIndex, chosenSecondClass.SelectedIndex }, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked);
+                    GeneratorBackend.Backend.Program.GenerateLeader(saveLocation, language.SelectedIndex, nameText.Text, new int[] { chosenClass.SelectedIndex, chosenSecondClass.SelectedIndex }, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked);
                     break;
                 // Monster
                 case 1:
-                    RollOutput good = new((int)goodOutputNum.Value, goodOutputSym.SelectedIndex, goodOutputText.Text);
-                    RollOutput bad = new((int)badOutputNum.Value, badOutputSym.SelectedIndex, badOutputText.Text);
+                    Backend.RollOutput good = new((int)goodOutputNum.Value, goodOutputSym.SelectedIndex, goodOutputText.Text);
+                    Backend.RollOutput bad = new((int)badOutputNum.Value, badOutputSym.SelectedIndex, badOutputText.Text);
                     int[] desiredRequirements = new int[] { classReq1.SelectedIndex, classReq2.SelectedIndex, classReq3.SelectedIndex, classReq4.SelectedIndex, classReq5.SelectedIndex };
                     string adReq = labelAdditionalReq.Checked ? additionalReq.Text : "";
                     string hBon = labelHeroBonus.Checked ? heroBonus.Text : "";
 
-                    GeneratorBackend.Program.GenerateMonster(saveLocation, language.SelectedIndex, nameText.Text, desiredRequirements, selectImgText.Text, good, bad, descriptionText.Text, adReq, hBon, gradient.Checked, nameWhite.Checked, alternativeColor.Checked);
+                    GeneratorBackend.Backend.Program.GenerateMonster(saveLocation, language.SelectedIndex, nameText.Text, desiredRequirements, selectImgText.Text, good, bad, descriptionText.Text, adReq, hBon, gradient.Checked, nameWhite.Checked, alternativeColor.Checked);
                     break;
                 // Hero
                 case 2:
-                    RollOutput description = new((int)goodOutputNum.Value, goodOutputSym.SelectedIndex, descriptionText.Text);
-                    GeneratorBackend.Program.GenerateHero(saveLocation, language.SelectedIndex, nameText.Text, chosenClass.SelectedIndex, selectImgText.Text, description, (int)maxItems.Value);
+                    Backend.RollOutput description = new((int)goodOutputNum.Value, goodOutputSym.SelectedIndex, descriptionText.Text);
+                    GeneratorBackend.Backend.Program.GenerateHero(saveLocation, language.SelectedIndex, nameText.Text, chosenClass.SelectedIndex, selectImgText.Text, description, (int)maxItems.Value);
                     break;
                 // Item
                 case 3:
-                    GeneratorBackend.Program.GenerateItem(saveLocation, language.SelectedIndex, nameText.Text, itemChosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text);
+                    GeneratorBackend.Backend.Program.GenerateItem(saveLocation, language.SelectedIndex, nameText.Text, itemChosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text);
                     break;
                 // Magic
                 case 4:
-                    GeneratorBackend.Program.GenerateMagic(null, language.SelectedIndex, nameText.Text, selectImgText.Text, descriptionText.Text);
+                    GeneratorBackend.Backend.Program.GenerateMagic(null, language.SelectedIndex, nameText.Text, selectImgText.Text, descriptionText.Text);
                     break;
                 default:
                     throw new NotImplementedException();
@@ -888,6 +887,7 @@ namespace HereToSlay
             chosenClass.Items.Add(new ImageCBox(tounges[language.SelectedIndex].class_name_berserker, Properties.Resources.berserk.ToBitmap()));
             chosenClass.Items.Add(new ImageCBox(tounges[language.SelectedIndex].class_name_necromancer, Properties.Resources.nekromanta.ToBitmap()));
             chosenClass.Items.Add(new ImageCBox(tounges[language.SelectedIndex].class_name_sorcerer, Properties.Resources.czarownik.ToBitmap()));
+            
             //chosenClass.Items.Add(new ImageCBox("BRAK KLASY", Properties.Resources.empty.ToBitmap()));
             //chosenClass.Items.Add(new ImageCBox("£owca", Properties.Resources.lowca.ToBitmap()));
             //chosenClass.Items.Add(new ImageCBox("Mag", Properties.Resources.mag.ToBitmap()));
@@ -902,25 +902,25 @@ namespace HereToSlay
             //chosenClass.Items.Add(new ImageCBox("Czarownik", Properties.Resources.czarownik.ToBitmap()));
 
             // Add custom classes
-            inst.ClassList.Skip(12).ToList().ForEach(c =>
-            {
-                string capitalisedName = char.ToUpper(c.NameEN[0]) + c.NameEN.Substring(1);
+            //inst.ClassList.Skip(12).ToList().ForEach(c =>
+            //{
+            //    string capitalisedName = char.ToUpper(c.NameEN[0]) + c.NameEN.Substring(1);
 
-                // Load class icon
-                Bitmap classIcon = new(1, 1);
-                if (File.Exists(c.ImagePath))
-                {
-                    classIcon = new Bitmap(c.ImagePath);
-                }
-                else
-                {
-                    if (initLang == true) // don't show this error when first loading the program (it would show up twice, due to lazy programming)
-                    {
-                        MessageBox.Show($"Error loading icon for the {c.NameEN} class.\nCould not find image in {c.ImagePath}.\n\nClass icon will be left empty.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-                chosenClass.Items.Add(new ImageCBox(capitalisedName, new Bitmap(1, 1)));
-            });
+            //    // Load class icon
+            //    Bitmap classIcon = new(1, 1);
+            //    if (File.Exists(c.ImagePath))                                   //temporarily disabled, probably doesn't work now
+            //    {
+            //        classIcon = new Bitmap(c.ImagePath);
+            //    }
+            //    else
+            //    {
+            //        if (initLang == true) // don't show this error when first loading the program (it would show up twice, due to lazy programming)
+            //        {
+            //            MessageBox.Show($"Error loading icon for the {c.NameEN} class.\nCould not find image in {c.ImagePath}.\n\nClass icon will be left empty.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //        }
+            //    }
+            //    chosenClass.Items.Add(new ImageCBox(capitalisedName, new Bitmap(1, 1)));
+            //});
 
             // Add monster related options
             classReq1.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
@@ -930,8 +930,8 @@ namespace HereToSlay
             classReq5.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
 
             // Add item related options
-            itemChosenClass.Items.Add(new ImageCBox("Item", Properties.Resources.itemIcon.ToBitmap()));
-            itemChosenClass.Items.Add(new ImageCBox("Cursed Item", Properties.Resources.cursed.ToBitmap()));
+            itemChosenClass.Items.Add(new ImageCBox(tounges[language.SelectedIndex].card_item_label, Properties.Resources.itemIcon.ToBitmap()));
+            itemChosenClass.Items.Add(new ImageCBox(tounges[language.SelectedIndex].card_item_cursed, Properties.Resources.cursed.ToBitmap()));
 
             foreach (var item in chosenClass.Items)
             {

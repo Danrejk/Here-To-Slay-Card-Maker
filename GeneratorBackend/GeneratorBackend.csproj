@@ -24,6 +24,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LanguageManager\LanguageManager.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Assets\GeneratorAssets\cursed_item.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

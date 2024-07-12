@@ -16,7 +16,7 @@
     "class_name_necromancer": "Necromancer",
     "class_name_sorcerer": "Sorcerer",
 
-    "card_leader_label": "Przywódca drużyny",
+    "card_leader_label": "Party Leader",
 
     "card_monster_label": "Monster",
     "card_monster_requirements": "Wymagania",
@@ -110,9 +110,9 @@
 
     "card_hero_label": "Bohater",
 
-    "card_item_label": "Przedmiot",
-    "card_item_cursed": "Przeklęty Przedmiot",
+    "card_item_label": "mandat",
+    "card_item_cursed": "niebieska karta",
 
-    "card_magic_label": "Magia"
+    "card_magic_label": "pozew"
   }
 ]
