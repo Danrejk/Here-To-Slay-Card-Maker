@@ -283,12 +283,7 @@ namespace GeneratorBackend
                 Raylib.ImageDraw(ref card, inst.frameMonster, imageRec, imageRec, frameColor);
 
                 // Requirements text
-                string reqText = language switch
-                {
-                    1 => "WYMAGANIA:",
-                    2 => "REQUISITI:",
-                    _ => "REQUIREMENT:"
-                };
+                string reqText = tounges[language].card_monster_requirements;
                 Raylib.ImageDrawTextEx(ref card, inst.reqFont, reqText, new(88, 920), AssetManager.REQ_SIZE, REQ_FONT_SPACING, inst.bottomColor);
                 float reqTextWidth = Raylib.MeasureTextEx(inst.reqFont, reqText, AssetManager.REQ_SIZE, REQ_FONT_SPACING).X; // get width of the "REQUIREMENT:" text to align the icons properly
 
@@ -315,12 +310,18 @@ namespace GeneratorBackend
                 foreach ((int req, int index) in orderedRequirements.Select((value, index) => (value, index)))
                 {
                     Image classSymbol;
-                    if (req == 0) classSymbol = language switch
+                    if (req == 0) 
                     {
-                        1 => inst.Bohater,
-                        2 => inst.Eroe,
-                        _ => inst.Hero
-                    };
+                        if (tounges[language].lang_code == "pl")
+                        {
+                            classSymbol = inst.Bohater;
+                        }
+                        else
+                        {
+                            classSymbol = inst.Hero;
+                        }
+                    } 
+                    
                     else classSymbol = inst.ClassList[req - 1].Image; // -1 because HERO is put in front, so the indexes are shifted
 
                     Raylib.ImageDraw(ref card, classSymbol, imageRec, new Rectangle(93 + reqTextWidth + 10 + index * iconsMargin, 902, 83, 83), Color.White);
@@ -366,12 +367,7 @@ namespace GeneratorBackend
                 }
 
                 // Name and Title
-                string titleText = language switch
-                {
-                    1 => "Potwór",
-                    2 => "Mostro",
-                    _ => "Monster"
-                };
+                string titleText = tounges[language].card_monster_label;
                 DrawNameAndTitleTarrot(name, titleText, card, nameWhite);
 
                 // Description
@@ -413,7 +409,7 @@ namespace GeneratorBackend
                 Image classSymbol = inst.ClassList[desiredClass].Image;
                 Color desiredColor = inst.ClassList[desiredClass].Color;
 
-                heroTitle = $"Bohater: {inst.ClassList[desiredClass].Name}";
+                heroTitle = $"Bohater: {tounges[language].class_name[desiredClass]}";
 
                 // Draw Class Symbol
                 Raylib.ImageDraw(ref card, classSymbol, imageRec, new Rectangle(322, 722, 102, 102), Color.White);
@@ -477,22 +473,12 @@ namespace GeneratorBackend
                 if (desiredClass == 1) // check if it's a cursed item
                 {
                     titleColor = new(160, 59, 139, 255);
-                    itemTitle = language switch
-                    {
-                        1 => "Przeklęty przedmiot",
-                        2 => "Oggetto maledetto",
-                        _ => "Cursed Item"
-                    };
+                    itemTitle = tounges[language].card_item_cursed;
                 }
                 else // if it's not a cursed item, then it's a normal item
                 {
                     titleColor = new(0, 163, 172, 255);
-                    itemTitle = language switch
-                    {
-                        1 => "Przedmiot",
-                        2 => "Oggetto",
-                        _ => "Item"
-                    };
+                    itemTitle = tounges[language].card_item_label;
                 }
 
                 // Draw Colored Frame
@@ -524,12 +510,7 @@ namespace GeneratorBackend
                 Raylib.ImageDraw(ref card, heroItemMagic, imageRec, new Rectangle(100, 232, 545, 545), Color.White);
 
                 // Localise the 'title'
-                string magicTitle = language switch
-                {
-                    1 => "Magia",
-                    2 => "Magia",
-                    _ => "Magic"
-                };
+                string magicTitle = tounges[language].card_magic_label;
 
                 // Draw Colored Frame
                 Raylib.ImageDraw(ref card, inst.frameHero, imageRec, imageRec, inst.magicColor);
