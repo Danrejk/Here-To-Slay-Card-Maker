@@ -3,17 +3,19 @@
     "lang_name": "Polski",
     "lang_code": "pl",
 
-    "class_name_ranger": "łowca",
-    "class_name_wizard": "mag",
-    "class_name_bard": "bard",
-    "class_name_guardian": "strażnik",
-    "class_name_fighter": "wojownik",
-    "class_name_thief": "złodziej",
-    "class_name_druid": "druid",
-    "class_name_warrior": "awanturnik",
-    "class_name_berserker": "berserk",
-    "class_name_necromancer": "nekromanta",
-    "class_name_sorcerer": "czarownik",
+    "class_name": [
+      /*ranger*/ "łowca",
+      /*wizard*/ "mag",
+      /*bard*/ "bard",
+      /*guardian*/ "strażnik",
+      /*fighter*/ "wojownik",
+      /*thief*/ "złodziej",
+      /*druid*/ "druid",
+      /*warrior*/ "awanturnik",
+      /*berserker*/ "berserk",
+      /*necromancer*/ "nekromanta",
+      /*sorcerer*/ "czarownik"
+    ],
 
     "card_leader_label": "Przywódca drużyny",
 

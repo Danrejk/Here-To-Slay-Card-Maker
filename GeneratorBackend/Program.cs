@@ -1,4 +1,5 @@
 ﻿using Raylib_cs;
+using LanguageManager;
 using System;
 using System.IO;
 using System.Numerics;
@@ -9,6 +10,8 @@ using Image = Raylib_cs.Image;
 using Rectangle = Raylib_cs.Rectangle;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Formats.Png;
+using System.Runtime.CompilerServices;
+using System.Reflection;
 
 namespace GeneratorBackend
 {
@@ -16,20 +19,10 @@ namespace GeneratorBackend
     {
         private static List<LanguageManager.Manager.Language> tounges = LanguageManager.Manager.LoadJson(); // load languages
 
-        //public class ClassListObject
-        //{
-        //    public string NameEN { get; set; } = "";
-        //    public Image Image { get; set; }
-        //    public string ImagePath { get; set; } = "";
-        //    public Color Color { get; set; }
-        //    public string NamePL { get; set; } = "";
-        //    public string NameIT { get; set; } = "";
-        //}
-
         public class ClassListObject
         {
             public bool isCustom { get; set; }
-            public string Name { get; set; } = "";
+            public string Name { get; set; } = "";  // this is actually not necessary, but who cares
             public Image Image { get; set; }
             public Color Color { get; set; }
         }
@@ -85,20 +78,20 @@ namespace GeneratorBackend
                 rollFont = Raylib.LoadFontEx("Assets/Fonts/PatuaOne_Polish.ttf", ROLL_SIZE, null, 1415);
                 descFont = Raylib.LoadFontEx("Assets/Fonts/SourceSansPro.ttf", DESC_SIZE, null, 1415);
 
-                //#pragma warning disable CS8602 // Dereference of a possibly null reference.
+                // these are just hardcoded classes                     as said before, name is just to point which line is which class
                 ClassList = new();
-                ClassList.Add(new ClassListObject { isCustom = false, Name = "class_name_no_class", Image = Raylib.LoadImage("Classes/none.png"), Color = new(91, 93, 92, 255) });
-                ClassList.Add(new ClassListObject { isCustom = false, Name = "class_name_ranger", Image = Raylib.LoadImage("Classes/ranger.png"), Color = new(35, 94, 57, 255) });
-                ClassList.Add(new ClassListObject { isCustom = false, Name = "class_name_wizard", Image = Raylib.LoadImage("Classes/wizard.png"), Color = new(116, 46, 137, 255) });
-                ClassList.Add(new ClassListObject { isCustom = false, Name = "class_name_bard", Image = Raylib.LoadImage("Classes/bard.png"), Color = new(194, 81, 47, 255) });
-                ClassList.Add(new ClassListObject { isCustom = false, Name = "class_name_guardian", Image = Raylib.LoadImage("Classes/guardian.png"), Color = new(235, 171, 33, 255) });
-                ClassList.Add(new ClassListObject { isCustom = false, Name = "class_name_fighter", Image = Raylib.LoadImage("Classes/fighter.png"), Color = new(151, 40, 44, 255) });
-                ClassList.Add(new ClassListObject { isCustom = false, Name = "class_name_thief", Image = Raylib.LoadImage("Classes/thief.png"), Color = new(0, 78, 125, 255) });
-                ClassList.Add(new ClassListObject { isCustom = false, Name = "class_name_druid", Image = Raylib.LoadImage("Classes/druid.png"), Color = new(0, 171, 143, 255) });
-                ClassList.Add(new ClassListObject { isCustom = false, Name = "class_name_warrior", Image = Raylib.LoadImage("Classes/warrior.png"), Color = new(94, 109, 180, 255) });
-                ClassList.Add(new ClassListObject { isCustom = false, Name = "class_name_berserker", Image = Raylib.LoadImage("Classes/berserker.png"), Color = new(225, 131, 51, 255) });
-                ClassList.Add(new ClassListObject { isCustom = false, Name = "class_name_necromancer", Image = Raylib.LoadImage("Classes/necromancer.png"), Color = new(213, 28, 106, 255) });
-                ClassList.Add(new ClassListObject { isCustom = false, Name = "class_name_sorcerer", Image = Raylib.LoadImage("Classes/sorcerer.png"), Color = new(29, 31, 29, 255) });
+                ClassList.Add(new ClassListObject { isCustom = false, Name = "no_class", Image = Raylib.LoadImage("Classes/none.png"), Color = new(91, 93, 92, 255) });
+                ClassList.Add(new ClassListObject { isCustom = false, Name = "ranger", Image = Raylib.LoadImage("Classes/ranger.png"), Color = new(35, 94, 57, 255) });
+                ClassList.Add(new ClassListObject { isCustom = false, Name = "wizard", Image = Raylib.LoadImage("Classes/wizard.png"), Color = new(116, 46, 137, 255) });
+                ClassList.Add(new ClassListObject { isCustom = false, Name = "bard", Image = Raylib.LoadImage("Classes/bard.png"), Color = new(194, 81, 47, 255) });
+                ClassList.Add(new ClassListObject { isCustom = false, Name = "guardian", Image = Raylib.LoadImage("Classes/guardian.png"), Color = new(235, 171, 33, 255) });
+                ClassList.Add(new ClassListObject { isCustom = false, Name = "fighter", Image = Raylib.LoadImage("Classes/fighter.png"), Color = new(151, 40, 44, 255) });
+                ClassList.Add(new ClassListObject { isCustom = false, Name = "thief", Image = Raylib.LoadImage("Classes/thief.png"), Color = new(0, 78, 125, 255) });
+                ClassList.Add(new ClassListObject { isCustom = false, Name = "druid", Image = Raylib.LoadImage("Classes/druid.png"), Color = new(0, 171, 143, 255) });
+                ClassList.Add(new ClassListObject { isCustom = false, Name = "warrior", Image = Raylib.LoadImage("Classes/warrior.png"), Color = new(94, 109, 180, 255) });
+                ClassList.Add(new ClassListObject { isCustom = false, Name = "berserker", Image = Raylib.LoadImage("Classes/berserker.png"), Color = new(225, 131, 51, 255) });
+                ClassList.Add(new ClassListObject { isCustom = false, Name = "necromancer", Image = Raylib.LoadImage("Classes/necromancer.png"), Color = new(213, 28, 106, 255) });
+                ClassList.Add(new ClassListObject { isCustom = false, Name = "sorcerer", Image = Raylib.LoadImage("Classes/sorcerer.png"), Color = new(29, 31, 29, 255) });
 
                 // Load the Class List
                 /*try
@@ -206,7 +199,7 @@ namespace GeneratorBackend
 
                 #region Classes
                 string leaderTitle;
-                string className = inst.ClassList[desiredClass[0]].Name;
+                string className = tounges[language].class_name[desiredClass[0]];
 
                 leaderTitle = $"{tounges[language].card_hero_label}: {className}";
 
@@ -223,7 +216,7 @@ namespace GeneratorBackend
 
                     Image secondClassSymbol = Raylib.ImageCopy(inst.ClassList[desiredClass[1]].Image); // It has to be copied, because otherwise it will modify the original image
 
-                    leaderTitle += $"/{inst.ClassList[desiredClass[1]].Name}";
+                    leaderTitle += $"/{tounges[language].class_name[desiredClass[1]]}";
                     
                     Raylib.ImageCrop(ref secondClassSymbol, new Rectangle(0, 0, 51, 102));
 

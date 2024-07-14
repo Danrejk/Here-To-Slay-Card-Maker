@@ -14,6 +14,7 @@ using System.Text.Json;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using Button = System.Windows.Forms.Button;
 using ComboBox = System.Windows.Forms.ComboBox;
+using Windows.Globalization;
 
 #pragma warning disable CA1416 // It onlyworks on Windows
 
@@ -25,6 +26,7 @@ namespace HereToSlay
         bool initLang = false; // this is used to prevent the missing image error from showing twice when first loading the program
 
         private static List<LanguageManager.Manager.Language> tounges = LanguageManager.Manager.LoadJson(); // load languages
+        public int SelectedLanguage; // this is used to pass selected language index to the backend (otherwise it only generation methods know selected language)
 
         public Menu()
         {
@@ -75,6 +77,7 @@ namespace HereToSlay
 
             language.SelectedIndex = Properties.Settings.Default.Language;
             initLang = true;
+            SelectedLanguage = language.SelectedIndex;
 
             // Make all of the class boxes have a custom draw mode with images
             foreach (ComboBox c in new ComboBox[] { chosenClass, chosenSecondClass, itemChosenClass, classReq1, classReq2, classReq3, classReq4, classReq5 })
@@ -875,18 +878,18 @@ namespace HereToSlay
             classReq5.Items.Clear();
 
             // These have to be hardcoded mainly because they each use an icon from the resources so it looks better in the combobox.
-            chosenClass.Items.Add(new ImageCBox(tounges[language.SelectedIndex].class_name_no_class, Properties.Resources.empty.ToBitmap()));
-            chosenClass.Items.Add(new ImageCBox(tounges[language.SelectedIndex].class_name_ranger, Properties.Resources.lowca.ToBitmap()));
-            chosenClass.Items.Add(new ImageCBox(tounges[language.SelectedIndex].class_name_wizard, Properties.Resources.mag.ToBitmap()));
-            chosenClass.Items.Add(new ImageCBox(tounges[language.SelectedIndex].class_name_bard, Properties.Resources.najebus.ToBitmap())); //przewybornie
-            chosenClass.Items.Add(new ImageCBox(tounges[language.SelectedIndex].class_name_guardian, Properties.Resources.straznik.ToBitmap()));
-            chosenClass.Items.Add(new ImageCBox(tounges[language.SelectedIndex].class_name_fighter, Properties.Resources.wojownik.ToBitmap()));
-            chosenClass.Items.Add(new ImageCBox(tounges[language.SelectedIndex].class_name_thief, Properties.Resources.zlodziej.ToBitmap()));
-            chosenClass.Items.Add(new ImageCBox(tounges[language.SelectedIndex].class_name_druid, Properties.Resources.druid.ToBitmap()));
-            chosenClass.Items.Add(new ImageCBox(tounges[language.SelectedIndex].class_name_warrior, Properties.Resources.awanturnik.ToBitmap()));
-            chosenClass.Items.Add(new ImageCBox(tounges[language.SelectedIndex].class_name_berserker, Properties.Resources.berserk.ToBitmap()));
-            chosenClass.Items.Add(new ImageCBox(tounges[language.SelectedIndex].class_name_necromancer, Properties.Resources.nekromanta.ToBitmap()));
-            chosenClass.Items.Add(new ImageCBox(tounges[language.SelectedIndex].class_name_sorcerer, Properties.Resources.czarownik.ToBitmap()));
+            chosenClass.Items.Add(new ImageCBox(tounges[language.SelectedIndex].class_name[0], Properties.Resources.empty.ToBitmap()));
+            chosenClass.Items.Add(new ImageCBox(tounges[language.SelectedIndex].class_name[1], Properties.Resources.lowca.ToBitmap()));
+            chosenClass.Items.Add(new ImageCBox(tounges[language.SelectedIndex].class_name[2], Properties.Resources.mag.ToBitmap()));
+            chosenClass.Items.Add(new ImageCBox(tounges[language.SelectedIndex].class_name[3], Properties.Resources.najebus.ToBitmap())); //przewybornie
+            chosenClass.Items.Add(new ImageCBox(tounges[language.SelectedIndex].class_name[4], Properties.Resources.straznik.ToBitmap()));
+            chosenClass.Items.Add(new ImageCBox(tounges[language.SelectedIndex].class_name[5], Properties.Resources.wojownik.ToBitmap()));
+            chosenClass.Items.Add(new ImageCBox(tounges[language.SelectedIndex].class_name[6], Properties.Resources.zlodziej.ToBitmap()));
+            chosenClass.Items.Add(new ImageCBox(tounges[language.SelectedIndex].class_name[7], Properties.Resources.druid.ToBitmap()));
+            chosenClass.Items.Add(new ImageCBox(tounges[language.SelectedIndex].class_name[8], Properties.Resources.awanturnik.ToBitmap()));
+            chosenClass.Items.Add(new ImageCBox(tounges[language.SelectedIndex].class_name[9], Properties.Resources.berserk.ToBitmap()));
+            chosenClass.Items.Add(new ImageCBox(tounges[language.SelectedIndex].class_name[10], Properties.Resources.nekromanta.ToBitmap()));
+            chosenClass.Items.Add(new ImageCBox(tounges[language.SelectedIndex].class_name[11], Properties.Resources.czarownik.ToBitmap()));
             
             //chosenClass.Items.Add(new ImageCBox("BRAK KLASY", Properties.Resources.empty.ToBitmap()));
             //chosenClass.Items.Add(new ImageCBox("£owca", Properties.Resources.lowca.ToBitmap()));

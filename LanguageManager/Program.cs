@@ -8,19 +8,8 @@ namespace LanguageManager
         public record struct Language(
             string lang_code,
             string lang_name,
-                  
-            string class_name_no_class,
-            string class_name_ranger,
-            string class_name_wizard,
-            string class_name_bard,
-            string class_name_guardian,
-            string class_name_fighter,
-            string class_name_thief,
-            string class_name_druid,
-            string class_name_warrior,
-            string class_name_berserker,
-            string class_name_necromancer,
-            string class_name_sorcerer,
+
+            string[] class_name,
                   
             string card_leader_label,
             string card_monster_label,
