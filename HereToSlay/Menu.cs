@@ -890,40 +890,27 @@ namespace HereToSlay
             chosenClass.Items.Add(new ImageCBox(tounges[language.SelectedIndex].class_name[9], Properties.Resources.berserk.ToBitmap()));
             chosenClass.Items.Add(new ImageCBox(tounges[language.SelectedIndex].class_name[10], Properties.Resources.nekromanta.ToBitmap()));
             chosenClass.Items.Add(new ImageCBox(tounges[language.SelectedIndex].class_name[11], Properties.Resources.czarownik.ToBitmap()));
-            
-            //chosenClass.Items.Add(new ImageCBox("BRAK KLASY", Properties.Resources.empty.ToBitmap()));
-            //chosenClass.Items.Add(new ImageCBox("£owca", Properties.Resources.lowca.ToBitmap()));
-            //chosenClass.Items.Add(new ImageCBox("Mag", Properties.Resources.mag.ToBitmap()));
-            //chosenClass.Items.Add(new ImageCBox("Bard", Properties.Resources.najebus.ToBitmap()));
-            //chosenClass.Items.Add(new ImageCBox("Stra¿nik", Properties.Resources.straznik.ToBitmap()));
-            //chosenClass.Items.Add(new ImageCBox("Wojownik", Properties.Resources.wojownik.ToBitmap()));
-            //chosenClass.Items.Add(new ImageCBox("Z³odziej", Properties.Resources.zlodziej.ToBitmap()));
-            //chosenClass.Items.Add(new ImageCBox("Druid", Properties.Resources.druid.ToBitmap()));
-            //chosenClass.Items.Add(new ImageCBox("Awanturnik", Properties.Resources.awanturnik.ToBitmap()));
-            //chosenClass.Items.Add(new ImageCBox("Berserk", Properties.Resources.berserk.ToBitmap()));
-            //chosenClass.Items.Add(new ImageCBox("Nekromanta", Properties.Resources.nekromanta.ToBitmap()));
-            //chosenClass.Items.Add(new ImageCBox("Czarownik", Properties.Resources.czarownik.ToBitmap()));
 
-            // Add custom classes
-            //inst.ClassList.Skip(12).ToList().ForEach(c =>
-            //{
-            //    string capitalisedName = char.ToUpper(c.NameEN[0]) + c.NameEN.Substring(1);
+            //Add custom classes
+            inst.ClassList.Skip(12).ToList().ForEach(c =>
+            {
+                string capitalisedName = char.ToUpper(c.Name[0]) + c.Name.Substring(1);
 
-            //    // Load class icon
-            //    Bitmap classIcon = new(1, 1);
-            //    if (File.Exists(c.ImagePath))                                   //temporarily disabled, probably doesn't work now
-            //    {
-            //        classIcon = new Bitmap(c.ImagePath);
-            //    }
-            //    else
-            //    {
-            //        if (initLang == true) // don't show this error when first loading the program (it would show up twice, due to lazy programming)
-            //        {
-            //            MessageBox.Show($"Error loading icon for the {c.NameEN} class.\nCould not find image in {c.ImagePath}.\n\nClass icon will be left empty.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //        }
-            //    }
-            //    chosenClass.Items.Add(new ImageCBox(capitalisedName, new Bitmap(1, 1)));
-            //});
+                // Load class icon
+                Bitmap classIcon = new(1, 1);
+                if (File.Exists(c.ImagePath))                                   //temporarily disabled, probably doesn't work now
+                {
+                    classIcon = new Bitmap(c.ImagePath);
+                }
+                else
+                {
+                    if (initLang == true) // don't show this error when first loading the program (it would show up twice, due to lazy programming)
+                    {
+                        MessageBox.Show($"Error loading icon for the {c.Name} class.\nCould not find image in {c.ImagePath}.\n\nClass icon will be left empty.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                chosenClass.Items.Add(new ImageCBox(capitalisedName, new Bitmap(1, 1)));
+            });
 
             // Add monster related options
             classReq1.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
