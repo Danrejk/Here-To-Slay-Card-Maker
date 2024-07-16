@@ -1,0 +1,56 @@
+﻿﻿This is a file explaining how to add your language to use in the maker.
+It might be a bit confusing at first, but it's really not that hard.
+
+NOTE: currently, there is no easy way to change the interface's language, so you can only translate anything that is on the cards
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+First, go to HereToSlay/Languages directory. You should see a file named lang.json. 
+Right click it and select "Open with" -> "Choose other app" -> "Notepad".
+
+Now scroll down to the bottom of the file, place your cursor after the coma and hit enter.
+Then, copy the following:
+
+{
+    "lang_name": "",
+    "lang_code": "",
+
+    "class_name": [
+      /*no_class*/ "",
+      /*ranger*/ "",
+      /*wizard*/ "",
+      /*bard*/ "",
+      /*guardian*/ "",
+      /*fighter*/ "",
+      /*thief*/ "",
+      /*druid*/ "",
+      /*warrior*/ "",
+      /*berserker*/ "",
+      /*necromancer*/ "",
+      /*sorcerer*/ ""
+    ],
+
+    "card_leader_label": "",
+
+    "card_monster_label": "",
+    "card_monster_requirements": "",
+
+    "card_hero_label": "",
+
+    "card_item_label": "",
+    "card_item_cursed": "",
+
+    "card_magic_label": ""
+  },
+
+and fill translations in between empty quotation marks.
+For example, for polish translations of the bard class, under "class_name" property find /*bard*/ and type "najebus" in quatation marks next to it.
+It should look like this:     /*bard*/ "najebus",           (that's not the correct translation but whatever)
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+NOTES:
+        In lang.json you will already find two languages (english and polish) with notes that will help you what's where.
+        Do NOT delete or modify anything outside those empty quatation mark as it will crash the program.
+        If program crashes after applying changes make sure that you aren't missing any comas, brackets or quatation marks.
+        And better don't use "pl" in "lang_code" property.

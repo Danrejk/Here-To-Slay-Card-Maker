@@ -23,7 +23,7 @@ namespace LanguageManager
 
         public static List<Language> LoadJson() // when using somewhere else it should be used somewhere on top of everything
         {
-            using (StreamReader r = new("lang.json"))
+            using (StreamReader r = new("./Languages/lang.json"))
             {
                 string json = r.ReadToEnd();
                 #pragma warning disable CS8600 //because yes

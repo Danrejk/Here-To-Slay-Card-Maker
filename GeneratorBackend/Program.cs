@@ -308,15 +308,15 @@ namespace GeneratorBackend
 
                 float iconsMargin = 83 + 13; // distance between icons (13), 83 is the width of the icon
 
-                if (reqCount > 4) // if there are more than 4 icons, we need to reduce the margin between them
-                {
-                    iconsMargin -= language switch
-                    {
-                        1 => 0, // polish doesn't need margin reduction, because the "REQUIREMENT" text is shorter
-                        2 => 0, // italian doesn't need margin reduction, because the "REQUIREMENT" text is shorter
-                        _ => 8 // YOU CAN MODIFY THIS. It might look better for your preferences, but for me I think this is the best option.
-                    };
-                }
+                //if (reqCount > 4) // if there are more than 4 icons, we need to reduce the margin between them
+                //{
+                //    iconsMargin -= language switch
+                //    {
+                //        1 => 0, // polish doesn't need margin reduction, because the "REQUIREMENT" text is shorter
+                //        2 => 0, // italian doesn't need margin reduction, because the "REQUIREMENT" text is shorter
+                //        _ => 8 // YOU CAN MODIFY THIS. It might look better for your preferences, but for me I think this is the best option.
+                //    };
+                //}
 
                 // Draw the class requirements
                 foreach ((int req, int index) in orderedRequirements.Select((value, index) => (value, index)))

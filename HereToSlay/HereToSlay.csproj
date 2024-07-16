@@ -77,7 +77,7 @@
     <None Update="Assets\Fonts\SourceSansPro.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="lang.json">
+    <None Update="Languages\lang.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="PrintingAssets\English\monsterBackBlack.png">
@@ -186,7 +186,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Languages\" />
     <Folder Include="Resources\" />
   </ItemGroup>
 
