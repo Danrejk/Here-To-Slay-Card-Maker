@@ -1,7 +1,7 @@
 [
   {
-    "lang_name": "English",                             // Language name that will display in langauge selection menu
-    "lang_code": "en",                                  // This can be anything BESIDES pl (go on if you want an interface in polish)
+    "lang_name": "English", // Language name that will display in langauge selection menu
+    "lang_code": "en", // This can be anything BESIDES pl (go on if you want an interface in polish)
 
     "class_name": [
       /*no_class*/ "NO CLASS",
@@ -18,15 +18,21 @@
       /*sorcerer*/ "Sorcerer"
     ],
 
-    "card_leader_label": "Party Leader",               // Labels are just pre-existing words on the cards that are not modifiable
+    "card_leader_label": "Party Leader", // Labels are just pre-existing words on the cards that are not modifiable
 
     "card_monster_label": "Monster",
-    "card_monster_requirements": "Requirements",       // This will display over the section with requirements on the monster card
+    "card_monster_requirements": "REQUIREMENT:", // This will display over the section with requirements on the monster card
+                                                 // Make sure if your language has a colon ":" after this text
+
+    "card_monster_margin": 8, // This is the only property that must NOT contain quatation marks ""
+                              // If a word in your lanugage for "requirements" is long I recommend to slighty increase this value (try 8 as in english)
+                              // so that requirements class icons don't overflow outside the card
+                              // Setting this value too big will make the icons overlap each other (default is 0)
 
     "card_hero_label": "Hero",
 
     "card_item_label": "Item",
-    "card_item_cursed": "Cursed Item",                 // This is a label for cursed item
+    "card_item_cursed": "Cursed Item", // This is a label for cursed item
 
     "card_magic_label": "Magic"
   },
@@ -52,7 +58,8 @@
     "card_leader_label": "Przywódca drużyny",
 
     "card_monster_label": "Potwór",
-    "card_monster_requirements": "Wymagania",
+    "card_monster_requirements": "WYMAGANIA",
+    "card_monster_margin": 0,
 
     "card_hero_label": "Bohater",
 

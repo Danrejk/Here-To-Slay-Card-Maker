@@ -34,6 +34,7 @@ Then, copy the following:
 
     "card_monster_label": "",
     "card_monster_requirements": "",
+    "card_monster_margin": ,
 
     "card_hero_label": "",
 
@@ -49,8 +50,11 @@ It should look like this:     /*bard*/ "najebus",           (that's not the corr
 
 ---------------------------------------------------------------------------------------------------------------------------------
 
-NOTES:
-        In lang.json you will already find two languages (english and polish) with notes that will help you what's where.
+NOTES:                                          (I really recommend to read those down here)
+        In lang.json you will already find two languages (english and polish). English has notes that will help you what's where.
+        I REALLY recommend you to read those. You will get an idea what each property does
         Do NOT delete or modify anything outside those empty quatation mark as it will crash the program.
         If program crashes after applying changes make sure that you aren't missing any comas, brackets or quatation marks.
-        And better don't use "pl" in "lang_code" property.
+        Remember, that there should always be a coma "," placed after any ending curly bracket "}".
+        The "card_monster_margin" is the only property whose value is NOT in quatation marks.
+        And better don't use "pl" and "en" in "lang_code" property.

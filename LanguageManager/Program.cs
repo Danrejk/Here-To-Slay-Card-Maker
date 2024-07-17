@@ -18,7 +18,9 @@ namespace LanguageManager
             string card_magic_label,
                   
             string card_monster_requirements,
-            string card_item_cursed
+            string card_item_cursed,
+
+            int card_monster_margin
         );
 
         public static List<Language> LoadJson() // when using somewhere else it should be used somewhere on top of everything
