@@ -6,7 +6,6 @@ Dzięki temu programowi możesz tworzyć <b>dokładne</b> niestandardowe karty d
 DZIAŁA TYLKO NA WINDOWS
 <br><br>
 English Version: [README.md](README.md)<br>
-Versione in lingua italiana: NESSUNA
 
 ## Instalacja
 <a href="https://github.com/Danrejk/Here-To-Slay-Card-Maker/releases/tag/v4.1"> <img alt="Najnowsza Wersja" src="https://img.shields.io/badge/Najnowsza_Wersja-v4.1-green"> </a>
