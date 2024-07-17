@@ -1,4 +1,5 @@
 using GeneratorBackend;
+using LanguageManager;
 using HereToSlay.Properties;
 using System.Diagnostics;
 using System.Drawing.Text;
@@ -9,9 +10,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Text.Json;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using Button = System.Windows.Forms.Button;
 using ComboBox = System.Windows.Forms.ComboBox;
+using Windows.Globalization;
 
 #pragma warning disable CA1416 // It onlyworks on Windows
 
@@ -19,8 +22,12 @@ namespace HereToSlay
 {
     public partial class Menu : Form
     {
-        private static readonly AssetManager inst = AssetManager.Instance;
+        private static readonly Backend.AssetManager inst = Backend.AssetManager.Instance;
         bool initLang = false; // this is used to prevent the missing image error from showing twice when first loading the program
+
+        private static List<LanguageManager.Manager.Language> tounges = LanguageManager.Manager.LoadJson(); // load languages
+        public int SelectedLanguage; // this is used to pass selected language index to the backend (otherwise it only generation methods know selected language)
+
         public Menu()
         {
             InitializeComponent();
@@ -58,15 +65,19 @@ namespace HereToSlay
 
 
             #region ComboBoxes
-#pragma warning disable CS8622 // the warnings were annoying me, so I disabled them
+            #pragma warning disable CS8622 // the warnings were annoying me, so I disabled them
             language.ComboBox.DrawMode = DrawMode.OwnerDrawFixed;
             language.ComboBox.DrawItem += ImageCBox.ComboBox_DrawItem;
             language.DropDown += ImageCBox.ComboBox_WidthAutoAdjust;
-            language.Items.Add(new ImageCBox("English", Properties.Resources.en));
-            language.Items.Add(new ImageCBox("Polski", Properties.Resources.pl));
-            language.Items.Add(new ImageCBox("Italiano", Properties.Resources.it));
+
+            foreach (var i in tounges) // tounges. because i said so :)
+            {
+                language.Items.Add(new ImageCBox(i.lang_name, Properties.Resources.missingno));
+            }
+
             language.SelectedIndex = Properties.Settings.Default.Language;
             initLang = true;
+            SelectedLanguage = language.SelectedIndex;
 
             // Make all of the class boxes have a custom draw mode with images
             foreach (ComboBox c in new ComboBox[] { chosenClass, chosenSecondClass, itemChosenClass, classReq1, classReq2, classReq3, classReq4, classReq5 })
@@ -95,7 +106,7 @@ namespace HereToSlay
             badOutputSym.SelectedIndex = 1;
             goodOutputSym.SelectedIndex = 0;
 
-#pragma warning restore CS8622
+            #pragma warning restore CS8622
             #endregion
 
             switch (Properties.Settings.Default.CardType)
@@ -119,7 +130,6 @@ namespace HereToSlay
 
             LeaderCard.Image = Properties.Resources.empty.ToBitmap();
             MonsterCard.Image = Properties.Resources.monster.ToBitmap();
-            //HeroCard.Image = Properties.Resources.hero.ToBitmap(); // this is done in the updateLanguage method
             ItemCard.Image = Properties.Resources.itemIcon.ToBitmap();
             MagicCard.Image = Properties.Resources.magic.ToBitmap();
         }
@@ -638,30 +648,30 @@ namespace HereToSlay
             {
                 // Leader
                 case 0:
-                    GeneratorBackend.Program.GenerateLeader(saveLocation, language.SelectedIndex, nameText.Text, new int[] { chosenClass.SelectedIndex, chosenSecondClass.SelectedIndex }, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked);
+                    GeneratorBackend.Backend.Program.GenerateLeader(saveLocation, language.SelectedIndex, nameText.Text, new int[] { chosenClass.SelectedIndex, chosenSecondClass.SelectedIndex }, selectImgText.Text, descriptionText.Text, gradient.Checked, nameWhite.Checked);
                     break;
                 // Monster
                 case 1:
-                    RollOutput good = new((int)goodOutputNum.Value, goodOutputSym.SelectedIndex, goodOutputText.Text);
-                    RollOutput bad = new((int)badOutputNum.Value, badOutputSym.SelectedIndex, badOutputText.Text);
+                    Backend.RollOutput good = new((int)goodOutputNum.Value, goodOutputSym.SelectedIndex, goodOutputText.Text);
+                    Backend.RollOutput bad = new((int)badOutputNum.Value, badOutputSym.SelectedIndex, badOutputText.Text);
                     int[] desiredRequirements = new int[] { classReq1.SelectedIndex, classReq2.SelectedIndex, classReq3.SelectedIndex, classReq4.SelectedIndex, classReq5.SelectedIndex };
                     string adReq = labelAdditionalReq.Checked ? additionalReq.Text : "";
                     string hBon = labelHeroBonus.Checked ? heroBonus.Text : "";
 
-                    GeneratorBackend.Program.GenerateMonster(saveLocation, language.SelectedIndex, nameText.Text, desiredRequirements, selectImgText.Text, good, bad, descriptionText.Text, adReq, hBon, gradient.Checked, nameWhite.Checked, alternativeColor.Checked);
+                    GeneratorBackend.Backend.Program.GenerateMonster(saveLocation, language.SelectedIndex, nameText.Text, desiredRequirements, selectImgText.Text, good, bad, descriptionText.Text, adReq, hBon, gradient.Checked, nameWhite.Checked, alternativeColor.Checked);
                     break;
                 // Hero
                 case 2:
-                    RollOutput description = new((int)goodOutputNum.Value, goodOutputSym.SelectedIndex, descriptionText.Text);
-                    GeneratorBackend.Program.GenerateHero(saveLocation, language.SelectedIndex, nameText.Text, chosenClass.SelectedIndex, selectImgText.Text, description, (int)maxItems.Value);
+                    Backend.RollOutput description = new((int)goodOutputNum.Value, goodOutputSym.SelectedIndex, descriptionText.Text);
+                    GeneratorBackend.Backend.Program.GenerateHero(saveLocation, language.SelectedIndex, nameText.Text, chosenClass.SelectedIndex, selectImgText.Text, description, (int)maxItems.Value);
                     break;
                 // Item
                 case 3:
-                    GeneratorBackend.Program.GenerateItem(saveLocation, language.SelectedIndex, nameText.Text, itemChosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text);
+                    GeneratorBackend.Backend.Program.GenerateItem(saveLocation, language.SelectedIndex, nameText.Text, itemChosenClass.SelectedIndex, selectImgText.Text, descriptionText.Text);
                     break;
                 // Magic
                 case 4:
-                    GeneratorBackend.Program.GenerateMagic(null, language.SelectedIndex, nameText.Text, selectImgText.Text, descriptionText.Text);
+                    GeneratorBackend.Backend.Program.GenerateMagic(null, language.SelectedIndex, nameText.Text, selectImgText.Text, descriptionText.Text);
                     break;
                 default:
                     throw new NotImplementedException();
@@ -681,310 +691,161 @@ namespace HereToSlay
             Properties.Settings.Default.Language = language.SelectedIndex;
             Properties.Settings.Default.Save();
 
-            #region unfinished custom language code
-            //LanguageManager langManager = new("Language/languages.xml");
-
-            //string lang = language.SelectedIndex switch
-            //{
-            //    0 => "EN",
-            //    1 => "PL",
-            //    2 => "IT",
-            //    _ => "EN"
-            //};
-
-            //// English
-            //logo.Image = Properties.Resources.Logo0;
-            //labelLeader.Text = langManager.GetLocalizedString(lang, "labelLeader");
-            //labelClass.Text = langManager.GetLocalizedString(lang, "labelClass");
-            //labelSecondClass.Text = "Second class";
-            //labelImg.Text = Properties.Settings.Default.CardType switch
-            //{
-            //    1 => "Monster image",
-            //    2 => "Hero image",
-            //    3 => "Item image",
-            //    4 => "Magic image",
-            //    _ => "Leader image"
-            //};
-            //labelDescription.Text = "Description";
-            //leaderImgToolTip.ToolTipTitle = "Image dimentions";
-            //string toolTipImageDimentions = Properties.Settings.Default.CardType switch
-            //{
-            //    1 => "The monster image (not the whole card) dimentions are 745x817.",
-            //    2 => "The hero image (not the whole card) dimentions are 545x545.",
-            //    3 => "The item image (not the whole card) dimentions are 545x545.",
-            //    4 => "The magic image (not the whole card) dimentions are 545x545.",
-            //    _ => "The leader image (not the whole card) dimentions are 745x1176.",
-            //};
-            //leaderImgToolTip.SetToolTip(selectImgButton, toolTipImageDimentions + "\nThe program will automatically crop and zoom the image, if needed.\n\nSupported file extensions:\n.png, .jpeg, .jpg, .gif(first frame), .bmp, .webp, .pbm, .tiff, .tga");
-
-            //gradient.Text = "Back gradient";
-            //nameWhite.Text = "White name";
-            //splitClass.Text = "Split Class";
-            //this.Text = "Here to Slay - Card generator";
-            //labelBad.Text = "Roll Requirements - Fail";
-            //labelGood.Text = "Roll Requirements - SLAY monster";
-            //goodOutputText.Text = "SLAY this Monster card";
-            //labelReq.Text = "Class Requirements";
-            //RENDER.Text = "SAVE IMAGE";
-            //copyImageToClipboardToolStripMenuItem.Text = "Copy image";
-            //openImageLocationToolStripMenuItem.Text = "Open image location";
-            //labelMaxItem.Text = "Max Item Ammount";
-            //alternativeColor.Text = "Alternative Color (?)";
-            //altColorToolTip.ToolTipTitle = "Alternative Color";
-            //altColorToolTip.SetToolTip(alternativeColor, "On some printers, the standard color might largely differ from the disered one.\nThe standard color is taken straight from the manual, so it should be good,\nbut some printers don't have a sufficient color depth.\n\nThe alternative color (black), might look better on some printers.");
-
-            //if (chosenClass.SelectedIndex == -1 && Properties.Settings.Default.CardType == 2)
-            //{
-            //    this.Icon = Properties.Resources.hero;
-            //}
-            //HeroCard.Image = Properties.Resources.hero.ToBitmap();
-
-            //cardType.Text = "Card Type";
-            //LeaderCard.Text = "Leader";
-            //MonsterCard.Text = "Monster";
-            //HeroCard.Text = "Hero";
-            //ItemCard.Text = "Item";
-            //MagicCard.Text = "Magic";
-
-            //additionalReq.Text = "Addidional Requirements";
-            //additionalReq.Text = "DISCARD X cards";
-            //labelHeroBonus.Text = "Additional Hero Bonus";
-            //heroBonus.Text = "For each additional Hero card in your Party, +X to your roll.";
-            #endregion
-
             #region old language code
             string toolTipImageDimentions;
 
-            switch (language.SelectedIndex)
+            if (tounges[language.SelectedIndex].lang_code == "pl")
             {
                 // Polish
-                case 1:
-                    logo.Image = Properties.Resources.Logo1;
-                    labelLeader.Text = Properties.Settings.Default.CardType switch
-                    {
-                        1 => "Nazwa potwora",
-                        2 => "Nazwa bohatera",
-                        3 => "Nazwa przedmiotu",
-                        4 => "Nazwa magii",
-                        _ => "Nazwa przywódcy"
-                    };
-                    labelClass.Text = Properties.Settings.Default.CardType switch
-                    {
-                        2 => "Klasa bohatera",
-                        3 => "Klasa przedmiotu",
-                        _ => "Klasa przywódcy"
-                    };
-                    labelSecondClass.Text = "Druga klasa";
-                    labelImg.Text = Properties.Settings.Default.CardType switch
-                    {
-                        1 => "Obrazek potwora",
-                        2 => "Obrazek bohatera",
-                        3 => "Obrazek przedmiotu",
-                        4 => "Obrazek magii",
-                        _ => "Obrazek przywódcy"
-                    };
-                    labelDescription.Text = "Opis";
-                    leaderImgToolTip.ToolTipTitle = "Wymiary obazka";
-                    toolTipImageDimentions = Properties.Settings.Default.CardType switch
-                    {
-                        1 => "Obrazek potwora (nie ca³a karta) ma wymiary 745x817.",
-                        2 => "Obrazek bohatera (nie ca³a karta) ma wymiary 545x545.",
-                        3 => "Obrazek przedmiotu (nie ca³a karta) ma wymiary 545x545.",
-                        4 => "Obrazek magii (nie ca³a karta) ma wymiary 545x545.",
-                        _ => "Obrazek przywódcy (nie ca³a karta) ma wymiary 745x1176.",
-                    };
-                    leaderImgToolTip.SetToolTip(selectImgButton, toolTipImageDimentions + "\nProgram automatycznie przytnie i przybli¿y obraz, je¿eli bêdzie to potrzebne.\n\nWspierane rozszerzenia plików:\n.png, .jpeg, .jpg, .gif(pierwsza klatka), .bmp, .webp, .pbm, .tiff, .tga");
+                logo.Image = Properties.Resources.Logo1;
+                labelLeader.Text = Properties.Settings.Default.CardType switch
+                {
+                    1 => "Nazwa potwora",
+                    2 => "Nazwa bohatera",
+                    3 => "Nazwa przedmiotu",
+                    4 => "Nazwa magii",
+                    _ => "Nazwa przywódcy"
+                };
+                labelClass.Text = Properties.Settings.Default.CardType switch
+                {
+                    2 => "Klasa bohatera",
+                    3 => "Klasa przedmiotu",
+                    _ => "Klasa przywódcy"
+                };
+                labelSecondClass.Text = "Druga klasa";
+                labelImg.Text = Properties.Settings.Default.CardType switch
+                {
+                    1 => "Obrazek potwora",
+                    2 => "Obrazek bohatera",
+                    3 => "Obrazek przedmiotu",
+                    4 => "Obrazek magii",
+                    _ => "Obrazek przywódcy"
+                };
+                labelDescription.Text = "Opis";
+                leaderImgToolTip.ToolTipTitle = "Wymiary obazka";
+                toolTipImageDimentions = Properties.Settings.Default.CardType switch
+                {
+                    1 => "Obrazek potwora (nie ca³a karta) ma wymiary 745x817.",
+                    2 => "Obrazek bohatera (nie ca³a karta) ma wymiary 545x545.",
+                    3 => "Obrazek przedmiotu (nie ca³a karta) ma wymiary 545x545.",
+                    4 => "Obrazek magii (nie ca³a karta) ma wymiary 545x545.",
+                    _ => "Obrazek przywódcy (nie ca³a karta) ma wymiary 745x1176.",
+                };
+                leaderImgToolTip.SetToolTip(selectImgButton, toolTipImageDimentions + "\nProgram automatycznie przytnie i przybli¿y obraz, je¿eli bêdzie to potrzebne.\n\nWspierane rozszerzenia plików:\n.png, .jpeg, .jpg, .gif(pierwsza klatka), .bmp, .webp, .pbm, .tiff, .tga");
 
-                    gradient.Text = "Tylni gradient";
-                    nameWhite.Text = "Bia³a nazwa";
-                    splitClass.Text = "Podwójna Klasa";
-                    this.Text = "To ja go tnê - Generator kart";
-                    labelBad.Text = "Wymagania rzutu - Pora¿ka";
-                    labelGood.Text = "Wymagania rzutu - UBIJ potwora";
-                    goodOutputText.Text = "UBIJ tego potwora";
-                    labelReq.Text = "Wymagania klas";
-                    RENDER.Text = "ZAPISZ OBRAZ";
-                    copyImageToClipboardToolStripMenuItem.Text = "Kopiuj obraz";
-                    openImageLocationToolStripMenuItem.Text = "Otwórz lokalizacjê obrazu";
-                    labelMaxItem.Text = "Max. iloœæ przedmiotów";
-                    alternativeColor.Text = "Alternatywny kolor (?)";
-                    altColorToolTip.ToolTipTitle = "Alternatywny kolor";
-                    altColorToolTip.SetToolTip(alternativeColor, "Na niektórych drukarkach, standardowy kolor mo¿e znacznie odstawiaæ od po¿¹danego.\nStandardowy kolor by³ wziêty prosto z instruckji, wiêc powinnien byæ dobry,\nale niektóre durkarki nie maj¹ poprawnej g³ebi kolorów.\n\nAlternatywny kolor (czarny) mo¿e wygl¹daæ lepiej na niektórych drukarkach.");
+                gradient.Text = "Tylni gradient";
+                nameWhite.Text = "Bia³a nazwa";
+                splitClass.Text = "Podwójna Klasa";
+                this.Text = "To ja go tnê - Generator kart";
+                labelBad.Text = "Wymagania rzutu - Pora¿ka";
+                labelGood.Text = "Wymagania rzutu - UBIJ potwora";
+                goodOutputText.Text = "UBIJ tego potwora";
+                labelReq.Text = "Wymagania klas";
+                RENDER.Text = "ZAPISZ OBRAZ";
+                copyImageToClipboardToolStripMenuItem.Text = "Kopiuj obraz";
+                openImageLocationToolStripMenuItem.Text = "Otwórz lokalizacjê obrazu";
+                labelMaxItem.Text = "Max. iloœæ przedmiotów";
+                alternativeColor.Text = "Alternatywny kolor (?)";
+                altColorToolTip.ToolTipTitle = "Alternatywny kolor";
+                altColorToolTip.SetToolTip(alternativeColor, "Na niektórych drukarkach, standardowy kolor mo¿e znacznie odstawiaæ od po¿¹danego.\nStandardowy kolor by³ wziêty prosto z instruckji, wiêc powinnien byæ dobry,\nale niektóre durkarki nie maj¹ poprawnej g³ebi kolorów.\n\nAlternatywny kolor (czarny) mo¿e wygl¹daæ lepiej na niektórych drukarkach.");
 
-                    if (chosenClass.SelectedIndex == -1 && Properties.Settings.Default.CardType == 2)
-                    {
-                        this.Icon = Properties.Resources.bohater;
-                    }
-                    HeroCard.Image = Properties.Resources.bohater.ToBitmap();
+                if (chosenClass.SelectedIndex == -1 && Properties.Settings.Default.CardType == 2)
+                {
+                    this.Icon = Properties.Resources.bohater;
+                }
+                HeroCard.Image = Properties.Resources.bohater.ToBitmap();
 
-                    cardType.Text = "Typ karty";
-                    LeaderCard.Text = "Przywódca";
-                    MonsterCard.Text = "Potwór";
-                    HeroCard.Text = "Bohater";
-                    ItemCard.Text = "Przedmiot";
-                    MagicCard.Text = "Magia";
+                cardType.Text = "Typ karty";
+                LeaderCard.Text = "Przywódca";
+                MonsterCard.Text = "Potwór";
+                HeroCard.Text = "Bohater";
+                ItemCard.Text = "Przedmiot";
+                MagicCard.Text = "Magia";
 
-                    labelAdditionalReq.Text = "Dodatkowe wymagania";
-                    additionalReq.Text = "ODRZUÆ X kart";
-                    labelHeroBonus.Text = "Bonus dodatkowych boh.";
-                    heroBonus.Text = "Za ka¿dego dodatkowego bohatera w twojej dru¿ynie, +X do twojego rzutu";
-
-                    break;
-
-                // Italian
-                case 2:
-                    logo.Image = Properties.Resources.Logo0;
-                    labelLeader.Text = Properties.Settings.Default.CardType switch
-                    {
-                        1 => "Nome del mostro",
-                        2 => "Nome dell'eroe",
-                        3 => "Nome dell'oggetto",
-                        4 => "Nome della magia",
-                        _ => "Nome del leader"
-                    };
-                    labelClass.Text = Properties.Settings.Default.CardType switch
-                    {
-                        2 => "Classe dell'eroe",
-                        3 => "Classe dell'oggetto",
-                        _ => "Classe del leader"
-                    };
-                    labelSecondClass.Text = "Seconda classe";
-                    labelImg.Text = Properties.Settings.Default.CardType switch
-                    {
-                        1 => "Immagine del mostro",
-                        2 => "Immagine dell'eroe",
-                        3 => "Immagine dell'oggetto",
-                        4 => "Immagine della magia",
-                        _ => "Immagine del leader"
-                    };
-                    labelDescription.Text = "Descrizione";
-                    leaderImgToolTip.ToolTipTitle = "Dimensioni dell'immagine";
-                    toolTipImageDimentions = Properties.Settings.Default.CardType switch
-                    {
-                        1 => "Le dimensioni dell'immagine del mostro (non l'intera carta) sono 745x817.",
-                        2 => "Le dimensioni dell'immagine dell'eroe (non l'intera carta) sono 545x545.",
-                        3 => "Le dimensioni dell'immagine dell'oggetto (non l'intera carta) sono 545x545.",
-                        4 => "Le dimensioni dell'immagine della magia (non l'intera carta) sono 545x545.",
-                        _ => "Le dimensioni dell'immagine del leader (non l'intera carta) sono 745x1176."
-                    };
-                    leaderImgToolTip.SetToolTip(selectImgButton, toolTipImageDimentions + "\nIl programma ritagliera e zoommera automaticamente l'immagine se necessario.\n\nEstensioni file supportate:\n.png, .jpeg, .jpg, .gif (first frame), .bmp, .webp, .pbm, .tiff, .tga");
-
-                    gradient.Text = "Gradiente di sfondo";
-                    nameWhite.Text = "Nome bianco";
-                    splitClass.Text = "Doppia classe";
-                    this.Text = "Here to Slay - Generatore di carte";
-                    labelBad.Text = "Requisito di tiro - Fallito";
-                    labelGood.Text = "Requisito di tiro - STERMINA mostro";
-                    goodOutputText.Text = "STERMINA questa carta Monstro";
-                    labelReq.Text = "Requisiti di classe";
-                    RENDER.Text = "SALVA L' IMMAGINE";
-                    copyImageToClipboardToolStripMenuItem.Text = "Copia l'immagine";
-                    openImageLocationToolStripMenuItem.Text = "Apri percorso immagine";
-                    labelMaxItem.Text = "Numero massimo di oggetti";
-                    alternativeColor.Text = "Colore alternativo (?)";
-                    altColorToolTip.ToolTipTitle = "Colore alternativo";
-                    altColorToolTip.SetToolTip(alternativeColor, "Su alcune stampanti, il colore standard potrebbe differire notevolmente da quello desiderato.\nIl colore standard ? preso direttamente dal manuale, quindi dovrebbe essere buono,\nma alcune stampanti non hanno una profondit? di colore sufficiente.\n\nIl colore alternativo (nero), potrebbe sembrare migliore su alcune stampanti.");
-
-                    if (chosenClass.SelectedIndex == -1 && Properties.Settings.Default.CardType == 2)
-                    {
-                        this.Icon = Properties.Resources.eroe;
-                    }
-                    HeroCard.Image = Properties.Resources.eroe.ToBitmap();
-
-                    cardType.Text = "Tipo di carta";
-                    LeaderCard.Text = "Leader";
-                    MonsterCard.Text = "Mostro";
-                    HeroCard.Text = "Eroe";
-                    ItemCard.Text = "Oggetto";
-                    MagicCard.Text = "Magia";
-
-                    additionalReq.Text = "Requisiti aggiuntivi";
-                    additionalReq.Text = "SCARTA X carte";
-                    labelHeroBonus.Text = "Bonus Eroe aggiuntivo";
-                    heroBonus.Text = "Per ogni carta Eroe aggiuntiva nella tua Squadra, +X al tuo tiro";
-
-                    break;
-
+                labelAdditionalReq.Text = "Dodatkowe wymagania";
+                additionalReq.Text = "ODRZUÆ X kart";
+                labelHeroBonus.Text = "Bonus dodatkowych boh.";
+                heroBonus.Text = "Za ka¿dego dodatkowego bohatera w twojej dru¿ynie, +X do twojego rzutu";
+            }
+            else
+            {
                 // English
-                default:
-                    logo.Image = Properties.Resources.Logo0;
-                    labelLeader.Text = Properties.Settings.Default.CardType switch
-                    {
-                        1 => "Monster name",
-                        2 => "Hero name",
-                        3 => "Item name",
-                        4 => "Magic name",
-                        _ => "Leader name"
-                    };
-                    labelClass.Text = Properties.Settings.Default.CardType switch
-                    {
-                        2 => "Hero class",
-                        3 => "Item class",
-                        _ => "Leader class"
-                    };
-                    labelSecondClass.Text = "Second class";
-                    labelImg.Text = Properties.Settings.Default.CardType switch
-                    {
-                        1 => "Monster image",
-                        2 => "Hero image",
-                        3 => "Item image",
-                        4 => "Magic image",
-                        _ => "Leader image"
-                    };
-                    labelDescription.Text = "Description";
-                    leaderImgToolTip.ToolTipTitle = "Image dimentions";
-                    toolTipImageDimentions = Properties.Settings.Default.CardType switch
-                    {
-                        1 => "The monster image (not the whole card) dimentions are 745x817.",
-                        2 => "The hero image (not the whole card) dimentions are 545x545.",
-                        3 => "The item image (not the whole card) dimentions are 545x545.",
-                        4 => "The magic image (not the whole card) dimentions are 545x545.",
-                        _ => "The leader image (not the whole card) dimentions are 745x1176.",
-                    };
-                    leaderImgToolTip.SetToolTip(selectImgButton, toolTipImageDimentions + "\nThe program will automatically crop and zoom the image, if needed.\n\nSupported file extensions:\n.png, .jpeg, .jpg, .gif(first frame), .bmp, .webp, .pbm, .tiff, .tga");
+                logo.Image = Properties.Resources.Logo0;
+                labelLeader.Text = Properties.Settings.Default.CardType switch
+                {
+                    1 => "Monster name",
+                    2 => "Hero name",
+                    3 => "Item name",
+                    4 => "Magic name",
+                    _ => "Leader name"
+                };
+                labelClass.Text = Properties.Settings.Default.CardType switch
+                {
+                    2 => "Hero class",
+                    3 => "Item class",
+                    _ => "Leader class"
+                };
+                labelSecondClass.Text = "Second class";
+                labelImg.Text = Properties.Settings.Default.CardType switch
+                {
+                    1 => "Monster image",
+                    2 => "Hero image",
+                    3 => "Item image",
+                    4 => "Magic image",
+                    _ => "Leader image"
+                };
+                labelDescription.Text = "Description";
+                leaderImgToolTip.ToolTipTitle = "Image dimentions";
+                toolTipImageDimentions = Properties.Settings.Default.CardType switch
+                {
+                    1 => "The monster image (not the whole card) dimentions are 745x817.",
+                    2 => "The hero image (not the whole card) dimentions are 545x545.",
+                    3 => "The item image (not the whole card) dimentions are 545x545.",
+                    4 => "The magic image (not the whole card) dimentions are 545x545.",
+                    _ => "The leader image (not the whole card) dimentions are 745x1176.",
+                };
+                leaderImgToolTip.SetToolTip(selectImgButton, toolTipImageDimentions + "\nThe program will automatically crop and zoom the image, if needed.\n\nSupported file extensions:\n.png, .jpeg, .jpg, .gif(first frame), .bmp, .webp, .pbm, .tiff, .tga");
 
-                    gradient.Text = "Back gradient";
-                    nameWhite.Text = "White name";
-                    splitClass.Text = "Split Class";
-                    this.Text = "Here to Slay - Card generator";
-                    labelBad.Text = "Roll Requirements - Fail";
-                    labelGood.Text = "Roll Requirements - SLAY monster";
-                    goodOutputText.Text = "SLAY this Monster card";
-                    labelReq.Text = "Class Requirements";
-                    RENDER.Text = "SAVE IMAGE";
-                    copyImageToClipboardToolStripMenuItem.Text = "Copy image";
-                    openImageLocationToolStripMenuItem.Text = "Open image location";
-                    labelMaxItem.Text = "Max Item Ammount";
-                    alternativeColor.Text = "Alternative Color (?)";
-                    altColorToolTip.ToolTipTitle = "Alternative Color";
-                    altColorToolTip.SetToolTip(alternativeColor, "On some printers, the standard color might largely differ from the disered one.\nThe standard color is taken straight from the manual, so it should be good,\nbut some printers don't have a sufficient color depth.\n\nThe alternative color (black), might look better on some printers.");
+                gradient.Text = "Back gradient";
+                nameWhite.Text = "White name";
+                splitClass.Text = "Split Class";
+                this.Text = "Here to Slay - Card generator";
+                labelBad.Text = "Roll Requirements - Fail";
+                labelGood.Text = "Roll Requirements - SLAY monster";
+                goodOutputText.Text = "SLAY this Monster card";
+                labelReq.Text = "Class Requirements";
+                RENDER.Text = "SAVE IMAGE";
+                copyImageToClipboardToolStripMenuItem.Text = "Copy image";
+                openImageLocationToolStripMenuItem.Text = "Open image location";
+                labelMaxItem.Text = "Max Item Ammount";
+                alternativeColor.Text = "Alternative Color (?)";
+                altColorToolTip.ToolTipTitle = "Alternative Color";
+                altColorToolTip.SetToolTip(alternativeColor, "On some printers, the standard color might largely differ from the disered one.\nThe standard color is taken straight from the manual, so it should be good,\nbut some printers don't have a sufficient color depth.\n\nThe alternative color (black), might look better on some printers.");
 
-                    if (chosenClass.SelectedIndex == -1 && Properties.Settings.Default.CardType == 2)
-                    {
-                        this.Icon = Properties.Resources.hero;
-                    }
-                    HeroCard.Image = Properties.Resources.hero.ToBitmap();
+                if (chosenClass.SelectedIndex == -1 && Properties.Settings.Default.CardType == 2)
+                {
+                    this.Icon = Properties.Resources.hero;
+                }
+                HeroCard.Image = Properties.Resources.hero.ToBitmap();
 
-                    cardType.Text = "Card Type";
-                    LeaderCard.Text = "Leader";
-                    MonsterCard.Text = "Monster";
-                    HeroCard.Text = "Hero";
-                    ItemCard.Text = "Item";
-                    MagicCard.Text = "Magic";
+                cardType.Text = "Card Type";
+                LeaderCard.Text = "Leader";
+                MonsterCard.Text = "Monster";
+                HeroCard.Text = "Hero";
+                ItemCard.Text = "Item";
+                MagicCard.Text = "Magic";
 
-                    additionalReq.Text = "Addidional Requirements";
-                    additionalReq.Text = "DISCARD X cards";
-                    labelHeroBonus.Text = "Additional Hero Bonus";
-                    heroBonus.Text = "For each additional Hero card in your Party, +X to your roll.";
-
-                    break;
+                additionalReq.Text = "Addidional Requirements";
+                additionalReq.Text = "DISCARD X cards";
+                labelHeroBonus.Text = "Additional Hero Bonus";
+                heroBonus.Text = "For each additional Hero card in your Party, +X to your roll.";
             }
             #endregion
             LocaliseClassOptions(language.SelectedIndex); // change class options based on selected language
         }
 
         // These are made so that after changing the language, the selected classes stay the same.
-        // TODO: reduce this all to a single operation
+        // TODO: reduce this all to a single operation              NO. useless. 
         int currentClassIndex;
         int currentSecondClassIndex;
         int currentItemClassIndex;
@@ -1015,159 +876,51 @@ namespace HereToSlay
             currentHeroReq5Index = classReq5.SelectedIndex;
             classReq5.Items.Clear();
 
-            switch (lang)
+            // These have to be hardcoded mainly because they each use an icon from the resources so it looks better in the combobox.
+            chosenClass.Items.Add(new ImageCBox(tounges[language.SelectedIndex].class_name[0], Properties.Resources.empty.ToBitmap()));
+            chosenClass.Items.Add(new ImageCBox(tounges[language.SelectedIndex].class_name[1], Properties.Resources.lowca.ToBitmap()));
+            chosenClass.Items.Add(new ImageCBox(tounges[language.SelectedIndex].class_name[2], Properties.Resources.mag.ToBitmap()));
+            chosenClass.Items.Add(new ImageCBox(tounges[language.SelectedIndex].class_name[3], Properties.Resources.najebus.ToBitmap())); //przewybornie
+            chosenClass.Items.Add(new ImageCBox(tounges[language.SelectedIndex].class_name[4], Properties.Resources.straznik.ToBitmap()));
+            chosenClass.Items.Add(new ImageCBox(tounges[language.SelectedIndex].class_name[5], Properties.Resources.wojownik.ToBitmap()));
+            chosenClass.Items.Add(new ImageCBox(tounges[language.SelectedIndex].class_name[6], Properties.Resources.zlodziej.ToBitmap()));
+            chosenClass.Items.Add(new ImageCBox(tounges[language.SelectedIndex].class_name[7], Properties.Resources.druid.ToBitmap()));
+            chosenClass.Items.Add(new ImageCBox(tounges[language.SelectedIndex].class_name[8], Properties.Resources.awanturnik.ToBitmap()));
+            chosenClass.Items.Add(new ImageCBox(tounges[language.SelectedIndex].class_name[9], Properties.Resources.berserk.ToBitmap()));
+            chosenClass.Items.Add(new ImageCBox(tounges[language.SelectedIndex].class_name[10], Properties.Resources.nekromanta.ToBitmap()));
+            chosenClass.Items.Add(new ImageCBox(tounges[language.SelectedIndex].class_name[11], Properties.Resources.czarownik.ToBitmap()));
+
+            //Add custom classes
+            inst.ClassList.Skip(12).ToList().ForEach(c =>
             {
-                // Polish
-                case 1:
-                    // These have to be hardcoded mainly because they each use an icon from the resources so it looks better in the combobox.
-                    chosenClass.Items.Add(new ImageCBox("BRAK KLASY", Properties.Resources.empty.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("£owca", Properties.Resources.lowca.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Mag", Properties.Resources.mag.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Bard", Properties.Resources.najebus.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Stra¿nik", Properties.Resources.straznik.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Wojownik", Properties.Resources.wojownik.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Z³odziej", Properties.Resources.zlodziej.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Druid", Properties.Resources.druid.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Awanturnik", Properties.Resources.awanturnik.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Berserk", Properties.Resources.berserk.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Nekromanta", Properties.Resources.nekromanta.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Czarownik", Properties.Resources.czarownik.ToBitmap()));
+                string capitalisedName = char.ToUpper(c.Name[0]) + c.Name.Substring(1);
 
-                    // Add custom classes
-                    inst.ClassList.Skip(12).ToList().ForEach(c =>
+                // Load class icon
+                Bitmap classIcon = new(1, 1);
+                if (File.Exists(c.ImagePath))                                   //temporarily disabled, probably doesn't work now
+                {
+                    classIcon = new Bitmap(c.ImagePath);
+                }
+                else
+                {
+                    if (initLang == true) // don't show this error when first loading the program (it would show up twice, due to lazy programming)
                     {
-                        string capitalisedName = char.ToUpper(c.NamePL[0]) + c.NamePL[1..];
+                        MessageBox.Show($"Error loading icon for the {c.Name} class.\nCould not find image in {c.ImagePath}.\n\nClass icon will be left empty.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                chosenClass.Items.Add(new ImageCBox(capitalisedName, new Bitmap(1, 1)));
+            });
 
-                        // Load class icon
-                        Bitmap classIcon = new(1, 1);
-                        if (File.Exists(c.ImagePath))
-                        {
-                            classIcon = new Bitmap(c.ImagePath);
-                        }
-                        else
-                        {
-                            if (initLang == true) // don't show this error when first loading the program (it would show up twice, due to lazy programming)
-                            {
-                                MessageBox.Show($"B³¹d podczas ³adowania ikony dla klasy {c.NamePL}.\nNie znaleziono obrazka {c.ImagePath}.\n\nIkona klasy pozostanie pusta.", "B³¹d", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
-                        }
+            // Add monster related options
+            classReq1.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
+            classReq2.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
+            classReq3.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
+            classReq4.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
+            classReq5.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
 
-                        // Add class to list
-                        chosenClass.Items.Add(new ImageCBox(capitalisedName, classIcon));
-                    });
-
-                    // Add monster related options
-                    classReq1.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
-                    classReq2.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
-                    classReq3.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
-                    classReq4.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
-                    classReq5.Items.Add(new ImageCBox("BOHATER", Properties.Resources.bohater.ToBitmap()));
-
-                    // Add item related options
-                    itemChosenClass.Items.Add(new ImageCBox("Przedmiot", Properties.Resources.itemIcon.ToBitmap()));
-                    itemChosenClass.Items.Add(new ImageCBox("Przekêty przed.", Properties.Resources.cursed.ToBitmap()));
-
-                    break;
-
-                // Italian
-                case 2:
-                    // These have to be hardcoded mainly because they each use an icon from the resources so it looks better in the combobox.
-                    chosenClass.Items.Add(new ImageCBox("SENZA CLASSE", Properties.Resources.empty.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Ranger", Properties.Resources.lowca.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Mago", Properties.Resources.mag.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Bardo", Properties.Resources.najebus.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Guardiano", Properties.Resources.straznik.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Guerriero", Properties.Resources.wojownik.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Ladro", Properties.Resources.zlodziej.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Druido", Properties.Resources.druid.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Combattente", Properties.Resources.awanturnik.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Berserker", Properties.Resources.berserk.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Necromante", Properties.Resources.nekromanta.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Stregone", Properties.Resources.czarownik.ToBitmap()));
-
-                    // Add custom classes
-                    inst.ClassList.Skip(12).ToList().ForEach(c =>
-                    {
-                        string capitalisedName = char.ToUpper(c.NameEN[0]) + c.NameEN.Substring(1);
-
-                        // Load class icon
-                        Bitmap classIcon = new(1, 1);
-                        if (File.Exists(c.ImagePath))
-                        {
-                            classIcon = new Bitmap(c.ImagePath);
-                        }
-                        else
-                        {
-                            if (initLang == true) // don't show this error when first loading the program (it would show up twice, due to lazy programming)
-                            {
-                                MessageBox.Show($"Error loading icon for the {c.NameIT} class.\nCould not find image in {c.ImagePath}.\n\nClass icon will be left empty.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
-                        }
-                        chosenClass.Items.Add(new ImageCBox(capitalisedName, new Bitmap(1, 1)));
-                    });
-
-                    // Add monster related options
-                    classReq1.Items.Add(new ImageCBox("EROE", Properties.Resources.eroe.ToBitmap()));
-                    classReq2.Items.Add(new ImageCBox("EROE", Properties.Resources.eroe.ToBitmap()));
-                    classReq3.Items.Add(new ImageCBox("EROE", Properties.Resources.eroe.ToBitmap()));
-                    classReq4.Items.Add(new ImageCBox("EROE", Properties.Resources.eroe.ToBitmap()));
-                    classReq5.Items.Add(new ImageCBox("EROE", Properties.Resources.eroe.ToBitmap()));
-
-                    // Add item related options
-                    itemChosenClass.Items.Add(new ImageCBox("Oggetto", Properties.Resources.itemIcon.ToBitmap()));
-                    itemChosenClass.Items.Add(new ImageCBox("Oggetto maledetto", Properties.Resources.cursed.ToBitmap()));
-
-                    break;
-                // English
-                default:
-                    // These have to be hardcoded mainly because they each use an icon from the resources so it looks better in the combobox.
-                    chosenClass.Items.Add(new ImageCBox("NO CLASS", Properties.Resources.empty.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Ranger", Properties.Resources.lowca.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Wizard", Properties.Resources.mag.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Bard", Properties.Resources.najebus.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Guardian", Properties.Resources.straznik.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Fighter", Properties.Resources.wojownik.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Thief", Properties.Resources.zlodziej.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Druid", Properties.Resources.druid.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Warrior", Properties.Resources.awanturnik.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Berserker", Properties.Resources.berserk.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Necromancer", Properties.Resources.nekromanta.ToBitmap()));
-                    chosenClass.Items.Add(new ImageCBox("Sorcerer", Properties.Resources.czarownik.ToBitmap()));
-
-                    // Add custom classes
-                    inst.ClassList.Skip(12).ToList().ForEach(c =>
-                    {
-                        string capitalisedName = char.ToUpper(c.NameEN[0]) + c.NameEN.Substring(1);
-
-                        // Load class icon
-                        Bitmap classIcon = new(1, 1);
-                        if (File.Exists(c.ImagePath))
-                        {
-                            classIcon = new Bitmap(c.ImagePath);
-                        }
-                        else
-                        {
-                            if (initLang == true) // don't show this error when first loading the program (it would show up twice, due to lazy programming)
-                            {
-                                MessageBox.Show($"Error loading icon for the {c.NameEN} class.\nCould not find image in {c.ImagePath}.\n\nClass icon will be left empty.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
-                        }
-                        chosenClass.Items.Add(new ImageCBox(capitalisedName, new Bitmap(1, 1)));
-                    });
-
-                    // Add monster related options
-                    classReq1.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
-                    classReq2.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
-                    classReq3.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
-                    classReq4.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
-                    classReq5.Items.Add(new ImageCBox("HERO", Properties.Resources.hero.ToBitmap()));
-
-                    // Add item related options
-                    itemChosenClass.Items.Add(new ImageCBox("Item", Properties.Resources.itemIcon.ToBitmap()));
-                    itemChosenClass.Items.Add(new ImageCBox("Cursed Item", Properties.Resources.cursed.ToBitmap()));
-
-                    break;
-            }
+            // Add item related options
+            itemChosenClass.Items.Add(new ImageCBox(tounges[language.SelectedIndex].card_item_label, Properties.Resources.itemIcon.ToBitmap()));
+            itemChosenClass.Items.Add(new ImageCBox(tounges[language.SelectedIndex].card_item_cursed, Properties.Resources.cursed.ToBitmap()));
 
             foreach (var item in chosenClass.Items)
             {
@@ -1220,7 +973,7 @@ namespace HereToSlay
                     0 => Properties.Resources.empty,
                     1 => Properties.Resources.lowca,
                     2 => Properties.Resources.mag,
-                    3 => Properties.Resources.najebus,
+                    3 => Properties.Resources.najebus, // wspaniale
                     4 => Properties.Resources.straznik,
                     5 => Properties.Resources.wojownik,
                     6 => Properties.Resources.zlodziej,

@@ -1,0 +1,71 @@
+[
+  {
+    "lang_name": "English", // Language name that will display in langauge selection menu
+    "lang_code": "en", // This can be anything BESIDES pl (go on if you want an interface in polish)
+
+    "class_name": [
+      /*no_class*/ "NO CLASS",
+      /*ranger*/ "Ranger",
+      /*wizard*/ "Wizard",
+      /*bard*/ "Bard",
+      /*guardian*/ "Guardian",
+      /*fighter*/ "Fighter",
+      /*thief*/ "Thief",
+      /*druid*/ "Druid",
+      /*warrior*/ "Warrior",
+      /*berserker*/ "Berserker",
+      /*necromancer*/ "Necromancer",
+      /*sorcerer*/ "Sorcerer"
+    ],
+
+    "card_leader_label": "Party Leader", // Labels are just pre-existing words on the cards that are not modifiable
+
+    "card_monster_label": "Monster",
+    "card_monster_requirements": "REQUIREMENT:", // This will display over the section with requirements on the monster card
+                                                 // Make sure if your language has a colon ":" after this text
+
+    "card_monster_margin": 8, // This is the only property that must NOT contain quatation marks ""
+                              // If a word in your lanugage for "requirements" is long I recommend to slighty increase this value (try 8 as in english)
+                              // so that requirements class icons don't overflow outside the card
+                              // Setting this value too big will make the icons overlap each other (default is 0)
+
+    "card_hero_label": "Hero",
+
+    "card_item_label": "Item",
+    "card_item_cursed": "Cursed Item", // This is a label for cursed item
+
+    "card_magic_label": "Magic"
+  },
+  {
+    "lang_name": "Polski",
+    "lang_code": "pl",
+
+    "class_name": [
+      /*no_class*/ "BRAK KLASY",
+      /*ranger*/ "łowca",
+      /*wizard*/ "mag",
+      /*bard*/ "bard",
+      /*guardian*/ "strażnik",
+      /*fighter*/ "wojownik",
+      /*thief*/ "złodziej",
+      /*druid*/ "druid",
+      /*warrior*/ "awanturnik",
+      /*berserker*/ "berserk",
+      /*necromancer*/ "nekromanta",
+      /*sorcerer*/ "czarownik"
+    ],
+
+    "card_leader_label": "Przywódca drużyny",
+
+    "card_monster_label": "Potwór",
+    "card_monster_requirements": "WYMAGANIA",
+    "card_monster_margin": 0,
+
+    "card_hero_label": "Bohater",
+
+    "card_item_label": "Przedmiot",
+    "card_item_cursed": "Przeklęty Przedmiot",
+
+    "card_magic_label": "Magia"
+  },   // Place the cursor after this coma and hit enter. Then copy the formula from Adding_New_Language.txt or from langauges above
+]
