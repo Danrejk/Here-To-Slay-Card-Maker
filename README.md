@@ -6,7 +6,6 @@ Using this program you can make <b>accurate</b> custom cards (also with custom c
 IT ONLY WORKS ON WINDOWS
 <br><br>
 Polska wersja językowa: [README.pl.md](README.pl.md)<br>
-Versione in lingua italiana: NESSUNA
 
 ## Instalation
 <a href="https://github.com/Danrejk/Here-To-Slay-Card-Maker/releases/tag/v4.1"> <img alt="Latest Version" src="https://img.shields.io/badge/Latest_Version-v4.1-green"> </a>
