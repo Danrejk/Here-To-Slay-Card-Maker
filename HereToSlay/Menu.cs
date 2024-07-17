@@ -130,7 +130,6 @@ namespace HereToSlay
 
             LeaderCard.Image = Properties.Resources.empty.ToBitmap();
             MonsterCard.Image = Properties.Resources.monster.ToBitmap();
-            //HeroCard.Image = Properties.Resources.hero.ToBitmap(); // this is done in the updateLanguage method
             ItemCard.Image = Properties.Resources.itemIcon.ToBitmap();
             MagicCard.Image = Properties.Resources.magic.ToBitmap();
         }
