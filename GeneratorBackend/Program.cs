@@ -15,7 +15,7 @@ using System.Reflection;
 
 namespace GeneratorBackend
 {
-    public partial class Backend
+    public partial class Backend // oh yeah this wasn't a thing but i added it so i could load languages only once rather than in every other class
     {
         private static List<LanguageManager.Manager.Language> tounges = LanguageManager.Manager.LoadJson(); // load languages
 
