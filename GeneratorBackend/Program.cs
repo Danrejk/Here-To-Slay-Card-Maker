@@ -64,7 +64,6 @@ namespace GeneratorBackend
             public List<ClassListObject> ClassList { get; private set; }
             public Image Hero = Raylib.LoadImage("Classes/hero.png");
             public Image Bohater = Raylib.LoadImage("Classes/bohater.png");
-            public Image Eroe = Raylib.LoadImage("Classes/eroe.png");
 
             private AssetManager()
             {
