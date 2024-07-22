@@ -63,8 +63,6 @@ namespace GeneratorBackend
             public Color magicColor = new(127, 117, 116, 255);
 
             public List<ClassListObject> ClassList { get; private set; }
-            public Image Hero = Raylib.LoadImage("Classes/hero.png");
-            public Image Bohater = Raylib.LoadImage("Classes/bohater.png");
             public Image HeroSample = Raylib.LoadImage("Classes/hero_sample.png"); // its just empty icon used for those two previous (without a letter)
 
             private AssetManager()
@@ -81,8 +79,8 @@ namespace GeneratorBackend
 
                 // these are just hardcoded classes                     as said before, name is just to point which line is which class
                 ClassList = new();
-                ClassList.Add(new ClassListObject { Name = "no_class", Image = Raylib.LoadImage("Classes/bohater.png"), Color = new(91, 93, 92, 255) });
-                ClassList.Add(new ClassListObject { Name = "ranger", Image = Raylib.LoadImage("Classes/hero.png"), Color = new(35, 94, 57, 255) });
+                ClassList.Add(new ClassListObject { Name = "no_class", Image = Raylib.LoadImage("Classes/none.png"), Color = new(91, 93, 92, 255) });
+                ClassList.Add(new ClassListObject { Name = "ranger", Image = Raylib.LoadImage("Classes/ranger.png"), Color = new(35, 94, 57, 255) });
                 ClassList.Add(new ClassListObject { Name = "wizard", Image = Raylib.LoadImage("Classes/wizard.png"), Color = new(116, 46, 137, 255) });
                 ClassList.Add(new ClassListObject { Name = "bard", Image = Raylib.LoadImage("Classes/bard.png"), Color = new(194, 81, 47, 255) });
                 ClassList.Add(new ClassListObject { Name = "guardian", Image = Raylib.LoadImage("Classes/guardian.png"), Color = new(235, 171, 33, 255) });
@@ -184,10 +182,19 @@ namespace GeneratorBackend
 
             #region Generation
 
-            public static Image GenerateHeroSymbol()
+            public static Image GenerateHeroSymbol(int language)
             {
                 Image heroSymbol = inst.HeroSample;
-                string letter = "H";
+                string letter;
+
+                if (tounges[language].hero_symbol_letter.Length != 1)
+                {
+                    letter = tounges[language].card_hero_label.Substring(0, 1).ToUpper();
+                }
+                else
+                {
+                    letter = tounges[language].hero_symbol_letter;
+                }
 
                 Vector2 letterSize = Raylib.MeasureTextEx(inst.nameFont, letter, AssetManager.HERO_SYMBOL, 0);
 
@@ -335,14 +342,7 @@ namespace GeneratorBackend
                     Image classSymbol;
                     if (req == 0) 
                     {
-                        if (tounges[language].lang_code == "pl")
-                        {
-                            classSymbol = inst.Bohater;
-                        }
-                        else
-                        {
-                            classSymbol = GenerateHeroSymbol();
-                        }
+                        classSymbol = GenerateHeroSymbol(language);
                     } 
                     
                     else classSymbol = inst.ClassList[req - 1].Image; // -1 because HERO is put in front, so the indexes are shifted
