@@ -50,6 +50,7 @@ namespace GeneratorBackend
             public const int ADDITIONAL_REQ_SIZE = 36; // 37 (god knows what this commented values here are)
             public const int ROLL_SIZE = 43; // 43
             public const int DESC_SIZE = 36; // 36
+            public const int HERO_SYMBOL = 75; //75.8823529411764705
 
             public Font nameFont { get; private set; }
             public Font titleFont { get; private set; }
@@ -64,6 +65,7 @@ namespace GeneratorBackend
             public List<ClassListObject> ClassList { get; private set; }
             public Image Hero = Raylib.LoadImage("Classes/hero.png");
             public Image Bohater = Raylib.LoadImage("Classes/bohater.png");
+            public Image HeroSample = Raylib.LoadImage("Classes/hero_sample.png"); // its just empty icon used for those two previous (without a letter)
 
             private AssetManager()
             {
@@ -79,8 +81,8 @@ namespace GeneratorBackend
 
                 // these are just hardcoded classes                     as said before, name is just to point which line is which class
                 ClassList = new();
-                ClassList.Add(new ClassListObject { Name = "no_class", Image = Raylib.LoadImage("Classes/none.png"), Color = new(91, 93, 92, 255) });
-                ClassList.Add(new ClassListObject { Name = "ranger", Image = Raylib.LoadImage("Classes/ranger.png"), Color = new(35, 94, 57, 255) });
+                ClassList.Add(new ClassListObject { Name = "no_class", Image = Raylib.LoadImage("Classes/bohater.png"), Color = new(91, 93, 92, 255) });
+                ClassList.Add(new ClassListObject { Name = "ranger", Image = Raylib.LoadImage("Classes/hero.png"), Color = new(35, 94, 57, 255) });
                 ClassList.Add(new ClassListObject { Name = "wizard", Image = Raylib.LoadImage("Classes/wizard.png"), Color = new(116, 46, 137, 255) });
                 ClassList.Add(new ClassListObject { Name = "bard", Image = Raylib.LoadImage("Classes/bard.png"), Color = new(194, 81, 47, 255) });
                 ClassList.Add(new ClassListObject { Name = "guardian", Image = Raylib.LoadImage("Classes/guardian.png"), Color = new(235, 171, 33, 255) });
@@ -176,15 +178,20 @@ namespace GeneratorBackend
             const int CARD_WIDTH_POKER = 745;
             const int CARD_HEIGHT_POKER = 1040;
 
+            const int CLASS_SYMBOL_HERO = 102;
+
             private static readonly AssetManager inst = AssetManager.Instance;
 
             #region Generation
 
             public static Image GenerateHeroSymbol()
             {
-                Image heroSymbol;
+                Image heroSymbol = inst.HeroSample;
+                string letter = "H";
 
-                // add stuf here
+                Vector2 letterSize = Raylib.MeasureTextEx(inst.nameFont, letter, AssetManager.HERO_SYMBOL, 0);
+
+                Raylib.ImageDrawTextEx(ref heroSymbol, inst.nameFont, letter, new Vector2((CLASS_SYMBOL_HERO - letterSize.X) / 2, (CLASS_SYMBOL_HERO - letterSize.Y) / 2), AssetManager.HERO_SYMBOL, 0, new Color(255, 255, 255, 255));
 
                 return heroSymbol;
             }
@@ -334,7 +341,7 @@ namespace GeneratorBackend
                         }
                         else
                         {
-                            classSymbol = inst.Hero;
+                            classSymbol = GenerateHeroSymbol();
                         }
                     } 
                     

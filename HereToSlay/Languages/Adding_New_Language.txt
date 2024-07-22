@@ -35,6 +35,7 @@ Then, copy the following:
     "card_monster_label": "",
     "card_monster_requirements": "",
     "card_monster_margin": ,
+    "hero_symbol_letter": "",
 
     "card_hero_label": "",
 

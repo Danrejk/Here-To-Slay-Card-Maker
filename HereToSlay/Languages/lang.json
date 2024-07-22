@@ -29,6 +29,9 @@
                               // so that requirements class icons don't overflow outside the card
                               // Setting this value too big will make the icons overlap each other (default is 0)
 
+    "hero_symbol_letter": "", // On monster card in the requirements if "Hero" is chosen this letter will appear on its symbol.
+                              // If this field is left empty, then the symbol will have the first letter from the field "card_hero_label".
+
     "card_hero_label": "Hero",
 
     "card_item_label": "Item",
@@ -60,6 +63,7 @@
     "card_monster_label": "Potwór",
     "card_monster_requirements": "WYMAGANIA",
     "card_monster_margin": 0,
+    "hero_symbol_letter": "",
 
     "card_hero_label": "Bohater",
 

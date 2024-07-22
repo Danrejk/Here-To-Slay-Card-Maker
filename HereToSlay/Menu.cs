@@ -328,11 +328,7 @@ namespace HereToSlay
 
                 if (chosenClass.SelectedIndex == -1)
                 {
-                    this.Icon = Properties.Settings.Default.Language switch
-                    {
-                        1 => Properties.Resources.bohater,
-                        _ => Properties.Resources.hero
-                    };
+                    this.Icon = Properties.Resources.hero;
                 }
 
                 LeaderCard.Checked = false;
