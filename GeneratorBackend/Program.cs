@@ -184,7 +184,7 @@ namespace GeneratorBackend
 
             public static Image GenerateHeroSymbol(int language)
             {
-                Image heroSymbol = inst.HeroSample;
+                Image heroSymbol = Raylib.LoadImage("Classes/hero_sample.png");
                 string letter;
 
                 if (tounges[language].hero_symbol_letter.Length != 1)
