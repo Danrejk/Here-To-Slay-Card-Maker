@@ -179,6 +179,16 @@ namespace GeneratorBackend
             private static readonly AssetManager inst = AssetManager.Instance;
 
             #region Generation
+
+            public static Image GenerateHeroSymbol()
+            {
+                Image heroSymbol;
+
+                // add stuf here
+
+                return heroSymbol;
+            }
+
             public static void GenerateLeader(string? renderLocation, int language, string name, int[] desiredClass, string leaderImg, string description, bool addGradient, bool nameWhite)
             {
                 // This has to be loaded each time, to clear the image from the previous render
