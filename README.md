@@ -5,7 +5,7 @@ Using this program you can make <b>accurate</b> custom cards (also with custom c
 <br><br>
 IT ONLY WORKS ON WINDOWS
 <br><br>
-Polska wersja językowa: [README.pl.md](README.pl.md)<br>
+Polska wersja językowa (przestarzała, zalecamy użyć tłumacza gugyl): [README.pl.md](README.pl.md)<br>
 
 ## Instalation
 <a href="https://github.com/Danrejk/Here-To-Slay-Card-Maker/releases/tag/v4.1"> <img alt="Latest Version" src="https://img.shields.io/badge/Latest_Version-v4.1-green"> </a>
