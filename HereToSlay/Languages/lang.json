@@ -1,7 +1,7 @@
 [
   {
     "lang_name": "English", // Language name that will display in langauge selection menu
-    "lang_code": "en", // This can be anything BESIDES pl (go on if you want an interface in polish)
+    "lang_code": "en", // This can be anything BESIDES pl (go on if you want an interface in Polish)
 
     "class_name": [
       /*no_class*/ "NO CLASS",

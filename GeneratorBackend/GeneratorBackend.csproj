@@ -76,6 +76,9 @@
     <None Update="Classes\sorcerer.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Classes\test.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Classes\thief.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
