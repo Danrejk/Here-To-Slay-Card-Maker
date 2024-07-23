@@ -211,6 +211,16 @@ After you have done all that, you should see your very own Here To Slay custom c
 
 <img width="33%" align="right" src="HereToSlay/PrintingAssets/mixed_cardPlacement_A4_example.png">
 
+<hr>
+
+## Additional card language
+You don't want your cards in English? Don't worry, we have something for that!<br>
+Head over to <code>HereToSlay/Languages</code> folder. First, read through <code>Adding_New_Language.txt</code> and then, well, follow the instructions!<br>
+Also in <code>lang.json</code> in English language object (the first one) we left some notes for you to understand which field is which, so make sure to read those notes also!<br>
+No, seriously. They ARE important.<br>
+
+<hr>
+
 ## Printing
 ### Printing at Home
 In the files included with the program there are attached printing assets for printing at home. Backs of the cards for leaders, monsters and heros, their cards placements on A4 papers, as well as a template for positioning your own generated cards.<br>
