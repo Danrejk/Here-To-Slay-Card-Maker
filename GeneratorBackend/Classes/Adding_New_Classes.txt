@@ -17,7 +17,10 @@ Example:
 Name	image.png	255,128,0
 
 -----------------------------------------------------------------------------------------------
-NOTES:
+NOTES:						(I really recommend to read those down here)
+	When creating a symbol for your custom class we recommend to use hero_sample.png in 'Classes' folder as a base. 
+	Just change the background color and add a symbol (all within the white circle).
+
 	The color RGB values MUST be separated by a comma.
 	You image will not appear in the lists where you choose a class, but it will appear on the card itself, so don't worry.
 	If it doesn't appear on the card, your image is either in bad format, or you named it wrong.

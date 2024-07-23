@@ -15,7 +15,7 @@ using System.Reflection;
 
 namespace GeneratorBackend
 {
-    public partial class Backend
+    public partial class Backend // oh yeah this wasn't a thing but i added it so i could load languages only once rather than in every other class
     {
         private static List<LanguageManager.Manager.Language> tounges = LanguageManager.Manager.LoadJson(); // load languages
 
@@ -50,6 +50,7 @@ namespace GeneratorBackend
             public const int ADDITIONAL_REQ_SIZE = 36; // 37 (god knows what this commented values here are)
             public const int ROLL_SIZE = 43; // 43
             public const int DESC_SIZE = 36; // 36
+            public const int HERO_SYMBOL = 75; //75.8823529411764705
 
             public Font nameFont { get; private set; }
             public Font titleFont { get; private set; }
@@ -62,9 +63,7 @@ namespace GeneratorBackend
             public Color magicColor = new(127, 117, 116, 255);
 
             public List<ClassListObject> ClassList { get; private set; }
-            public Image Hero = Raylib.LoadImage("Classes/hero.png");
-            public Image Bohater = Raylib.LoadImage("Classes/bohater.png");
-            public Image Eroe = Raylib.LoadImage("Classes/eroe.png");
+            public Image HeroSample = Raylib.LoadImage("Classes/hero_sample.png"); // its just empty icon used for those two previous (without a letter)
 
             private AssetManager()
             {
@@ -177,9 +176,33 @@ namespace GeneratorBackend
             const int CARD_WIDTH_POKER = 745;
             const int CARD_HEIGHT_POKER = 1040;
 
+            const int CLASS_SYMBOL_HERO = 102;
+
             private static readonly AssetManager inst = AssetManager.Instance;
 
             #region Generation
+
+            public static Image GenerateHeroSymbol(int language)
+            {
+                Image heroSymbol = Raylib.LoadImage("Classes/hero_sample.png");
+                string letter;
+
+                if (tounges[language].hero_symbol_letter.Length != 1)
+                {
+                    letter = tounges[language].card_hero_label.Substring(0, 1).ToUpper();
+                }
+                else
+                {
+                    letter = tounges[language].hero_symbol_letter;
+                }
+
+                Vector2 letterSize = Raylib.MeasureTextEx(inst.nameFont, letter, AssetManager.HERO_SYMBOL, 0);
+
+                Raylib.ImageDrawTextEx(ref heroSymbol, inst.nameFont, letter, new Vector2((CLASS_SYMBOL_HERO - letterSize.X) / 2, (CLASS_SYMBOL_HERO - letterSize.Y) / 2), AssetManager.HERO_SYMBOL, 0, new Color(255, 255, 255, 255));
+
+                return heroSymbol;
+            }
+
             public static void GenerateLeader(string? renderLocation, int language, string name, int[] desiredClass, string leaderImg, string description, bool addGradient, bool nameWhite)
             {
                 // This has to be loaded each time, to clear the image from the previous render
@@ -319,14 +342,7 @@ namespace GeneratorBackend
                     Image classSymbol;
                     if (req == 0) 
                     {
-                        if (tounges[language].lang_code == "pl")
-                        {
-                            classSymbol = inst.Bohater;
-                        }
-                        else
-                        {
-                            classSymbol = inst.Hero;
-                        }
+                        classSymbol = GenerateHeroSymbol(language);
                     } 
                     
                     else classSymbol = inst.ClassList[req - 1].Image; // -1 because HERO is put in front, so the indexes are shifted

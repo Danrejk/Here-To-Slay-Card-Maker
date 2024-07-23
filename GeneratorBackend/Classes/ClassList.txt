@@ -1,1 +1,1 @@
-﻿ExampleClass	sorcerer.png	31,27,38
+﻿ExampleCustomClass	sorcerer.png	31,120,38
