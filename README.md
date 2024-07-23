@@ -180,6 +180,7 @@ This program is what the official one should be, accurate and with more features
 ## Custom Classes
 The progam allows you to add your very own custom classes to the generator. With custom colors, custom icons and cusom names. The process of adding them is a bit rough around the edges, but it's fairly simple.<br>
 First you will have to make a class icon. You can make it whatever you want, even a picture of your cat, but you have to follow all the steps for it to work.<br>
+We recommended to start with <code>hero_sample.png</code> in <code>Classes</code> as square icons might break the card's look.<br>
 While making the icon, be sure to add an outline using the <code>#f5f1e7</code> color to match the design on the original cards.<br>
 <br>
 After you made the icon, you put it in the <code>Classes</code> folder, and you name it whatever you want. Just remember the name, you'll need it later.<br>
