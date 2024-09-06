@@ -59,6 +59,7 @@ namespace HereToSlay
             HeroCard.Font = fontLeaderSmall;
             ItemCard.Font = fontLeaderSmall;
             MagicCard.Font = fontLeaderSmall;
+            ModifierCard.Font = fontLeaderSmall;
 
             itemImgMore.Font = fontLeader;
             #endregion
@@ -126,12 +127,16 @@ namespace HereToSlay
                 case 4:
                     MagicCard_Click(null, null);
                     break;
+                case 5:
+                    ModifierCard_Click(null, null);
+                    break;
             }
 
             LeaderCard.Image = Properties.Resources.empty.ToBitmap();
             MonsterCard.Image = Properties.Resources.monster.ToBitmap();
             ItemCard.Image = Properties.Resources.itemIcon.ToBitmap();
             MagicCard.Image = Properties.Resources.magic.ToBitmap();
+            ModifierCard.Image = Properties.Resources.modifier.ToBitmap();
         }
 
         #region Card Type Selection 
@@ -149,16 +154,10 @@ namespace HereToSlay
                     this.Icon = Properties.Resources.LEADER;
                 }
 
-                MonsterCard.Checked = false;
-                MonsterCard.BackColor = SystemColors.Control;
+                Uncheck();
+
                 LeaderCard.Checked = true;
                 LeaderCard.BackColor = SystemColors.ControlLight;
-                HeroCard.Checked = false;
-                HeroCard.BackColor = SystemColors.Control;
-                ItemCard.Checked = false;
-                ItemCard.BackColor = SystemColors.Control;
-                MagicCard.Checked = false;
-                MagicCard.BackColor = SystemColors.Control;
 
                 chosenClass.Visible = true;
                 labelClass.Visible = true;
@@ -237,16 +236,10 @@ namespace HereToSlay
 
                 this.Icon = Properties.Resources.monster;
 
-                LeaderCard.Checked = false;
-                LeaderCard.BackColor = SystemColors.Control;
+                Uncheck();
+
                 MonsterCard.Checked = true;
                 MonsterCard.BackColor = SystemColors.ControlLight;
-                HeroCard.Checked = false;
-                HeroCard.BackColor = SystemColors.Control;
-                ItemCard.Checked = false;
-                ItemCard.BackColor = SystemColors.Control;
-                MagicCard.Checked = false;
-                MagicCard.BackColor = SystemColors.Control;
 
                 chosenClass.Visible = false;
                 labelClass.Visible = false;
@@ -276,6 +269,8 @@ namespace HereToSlay
                 badOutputText.Visible = true;
                 badOutputNum.Visible = true;
                 badOutputSym.Visible = true;
+                badOutputNum.Location = new Point(84, 425);
+                badOutputSym.Location = new Point(118, 425);
 
                 labelGood.Visible = true;
                 goodOutputText.Visible = true;
@@ -331,16 +326,10 @@ namespace HereToSlay
                     this.Icon = Properties.Resources.hero;
                 }
 
-                LeaderCard.Checked = false;
-                LeaderCard.BackColor = SystemColors.Control;
-                MonsterCard.Checked = false;
-                MonsterCard.BackColor = SystemColors.Control;
+                Uncheck();
+
                 HeroCard.Checked = true;
                 HeroCard.BackColor = SystemColors.ControlLight;
-                ItemCard.Checked = false;
-                ItemCard.BackColor = SystemColors.Control;
-                MagicCard.Checked = false;
-                MagicCard.BackColor = SystemColors.Control;
 
                 chosenClass.Visible = true;
                 labelClass.Visible = true;
@@ -424,6 +413,8 @@ namespace HereToSlay
                     this.Icon = Properties.Resources.itemIcon;
                 }
 
+                Uncheck();
+
                 LeaderCard.Checked = false;
                 LeaderCard.BackColor = SystemColors.Control;
                 MonsterCard.Checked = false;
@@ -434,6 +425,8 @@ namespace HereToSlay
                 ItemCard.BackColor = SystemColors.ControlLight;
                 MagicCard.Checked = false;
                 MagicCard.BackColor = SystemColors.Control;
+                ModifierCard.Checked = false;
+                ModifierCard.BackColor = SystemColors.Control;
 
                 chosenClass.Visible = false;
                 labelClass.Visible = true;
@@ -515,14 +508,8 @@ namespace HereToSlay
 
                 this.Icon = Properties.Resources.magic;
 
-                LeaderCard.Checked = false;
-                LeaderCard.BackColor = SystemColors.Control;
-                MonsterCard.Checked = false;
-                MonsterCard.BackColor = SystemColors.Control;
-                HeroCard.Checked = false;
-                HeroCard.BackColor = SystemColors.Control;
-                ItemCard.Checked = false;
-                ItemCard.BackColor = SystemColors.Control;
+                Uncheck();
+
                 MagicCard.Checked = true;
                 MagicCard.BackColor = SystemColors.ControlLight;
 
@@ -596,6 +583,112 @@ namespace HereToSlay
                 previewImg.SizeMode = PictureBoxSizeMode.Zoom;
             }
         }
+
+        private void ModifierCard_Click(object? sender, EventArgs? e) 
+        {
+            if (ModifierCard.Checked == false) {
+                Properties.Settings.Default.CardType = 5;
+                Properties.Settings.Default.Save();
+
+                this.Icon = Properties.Resources.modifier;
+
+                Uncheck();
+
+                ModifierCard.Checked = true;
+                ModifierCard.BackColor = SystemColors.ControlLight;
+
+                chosenClass.Visible = false;
+                labelClass.Visible = false;
+                advancedClass.Visible = false;
+                advancedClass.Image = Properties.Resources.closed;
+                advancedClassBox.Visible = false;
+                splitClass.Checked = false;
+                itemChosenClass.Visible = false;
+
+                advancedName.Image = Properties.Resources.closed;
+                advancedNameBox.Visible = false;
+                advancedName.Visible = false;
+
+                labelImg.Location = new Point(labelImg.Location.X, 304);
+                selectImgText.Location = new Point(selectImgText.Location.X, 324);
+                selectImgButton.Location = new Point(selectImgButton.Location.X, 324);
+
+                RENDER.Location = new Point(RENDER.Location.X, 525);
+
+                labelReq.Visible = false;
+                classReq1.Visible = false;
+                classReq2.Visible = false;
+                classReq3.Visible = false;
+                classReq4.Visible = false;
+                classReq5.Visible = false;
+
+                labelBad.Visible = false;
+                badOutputText.Visible = false;
+
+                badOutputNum.Visible = true;
+                badOutputSym.Visible = true;
+                badOutputNum.Location = new Point(200, 398);
+                badOutputSym.Location = new Point(234, 398);
+
+                labelGood.Visible = false;
+                goodOutputText.Visible = false;
+
+                goodOutputNum.Visible = true;
+                goodOutputSym.Visible = true;
+                goodOutputNum.Location = new Point(120, 398);
+                goodOutputSym.Location = new Point(154, 398);
+
+                maxItems.Visible = false;
+                labelMaxItem.Visible = false;
+                itemImg.Visible = false;
+                itemImg2.Visible = false;
+                itemImgMore.Visible = false;
+
+                descriptionText.Size = new Size(300, descriptionText.Size.Height);
+                labelDescription.Location = new Point(53, 426);
+                descriptionText.Location = new Point(57, 446);
+
+                advancedGeneral.Visible = false;
+                advancedGeneral.Image = Properties.Resources.closed;
+                advancedGeneralBox.Visible = false;
+
+                foreach (Control c in this.Controls) {
+                    if (c.Name.Contains("clear")) { c.Visible = false; };
+                }
+
+                nameWhite.Checked = false;
+
+                labelAdditionalReq.Visible = false;
+                additionalReq.Visible = false;
+                labelHeroBonus.Visible = false;
+                heroBonus.Visible = false;
+
+                this.Update();
+                updateLanguage(sender, e);
+                this.Update();
+
+                renderNow(sender, e, null);
+                previewImg.ImageLocation = Path.Combine(Directory.GetCurrentDirectory(), "preview.png");
+                previewImg.SizeMode = PictureBoxSizeMode.Zoom;
+            }
+        }
+
+        //This is here so that I dont have to set everything im not using to false
+        private void Uncheck() 
+        {
+            LeaderCard.Checked = false;
+            LeaderCard.BackColor = SystemColors.Control;
+            MonsterCard.Checked = false;
+            MonsterCard.BackColor = SystemColors.Control;
+            HeroCard.Checked = false;
+            HeroCard.BackColor = SystemColors.Control;
+            ItemCard.Checked = false;
+            ItemCard.BackColor = SystemColors.Control;
+            MagicCard.Checked = false;
+            MagicCard.BackColor = SystemColors.Control;
+            ModifierCard.Checked = false;
+            ModifierCard.BackColor = SystemColors.Control;
+        }
         #endregion
 
         #region Direct Rendering (Preview and Save)
@@ -640,6 +733,8 @@ namespace HereToSlay
 
         private void renderNow(object? sender, EventArgs? e, string? saveLocation)
         {
+            Backend.RollOutput good;
+            Backend.RollOutput bad;
             switch (Properties.Settings.Default.CardType)
             {
                 // Leader
@@ -648,8 +743,8 @@ namespace HereToSlay
                     break;
                 // Monster
                 case 1:
-                    Backend.RollOutput good = new((int)goodOutputNum.Value, goodOutputSym.SelectedIndex, goodOutputText.Text);
-                    Backend.RollOutput bad = new((int)badOutputNum.Value, badOutputSym.SelectedIndex, badOutputText.Text);
+                    good = new((int)goodOutputNum.Value, goodOutputSym.SelectedIndex, goodOutputText.Text);
+                    bad = new((int)badOutputNum.Value, badOutputSym.SelectedIndex, badOutputText.Text);
                     int[] desiredRequirements = new int[] { classReq1.SelectedIndex, classReq2.SelectedIndex, classReq3.SelectedIndex, classReq4.SelectedIndex, classReq5.SelectedIndex };
                     string adReq = labelAdditionalReq.Checked ? additionalReq.Text : "";
                     string hBon = labelHeroBonus.Checked ? heroBonus.Text : "";
@@ -668,6 +763,13 @@ namespace HereToSlay
                 // Magic
                 case 4:
                     GeneratorBackend.Backend.Program.GenerateMagic(saveLocation, language.SelectedIndex, nameText.Text, selectImgText.Text, descriptionText.Text);
+                    break;
+                // Modifier
+                case 5:
+                    good = new((int)goodOutputNum.Value, goodOutputSym.SelectedIndex, goodOutputText.Text);
+                    bad = new((int)badOutputNum.Value, badOutputSym.SelectedIndex, badOutputText.Text);
+
+                    GeneratorBackend.Backend.Program.GenerateModifier(saveLocation, language.SelectedIndex, nameText.Text, selectImgText.Text, good, bad, descriptionText.Text);
                     break;
                 default:
                     throw new NotImplementedException();
@@ -700,13 +802,13 @@ namespace HereToSlay
                     2 => "Nazwa bohatera",
                     3 => "Nazwa przedmiotu",
                     4 => "Nazwa magii",
-                    _ => "Nazwa przywÃ³dcy"
+                    _ => "Nazwa przywódcy"
                 };
                 labelClass.Text = Properties.Settings.Default.CardType switch
                 {
                     2 => "Klasa bohatera",
                     3 => "Klasa przedmiotu",
-                    _ => "Klasa przywÃ³dcy"
+                    _ => "Klasa przywódcy"
                 };
                 labelSecondClass.Text = "Druga klasa";
                 labelImg.Text = Properties.Settings.Default.CardType switch
@@ -715,35 +817,35 @@ namespace HereToSlay
                     2 => "Obrazek bohatera",
                     3 => "Obrazek przedmiotu",
                     4 => "Obrazek magii",
-                    _ => "Obrazek przywÃ³dcy"
+                    _ => "Obrazek przywódcy"
                 };
                 labelDescription.Text = "Opis";
                 leaderImgToolTip.ToolTipTitle = "Wymiary obazka";
                 toolTipImageDimentions = Properties.Settings.Default.CardType switch
                 {
-                    1 => "Obrazek potwora (nie caÂ³a karta) ma wymiary 745x817.",
-                    2 => "Obrazek bohatera (nie caÂ³a karta) ma wymiary 545x545.",
-                    3 => "Obrazek przedmiotu (nie caÂ³a karta) ma wymiary 545x545.",
-                    4 => "Obrazek magii (nie caÂ³a karta) ma wymiary 545x545.",
-                    _ => "Obrazek przywÃ³dcy (nie caÂ³a karta) ma wymiary 745x1176.",
+                    1 => "Obrazek potwora (nie ca³a karta) ma wymiary 745x817.",
+                    2 => "Obrazek bohatera (nie ca³a karta) ma wymiary 545x545.",
+                    3 => "Obrazek przedmiotu (nie ca³a karta) ma wymiary 545x545.",
+                    4 => "Obrazek magii (nie ca³a karta) ma wymiary 545x545.",
+                    _ => "Obrazek przywódcy (nie ca³a karta) ma wymiary 745x1176.",
                 };
-                leaderImgToolTip.SetToolTip(selectImgButton, toolTipImageDimentions + "\nProgram automatycznie przytnie i przybliÂ¿y obraz, jeÂ¿eli bÃªdzie to potrzebne.\n\nWspierane rozszerzenia plikÃ³w:\n.png, .jpeg, .jpg, .gif(pierwsza klatka), .bmp, .webp, .pbm, .tiff, .tga");
+                leaderImgToolTip.SetToolTip(selectImgButton, toolTipImageDimentions + "\nProgram automatycznie przytnie i przybli¿y obraz, je¿eli bêdzie to potrzebne.\n\nWspierane rozszerzenia plików:\n.png, .jpeg, .jpg, .gif(pierwsza klatka), .bmp, .webp, .pbm, .tiff, .tga");
 
                 gradient.Text = "Tylni gradient";
-                nameWhite.Text = "BiaÂ³a nazwa";
-                splitClass.Text = "PodwÃ³jna Klasa";
-                this.Text = "To ja go tnÃª - Generator kart";
-                labelBad.Text = "Wymagania rzutu - PoraÂ¿ka";
+                nameWhite.Text = "Bia³a nazwa";
+                splitClass.Text = "Podwójna Klasa";
+                this.Text = "To ja go tnê - Generator kart";
+                labelBad.Text = "Wymagania rzutu - Pora¿ka";
                 labelGood.Text = "Wymagania rzutu - UBIJ potwora";
                 goodOutputText.Text = "UBIJ tego potwora";
                 labelReq.Text = "Wymagania klas";
                 RENDER.Text = "ZAPISZ OBRAZ";
                 copyImageToClipboardToolStripMenuItem.Text = "Kopiuj obraz";
-                openImageLocationToolStripMenuItem.Text = "OtwÃ³rz lokalizacjÃª obrazu";
-                labelMaxItem.Text = "Max. iloÂœÃ¦ przedmiotÃ³w";
+                openImageLocationToolStripMenuItem.Text = "Otwórz lokalizacjê obrazu";
+                labelMaxItem.Text = "Max. iloœæ przedmiotów";
                 alternativeColor.Text = "Alternatywny kolor (?)";
                 altColorToolTip.ToolTipTitle = "Alternatywny kolor";
-                altColorToolTip.SetToolTip(alternativeColor, "Na niektÃ³rych drukarkach, standardowy kolor moÂ¿e znacznie odstawiaÃ¦ od poÂ¿Â¹danego.\nStandardowy kolor byÂ³ wziÃªty prosto z instruckji, wiÃªc powinnien byÃ¦ dobry,\nale niektÃ³re durkarki nie majÂ¹ poprawnej gÂ³ebi kolorÃ³w.\n\nAlternatywny kolor (czarny) moÂ¿e wyglÂ¹daÃ¦ lepiej na niektÃ³rych drukarkach.");
+                altColorToolTip.SetToolTip(alternativeColor, "Na niektórych drukarkach, standardowy kolor mo¿e znacznie odstawiaæ od po¿¹danego.\nStandardowy kolor by³ wziêty prosto z instruckji, wiêc powinnien byæ dobry,\nale niektóre durkarki nie maj¹ poprawnej g³ebi kolorów.\n\nAlternatywny kolor (czarny) mo¿e wygl¹daæ lepiej na niektórych drukarkach.");
 
                 if (chosenClass.SelectedIndex == -1 && Properties.Settings.Default.CardType == 2)
                 {
@@ -752,16 +854,16 @@ namespace HereToSlay
                 HeroCard.Image = Properties.Resources.bohater.ToBitmap();
 
                 cardType.Text = "Typ karty";
-                LeaderCard.Text = "PrzywÃ³dca";
-                MonsterCard.Text = "PotwÃ³r";
+                LeaderCard.Text = "Przywódca";
+                MonsterCard.Text = "Potwór";
                 HeroCard.Text = "Bohater";
                 ItemCard.Text = "Przedmiot";
                 MagicCard.Text = "Magia";
 
                 labelAdditionalReq.Text = "Dodatkowe wymagania";
-                additionalReq.Text = "ODRZUÃ† X kart";
+                additionalReq.Text = "ODRZUÆ X kart";
                 labelHeroBonus.Text = "Bonus dodatkowych boh.";
-                heroBonus.Text = "Za kaÂ¿dego dodatkowego bohatera w twojej druÂ¿ynie, +X do twojego rzutu";
+                heroBonus.Text = "Za ka¿dego dodatkowego bohatera w twojej dru¿ynie, +X do twojego rzutu";
             }
             else
             {
@@ -773,6 +875,7 @@ namespace HereToSlay
                     2 => "Hero name",
                     3 => "Item name",
                     4 => "Magic name",
+                    5 => "Modifier name",
                     _ => "Leader name"
                 };
                 labelClass.Text = Properties.Settings.Default.CardType switch
@@ -788,6 +891,7 @@ namespace HereToSlay
                     2 => "Hero image",
                     3 => "Item image",
                     4 => "Magic image",
+                    5 => "Modifier image",
                     _ => "Leader image"
                 };
                 labelDescription.Text = "Description";
@@ -830,6 +934,7 @@ namespace HereToSlay
                 HeroCard.Text = "Hero";
                 ItemCard.Text = "Item";
                 MagicCard.Text = "Magic";
+                ModifierCard.Text = "Modifier";
 
                 additionalReq.Text = "Addidional Requirements";
                 additionalReq.Text = "DISCARD X cards";

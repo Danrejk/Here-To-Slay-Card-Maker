@@ -16,7 +16,8 @@ namespace LanguageManager
             string card_hero_label,
             string card_item_label,
             string card_magic_label,
-                  
+            string card_modifier_label,
+
             string card_monster_requirements,
             string hero_symbol_letter,
             string card_item_cursed,

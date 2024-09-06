@@ -37,7 +37,10 @@
     "card_item_label": "Item",
     "card_item_cursed": "Cursed Item", // This is a label for cursed item
 
-    "card_magic_label": "Magic"
+    "card_magic_label": "Magic",
+
+    "card_modifier_label": "Modifier",
+    "card_challenge_label": "Challenge"
   },
   {
     "lang_name": "Polski",

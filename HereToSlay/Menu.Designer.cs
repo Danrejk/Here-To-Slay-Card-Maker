@@ -26,8 +26,8 @@
         ///  Required method for Designer support - do not modify
         ///  the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() 
+            {
             components = new System.ComponentModel.Container();
             RENDER = new Button();
             nameText = new TextBox();
@@ -66,6 +66,7 @@
             HeroCard = new ToolStripMenuItem();
             ItemCard = new ToolStripMenuItem();
             MagicCard = new ToolStripMenuItem();
+            ModifierCard = new ToolStripMenuItem();
             language = new ToolStripComboBox();
             classReq3 = new ComboBox();
             classReq2 = new ComboBox();
@@ -490,7 +491,7 @@
             // cardType
             // 
             cardType.BackColor = SystemColors.Control;
-            cardType.DropDownItems.AddRange(new ToolStripItem[] { LeaderCard, MonsterCard, HeroCard, ItemCard, MagicCard });
+            cardType.DropDownItems.AddRange(new ToolStripItem[] { LeaderCard, MonsterCard, HeroCard, ItemCard, MagicCard, ModifierCard });
             cardType.Name = "cardType";
             cardType.Size = new Size(71, 23);
             cardType.Text = "Card Type";
@@ -498,37 +499,44 @@
             // LeaderCard
             // 
             LeaderCard.Name = "LeaderCard";
-            LeaderCard.Size = new Size(118, 22);
+            LeaderCard.Size = new Size(180, 22);
             LeaderCard.Text = "Leader";
             LeaderCard.Click += LeaderCard_Click;
             // 
             // MonsterCard
             // 
             MonsterCard.Name = "MonsterCard";
-            MonsterCard.Size = new Size(118, 22);
+            MonsterCard.Size = new Size(180, 22);
             MonsterCard.Text = "Monster";
             MonsterCard.Click += MonsterCard_Click;
             // 
             // HeroCard
             // 
             HeroCard.Name = "HeroCard";
-            HeroCard.Size = new Size(118, 22);
+            HeroCard.Size = new Size(180, 22);
             HeroCard.Text = "Hero";
             HeroCard.Click += HeroCard_Click;
             // 
             // ItemCard
             // 
             ItemCard.Name = "ItemCard";
-            ItemCard.Size = new Size(118, 22);
+            ItemCard.Size = new Size(180, 22);
             ItemCard.Text = "Item";
             ItemCard.Click += ItemCard_Click;
             // 
             // MagicCard
             // 
             MagicCard.Name = "MagicCard";
-            MagicCard.Size = new Size(118, 22);
+            MagicCard.Size = new Size(180, 22);
             MagicCard.Text = "Magic";
             MagicCard.Click += MagicCard_Click;
+            // 
+            // ModifierCard
+            // 
+            ModifierCard.Name = "ModifierCard";
+            ModifierCard.Size = new Size(180, 22);
+            ModifierCard.Text = "Modifier";
+            ModifierCard.Click += ModifierCard_Click;
             // 
             // language
             // 
@@ -1182,5 +1190,6 @@
         private TextBox additionalReq;
         private CheckBox labelHeroBonus;
         private TextBox heroBonus;
+        private ToolStripMenuItem ModifierCard;
     }
 }
