@@ -570,7 +570,7 @@ namespace GeneratorBackend
 
                 // Draw Modifier Image
                 ChangeHeroItemMagicImage(modifierImg);
-                Raylib.ImageDraw(ref card, heroItemMagic, imageRec, new Rectangle(100, 232, 545, 545), Color.White);
+                Raylib.ImageDraw(ref card, heroItemMagic, imageRec, new Rectangle(100, 182, 545, 545), Color.White);
 
                 // Name
                 DrawNameBlank(name, card);
