@@ -26,8 +26,7 @@
         ///  Required method for Designer support - do not modify
         ///  the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-            {
+        private void InitializeComponent() {
             components = new System.ComponentModel.Container();
             RENDER = new Button();
             nameText = new TextBox();
@@ -67,6 +66,7 @@
             ItemCard = new ToolStripMenuItem();
             MagicCard = new ToolStripMenuItem();
             ModifierCard = new ToolStripMenuItem();
+            ChallengeCard = new ToolStripMenuItem();
             language = new ToolStripComboBox();
             classReq3 = new ComboBox();
             classReq2 = new ComboBox();
@@ -491,7 +491,7 @@
             // cardType
             // 
             cardType.BackColor = SystemColors.Control;
-            cardType.DropDownItems.AddRange(new ToolStripItem[] { LeaderCard, MonsterCard, HeroCard, ItemCard, MagicCard, ModifierCard });
+            cardType.DropDownItems.AddRange(new ToolStripItem[] { LeaderCard, MonsterCard, HeroCard, ItemCard, MagicCard, ModifierCard, ChallengeCard });
             cardType.Name = "cardType";
             cardType.Size = new Size(71, 23);
             cardType.Text = "Card Type";
@@ -537,6 +537,13 @@
             ModifierCard.Size = new Size(180, 22);
             ModifierCard.Text = "Modifier";
             ModifierCard.Click += ModifierCard_Click;
+            // 
+            // ChallengeCard
+            // 
+            ChallengeCard.Name = "ChallengeCard";
+            ChallengeCard.Size = new Size(180, 22);
+            ChallengeCard.Text = "Challenge";
+            ChallengeCard.Click += ChallengeCard_Click;
             // 
             // language
             // 
@@ -1191,5 +1198,6 @@
         private CheckBox labelHeroBonus;
         private TextBox heroBonus;
         private ToolStripMenuItem ModifierCard;
+        private ToolStripMenuItem ChallengeCard;
     }
 }

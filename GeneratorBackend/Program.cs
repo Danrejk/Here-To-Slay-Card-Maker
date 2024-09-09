@@ -594,6 +594,27 @@ namespace GeneratorBackend
                 Raylib.ExportImage(card, renderLocation);
                 Raylib.UnloadImage(card);
             }
+
+            public static void GenerateChallenge(string? renderLocation, int language, string name, string challengeImg, string description) {
+                // This has to be loaded each time, to clear the image from the previous render
+                Image card = Raylib.LoadImage(inst.cardBlank);
+                Rectangle imageRec = new(0, 0, CARD_WIDTH_POKER, CARD_HEIGHT_POKER);
+
+                // Draw Challenge Image
+                ChangeChallenge(challengeImg);
+                Raylib.ImageDraw(ref card, challenge, imageRec, new Rectangle(50, 215, 645, 550), Color.White);
+
+                // Name
+                DrawNameBlank(name, card);
+
+                // Description
+                DrawDescription(description, card, DESC_MARGIN_MAGIC, DESC_MARGIN_RIGHT, 5, inst.bottomColorDark);
+
+                // Save the image
+                renderLocation ??= "preview.png";
+                Raylib.ExportImage(card, renderLocation);
+                Raylib.UnloadImage(card);
+            }
             #endregion
 
             #region Common Draw Text
@@ -881,10 +902,12 @@ namespace GeneratorBackend
             static Image leader = new();
             static Image monster = new();
             static Image heroItemMagic = new();
+            static Image challenge = new();
 
             static string lastPathLeader = "";
             static string lastPathMonster = "";
             static string lastPathHero = "";
+            static string lastPathChallenge = "";
 
             static void ChangeLeaderImage(string path)
             {
@@ -911,6 +934,14 @@ namespace GeneratorBackend
 
                 LoadImage(ref heroItemMagic, path);
                 CropImage(ref heroItemMagic, 545, 545);
+            }
+
+            static void ChangeChallenge(string path) {
+                if (path == lastPathChallenge) { return; }
+                lastPathChallenge = path;
+
+                LoadImage(ref challenge, path);
+                CropImage(ref challenge, 645, 550);
             }
 
             static void LoadImage(ref Image image, string path)

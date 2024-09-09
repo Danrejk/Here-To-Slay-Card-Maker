@@ -60,6 +60,7 @@ namespace HereToSlay
             ItemCard.Font = fontLeaderSmall;
             MagicCard.Font = fontLeaderSmall;
             ModifierCard.Font = fontLeaderSmall;
+            ChallengeCard.Font = fontLeaderSmall;
 
             itemImgMore.Font = fontLeader;
             #endregion
@@ -130,6 +131,9 @@ namespace HereToSlay
                 case 5:
                     ModifierCard_Click(null, null);
                     break;
+                case 6:
+                    ChallengeCard_Click(null, null);
+                    break;
             }
 
             LeaderCard.Image = Properties.Resources.empty.ToBitmap();
@@ -137,6 +141,7 @@ namespace HereToSlay
             ItemCard.Image = Properties.Resources.itemIcon.ToBitmap();
             MagicCard.Image = Properties.Resources.magic.ToBitmap();
             ModifierCard.Image = Properties.Resources.modifier.ToBitmap();
+            ChallengeCard.Image = Properties.Resources.challenge.ToBitmap();
         }
 
         #region Card Type Selection 
@@ -673,6 +678,86 @@ namespace HereToSlay
             }
         }
 
+        private void ChallengeCard_Click(object? sender, EventArgs? e) {
+            if (ChallengeCard.Checked == false) {
+                Properties.Settings.Default.CardType = 6;
+                Properties.Settings.Default.Save();
+
+                this.Icon = Properties.Resources.challenge;
+
+                Uncheck();
+
+                ChallengeCard.Checked = true;
+                ChallengeCard.BackColor = SystemColors.ControlLight;
+
+                chosenClass.Visible = false;
+                labelClass.Visible = false;
+                advancedClass.Visible = false;
+                advancedClass.Image = Properties.Resources.closed;
+                advancedClassBox.Visible = false;
+                splitClass.Checked = false;
+                itemChosenClass.Visible = false;
+
+                advancedName.Image = Properties.Resources.closed;
+                advancedNameBox.Visible = false;
+                advancedName.Visible = false;
+
+                labelImg.Location = new Point(labelImg.Location.X, 304);
+                selectImgText.Location = new Point(selectImgText.Location.X, 324);
+                selectImgButton.Location = new Point(selectImgButton.Location.X, 324);
+
+                RENDER.Location = new Point(RENDER.Location.X, 525);
+
+                labelReq.Visible = false;
+                classReq1.Visible = false;
+                classReq2.Visible = false;
+                classReq3.Visible = false;
+                classReq4.Visible = false;
+                classReq5.Visible = false;
+
+                labelBad.Visible = false;
+                badOutputText.Visible = false;
+                badOutputNum.Visible = false;
+                badOutputSym.Visible = false;
+                labelGood.Visible = false;
+                goodOutputText.Visible = false;
+                goodOutputNum.Visible = false;
+                goodOutputSym.Visible = false;
+
+                maxItems.Visible = false;
+                labelMaxItem.Visible = false;
+                itemImg.Visible = false;
+                itemImg2.Visible = false;
+                itemImgMore.Visible = false;
+
+                descriptionText.Size = new Size(300, descriptionText.Size.Height);
+                labelDescription.Location = new Point(53, 426);
+                descriptionText.Location = new Point(57, 446);
+
+                advancedGeneral.Visible = false;
+                advancedGeneral.Image = Properties.Resources.closed;
+                advancedGeneralBox.Visible = false;
+
+                foreach (Control c in this.Controls) {
+                    if (c.Name.Contains("clear")) { c.Visible = false; };
+                }
+
+                nameWhite.Checked = false;
+
+                labelAdditionalReq.Visible = false;
+                additionalReq.Visible = false;
+                labelHeroBonus.Visible = false;
+                heroBonus.Visible = false;
+
+                this.Update();
+                updateLanguage(sender, e);
+                this.Update();
+
+                renderNow(sender, e, null);
+                previewImg.ImageLocation = Path.Combine(Directory.GetCurrentDirectory(), "preview.png");
+                previewImg.SizeMode = PictureBoxSizeMode.Zoom;
+            }
+        }
         //This is here so that I dont have to set everything im not using to false
         private void Uncheck() 
         {
@@ -688,6 +773,8 @@ namespace HereToSlay
             MagicCard.BackColor = SystemColors.Control;
             ModifierCard.Checked = false;
             ModifierCard.BackColor = SystemColors.Control;
+            ChallengeCard.Checked = false;
+            ChallengeCard.BackColor = SystemColors.Control;
         }
         #endregion
 
@@ -752,6 +839,7 @@ namespace HereToSlay
                     GeneratorBackend.Backend.Program.GenerateMonster(saveLocation, language.SelectedIndex, nameText.Text, desiredRequirements, selectImgText.Text, good, bad, descriptionText.Text, adReq, hBon, gradient.Checked, nameWhite.Checked, alternativeColor.Checked);
                     break;
                 // Hero
+                //Todo 
                 case 2:
                     Backend.RollOutput description = new((int)goodOutputNum.Value, goodOutputSym.SelectedIndex, descriptionText.Text);
                     GeneratorBackend.Backend.Program.GenerateHero(saveLocation, language.SelectedIndex, nameText.Text, chosenClass.SelectedIndex, selectImgText.Text, description, (int)maxItems.Value);
@@ -770,6 +858,10 @@ namespace HereToSlay
                     bad = new((int)badOutputNum.Value, badOutputSym.SelectedIndex, badOutputText.Text);
 
                     GeneratorBackend.Backend.Program.GenerateModifier(saveLocation, language.SelectedIndex, nameText.Text, selectImgText.Text, good, bad, descriptionText.Text);
+                    break;
+                // Challenge
+                case 6:
+                    GeneratorBackend.Backend.Program.GenerateChallenge(saveLocation, language.SelectedIndex, nameText.Text, selectImgText.Text, descriptionText.Text);
                     break;
                 default:
                     throw new NotImplementedException();
@@ -876,6 +968,7 @@ namespace HereToSlay
                     3 => "Item name",
                     4 => "Magic name",
                     5 => "Modifier name",
+                    6 => "Challenge name",
                     _ => "Leader name"
                 };
                 labelClass.Text = Properties.Settings.Default.CardType switch
@@ -892,6 +985,7 @@ namespace HereToSlay
                     3 => "Item image",
                     4 => "Magic image",
                     5 => "Modifier image",
+                    6 => "Challenge image",
                     _ => "Leader image"
                 };
                 labelDescription.Text = "Description";
@@ -902,6 +996,8 @@ namespace HereToSlay
                     2 => "The hero image (not the whole card) dimentions are 545x545.",
                     3 => "The item image (not the whole card) dimentions are 545x545.",
                     4 => "The magic image (not the whole card) dimentions are 545x545.",
+                    5 => "The modifier image (not the whole card) dimentions are 545x545.",
+                    6 => "The challenge image (not the whole card) dimentions are 645x550.",
                     _ => "The leader image (not the whole card) dimentions are 745x1176.",
                 };
                 leaderImgToolTip.SetToolTip(selectImgButton, toolTipImageDimentions + "\nThe program will automatically crop and zoom the image, if needed.\n\nSupported file extensions:\n.png, .jpeg, .jpg, .gif(first frame), .bmp, .webp, .pbm, .tiff, .tga");
@@ -935,6 +1031,7 @@ namespace HereToSlay
                 ItemCard.Text = "Item";
                 MagicCard.Text = "Magic";
                 ModifierCard.Text = "Modifier";
+                ModifierCard.Text = "Challenge";
 
                 additionalReq.Text = "Addidional Requirements";
                 additionalReq.Text = "DISCARD X cards";
