@@ -73,3 +73,36 @@
     "card_magic_label": "Magia"
   },   // Place the cursor after this coma and hit enter. Then copy the formula from Adding_New_Language.txt or from langauges above
 ]
+{
+    "lang_name": "français",
+    "lang_code": "fr",
+
+    "class_name": [
+      /*no_class*/ "NON CLASSÉ",
+      /*ranger*/ "Rodeur",
+      /*wizard*/ "Magicien",
+      /*bard*/ "Barde",
+      /*guardian*/ "Guardien",
+      /*fighter*/ "Guerrier",
+      /*thief*/ "Voleur",
+      /*druid*/ "Druide",
+      /*warrior*/ "Bretteur",
+      /*berserker*/ "Berserker",
+      /*necromancer*/ "Necromancien",
+      /*sorcerer*/ "Sorcier"
+    ],
+
+    "card_leader_label": "Chef de Groupe ",
+
+    "card_monster_label": "Monstre",
+    "card_monster_requirements": "Prérequis:",
+    "card_monster_margin": 9,
+    "hero_symbol_letter": "",
+
+    "card_hero_label": "Héros",
+
+    "card_item_label": "Objet",
+    "card_item_cursed": "Objet maudit",
+
+    "card_magic_label": "Magie"
+  },
