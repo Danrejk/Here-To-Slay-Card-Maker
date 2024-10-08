@@ -32,6 +32,7 @@ namespace GeneratorBackend
             private static AssetManager? instance;
             public string cardTarrot = "Assets/GeneratorAssets/card_tarrot.png";
             public string cardPoker = "Assets/GeneratorAssets/card_poker.png";
+            public string cardBlank = "Assets/GeneratorAssets/card_blank.png";
             public Image frameLeader = Raylib.LoadImage("Assets/GeneratorAssets/frame_leader.png");
             public Image frameMonster = Raylib.LoadImage("Assets/GeneratorAssets/frame_monster.png");
             public Image frameHero = Raylib.LoadImage("Assets/GeneratorAssets/frame_hero.png");
@@ -45,6 +46,8 @@ namespace GeneratorBackend
             public Image cursed = Raylib.LoadImage("Assets/GeneratorAssets/cursed_item.png");
 
             public const int NAME_SIZE = 60; // 60
+            public const int BLANK_CARD_NAME_SIZE = 97;
+            public const int MODIFIER_SIZE = 97;
             public const int TITLE_SIZE = 47; // 47
             public const int REQ_SIZE = 49; // 49
             public const int ADDITIONAL_REQ_SIZE = 36; // 37 (god knows what this commented values here are)
@@ -61,6 +64,8 @@ namespace GeneratorBackend
             public Color bottomColor = new(245, 241, 231, 255);
             public Color bottomColorDark = new(78, 78, 78, 255);
             public Color magicColor = new(127, 117, 116, 255);
+            public Color modifierGoodColor = new(100, 171, 66, 255);
+            public Color modifierBadColor = new(224, 33, 37, 255);
 
             public List<ClassListObject> ClassList { get; private set; }
             public Image HeroSample = Raylib.LoadImage("Classes/hero_sample.png"); // its just empty icon used for those two previous (without a letter)
@@ -557,6 +562,59 @@ namespace GeneratorBackend
                 Raylib.ExportImage(card, renderLocation);
                 Raylib.UnloadImage(card);
             }
+
+            public static void GenerateModifier(string? renderLocation, int language, string name, string modifierImg, RollOutput good, RollOutput bad, string description) {
+                // This has to be loaded each time, to clear the image from the previous render
+                Image card = Raylib.LoadImage(inst.cardBlank);
+                Rectangle imageRec = new(0, 0, CARD_WIDTH_POKER, CARD_HEIGHT_POKER);
+
+                // Draw Modifier Image
+                ChangeHeroItemMagicImage(modifierImg);
+                Raylib.ImageDraw(ref card, heroItemMagic, imageRec, new Rectangle(100, 182, 545, 545), Color.White);
+
+                // Name
+                DrawNameBlank(name, card);
+
+                // Modifier Amounts
+                RollOutput red = bad;
+                RollOutput green = good;
+                if (bad.Symbol == 0) // check if "bad" has a positive value instead
+                {
+                    red = good;
+                    green = bad;
+                }
+
+                DrawModifierAmounts(green, red, card, new(187, 1002 + 78 / 2), 300, inst.magicColor);
+
+                // Description
+                DrawDescription(description, card, DESC_MARGIN_MAGIC, DESC_MARGIN_RIGHT, 5, inst.bottomColorDark);
+
+                // Save the image
+                renderLocation ??= "preview.png";
+                Raylib.ExportImage(card, renderLocation);
+                Raylib.UnloadImage(card);
+            }
+
+            public static void GenerateChallenge(string? renderLocation, int language, string name, string challengeImg, string description) {
+                // This has to be loaded each time, to clear the image from the previous render
+                Image card = Raylib.LoadImage(inst.cardBlank);
+                Rectangle imageRec = new(0, 0, CARD_WIDTH_POKER, CARD_HEIGHT_POKER);
+
+                // Draw Challenge Image
+                ChangeChallenge(challengeImg);
+                Raylib.ImageDraw(ref card, challenge, imageRec, new Rectangle(50, 215, 645, 550), Color.White);
+
+                // Name
+                DrawNameBlank(name, card);
+
+                // Description
+                DrawDescription(description, card, DESC_MARGIN_MAGIC, DESC_MARGIN_RIGHT, 5, inst.bottomColorDark);
+
+                // Save the image
+                renderLocation ??= "preview.png";
+                Raylib.ExportImage(card, renderLocation);
+                Raylib.UnloadImage(card);
+            }
             #endregion
 
             #region Common Draw Text
@@ -601,6 +659,15 @@ namespace GeneratorBackend
 
                 // Title
                 Raylib.ImageDrawTextEx(ref card, inst.titleFont, titleText, new Vector2((CARD_WIDTH_POKER / 2) - (titleSize.X / 2), titleY), AssetManager.TITLE_SIZE, TITLE_FONT_SPACING, titleColor);
+            }
+
+            static void DrawNameBlank(string nameText, Image card) {
+                Vector2 nameSize = Raylib.MeasureTextEx(inst.nameFont, nameText, AssetManager.BLANK_CARD_NAME_SIZE, NAME_FONT_SPACING);
+
+                int nameY = 52;
+
+                // Name
+                Raylib.ImageDrawTextEx(ref card, inst.nameFont, nameText, new Vector2((CARD_WIDTH_POKER / 2) - (nameSize.X / 2), nameY), AssetManager.BLANK_CARD_NAME_SIZE, NAME_FONT_SPACING, Color.Black);
             }
 
             static (List<string>, int) SplitTextToLines(string text, int targetLen, bool greaterSpace)
@@ -693,6 +760,11 @@ namespace GeneratorBackend
 
                         desc_space = 222; // this one is for some reason smaller than the actual desc space on the card on real cards
                         break;
+                    case 5:
+                        card_size.X = CARD_WIDTH_POKER;
+                        card_size.Y = CARD_HEIGHT_POKER;
+                        desc_space = 264; // this one is for some reason smaller than the actual desc space on the card on real cards
+                        break;
                     default:
                         throw new Exception("Invalid size_set value");
                 }
@@ -777,6 +849,29 @@ namespace GeneratorBackend
                 }
             }
 
+            static void DrawModifierAmounts(RollOutput goodText, RollOutput badText, Image card, Vector2 drawLocation, int maxWidth, Color TextColor) {
+                Vector2 goodSize = Raylib.MeasureTextEx(inst.rollFont, "+" + goodText.Value.ToString(), AssetManager.MODIFIER_SIZE, NAME_FONT_SPACING);
+                Vector2 badSize = Raylib.MeasureTextEx(inst.rollFont, "-" + badText.Value.ToString(), AssetManager.MODIFIER_SIZE, NAME_FONT_SPACING);
+
+                int modifierY = 763;
+                int spacing = 0;
+
+                if (goodText.Value != 0 && badText.Value != 0) {
+                    spacing = 94;
+
+                    Vector2 dividerSize = Raylib.MeasureTextEx(inst.rollFont, "/", AssetManager.MODIFIER_SIZE, NAME_FONT_SPACING);
+                    Raylib.ImageDrawTextEx(ref card, inst.rollFont, "/", new Vector2((CARD_WIDTH_POKER / 2) - (dividerSize.X / 2), modifierY), AssetManager.MODIFIER_SIZE, NAME_FONT_SPACING, Color.Black);
+                }
+
+                // Draw values
+                if (goodText.Value != 0) {
+                    Raylib.ImageDrawTextEx(ref card, inst.rollFont, "+" + goodText.Value.ToString(), new Vector2((CARD_WIDTH_POKER / 2) - (goodSize.X / 2) - spacing, modifierY), AssetManager.MODIFIER_SIZE, NAME_FONT_SPACING, inst.modifierGoodColor); 
+                }
+                if (badText.Value != 0) {
+                    Raylib.ImageDrawTextEx(ref card, inst.rollFont, "-" + badText.Value.ToString(), new Vector2((CARD_WIDTH_POKER / 2) - (badSize.X / 2) + spacing, modifierY), AssetManager.MODIFIER_SIZE, NAME_FONT_SPACING, inst.modifierBadColor);
+                }
+            }
+
             static void DrawAdditionalReq(string text, Image card, Vector2 drawLocation, int maxWidth, Color TextColor)
             {
                 (List<string> lineList, int additionalLineSpace) = SplitTextToLines(text, maxWidth, false);
@@ -807,10 +902,12 @@ namespace GeneratorBackend
             static Image leader = new();
             static Image monster = new();
             static Image heroItemMagic = new();
+            static Image challenge = new();
 
             static string lastPathLeader = "";
             static string lastPathMonster = "";
             static string lastPathHero = "";
+            static string lastPathChallenge = "";
 
             static void ChangeLeaderImage(string path)
             {
@@ -837,6 +934,14 @@ namespace GeneratorBackend
 
                 LoadImage(ref heroItemMagic, path);
                 CropImage(ref heroItemMagic, 545, 545);
+            }
+
+            static void ChangeChallenge(string path) {
+                if (path == lastPathChallenge) { return; }
+                lastPathChallenge = path;
+
+                LoadImage(ref challenge, path);
+                CropImage(ref challenge, 645, 550);
             }
 
             static void LoadImage(ref Image image, string path)
