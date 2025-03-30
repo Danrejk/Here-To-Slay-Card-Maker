@@ -234,7 +234,7 @@ namespace GeneratorBackend
                     className = inst.ClassList[desiredClass[0]].Name;
                 }
 
-                leaderTitle = $"{tounges[language].card_hero_label}: {className}";
+                leaderTitle = $"{tounges[language].card_leader_label}: {className}";
 
                 // Primary Class
                 Image classSymbol = inst.ClassList[desiredClass[0]].Image;
