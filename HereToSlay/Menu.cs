@@ -915,29 +915,29 @@ namespace HereToSlay
                 leaderImgToolTip.ToolTipTitle = "Wymiary obazka";
                 toolTipImageDimentions = Properties.Settings.Default.CardType switch
                 {
-                    1 => "Obrazek potwora (nie ca³a karta) ma wymiary 745x817.",
-                    2 => "Obrazek bohatera (nie ca³a karta) ma wymiary 545x545.",
-                    3 => "Obrazek przedmiotu (nie ca³a karta) ma wymiary 545x545.",
-                    4 => "Obrazek magii (nie ca³a karta) ma wymiary 545x545.",
-                    _ => "Obrazek przywódcy (nie ca³a karta) ma wymiary 745x1176.",
+                    1 => "Obrazek potwora (nie cała karta) ma wymiary 745x817.",
+                    2 => "Obrazek bohatera (nie cała karta) ma wymiary 545x545.",
+                    3 => "Obrazek przedmiotu (nie cała karta) ma wymiary 545x545.",
+                    4 => "Obrazek magii (nie cała karta) ma wymiary 545x545.",
+                    _ => "Obrazek przywódcy (nie cała karta) ma wymiary 745x1176.",
                 };
-                leaderImgToolTip.SetToolTip(selectImgButton, toolTipImageDimentions + "\nProgram automatycznie przytnie i przybli¿y obraz, je¿eli bêdzie to potrzebne.\n\nWspierane rozszerzenia plików:\n.png, .jpeg, .jpg, .gif(pierwsza klatka), .bmp, .webp, .pbm, .tiff, .tga");
+                leaderImgToolTip.SetToolTip(selectImgButton, toolTipImageDimentions + "\nProgram automatycznie przytnie i przybliży obraz, jeżeli będzie to potrzebne.\n\nWspierane rozszerzenia plików:\n.png, .jpeg, .jpg, .gif(pierwsza klatka), .bmp, .webp, .pbm, .tiff, .tga");
 
                 gradient.Text = "Tylni gradient";
-                nameWhite.Text = "Bia³a nazwa";
+                nameWhite.Text = "Biała nazwa";
                 splitClass.Text = "Podwójna Klasa";
-                this.Text = "To ja go tnê - Generator kart";
-                labelBad.Text = "Wymagania rzutu - Pora¿ka";
+                this.Text = "To ja go tnę - Generator kart";
+                labelBad.Text = "Wymagania rzutu - Porażka";
                 labelGood.Text = "Wymagania rzutu - UBIJ potwora";
                 goodOutputText.Text = "UBIJ tego potwora";
                 labelReq.Text = "Wymagania klas";
                 RENDER.Text = "ZAPISZ OBRAZ";
                 copyImageToClipboardToolStripMenuItem.Text = "Kopiuj obraz";
-                openImageLocationToolStripMenuItem.Text = "Otwórz lokalizacjê obrazu";
-                labelMaxItem.Text = "Max. iloæ przedmiotów";
+                openImageLocationToolStripMenuItem.Text = "Otwórz lokalizację obrazu";
+                labelMaxItem.Text = "Max. ilość przedmiotów";
                 alternativeColor.Text = "Alternatywny kolor (?)";
                 altColorToolTip.ToolTipTitle = "Alternatywny kolor";
-                altColorToolTip.SetToolTip(alternativeColor, "Na niektórych drukarkach, standardowy kolor mo¿e znacznie odstawiaæ od po¿¹danego.\nStandardowy kolor by³ wziêty prosto z instruckji, wiêc powinnien byæ dobry,\nale niektóre durkarki nie maj¹ poprawnej g³ebi kolorów.\n\nAlternatywny kolor (czarny) mo¿e wygl¹daæ lepiej na niektórych drukarkach.");
+                altColorToolTip.SetToolTip(alternativeColor, "Na niektórych drukarkach, standardowy kolor może znacznie odstawiaæ od pożądanego.\nStandardowy kolor był wziêty prosto z instruckji, więc powinnien być dobry,\nale niektóre durkarki nie mają poprawnej głebi kolorów.\n\nAlternatywny kolor (czarny) może wyglądać lepiej na niektórych drukarkach.");
 
                 if (chosenClass.SelectedIndex == -1 && Properties.Settings.Default.CardType == 2)
                 {
@@ -953,9 +953,9 @@ namespace HereToSlay
                 MagicCard.Text = "Magia";
 
                 labelAdditionalReq.Text = "Dodatkowe wymagania";
-                additionalReq.Text = "ODRZUÆ X kart";
+                additionalReq.Text = "ODRZUĆ X kart";
                 labelHeroBonus.Text = "Bonus dodatkowych boh.";
-                heroBonus.Text = "Za ka¿dego dodatkowego bohatera w twojej dru¿ynie, +X do twojego rzutu";
+                heroBonus.Text = "Za każdego dodatkowego bohatera w twojej drużynie, +X do twojego rzutu";
             }
             else
             {
