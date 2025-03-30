@@ -74,5 +74,33 @@
     "card_item_cursed": "Przeklęty Przedmiot",
 
     "card_magic_label": "Magia"
-  },   // Place the cursor after this coma and hit enter. Then copy the formula from Adding_New_Language.txt or from langauges above
+  },
+  {
+    "lang_name": "Français",
+    "lang_code": "fr",
+    "class_name": [
+      /*no_class*/ "AUCUNE CLASSE",
+      /*ranger*/ "Rôdeur",
+      /*wizard*/ "Sorcier",
+      /*bard*/ "Barde",
+      /*guardian*/ "Gardien",
+      /*fighter*/ "Guerrier",
+      /*thief*/ "Voleur",
+      /*druid*/ "Druide",
+      /*warrior*/ "Paladin",
+      /*berserker*/ "Berserker",
+      /*necromancer*/ "Necromancien",
+      /*sorcerer*/ "Mâge"
+    ],
+    "card_leader_label": "Chef de groupe",
+    "card_monster_label": "Monstre",
+    "card_monster_requirements": "PRÉREQUIS:",
+    "card_monster_margin": 8,
+    "hero_symbol_letter": "",
+    "card_hero_label": "Héros",
+    "card_item_label": "Objet",
+    "card_item_cursed": "Objet maudit",
+    "card_magic_label": "Magie"
+  },
+  // Place the cursor after this coma and hit enter. Then copy the formula from Adding_New_Language.txt or from languages above
 ]
