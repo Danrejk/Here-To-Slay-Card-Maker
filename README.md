@@ -175,6 +175,11 @@ This program is what the official one should be, accurate and with more features
 <br>
 <img src="ReadmeAssets/LazyDevider.png">
 
+### Modifier and Challenge
+You want them? We got you covered!
+It's just we didnt' add an image for them here in the README.
+Just believe us.
+
 <img align="right" width="33%" src="ReadmeAssets/Demo_Custom.png">
 
 ## Custom Classes
