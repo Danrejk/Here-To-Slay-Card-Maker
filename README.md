@@ -8,7 +8,7 @@ IT ONLY WORKS ON WINDOWS
 Polska wersja językowa (przestarzała, zalecamy użyć tłumacza gugyl): [README.pl.md](README.pl.md)<br>
 
 ## Instalation
-<a href="https://github.com/Danrejk/Here-To-Slay-Card-Maker/releases/tag/v4.1"> <img alt="Latest Version" src="https://img.shields.io/badge/Latest_Version-v4.1-green"> </a>
+<a href="https://github.com/Danrejk/Here-To-Slay-Card-Maker/releases/tag/v5.0.1"> <img alt="Latest Version" src="https://img.shields.io/badge/Latest_Version-v5.0.1-green"> </a>
 
 <br>
 Download the <code>.zip</code> file from the latest <b>Release</b> of the program displayed above, or on the right side of the page.<br>
