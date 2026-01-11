@@ -102,5 +102,32 @@
     "card_item_cursed": "Objet maudit",
     "card_magic_label": "Magie"
   },
+  {
+    "lang_name": "Español",
+    "lang_code": "es",
+    "class_name": [
+      /*no_class*/ "SIN CLASE",
+      /*ranger*/ "Cazador",
+      /*wizard*/ "Mago",
+      /*bard*/ "Bardo",
+      /*guardian*/ "Guardián",
+      /*fighter*/ "Guerrero",
+      /*thief*/ "Ladrón",
+      /*druid*/ "Druida",
+      /*warrior*/ "Espadachín",
+      /*berserker*/ "Berserker",
+      /*necromancer*/ "Nigromante",
+      /*sorcerer*/ "Hechizero"
+    ],
+    "card_leader_label": "Líder de Equipo",
+    "card_monster_label": "Monstruo",
+    "card_monster_requirements": "REQUISITOS:",
+    "card_monster_margin": 8,
+    "hero_symbol_letter": "",
+    "card_hero_label": "Héroe",
+    "card_item_label": "Objeto",
+    "card_item_cursed": "Objeto maldito",
+    "card_magic_label": "Magia"
+  },
   // Place the cursor after this coma and hit enter. Then copy the formula from Adding_New_Language.txt or from languages above
 ]
